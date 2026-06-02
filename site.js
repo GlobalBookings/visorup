@@ -14,7 +14,7 @@ const DESTINATIONS = [
     waypoints: [[57.28,-5.74],[57.24,-5.92],[57.15,-5.92],[57.29,-6.17],[57.41,-6.20],[57.51,-6.18],[57.64,-6.26],[57.59,-6.21],[57.58,-6.37],[57.45,-6.59],[57.30,-6.36],[57.29,-6.17]],
     tagline: "Otherworldly landscapes and Britain's most dramatic roads",
     region: "Scotland",
-    image: "https://images.unsplash.com/photo-1520466809213-7b9a56adcd45?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/isle-of-skye.jpg",
     bestTime: "May to September",
     overview: "Skye is the crown jewel of Scottish motorcycling. The Trotternish Peninsula alone offers more jaw-dropping riding than most countries — from the alien pinnacles of the Quiraing to the towering Old Man of Storr, every corner reveals something extraordinary. The roads are narrow, winding, and utterly addictive. Single-track sections with passing places demand patience and respect, but the reward is some of the most dramatic scenery you'll ever ride through. Portree, the island's colourful capital, makes a good base with fuel, food, and accommodation. The Cuillin mountain range dominates the south of the island and provides a constantly changing backdrop that shifts from menacing to magical depending on the light.",
     topRoads: ["Quiraing Road (5-star)", "Trotternish Loop", "Elgol Road", "A87 Skye Bridge approach"],
@@ -28,7 +28,7 @@ const DESTINATIONS = [
     waypoints: [[56.43,-4.71],[56.52,-4.75],[56.58,-4.87],[56.65,-4.97],[56.67,-5.03],[56.68,-5.10],[56.63,-5.05],[56.68,-5.19],[56.69,-5.06],[56.68,-5.10]],
     tagline: "Scotland's most dramatic valley and the gateway to the Highlands",
     region: "Scotland",
-    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/glencoe.jpg",
     bestTime: "April to October",
     overview: "Glencoe is where Scotland gets properly wild. The A82 sweeps across the desolate emptiness of Rannoch Moor before plunging into the valley between the towering Three Sisters and the knife-edge ridge of Aonach Eagach. The descent into the glen is one of motorcycling's great moments — the sheer scale of the mountains on either side makes you feel wonderfully insignificant. Glen Etive, the single-track road made famous by the Skyfall film, branches off into 12 miles of remote Highland perfection. Red deer graze beside the road, golden eagles soar overhead, and the history of the 1692 massacre adds a haunting weight to the landscape.",
     topRoads: ["A82 Rannoch Moor to Glencoe (5-star)", "Glen Etive single-track", "A82 through the glen"],
@@ -42,7 +42,7 @@ const DESTINATIONS = [
     waypoints: [[57.48,-4.22],[57.60,-4.43],[57.54,-5.51],[57.43,-5.81],[57.51,-5.65],[57.73,-5.69],[57.90,-5.16],[58.15,-5.25],[58.25,-5.02],[58.40,-4.75],[58.48,-4.42],[58.59,-3.53],[58.64,-3.07],[58.12,-3.65],[57.88,-4.03],[57.48,-4.22]],
     tagline: "Scotland's answer to Route 66 — 516 miles of wild Highland coastline",
     region: "Scotland",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/nc500.jpg",
     bestTime: "May to September",
     overview: "The NC500 is a 516-mile loop starting and ending in Inverness that takes in the most spectacular coastline in Britain. From the towering mountains of Torridon to the white-sand beaches of the north coast, from the Bealach na Ba — Britain's highest road pass — to the eerie ruins of Ardvreck Castle on Loch Assynt, every day delivers something unforgettable. The west coast is wild, rugged, and deeply remote, while the east coast offers fairy-tale castles and dolphin-watching. Many riders consider this the greatest motorcycle route in Europe, and it's hard to argue. Allow at least five days to do it justice.",
     topRoads: ["Bealach na Ba (5-star)", "A896 Torridon coast road", "A838 north coast", "A894 Kylesku road"],
@@ -56,7 +56,7 @@ const DESTINATIONS = [
     waypoints: [[54.60,-3.14],[54.51,-3.20],[54.54,-3.28],[54.57,-3.32],[54.66,-3.36],[54.67,-3.22],[54.60,-3.14],[54.43,-2.96],[54.45,-2.92],[54.38,-2.91],[54.37,-3.07],[54.42,-3.11],[54.40,-3.20],[54.38,-3.25],[54.45,-3.28],[54.60,-3.14]],
     tagline: "England's steepest passes and most beautiful lakes in one compact package",
     region: "England",
-    image: "https://images.unsplash.com/photo-1612438214708-f428a707dd4e?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/lake-district.jpg",
     bestTime: "April to October",
     overview: "The Lake District packs an extraordinary amount of dramatic riding into a compact area. Hardknott Pass — at 33% gradient with hairpin bends — is the steepest paved road in England and a genuine challenge on a loaded sportbike. Combined with its sister pass Wrynose, it makes for one of the most intense short rides in Britain. Kirkstone Pass offers a more flowing experience with the famous Struggle climb from Ambleside, while the road along Ullswater to Aira Force waterfall is simply beautiful. The lakes themselves provide a constantly changing backdrop of reflections, and the ancient fell peaks create a landscape that inspired Wordsworth, Beatrix Potter, and countless bikers.",
     topRoads: ["Hardknott Pass (5-star)", "Wrynose Pass", "Kirkstone Pass (The Struggle)", "A592 along Ullswater"],
@@ -70,7 +70,7 @@ const DESTINATIONS = [
     waypoints: [[53.96,-2.02],[54.07,-1.99],[54.17,-2.01],[54.36,-2.18],[54.31,-2.20],[54.21,-2.37],[54.15,-2.46],[54.07,-2.28],[54.10,-2.15],[53.96,-2.02]],
     tagline: "Rolling green valleys, stone walls, and the magnificent Ribblehead Viaduct",
     region: "England",
-    image: "https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/yorkshire-dales.jpg",
     bestTime: "April to October",
     overview: "The Yorkshire Dales are quintessentially English — dry stone walls running across rolling green fells, ancient market towns, and some surprisingly good biking roads. The Buttertubs Pass between Hawes and Thwaite is a classic motorcycle route with fast flowing bends across open moorland, while the road from Ribblehead over to Ingleton offers spectacular views of the famous 24-arch Victorian viaduct. Fleet Moss is one of England's highest and steepest roads. The Dales make an excellent long weekend trip or a worthy stop en route to the Lakes or Scotland.",
     topRoads: ["Buttertubs Pass", "Fleet Moss", "B6255 past Ribblehead Viaduct", "A684 Hawes to Sedbergh"],
@@ -84,7 +84,7 @@ const DESTINATIONS = [
     waypoints: [[53.09,-3.80],[53.10,-3.93],[53.07,-4.02],[53.12,-4.13],[53.14,-4.28],[53.01,-4.10],[52.91,-4.07],[52.86,-4.11],[52.74,-3.89],[52.91,-3.60],[53.09,-3.80]],
     tagline: "Wales' highest peaks and most thrilling mountain passes",
     region: "Wales",
-    image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/snowdonia.jpg",
     bestTime: "May to September",
     overview: "Snowdonia National Park contains some of the finest motorcycling roads in Wales. The Llanberis Pass (A4086) cuts through a dramatic mountain corridor beneath the flanks of Snowdon, while the road over Pen-y-Pass connects to the Ogwen Valley with its waterfalls and towering cliffs. The A5 through the park is a flowing A-road with sweeping bends and mountain views, and quieter B-roads lead to hidden valleys and remote lakes. The Horseshoe Pass near Llangollen and the roads around Bala Lake add variety. Combined with the Brecon Beacons to the south, Wales offers a complete motorcycle touring experience.",
     topRoads: ["Llanberis Pass (A4086)", "A5 through Ogwen Valley", "A498 Beddgelert", "Horseshoe Pass"],
@@ -98,7 +98,7 @@ const DESTINATIONS = [
     waypoints: [[51.95,-3.40],[51.89,-3.47],[51.88,-3.44],[51.75,-3.38],[51.77,-3.57],[51.80,-3.80],[51.86,-3.73],[51.99,-3.80],[51.89,-3.72],[51.95,-3.40]],
     tagline: "Home of the legendary Black Mountain Pass and Wales' waterfall country",
     region: "Wales",
-    image: "https://images.unsplash.com/photo-1571366343168-631c5bcca7a4?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/brecon-beacons.jpg",
     bestTime: "April to October",
     overview: "The Brecon Beacons (now Bannau Brycheiniog) are home to one of the UK's all-time great motorcycle roads: the A4069 Black Mountain Pass. This sweeping ribbon of tarmac climbs over the Black Mountain with long, flowing bends and panoramic views that have graced countless bike magazine covers. Below the mountains, Waterfall Country hides a string of spectacular falls including Sgwd yr Eira — a waterfall you can walk behind. The market town of Brecon makes an excellent base with good pubs, independent shops, and the canal for evening walks. The surrounding B-roads through the valleys are empty and addictive.",
     topRoads: ["A4069 Black Mountain Pass (5-star)", "A470 Storey Arms", "B4560 Gospel Pass", "A4059 through the valleys"],
@@ -112,7 +112,7 @@ const DESTINATIONS = [
     waypoints: [[57.90,-6.80],[57.88,-6.92],[57.82,-7.02],[57.77,-7.02],[57.73,-7.05],[57.60,-7.16],[57.45,-7.33],[57.25,-7.35],[57.07,-7.30],[57.90,-6.80]],
     tagline: "The edge of the world — remote islands of white sand and Atlantic wildness",
     region: "Islands",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/outer-hebrides.jpg",
     bestTime: "May to August",
     overview: "The Outer Hebrides are as remote as British motorcycling gets. A chain of islands stretching 130 miles from Lewis in the north to Barra in the south, connected by causeways and short ferry hops. The riding is exposed and windswept, with single-track roads running through landscapes of extraordinary beauty — white shell-sand beaches, ancient standing stones, and vast empty moorland. Harris has some of the most stunning beaches in Europe, while Lewis holds the mysterious Callanish Standing Stones and the blackhouse villages of Arnol. The sense of isolation and remoteness is intoxicating.",
     topRoads: ["Golden Road (east Harris)", "A859 along Harris beaches", "West coast Lewis", "Sound of Harris causeway"],
@@ -126,7 +126,7 @@ const DESTINATIONS = [
     waypoints: [[54.15,-4.48],[54.17,-4.47],[54.16,-4.48],[54.32,-4.38],[54.28,-4.44],[54.27,-4.46],[54.20,-4.42],[54.22,-4.69],[54.09,-4.77],[54.07,-4.65],[54.15,-4.48]],
     tagline: "The legendary TT course and no national speed limit on open roads",
     region: "Islands",
-    image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/isle-of-man.jpg",
     bestTime: "May to September (TT fortnight late May/early June)",
     overview: "The Isle of Man is hallowed ground for motorcyclists. The 37.73-mile Mountain Course — used for the TT races since 1907 — is one of the most famous road circuits in the world, and you can ride every inch of it on public roads. The island has no national speed limit on many open roads (derestricted means exactly that), though this requires mature judgment. Beyond the TT course, the island offers beautiful coastal roads, the dramatic Snaefell Mountain Railway road, quiet glens, and medieval castles. During TT fortnight, the island becomes the motorcycle capital of the world.",
     topRoads: ["TT Mountain Course", "Marine Drive", "A18 coast road", "Snaefell Mountain Road"],
@@ -140,7 +140,7 @@ const DESTINATIONS = [
     waypoints: [[55.95,-3.19],[55.38,-2.42],[55.48,-2.55],[55.60,-2.43],[55.60,-2.73],[55.58,-2.65],[55.65,-3.19],[55.95,-3.19]],
     tagline: "Rolling hills, ruined abbeys, and empty roads through Walter Scott country",
     region: "Scotland",
-    image: "https://images.unsplash.com/photo-1565098772267-60af42b81ef2?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/scottish-borders.jpg",
     bestTime: "April to October",
     overview: "The Scottish Borders are criminally underrated for motorcycling. The A68 from Carter Bar to Edinburgh is a fast, flowing road with long straights and sweeping bends through rolling hills. The smaller B-roads through the Tweed Valley are even better — empty, well-surfaced, and winding through beautiful countryside dotted with ruined abbeys and fortified tower houses. Scott's View, overlooking the Eildon Hills and the Tweed, is one of the finest viewpoints in Scotland. The region's four great abbeys — Melrose, Jedburgh, Dryburgh, and Kelso — are all worth a stop. Fewer tourists than the Highlands means more road to yourself.",
     topRoads: ["A68 Carter Bar to Edinburgh", "A7 through Hawick", "B6357 Langholm", "B6399 over Craik"],
@@ -154,7 +154,7 @@ const DESTINATIONS = [
     waypoints: [[54.97,-2.10],[55.01,-2.37],[54.97,-2.46],[54.76,-2.46],[54.81,-2.44],[54.97,-2.10],[55.41,-1.71],[55.61,-1.71],[55.67,-1.80],[54.97,-2.10]],
     tagline: "Hadrian's Wall, empty moorland roads, and England's dark sky country",
     region: "England",
-    image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/northumberland.jpg",
     bestTime: "April to October",
     overview: "Northumberland is England's most sparsely populated county, and that translates directly into empty roads and spectacular riding. The A686 Hartside Pass is a 12-mile sweeping climb over the North Pennines to 1,904 feet — one of England's finest motorcycle roads. Hadrian's Wall runs through the county, and the military road (B6318) that follows it offers flowing bends with views across the wall and the crags. Kielder Forest is a designated Dark Sky Park, and the coast has dramatic castles at Bamburgh, Dunstanburgh, and Holy Island. The entire region has a wonderful sense of space and emptiness.",
     topRoads: ["A686 Hartside Pass (5-star)", "B6318 Military Road (Hadrian's Wall)", "A68 through Redesdale", "Coast road to Bamburgh"],
@@ -168,7 +168,7 @@ const DESTINATIONS = [
     waypoints: [[49.19,-2.11],[49.20,-2.01],[49.23,-2.02],[49.25,-2.13],[49.24,-2.20],[49.22,-2.25],[49.18,-2.25],[49.18,-2.19],[49.19,-2.11]],
     tagline: "Compact Channel Island with dramatic cliffs, hidden bays, and WWII history",
     region: "Islands",
-    image: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/jersey.jpg",
     bestTime: "May to September",
     overview: "Jersey is the largest Channel Island and packs a surprising amount of riding variety into its 45 square miles. The north coast road hugs dramatic granite cliffs with views across to France, while the south coast has sheltered sandy bays and the imposing Elizabeth Castle. The island's Green Lanes — a network of quiet rural roads with a 15mph speed limit — are perfect for gentle exploration through lush countryside. WWII bunkers and fortifications are scattered across the island, reminders of the German occupation. St Helier is a lively town with excellent seafood restaurants. The pace of life here is wonderfully relaxed.",
     topRoads: ["North coast cliff road", "Five Mile Road", "La Route du Nord", "West coast loop"],
@@ -182,7 +182,7 @@ const DESTINATIONS = [
     waypoints: [[49.46,-2.54],[49.48,-2.53],[49.49,-2.55],[49.48,-2.60],[49.47,-2.62],[49.43,-2.66],[49.44,-2.59],[49.45,-2.55],[49.46,-2.54]],
     tagline: "The starting line — cliff-top lanes, harbour charm, and a slower pace of island life",
     region: "Islands",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/destinations/guernsey.jpg",
     bestTime: "May to September",
     overview: "Guernsey is where the VisorUp flagship route begins — and it's a destination worth exploring in its own right. The island's south coast cliffs are dramatic and rugged, with narrow lanes winding between granite farmhouses and hidden bays. St Peter Port, the capital, is one of the most attractive harbour towns in the British Isles, with a castle guarding the entrance and excellent waterfront restaurants. The Ruettes Tranquilles (quiet lanes) network encourages slow exploration, and the island's compact size means you can ride every road in a leisurely day. Victor Hugo lived here in exile and wrote Les Misérables — the views clearly inspired him.",
     topRoads: ["South coast cliff road", "Ruettes Tranquilles network", "West coast loop via Vazon Bay", "Pleinmont headland"],
@@ -269,7 +269,7 @@ const ROUTES = [
     miles: 1880,
     difficulty: "Intermediate",
     region: "UK-Wide",
-    image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/routes/island-to-highlands.jpg",
     highlights: ["NC500", "Isle of Skye", "Bealach na Ba", "Cat and Fiddle", "Hardknott Pass"],
     description: "Our flagship route from Guernsey to the Scottish Highlands, taking in the best motorcycle roads in Britain. 14 days of waterfalls, mountain passes, coastal roads, and wild camping across England, Wales, and Scotland.",
     isLive: true,
@@ -283,7 +283,7 @@ const ROUTES = [
     miles: 650,
     difficulty: "Moderate",
     region: "Scotland",
-    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/routes/scottish-highlands-loop.jpg",
     highlights: ["Bealach na Ba", "Torridon", "Ullapool", "Kylesku Bridge", "Glen Affric"],
     description: "Starting and ending in Inverness, this 7-day loop takes in the finest Highland scenery. From the jaw-dropping Bealach na Ba to the remote beauty of Wester Ross, the wild north coast past Durness, and the tranquil Glen Affric on the return — this is Scotland at its most magnificent.",
     isLive: true,
@@ -297,7 +297,7 @@ const ROUTES = [
     miles: 516,
     difficulty: "Moderate",
     region: "Scotland",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/routes/nc500-complete.jpg",
     highlights: ["Bealach na Ba", "Applecross", "Smoo Cave", "Dunnet Head", "Duncansby Stacks"],
     description: "The North Coast 500 is one of the world's great coastal road trips. This 6-day itinerary covers every mile of the circuit from Inverness, taking in Applecross, the wild north coast, John O'Groats, and the scenic east coast return. Single-track roads, empty beaches, and endless horizons.",
     isLive: true,
@@ -311,7 +311,7 @@ const ROUTES = [
     miles: 480,
     difficulty: "Moderate-Challenging",
     region: "Wales",
-    image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/routes/welsh-mountain-passes.jpg",
     highlights: ["Llanberis Pass", "Gospel Pass", "Elan Valley", "Devil's Bridge", "Black Mountain"],
     description: "From the slate valleys of Snowdonia to the rolling Brecon Beacons, this 5-day route links Wales' greatest mountain passes with hidden reservoirs, historic bridges, and some of the most rewarding motorcycle roads in Britain.",
     isLive: true,
@@ -325,7 +325,7 @@ const ROUTES = [
     miles: 280,
     difficulty: "Challenging",
     region: "England",
-    image: "https://images.unsplash.com/photo-1612438214708-f428a707dd4e?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/routes/lake-district-ultimate.jpg",
     highlights: ["Hardknott Pass", "Wrynose Pass", "Kirkstone Pass", "Honister Pass", "Wastwater"],
     description: "Four days in England's most dramatic national park. Tackle Britain's steepest road over Hardknott Pass, cruise alongside deep glacial lakes, and wind through passes that'll have you grinning inside your helmet. Compact but intense — every mile counts.",
     isLive: true,
@@ -339,7 +339,7 @@ const ROUTES = [
     miles: 120,
     difficulty: "Easy",
     region: "Channel Islands",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/routes/channel-islands-explorer.jpg",
     highlights: ["Castle Cornet", "La Corbière", "Bouley Bay", "Little Chapel", "Mont Orgueil"],
     description: "A relaxed 5-day island-hopping adventure across Guernsey and Jersey. Tiny lanes, stunning coastal fortifications, WWII history, and some of the best seafood in the British Isles. The perfect warm-up tour or a standalone escape from the mainland.",
     isLive: true,
@@ -353,7 +353,7 @@ const ROUTES = [
     miles: 350,
     difficulty: "Easy",
     region: "England",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+    image: "public/images/routes/coastal-cornwall.jpg",
     highlights: ["Atlantic Highway", "Land's End", "St Ives", "Tintagel Castle", "Lizard Point", "Minack Theatre"],
     description: "The Atlantic Highway sweeps along Cornwall's dramatic north coast before turning south to Land's End and around the Lizard Peninsula. Pasties, surf beaches, ancient castles, cliff-edge roads, and hidden fishing villages — this is England's sun-soaked south-west at its finest.",
     isLive: true,
@@ -672,7 +672,7 @@ class VisorUpSite {
 
     return '' +
     '<!-- HERO -->' +
-    '<section class="hero" style="background-image:url(https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1920&q=80)">' +
+    '<section class="hero" style="background-image:url(public/images/heroes/homepage.jpg">' +
       '<div class="hero-overlay"></div>' +
       '<div class="hero-content">' +
         '<h1 class="hero-title">Motorcycle Adventures<br>Across Britain</h1>' +
@@ -694,7 +694,7 @@ class VisorUpSite {
         '<span class="section-eyebrow"><i class="fas fa-route"></i> Featured Route</span>' +
         '<h2 class="section-heading">Island To Highlands</h2>' +
         '<p class="section-desc">Our signature 14-day route from Guernsey to the Scottish Highlands — 1,880 miles of Britain\'s best motorcycle roads, with GPX downloads, curated stops, and ferry guides.</p>' +
-        '<div class="featured-route-card" style="background-image:url(https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=80)">' +
+        '<div class="featured-route-card" style="background-image:url(public/images/heroes/homepage.jpg">' +
           '<div class="featured-route-overlay"></div>' +
           '<div class="featured-route-content">' +
             '<div class="featured-route-stats">' +
@@ -814,7 +814,7 @@ class VisorUpSite {
     }).join('');
 
     return '' +
-    '<section class="page-hero" style="background-image:url(https://images.unsplash.com/photo-1558981852-426c6c22a060?auto=format&fit=crop&w=1920&q=80)">' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg">' +
       '<div class="hero-overlay"></div>' +
       '<div class="page-hero-content">' +
         '<h1 class="page-hero-title">Routes</h1>' +
@@ -1120,7 +1120,7 @@ class VisorUpSite {
     }).join('');
 
     return '' +
-    '<section class="page-hero" style="background-image:url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80)">' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/destinations.jpg">' +
       '<div class="hero-overlay"></div>' +
       '<div class="page-hero-content">' +
         '<h1 class="page-hero-title">Destinations</h1>' +
@@ -1319,7 +1319,7 @@ class VisorUpSite {
     }).join('');
 
     return '' +
-    '<section class="page-hero" style="background-image:url(https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1920&q=80)">' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg">' +
       '<div class="hero-overlay"></div>' +
       '<div class="page-hero-content">' +
         '<h1 class="page-hero-title">Trip Planning Tools</h1>' +
@@ -1423,7 +1423,7 @@ class VisorUpSite {
 
   renderAbout() {
     return '' +
-    '<section class="page-hero" style="background-image:url(https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1920&q=80)">' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg">' +
       '<div class="hero-overlay"></div>' +
       '<div class="page-hero-content">' +
         '<h1 class="page-hero-title">About VisorUp</h1>' +
@@ -1464,7 +1464,7 @@ class VisorUpSite {
 
   renderContact() {
     return '' +
-    '<section class="page-hero" style="background-image:url(https://images.unsplash.com/photo-1558981852-426c6c22a060?auto=format&fit=crop&w=1920&q=80)">' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg">' +
       '<div class="hero-overlay"></div>' +
       '<div class="page-hero-content">' +
         '<h1 class="page-hero-title">Contact Us</h1>' +
