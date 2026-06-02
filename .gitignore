@@ -3,5 +3,6 @@ test-results/
 screenshots/
 .wrangler/
 .env
+supabase-env.json
 .DS_Store
 *.log

@@ -396,6 +396,7 @@ class VisorUpSite {
     this.bindMobileNav();
     this.bindPlannerBack();
     this.bindNavLinks();
+    this.bindAuth();
 
     // History API routing
     window.addEventListener('popstate', () => this.route(location.pathname));
@@ -580,16 +581,49 @@ class VisorUpSite {
         this.setActiveNav('planning');
         this.setTitle('Build Your Own Route');
         if (typeof RouteBuilder !== 'undefined') {
-          setTimeout(function() {
+          setTimeout(async function() {
             var rb = new RouteBuilder('routeBuilderContainer');
+
+            // Load cloud trip if requested from profile
+            var cloudTripId = sessionStorage.getItem('vu_load_trip');
+            if (cloudTripId && typeof VisorUpTrips !== 'undefined') {
+              sessionStorage.removeItem('vu_load_trip');
+              try {
+                var trip = await VisorUpTrips.get(cloudTripId);
+                if (trip && trip.waypoints && trip.waypoints.length >= 2) {
+                  rb._cloudTripId = trip.id;
+                  var nameInput = rb.container.querySelector('#rb-routeName');
+                  if (nameInput) nameInput.value = trip.name;
+                  trip.waypoints.forEach(function(wp) { rb._addWaypoint(wp.lat, wp.lng); });
+                  rb._buildRoute();
+                  return;
+                }
+              } catch (e) { console.error('Failed to load cloud trip:', e); }
+            }
+
+            // Load shared trip waypoints
+            var sharedWps = sessionStorage.getItem('vu_shared_waypoints');
+            if (sharedWps) {
+              sessionStorage.removeItem('vu_shared_waypoints');
+              try {
+                var wps = JSON.parse(sharedWps);
+                if (Array.isArray(wps) && wps.length >= 2) {
+                  wps.forEach(function(wp) { rb._addWaypoint(wp.lat, wp.lng); });
+                  rb._buildRoute();
+                  return;
+                }
+              } catch (e) { /* ignore */ }
+            }
+
+            // Load from trip planner
             var stored = sessionStorage.getItem('tp_waypoints');
             if (stored) {
               sessionStorage.removeItem('tp_waypoints');
               try {
-                var wps = JSON.parse(stored);
-                if (Array.isArray(wps) && wps.length >= 2 && rb._addWaypoint) {
-                  for (var wi = 0; wi < wps.length; wi++) {
-                    rb._addWaypoint(wps[wi].lat, wps[wi].lng);
+                var wps2 = JSON.parse(stored);
+                if (Array.isArray(wps2) && wps2.length >= 2 && rb._addWaypoint) {
+                  for (var wi = 0; wi < wps2.length; wi++) {
+                    rb._addWaypoint(wps2[wi].lat, wps2[wi].lng);
                   }
                   rb._buildRoute();
                 }
@@ -606,6 +640,28 @@ class VisorUpSite {
         this.setTitle('AI Trip Planner');
         if (typeof AITripPlanner !== 'undefined') {
           setTimeout(function() { new AITripPlanner('tripPlannerContainer'); }, 50);
+        }
+        break;
+
+      case 'login':
+        this.showAuthModal('login');
+        break;
+
+      case 'signup':
+        this.showAuthModal('signup');
+        break;
+
+      case 'profile':
+        this.showSiteView();
+        this.renderProfile();
+        this.scrollToTop();
+        break;
+
+      case 'shared':
+        if (parts[1]) {
+          this.showSiteView();
+          this.renderSharedTrip(parts[1]);
+          this.scrollToTop();
         }
         break;
 
@@ -1229,8 +1285,9 @@ class VisorUpSite {
           '</div>' +
         '</div>' +
 
-        '<div class="detail-cta">' +
+        '<div class="detail-cta" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">' +
           '<a href="/build-route?dest=' + d.slug + '" class="hero-cta"><i class="fas fa-pencil-ruler"></i> Plan a Route to ' + d.name + ' <i class="fas fa-arrow-right"></i></a>' +
+          '<button class="fav-btn" data-fav-type="destination" data-fav-slug="' + d.slug + '" title="Favourite"><i class="fas fa-heart"></i></button>' +
         '</div>' +
       '</div>' +
     '</section>';
@@ -2209,6 +2266,22 @@ class VisorUpSite {
       }
     });
 
+    // Delegate click for favourite buttons
+    document.addEventListener('click', function(e) {
+      var favBtn = e.target.closest('.fav-btn');
+      if (!favBtn) return;
+      e.preventDefault();
+      if (typeof VisorUpAuth === 'undefined' || typeof VisorUpFavourites === 'undefined') return;
+      VisorUpAuth.getUser().then(function(user) {
+        if (!user) { self.showAuthModal('login'); return; }
+        var type = favBtn.dataset.favType;
+        var slug = favBtn.dataset.favSlug;
+        VisorUpFavourites.toggle(type, slug).then(function(isFav) {
+          favBtn.classList.toggle('fav-active', isFav);
+        });
+      });
+    });
+
     // Delegate click for hero scroll indicator
     document.addEventListener('click', function(e) {
       if (e.target.closest('.hero-scroll')) {
@@ -2218,6 +2291,325 @@ class VisorUpSite {
         }
       }
     });
+  }
+
+  // ── Auth ────────────────────────────────────────────────────
+
+  bindAuth() {
+    var self = this;
+    var modal = document.getElementById('authModal');
+    var closeBtn = document.getElementById('authModalClose');
+    var googleBtn = document.getElementById('authGoogleBtn');
+    var form = document.getElementById('authEmailForm');
+    var toggleLink = document.getElementById('authToggleLink');
+    var forgotLink = document.getElementById('authForgotLink');
+    this._authMode = 'login';
+
+    if (closeBtn) closeBtn.addEventListener('click', function() { self.hideAuthModal(); });
+    if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) self.hideAuthModal(); });
+
+    if (googleBtn) googleBtn.addEventListener('click', function() {
+      if (typeof VisorUpAuth !== 'undefined') VisorUpAuth.signInGoogle();
+    });
+
+    if (toggleLink) toggleLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      self._authMode = self._authMode === 'login' ? 'signup' : 'login';
+      self._updateAuthModal();
+    });
+
+    if (forgotLink) forgotLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('authEmail').value;
+      if (!email) { self._showAuthError('Enter your email address first'); return; }
+      VisorUpAuth.resetPassword(email).then(function() {
+        document.getElementById('authModalBody').style.display = 'none';
+        document.getElementById('authSuccessBody').style.display = '';
+        document.getElementById('authSuccessMsg').textContent = 'Password reset link sent to ' + email;
+      }).catch(function(err) { self._showAuthError(err.message); });
+    });
+
+    if (form) form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('authEmail').value;
+      var password = document.getElementById('authPassword').value;
+      var submitBtn = document.getElementById('authSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Please wait...';
+      self._hideAuthError();
+
+      if (self._authMode === 'signup') {
+        var name = document.getElementById('authName').value || email.split('@')[0];
+        VisorUpAuth.signUpEmail(email, password, name).then(function(data) {
+          if (data.user && !data.session) {
+            document.getElementById('authModalBody').style.display = 'none';
+            document.getElementById('authSuccessBody').style.display = '';
+            document.getElementById('authSuccessMsg').textContent = 'Check your email to confirm your account.';
+          } else {
+            self.hideAuthModal();
+            self._updateNavAuth();
+          }
+        }).catch(function(err) {
+          self._showAuthError(err.message);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Sign Up';
+        });
+      } else {
+        VisorUpAuth.signInEmail(email, password).then(function() {
+          self.hideAuthModal();
+          self._updateNavAuth();
+          self.navigate('/profile');
+        }).catch(function(err) {
+          self._showAuthError(err.message);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Log In';
+        });
+      }
+    });
+
+    if (typeof VisorUpAuth !== 'undefined') {
+      VisorUpAuth.onAuthChange(function(event) {
+        self._updateNavAuth();
+      });
+      self._updateNavAuth();
+    }
+  }
+
+  showAuthModal(mode) {
+    this._authMode = mode || 'login';
+    this._updateAuthModal();
+    document.getElementById('authModalBody').style.display = '';
+    document.getElementById('authSuccessBody').style.display = 'none';
+    document.getElementById('authModal').style.display = '';
+    this._hideAuthError();
+    document.getElementById('authEmail').value = '';
+    document.getElementById('authPassword').value = '';
+    document.getElementById('authName').value = '';
+  }
+
+  hideAuthModal() {
+    document.getElementById('authModal').style.display = 'none';
+  }
+
+  _updateAuthModal() {
+    var isSignup = this._authMode === 'signup';
+    document.getElementById('authModalTitle').textContent = isSignup ? 'Create Account' : 'Log In';
+    document.getElementById('authModalSub').textContent = isSignup ? 'Join VisorUp to save trips and share routes.' : 'Save trips, favourite routes, and share adventures.';
+    document.getElementById('authSubmitBtn').textContent = isSignup ? 'Sign Up' : 'Log In';
+    document.getElementById('authSubmitBtn').disabled = false;
+    document.getElementById('authName').style.display = isSignup ? '' : 'none';
+    document.getElementById('authToggle').innerHTML = isSignup
+      ? 'Already have an account? <a href="#" id="authToggleLink">Log in</a>'
+      : 'Don\'t have an account? <a href="#" id="authToggleLink">Sign up</a>';
+    var self = this;
+    document.getElementById('authToggleLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      self._authMode = self._authMode === 'login' ? 'signup' : 'login';
+      self._updateAuthModal();
+    });
+  }
+
+  _showAuthError(msg) {
+    var el = document.getElementById('authError');
+    el.textContent = msg;
+    el.style.display = '';
+  }
+
+  _hideAuthError() {
+    document.getElementById('authError').style.display = 'none';
+  }
+
+  async _updateNavAuth() {
+    var loginBtn = document.getElementById('navLoginBtn');
+    var profileBtn = document.getElementById('navProfileBtn');
+    if (typeof VisorUpAuth === 'undefined') return;
+
+    var user = await VisorUpAuth.getUser();
+    if (user) {
+      loginBtn.style.display = 'none';
+      profileBtn.style.display = '';
+      var profile = await VisorUpAuth.getProfile();
+      if (profile) {
+        document.getElementById('navUserName').textContent = profile.display_name || 'Profile';
+        var avatar = document.getElementById('navAvatar');
+        if (profile.avatar_url) {
+          avatar.src = profile.avatar_url;
+          avatar.style.display = '';
+        } else {
+          avatar.style.display = 'none';
+        }
+      }
+    } else {
+      loginBtn.style.display = '';
+      profileBtn.style.display = 'none';
+    }
+  }
+
+  // ── Profile Page ────────────────────────────────────────────
+
+  async renderProfile() {
+    if (typeof VisorUpAuth === 'undefined') { this.navigate('/login'); return; }
+    var user = await VisorUpAuth.getUser();
+    if (!user) { this.showAuthModal('login'); return; }
+
+    this.setTitle('My Profile');
+    this.pageContent.innerHTML = '<section class="page-section"><div class="container"><p style="color:var(--text-muted)">Loading profile...</p></div></section>' + this.renderFooter();
+
+    var profile = await VisorUpAuth.getProfile();
+    var trips = await VisorUpTrips.list();
+    var favs = await VisorUpFavourites.list();
+
+    var avatarHTML = profile && profile.avatar_url
+      ? '<img src="' + profile.avatar_url + '" class="profile-avatar" alt="">'
+      : '<div class="profile-avatar-placeholder">' + ((profile && profile.display_name) || 'U').charAt(0).toUpperCase() + '</div>';
+
+    var tripsHTML = '';
+    if (trips.length === 0) {
+      tripsHTML = '<div class="profile-empty"><i class="fas fa-route"></i><p>No saved trips yet. Build a route and save it!</p><a href="/build-route" class="hero-cta" style="display:inline-flex;margin-top:12px;font-size:13px;"><i class="fas fa-pencil-ruler"></i> Build a Route</a></div>';
+    } else {
+      tripsHTML = trips.map(function(t) {
+        var stats = t.route_stats || {};
+        var date = new Date(t.updated_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+        return '<div class="saved-trip-card" data-trip-id="' + t.id + '">' +
+          '<div class="saved-trip-info">' +
+            '<h4>' + t.name + '</h4>' +
+            '<p>' + (stats.distance || '?') + ' miles · ' + (stats.waypoints || '?') + ' stops · Updated ' + date + '</p>' +
+          '</div>' +
+          '<div class="saved-trip-actions">' +
+            '<button class="trip-load-btn" data-id="' + t.id + '" title="Open in Route Builder"><i class="fas fa-map"></i></button>' +
+            '<button class="trip-share-btn" data-id="' + t.id + '" data-public="' + (t.is_public ? '1' : '0') + '" title="' + (t.is_public ? 'Shared' : 'Share') + '"><i class="fas fa-' + (t.is_public ? 'link' : 'share-alt') + '"></i></button>' +
+            '<button class="trip-delete-btn" data-id="' + t.id + '" title="Delete"><i class="fas fa-trash"></i></button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    var favsHTML = '';
+    if (favs.length === 0) {
+      favsHTML = '<div class="profile-empty"><i class="fas fa-heart"></i><p>No favourites yet. Tap the heart on any destination or route.</p></div>';
+    } else {
+      favsHTML = favs.map(function(f) {
+        var icon = f.item_type === 'destination' ? 'fa-map-pin' : f.item_type === 'route' ? 'fa-route' : 'fa-motorcycle';
+        var href = '/' + f.item_type + 's/' + f.item_slug;
+        var label = f.item_slug.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+        return '<a href="' + href + '" class="fav-item"><i class="fas ' + icon + '"></i><span>' + label + '</span><span class="fav-type">' + f.item_type + '</span></a>';
+      }).join('');
+    }
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="profile-header">' +
+          avatarHTML +
+          '<div class="profile-info">' +
+            '<h2>' + ((profile && profile.display_name) || 'Rider') + '</h2>' +
+            '<p>' + (user.email || '') + '</p>' +
+          '</div>' +
+          '<div class="profile-actions">' +
+            '<button class="auth-submit-btn" id="profileLogout" style="padding:8px 16px;font-size:12px;width:auto;"><i class="fas fa-sign-out-alt"></i> Log Out</button>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="profile-section">' +
+          '<h3><i class="fas fa-route"></i> Saved Trips (' + trips.length + ')</h3>' +
+          tripsHTML +
+        '</div>' +
+
+        '<div class="profile-section">' +
+          '<h3><i class="fas fa-heart"></i> Favourites (' + favs.length + ')</h3>' +
+          favsHTML +
+        '</div>' +
+      '</div>' +
+    '</section>' + this.renderFooter();
+
+    var self = this;
+
+    document.getElementById('profileLogout').addEventListener('click', function() {
+      VisorUpAuth.signOut().then(function() {
+        self._updateNavAuth();
+        self.navigate('/');
+      });
+    });
+
+    document.querySelectorAll('.trip-load-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var tripId = btn.dataset.id;
+        sessionStorage.setItem('vu_load_trip', tripId);
+        self.navigate('/build-route');
+      });
+    });
+
+    document.querySelectorAll('.trip-share-btn').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        var tripId = btn.dataset.id;
+        try {
+          var trip = await VisorUpTrips.togglePublic(tripId);
+          if (trip.is_public) {
+            var url = window.location.origin + '/shared/' + trip.share_slug;
+            await navigator.clipboard.writeText(url);
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.title = 'Link copied!';
+            setTimeout(function() {
+              btn.innerHTML = '<i class="fas fa-link"></i>';
+              btn.dataset.public = '1';
+            }, 2000);
+          } else {
+            btn.innerHTML = '<i class="fas fa-share-alt"></i>';
+            btn.dataset.public = '0';
+          }
+        } catch (err) { console.error(err); }
+      });
+    });
+
+    document.querySelectorAll('.trip-delete-btn').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        if (!confirm('Delete this trip?')) return;
+        var tripId = btn.dataset.id;
+        await VisorUpTrips.delete(tripId);
+        btn.closest('.saved-trip-card').remove();
+      });
+    });
+  }
+
+  // ── Shared Trip Page ────────────────────────────────────────
+
+  async renderSharedTrip(slug) {
+    this.setTitle('Shared Trip');
+    this.pageContent.innerHTML = '<section class="page-section"><div class="container"><p style="color:var(--text-muted)">Loading shared trip...</p></div></section>' + this.renderFooter();
+
+    try {
+      var trip = await VisorUpTrips.getByShareSlug(slug);
+      if (!trip) { this.pageContent.innerHTML = this.render404(); return; }
+
+      var stats = trip.route_stats || {};
+      this.setTitle(trip.name + ' — Shared Trip');
+      this.pageContent.innerHTML = '' +
+      '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg)">' +
+        '<div class="hero-overlay"></div>' +
+        '<div class="page-hero-content">' +
+          '<span style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:700;display:block;margin-bottom:8px;">Shared Trip</span>' +
+          '<h1 class="page-hero-title">' + trip.name + '</h1>' +
+          '<p class="page-hero-sub">' + (stats.distance || '?') + ' miles · ' + (stats.waypoints || '?') + ' stops</p>' +
+        '</div>' +
+      '</section>' +
+      '<section class="page-section">' +
+        '<div class="container">' +
+          (trip.description ? '<p class="detail-text" style="margin-bottom:24px;">' + trip.description + '</p>' : '') +
+          '<div id="sharedTripMap" style="width:100%;height:500px;border-radius:12px;border:1px solid var(--border);"></div>' +
+          '<div style="margin-top:16px;display:flex;gap:12px;">' +
+            '<button class="hero-cta" id="sharedTripCopy" style="font-size:13px;"><i class="fas fa-pencil-ruler"></i> Open in Route Builder</button>' +
+          '</div>' +
+        '</div>' +
+      '</section>' + this.renderFooter();
+
+      var self = this;
+      document.getElementById('sharedTripCopy').addEventListener('click', function() {
+        sessionStorage.setItem('vu_shared_waypoints', JSON.stringify(trip.waypoints));
+        self.navigate('/build-route');
+      });
+    } catch (err) {
+      this.pageContent.innerHTML = this.render404();
+    }
   }
 }
 

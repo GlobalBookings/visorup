@@ -2379,7 +2379,45 @@ class RouteBuilder {
 
     localStorage.setItem('rb_routes', JSON.stringify(saved));
     this._loadSavedList();
-    alert('Route "' + name + '" saved!');
+
+    // Cloud save if logged in
+    var self = this;
+    if (typeof VisorUpAuth !== 'undefined' && typeof VisorUpTrips !== 'undefined') {
+      VisorUpAuth.getUser().then(function(user) {
+        if (!user) { alert('Route "' + name + '" saved locally. Log in to save to your profile!'); return; }
+        var totalDist = 0;
+        if (self.routeSegments) {
+          self.routeSegments.forEach(function(s) { if (s && s.distance) totalDist += s.distance; });
+        }
+        VisorUpTrips.save({
+          id: self._cloudTripId || null,
+          name: name,
+          waypoints: route.waypoints.map(function(wp, i) {
+            return { lat: wp[0], lng: wp[1], name: route.waypointNames[i] || '' };
+          }),
+          settings: {
+            segmentModes: route.segmentModes,
+            startLocation: route.startLocation,
+            endLocation: route.endLocation,
+            prefMode: route.prefMode,
+            maxMiles: route.maxMiles,
+            maxHours: route.maxHours
+          },
+          routeStats: {
+            distance: Math.round(totalDist),
+            waypoints: route.waypoints.length
+          }
+        }).then(function(saved) {
+          self._cloudTripId = saved.id;
+          alert('Route "' + name + '" saved to your profile!');
+        }).catch(function(err) {
+          console.error('Cloud save failed:', err);
+          alert('Route saved locally. Cloud save failed: ' + err.message);
+        });
+      });
+    } else {
+      alert('Route "' + name + '" saved!');
+    }
   }
 
   _loadRoute(idx) {
