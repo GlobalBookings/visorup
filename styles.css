@@ -3473,8 +3473,48 @@ ul, ol { list-style: none; }
 .profile-actions { margin-left:auto; display:flex; gap:8px; }
 
 .profile-section { margin-bottom:36px; }
-.profile-section h3 { font-size:16px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.profile-section h3 { font-size:16px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 .profile-section h3 i { color:var(--accent); }
+
+/* Garage */
+.garage-add-trigger { margin-left:auto; padding:5px 14px; background:var(--accent); color:#080c0b; border:none; border-radius:20px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px; transition:opacity var(--transition); }
+.garage-add-trigger:hover { opacity:0.85; }
+
+.garage-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
+.garage-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:border-color var(--transition); position:relative; }
+.garage-card:hover { border-color:var(--accent); }
+
+.garage-card-media { position:relative; height:180px; background:var(--bg-card-hover); overflow:hidden; }
+.garage-card-img { width:100%; height:100%; object-fit:cover; }
+.garage-card-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:48px; color:var(--text-dim); }
+
+.garage-primary-badge { position:absolute; top:10px; left:10px; padding:3px 10px; background:var(--accent); color:#080c0b; border-radius:20px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+
+.garage-photo-upload { position:absolute; bottom:10px; right:10px; }
+.garage-photo-btn { width:32px; height:32px; border-radius:50%; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer; transition:all var(--transition); }
+.garage-photo-btn:hover { background:var(--accent); color:#080c0b; transform:scale(1.1); }
+
+.garage-card-body { padding:14px 16px; }
+.garage-nickname { font-size:16px; font-weight:800; color:var(--accent); margin-bottom:2px; font-family:'Playfair Display',serif; }
+.garage-make-model { font-size:14px; font-weight:600; color:var(--text); }
+.garage-year { font-size:12px; color:var(--text-muted); font-weight:400; }
+.garage-notes { font-size:12px; color:var(--text-muted); margin-top:4px; line-height:1.5; }
+
+.garage-card-actions { display:flex; gap:4px; padding:0 12px 12px; }
+.garage-action-btn { width:30px; height:30px; border:1px solid var(--border); border-radius:var(--radius-sm); background:none; color:var(--text-muted); font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all var(--transition); }
+.garage-action-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+.garage-add-form { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-top:16px; }
+.garage-add-form label { display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
+.garage-add-form input { width:100%; padding:9px 12px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-size:13px; font-family:inherit; }
+.garage-add-form input:focus { outline:none; border-color:var(--accent); }
+.garage-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.garage-form-actions { display:flex; gap:10px; margin-top:14px; }
+
+@media (max-width:900px) {
+  .garage-grid { grid-template-columns:1fr; }
+  .garage-form-grid { grid-template-columns:1fr; }
+}
 
 .saved-trip-card { display:flex; align-items:center; gap:16px; padding:16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:10px; transition:all var(--transition); }
 .saved-trip-card:hover { border-color:var(--accent); }

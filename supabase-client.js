@@ -217,6 +217,108 @@ const VisorUpTrips = {
   }
 };
 
+// ── User Garage (Bikes) ──────────────────────────────────────────
+
+const VisorUpGarage = {
+
+  async list() {
+    const user = await VisorUpAuth.getUser();
+    if (!user) return [];
+    const sb = getSupabase();
+    const { data, error } = await sb.from('user_bikes')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('is_primary', { ascending: false })
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data || [];
+  },
+
+  async add(bike) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    const { data, error } = await sb.from('user_bikes')
+      .insert({
+        user_id: user.id,
+        make: bike.make,
+        model: bike.model,
+        year: bike.year || null,
+        nickname: bike.nickname || null,
+        notes: bike.notes || null,
+        is_primary: bike.isPrimary || false
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async update(id, updates) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    const { data, error } = await sb.from('user_bikes')
+      .update(updates)
+      .eq('id', id)
+      .eq('user_id', user.id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async remove(id) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    const { error } = await sb.from('user_bikes').delete().eq('id', id).eq('user_id', user.id);
+    if (error) throw error;
+  },
+
+  async setPrimary(id) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    await sb.from('user_bikes').update({ is_primary: false }).eq('user_id', user.id);
+    const { data, error } = await sb.from('user_bikes')
+      .update({ is_primary: true })
+      .eq('id', id)
+      .eq('user_id', user.id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async uploadPhoto(bikeId, file) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    var ext = file.name.split('.').pop().toLowerCase();
+    if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext)) throw new Error('Only JPG, PNG, and WebP allowed');
+    if (file.size > 5 * 1024 * 1024) throw new Error('Image must be under 5MB');
+    var path = user.id + '/' + bikeId + '.' + ext;
+    const { error: uploadErr } = await sb.storage.from('bike-photos').upload(path, file, { upsert: true, contentType: file.type });
+    if (uploadErr) throw uploadErr;
+    const { data: urlData } = sb.storage.from('bike-photos').getPublicUrl(path);
+    var photoUrl = urlData.publicUrl + '?t=' + Date.now();
+    await this.update(bikeId, { photo_url: photoUrl });
+    return photoUrl;
+  },
+
+  async listByUser(userId) {
+    const sb = getSupabase();
+    if (!sb) return [];
+    const { data, error } = await sb.from('user_bikes')
+      .select('*')
+      .eq('user_id', userId)
+      .order('is_primary', { ascending: false });
+    if (error) return [];
+    return data || [];
+  }
+};
+
 // ── Favourites ───────────────────────────────────────────────────
 
 const VisorUpFavourites = {

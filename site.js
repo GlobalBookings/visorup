@@ -2735,6 +2735,7 @@ class VisorUpSite {
     var profile = await VisorUpAuth.getProfile();
     var trips = await VisorUpTrips.list();
     var favs = await VisorUpFavourites.list();
+    var garageBikes = (typeof VisorUpGarage !== 'undefined') ? await VisorUpGarage.list() : [];
 
     var avatarInner = profile && profile.avatar_url
       ? '<img src="' + profile.avatar_url + '" class="profile-avatar" alt="">'
@@ -2778,6 +2779,49 @@ class VisorUpSite {
       }).join('');
     }
 
+    // Garage HTML
+    var garageHTML = '';
+    if (garageBikes.length === 0) {
+      garageHTML = '<div class="profile-empty"><i class="fas fa-motorcycle"></i><p>No bikes in your garage yet. Add your first ride!</p></div>';
+    } else {
+      garageHTML = '<div class="garage-grid">' + garageBikes.map(function(b) {
+        var photoHTML = b.photo_url
+          ? '<img src="' + b.photo_url + '" class="garage-card-img" alt="' + b.make + ' ' + b.model + '">'
+          : '<div class="garage-card-placeholder"><i class="fas fa-motorcycle"></i></div>';
+        return '<div class="garage-card" data-bike-id="' + b.id + '">' +
+          '<div class="garage-card-media">' +
+            photoHTML +
+            (b.is_primary ? '<span class="garage-primary-badge"><i class="fas fa-star"></i> Primary</span>' : '') +
+            '<label class="garage-photo-upload" title="Upload photo"><input type="file" class="garage-photo-input" data-bike-id="' + b.id + '" accept="image/jpeg,image/png,image/webp" style="display:none"><span class="garage-photo-btn"><i class="fas fa-camera"></i></span></label>' +
+          '</div>' +
+          '<div class="garage-card-body">' +
+            (b.nickname ? '<div class="garage-nickname">' + b.nickname + '</div>' : '') +
+            '<div class="garage-make-model">' + b.make + ' ' + b.model + (b.year ? ' <span class="garage-year">' + b.year + '</span>' : '') + '</div>' +
+            (b.notes ? '<div class="garage-notes">' + b.notes + '</div>' : '') +
+          '</div>' +
+          '<div class="garage-card-actions">' +
+            (!b.is_primary ? '<button class="garage-action-btn garage-set-primary" data-bike-id="' + b.id + '" title="Set as primary"><i class="fas fa-star"></i></button>' : '') +
+            '<button class="garage-action-btn garage-delete-btn" data-bike-id="' + b.id + '" title="Remove"><i class="fas fa-trash"></i></button>' +
+          '</div>' +
+        '</div>';
+      }).join('') + '</div>';
+    }
+
+    var addBikeFormHTML = '' +
+      '<div class="garage-add-form" id="garageAddForm" style="display:none">' +
+        '<div class="garage-form-grid">' +
+          '<div><label>Make *</label><input type="text" id="garageMake" placeholder="e.g. BMW, Triumph, Honda" required></div>' +
+          '<div><label>Model *</label><input type="text" id="garageModel" placeholder="e.g. R 1250 GS, Tiger 900" required></div>' +
+          '<div><label>Year</label><input type="number" id="garageYear" placeholder="e.g. 2024" min="1950" max="2030"></div>' +
+          '<div><label>Nickname</label><input type="text" id="garageNickname" placeholder="e.g. The Beast"></div>' +
+        '</div>' +
+        '<div style="margin-top:8px"><label>Notes</label><input type="text" id="garageNotes" placeholder="Mods, spec, stories..." style="width:100%"></div>' +
+        '<div class="garage-form-actions">' +
+          '<button class="btn-primary" id="garageSaveBtn" style="font-size:13px;padding:10px 20px;"><i class="fas fa-plus"></i> Add to Garage</button>' +
+          '<button class="btn-outline" id="garageCancelBtn" style="font-size:13px;padding:10px 20px;">Cancel</button>' +
+        '</div>' +
+      '</div>';
+
     this.pageContent.innerHTML = '' +
     '<section class="page-section">' +
       '<div class="container">' +
@@ -2790,6 +2834,12 @@ class VisorUpSite {
           '<div class="profile-actions">' +
             '<button class="auth-submit-btn" id="profileLogout" style="padding:8px 16px;font-size:12px;width:auto;"><i class="fas fa-sign-out-alt"></i> Log Out</button>' +
           '</div>' +
+        '</div>' +
+
+        '<div class="profile-section">' +
+          '<h3><i class="fas fa-warehouse"></i> My Garage (' + garageBikes.length + ') <button class="garage-add-trigger" id="garageAddTrigger"><i class="fas fa-plus"></i> Add Bike</button></h3>' +
+          garageHTML +
+          addBikeFormHTML +
         '</div>' +
 
         '<div class="profile-section">' +
@@ -2878,6 +2928,74 @@ class VisorUpSite {
         var tripId = btn.dataset.id;
         await VisorUpTrips.delete(tripId);
         btn.closest('.saved-trip-card').remove();
+      });
+    });
+
+    // Garage: Add bike toggle
+    var addTrigger = document.getElementById('garageAddTrigger');
+    var addForm = document.getElementById('garageAddForm');
+    if (addTrigger && addForm) {
+      addTrigger.addEventListener('click', function() {
+        addForm.style.display = addForm.style.display === 'none' ? '' : 'none';
+      });
+      document.getElementById('garageCancelBtn').addEventListener('click', function() {
+        addForm.style.display = 'none';
+      });
+      document.getElementById('garageSaveBtn').addEventListener('click', async function() {
+        var make = document.getElementById('garageMake').value.trim();
+        var model = document.getElementById('garageModel').value.trim();
+        if (!make || !model) { alert('Make and model are required'); return; }
+        try {
+          await VisorUpGarage.add({
+            make: make,
+            model: model,
+            year: parseInt(document.getElementById('garageYear').value) || null,
+            nickname: document.getElementById('garageNickname').value.trim() || null,
+            notes: document.getElementById('garageNotes').value.trim() || null,
+            isPrimary: garageBikes.length === 0
+          });
+          self.renderProfile();
+        } catch (e) { alert('Failed to add bike: ' + e.message); }
+      });
+    }
+
+    // Garage: Photo upload
+    document.querySelectorAll('.garage-photo-input').forEach(function(input) {
+      input.addEventListener('change', async function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var bikeId = input.dataset.bikeId;
+        var card = input.closest('.garage-card');
+        var btn = card.querySelector('.garage-photo-btn');
+        if (btn) btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        try {
+          await VisorUpGarage.uploadPhoto(bikeId, file);
+          self.renderProfile();
+        } catch (err) {
+          alert('Upload failed: ' + err.message);
+          if (btn) btn.innerHTML = '<i class="fas fa-camera"></i>';
+        }
+      });
+    });
+
+    // Garage: Set primary
+    document.querySelectorAll('.garage-set-primary').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        try {
+          await VisorUpGarage.setPrimary(btn.dataset.bikeId);
+          self.renderProfile();
+        } catch (e) { console.error(e); }
+      });
+    });
+
+    // Garage: Delete
+    document.querySelectorAll('.garage-delete-btn').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        if (!confirm('Remove this bike from your garage?')) return;
+        try {
+          await VisorUpGarage.remove(btn.dataset.bikeId);
+          btn.closest('.garage-card').remove();
+        } catch (e) { console.error(e); }
       });
     });
   }
