@@ -790,25 +790,23 @@ class VisorUpSite {
       var liveClass = r.isLive ? 'route-card-live' : 'route-card-soon';
       var href = r.isLive ? '#/routes/' + r.slug : '#/routes';
       var badge = r.hasPlanner
-        ? '<span class="route-badge-live"><i class="fas fa-play-circle"></i> Interactive Planner</span>'
+        ? '<span class="route-badge route-badge-planner"><i class="fas fa-play-circle"></i> Interactive Planner</span>'
         : r.isLive
-          ? '<span class="route-badge-live"><i class="fas fa-map-marked-alt"></i> Route Guide</span>'
-          : '<span class="route-badge-soon"><i class="fas fa-clock"></i> Coming Soon</span>';
-      var highlightTags = r.highlights.map(function(h) { return '<span class="route-highlight-tag">' + h + '</span>'; }).join('');
+          ? '<span class="route-badge route-badge-guide"><i class="fas fa-map-marked-alt"></i> Route Guide</span>'
+          : '<span class="route-badge route-badge-soon"><i class="fas fa-clock"></i> Coming Soon</span>';
 
       return '<a href="' + href + '" class="route-card ' + liveClass + '">' +
-        '<div class="route-card-img" style="background-image:url(' + r.image + ')">' +
+        '<div class="route-card-bg" style="background-image:url(' + r.image + ')"></div>' +
+        '<div class="route-card-overlay"></div>' +
+        '<div class="route-card-content">' +
           badge +
-        '</div>' +
-        '<div class="route-card-body">' +
           '<h3 class="route-card-title">' + r.name + '</h3>' +
           '<p class="route-card-tagline">' + r.tagline + '</p>' +
-          '<div class="route-card-meta">' +
-            '<span><i class="fas fa-calendar"></i> ' + r.days + ' Days</span>' +
-            '<span><i class="fas fa-road"></i> ' + r.miles + ' Miles</span>' +
+          '<div class="route-card-stats">' +
+            '<span><i class="fas fa-calendar-day"></i> ' + r.days + ' days</span>' +
+            '<span><i class="fas fa-road"></i> ' + r.miles + ' mi</span>' +
             '<span><i class="fas fa-signal"></i> ' + r.difficulty + '</span>' +
           '</div>' +
-          '<div class="route-highlight-tags">' + highlightTags + '</div>' +
         '</div>' +
       '</a>';
     }).join('');
