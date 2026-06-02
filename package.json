@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "echo 'Static site - no build step required'",
+    "build": "node -e \"if(process.env.SUPABASE_URL&&process.env.SUPABASE_ANON_KEY){require('fs').writeFileSync('supabase-env.json',JSON.stringify({url:process.env.SUPABASE_URL,anonKey:process.env.SUPABASE_ANON_KEY}))}else{console.log('No Supabase env vars set, skipping config')}\"",
     "start": "npx serve . -l 3000 -c serve.json",
     "test": "npx playwright test",
     "deploy": "npx wrangler pages deploy . --project-name=motorbike-tour --branch=main"
