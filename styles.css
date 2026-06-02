@@ -2931,7 +2931,8 @@ ul, ol { list-style: none; }
 .gear-category { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
 .gear-category-title { font-size:14px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
 .gear-category-title i { color:var(--accent); }
-.gear-item { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); gap:12px; }
+.gear-item { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); gap:12px; text-decoration:none; color:inherit; transition:opacity var(--transition); }
+.gear-item:hover { opacity:0.8; }
 .gear-item:last-child { border-bottom:none; }
 .gear-item-info { display:flex; flex-direction:column; }
 .gear-item-info strong { font-size:13px; }

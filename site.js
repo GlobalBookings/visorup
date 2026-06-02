@@ -1926,13 +1926,13 @@ class VisorUpSite {
 
     var gearSections = b.gearRecommendations.map(function(cat) {
       var items = cat.items.map(function(item) {
-        return '<div class="gear-item">' +
+        return '<a href="' + item.url + '" target="_blank" rel="noopener sponsored" class="gear-item">' +
           '<div class="gear-item-info">' +
             '<strong>' + item.name + '</strong>' +
             '<span class="gear-item-note">' + item.note + '</span>' +
           '</div>' +
-          '<span class="gear-item-price">' + item.price + '</span>' +
-        '</div>';
+          '<span class="gear-item-price">' + item.price + ' <i class="fas fa-external-link-alt" style="font-size:9px;opacity:0.5"></i></span>' +
+        '</a>';
       }).join('');
       return '<div class="gear-category">' +
         '<h4 class="gear-category-title"><i class="fas fa-' +
