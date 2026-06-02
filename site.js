@@ -744,14 +744,17 @@ class VisorUpSite {
 
   renderHome() {
     var destCards = DESTINATIONS.slice(0, 6).map(function(d) {
-      return '<a href="/destinations/' + d.slug + '" class="dest-card">' +
-        '<div class="dest-card-img" style="background-image:url(' + d.image + ')"></div>' +
-        '<div class="dest-card-body">' +
-          '<span class="dest-card-region">' + d.region + '</span>' +
-          '<h3 class="dest-card-title">' + d.name + '</h3>' +
-          '<p class="dest-card-tagline">' + d.tagline + '</p>' +
-        '</div>' +
-      '</a>';
+      return '<div class="dest-card-wrapper">' +
+        '<a href="/destinations/' + d.slug + '" class="dest-card">' +
+          '<div class="dest-card-img" style="background-image:url(' + d.image + ')"></div>' +
+          '<div class="dest-card-body">' +
+            '<span class="dest-card-region">' + d.region + '</span>' +
+            '<h3 class="dest-card-title">' + d.name + '</h3>' +
+            '<p class="dest-card-tagline">' + d.tagline + '</p>' +
+          '</div>' +
+        '</a>' +
+        '<button class="fav-btn card-fav-btn" data-fav-type="destination" data-fav-slug="' + d.slug + '" title="Favourite"><i class="fas fa-heart"></i></button>' +
+      '</div>';
     }).join('');
 
     var ferryCards = FERRIES.slice(0, 4).map(function(f) {
@@ -891,20 +894,23 @@ class VisorUpSite {
           ? '<span class="route-badge route-badge-guide"><i class="fas fa-map-marked-alt"></i> Route Guide</span>'
           : '<span class="route-badge route-badge-soon"><i class="fas fa-clock"></i> Coming Soon</span>';
 
-      return '<a href="' + href + '" class="route-card ' + liveClass + '">' +
-        '<div class="route-card-bg" style="background-image:url(' + r.image + ')"></div>' +
-        '<div class="route-card-overlay"></div>' +
-        '<div class="route-card-content">' +
-          badge +
-          '<h3 class="route-card-title">' + r.name + '</h3>' +
-          '<p class="route-card-tagline">' + r.tagline + '</p>' +
-          '<div class="route-card-stats">' +
-            '<span><i class="fas fa-calendar-day"></i> ' + r.days + ' days</span>' +
-            '<span><i class="fas fa-road"></i> ' + r.miles + ' mi</span>' +
-            '<span><i class="fas fa-signal"></i> ' + r.difficulty + '</span>' +
+      return '<div class="route-card-wrapper">' +
+        '<a href="' + href + '" class="route-card ' + liveClass + '">' +
+          '<div class="route-card-bg" style="background-image:url(' + r.image + ')"></div>' +
+          '<div class="route-card-overlay"></div>' +
+          '<div class="route-card-content">' +
+            badge +
+            '<h3 class="route-card-title">' + r.name + '</h3>' +
+            '<p class="route-card-tagline">' + r.tagline + '</p>' +
+            '<div class="route-card-stats">' +
+              '<span><i class="fas fa-calendar-day"></i> ' + r.days + ' days</span>' +
+              '<span><i class="fas fa-road"></i> ' + r.miles + ' mi</span>' +
+              '<span><i class="fas fa-signal"></i> ' + r.difficulty + '</span>' +
+            '</div>' +
           '</div>' +
-        '</div>' +
-      '</a>';
+        '</a>' +
+        '<button class="fav-btn card-fav-btn" data-fav-type="route" data-fav-slug="' + r.slug + '" title="Favourite"><i class="fas fa-heart"></i></button>' +
+      '</div>';
     }).join('');
 
     return '' +
@@ -1203,14 +1209,17 @@ class VisorUpSite {
     }).join('');
 
     var cards = DESTINATIONS.map(function(d) {
-      return '<a href="/destinations/' + d.slug + '" class="dest-card" data-region="' + d.region + '">' +
-        '<div class="dest-card-img" style="background-image:url(' + d.image + ')"></div>' +
-        '<div class="dest-card-body">' +
-          '<span class="dest-card-region">' + d.region + '</span>' +
-          '<h3 class="dest-card-title">' + d.name + '</h3>' +
-          '<p class="dest-card-tagline">' + d.tagline + '</p>' +
-        '</div>' +
-      '</a>';
+      return '<div class="dest-card-wrapper">' +
+        '<a href="/destinations/' + d.slug + '" class="dest-card" data-region="' + d.region + '">' +
+          '<div class="dest-card-img" style="background-image:url(' + d.image + ')"></div>' +
+          '<div class="dest-card-body">' +
+            '<span class="dest-card-region">' + d.region + '</span>' +
+            '<h3 class="dest-card-title">' + d.name + '</h3>' +
+            '<p class="dest-card-tagline">' + d.tagline + '</p>' +
+          '</div>' +
+        '</a>' +
+        '<button class="fav-btn card-fav-btn" data-fav-type="destination" data-fav-slug="' + d.slug + '" title="Favourite"><i class="fas fa-heart"></i></button>' +
+      '</div>';
     }).join('');
 
     return '' +
@@ -2162,6 +2171,20 @@ class VisorUpSite {
   scrollToTop() {
     if (this.siteView) this.siteView.scrollTop = 0;
     window.scrollTo(0, 0);
+    this._syncFavourites();
+  }
+
+  async _syncFavourites() {
+    if (typeof VisorUpAuth === 'undefined' || typeof VisorUpFavourites === 'undefined') return;
+    var user = await VisorUpAuth.getUser();
+    if (!user) return;
+    var favs = await VisorUpFavourites.list();
+    document.querySelectorAll('.fav-btn[data-fav-type]').forEach(function(btn) {
+      var type = btn.dataset.favType;
+      var slug = btn.dataset.favSlug;
+      var isFav = favs.some(function(f) { return f.item_type === type && f.item_slug === slug; });
+      btn.classList.toggle('fav-active', isFav);
+    });
   }
 
   bindThemeToggle() {
