@@ -2101,6 +2101,34 @@ class RouteBuilder {
   // ── Reverse Route ───────────────────────────────────────────
 
   _reverseRoute() {
+    if (this.waypoints.length < 2) return;
+
+    this.waypoints.reverse();
+    this.waypointMarkers.reverse();
+    this.waypointNames.reverse();
+
+    // Swap start and end locations
+    var tmpLoc = this.startLocation;
+    this.startLocation = this.endLocation;
+    this.endLocation = tmpLoc;
+
+    var tmpMarker = this.startMarker;
+    this.startMarker = this.endMarker;
+    this.endMarker = tmpMarker;
+
+    var tmpInput = this.container.querySelector('#rb-startInput').value;
+    this.container.querySelector('#rb-startInput').value = this.container.querySelector('#rb-endInput').value;
+    this.container.querySelector('#rb-endInput').value = tmpInput;
+
+    // Reset segment modes
+    this.segmentModes = {};
+
+    this._renumberMarkers();
+    this._updateWaypointList();
+    this._clearSuggestions();
+    this._recalcRoute();
+  }
+
   _setAllFastTrack() {
     if (this.waypoints.length < 2) { alert('Add at least 2 waypoints first'); return; }
     var btn = this.container.querySelector('#rb-fastTrackBtn');

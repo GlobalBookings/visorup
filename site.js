@@ -626,10 +626,59 @@ class VisorUpSite {
                     rb._addWaypoint(wps2[wi].lat, wps2[wi].lng);
                   }
                   rb._buildRoute();
+                  return;
                 }
               } catch (e) { /* ignore */ }
             }
+
+            // Load destination waypoints from ?dest= parameter
+            var destParam = new URLSearchParams(window.location.search).get('dest');
+            if (destParam && typeof DESTINATIONS !== 'undefined') {
+              var dest = DESTINATIONS.find(function(d) { return d.slug === destParam; });
+              if (dest && dest.waypoints && dest.waypoints.length >= 2) {
+                var nameInput = rb.container.querySelector('#rb-routeName');
+                if (nameInput) nameInput.value = 'Route to ' + dest.name;
+                for (var di = 0; di < dest.waypoints.length; di++) {
+                  var wp = dest.waypoints[di];
+                  rb._addWaypoint(wp[0], wp[1], di === 0 ? dest.name + ' (start)' : null);
+                }
+                rb.map.setView(dest.center, 9);
+              }
+            }
           }, 50);
+        }
+        break;
+
+      case 'guides':
+        this.showSiteView();
+        if (parts[1] && parts[2]) {
+          var article = typeof ARTICLES !== 'undefined' && ARTICLES.find(function(a) { return a.category === parts[1] && a.slug === parts[2]; });
+          if (article) {
+            this.pageContent.innerHTML = this.renderArticle(article) + this.renderFooter();
+            this.setActiveNav('guides');
+            this.setTitle(article.title);
+            this._setMeta(article.metaDescription);
+            this._injectJsonLd(article);
+            this.scrollToTop();
+          } else {
+            this.pageContent.innerHTML = this.render404();
+            this.setTitle('Page Not Found');
+            this.scrollToTop();
+          }
+        } else if (parts[1]) {
+          this.showSiteView();
+          this.pageContent.innerHTML = this.renderGuideCategory(parts[1]) + this.renderFooter();
+          this.setActiveNav('guides');
+          var catName = parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
+          this.setTitle(catName + ' Guides — Motorcycle Touring');
+          this.scrollToTop();
+        } else {
+          this.showSiteView();
+          this.pageContent.innerHTML = this.renderGuides() + this.renderFooter();
+          this.setActiveNav('guides');
+          this.setTitle('Motorcycle Touring Guides — Tips, Gear, Routes & More');
+          this._setMeta('In-depth motorcycle touring guides: gear reviews, route planning, scenic stops, bike setup, and seasonal riding tips for UK riders.');
+          this.scrollToTop();
         }
         break;
 
@@ -2103,6 +2152,188 @@ class VisorUpSite {
 
       '</div>' +
     '</section>';
+  }
+
+  // ── Guides / Articles ───────────────────────────────────────
+
+  renderGuides() {
+    if (typeof ARTICLES === 'undefined' || !ARTICLES.length) return this.renderComingSoon('Guides', 'Content coming soon.', 'fa-book');
+    var cats = ['All', 'gear', 'bikes', 'routes', 'destinations', 'planning', 'scenic', 'seasonal'];
+    var pills = cats.map(function(c) {
+      var label = c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1);
+      var active = c === 'All' ? 'filter-pill-active' : '';
+      return '<button class="filter-pill ' + active + '" data-filter="' + c + '">' + label + '</button>';
+    }).join('');
+
+    var cards = ARTICLES.map(function(a) {
+      return '<a href="/guides/' + a.category + '/' + a.slug + '" class="guide-card" data-category="' + a.category + '">' +
+        '<div class="guide-card-img" style="background-image:url(' + a.heroImage + ')">' +
+          '<span class="guide-card-cat">' + a.category + '</span>' +
+        '</div>' +
+        '<div class="guide-card-body">' +
+          '<h3>' + a.title + '</h3>' +
+          '<p>' + a.metaDescription + '</p>' +
+          '<div class="guide-card-meta"><span><i class="fas fa-clock"></i> ' + a.readTime + '</span><span><i class="fas fa-calendar"></i> ' + a.publishDate + '</span></div>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+
+    setTimeout(function() {
+      document.addEventListener('click', function handler(e) {
+        if (!e.target.classList.contains('filter-pill')) return;
+        var section = e.target.closest('.page-section');
+        if (!section || !section.querySelector('#guideGrid')) return;
+        var filter = e.target.dataset.filter;
+        section.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('filter-pill-active'); });
+        e.target.classList.add('filter-pill-active');
+        section.querySelectorAll('#guideGrid .guide-card').forEach(function(card) {
+          card.style.display = (filter === 'All' || card.dataset.category === filter) ? '' : 'none';
+        });
+      });
+    }, 50);
+
+    return '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Touring Guides</h1>' +
+        '<p class="page-hero-sub">Gear reviews, route tips, bike setup, and everything you need to plan the perfect UK motorcycle tour.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="filter-pills">' + pills + '</div>' +
+        '<div class="guide-grid" id="guideGrid">' + cards + '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  renderGuideCategory(category) {
+    if (typeof ARTICLES === 'undefined') return this.renderComingSoon('Guides', 'Content coming soon.', 'fa-book');
+    var catArticles = ARTICLES.filter(function(a) { return a.category === category; });
+    if (catArticles.length === 0) return this.render404();
+    var catName = category.charAt(0).toUpperCase() + category.slice(1);
+
+    var cards = catArticles.map(function(a) {
+      return '<a href="/guides/' + a.category + '/' + a.slug + '" class="guide-card">' +
+        '<div class="guide-card-img" style="background-image:url(' + a.heroImage + ')">' +
+          '<span class="guide-card-cat">' + a.category + '</span>' +
+        '</div>' +
+        '<div class="guide-card-body">' +
+          '<h3>' + a.title + '</h3>' +
+          '<p>' + a.metaDescription + '</p>' +
+          '<div class="guide-card-meta"><span><i class="fas fa-clock"></i> ' + a.readTime + '</span><span><i class="fas fa-calendar"></i> ' + a.publishDate + '</span></div>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+
+    return '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">' + catName + ' Guides</h1>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="guide-grid">' + cards + '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  renderArticle(a) {
+    var tags = a.tags.map(function(t) { return '<span class="article-tag">' + t + '</span>'; }).join('');
+
+    var related = '';
+    if (a.relatedSlugs && a.relatedSlugs.length > 0 && typeof ARTICLES !== 'undefined') {
+      var relCards = a.relatedSlugs.map(function(slug) {
+        var r = ARTICLES.find(function(ar) { return ar.slug === slug; });
+        if (!r) return '';
+        return '<a href="/guides/' + r.category + '/' + r.slug + '" class="related-card">' +
+          '<div class="related-card-img" style="background-image:url(' + r.heroImage + ')"></div>' +
+          '<div class="related-card-body"><h4>' + r.title + '</h4><span>' + r.readTime + '</span></div>' +
+        '</a>';
+      }).filter(Boolean).join('');
+      if (relCards) {
+        related = '<div class="article-related"><h3><i class="fas fa-book-open" style="color:var(--accent);margin-right:6px;"></i>Related Guides</h3><div class="related-grid">' + relCards + '</div></div>';
+      }
+    }
+
+    var affiliates = '';
+    if (a.affiliateLinks && a.affiliateLinks.length > 0) {
+      var items = a.affiliateLinks.map(function(link) {
+        return '<a href="' + link.url + '" target="_blank" rel="noopener sponsored" class="article-affiliate">' +
+          '<span class="article-affiliate-name">' + link.name + '</span>' +
+          '<span class="article-affiliate-price">' + link.price + ' <i class="fas fa-external-link-alt" style="font-size:9px;opacity:0.5;"></i></span>' +
+        '</a>';
+      }).join('');
+      affiliates = '<div class="article-affiliate-box"><h4><i class="fas fa-shopping-bag" style="color:var(--accent);margin-right:6px;"></i>Products Mentioned</h4>' + items + '</div>';
+    }
+
+    var catLabel = a.category.charAt(0).toUpperCase() + a.category.slice(1);
+
+    return '' +
+    '<section class="page-hero" style="background-image:url(' + a.heroImage + ')">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<span class="article-hero-cat">' + catLabel + '</span>' +
+        '<h1 class="page-hero-title">' + a.title + '</h1>' +
+        '<div class="article-hero-meta"><span><i class="fas fa-user"></i> ' + a.author + '</span><span><i class="fas fa-calendar"></i> ' + a.publishDate + '</span><span><i class="fas fa-clock"></i> ' + a.readTime + '</span></div>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<nav class="breadcrumb"><a href="/">Home</a> <i class="fas fa-chevron-right"></i> <a href="/guides">Guides</a> <i class="fas fa-chevron-right"></i> <a href="/guides/' + a.category + '">' + catLabel + '</a> <i class="fas fa-chevron-right"></i> <span>' + a.title + '</span></nav>' +
+        '<div class="article-layout">' +
+          '<article class="article-body">' +
+            a.content +
+          '</article>' +
+          '<aside class="article-sidebar">' +
+            affiliates +
+            '<div class="article-tags"><h4>Tags</h4>' + tags + '</div>' +
+          '</aside>' +
+        '</div>' +
+        related +
+      '</div>' +
+    '</section>';
+  }
+
+  _setMeta(description) {
+    var existing = document.querySelector('meta[name="description"]');
+    if (existing) existing.setAttribute('content', description);
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', description);
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', document.title);
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = window.location.origin + window.location.pathname;
+  }
+
+  _injectJsonLd(article) {
+    var existing = document.getElementById('visorup-jsonld');
+    if (existing) existing.remove();
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'visorup-jsonld';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      'headline': article.title,
+      'description': article.metaDescription,
+      'image': window.location.origin + '/' + article.heroImage,
+      'author': { '@type': 'Organization', 'name': 'VisorUp', 'url': 'https://visorup.co.uk' },
+      'publisher': { '@type': 'Organization', 'name': 'VisorUp', 'url': 'https://visorup.co.uk', 'logo': { '@type': 'ImageObject', 'url': 'https://visorup.co.uk/public/images/heroes/homepage.jpg' } },
+      'datePublished': article.publishDate,
+      'dateModified': article.publishDate,
+      'mainEntityOfPage': { '@type': 'WebPage', '@id': window.location.origin + '/guides/' + article.category + '/' + article.slug },
+      'keywords': article.tags.join(', ')
+    });
+    document.head.appendChild(script);
   }
 
   renderFooter() {
