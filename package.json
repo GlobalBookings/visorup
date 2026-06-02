@@ -1,0 +1,17 @@
+{
+  "name": "motorbiketour",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "deploy": "npx wrangler pages deploy . --project-name=motorbike-tour --branch=main"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

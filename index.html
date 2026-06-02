@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5">
+  <title>VisorUp — Motorcycle Adventures Across Britain</title>
+  <meta name="description" content="Plan epic motorcycle tours across Britain and the Channel Islands. Scenic roads, stunning viewpoints, GPX downloads, ferry guides. From island roads to highland horizons.">
+  <meta name="theme-color" content="#0D3B2E">
+  <meta property="og:title" content="VisorUp — Motorcycle Adventures Across Britain">
+  <meta property="og:description" content="The definitive motorcycle touring resource for Britain and the islands. Routes, destinations, ferries, GPX downloads.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://visorup.co.uk">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏍️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="main-nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="#/" class="nav-brand" aria-label="VisorUp Home">
+        <i class="fas fa-motorcycle"></i>
+        <span>VISOR<strong>UP</strong></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#/routes" data-nav="routes">Routes</a>
+        <a href="#/destinations" data-nav="destinations">Destinations</a>
+        <a href="#/ferries" data-nav="ferries">Ferries</a>
+        <a href="#/planning" data-nav="planning">Planning</a>
+        <a href="#/build-route" data-nav="build-route">Build Route</a>
+        <a href="#/gear" data-nav="gear">Gear</a>
+        <a href="#/reports" data-nav="reports">Ride Reports</a>
+        <a href="#/community" data-nav="community">Community</a>
+      </div>
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme"><i class="fas fa-sun"></i></button>
+        <button id="navMenuBtn" class="icon-btn nav-menu-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="#/routes">Routes</a>
+    <a href="#/destinations">Destinations</a>
+    <a href="#/ferries">Ferries</a>
+    <a href="#/planning">Planning</a>
+    <a href="#/build-route">Build Route</a>
+    <a href="#/gear">Gear</a>
+    <a href="#/reports">Ride Reports</a>
+    <a href="#/community">Community</a>
+  </div>
+
+  <div id="siteView" class="site-view">
+    <div id="pageContent"></div>
+  </div>
+
+  <div id="plannerView" class="planner-view" style="display:none">
+    <button class="planner-back" id="plannerBack"><i class="fas fa-arrow-left"></i> Back to VisorUp</button>
+    <div class="planner-inner">
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
+      <button class="planner-menu-btn" id="plannerMenuBtn"><i class="fas fa-bars"></i></button>
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand-sm">
+            <i class="fas fa-motorcycle"></i>
+            <span>VISOR<strong>UP</strong></span>
+          </div>
+          <div class="trip-pill"><i class="fas fa-route"></i><span id="tripPillLabel">Island To Highlands</span></div>
+        </div>
+        <nav class="day-nav" id="dayNav"></nav>
+        <div class="sidebar-content" id="sidebarContent"></div>
+      </aside>
+      <main class="map-container"><div id="map"></div></main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="data.js"></script>
+  <script src="trips/scottish-highlands-loop.js"></script>
+  <script src="trips/nc500-complete.js"></script>
+  <script src="trips/welsh-mountain-passes.js"></script>
+  <script src="trips/lake-district-ultimate.js"></script>
+  <script src="trips/channel-islands-explorer.js"></script>
+  <script src="trips/coastal-cornwall.js"></script>
+  <script src="poi-scotland.js"></script>
+  <script src="poi-england.js"></script>
+  <script src="poi-wales-islands.js"></script>
+  <script src="app.js"></script>
+  <script src="route-builder.js"></script>
+  <script src="trip-planner.js"></script>
+  <script src="site.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>We use cookies to improve your experience, analyse site usage, and support our affiliate partnerships. Essential cookies are always active. You can accept or reject optional cookies.
+    <a href="#/privacy">Privacy Policy</a></p>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accept All</button>
+    <button class="cookie-btn cookie-btn-reject" id="cookieReject">Essential Only</button>
+  </div>
+  <script>
+  (function() {
+    var banner = document.getElementById('cookieBanner');
+    var consent = localStorage.getItem('vu_cookie_consent');
+    if (consent) {
+      banner.classList.add('hidden');
+    }
+    document.getElementById('cookieAccept').addEventListener('click', function() {
+      localStorage.setItem('vu_cookie_consent', 'all');
+      localStorage.setItem('vu_cookie_consent_date', new Date().toISOString());
+      banner.classList.add('hidden');
+    });
+    document.getElementById('cookieReject').addEventListener('click', function() {
+      localStorage.setItem('vu_cookie_consent', 'essential');
+      localStorage.setItem('vu_cookie_consent_date', new Date().toISOString());
+      banner.classList.add('hidden');
+    });
+  })();
+  </script>
+</body>
+</html>
