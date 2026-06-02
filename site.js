@@ -2732,10 +2732,16 @@ class VisorUpSite {
     this.setTitle('My Profile');
     this.pageContent.innerHTML = '<section class="page-section"><div class="container"><p style="color:var(--text-muted)">Loading profile...</p></div></section>' + this.renderFooter();
 
-    var profile = await VisorUpAuth.getProfile();
-    var trips = await VisorUpTrips.list();
-    var favs = await VisorUpFavourites.list();
-    var garageBikes = (typeof VisorUpGarage !== 'undefined') ? await VisorUpGarage.list() : [];
+    var results = await Promise.all([
+      VisorUpAuth.getProfile(),
+      VisorUpTrips.list(),
+      VisorUpFavourites.list(),
+      (typeof VisorUpGarage !== 'undefined') ? VisorUpGarage.list() : Promise.resolve([])
+    ]);
+    var profile = results[0];
+    var trips = results[1];
+    var favs = results[2];
+    var garageBikes = results[3];
 
     var avatarInner = profile && profile.avatar_url
       ? '<img src="' + profile.avatar_url + '" class="profile-avatar" alt="">'
