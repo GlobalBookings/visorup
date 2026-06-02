@@ -512,6 +512,30 @@ class VisorUpSite {
         this.scrollToTop();
         break;
 
+      case 'bikes':
+        if (parts[1]) {
+          var bike = BIKES.find(function(b) { return b.slug === parts[1]; });
+          if (bike) {
+            this.showSiteView();
+            this.pageContent.innerHTML = this.renderBikeDetail(bike) + this.renderFooter();
+            this.setActiveNav('bikes');
+            this.setTitle(bike.name + ' — Touring Setup Guide');
+            this.scrollToTop();
+          } else {
+            this.showSiteView();
+            this.pageContent.innerHTML = this.render404();
+            this.setTitle('Page Not Found');
+            this.scrollToTop();
+          }
+        } else {
+          this.showSiteView();
+          this.pageContent.innerHTML = this.renderBikes() + this.renderFooter();
+          this.setActiveNav('bikes');
+          this.setTitle('Motorcycle Touring Setup — Bike Guides');
+          this.scrollToTop();
+        }
+        break;
+
       case 'gear':
         this.showSiteView();
         this.pageContent.innerHTML = this.renderComingSoon('Gear Reviews', 'In-depth reviews of motorcycle touring gear, luggage systems, and riding kit — tested on real British roads.', 'fa-helmet-safety') + this.renderFooter();
@@ -1811,6 +1835,194 @@ class VisorUpSite {
     '</section>';
   }
 
+  // ── Bikes Section ───────────────────────────────────────────
+
+  renderBikes() {
+    var categories = ['All', 'Adventure', 'Sport Touring', 'Touring', 'Naked', 'Sport', 'Versatile'];
+    var pills = categories.map(function(c) {
+      var active = c === 'All' ? 'filter-pill-active' : '';
+      return '<button class="filter-pill ' + active + '" data-filter="' + c + '">' + c + '</button>';
+    }).join('');
+
+    var cards = BIKES.map(function(b) {
+      var scoreBar = function(label, val) {
+        return '<div class="bike-score-row"><span class="bike-score-label">' + label + '</span><div class="bike-score-bar"><div class="bike-score-fill" style="width:' + val + '%"></div></div><span class="bike-score-val">' + val + '</span></div>';
+      };
+      return '<a href="#/bikes/' + b.slug + '" class="bike-card" data-category="' + b.category + '">' +
+        '<div class="bike-card-img" style="background-image:url(' + b.image + ')">' +
+          '<span class="bike-card-category">' + b.category + '</span>' +
+        '</div>' +
+        '<div class="bike-card-body">' +
+          '<h3 class="bike-card-title">' + b.name + '</h3>' +
+          '<p class="bike-card-price">' + b.price + '</p>' +
+          '<div class="bike-card-specs">' +
+            '<span><i class="fas fa-bolt"></i> ' + b.specs.power + '</span>' +
+            '<span><i class="fas fa-weight-hanging"></i> ' + b.specs.weight + '</span>' +
+            '<span><i class="fas fa-gas-pump"></i> ' + b.specs.mpg + '</span>' +
+          '</div>' +
+          '<div class="bike-card-scores">' +
+            scoreBar('Touring', b.scores.touring) +
+            scoreBar('Comfort', b.scores.comfort) +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+
+    var self = this;
+    setTimeout(function() {
+      document.addEventListener('click', function handler(e) {
+        if (!e.target.classList.contains('filter-pill')) return;
+        var section = e.target.closest('.page-section');
+        if (!section || !section.querySelector('#bikeGrid')) return;
+        var filter = e.target.dataset.filter;
+        section.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('filter-pill-active'); });
+        e.target.classList.add('filter-pill-active');
+        section.querySelectorAll('#bikeGrid .bike-card').forEach(function(card) {
+          if (filter === 'All') { card.style.display = ''; }
+          else { card.style.display = card.getAttribute('data-category') === filter ? '' : 'none'; }
+        });
+      });
+    }, 50);
+
+    return '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Motorcycle Touring Setup</h1>' +
+        '<p class="page-hero-sub">Choose your machine. Every bike reviewed for real-world UK touring — specs, strengths, gear recommendations, and the routes they\'re built for.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="filter-pills">' + pills + '</div>' +
+        '<div class="bike-grid" id="bikeGrid">' + cards + '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  renderBikeDetail(b) {
+    var scoreBar = function(label, val) {
+      return '<div class="bike-score-row"><span class="bike-score-label">' + label + '</span><div class="bike-score-bar"><div class="bike-score-fill" style="width:' + val + '%"></div></div><span class="bike-score-val">' + val + '</span></div>';
+    };
+
+    var specsHTML = '' +
+      '<tr><td><i class="fas fa-cog"></i> Engine</td><td>' + b.specs.engine + '</td></tr>' +
+      '<tr><td><i class="fas fa-bolt"></i> Power</td><td>' + b.specs.power + '</td></tr>' +
+      '<tr><td><i class="fas fa-arrows-rotate"></i> Torque</td><td>' + b.specs.torque + '</td></tr>' +
+      '<tr><td><i class="fas fa-weight-hanging"></i> Weight</td><td>' + b.specs.weight + '</td></tr>' +
+      '<tr><td><i class="fas fa-arrows-up-down"></i> Seat Height</td><td>' + b.specs.seatHeight + '</td></tr>' +
+      '<tr><td><i class="fas fa-gas-pump"></i> Tank</td><td>' + b.specs.tankCapacity + '</td></tr>' +
+      '<tr><td><i class="fas fa-gauge-high"></i> Economy</td><td>' + b.specs.mpg + '</td></tr>' +
+      '<tr><td><i class="fas fa-road"></i> Range</td><td>' + b.specs.fuelRange + '</td></tr>';
+
+    var strengths = b.strengths.map(function(s) { return '<li><i class="fas fa-check"></i> ' + s + '</li>'; }).join('');
+    var weaknesses = b.weaknesses.map(function(w) { return '<li><i class="fas fa-times"></i> ' + w + '</li>'; }).join('');
+
+    var routeLinks = b.bestRoutes.map(function(slug) {
+      var r = ROUTES.find(function(route) { return route.slug === slug; });
+      if (!r) return '';
+      return '<a href="#/routes/' + slug + '" class="bike-route-link"><i class="fas fa-route"></i> ' + r.name + ' <span>' + r.days + ' days · ' + r.miles + ' mi</span></a>';
+    }).join('');
+
+    var gearSections = b.gearRecommendations.map(function(cat) {
+      var items = cat.items.map(function(item) {
+        return '<div class="gear-item">' +
+          '<div class="gear-item-info">' +
+            '<strong>' + item.name + '</strong>' +
+            '<span class="gear-item-note">' + item.note + '</span>' +
+          '</div>' +
+          '<span class="gear-item-price">' + item.price + '</span>' +
+        '</div>';
+      }).join('');
+      return '<div class="gear-category">' +
+        '<h4 class="gear-category-title"><i class="fas fa-' +
+          (cat.category === 'Luggage' ? 'suitcase-rolling' :
+           cat.category === 'Protection' ? 'shield-halved' :
+           cat.category === 'Comfort' ? 'couch' : 'microchip') +
+        '"></i> ' + cat.category + '</h4>' + items + '</div>';
+    }).join('');
+
+    var tips = b.touringTips.map(function(t) { return '<li><i class="fas fa-lightbulb"></i> ' + t + '</li>'; }).join('');
+
+    return '' +
+    '<section class="page-hero" style="background-image:url(' + b.heroImage + ')">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<span class="bike-hero-category">' + b.category + ' · ' + b.year + '</span>' +
+        '<h1 class="page-hero-title">' + b.name + '</h1>' +
+        '<p class="page-hero-sub">' + b.price + '</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<nav class="breadcrumb"><a href="#/">Home</a> <i class="fas fa-chevron-right"></i> <a href="#/bikes">Bikes</a> <i class="fas fa-chevron-right"></i> <span>' + b.name + '</span></nav>' +
+
+        '<div class="detail-grid">' +
+          '<div class="detail-main">' +
+            '<h2 class="detail-heading">Overview</h2>' +
+            '<p class="detail-text">' + b.overview + '</p>' +
+
+            '<h2 class="detail-heading" style="margin-top:36px;">UK Touring Review</h2>' +
+            '<p class="detail-text">' + b.touringReview + '</p>' +
+
+            '<div class="bike-scores-panel">' +
+              '<h3 class="detail-heading"><i class="fas fa-chart-bar" style="color:var(--accent);margin-right:6px;"></i> Touring Scores</h3>' +
+              scoreBar('Touring', b.scores.touring) +
+              scoreBar('Comfort', b.scores.comfort) +
+              scoreBar('Handling', b.scores.handling) +
+              scoreBar('Value', b.scores.value) +
+              scoreBar('Off-road', b.scores.offroad) +
+              scoreBar('Pillion', b.scores.pillion) +
+            '</div>' +
+
+            '<div class="bike-strengths-weaknesses">' +
+              '<div class="bike-sw-col">' +
+                '<h3 class="detail-heading" style="color:#27ae60"><i class="fas fa-thumbs-up"></i> Touring Strengths</h3>' +
+                '<ul class="bike-sw-list bike-sw-strengths">' + strengths + '</ul>' +
+              '</div>' +
+              '<div class="bike-sw-col">' +
+                '<h3 class="detail-heading" style="color:#e74c3c"><i class="fas fa-thumbs-down"></i> Limitations</h3>' +
+                '<ul class="bike-sw-list bike-sw-weaknesses">' + weaknesses + '</ul>' +
+              '</div>' +
+            '</div>' +
+
+            (routeLinks ? '<h3 class="detail-heading" style="margin-top:36px;"><i class="fas fa-map-marked-alt" style="color:var(--accent);margin-right:6px;"></i> Best Routes For This Bike</h3>' +
+              '<div class="bike-route-links">' + routeLinks + '</div>' : '') +
+
+            '<h3 class="detail-heading" style="margin-top:36px;"><i class="fas fa-toolbox" style="color:var(--accent);margin-right:6px;"></i> Recommended Touring Gear</h3>' +
+            '<div class="gear-grid">' + gearSections + '</div>' +
+
+            '<div class="tips-callout" style="margin-top:36px;">' +
+              '<div class="tips-callout-icon"><i class="fas fa-lightbulb"></i></div>' +
+              '<div class="tips-callout-body">' +
+                '<h4>Touring Tips for the ' + b.name + '</h4>' +
+                '<ul class="bike-tips-list">' + tips + '</ul>' +
+              '</div>' +
+            '</div>' +
+
+          '</div>' +
+
+          '<div class="detail-sidebar">' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-motorcycle"></i> Specifications</h4>' +
+              '<table class="bike-specs-table">' + specsHTML + '</table>' +
+            '</div>' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-chart-simple"></i> Quick Scores</h4>' +
+              scoreBar('Touring', b.scores.touring) +
+              scoreBar('Comfort', b.scores.comfort) +
+              scoreBar('Handling', b.scores.handling) +
+            '</div>' +
+            '<div class="info-card">' +
+              '<a href="#/build-route" class="hero-cta" style="width:100%;text-align:center;font-size:14px;"><i class="fas fa-pencil-ruler"></i> Plan a Route</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>' +
+    '</section>';
+  }
+
   renderFooter() {
     return '' +
     '<footer class="site-footer">' +
@@ -1826,6 +2038,7 @@ class VisorUpSite {
             '<a href="#/routes">Routes</a>' +
             '<a href="#/destinations">Destinations</a>' +
             '<a href="#/ferries">Ferries</a>' +
+            '<a href="#/bikes">Bike Guides</a>' +
             '<a href="#/planning">Trip Planning</a>' +
           '</div>' +
           '<div class="footer-col">' +
