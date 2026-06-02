@@ -2459,9 +2459,14 @@ class VisorUpSite {
     var trips = await VisorUpTrips.list();
     var favs = await VisorUpFavourites.list();
 
-    var avatarHTML = profile && profile.avatar_url
+    var avatarInner = profile && profile.avatar_url
       ? '<img src="' + profile.avatar_url + '" class="profile-avatar" alt="">'
       : '<div class="profile-avatar-placeholder">' + ((profile && profile.display_name) || 'U').charAt(0).toUpperCase() + '</div>';
+    var avatarHTML = '<label class="profile-avatar-upload" title="Click to change photo">' +
+      avatarInner +
+      '<input type="file" id="avatarUpload" accept="image/jpeg,image/png,image/webp" style="display:none">' +
+      '<span class="profile-avatar-edit"><i class="fas fa-camera"></i></span>' +
+    '</label>';
 
     var tripsHTML = '';
     if (trips.length === 0) {
@@ -2530,6 +2535,35 @@ class VisorUpSite {
         self.navigate('/');
       });
     });
+
+    var avatarInput = document.getElementById('avatarUpload');
+    if (avatarInput) {
+      avatarInput.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var label = avatarInput.closest('.profile-avatar-upload');
+        var editIcon = label.querySelector('.profile-avatar-edit');
+        if (editIcon) editIcon.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        VisorUpAuth.uploadAvatar(file).then(function(newUrl) {
+          var img = label.querySelector('img');
+          var placeholder = label.querySelector('.profile-avatar-placeholder');
+          if (img) {
+            img.src = newUrl;
+          } else if (placeholder) {
+            var newImg = document.createElement('img');
+            newImg.src = newUrl;
+            newImg.className = 'profile-avatar';
+            newImg.alt = '';
+            placeholder.replaceWith(newImg);
+          }
+          if (editIcon) editIcon.innerHTML = '<i class="fas fa-camera"></i>';
+          self._updateNavAuth();
+        }).catch(function(err) {
+          alert('Upload failed: ' + err.message);
+          if (editIcon) editIcon.innerHTML = '<i class="fas fa-camera"></i>';
+        });
+      });
+    }
 
     document.querySelectorAll('.trip-load-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {

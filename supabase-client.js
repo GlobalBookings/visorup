@@ -92,6 +92,22 @@ const VisorUpAuth = {
     return data;
   },
 
+  async uploadAvatar(file) {
+    const user = await this.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    var ext = file.name.split('.').pop().toLowerCase();
+    if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext)) throw new Error('Only JPG, PNG, and WebP images are allowed');
+    if (file.size > 2 * 1024 * 1024) throw new Error('Image must be under 2MB');
+    var path = user.id + '/avatar.' + ext;
+    const { error: uploadErr } = await sb.storage.from('avatars').upload(path, file, { upsert: true, contentType: file.type });
+    if (uploadErr) throw uploadErr;
+    const { data: urlData } = sb.storage.from('avatars').getPublicUrl(path);
+    var avatarUrl = urlData.publicUrl + '?t=' + Date.now();
+    await this.updateProfile({ avatar_url: avatarUrl });
+    return avatarUrl;
+  },
+
   onAuthChange(callback) {
     const sb = getSupabase();
     if (!sb) return;
