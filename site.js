@@ -423,11 +423,12 @@ class VisorUpSite {
   // ── Routing ──────────────────────────────────────────────────
 
   route(pathname) {
-    // Close mobile menu on navigation
+    // Close mobile menu and mega panels on navigation
     var mobileMenu = document.getElementById('navMobileMenu');
     if (mobileMenu) mobileMenu.classList.remove('open');
     var menuIcon = document.querySelector('#navMenuBtn i');
     if (menuIcon) menuIcon.className = 'fas fa-bars';
+    document.querySelectorAll('.mob-sub, .mob-heading').forEach(function(el) { el.classList.remove('open'); });
 
     if (!pathname || pathname === '/') {
       this.showSiteView();
@@ -2379,20 +2380,29 @@ class VisorUpSite {
   // ── Utilities ─────────────────────────────────────────────────
 
   setActiveNav(name) {
-    document.querySelectorAll('.nav-links a[data-nav]').forEach(function(a) {
+    // Mega trigger active states
+    var explorePages = ['routes','destinations','ferries','bikes'];
+    var guidesPages = ['guides'];
+    var toolsPages = ['planning','build-route','plan-trip'];
+    document.querySelectorAll('.mega-trigger').forEach(function(t) {
+      t.classList.remove('active');
+    });
+    document.querySelectorAll('.nav-links > a[data-nav]').forEach(function(a) {
       a.classList.remove('active');
       if (a.dataset.nav === name) a.classList.add('active');
     });
-    // Also set mobile nav links
-    document.querySelectorAll('#navMobileMenu a').forEach(function(a) {
-      a.classList.remove('active');
-      var href = a.getAttribute('href') || '';
-      if (name === 'home' && (href === '/' || href === '')) {
-        a.classList.add('active');
-      } else if (href.indexOf('/' + name) === 0) {
-        a.classList.add('active');
-      }
-    });
+    if (explorePages.indexOf(name) >= 0) {
+      var et = document.querySelector('.mega-trigger[data-nav="explore"]');
+      if (et) et.classList.add('active');
+    }
+    if (guidesPages.indexOf(name) >= 0) {
+      var gt = document.querySelector('.mega-trigger[data-nav="guides"]');
+      if (gt) gt.classList.add('active');
+    }
+    if (toolsPages.indexOf(name) >= 0) {
+      var tt = document.querySelector('.mega-trigger[data-nav="tools"]');
+      if (tt) tt.classList.add('active');
+    }
   }
 
   setTitle(page) {
@@ -2458,12 +2468,25 @@ class VisorUpSite {
       mobileMenu.classList.toggle('open');
       var icon = menuBtn.querySelector('i');
       if (icon) {
-        if (mobileMenu.classList.contains('open')) {
-          icon.className = 'fas fa-times';
-        } else {
-          icon.className = 'fas fa-bars';
-        }
+        icon.className = mobileMenu.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
       }
+    });
+
+    // Accordion toggles
+    mobileMenu.querySelectorAll('.mob-heading').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var targetId = btn.dataset.mobToggle;
+        var sub = document.getElementById(targetId);
+        if (!sub) return;
+        var isOpen = sub.classList.contains('open');
+        // Close all
+        mobileMenu.querySelectorAll('.mob-sub').forEach(function(s) { s.classList.remove('open'); });
+        mobileMenu.querySelectorAll('.mob-heading').forEach(function(b) { b.classList.remove('open'); });
+        if (!isOpen) {
+          sub.classList.add('open');
+          btn.classList.add('open');
+        }
+      });
     });
 
     // Close mobile menu on link click
