@@ -461,23 +461,19 @@ class RouteBuilder {
 
           '<div class="rb-section">' +
             '<h3>\u23F1\uFE0F Daily Limits</h3>' +
-            '<div class="rb-pref-toggle" id="rb-prefToggle">' +
-              '<button class="active" data-mode="miles">Miles</button>' +
-              '<button data-mode="hours">Hours</button>' +
-            '</div>' +
-            '<div style="margin-top:8px">' +
-              '<label id="rb-milesLabel">Max miles per day' +
-                '<input type="number" id="rb-maxMiles" value="150" min="20" max="600" style="width:70px;margin-left:auto">' +
-              '</label>' +
-              '<label id="rb-hoursLabel" style="display:none">Max hours per day' +
-                '<input type="number" id="rb-maxHours" value="4" min="1" max="12" step="0.5" style="width:70px;margin-left:auto">' +
-              '</label>' +
-            '</div>' +
+            '<div style="display:none" id="rb-prefToggle"><button class="active" data-mode="miles">Miles</button></div>' +
+            '<label>Max miles per day' +
+              '<input type="number" id="rb-maxMiles" value="150" min="20" max="600" style="width:70px;margin-left:auto">' +
+            '</label>' +
+            '<label style="margin-top:6px">Max hours per day' +
+              '<input type="number" id="rb-maxHours" value="4" min="1" max="12" step="0.5" style="width:70px;margin-left:auto">' +
+            '</label>' +
             '<div class="rb-fuel-range" style="margin-top:10px">' +
               '<label>\u26FD Tank Range (miles)' +
                 '<input type="number" id="rbFuelRange" value="120" min="50" max="400" step="10" style="width:70px;margin-left:auto">' +
               '</label>' +
             '</div>' +
+            '<button class="rb-btn rb-btn-secondary" id="rb-fastTrackBtn" style="margin-top:10px;width:100%;"><i class="fas fa-forward"></i> Fast Track (Motorways)</button>' +
           '</div>' +
 
           '<div class="rb-section">' +
@@ -637,6 +633,7 @@ class RouteBuilder {
     this.container.querySelector('#rb-reverseBtn').addEventListener('click', function () { self._reverseRoute(); });
     this.container.querySelector('#rb-suggestBtn').addEventListener('click', function () { self._suggestStops(); });
     this.container.querySelector('#rb-shareBtn').addEventListener('click', function () { self._shareRoute(); });
+    this.container.querySelector('#rb-fastTrackBtn').addEventListener('click', function () { self._setAllFastTrack(); });
 
     // Import GPX
     var gpxFileInput = this.container.querySelector('#rb-gpxFile');
@@ -1885,56 +1882,68 @@ class RouteBuilder {
       return;
     }
 
-    var prefMode = this.container.querySelector('#rb-prefToggle .active').dataset.mode;
-    var maxPerDay;
-    if (prefMode === 'miles') {
-      maxPerDay = parseFloat(this.container.querySelector('#rb-maxMiles').value) || 150;
-      maxPerDay = maxPerDay * 1609.34; // meters
-    } else {
-      maxPerDay = parseFloat(this.container.querySelector('#rb-maxHours').value) || 4;
-      maxPerDay = maxPerDay * 3600; // seconds
-    }
+    var maxMiles = (parseFloat(this.container.querySelector('#rb-maxMiles').value) || 150) * 1609.34;
+    var maxHours = (parseFloat(this.container.querySelector('#rb-maxHours').value) || 4) * 3600;
 
-    // Build a list of all sub-coords with their modes and cumulative distances
-    var segments = [];
-    var currentDay = {
-      subSegments: [],
-      distance: 0,
-      duration: 0,
-      hasFast: false
-    };
-
+    // Build flat list of coords with cumulative distance/duration from all segments
+    var flatCoords = [];
+    var cumDist = 0;
+    var cumDur = 0;
     for (var i = 0; i < this._segmentResults.length; i++) {
       var seg = this._segmentResults[i];
-      var metric = prefMode === 'miles' ? seg.distance : seg.duration;
-
-      var dayMetric = prefMode === 'miles' ? currentDay.distance : currentDay.duration;
-
-      if (dayMetric + metric > maxPerDay && currentDay.subSegments.length > 0) {
-        // Start a new day
-        segments.push(currentDay);
-        currentDay = {
-          subSegments: [],
-          distance: 0,
-          duration: 0,
-          hasFast: false
-        };
+      var segCoords = seg.coords || [];
+      if (segCoords.length === 0) continue;
+      var distPerCoord = segCoords.length > 1 ? seg.distance / (segCoords.length - 1) : 0;
+      var durPerCoord = segCoords.length > 1 ? seg.duration / (segCoords.length - 1) : 0;
+      for (var c = 0; c < segCoords.length; c++) {
+        if (c > 0) { cumDist += distPerCoord; cumDur += durPerCoord; }
+        flatCoords.push({ coord: segCoords[c], dist: cumDist, dur: cumDur, mode: seg.mode });
       }
+    }
 
-      currentDay.subSegments.push({
-        coords: seg.coords,
-        mode: seg.mode,
-        distance: seg.distance,
-        duration: seg.duration
-      });
-      currentDay.distance += seg.distance;
-      currentDay.duration += seg.duration;
-      if (seg.mode === 'fast') currentDay.hasFast = true;
+    // Split into days enforcing BOTH mile and hour limits
+    var segments = [];
+    var dayStart = 0;
+    var dayStartDist = 0;
+    var dayStartDur = 0;
+
+    for (var j = 1; j < flatCoords.length; j++) {
+      var dayDist = flatCoords[j].dist - dayStartDist;
+      var dayDur = flatCoords[j].dur - dayStartDur;
+
+      if ((dayDist > maxMiles || dayDur > maxHours) && j > dayStart + 1) {
+        var dayCoords = [];
+        var hasFast = false;
+        for (var k = dayStart; k < j; k++) {
+          dayCoords.push(flatCoords[k].coord);
+          if (flatCoords[k].mode === 'fast') hasFast = true;
+        }
+        segments.push({
+          subSegments: [{ coords: dayCoords, mode: hasFast ? 'fast' : 'scenic', distance: flatCoords[j - 1].dist - dayStartDist, duration: flatCoords[j - 1].dur - dayStartDur }],
+          distance: flatCoords[j - 1].dist - dayStartDist,
+          duration: flatCoords[j - 1].dur - dayStartDur,
+          hasFast: hasFast
+        });
+        dayStart = j - 1;
+        dayStartDist = flatCoords[j - 1].dist;
+        dayStartDur = flatCoords[j - 1].dur;
+      }
     }
 
     // Final day
-    if (currentDay.subSegments.length > 0) {
-      segments.push(currentDay);
+    if (dayStart < flatCoords.length - 1) {
+      var lastCoords = [];
+      var lastHasFast = false;
+      for (var m = dayStart; m < flatCoords.length; m++) {
+        lastCoords.push(flatCoords[m].coord);
+        if (flatCoords[m].mode === 'fast') lastHasFast = true;
+      }
+      segments.push({
+        subSegments: [{ coords: lastCoords, mode: lastHasFast ? 'fast' : 'scenic', distance: flatCoords[flatCoords.length - 1].dist - dayStartDist, duration: flatCoords[flatCoords.length - 1].dur - dayStartDur }],
+        distance: flatCoords[flatCoords.length - 1].dist - dayStartDist,
+        duration: flatCoords[flatCoords.length - 1].dur - dayStartDur,
+        hasFast: lastHasFast
+      });
     }
 
     this.daySegments = segments;
@@ -2090,6 +2099,31 @@ class RouteBuilder {
   }
 
   // ── Reverse Route ───────────────────────────────────────────
+
+  _reverseRoute() {
+  _setAllFastTrack() {
+    if (this.waypoints.length < 2) { alert('Add at least 2 waypoints first'); return; }
+    var btn = this.container.querySelector('#rb-fastTrackBtn');
+    var allFast = true;
+    for (var key in this.segmentModes) {
+      if (this.segmentModes[key] !== 'fast') { allFast = false; break; }
+    }
+    if (allFast && Object.keys(this.segmentModes).length > 0) {
+      // Toggle back to scenic
+      this.segmentModes = {};
+      btn.innerHTML = '<i class="fas fa-forward"></i> Fast Track (Motorways)';
+      btn.style.background = '';
+    } else {
+      // Set all segments to fast (motorway routing)
+      for (var i = 0; i < this.waypoints.length - 1; i++) {
+        this.segmentModes[i] = 'fast';
+      }
+      btn.innerHTML = '<i class="fas fa-forward"></i> Fast Track ON';
+      btn.style.background = 'var(--accent)';
+      btn.style.color = '#080c0b';
+    }
+    this._buildRoute();
+  }
 
   _reverseRoute() {
     if (this.waypoints.length < 2) return;
@@ -2749,7 +2783,9 @@ class RouteBuilder {
     }
 
     var tankRange = parseFloat(this.container.querySelector('#rbFuelRange').value) || 120;
-    var fuelStations = RouteBuilder.FUEL;
+    var fuelStations = (typeof UK_FUEL_STATIONS !== 'undefined' && UK_FUEL_STATIONS.length > 0)
+      ? UK_FUEL_STATIONS
+      : RouteBuilder.FUEL;
     if (!fuelStations || fuelStations.length === 0) {
       warningsDiv.innerHTML = '';
       return;
