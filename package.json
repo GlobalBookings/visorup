@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "echo 'Static site - no build step required'",
-    "start": "npx serve . -l 3000",
+    "start": "npx serve . -l 3000 -c serve.json",
     "test": "npx playwright test",
     "deploy": "npx wrangler pages deploy . --project-name=motorbike-tour --branch=main"
   },

@@ -397,24 +397,38 @@ class VisorUpSite {
     this.bindPlannerBack();
     this.bindNavLinks();
 
-    // Listen for hash changes
-    window.addEventListener('hashchange', () => this.route(location.hash));
+    // History API routing
+    window.addEventListener('popstate', () => this.route(location.pathname));
+
+    // Intercept internal link clicks for SPA navigation
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') return;
+      if (href.startsWith('/')) {
+        e.preventDefault();
+        if (href !== location.pathname) {
+          history.pushState(null, '', href);
+        }
+        this.route(href);
+      }
+    });
 
     // Initial route
-    this.route(location.hash || '#/');
+    this.route(location.pathname);
   }
 
   // ── Routing ──────────────────────────────────────────────────
 
-  route(hash) {
-    // Normalise
+  route(pathname) {
     // Close mobile menu on navigation
     var mobileMenu = document.getElementById('navMobileMenu');
     if (mobileMenu) mobileMenu.classList.remove('open');
     var menuIcon = document.querySelector('#navMenuBtn i');
     if (menuIcon) menuIcon.className = 'fas fa-bars';
 
-    if (!hash || hash === '#' || hash === '#/') {
+    if (!pathname || pathname === '/') {
       this.showSiteView();
       this.pageContent.innerHTML = this.renderHome() + this.renderFooter();
       this.setActiveNav('home');
@@ -423,7 +437,7 @@ class VisorUpSite {
       return;
     }
 
-    const path = hash.replace(/^#\/?/, '').replace(/\/$/, '');
+    const path = pathname.replace(/^\//, '').replace(/\/$/, '');
     const parts = path.split('/');
     this.currentPath = path;
 
@@ -633,7 +647,9 @@ class VisorUpSite {
   }
 
   navigate(path) {
-    location.hash = '#/' + path.replace(/^\//, '');
+    var cleanPath = '/' + path.replace(/^\//, '');
+    history.pushState(null, '', cleanPath);
+    this.route(cleanPath);
   }
 
   // ── View Switching ────────────────────────────────────────────
@@ -672,7 +688,7 @@ class VisorUpSite {
 
   renderHome() {
     var destCards = DESTINATIONS.slice(0, 6).map(function(d) {
-      return '<a href="#/destinations/' + d.slug + '" class="dest-card">' +
+      return '<a href="/destinations/' + d.slug + '" class="dest-card">' +
         '<div class="dest-card-img" style="background-image:url(' + d.image + ')"></div>' +
         '<div class="dest-card-body">' +
           '<span class="dest-card-region">' + d.region + '</span>' +
@@ -683,7 +699,7 @@ class VisorUpSite {
     }).join('');
 
     var ferryCards = FERRIES.slice(0, 4).map(function(f) {
-      return '<a href="#/ferries/' + f.slug + '" class="ferry-guide-card">' +
+      return '<a href="/ferries/' + f.slug + '" class="ferry-guide-card">' +
         '<div class="ferry-guide-card-icon"><i class="fas fa-ship"></i></div>' +
         '<div class="ferry-guide-card-body">' +
           '<h3>' + f.name + '</h3>' +
@@ -701,7 +717,7 @@ class VisorUpSite {
       '<div class="hero-content">' +
         '<h1 class="hero-title">Motorcycle Adventures<br>Across Britain</h1>' +
         '<p class="hero-sub">From Island Roads To Highland Horizons</p>' +
-        '<a href="#/routes/island-to-highlands" class="hero-cta">Explore Our Flagship Route <i class="fas fa-arrow-right"></i></a>' +
+        '<a href="/routes/island-to-highlands" class="hero-cta">Explore Our Flagship Route <i class="fas fa-arrow-right"></i></a>' +
         '<div class="hero-stats">' +
           '<div class="hero-stat"><span class="hero-stat-value">7</span><span class="hero-stat-label">Curated Routes</span></div>' +
           '<div class="hero-stat"><span class="hero-stat-value">4,000+</span><span class="hero-stat-label">Miles Mapped</span></div>' +
@@ -730,7 +746,7 @@ class VisorUpSite {
             '<div class="featured-route-highlights">' +
               '<span>NC500</span><span>Isle of Skye</span><span>Bealach na Ba</span><span>Hardknott Pass</span><span>Cat and Fiddle</span>' +
             '</div>' +
-            '<a href="#/routes/island-to-highlands" class="hero-cta" style="margin-top:20px">Plan This Route <i class="fas fa-arrow-right"></i></a>' +
+            '<a href="/routes/island-to-highlands" class="hero-cta" style="margin-top:20px">Plan This Route <i class="fas fa-arrow-right"></i></a>' +
           '</div>' +
         '</div>' +
       '</div>' +
@@ -744,7 +760,7 @@ class VisorUpSite {
         '<p class="section-desc">From the otherworldly landscapes of Skye to the steep passes of the Lake District — detailed guides for every rider.</p>' +
         '<div class="dest-grid">' + destCards + '</div>' +
         '<div style="text-align:center;margin-top:32px">' +
-          '<a href="#/destinations" class="btn-outline">View All Destinations <i class="fas fa-arrow-right"></i></a>' +
+          '<a href="/destinations" class="btn-outline">View All Destinations <i class="fas fa-arrow-right"></i></a>' +
         '</div>' +
       '</div>' +
     '</section>' +
@@ -757,7 +773,7 @@ class VisorUpSite {
         '<p class="section-desc">Everything you need to know about getting your bike on a ferry — routes, costs, booking tips, and what to expect.</p>' +
         '<div class="ferry-guides-grid">' + ferryCards + '</div>' +
         '<div style="text-align:center;margin-top:32px">' +
-          '<a href="#/ferries" class="btn-outline">All Ferry Guides <i class="fas fa-arrow-right"></i></a>' +
+          '<a href="/ferries" class="btn-outline">All Ferry Guides <i class="fas fa-arrow-right"></i></a>' +
         '</div>' +
       '</div>' +
     '</section>' +
@@ -769,22 +785,22 @@ class VisorUpSite {
         '<h2 class="section-heading">Trip Planning Tools</h2>' +
         '<p class="section-desc">Packing lists, fuel strategy, weather guidance, and route planning tools to prepare you for the road.</p>' +
         '<div class="tools-grid">' +
-          '<a href="#/planning" class="tool-card">' +
+          '<a href="/planning" class="tool-card">' +
             '<div class="tool-card-icon"><i class="fas fa-suitcase"></i></div>' +
             '<h3>Packing Lists</h3>' +
             '<p>Everything you need to bring on a multi-day British motorcycle tour</p>' +
           '</a>' +
-          '<a href="#/planning" class="tool-card">' +
+          '<a href="/planning" class="tool-card">' +
             '<div class="tool-card-icon"><i class="fas fa-cloud-sun"></i></div>' +
             '<h3>Weather Guide</h3>' +
             '<p>Best times to ride each region and how to prepare for British weather</p>' +
           '</a>' +
-          '<a href="#/planning" class="tool-card">' +
+          '<a href="/planning" class="tool-card">' +
             '<div class="tool-card-icon"><i class="fas fa-route"></i></div>' +
             '<h3>Route Planning</h3>' +
             '<p>Interactive maps, GPX downloads, and day-by-day itineraries</p>' +
           '</a>' +
-          '<a href="#/planning" class="tool-card">' +
+          '<a href="/planning" class="tool-card">' +
             '<div class="tool-card-icon"><i class="fas fa-gas-pump"></i></div>' +
             '<h3>Fuel Calculator</h3>' +
             '<p>Know where to fill up — rural fuel stations mapped for every route</p>' +
@@ -812,7 +828,7 @@ class VisorUpSite {
   renderRoutes() {
     var cards = ROUTES.map(function(r) {
       var liveClass = r.isLive ? 'route-card-live' : 'route-card-soon';
-      var href = r.isLive ? '#/routes/' + r.slug : '#/routes';
+      var href = r.isLive ? '/routes/' + r.slug : '/routes';
       var badge = r.hasPlanner
         ? '<span class="route-badge route-badge-planner"><i class="fas fa-play-circle"></i> Interactive Planner</span>'
         : r.isLive
@@ -866,8 +882,8 @@ class VisorUpSite {
     '<section class="page-section">' +
       '<div class="container">' +
         '<nav class="breadcrumb">' +
-          '<a href="#/">Home</a> <i class="fas fa-chevron-right"></i> ' +
-          '<a href="#/routes">Routes</a> <i class="fas fa-chevron-right"></i> ' +
+          '<a href="/">Home</a> <i class="fas fa-chevron-right"></i> ' +
+          '<a href="/routes">Routes</a> <i class="fas fa-chevron-right"></i> ' +
           '<span>' + r.name + '</span>' +
         '</nav>' +
         '<div class="detail-grid">' +
@@ -887,9 +903,9 @@ class VisorUpSite {
               '</div>' : '') +
             '<div class="detail-cta" style="margin-top:32px;">' +
               (r.hasPlanner
-                ? '<a href="#/routes/' + r.slug + '" class="btn-primary"><i class="fas fa-map-marked-alt"></i> Open Interactive Planner</a>'
-                : '<a href="#/build-route" class="btn-primary" style="margin-right:12px;"><i class="fas fa-pencil-ruler"></i> Build Your Own Route</a>' +
-                  '<a href="#/routes" class="btn-outline"><i class="fas fa-arrow-left"></i> Back to All Routes</a>') +
+                ? '<a href="/routes/' + r.slug + '" class="btn-primary"><i class="fas fa-map-marked-alt"></i> Open Interactive Planner</a>'
+                : '<a href="/build-route" class="btn-primary" style="margin-right:12px;"><i class="fas fa-pencil-ruler"></i> Build Your Own Route</a>' +
+                  '<a href="/routes" class="btn-outline"><i class="fas fa-arrow-left"></i> Back to All Routes</a>') +
             '</div>' +
           '</div>' +
           '<div class="detail-sidebar">' +
@@ -1131,7 +1147,7 @@ class VisorUpSite {
     }).join('');
 
     var cards = DESTINATIONS.map(function(d) {
-      return '<a href="#/destinations/' + d.slug + '" class="dest-card" data-region="' + d.region + '">' +
+      return '<a href="/destinations/' + d.slug + '" class="dest-card" data-region="' + d.region + '">' +
         '<div class="dest-card-img" style="background-image:url(' + d.image + ')"></div>' +
         '<div class="dest-card-body">' +
           '<span class="dest-card-region">' + d.region + '</span>' +
@@ -1174,7 +1190,7 @@ class VisorUpSite {
     '</section>' +
     '<section class="page-section">' +
       '<div class="container">' +
-        '<nav class="breadcrumb"><a href="#/">Home</a> <i class="fas fa-chevron-right"></i> <a href="#/destinations">Destinations</a> <i class="fas fa-chevron-right"></i> <span>' + d.name + '</span></nav>' +
+        '<nav class="breadcrumb"><a href="/">Home</a> <i class="fas fa-chevron-right"></i> <a href="/destinations">Destinations</a> <i class="fas fa-chevron-right"></i> <span>' + d.name + '</span></nav>' +
 
         '<div class="detail-grid">' +
           '<div class="detail-main">' +
@@ -1214,7 +1230,7 @@ class VisorUpSite {
         '</div>' +
 
         '<div class="detail-cta">' +
-          '<a href="#/build-route?dest=' + d.slug + '" class="hero-cta"><i class="fas fa-pencil-ruler"></i> Plan a Route to ' + d.name + ' <i class="fas fa-arrow-right"></i></a>' +
+          '<a href="/build-route?dest=' + d.slug + '" class="hero-cta"><i class="fas fa-pencil-ruler"></i> Plan a Route to ' + d.name + ' <i class="fas fa-arrow-right"></i></a>' +
         '</div>' +
       '</div>' +
     '</section>';
@@ -1224,7 +1240,7 @@ class VisorUpSite {
     var cards = FERRIES.map(function(f) {
       var routesList = f.routes.map(function(r) { return '<li><i class="fas fa-anchor"></i> ' + r + '</li>'; }).join('');
 
-      return '<a href="#/ferries/' + f.slug + '" class="ferry-full-card">' +
+      return '<a href="/ferries/' + f.slug + '" class="ferry-full-card">' +
         '<div class="ferry-full-card-header">' +
           '<div class="ferry-full-card-icon"><i class="fas fa-ship"></i></div>' +
           '<div>' +
@@ -1276,7 +1292,7 @@ class VisorUpSite {
     '</section>' +
     '<section class="page-section">' +
       '<div class="container">' +
-        '<nav class="breadcrumb"><a href="#/">Home</a> <i class="fas fa-chevron-right"></i> <a href="#/ferries">Ferries</a> <i class="fas fa-chevron-right"></i> <span>' + f.name + '</span></nav>' +
+        '<nav class="breadcrumb"><a href="/">Home</a> <i class="fas fa-chevron-right"></i> <a href="/ferries">Ferries</a> <i class="fas fa-chevron-right"></i> <span>' + f.name + '</span></nav>' +
 
         '<div class="detail-grid">' +
           '<div class="detail-main">' +
@@ -1351,7 +1367,7 @@ class VisorUpSite {
     '<section class="page-section">' +
       '<div class="container">' +
 
-        '<div class="tips-callout" style="margin-bottom:40px;border-left:4px solid var(--accent);cursor:pointer;" onclick="location.hash=\'#/plan-trip\'">' +
+        '<div class="tips-callout" style="margin-bottom:40px;border-left:4px solid var(--accent);cursor:pointer;" onclick="history.pushState(null,\'\',\'/plan-trip\');site.route(\'/plan-trip\')">' +
           '<div class="tips-callout-icon" style="font-size:28px;"><i class="fas fa-wand-magic-sparkles"></i></div>' +
           '<div class="tips-callout-body">' +
             '<h4 style="font-size:18px;margin-bottom:4px;">AI Trip Planner</h4>' +
@@ -1361,12 +1377,12 @@ class VisorUpSite {
         '</div>' +
 
         '<div class="tools-grid" style="margin-bottom:48px">' +
-          '<a href="#/plan-trip" class="tool-card" style="text-decoration:none;color:inherit;">' +
+          '<a href="/plan-trip" class="tool-card" style="text-decoration:none;color:inherit;">' +
             '<div class="tool-card-icon" style="color:var(--accent)"><i class="fas fa-wand-magic-sparkles"></i></div>' +
             '<h3>Trip Planner</h3>' +
             '<p>Tell us your start, duration and interests — we build the route for you</p>' +
           '</a>' +
-          '<a href="#/build-route" class="tool-card" style="text-decoration:none;color:inherit;">' +
+          '<a href="/build-route" class="tool-card" style="text-decoration:none;color:inherit;">' +
             '<div class="tool-card-icon"><i class="fas fa-pencil-ruler"></i></div>' +
             '<h3>Route Builder</h3>' +
             '<p>Full custom route planner with elevation, weather, fuel and cost tools</p>' +
@@ -1426,7 +1442,7 @@ class VisorUpSite {
           '<input type="email" class="newsletter-input" placeholder="your@email.com" required>' +
           '<button type="submit" class="newsletter-btn">Notify Me</button>' +
         '</form>' +
-        '<a href="#/" class="btn-outline" style="margin-top:24px"><i class="fas fa-arrow-left"></i> Back to Home</a>' +
+        '<a href="/" class="btn-outline" style="margin-top:24px"><i class="fas fa-arrow-left"></i> Back to Home</a>' +
       '</div>' +
     '</section>';
   }
@@ -1438,7 +1454,7 @@ class VisorUpSite {
         '<div class="coming-soon-icon" style="font-size:64px">🏍️</div>' +
         '<h1 class="coming-soon-title">Wrong Turn</h1>' +
         '<p class="coming-soon-desc">Looks like you\'ve taken a wrong turn — this page doesn\'t exist. Even the best riders miss a junction sometimes.</p>' +
-        '<a href="#/" class="hero-cta"><i class="fas fa-home"></i> Back to Home</a>' +
+        '<a href="/" class="hero-cta"><i class="fas fa-home"></i> Back to Home</a>' +
       '</div>' +
     '</section>';
   }
@@ -1470,7 +1486,7 @@ class VisorUpSite {
             '</div>' +
             '<h3 class="detail-heading" style="margin-top:32px">The Team</h3>' +
             '<p class="detail-text">VisorUp is run by a small team of motorcycle enthusiasts based in the UK. Between us we\'ve ridden tens of thousands of miles across Britain on everything from sportbikes to adventure bikes. We know which roads make you grin, which campsites have the best views, and which pubs serve the best pint after a long day in the saddle.</p>' +
-            '<p class="detail-text">We\'re always adding new routes, new POIs, and new features. If you\'ve got a suggestion, a correction, or a road we absolutely must ride, <a href="#/contact" style="color:var(--accent)">get in touch</a>.</p>' +
+            '<p class="detail-text">We\'re always adding new routes, new POIs, and new features. If you\'ve got a suggestion, a correction, or a road we absolutely must ride, <a href="/contact" style="color:var(--accent)">get in touch</a>.</p>' +
           '</div>' +
           '<div class="detail-sidebar">' +
             '<div class="info-card"><h4><i class="fas fa-route"></i> Routes</h4><p>7 curated routes with interactive planners and GPX downloads</p></div>' +
@@ -1782,7 +1798,7 @@ class VisorUpSite {
         '<p>We strongly recommend carrying physical maps, checking road reports before departure, and never relying solely on digital tools for navigation in remote areas.</p>' +
 
         '<h2>6. Third-Party Services &amp; Affiliate Links</h2>' +
-        '<p>The Platform contains links to third-party websites (campsites, ferry operators, gear shops, etc.). Some of these are affiliate links — see our <a href="#/privacy" style="color:var(--accent)">Privacy Policy</a> for details.</p>' +
+        '<p>The Platform contains links to third-party websites (campsites, ferry operators, gear shops, etc.). Some of these are affiliate links — see our <a href="/privacy" style="color:var(--accent)">Privacy Policy</a> for details.</p>' +
         '<ul>' +
           '<li>We are not responsible for the content, availability, or accuracy of third-party websites</li>' +
           '<li>Your use of third-party services is governed by their own terms and privacy policies</li>' +
@@ -1848,7 +1864,7 @@ class VisorUpSite {
       var scoreBar = function(label, val) {
         return '<div class="bike-score-row"><span class="bike-score-label">' + label + '</span><div class="bike-score-bar"><div class="bike-score-fill" style="width:' + val + '%"></div></div><span class="bike-score-val">' + val + '</span></div>';
       };
-      return '<a href="#/bikes/' + b.slug + '" class="bike-card" data-category="' + b.category + '">' +
+      return '<a href="/bikes/' + b.slug + '" class="bike-card" data-category="' + b.category + '">' +
         '<div class="bike-card-img" style="background-image:url(' + b.image + ')">' +
           '<span class="bike-card-category">' + b.category + '</span>' +
         '</div>' +
@@ -1921,7 +1937,7 @@ class VisorUpSite {
     var routeLinks = b.bestRoutes.map(function(slug) {
       var r = ROUTES.find(function(route) { return route.slug === slug; });
       if (!r) return '';
-      return '<a href="#/routes/' + slug + '" class="bike-route-link"><i class="fas fa-route"></i> ' + r.name + ' <span>' + r.days + ' days · ' + r.miles + ' mi</span></a>';
+      return '<a href="/routes/' + slug + '" class="bike-route-link"><i class="fas fa-route"></i> ' + r.name + ' <span>' + r.days + ' days · ' + r.miles + ' mi</span></a>';
     }).join('');
 
     var gearSections = b.gearRecommendations.map(function(cat) {
@@ -1955,7 +1971,7 @@ class VisorUpSite {
     '</section>' +
     '<section class="page-section">' +
       '<div class="container">' +
-        '<nav class="breadcrumb"><a href="#/">Home</a> <i class="fas fa-chevron-right"></i> <a href="#/bikes">Bikes</a> <i class="fas fa-chevron-right"></i> <span>' + b.name + '</span></nav>' +
+        '<nav class="breadcrumb"><a href="/">Home</a> <i class="fas fa-chevron-right"></i> <a href="/bikes">Bikes</a> <i class="fas fa-chevron-right"></i> <span>' + b.name + '</span></nav>' +
 
         '<div class="detail-grid">' +
           '<div class="detail-main">' +
@@ -2014,7 +2030,7 @@ class VisorUpSite {
               scoreBar('Handling', b.scores.handling) +
             '</div>' +
             '<div class="info-card">' +
-              '<a href="#/build-route" class="hero-cta" style="width:100%;text-align:center;font-size:14px;"><i class="fas fa-pencil-ruler"></i> Plan a Route</a>' +
+              '<a href="/build-route" class="hero-cta" style="width:100%;text-align:center;font-size:14px;"><i class="fas fa-pencil-ruler"></i> Plan a Route</a>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -2035,25 +2051,25 @@ class VisorUpSite {
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Explore</h4>' +
-            '<a href="#/routes">Routes</a>' +
-            '<a href="#/destinations">Destinations</a>' +
-            '<a href="#/ferries">Ferries</a>' +
-            '<a href="#/bikes">Bike Guides</a>' +
-            '<a href="#/planning">Trip Planning</a>' +
+            '<a href="/routes">Routes</a>' +
+            '<a href="/destinations">Destinations</a>' +
+            '<a href="/ferries">Ferries</a>' +
+            '<a href="/bikes">Bike Guides</a>' +
+            '<a href="/planning">Trip Planning</a>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Destinations</h4>' +
-            '<a href="#/destinations/isle-of-skye">Isle of Skye</a>' +
-            '<a href="#/destinations/nc500">NC500</a>' +
-            '<a href="#/destinations/glencoe">Glencoe</a>' +
-            '<a href="#/destinations/lake-district">Lake District</a>' +
+            '<a href="/destinations/isle-of-skye">Isle of Skye</a>' +
+            '<a href="/destinations/nc500">NC500</a>' +
+            '<a href="/destinations/glencoe">Glencoe</a>' +
+            '<a href="/destinations/lake-district">Lake District</a>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Company</h4>' +
-            '<a href="#/about">About</a>' +
-            '<a href="#/contact">Contact</a>' +
-            '<a href="#/privacy">Privacy Policy</a>' +
-            '<a href="#/terms">Terms of Service</a>' +
+            '<a href="/about">About</a>' +
+            '<a href="/contact">Contact</a>' +
+            '<a href="/privacy">Privacy Policy</a>' +
+            '<a href="/terms">Terms of Service</a>' +
           '</div>' +
         '</div>' +
         '<div class="footer-bottom">' +
@@ -2074,9 +2090,9 @@ class VisorUpSite {
     document.querySelectorAll('#navMobileMenu a').forEach(function(a) {
       a.classList.remove('active');
       var href = a.getAttribute('href') || '';
-      if (name === 'home' && (href === '#/' || href === '#')) {
+      if (name === 'home' && (href === '/' || href === '')) {
         a.classList.add('active');
-      } else if (href.indexOf('#/' + name) === 0) {
+      } else if (href.indexOf('/' + name) === 0) {
         a.classList.add('active');
       }
     });

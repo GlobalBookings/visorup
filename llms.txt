@@ -8,85 +8,85 @@ VisorUp is a premium motorcycle touring platform focused exclusively on Britain 
 https://visorup.co.uk
 
 ## Core Pages
-- Homepage: https://visorup.co.uk/#/
-- Routes: https://visorup.co.uk/#/routes
-- Destinations: https://visorup.co.uk/#/destinations
-- Ferries: https://visorup.co.uk/#/ferries
-- Bike Guides: https://visorup.co.uk/#/bikes
-- Trip Planning: https://visorup.co.uk/#/planning
-- Route Builder: https://visorup.co.uk/#/build-route
-- AI Trip Planner: https://visorup.co.uk/#/plan-trip
-- About: https://visorup.co.uk/#/about
-- Contact: https://visorup.co.uk/#/contact
-- Privacy Policy: https://visorup.co.uk/#/privacy
-- Terms of Service: https://visorup.co.uk/#/terms
+- Homepage: https://visorup.co.uk/
+- Routes: https://visorup.co.uk/routes
+- Destinations: https://visorup.co.uk/destinations
+- Ferries: https://visorup.co.uk/ferries
+- Bike Guides: https://visorup.co.uk/bikes
+- Trip Planning: https://visorup.co.uk/planning
+- Route Builder: https://visorup.co.uk/build-route
+- AI Trip Planner: https://visorup.co.uk/plan-trip
+- About: https://visorup.co.uk/about
+- Contact: https://visorup.co.uk/contact
+- Privacy Policy: https://visorup.co.uk/privacy
+- Terms of Service: https://visorup.co.uk/terms
 
 ## Curated Motorcycle Routes (with GPX downloads)
-- Island To Highlands: https://visorup.co.uk/#/routes/island-to-highlands — 14-day flagship route, Guernsey to Scottish Highlands, 1,880 miles
-- Scottish Highlands Loop: https://visorup.co.uk/#/routes/scottish-highlands-loop — 7 days, 650 miles, circular from Inverness
-- NC500 Complete: https://visorup.co.uk/#/routes/nc500-complete — 6 days, 516 miles, full North Coast 500 circuit
-- Welsh Mountain Passes: https://visorup.co.uk/#/routes/welsh-mountain-passes — 5 days, 480 miles, Snowdonia to Brecon Beacons
-- Lake District Ultimate: https://visorup.co.uk/#/routes/lake-district-ultimate — 4 days, 280 miles, England's steepest passes
-- Channel Islands Explorer: https://visorup.co.uk/#/routes/channel-islands-explorer — 5 days, 120 miles, Jersey and Guernsey
-- Coastal Cornwall: https://visorup.co.uk/#/routes/coastal-cornwall — 4 days, 350 miles, Atlantic Highway to Land's End
+- Island To Highlands: https://visorup.co.uk/routes/island-to-highlands — 14-day flagship route, Guernsey to Scottish Highlands, 1,880 miles
+- Scottish Highlands Loop: https://visorup.co.uk/routes/scottish-highlands-loop — 7 days, 650 miles, circular from Inverness
+- NC500 Complete: https://visorup.co.uk/routes/nc500-complete — 6 days, 516 miles, full North Coast 500 circuit
+- Welsh Mountain Passes: https://visorup.co.uk/routes/welsh-mountain-passes — 5 days, 480 miles, Snowdonia to Brecon Beacons
+- Lake District Ultimate: https://visorup.co.uk/routes/lake-district-ultimate — 4 days, 280 miles, England's steepest passes
+- Channel Islands Explorer: https://visorup.co.uk/routes/channel-islands-explorer — 5 days, 120 miles, Jersey and Guernsey
+- Coastal Cornwall: https://visorup.co.uk/routes/coastal-cornwall — 4 days, 350 miles, Atlantic Highway to Land's End
 
 ## Destination Guides
-- Isle of Skye: https://visorup.co.uk/#/destinations/isle-of-skye — Otherworldly landscapes and Britain's most dramatic roads
-- Glencoe: https://visorup.co.uk/#/destinations/glencoe — Scotland's most dramatic valley and Highland gateway
-- North Coast 500: https://visorup.co.uk/#/destinations/nc500 — 516 miles of wild Highland coastline
-- Lake District: https://visorup.co.uk/#/destinations/lake-district — England's steepest passes and most beautiful lakes
-- Yorkshire Dales: https://visorup.co.uk/#/destinations/yorkshire-dales — Rolling green valleys, stone walls, Ribblehead Viaduct
-- Snowdonia: https://visorup.co.uk/#/destinations/snowdonia — Wales' highest peaks and mountain passes
-- Brecon Beacons: https://visorup.co.uk/#/destinations/brecon-beacons — Black Mountain Pass and waterfall country
-- Outer Hebrides: https://visorup.co.uk/#/destinations/outer-hebrides — Remote Atlantic islands and white sand beaches
-- Isle of Man: https://visorup.co.uk/#/destinations/isle-of-man — Home of the TT and mountain roads
-- Scottish Borders: https://visorup.co.uk/#/destinations/scottish-borders — Rolling hills, abbeys, and quiet roads
-- Northumberland: https://visorup.co.uk/#/destinations/northumberland — Hadrian's Wall and England's emptiest county
-- Jersey: https://visorup.co.uk/#/destinations/jersey — Dramatic coastal cliffs and WWII history
-- Guernsey: https://visorup.co.uk/#/destinations/guernsey — Hidden lanes, rugged coast, island charm
+- Isle of Skye: https://visorup.co.uk/destinations/isle-of-skye — Otherworldly landscapes and Britain's most dramatic roads
+- Glencoe: https://visorup.co.uk/destinations/glencoe — Scotland's most dramatic valley and Highland gateway
+- North Coast 500: https://visorup.co.uk/destinations/nc500 — 516 miles of wild Highland coastline
+- Lake District: https://visorup.co.uk/destinations/lake-district — England's steepest passes and most beautiful lakes
+- Yorkshire Dales: https://visorup.co.uk/destinations/yorkshire-dales — Rolling green valleys, stone walls, Ribblehead Viaduct
+- Snowdonia: https://visorup.co.uk/destinations/snowdonia — Wales' highest peaks and mountain passes
+- Brecon Beacons: https://visorup.co.uk/destinations/brecon-beacons — Black Mountain Pass and waterfall country
+- Outer Hebrides: https://visorup.co.uk/destinations/outer-hebrides — Remote Atlantic islands and white sand beaches
+- Isle of Man: https://visorup.co.uk/destinations/isle-of-man — Home of the TT and mountain roads
+- Scottish Borders: https://visorup.co.uk/destinations/scottish-borders — Rolling hills, abbeys, and quiet roads
+- Northumberland: https://visorup.co.uk/destinations/northumberland — Hadrian's Wall and England's emptiest county
+- Jersey: https://visorup.co.uk/destinations/jersey — Dramatic coastal cliffs and WWII history
+- Guernsey: https://visorup.co.uk/destinations/guernsey — Hidden lanes, rugged coast, island charm
 
 ## Ferry Guides (motorcycle-specific)
-- Guernsey to UK: https://visorup.co.uk/#/ferries/guernsey-to-uk
-- Jersey to UK: https://visorup.co.uk/#/ferries/jersey-to-uk
-- Isle of Man: https://visorup.co.uk/#/ferries/isle-of-man
-- Skye Ferry: https://visorup.co.uk/#/ferries/skye-ferry
-- Outer Hebrides: https://visorup.co.uk/#/ferries/outer-hebrides
-- Orkney: https://visorup.co.uk/#/ferries/orkney
+- Guernsey to UK: https://visorup.co.uk/ferries/guernsey-to-uk
+- Jersey to UK: https://visorup.co.uk/ferries/jersey-to-uk
+- Isle of Man: https://visorup.co.uk/ferries/isle-of-man
+- Skye Ferry: https://visorup.co.uk/ferries/skye-ferry
+- Outer Hebrides: https://visorup.co.uk/ferries/outer-hebrides
+- Orkney: https://visorup.co.uk/ferries/orkney
 
 ## Motorcycle Touring Setup Guides (20 bikes)
 Each guide includes full specifications, UK touring review, scoring (touring/comfort/handling/value/off-road/pillion), strengths and weaknesses, recommended routes, gear recommendations with prices, and touring tips.
 
 ### Adventure
-- BMW R 1250 GS: https://visorup.co.uk/#/bikes/bmw-r-1250-gs
-- Triumph Tiger 900: https://visorup.co.uk/#/bikes/triumph-tiger-900
-- Honda Africa Twin: https://visorup.co.uk/#/bikes/honda-africa-twin
-- Yamaha Tenere 700: https://visorup.co.uk/#/bikes/yamaha-tenere-700
-- KTM 1290 Super Adventure S: https://visorup.co.uk/#/bikes/ktm-1290-super-adventure-s
-- Ducati Multistrada V4 S: https://visorup.co.uk/#/bikes/ducati-multistrada-v4-s
-- Suzuki V-Strom 650: https://visorup.co.uk/#/bikes/suzuki-v-strom-650
-- Royal Enfield Himalayan 450: https://visorup.co.uk/#/bikes/royal-enfield-himalayan-450
+- BMW R 1250 GS: https://visorup.co.uk/bikes/bmw-r-1250-gs
+- Triumph Tiger 900: https://visorup.co.uk/bikes/triumph-tiger-900
+- Honda Africa Twin: https://visorup.co.uk/bikes/honda-africa-twin
+- Yamaha Tenere 700: https://visorup.co.uk/bikes/yamaha-tenere-700
+- KTM 1290 Super Adventure S: https://visorup.co.uk/bikes/ktm-1290-super-adventure-s
+- Ducati Multistrada V4 S: https://visorup.co.uk/bikes/ducati-multistrada-v4-s
+- Suzuki V-Strom 650: https://visorup.co.uk/bikes/suzuki-v-strom-650
+- Royal Enfield Himalayan 450: https://visorup.co.uk/bikes/royal-enfield-himalayan-450
 
 ### Sport Touring
-- Kawasaki Ninja 1000SX: https://visorup.co.uk/#/bikes/kawasaki-ninja-1000sx
-- Yamaha Tracer 9 GT: https://visorup.co.uk/#/bikes/yamaha-tracer-9-gt
-- Honda NT1100: https://visorup.co.uk/#/bikes/honda-nt1100
-- BMW S 1000 XR: https://visorup.co.uk/#/bikes/bmw-s-1000-xr
+- Kawasaki Ninja 1000SX: https://visorup.co.uk/bikes/kawasaki-ninja-1000sx
+- Yamaha Tracer 9 GT: https://visorup.co.uk/bikes/yamaha-tracer-9-gt
+- Honda NT1100: https://visorup.co.uk/bikes/honda-nt1100
+- BMW S 1000 XR: https://visorup.co.uk/bikes/bmw-s-1000-xr
 
 ### Naked
-- Triumph Bonneville T120: https://visorup.co.uk/#/bikes/triumph-bonneville-t120
-- Kawasaki Z650: https://visorup.co.uk/#/bikes/kawasaki-z650
+- Triumph Bonneville T120: https://visorup.co.uk/bikes/triumph-bonneville-t120
+- Kawasaki Z650: https://visorup.co.uk/bikes/kawasaki-z650
 
 ### Touring
-- BMW K 1600 GT: https://visorup.co.uk/#/bikes/bmw-k-1600-gt
-- Honda Gold Wing: https://visorup.co.uk/#/bikes/honda-gold-wing
+- BMW K 1600 GT: https://visorup.co.uk/bikes/bmw-k-1600-gt
+- Honda Gold Wing: https://visorup.co.uk/bikes/honda-gold-wing
 
 ### Sport
-- Suzuki GSX-R1000R: https://visorup.co.uk/#/bikes/suzuki-gsx-r1000r
-- Kawasaki Ninja 650: https://visorup.co.uk/#/bikes/kawasaki-ninja-650
+- Suzuki GSX-R1000R: https://visorup.co.uk/bikes/suzuki-gsx-r1000r
+- Kawasaki Ninja 650: https://visorup.co.uk/bikes/kawasaki-ninja-650
 
 ### Versatile
-- Kawasaki Versys 650: https://visorup.co.uk/#/bikes/kawasaki-versys-650
-- Honda CB500X: https://visorup.co.uk/#/bikes/honda-cb500x
+- Kawasaki Versys 650: https://visorup.co.uk/bikes/kawasaki-versys-650
+- Honda CB500X: https://visorup.co.uk/bikes/honda-cb500x
 
 ## Interactive Tools
 - **Route Builder**: Click-to-add waypoints, OSRM road-accurate routing, 800+ POI markers (campsites, bridges, wildlife, fuel stations, viewpoints, biker pubs, scenic roads), scenic/fast mode toggle, GPX export, auto day-splitting

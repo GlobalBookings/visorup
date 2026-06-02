@@ -841,7 +841,8 @@ class AITripPlanner {
       waypoints.push({ lat: trip.config.endLat, lng: trip.config.endLng, name: 'End: ' + trip.config.endName });
     }
     sessionStorage.setItem('tp_waypoints', JSON.stringify(waypoints));
-    location.hash = '#/build-route?from=planner';
+    history.pushState(null, '', '/build-route?from=planner');
+    if (typeof site !== 'undefined') site.route('/build-route');
   }
 
   // ── Utilities ─────────────────────────────────────────────────

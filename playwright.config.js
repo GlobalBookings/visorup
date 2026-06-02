@@ -9,7 +9,7 @@ module.exports = defineConfig({
   reporter: 'html',
   timeout: 60000,
   use: {
-    baseURL: `file://${__dirname}/index.html`,
+    baseURL: 'http://localhost:4173',
     trace: 'on-first-retry',
     actionTimeout: 10000,
   },
@@ -23,4 +23,9 @@ module.exports = defineConfig({
       use: { ...devices['Pixel 7'] },
     },
   ],
+  webServer: {
+    command: 'npx serve . -l 4173 -c serve.json',
+    port: 4173,
+    reuseExistingServer: !process.env.CI,
+  },
 });
