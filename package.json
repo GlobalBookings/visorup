@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "build": "echo 'Static site - no build step required'",
+    "start": "npx serve . -l 3000",
     "test": "npx playwright test",
     "deploy": "npx wrangler pages deploy . --project-name=motorbike-tour --branch=main"
   },
