@@ -2976,6 +2976,10 @@ class VisorUpSite {
           '<div class="garage-card-body">' +
             (b.nickname ? '<div class="garage-nickname">' + b.nickname + '</div>' : '') +
             '<div class="garage-make-model">' + b.make + ' ' + b.model + (b.year ? ' <span class="garage-year">' + b.year + '</span>' : '') + '</div>' +
+            (b.tank_litres && b.mpg ? (function() {
+              var r = (typeof calculateBikeRange !== 'undefined') ? calculateBikeRange(b.tank_litres, b.mpg) : null;
+              return '<div class="garage-bike-range"><span><i class="fas fa-gas-pump"></i> ' + b.tank_litres + 'L</span><span><i class="fas fa-tachometer-alt"></i> ' + b.mpg + ' mpg</span>' + (r ? '<span><i class="fas fa-road"></i> ~' + r.safeRange + ' mi range</span>' : '') + '</div>';
+            })() : '') +
             (b.notes ? '<div class="garage-notes">' + b.notes + '</div>' : '') +
           '</div>' +
           '<div class="garage-card-actions">' +
@@ -2986,14 +2990,23 @@ class VisorUpSite {
       }).join('') + '</div>';
     }
 
+    var makeOptions = '<option value="">Select make...</option>';
+    if (typeof BIKE_CATALOGUE !== 'undefined') {
+      Object.keys(BIKE_CATALOGUE).sort().forEach(function(m) {
+        makeOptions += '<option value="' + m + '">' + m + '</option>';
+      });
+    }
+    makeOptions += '<option value="__other">Other</option>';
+
     var addBikeFormHTML = '' +
       '<div class="garage-add-form" id="garageAddForm" style="display:none">' +
         '<div class="garage-form-grid">' +
-          '<div><label>Make *</label><input type="text" id="garageMake" placeholder="e.g. BMW, Triumph, Honda" required></div>' +
-          '<div><label>Model *</label><input type="text" id="garageModel" placeholder="e.g. R 1250 GS, Tiger 900" required></div>' +
+          '<div><label>Make *</label><select id="garageMake" class="garage-select">' + makeOptions + '</select><input type="text" id="garageMakeCustom" class="garage-custom-input" placeholder="Enter make..." style="display:none"></div>' +
+          '<div><label>Model *</label><select id="garageModel" class="garage-select" disabled><option value="">Select make first...</option></select><input type="text" id="garageModelCustom" class="garage-custom-input" placeholder="Enter model..." style="display:none"></div>' +
           '<div><label>Year</label><input type="number" id="garageYear" placeholder="e.g. 2024" min="1950" max="2030"></div>' +
-          '<div><label>Nickname</label><input type="text" id="garageNickname" placeholder="e.g. The Beast"></div>' +
+          '<div><label>Nickname</label><div class="garage-nickname-wrap"><input type="text" id="garageNickname" placeholder="e.g. The Beast"><button type="button" class="garage-nickname-gen" id="garageNicknameGen" title="Generate nickname"><i class="fas fa-dice"></i></button></div></div>' +
         '</div>' +
+        '<div id="garageBikeSpecs" class="garage-bike-specs" style="display:none"></div>' +
         '<div style="margin-top:8px"><label>Notes</label><input type="text" id="garageNotes" placeholder="Mods, spec, stories..." style="width:100%"></div>' +
         '<div class="garage-form-actions">' +
           '<button class="btn-primary" id="garageSaveBtn" style="font-size:13px;padding:10px 20px;"><i class="fas fa-plus"></i> Add to Garage</button>' +
@@ -3113,6 +3126,7 @@ class VisorUpSite {
     // Garage: Add bike toggle
     var addTrigger = document.getElementById('garageAddTrigger');
     var addForm = document.getElementById('garageAddForm');
+    var _selectedBikeSpec = null;
     if (addTrigger && addForm) {
       addTrigger.addEventListener('click', function() {
         addForm.style.display = addForm.style.display === 'none' ? '' : 'none';
@@ -3120,9 +3134,91 @@ class VisorUpSite {
       document.getElementById('garageCancelBtn').addEventListener('click', function() {
         addForm.style.display = 'none';
       });
+
+      // Make dropdown -> populate models
+      var makeSelect = document.getElementById('garageMake');
+      var modelSelect = document.getElementById('garageModel');
+      var makeCustom = document.getElementById('garageMakeCustom');
+      var modelCustom = document.getElementById('garageModelCustom');
+      var specsDiv = document.getElementById('garageBikeSpecs');
+
+      makeSelect.addEventListener('change', function() {
+        var make = makeSelect.value;
+        _selectedBikeSpec = null;
+        specsDiv.style.display = 'none';
+        if (make === '__other') {
+          makeCustom.style.display = '';
+          modelCustom.style.display = '';
+          modelSelect.style.display = 'none';
+          modelSelect.disabled = true;
+          makeCustom.focus();
+          return;
+        }
+        makeCustom.style.display = 'none';
+        modelCustom.style.display = 'none';
+        modelSelect.style.display = '';
+        if (!make || typeof BIKE_CATALOGUE === 'undefined' || !BIKE_CATALOGUE[make]) {
+          modelSelect.innerHTML = '<option value="">Select make first...</option>';
+          modelSelect.disabled = true;
+          return;
+        }
+        var models = BIKE_CATALOGUE[make];
+        var opts = '<option value="">Select model...</option>';
+        models.forEach(function(m) {
+          opts += '<option value="' + m.model + '">' + m.model + ' (' + m.category + ')</option>';
+        });
+        opts += '<option value="__other">Other</option>';
+        modelSelect.innerHTML = opts;
+        modelSelect.disabled = false;
+      });
+
+      // Model dropdown -> show specs
+      modelSelect.addEventListener('change', function() {
+        var make = makeSelect.value;
+        var model = modelSelect.value;
+        _selectedBikeSpec = null;
+        if (model === '__other') {
+          modelCustom.style.display = '';
+          modelCustom.focus();
+          specsDiv.style.display = 'none';
+          return;
+        }
+        modelCustom.style.display = 'none';
+        if (!make || !model || typeof BIKE_CATALOGUE === 'undefined') { specsDiv.style.display = 'none'; return; }
+        var entry = BIKE_CATALOGUE[make] && BIKE_CATALOGUE[make].find(function(m) { return m.model === model; });
+        if (entry) {
+          _selectedBikeSpec = entry;
+          var range = (typeof calculateBikeRange !== 'undefined') ? calculateBikeRange(entry.tank, entry.mpg) : null;
+          specsDiv.innerHTML = '<div class="garage-specs-row">' +
+            '<span><i class="fas fa-gas-pump"></i> ' + entry.tank + 'L tank</span>' +
+            '<span><i class="fas fa-tachometer-alt"></i> ' + entry.mpg + ' mpg</span>' +
+            (range ? '<span><i class="fas fa-road"></i> ~' + range.safeRange + ' mi safe range</span>' : '') +
+            '<span><i class="fas fa-tag"></i> ' + entry.category + '</span>' +
+          '</div>';
+          specsDiv.style.display = '';
+        } else {
+          specsDiv.style.display = 'none';
+        }
+      });
+
+      // Nickname generator
+      document.getElementById('garageNicknameGen').addEventListener('click', function() {
+        var make = makeSelect.value === '__other' ? makeCustom.value.trim() : makeSelect.value;
+        var model = modelSelect.value === '__other' ? modelCustom.value.trim() : (modelSelect.disabled ? modelCustom.value.trim() : modelSelect.value);
+        if (!make || !model) { alert('Select a make and model first'); return; }
+        if (typeof generateBikeNickname !== 'undefined') {
+          var suggestions = generateBikeNickname(make, model);
+          var nicknameInput = document.getElementById('garageNickname');
+          var current = nicknameInput.value.trim();
+          var idx = current ? suggestions.indexOf(current) : -1;
+          nicknameInput.value = suggestions[(idx + 1) % suggestions.length];
+        }
+      });
+
+      // Save bike
       document.getElementById('garageSaveBtn').addEventListener('click', async function() {
-        var make = document.getElementById('garageMake').value.trim();
-        var model = document.getElementById('garageModel').value.trim();
+        var make = makeSelect.value === '__other' ? makeCustom.value.trim() : makeSelect.value;
+        var model = modelSelect.value === '__other' || modelSelect.disabled ? modelCustom.value.trim() : modelSelect.value;
         if (!make || !model) { alert('Make and model are required'); return; }
         try {
           await VisorUpGarage.add({
@@ -3131,7 +3227,9 @@ class VisorUpSite {
             year: parseInt(document.getElementById('garageYear').value) || null,
             nickname: document.getElementById('garageNickname').value.trim() || null,
             notes: document.getElementById('garageNotes').value.trim() || null,
-            isPrimary: garageBikes.length === 0
+            isPrimary: garageBikes.length === 0,
+            tankLitres: _selectedBikeSpec ? _selectedBikeSpec.tank : null,
+            mpg: _selectedBikeSpec ? _selectedBikeSpec.mpg : null
           });
           self.renderProfile();
         } catch (e) { alert('Failed to add bike: ' + e.message); }

@@ -246,7 +246,9 @@ const VisorUpGarage = {
         year: bike.year || null,
         nickname: bike.nickname || null,
         notes: bike.notes || null,
-        is_primary: bike.isPrimary || false
+        is_primary: bike.isPrimary || false,
+        tank_litres: bike.tankLitres || null,
+        mpg: bike.mpg || null
       })
       .select()
       .single();

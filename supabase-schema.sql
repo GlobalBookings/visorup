@@ -114,6 +114,8 @@ create table public.user_bikes (
   photo_url text,
   notes text,
   is_primary boolean default false,
+  tank_litres numeric,
+  mpg numeric,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
