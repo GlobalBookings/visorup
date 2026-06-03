@@ -588,6 +588,69 @@ class VisorUpSite {
         this.scrollToTop();
         break;
 
+      case 'packing-checklist':
+        this.showSiteView();
+        this.setActiveNav('tools');
+        this.setTitle('Motorcycle Packing Checklist — What to Pack for a Bike Trip');
+        this._setMeta({ description: 'Interactive motorcycle packing checklist for UK touring. Customised lists for day rides, weekend tours, camping trips, and European adventures. Never forget essential gear again.' });
+        this.renderPackingChecklist();
+        this.scrollToTop();
+        break;
+
+      case 'cost-calculator':
+        this.showSiteView();
+        this.setActiveNav('tools');
+        this.setTitle('Motorcycle Ride Cost Calculator — Trip Budget Planner');
+        this._setMeta({ description: 'Calculate the cost of your next motorcycle trip. Fuel, accommodation, food, ferries — get a full breakdown and budget for UK touring.' });
+        this.renderCostCalculator();
+        this.scrollToTop();
+        break;
+
+      case 'weather':
+        this.showSiteView();
+        this.setActiveNav('tools');
+        this.setTitle('Motorcycle Riding Weather — 7-Day UK Forecast');
+        this._setMeta({ description: 'Check riding weather for any UK location. 7-day forecast with riding verdicts, wind speeds, and rainfall — plan your ride around the best days.' });
+        this.renderWeatherDashboard();
+        this.scrollToTop();
+        break;
+
+      case 'sunrise-sunset':
+        this.showSiteView();
+        this.setActiveNav('tools');
+        this.setTitle('Sunrise & Sunset Times — Plan Your Riding Hours');
+        this._setMeta({ description: 'Check sunrise, sunset, and golden hour times for any UK location. Maximise daylight riding hours and plan scenic photography stops.' });
+        this.renderSunriseSunset();
+        this.scrollToTop();
+        break;
+
+      case 'service-tracker':
+        this.showSiteView();
+        this.setActiveNav('tools');
+        this.setTitle('Motorcycle Service Tracker — Tyres, Chain, Oil & Servicing');
+        this._setMeta({ description: 'Track tyre wear, chain maintenance, oil changes, and service intervals for every bike in your garage. Never miss a service before a big trip.' });
+        this.renderServiceTracker();
+        this.scrollToTop();
+        break;
+
+      case 'mot-tax':
+        this.showSiteView();
+        this.setActiveNav('tools');
+        this.setTitle('MOT & Tax Tracker — Motorcycle Expiry Reminders');
+        this._setMeta({ description: 'Track MOT, tax, and insurance expiry dates for all your bikes. Clear dashboard with countdown warnings so you never ride with expired documents.' });
+        this.renderMOTChecker();
+        this.scrollToTop();
+        break;
+
+      case 'emergency-card':
+        this.showSiteView();
+        this.setActiveNav('tools');
+        this.setTitle('Emergency Info Card — ICE Details for Motorcyclists');
+        this._setMeta({ description: 'Create a printable emergency card with your ICE contacts, medical info, bike details, and breakdown cover. Carry it in your jacket — it could save your life.' });
+        this.renderEmergencyCard();
+        this.scrollToTop();
+        break;
+
       case 'build-route':
         this.showSiteView();
         this.pageContent.innerHTML = '<div id="routeBuilderContainer" style="height:calc(100vh - 60px);width:100%;"></div>';

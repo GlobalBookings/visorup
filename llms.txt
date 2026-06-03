@@ -16,6 +16,14 @@ https://visorup.co.uk
 - Trip Planning: https://visorup.co.uk/planning
 - Route Builder: https://visorup.co.uk/build-route
 - AI Trip Planner: https://visorup.co.uk/plan-trip
+- Community: https://visorup.co.uk/community
+- Packing Checklist: https://visorup.co.uk/packing-checklist
+- Ride Cost Calculator: https://visorup.co.uk/cost-calculator
+- Riding Weather: https://visorup.co.uk/weather
+- Sunrise & Sunset: https://visorup.co.uk/sunrise-sunset
+- Service Tracker: https://visorup.co.uk/service-tracker
+- MOT & Tax Tracker: https://visorup.co.uk/mot-tax
+- Emergency Info Card: https://visorup.co.uk/emergency-card
 - About: https://visorup.co.uk/about
 - Contact: https://visorup.co.uk/contact
 - Privacy Policy: https://visorup.co.uk/privacy

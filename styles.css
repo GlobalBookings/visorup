@@ -222,6 +222,12 @@ ul, ol { list-style: none; }
   min-width: 340px;
   padding: 8px;
 }
+.mega-tools-grid {
+  grid-template-columns: repeat(3, 1fr);
+  min-width: 720px;
+  right: 0;
+  left: auto;
+}
 
 /* ── Mega Columns ── */
 .mega-col {
