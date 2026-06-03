@@ -29,7 +29,13 @@ window.POI_SCOTLAND = {
     { name: 'Seal Shore Camping, Arran', lat: 55.44, lng: -5.12, desc: 'Shoreside campsite at Kildonan on the Isle of Arran. Watch seals basking on the rocks from your tent.' },
     { name: 'Glendaruel Caravan Park', lat: 55.97, lng: -5.12, desc: 'Sheltered site in a quiet Cowal peninsula glen. Good base for exploring Argyll\'s sea lochs and forest trails.' },
     { name: 'Calgary Bay Campsite, Mull', lat: 56.60, lng: -6.28, desc: 'Small campsite behind Calgary Bay\'s stunning white sand beach on the Isle of Mull. Caribbean vibes in the Hebrides.' },
-    { name: 'Braemar Campsite', lat: 57.01, lng: -3.40, desc: 'Invercauld Caravan Club site in Royal Deeside near Braemar Castle. Gateway to the eastern Cairngorms and the Linn of Dee.' }
+    { name: 'Braemar Campsite', lat: 57.01, lng: -3.40, desc: 'Invercauld Caravan Club site in Royal Deeside near Braemar Castle. Gateway to the eastern Cairngorms and the Linn of Dee.' },
+    { name: 'Sandyhills Bay Holiday Park', lat: 54.89, lng: -3.76, desc: 'This coastal park in Dumfries and Galloway offers stunning views and a mix of pitches, ideal for a relaxing stop after a scenic ride along the Solway Coast.' },
+    { name: 'Brighouse Bay Holiday Park', lat: 54.79, lng: -4.00, desc: 'Set on a beautiful peninsula near Kirkcudbright, this park provides excellent facilities and a peaceful base for exploring the Galloway Forest Park roads.' },
+    { name: 'Pettycur Bay Holiday Park', lat: 56.07, lng: -3.17, desc: 'Overlooking the Firth of Forth in Fife, this large park offers extensive amenities and a convenient base for exploring the region\\\'s coastal routes and historic towns.' },
+    { name: 'Silver Sands Holiday Park', lat: 56.19, lng: -3.00, desc: 'Located right on the beach in Leven, Fife, this lively park provides a great spot to unwind after riding the scenic Fife Coastal Route.' },
+    { name: 'Ballater Caravan Park', lat: 57.05, lng: -3.04, desc: 'Situated in the heart of Royal Deeside, this well-maintained park is perfectly positioned for exploring the stunning roads of the Cairngorms National Park in Aberdeenshire.' },
+    { name: 'Stonehaven Campsite', lat: 56.95, lng: -2.21, desc: 'This coastal campsite offers easy access to the charming town of Stonehaven and is a great base for exploring the dramatic Aberdeenshire coastline and castles.' }
   ],
 
   // =====================================================
@@ -144,7 +150,13 @@ window.POI_SCOTLAND = {
     { name: 'Fairy Pools, Skye', lat: 57.25, lng: -6.27, desc: 'Crystal-clear blue pools and waterfalls at the foot of the Black Cuillin. Absurdly beautiful on a sunny day.' },
     { name: 'Callanish Viewpoint', lat: 58.20, lng: -6.74, desc: 'View over the 5,000-year-old Callanish Standing Stones on the Isle of Lewis. Older than Stonehenge and far more atmospheric.' },
     { name: 'Smoo Cave Viewpoint', lat: 58.41, lng: -4.72, desc: 'Viewpoint above Britain\'s largest sea cave entrance at Durness. The combined sea cave and freshwater waterfall inside is unique.' },
-    { name: 'Falls of Measach Viewpoint', lat: 57.75, lng: -5.03, desc: 'Victorian suspension bridge over Corrieshalloch Gorge with a 150ft waterfall plunging into a box canyon below.' }
+    { name: 'Falls of Measach Viewpoint', lat: 57.75, lng: -5.03, desc: 'Victorian suspension bridge over Corrieshalloch Gorge with a 150ft waterfall plunging into a box canyon below.' },
+    { name: 'Mull of Galloway Lighthouse', lat: 54.63, lng: -4.86, desc: 'Scotland\\\'s southernmost point offers spectacular panoramic views of the Irish Sea, Solway Firth, and Isle of Man.' },
+    { name: 'Clatteringshaws Loch Viewpoint', lat: 55.08, lng: -4.17, desc: 'Enjoy serene views across Clatteringshaws Loch, a tranquil reservoir nestled within the Galloway Forest Park.' },
+    { name: 'Forth Bridges Viewpoint', lat: 56.01, lng: -3.40, desc: 'This iconic spot provides an unparalleled perspective of all three magnificent Forth bridges spanning the Firth of Forth.' },
+    { name: 'Dunnottar Castle Viewpoint', lat: 56.95, lng: -2.21, desc: 'Perched dramatically on a cliff edge, Dunnottar Castle offers breathtaking views of the rugged Aberdeenshire coastline.' },
+    { name: 'Glenshee Ski Centre Viewpoint', lat: 56.88, lng: -3.42, desc: 'A high mountain pass on the A93, providing expansive and wild views across the Cairngorms National Park.' },
+    { name: 'Gairnshiel Bridge Viewpoint', lat: 57.14, lng: -3.29, desc: 'Situated on the scenic Snow Road, this high point offers stunning panoramic vistas of the surrounding moorland and distant mountains.' }
   ],
 
   // =====================================================
@@ -162,7 +174,13 @@ window.POI_SCOTLAND = {
     { name: 'Badachro Inn', lat: 57.70, lng: -5.70, desc: 'Hidden gem on the shores of Loch Gairloch in Wester Ross. Excellent seafood and a beer garden with mountain views.' },
     { name: 'Cluanie Inn', lat: 57.19, lng: -5.13, desc: 'Remote Highland inn on the A87 between Invermoriston and Shiel Bridge. Classic stop for Munro-baggers and bikers.' },
     { name: 'Moulin Inn, Pitlochry', lat: 56.70, lng: -3.73, desc: 'One of Scotland\'s oldest inns with its own on-site brewery. The Moulin ales are excellent. Cosy and atmospheric.' , url: 'https://www.moulinhotel.co.uk' },
-    { name: 'Mash Tun, Aberlour', lat: 57.47, lng: -3.23, desc: 'Converted railway station in the heart of Speyside whisky country. Over 100 malts behind the bar and excellent food.' }
+    { name: 'Mash Tun, Aberlour', lat: 57.47, lng: -3.23, desc: 'Converted railway station in the heart of Speyside whisky country. Over 100 malts behind the bar and excellent food.' },
+    { name: 'The Clachan Inn', lat: 55.08, lng: -4.14, desc: 'A traditional village pub nestled in the heart of Galloway, offering a warm welcome and hearty food after a scenic ride through the hills.' },
+    { name: 'The Ship Inn', lat: 56.19, lng: -2.81, desc: 'Enjoy stunning views over Elie Bay from this iconic pub, famous for its beach cricket and excellent seafood, perfect for a coastal stop in Fife.' },
+    { name: 'The Boat Inn', lat: 57.08, lng: -2.78, desc: 'Situated on the banks of the River Dee in Royal Deeside, this charming inn provides a great base for exploring the Cairngorms National Park and surrounding castles.' },
+    { name: 'The Creel Inn', lat: 56.92, lng: -2.20, desc: 'Perched on the dramatic Aberdeenshire coast, this renowned seafood restaurant and pub offers breathtaking sea views and fresh local catches.' },
+    { name: 'The Steamboat Inn', lat: 54.96, lng: -3.56, desc: 'A picturesque waterside pub in a tiny coastal village near Dumfries, ideal for a relaxing stop with views across the Solway Firth after a ride along the coast.' },
+    { name: 'The Dreel Tavern', lat: 56.22, lng: -2.70, desc: 'One of Scotland\\\'s oldest pubs, this historic tavern in Anstruther offers real ales and a cozy atmosphere, perfect for a stop on a Fife coastal route.' }
   ],
 
   // =====================================================
@@ -183,7 +201,13 @@ window.POI_SCOTLAND = {
     { name: 'Dunrobin Castle', lat: 57.98, lng: -3.95, desc: 'Fairy-tale French château on the Sutherland coast with 189 rooms and magnificent formal gardens. The falconry display is excellent.' },
     { name: 'Castle of Mey', lat: 58.61, lng: -3.22, desc: 'The Queen Mother\'s beloved retreat on the Caithness coast. Beautiful walled gardens sheltering from the fierce northern winds.' },
     { name: 'Dunvegan Castle, Skye', lat: 57.45, lng: -6.59, desc: 'The oldest continuously inhabited castle in Scotland — 800 years of Clan MacLeod history on the shores of Loch Dunvegan.' },
-    { name: 'Blair Castle', lat: 56.77, lng: -3.85, desc: 'White-walled castle in Highland Perthshire, home to Europe\'s only remaining private army — the Atholl Highlanders.' }
+    { name: 'Blair Castle', lat: 56.77, lng: -3.85, desc: 'White-walled castle in Highland Perthshire, home to Europe\'s only remaining private army — the Atholl Highlanders.' },
+    { name: 'Caerlaverock Castle', lat: 54.99, lng: -3.60, desc: 'This unique triangular moated castle offers a fascinating glimpse into medieval siege warfare and stunning views over the Solway Firth.' },
+    { name: 'Drumlanrig Castle', lat: 55.28, lng: -3.79, desc: 'A magnificent 17th-century pink sandstone castle, Drumlanrig is a grand stately home set amidst beautiful gardens and a vast estate perfect for a scenic ride.' },
+    { name: 'St Andrews Castle', lat: 56.34, lng: -2.79, desc: 'Perched dramatically on a rocky promontory overlooking the North Sea, this historic ruin tells tales of bishops, kings, and religious reformers.' },
+    { name: 'Dunnottar Castle', lat: 56.95, lng: -2.21, desc: 'This iconic and impregnable fortress, dramatically situated on a cliff-top peninsula, offers breathtaking coastal views and a truly memorable destination for any rider.' },
+    { name: 'Crathes Castle', lat: 57.05, lng: -2.40, desc: 'A classic 16th-century tower house with intricate painted ceilings and world-renowned walled gardens, Crathes provides a charming and accessible stop on the Aberdeenshire Castle Trail.' },
+    { name: 'Fraser Castle', lat: 57.22, lng: -2.44, desc: 'This impressive Z-plan castle, one of the grandest in Scotland, boasts a rich history and stunning architecture, making it a rewarding visit after a scenic ride through the Aberdeenshire countryside.' }
   ],
 
   // =====================================================
@@ -219,7 +243,13 @@ window.POI_SCOTLAND = {
     { name: 'St Andrews West Sands', lat: 56.35, lng: -2.81, desc: 'The famous beach from the opening scene of Chariots of Fire. Wide, flat sands stretching two miles below the university town.' },
     { name: 'Dunnet Bay', lat: 58.62, lng: -3.37, desc: 'Two-mile sweep of sand on the north coast backed by dunes and machair. The bay faces directly towards Orkney.' },
     { name: 'Sango Bay, Durness', lat: 58.40, lng: -4.73, desc: 'Dramatic beach at the foot of cliffs in Durness. The campsite above has one of the most spectacular views in Britain.' },
-    { name: 'Traigh Mhor, Barra', lat: 57.02, lng: -7.40, desc: 'The famous cockle strand on Barra — the only beach runway in the world where scheduled flights land on the sand at low tide.' }
+    { name: 'Traigh Mhor, Barra', lat: 57.02, lng: -7.40, desc: 'The famous cockle strand on Barra — the only beach runway in the world where scheduled flights land on the sand at low tide.' },
+    { name: 'Sandyhills Beach', lat: 54.89, lng: -3.78, desc: 'A beautiful sandy bay offering stunning views across the Solway Firth, perfect after a scenic ride along the coastal roads of Dumfries and Galloway.' },
+    { name: 'Portpatrick Beach', lat: 54.83, lng: -5.11, desc: 'This charming harbour village beach provides a picturesque stop with its colourful houses and dramatic cliff walks, accessible via winding roads in Galloway.' },
+    { name: 'Elie Ruby Bay', lat: 56.18, lng: -2.81, desc: 'A hidden gem near Elie, this small, sheltered bay is known for its red sand and offers a peaceful retreat after a ride along Fife\\\'s East Neuk.' },
+    { name: 'St Andrews West Sands', lat: 56.34, lng: -2.81, desc: 'Famous for its vast expanse of golden sand and iconic views of the town, this beach is a classic stop for any rider exploring the Fife coast.' },
+    { name: 'Cruden Bay Beach', lat: 57.40, lng: -1.83, desc: 'This expansive golden beach, overlooked by the dramatic Slains Castle ruins, offers a wild and invigorating stop on the Aberdeenshire coast.' },
+    { name: 'Balmedie Beach', lat: 57.25, lng: -2.00, desc: 'A vast stretch of sand dunes and beach, Balmedie provides a refreshing stop with plenty of space to stretch your legs after a coastal journey north of Aberdeen.' }
   ],
 
   // =====================================================
@@ -261,7 +291,13 @@ window.POI_SCOTLAND = {
     { name: 'Smoo Cave, Durness', lat: 58.41, lng: -4.72, desc: 'Britain\'s largest sea cave entrance with a freshwater waterfall inside. Boat trips explore the deeper chambers.' },
     { name: 'Arthur\'s Seat, Edinburgh', lat: 55.94, lng: -3.16, desc: 'Ancient volcano in the heart of Edinburgh offering panoramic city views. An 822ft hill that feels like a mountain summit.' },
     { name: 'Rosslyn Chapel', lat: 55.86, lng: -3.16, desc: '15th-century chapel near Edinburgh made famous by The Da Vinci Code. Extraordinarily ornate stone carvings cover every surface.' },
-    { name: 'Fortingall Yew', lat: 56.60, lng: -4.05, desc: 'Possibly the oldest living thing in Europe — a yew tree estimated at 3,000-5,000 years old in a quiet Perthshire churchyard.' }
+    { name: 'Fortingall Yew', lat: 56.60, lng: -4.05, desc: 'Possibly the oldest living thing in Europe — a yew tree estimated at 3,000-5,000 years old in a quiet Perthshire churchyard.' },
+    { name: 'Mull of Galloway Lighthouse', lat: 54.63, lng: -4.42, desc: 'The southernmost point in Scotland offers dramatic clifftop views, a historic lighthouse, and a challenging but rewarding ride to its remote tip.' },
+    { name: 'Clatteringshaws Loch Visitor Centre', lat: 55.08, lng: -4.18, desc: 'Nestled within Galloway Forest Park, this tranquil loch and visitor centre provide a perfect stop amidst some of Scotland\\\'s best dark sky and scenic forest roads.' },
+    { name: 'Anstruther Harbour', lat: 56.22, lng: -2.69, desc: 'A picturesque fishing village in the East Neuk of Fife, Anstruther is famous for its award-winning fish and chips and charming harbour views.' },
+    { name: 'Forth Bridges Viewpoint (North Queensferry)', lat: 56.01, lng: -3.40, desc: 'Witness the engineering marvel of three iconic bridges spanning the Firth of Forth, offering a spectacular backdrop for a memorable ride.' },
+    { name: 'Cairn O\\\' Mount Pass', lat: 56.95, lng: -2.59, desc: 'This challenging mountain pass on the B974 offers exhilarating twists and turns, rewarding riders with breathtaking panoramic views across Aberdeenshire.' },
+    { name: 'Dunnottar Castle', lat: 56.95, lng: -2.21, desc: 'Perched dramatically on a clifftop peninsula near Stonehaven, this ruined medieval fortress is one of Scotland\\\'s most iconic and photogenic castles.' }
   ],
 
   // =====================================================

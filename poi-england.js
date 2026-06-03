@@ -33,7 +33,17 @@ window.POI_ENGLAND = {
     { name: 'Lizard Campsite', lat: 50.00, lng: -5.20, desc: 'Britain\'s most southerly campsite on the Lizard Peninsula. Kynance Cove and its serpentine rock stacks are a short ride away.' },
     { name: 'Sennen Cove Campsite', lat: 50.07, lng: -5.70, desc: 'Camping at the edge of England, a mile from Land\'s End. Watch the Atlantic sunset from your pitch before riding to the very tip of the country.' },
     { name: 'Woolacombe Campsite', lat: 51.17, lng: -4.21, desc: 'North Devon surfing coast campsite behind one of England\'s best sandy beaches. Three miles of golden sand and consistent Atlantic swells.' },
-    { name: 'Robin Hood\'s Bay Camping', lat: 54.43, lng: -0.53, desc: 'Hilltop camping overlooking the bay where the Coast to Coast walk ends. Steep cobbled streets lead down to a tiny harbour wedged between the cliffs.' }
+    { name: 'Robin Hood\'s Bay Camping', lat: 54.43, lng: -0.53, desc: 'Hilltop camping overlooking the bay where the Coast to Coast walk ends. Steep cobbled streets lead down to a tiny harbour wedged between the cliffs.' },
+    { name: 'Sandy Balls Holiday Village', lat: 50.88, lng: -1.72, desc: 'A popular New Forest site with good facilities, ideal for exploring the national park by bike.' },
+    { name: 'Clippesby Hall', lat: 52.64, lng: 1.62, desc: 'Award-winning campsite in the Norfolk Broads, perfect for exploring the quiet lanes and waterways.' },
+    { name: 'Peak Gateway Camping & Caravanning Park', lat: 53.07, lng: -1.55, desc: 'Located on the edge of the Peak District, offering easy access to stunning riding roads.' },
+    { name: 'Broadway Caravan and Motorhome Club Site', lat: 52.03, lng: -1.85, desc: 'A well-maintained site in the picturesque Cotswolds, great for touring the region.' },
+    { name: 'The Quiet Site', lat: 54.58, lng: -2.91, desc: 'A unique, eco-friendly site near Ullswater, offering a great base for Lake District adventures.' },
+    { name: 'Forest Holidays Sherwood Pines', lat: 53.13, lng: -1.06, desc: 'Luxury cabins and pitches within Sherwood Forest, offering a peaceful retreat after a day\\\'s ride.' },
+    { name: 'Woburn Sands Camping & Caravanning Club Site', lat: 52.01, lng: -0.62, desc: 'Conveniently located near Milton Keynes, with good access to Buckinghamshire and Bedfordshire roads.' },
+    { name: 'Longthorns Farm', lat: 50.68, lng: -2.19, desc: 'A family-friendly campsite near Monkey World in Dorset, close to the Jurassic Coast.' },
+    { name: 'Blacklands Farm Caravan & Camping', lat: 50.96, lng: -0.01, desc: 'A tranquil site in West Sussex, ideal for exploring the South Downs National Park.' },
+    { name: 'Holkham Hall Estate Caravan Park', lat: 52.96, lng: 0.80, desc: 'Set within the stunning Holkham Estate, offering direct access to the North Norfolk coast and quiet lanes.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -74,7 +84,17 @@ window.POI_ENGLAND = {
     { name: 'Farne Islands Puffins', lat: 55.62, lng: -1.66, desc: 'Inner Farne hosts the most accessible puffin colony in England. Land on the island May-July and the puffins waddle right past your feet, beaks stuffed with sand eels.' },
     { name: 'Martin Mere Wildfowl', lat: 53.63, lng: -2.87, desc: 'WWT wetland reserve in Lancashire hosting thousands of overwintering swans, geese, and ducks. Pink-footed geese arrive in their tens of thousands each autumn.' },
     { name: 'WWT Slimbridge', lat: 51.74, lng: -2.40, desc: 'Sir Peter Scott\'s pioneering wetland centre on the Severn Estuary. The largest collection of wildfowl in the world and winter home to Bewick\'s swans from Arctic Russia.' },
-    { name: 'Minsmere RSPB', lat: 52.24, lng: 1.62, desc: 'Suffolk\'s flagship nature reserve with reedbeds, heathland, and scrapes. Bitterns boom in spring, avocets breed on the Scrape, and marsh harriers quarter the reeds.' }
+    { name: 'Minsmere RSPB', lat: 52.24, lng: 1.62, desc: 'Suffolk\'s flagship nature reserve with reedbeds, heathland, and scrapes. Bitterns boom in spring, avocets breed on the Scrape, and marsh harriers quarter the reeds.' },
+    { name: 'New Forest National Park, Hampshire', lat: 50.85, lng: -1.60, desc: 'Famous for its free-roaming ponies, cattle, and deer, offering unique wildlife viewing opportunities from the road.' },
+    { name: 'Norfolk Broads National Park, Norfolk/Suffolk', lat: 52.65, lng: 1.50, desc: 'A network of rivers and lakes, home to rare birds, otters, and dragonflies, best explored by boat or quiet lanes.' },
+    { name: 'Slimbridge Wetland Centre, Gloucestershire', lat: 51.74, lng: -2.41, desc: 'A world-renowned wetland reserve, home to a huge variety of wild and captive birds, great for birdwatchers.' },
+    { name: 'Rutland Water Nature Reserve, Rutland', lat: 52.66, lng: -0.62, desc: 'One of Europe\\\'s most important wildfowl sanctuaries, famous for its ospreys and diverse birdlife.' },
+    { name: 'Attenborough Nature Centre, Nottinghamshire', lat: 52.90, lng: -1.26, desc: 'A beautiful wetland reserve created from gravel pits, offering excellent birdwatching and peaceful walks.' },
+    { name: 'Arne RSPB Reserve, Dorset', lat: 50.68, lng: -2.06, desc: 'A stunning heathland and woodland reserve, home to Dartford warblers, nightjars, and sika deer.' },
+    { name: 'Strumpshaw Fen RSPB Reserve, Norfolk', lat: 52.60, lng: 1.45, desc: 'A fantastic reserve in the Broads, known for its booming bitterns, marsh harriers, and swallowtail butterflies.' },
+    { name: 'Titchwell Marsh RSPB Reserve, Norfolk', lat: 52.97, lng: 0.59, desc: 'A coastal reserve with lagoons, reedbeds, and saltmarsh, attracting a huge array of wading birds and wildfowl.' },
+    { name: 'Rye Harbour Nature Reserve, East Sussex', lat: 50.93, lng: 0.76, desc: 'A shingle beach and wetland reserve, home to many rare species of birds, plants, and insects.' },
+    { name: 'Wicken Fen National Nature Reserve, Cambridgeshire', lat: 52.29, lng: 0.28, desc: 'Britain\\\'s oldest nature reserve, a remnant of undrained fenland, with unique flora and fauna including Konik ponies.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -100,7 +120,17 @@ window.POI_ENGLAND = {
     { name: 'Lamps Moss', lat: 54.42, lng: -2.20, sLat: 54.40, sLng: -2.18, eLat: 54.44, eLng: -2.22, desc: 'High, wild road between Nateby and Keld in the Yorkshire Dales. Open moorland at 1,800ft with views stretching to the Lake District on clear days.' , surface: 'fair', hazard: 'Exposed moorland. Sheep on road. Ice in winter.' },
     { name: 'Tan Hill Road', lat: 54.38, lng: -2.14, sLat: 54.35, sLng: -2.10, eLat: 54.40, eLng: -2.16, desc: 'Remote road climbing to Britain\'s highest pub at 1,732ft. The landscape is bleak, beautiful, and utterly empty — perfect for a solitary moorland ride.' , surface: 'fair' },
     { name: 'Military Road, B3399, Isle of Wight', lat: 50.66, lng: -1.46, sLat: 50.66, sLng: -1.52, eLat: 50.66, eLng: -1.38, desc: 'Arrow-straight road along the Isle of Wight\'s southwestern coast with Channel views. Built to connect Victorian forts — now a brilliant open-throttle blast.' , surface: 'excellent' },
-    { name: 'Atlantic Highway, A39 Devon', lat: 51.00, lng: -4.20, sLat: 50.83, sLng: -4.36, eLat: 51.18, eLng: -4.12, desc: 'Sweeping North Devon coast road linking Bideford to Barnstaple and beyond. Rolling hills, sea glimpses, and access to Croyde, Woolacombe, and the surfing beaches.' , surface: 'excellent' }
+    { name: 'Atlantic Highway, A39 Devon', lat: 51.00, lng: -4.20, sLat: 50.83, sLng: -4.36, eLat: 51.18, eLng: -4.12, desc: 'Sweeping North Devon coast road linking Bideford to Barnstaple and beyond. Rolling hills, sea glimpses, and access to Croyde, Woolacombe, and the surfing beaches.' , surface: 'excellent' },
+    { name: 'A272, Sussex', lat: 50.99, lng: 0.10, desc: 'A classic biker road stretching across Sussex, offering varied scenery and enjoyable bends.', surface: 'good', miles: 50 },
+    { name: 'B4632, Cotswolds', lat: 52.00, lng: -1.86, desc: 'Winding through picturesque Cotswold villages and rolling hills, a scenic and pleasant ride.', surface: 'good', miles: 25 },
+    { name: 'A537 Cat and Fiddle Road, Peak District', lat: 53.25, lng: -2.00, desc: 'One of the UK\\\'s most famous and challenging roads, with incredible views and demanding corners.', surface: 'excellent', miles: 10 },
+    { name: 'A57 Snake Pass, Peak District', lat: 53.40, lng: -1.87, desc: 'A dramatic road through the Dark Peak, offering sweeping bends and stunning moorland scenery.', surface: 'good', miles: 20 },
+    { name: 'B1159 Coast Road, Norfolk', lat: 52.92, lng: 1.40, desc: 'Hugs the North Norfolk coast, providing sea views and access to charming coastal towns.', surface: 'good', miles: 30 },
+    { name: 'A39 Atlantic Highway, Somerset/Devon', lat: 51.12, lng: -3.20, desc: 'A long, sweeping road offering coastal views and a great sense of open riding towards the South West.', surface: 'excellent', miles: 70 },
+    { name: 'B4077, Cotswolds', lat: 51.95, lng: -1.90, desc: 'A less-trafficked alternative to the A40, offering lovely views and gentle curves through the Cotswolds.', surface: 'good', miles: 15 },
+    { name: 'A44, Worcestershire/Herefordshire', lat: 52.15, lng: -2.20, desc: 'From Worcester westwards, this road offers a mix of open stretches and scenic sections towards Wales.', surface: 'good', miles: 40 },
+    { name: 'B2139, West Sussex', lat: 50.95, lng: 0.50, desc: 'A delightful road through the South Downs, connecting villages with pleasant twists and turns.', surface: 'good', miles: 18 },
+    { name: 'A149 Coast Road, Norfolk', lat: 52.85, lng: 0.70, desc: 'A popular route along the North Norfolk coast, offering scenic views and access to charming villages.', surface: 'good', miles: 45 }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -142,7 +172,17 @@ window.POI_ENGLAND = {
     { name: 'Lindisfarne View', lat: 55.67, lng: -1.80, desc: 'Holy Island seen across the tidal causeway from the mainland. The castle, priory, and vast sand flats create an otherworldly scene — check tide times before crossing.' , hazard: 'Tidal causeway floods twice daily. Check tide tables before crossing.' },
     { name: 'Wastwater View', lat: 54.45, lng: -3.28, desc: 'England\'s deepest lake with the famous scree slopes of the Wasdale Screes plunging directly into the dark water. Voted Britain\'s favourite view.' , hazard: 'Loose scree on shore path. Deep cold water.' },
     { name: 'Derwentwater Panorama', lat: 54.58, lng: -3.15, desc: 'Friar\'s Crag viewpoint over Derwentwater towards Borrowdale and Castle Crag. Ruskin called it one of the three most beautiful scenes in Europe.' },
-    { name: 'Brimham Rocks', lat: 54.08, lng: -1.69, desc: 'Bizarre wind-sculpted gritstone formations on Nidderdale moorland. Balancing rocks, natural arches, and far-reaching Dales views make this an unforgettable stop.' }
+    { name: 'Brimham Rocks', lat: 54.08, lng: -1.69, desc: 'Bizarre wind-sculpted gritstone formations on Nidderdale moorland. Balancing rocks, natural arches, and far-reaching Dales views make this an unforgettable stop.' },
+    { name: 'Box Hill, Surrey', lat: 51.25, lng: -0.32, desc: 'Iconic viewpoint offering panoramic views of the Surrey Hills, a popular biker meet-up spot.' },
+    { name: 'Cleeve Hill, Cotswolds', lat: 51.93, lng: -1.97, desc: 'The highest point in the Cotswolds, providing expansive views across Gloucestershire and beyond.' },
+    { name: 'Dover Castle Cliffs, Kent', lat: 51.12, lng: 1.32, desc: 'Stunning views of the English Channel and the White Cliffs, with the historic castle as a backdrop.' },
+    { name: 'Mam Tor, Peak District', lat: 53.34, lng: -1.79, desc: 'Known as the \\\'Shivering Mountain\\\', offering incredible vistas over the Hope Valley and surrounding peaks.' },
+    { name: 'Butser Hill, Hampshire', lat: 50.99, lng: -0.99, desc: 'The highest point in the South Downs National Park, with far-reaching views across the countryside.' },
+    { name: 'Sutton Bank National Park Centre', lat: 54.22, lng: -1.24, desc: 'Offers \\\'the finest view in England\\\' according to James Herriot, overlooking the Vale of Mowbray.' },
+    { name: 'Malvern Hills, Worcestershire', lat: 52.09, lng: -2.33, desc: 'Numerous accessible points along the ridge offer spectacular views across the Severn Valley and into Wales.' },
+    { name: 'Dunwich Heath, Suffolk', lat: 52.22, lng: 1.63, desc: 'Coastal heathland with elevated views over the North Sea and Suffolk coastline, great for a sea breeze.' },
+    { name: 'St Martha\\\'s Hill, Surrey', lat: 51.21, lng: -0.52, desc: 'A beautiful hilltop church offering 360-degree views of the Surrey Hills, accessible via a short walk.' },
+    { name: 'Portland Bill Lighthouse, Dorset', lat: 50.51, lng: -2.45, desc: 'Dramatic coastal views at the southern tip of the Isle of Portland, with a striking lighthouse.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -160,7 +200,17 @@ window.POI_ENGLAND = {
     { name: 'Ship Inn, Porlock', lat: 51.21, lng: -3.59, desc: 'Thatched 13th-century pub at the bottom of the notorious Porlock Hill. A well-earned pint after surviving the 1-in-4 descent — or liquid courage before the climb.' },
     { name: 'Square and Compass, Worth Matravers', lat: 50.62, lng: -2.05, desc: 'Gloriously unchanged Dorset pub with cider served through a hatch and pasties from a warmer. No bar, no frills — just a stone-flagged room, fossil collection, and sea views.' },
     { name: 'Marisco Tavern, Lundy Island', lat: 51.18, lng: -4.67, desc: 'England\'s most remote pub, accessible only by boat. No phone signal, no crowds — just Atlantic views, real ale, and puffins nesting on the cliffs outside.' },
-    { name: 'Old Nags Head, Edale', lat: 53.37, lng: -1.82, desc: 'The official start of the Pennine Way, at the base of Kinder Scout in the Peak District. A proper walkers\' and bikers\' pub with good beer and fell views.' , url: 'https://www.the-old-nags-head.co.uk' }
+    { name: 'Old Nags Head, Edale', lat: 53.37, lng: -1.82, desc: 'The official start of the Pennine Way, at the base of Kinder Scout in the Peak District. A proper walkers\' and bikers\' pub with good beer and fell views.' , url: 'https://www.the-old-nags-head.co.uk' },
+    { name: 'The George Inn, Lacock', lat: 51.40, lng: -2.12, desc: 'A historic 14th-century pub in the beautiful village of Lacock, perfect for a refreshment stop.' },
+    { name: 'The Anchor Inn, Nayland', lat: 51.96, lng: 0.89, desc: 'Riverside pub in Suffolk, offering great food and a scenic spot to relax by the Stour.' },
+    { name: 'The Cat and Fiddle Inn', lat: 53.25, lng: -2.00, desc: 'Britain\\\'s second-highest pub, offering stunning views and a warm welcome after riding the A537.' },
+    { name: 'The Green Dragon, Hardraw', lat: 54.29, lng: -2.20, desc: 'A traditional Dales pub with its own waterfall (Hardraw Force), a unique stop for bikers.' },
+    { name: 'The Royal Oak, Winsford', lat: 51.09, lng: -3.58, desc: 'A charming pub in the heart of Exmoor National Park, ideal for a break during a scenic ride.' },
+    { name: 'The Fleece Inn, Bretforton', lat: 52.10, lng: -1.90, desc: 'A National Trust pub with a rich history, offering traditional ales and a glimpse into rural Worcestershire.' },
+    { name: 'The Ferry Boat Inn, Helford Passage', lat: 50.10, lng: -5.13, desc: 'A picturesque waterside pub in Cornwall, perfect for a scenic stop with great food.' },
+    { name: 'The Chequers Inn, Smarden', lat: 51.13, lng: 0.69, desc: 'A classic Kentish pub with a large garden, great for a summer stop while exploring the Garden of England.' },
+    { name: 'The Olde Bell, Hurley', lat: 51.55, lng: -0.83, desc: 'One of Britain\\\'s oldest inns, offering a historic setting and good food near the River Thames.' },
+    { name: 'The Bell Inn, Aldworth', lat: 51.52, lng: -1.24, desc: 'A traditional Berkshire pub with a thatched roof, popular with locals and offering a real ale experience.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -181,7 +231,17 @@ window.POI_ENGLAND = {
     { name: 'Kenilworth Castle', lat: 52.35, lng: -1.59, desc: 'One of the grandest castle ruins in England, with a history spanning from Norman times to the Elizabethan era. The great mere that once surrounded it has long been drained.' },
     { name: 'Carlisle Castle', lat: 54.89, lng: -2.94, desc: 'Border fortress that saw more than its share of Anglo-Scottish warfare. Mary Queen of Scots was imprisoned here — the keep is one of the best-preserved Norman towers in England.' },
     { name: 'Scarborough Castle', lat: 54.28, lng: -0.39, desc: 'Headland fortress with 3,000 years of history overlooking the North Sea. The views up and down the Yorkshire coast from the battlements are magnificent.' },
-    { name: 'Conisborough Castle', lat: 53.48, lng: -1.23, desc: 'Spectacular white limestone keep — the oldest circular keep in England and inspiration for Sir Walter Scott\'s Ivanhoe. The tower dominates the Don Valley.' }
+    { name: 'Conisborough Castle', lat: 53.48, lng: -1.23, desc: 'Spectacular white limestone keep — the oldest circular keep in England and inspiration for Sir Walter Scott\'s Ivanhoe. The tower dominates the Don Valley.' },
+    { name: 'Warwick Castle', lat: 52.28, lng: -1.59, desc: 'A magnificent medieval castle with impressive grounds and attractions, easily accessible in the Midlands.' },
+    { name: 'Leeds Castle, Kent', lat: 51.24, lng: 0.63, desc: 'Often called \\\'the loveliest castle in the world\\\', set on two islands in a lake, a stunning stop.' },
+    { name: 'Arundel Castle, West Sussex', lat: 50.85, lng: -0.55, desc: 'A restored medieval castle and stately home, dominating the landscape above the River Arun.' },
+    { name: 'Framlingham Castle, Suffolk', lat: 52.21, lng: 1.35, desc: 'A formidable 12th-century castle with a wall walk offering panoramic views of the Suffolk countryside.' },
+    { name: 'Dover Castle, Kent', lat: 51.12, lng: 1.32, desc: 'Britain\\\'s largest castle, guarding the shortest sea crossing to Europe, with extensive tunnels to explore.' },
+    { name: 'Corfe Castle, Dorset', lat: 50.64, lng: -2.06, desc: 'Dramatic ruins of a thousand-year-old castle, offering stunning views over the Purbeck Hills.' },
+    { name: 'Kenilworth Castle, Warwickshire', lat: 52.34, lng: -1.59, desc: 'Extensive ruins of a grand medieval fortress, once a favourite of Queen Elizabeth I.' },
+    { name: 'Berkeley Castle, Gloucestershire', lat: 51.68, lng: -2.46, desc: 'A beautiful and historic castle, continuously inhabited by the Berkeley family for over 900 years.' },
+    { name: 'Windsor Castle, Berkshire', lat: 51.48, lng: -0.60, desc: 'The oldest and largest inhabited castle in the world, a royal residence and major landmark.' },
+    { name: 'Rochester Castle, Kent', lat: 51.39, lng: 0.50, desc: 'Impressive Norman keep, one of the best preserved in England, overlooking the River Medway.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -199,7 +259,17 @@ window.POI_ENGLAND = {
     { name: 'Cautley Spout, Howgills', lat: 54.38, lng: -2.50, desc: 'England\'s highest waterfall above ground at 650ft total descent, cascading down the Howgill Fells near Sedbergh. Best seen after heavy rain when it becomes a torrent.' },
     { name: 'Moss Force, Newlands', lat: 54.57, lng: -3.22, desc: 'Powerful waterfall visible from the road over Newlands Pass near Keswick. After rain it becomes a spectacular white streak down the dark fellside.' },
     { name: 'Ingleton Waterfalls Trail', lat: 54.15, lng: -2.46, desc: 'Classic 4.5-mile circular walk past a chain of waterfalls in limestone gorges. Thornton Force, where water falls over 300-million-year-old slate, is the highlight.' },
-    { name: 'Lydford Gorge, Devon', lat: 50.65, lng: -4.10, desc: 'Devon\'s deepest gorge with the dramatic 90ft White Lady waterfall at one end and the Devil\'s Cauldron whirlpool at the other. A mile-long walk through ancient oak woodland.' }
+    { name: 'Lydford Gorge, Devon', lat: 50.65, lng: -4.10, desc: 'Devon\'s deepest gorge with the dramatic 90ft White Lady waterfall at one end and the Devil\'s Cauldron whirlpool at the other. A mile-long walk through ancient oak woodland.' },
+    { name: 'Lumsdale Falls, Matlock', lat: 53.12, lng: -1.56, desc: 'A series of picturesque cascades and industrial ruins in a hidden valley near Matlock, Derbyshire.' },
+    { name: 'St Audries Bay Waterfall, Somerset', lat: 51.17, lng: -3.29, desc: 'Two waterfalls cascade directly onto the beach at St Audries Bay, a unique coastal feature.' },
+    { name: 'Chatsworth House Cascade, Derbyshire', lat: 53.22, lng: -1.61, desc: 'An impressive man-made cascade in the stunning gardens of Chatsworth House, worth a visit.' },
+    { name: 'Dovedale Stepping Stones, Derbyshire', lat: 53.05, lng: -1.78, desc: 'While not a single waterfall, the River Dove here features numerous small cascades and a beautiful valley walk.' },
+    { name: 'Ladybower Reservoir Spillway, Derbyshire', lat: 53.39, lng: -1.73, desc: 'When the reservoir is full, the twin plughole spillways create a dramatic and unique water feature.' },
+    { name: 'Tintern Abbey (Wye Valley), Monmouthshire/Gloucestershire Border', lat: 51.69, lng: -2.68, desc: 'Explore the area around the abbey for smaller, scenic cascades along the tributaries of the River Wye.' },
+    { name: 'Hardraw Force, North Yorkshire', lat: 54.29, lng: -2.20, desc: 'England\\\'s largest single-drop waterfall, located behind The Green Dragon pub, a truly impressive sight.' },
+    { name: 'Gordale Scar, North Yorkshire', lat: 54.07, lng: -2.14, desc: 'A dramatic limestone gorge with two waterfalls, offering a challenging but rewarding walk from Malham Cove.' },
+    { name: 'Rivelin Valley Nature Trail, Sheffield', lat: 53.39, lng: -1.54, desc: 'A series of weirs and small cascades along the Rivelin River, part of a pleasant urban trail.' },
+    { name: 'Wyming Brook Nature Reserve, Sheffield', lat: 53.37, lng: -1.62, desc: 'Features a beautiful brook with numerous small waterfalls and cascades, nestled in ancient woodland.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -217,7 +287,17 @@ window.POI_ENGLAND = {
     { name: 'Blackpool Beach', lat: 53.82, lng: -3.05, desc: 'Miles of sandy beach beneath the famous Tower and Golden Mile. Unashamedly brash British seaside — the Illuminations in autumn are spectacular from the promenade.' },
     { name: 'Croyde Beach', lat: 51.13, lng: -4.24, desc: 'North Devon surfing hotspot with consistent waves and a laid-back village vibe. The beach is backed by dunes and the coast road here is a cracking ride.' },
     { name: 'Kynance Cove', lat: 49.97, lng: -5.23, desc: 'Arguably Cornwall\'s most beautiful cove, with serpentine rock stacks, turquoise water, and white sand. The walk down from the car park reveals the cove gradually — utterly stunning.' },
-    { name: 'Chesil Beach', lat: 50.62, lng: -2.53, desc: 'Extraordinary 18-mile shingle bank stretching from Portland to West Bay. The pebbles grade from small to large along its length — a geological wonder of the Jurassic Coast.' }
+    { name: 'Chesil Beach', lat: 50.62, lng: -2.53, desc: 'Extraordinary 18-mile shingle bank stretching from Portland to West Bay. The pebbles grade from small to large along its length — a geological wonder of the Jurassic Coast.' },
+    { name: 'Camber Sands, East Sussex', lat: 50.93, lng: 0.79, desc: 'A vast expanse of golden sand and dunes, popular for walks and watersports, with good parking.' },
+    { name: 'Southwold Beach, Suffolk', lat: 52.32, lng: 1.69, desc: 'Charming pier, colourful beach huts, and a traditional seaside feel, great for a coastal stop.' },
+    { name: 'Bournemouth Beach, Dorset', lat: 50.72, lng: -1.87, desc: 'Seven miles of sandy beach, vibrant pier, and plenty of amenities, a classic British seaside destination.' },
+    { name: 'West Wittering Beach, West Sussex', lat: 50.78, lng: -0.89, desc: 'A beautiful, unspoilt sandy beach with excellent water quality and views of Chichester Harbour.' },
+    { name: 'Holkham Beach, Norfolk', lat: 52.97, lng: 0.81, desc: 'An immense, pristine sandy beach backed by pine forest, famous for its natural beauty and tranquility.' },
+    { name: 'Studland Bay, Dorset', lat: 50.64, lng: -1.94, desc: 'Four miles of sandy beaches managed by the National Trust, offering stunning views and diverse wildlife.' },
+    { name: 'Frinton-on-Sea, Essex', lat: 51.83, lng: 1.25, desc: 'A quiet, traditional Victorian seaside town with a long, sandy beach and colourful beach huts.' },
+    { name: 'Wells-next-the-Sea, Norfolk', lat: 52.96, lng: 0.84, desc: 'Famous for its colourful beach huts on stilts and a vast sandy expanse, accessible via a miniature railway.' },
+    { name: 'Lyme Regis Beach, Dorset', lat: 50.72, lng: -2.93, desc: 'Historic harbour town with a sandy beach, known for fossil hunting and the iconic Cobb wall.' },
+    { name: 'Botany Bay, Kent', lat: 51.39, lng: 1.43, desc: 'Stunning chalk cliffs and stacks make this a dramatic and picturesque sandy cove, great for photos.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -249,7 +329,17 @@ window.POI_ENGLAND = {
     { name: 'Lindisfarne Priory', lat: 55.67, lng: -1.80, desc: 'Ruined Anglo-Saxon monastery on Holy Island where the Lindisfarne Gospels were created. Accessible only at low tide — the tidal causeway crossing is part of the pilgrimage.' },
     { name: 'Robin Hood Statue, Nottingham', lat: 52.95, lng: -1.15, desc: 'Bronze statue of the legendary outlaw outside Nottingham Castle. The castle itself has been rebuilt as a museum — Sherwood Forest is a short ride north.' },
     { name: 'Blackpool Tower', lat: 53.82, lng: -3.05, desc: 'Inspired by the Eiffel Tower, this 518ft landmark has dominated the Blackpool skyline since 1894. The glass Skywalk at the top and the Tower Ballroom below are both worth visiting.' },
-    { name: 'York Minster', lat: 53.96, lng: -1.08, desc: 'The largest Gothic cathedral in Northern Europe, with medieval stained glass windows that survived the Reformation. The view from the tower after climbing 275 steps is worth the effort.' }
+    { name: 'York Minster', lat: 53.96, lng: -1.08, desc: 'The largest Gothic cathedral in Northern Europe, with medieval stained glass windows that survived the Reformation. The view from the tower after climbing 275 steps is worth the effort.' },
+    { name: 'Stonehenge, Wiltshire', lat: 51.18, lng: -1.82, desc: 'The iconic prehistoric stone circle, a UNESCO World Heritage Site and a must-see landmark.' },
+    { name: 'White Cliffs of Dover, Kent', lat: 51.13, lng: 1.33, desc: 'Iconic natural landmark, offering dramatic views and a symbol of England\\\'s coastline.' },
+    { name: 'Ironbridge Gorge, Shropshire', lat: 52.63, lng: -2.48, desc: 'Birthplace of the Industrial Revolution, home to the world\\\'s first iron bridge and multiple museums.' },
+    { name: 'Ely Cathedral, Cambridgeshire', lat: 52.39, lng: 0.26, desc: 'A magnificent Norman cathedral, known as the \\\'Ship of the Fens\\\', dominating the flat landscape.' },
+    { name: 'Canterbury Cathedral, Kent', lat: 51.28, lng: 1.08, desc: 'Mother Church of the Anglican Communion, a stunning example of Gothic architecture and a pilgrimage site.' },
+    { name: 'Roman Baths, Bath', lat: 51.38, lng: -2.36, desc: 'Well-preserved Roman public baths and temple complex, a fascinating historical attraction in a beautiful city.' },
+    { name: 'Lincoln Cathedral, Lincolnshire', lat: 53.23, lng: -0.54, desc: 'A breathtaking Gothic cathedral, once the tallest building in the world, with stunning stained glass.' },
+    { name: 'The Needles, Isle of Wight', lat: 50.66, lng: -1.59, desc: 'Three distinctive stacks of chalk rising from the sea, with a lighthouse at the end, a dramatic sight.' },
+    { name: 'Cheddar Gorge, Somerset', lat: 51.28, lng: -2.75, desc: 'England\\\'s largest gorge, with spectacular cliffs, caves, and a winding road through its base.' },
+    { name: 'Sherwood Forest, Nottinghamshire', lat: 53.19, lng: -1.07, desc: 'Legendary home of Robin Hood, featuring ancient oak trees including the Major Oak, great for a walk.' }
   ],
 
   // ──────────────────────────────────────────────────────────

@@ -24,7 +24,13 @@ window.POI_WALES_ISLANDS = {
     { name: 'Nant-yr-Arian Campsite', lat: 52.41, lng: -3.84, desc: 'Forest campsite near the famous red kite feeding station above Aberystwyth. Mountain biking trails weave through the surrounding woodland.' },
     { name: 'Aberafon Campsite', lat: 52.89, lng: -4.39, desc: 'Beachside campsite on the Llŷn Peninsula with Cardigan Bay views. Simple, well-kept site with direct beach access.' },
     { name: 'Cwmcarn Forest Campsite', lat: 51.64, lng: -3.12, desc: 'Campsite in the Cwmcarn Forest Drive above the South Wales valleys. Mountain biking trails and forest walks from the tent door.' },
-    { name: 'Brecon Beacons Campsite', lat: 51.92, lng: -3.38, desc: 'Well-placed campsite for exploring the Brecon Beacons and the Usk Valley. Pen y Fan, Wales\'s highest peak in the south, is close by.' }
+    { name: 'Brecon Beacons Campsite', lat: 51.92, lng: -3.38, desc: 'Well-placed campsite for exploring the Brecon Beacons and the Usk Valley. Pen y Fan, Wales\'s highest peak in the south, is close by.' },
+    { name: 'Erwlon Caravan & Camping Park', lat: 51.99, lng: -3.98, desc: 'This award-winning park near Llandovery offers excellent facilities and is a popular base for exploring the Brecon Beacons and surrounding scenic routes.' },
+    { name: 'Fforest Fields Caravan & Camping Park', lat: 52.17, lng: -3.45, desc: 'Nestled in the heart of Mid Wales near Builth Wells, this tranquil site provides a perfect retreat after a day of riding the region\\\'s quiet, winding roads.' },
+    { name: 'Rozel Camping Park', lat: 49.23, lng: -2.05, desc: 'Situated near the picturesque Rozel Bay, this well-equipped park offers a convenient base for exploring Jersey\\\'s coastal roads and attractions.' },
+    { name: 'Beaucette Marina Campsite', lat: 49.50, lng: -2.50, desc: 'Located within a working marina, this unique campsite provides stunning sea views and easy access to Guernsey\\\'s northern routes.' },
+    { name: 'Glen Wyllin Campsite', lat: 54.24, lng: -4.68, desc: 'This scenic coastal campsite near Kirk Michael offers direct beach access and is ideally located for exploring the Isle of Man\\\'s famous TT course and stunning landscapes.' },
+    { name: 'Dol-llys Farm Caravan & Camping Park', lat: 52.45, lng: -3.55, desc: 'A peaceful, family-run site set in the beautiful Severn Valley near Llanidloes, offering a tranquil base for exploring the Cambrian Mountains and surrounding trails.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -107,7 +113,13 @@ window.POI_WALES_ISLANDS = {
     { name: 'Sugar Loaf Summit', lat: 51.85, lng: -3.06, desc: 'Distinctive conical peak above Abergavenny with 360-degree views. A short hike from the road to the summit cairn.' },
     { name: 'Pen y Fan Summit', lat: 51.88, lng: -3.44, desc: 'Highest peak in South Wales at 2,907ft. The flat-topped summit offers views across the Brecon Beacons to the Bristol Channel on clear days.' },
     { name: 'Moel Famau Summit', lat: 53.14, lng: -3.26, desc: 'Highest point of the Clwydian Range with the Jubilee Tower ruins on top. Views stretch from Snowdonia to the Peak District on a fine day.' },
-    { name: 'Snowdon Summit', lat: 53.07, lng: -4.08, desc: 'Wales\'s highest peak at 3,560ft. Ride to Pen-y-Pass and hike up, or take the rack railway from Llanberis. On a clear day you can see Ireland.' }
+    { name: 'Snowdon Summit', lat: 53.07, lng: -4.08, desc: 'Wales\'s highest peak at 3,560ft. Ride to Pen-y-Pass and hike up, or take the rack railway from Llanberis. On a clear day you can see Ireland.' },
+    { name: 'Elan Valley Visitor Centre', lat: 52.32, lng: -3.62, desc: 'Enjoy breathtaking views of the reservoirs and dams, a highlight of the scenic Elan Valley drive in Central Wales.' },
+    { name: 'Devil\\\'s Bridge', lat: 52.38, lng: -3.85, desc: 'A historic site in Central Wales offering stunning views of the Mynach waterfalls and the unique triple bridge structure.' },
+    { name: 'Corbière Lighthouse', lat: 49.18, lng: -2.25, desc: 'Witness dramatic coastal scenery and the iconic lighthouse on Jersey, especially beautiful at sunset.' },
+    { name: 'Pleinmont Point', lat: 49.43, lng: -2.67, desc: 'Experience rugged cliff-top views and historical German fortifications overlooking the Atlantic Ocean on Guernsey.' },
+    { name: 'Snaefell Summit', lat: 54.28, lng: -4.46, desc: 'Reach the highest point on the Isle of Man for unparalleled panoramic views across the entire island and beyond.' },
+    { name: 'Creg-ny-Baa', lat: 54.21, lng: -4.43, desc: 'A legendary TT vantage point on the Isle of Man offering superb views of the mountain course and the surrounding Manx countryside.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -121,7 +133,13 @@ window.POI_WALES_ISLANDS = {
     { name: 'Felin Fach Griffin', lat: 51.92, lng: -3.20, desc: 'Award-winning gastropub between Brecon and Hay-on-Wye. Locally sourced food, roaring fires, and a relaxed atmosphere in the Welsh countryside.' },
     { name: 'Devil\'s Bridge Tearoom', lat: 52.38, lng: -3.85, desc: 'Cosy refreshment stop beside the famous waterfall and triple bridge. Perfect pit stop after exploring the falls and the Vale of Rheidol Railway.' },
     { name: 'Cat & Fiddle, Rhydlydan', lat: 52.87, lng: -3.47, desc: 'Traditional country pub in the remote Berwyn foothills. A welcome sight after tackling the mountain passes of northern Powys.' },
-    { name: 'Tafarn y Fic, Llithfaen', lat: 52.94, lng: -4.48, desc: 'Community-owned Welsh-language pub on the Llŷn Peninsula. Live music, warm welcome, and a taste of authentic Welsh culture.' }
+    { name: 'Tafarn y Fic, Llithfaen', lat: 52.94, lng: -4.48, desc: 'Community-owned Welsh-language pub on the Llŷn Peninsula. Live music, warm welcome, and a taste of authentic Welsh culture.' },
+    { name: 'The Star Inn', lat: 52.49, lng: -3.74, desc: 'This remote, historic pub offers a warm welcome and hearty food amidst stunning Cambrian Mountains scenery, a true haven for riders.' },
+    { name: 'The Red Lion', lat: 52.65, lng: -3.60, desc: 'A traditional Welsh pub perfectly situated for exploring the scenic roads of Powys, offering a friendly atmosphere and local ales.' },
+    { name: 'The Portelet Inn', lat: 49.16, lng: -2.16, desc: 'Nestled near Portelet Bay, this charming inn provides a picturesque stop with great food and a relaxed vibe after a ride around the island.' },
+    { name: 'The Rockmount', lat: 49.48, lng: -2.58, desc: 'Offering stunning views over Cobo Bay, this popular spot is ideal for a refreshing drink and meal while enjoying Guernsey\\\'s beautiful coastline.' },
+    { name: 'The Creg-ny-Baa', lat: 54.20, lng: -4.45, desc: 'An iconic landmark on the TT Mountain Course, this pub is a must-visit for any motorcyclist, offering trackside views and a vibrant atmosphere.' },
+    { name: 'The Ginger Hall Hotel', lat: 54.32, lng: -4.48, desc: 'Another famous pub on the TT course, known for its lively atmosphere and as a popular gathering point for riders and fans alike.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -139,7 +157,13 @@ window.POI_WALES_ISLANDS = {
     { name: 'Raglan Castle', lat: 51.78, lng: -2.85, desc: 'Late medieval castle with the Great Tower standing apart as a keep. Elaborate heraldic decorations and a long gallery reflect its use as a grand residence.' },
     { name: 'Powis Castle', lat: 52.66, lng: -3.14, desc: 'Medieval castle transformed into a grand country house with world-famous Italianate terraced gardens. Home to the Clive of India collection.' },
     { name: 'Castell Coch', lat: 51.52, lng: -3.26, desc: 'Victorian Gothic Revival fairy-tale castle north of Cardiff. The conical turrets and lavish interiors were designed by William Burges for the Marquess of Bute.' },
-    { name: 'Castle Cornet, Guernsey', lat: 49.45, lng: -2.54, desc: 'Medieval castle guarding St Peter Port harbour for over 800 years. Daily noon-day gun firing and panoramic views across the Channel Islands.' }
+    { name: 'Castle Cornet, Guernsey', lat: 49.45, lng: -2.54, desc: 'Medieval castle guarding St Peter Port harbour for over 800 years. Daily noon-day gun firing and panoramic views across the Channel Islands.' },
+    { name: 'Powis Castle', lat: 52.65, lng: -3.15, desc: 'A magnificent medieval castle, fortress, and grand country house, Powis Castle offers stunning gardens and a rich history, easily accessible via scenic routes.' },
+    { name: 'Carreg Cennen Castle', lat: 51.86, lng: -3.92, desc: 'This dramatic hilltop fortress, often shrouded in mist, offers a truly wild and remote experience, reached by exhilarating roads through the Brecon Beacons.' },
+    { name: 'Dinefwr Castle', lat: 51.88, lng: -4.00, desc: 'Perched above the River Towy, Dinefwr Castle is a historic Welsh stronghold offering panoramic views and a tranquil setting for a motorcycle stop.' },
+    { name: 'Mont Orgueil Castle', lat: 49.22, lng: -2.01, desc: 'Dominating Gorey harbour, Mont Orgueil Castle is a stunning medieval fortress offering breathtaking views across to France and a deep dive into Jersey\\\'s history.' },
+    { name: 'Castle Cornet', lat: 49.45, lng: -2.52, desc: 'Guarding St Peter Port harbour for over 800 years, Castle Cornet is a fascinating complex of museums and historical fortifications, perfect for exploring after a coastal ride.' },
+    { name: 'Peel Castle', lat: 54.22, lng: -4.70, desc: 'Standing proudly on St Patrick\\\'s Isle, Peel Castle is a dramatic Viking and medieval fortress offering stunning sea views and a rich tapestry of Manx history.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -171,7 +195,13 @@ window.POI_WALES_ISLANDS = {
     { name: 'Barmouth Beach', lat: 52.73, lng: -4.06, desc: 'Long sandy beach at the mouth of the Mawddach estuary with mountain views. The Victorian seaside resort has an old-fashioned charm.' },
     { name: 'Aberffraw Beach, Anglesey', lat: 53.19, lng: -4.47, desc: 'Hidden beach reached through the dunes from the ancient village of Aberffraw, once the royal court of the Princes of Gwynedd.' },
     { name: 'La Corbière Beach, Jersey', lat: 49.18, lng: -2.25, desc: 'Dramatic rock pools and sandy coves beneath the iconic Corbière Lighthouse. The causeway to the lighthouse is only accessible at low tide.' },
-    { name: 'Petit Bot Bay, Guernsey', lat: 49.44, lng: -2.59, desc: 'Sheltered south coast bay backed by a wooded valley and German Occupation-era fortifications. A peaceful escape from St Peter Port.' }
+    { name: 'Petit Bot Bay, Guernsey', lat: 49.44, lng: -2.59, desc: 'Sheltered south coast bay backed by a wooded valley and German Occupation-era fortifications. A peaceful escape from St Peter Port.' },
+    { name: 'Barmouth Beach', lat: 52.72, lng: -4.05, desc: 'This expansive sandy beach is a popular destination after a thrilling ride along the scenic A470 or A487 through Snowdonia National Park.' },
+    { name: 'New Quay Beach', lat: 52.21, lng: -4.35, desc: 'Enjoy the picturesque harbour and golden sands of New Quay, accessible via winding coastal roads offering stunning views of Cardigan Bay.' },
+    { name: 'St Ouen\\\'s Bay', lat: 49.20, lng: -2.20, desc: 'Jersey\\\'s longest beach offers a fantastic coastal ride with wide open views, popular with surfers and those seeking a refreshing stop.' },
+    { name: 'Vazon Bay', lat: 49.47, lng: -2.63, desc: 'Guernsey\\\'s largest and most popular surfing beach is easily reached by a scenic coastal road, perfect for a ride-out and a break by the sea.' },
+    { name: 'Peel Beach', lat: 54.22, lng: -4.69, desc: 'Situated beneath the historic Peel Castle, this sandy beach is a classic stop on any Isle of Man motorcycle tour, offering stunning sunsets and a charming town.' },
+    { name: 'Port Erin Beach', lat: 54.09, lng: -4.75, desc: 'The beautiful horseshoe bay of Port Erin, nestled in the south of the island, provides a tranquil setting after an exhilarating ride through the Manx countryside.' }
   ],
 
   // ──────────────────────────────────────────────────────────
@@ -198,7 +228,13 @@ window.POI_WALES_ISLANDS = {
     { name: 'Tintern Abbey', lat: 51.70, lng: -2.68, desc: 'Romantic ruined Cistercian abbey in the Wye Valley that inspired Wordsworth\'s famous poem. The soaring Gothic arches remain hauntingly beautiful.' },
     { name: 'Caerleon Roman Fortress', lat: 51.61, lng: -2.95, desc: 'One of only three permanent Roman legionary fortresses in Britain. The amphitheatre, barracks, and baths are remarkably well preserved.' },
     { name: 'Snowdon Summit Marker', lat: 53.07, lng: -4.08, desc: 'The summit cairn and Hafod Eryri visitor centre atop Wales\'s highest peak. The views on a clear day span across Snowdonia, Anglesey, and to Ireland.' },
-    { name: 'German Occupation Museum, Guernsey', lat: 49.46, lng: -2.58, desc: 'Museum documenting the five years of Nazi occupation of the Channel Islands during WWII. The only part of the British Isles to be occupied by Germany.' }
+    { name: 'German Occupation Museum, Guernsey', lat: 49.46, lng: -2.58, desc: 'Museum documenting the five years of Nazi occupation of the Channel Islands during WWII. The only part of the British Isles to be occupied by Germany.' },
+    { name: 'Elan Valley Visitor Centre', lat: 52.30, lng: -3.62, desc: 'A gateway to stunning reservoirs and winding roads, perfect for a scenic ride through the heart of Central Wales.' },
+    { name: 'Devil\\\'s Staircase (Abergwesyn Pass)', lat: 52.17, lng: -3.71, desc: 'Conquer one of Wales\\\' most challenging and rewarding single-track roads, renowned for its steep gradients and remote beauty.' },
+    { name: 'Corbière Lighthouse', lat: 49.18, lng: -2.25, desc: 'Perched on a tidal island, this iconic lighthouse offers dramatic coastal views and a thrilling ride along Jersey\\\'s western tip.' },
+    { name: 'Pleinmont Point', lat: 49.42, lng: -2.67, desc: 'Explore rugged cliffs, wartime bunkers, and enjoy panoramic sea views from Guernsey\\\'s southwesternmost point.' },
+    { name: 'Snaefell Mountain Railway Summit', lat: 54.23, lng: -4.46, desc: 'Ride to the highest point on the Isle of Man for breathtaking views across the \\\'Seven Kingdoms\\\' on a clear day.' },
+    { name: 'Creg-ny-Baa Pub', lat: 54.21, lng: -4.43, desc: 'An iconic landmark on the Isle of Man TT Mountain Course, offering a fantastic vantage point for racing and a popular stop for riders.' }
   ],
 
   // ──────────────────────────────────────────────────────────
