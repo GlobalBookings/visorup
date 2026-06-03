@@ -2422,6 +2422,13 @@ class VisorUpSite {
         '</p>' +
         tripSelectorHTML +
         '<div id="packingChecklistBody">' + buildChecklistHTML(defaultTrip) + '</div>' +
+        '<div class="packing-shop-cta">' +
+          '<i class="fas fa-shopping-bag"></i>' +
+          '<div class="packing-shop-cta-body">' +
+            '<p><strong>Missing something?</strong> Our partner SportsBikeShop stocks everything on this list \u2014 helmets, jackets, luggage, tools, and camping gear for UK motorcycle touring.</p>' +
+            '<a href="https://www.sportsbikeshop.co.uk#/28914,3714,0" target="_blank" rel="noopener sponsored">Shop at SportsBikeShop <i class="fas fa-external-link-alt" style="font-size:10px"></i></a>' +
+          '</div>' +
+        '</div>' +
         '<div class="packing-actions">' +
           '<button class="btn-outline packing-reset-btn" id="packingResetBtn"><i class="fas fa-rotate-left"></i> Reset All</button>' +
         '</div>' +

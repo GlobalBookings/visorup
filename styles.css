@@ -3321,6 +3321,54 @@ ul, ol { list-style: none; }
 .planning-tip-card h4 { font-size:14px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:8px; color:var(--text); }
 .planning-tip-card h4 i { color:var(--accent); }
 .planning-tip-card p { font-size:13px; line-height:1.7; color:var(--text-secondary); margin:0; }
+/* ── Packing Checklist Tool ── */
+.packing-trip-selector { display:flex; gap:8px; justify-content:center; margin-bottom:28px; flex-wrap:wrap; }
+.packing-trip-btn { padding:10px 20px; background:var(--bg-card); border:1px solid var(--border); border-radius:50px; color:var(--text-muted); font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all var(--transition); }
+.packing-trip-btn:hover { border-color:var(--accent); color:var(--accent); }
+.packing-trip-active { background:var(--accent); border-color:var(--accent); color:#080c0b; }
+
+.packing-progress { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; margin-bottom:24px; }
+.packing-progress-text { font-size:14px; color:var(--text-secondary); margin-bottom:10px; }
+.packing-progress-text strong { color:var(--text); }
+.packing-progress-bar { height:8px; background:var(--bg-secondary); border-radius:4px; overflow:hidden; }
+.packing-progress-fill { height:100%; background:var(--accent); border-radius:4px; transition:width 0.4s ease; }
+
+.packing-categories { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:20px; }
+.packing-category { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; }
+.packing-category-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+.packing-category-header i { font-size:18px; color:var(--accent); }
+.packing-category-header h3 { font-size:15px; font-weight:700; color:var(--text); margin:0; }
+.packing-category-items { display:flex; flex-direction:column; gap:2px; }
+
+.packing-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:var(--radius-sm); cursor:pointer; transition:background var(--transition); user-select:none; }
+.packing-item:hover { background:var(--bg-secondary); }
+.packing-item-checked { opacity:0.5; }
+.packing-item-checked .packing-item-label { text-decoration:line-through; }
+.packing-cb { width:18px; height:18px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+.packing-item-label { font-size:14px; color:var(--text-secondary); }
+
+.packing-add-custom { display:flex; gap:6px; margin-top:12px; padding-top:12px; border-top:1px solid var(--border); }
+.packing-custom-input { flex:1; padding:8px 12px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-size:12px; font-family:inherit; }
+.packing-custom-input:focus { outline:none; border-color:var(--accent); }
+.packing-add-btn { padding:8px 12px; background:var(--accent); border:none; color:#080c0b; border-radius:var(--radius-sm); cursor:pointer; font-size:12px; }
+.packing-add-btn:hover { opacity:0.85; }
+
+.packing-actions { display:flex; gap:12px; justify-content:center; margin-top:24px; }
+
+.packing-shop-cta { display:flex; align-items:center; gap:16px; margin-top:28px; padding:20px 24px; background:var(--bg-card); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:var(--radius); }
+.packing-shop-cta i { font-size:24px; color:var(--accent); flex-shrink:0; }
+.packing-shop-cta-body { flex:1; }
+.packing-shop-cta-body p { font-size:14px; color:var(--text-secondary); margin:0 0 8px; line-height:1.5; }
+.packing-shop-cta-body strong { color:var(--text); }
+.packing-shop-cta-body a { font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; }
+.packing-shop-cta-body a:hover { text-decoration:underline; }
+
+@media (max-width:680px) {
+  .packing-categories { grid-template-columns:1fr; }
+  .packing-trip-selector { gap:6px; }
+  .packing-trip-btn { padding:8px 14px; font-size:12px; }
+}
+
 .packing-checklist { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
 .packing-list-site { list-style:none; padding:0; margin:0; }
 .packing-list-site li { padding:8px 0; font-size:14px; color:var(--text-secondary); display:flex; align-items:flex-start; gap:10px; border-bottom:1px solid var(--border); }
