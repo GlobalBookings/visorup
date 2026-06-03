@@ -14,6 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { execSync } from 'node:child_process';
 import { createLogger } from '../core/logger.js';
 import { sendSlack, slackHeader, slackSection, slackDivider } from '../core/slack.js';
+import { getWorkDir } from '../utils/repo.js';
 
 const log = createLogger('internal-linker');
 
@@ -21,7 +22,7 @@ const log = createLogger('internal-linker');
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
-const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
+const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
 const MAX_LINKS_PER_ARTICLE = 5;
 const MIN_CONTENT_LENGTH = 500;
 
@@ -47,11 +48,12 @@ const RELATED_CATEGORIES = {
 };
 
 /* ── Repo paths ─────────────────────────────────────────────────────── */
-function getRepoPaths() {
+function getRepoPaths(workDir) {
+  const wd = workDir || getWorkDir(LOCAL_FALLBACK);
   return {
-    root: WORK_DIR,
-    articlesIndex: path.join(WORK_DIR, 'articles.js'),
-    articlesDir: path.join(WORK_DIR, 'articles'),
+    root: wd,
+    articlesIndex: path.join(wd, 'articles.js'),
+    articlesDir: path.join(wd, 'articles'),
   };
 }
 

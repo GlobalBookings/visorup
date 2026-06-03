@@ -16,6 +16,7 @@ import puppeteer from 'puppeteer';
 import { createLogger } from '../core/logger.js';
 import { sendSlack, slackHeader, slackSection, slackDivider } from '../core/slack.js';
 import { generateImageBuffer } from '../utils/gemini-image.js';
+import { getWorkDir } from '../utils/repo.js';
 
 const log = createLogger('infographic-generator');
 
@@ -23,7 +24,7 @@ const log = createLogger('infographic-generator');
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
-const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
+const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
 
 /* ── Brand colours ──────────────────────────────────────────────────── */
 const BRAND = {
@@ -630,6 +631,9 @@ function parseExistingSlugs(indexPath) {
 /* ── Main run ───────────────────────────────────────────────────────── */
 export async function run() {
   log.info('Infographic Generator starting');
+
+  const WORK_DIR = getWorkDir(LOCAL_FALLBACK);
+  log.info(`Working directory: ${WORK_DIR}`);
 
   const outputDir = path.join(WORK_DIR, 'data', 'infographics');
   const publicImgDir = path.join(WORK_DIR, 'public', 'images', 'infographics');

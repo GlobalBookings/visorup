@@ -17,6 +17,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { createLogger } from '../core/logger.js';
 import { sendSlack, slackHeader, slackSection, slackDivider } from '../core/slack.js';
 import { generateImage } from '../utils/gemini-image.js';
+import { getWorkDir } from '../utils/repo.js';
 
 const log = createLogger('shareable-content');
 
@@ -25,7 +26,7 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
-const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
+const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
 
 /* ── Content templates ──────────────────────────────────────────────── */
 const CONTENT_TYPES = {
@@ -58,12 +59,13 @@ const CONTENT_TYPES = {
 };
 
 /* ── Repo paths ─────────────────────────────────────────────────────── */
-function getRepoPaths() {
+function getRepoPaths(workDir) {
+  const wd = workDir || getWorkDir(LOCAL_FALLBACK);
   return {
-    root: WORK_DIR,
-    articlesIndex: path.join(WORK_DIR, 'articles.js'),
-    articlesDir: path.join(WORK_DIR, 'articles'),
-    imagesDir: path.join(WORK_DIR, 'public', 'images', 'guides'),
+    root: wd,
+    articlesIndex: path.join(wd, 'articles.js'),
+    articlesDir: path.join(wd, 'articles'),
+    imagesDir: path.join(wd, 'public', 'images', 'guides'),
   };
 }
 

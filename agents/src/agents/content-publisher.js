@@ -18,6 +18,7 @@ import { getOAuth2Client } from '../core/google-auth.js';
 import { createLogger } from '../core/logger.js';
 import { sendSlack, slackHeader, slackSection, slackDivider } from '../core/slack.js';
 import { generateImage } from '../utils/gemini-image.js';
+import { getWorkDir } from '../utils/repo.js';
 
 const log = createLogger('content-publisher');
 
@@ -28,7 +29,7 @@ const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SC_SITE = process.env.SEARCH_CONSOLE_SITE_URL || 'https://visorup.co.uk';
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const GA4_PROPERTY = process.env.GA4_PROPERTY_ID;
-const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
+const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
 const POSTS_PER_RUN = 2;
 
 const CATEGORIES = [
@@ -42,12 +43,13 @@ const CATEGORIES = [
 ];
 
 /* ── Repo paths ─────────────────────────────────────────────────────── */
-function getRepoPaths() {
+function getRepoPaths(workDir) {
+  const wd = workDir || getWorkDir(LOCAL_FALLBACK);
   return {
-    root: WORK_DIR,
-    articlesIndex: path.join(WORK_DIR, 'articles.js'),
-    articlesDir: path.join(WORK_DIR, 'articles'),
-    imagesDir: path.join(WORK_DIR, 'public', 'images', 'guides'),
+    root: wd,
+    articlesIndex: path.join(wd, 'articles.js'),
+    articlesDir: path.join(wd, 'articles'),
+    imagesDir: path.join(wd, 'public', 'images', 'guides'),
   };
 }
 

@@ -17,6 +17,7 @@ import { google } from 'googleapis';
 import { getOAuth2Client } from '../core/google-auth.js';
 import { createLogger } from '../core/logger.js';
 import { sendSlack, slackHeader, slackSection, slackDivider } from '../core/slack.js';
+import { getWorkDir } from '../utils/repo.js';
 
 const log = createLogger('content-refresher');
 
@@ -28,14 +29,15 @@ const GA4_PROPERTY = process.env.GA4_PROPERTY_ID;
 const SC_SITE = process.env.SEARCH_CONSOLE_SITE_URL || 'https://visorup.co.uk';
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const MAX_REFRESHES = 2;
-const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
+const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
 
 /* ── Repo paths ─────────────────────────────────────────────────────── */
-function getRepoPaths() {
+function getRepoPaths(workDir) {
+  const wd = workDir || getWorkDir(LOCAL_FALLBACK);
   return {
-    root: WORK_DIR,
-    articlesIndex: path.join(WORK_DIR, 'articles.js'),
-    articlesDir: path.join(WORK_DIR, 'articles'),
+    root: wd,
+    articlesIndex: path.join(wd, 'articles.js'),
+    articlesDir: path.join(wd, 'articles'),
   };
 }
 
