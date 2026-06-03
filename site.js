@@ -435,6 +435,7 @@ class VisorUpSite {
       this.pageContent.innerHTML = this.renderHome() + this.renderFooter();
       this.setActiveNav('home');
       this.setTitle('Motorcycle Adventures Across Britain');
+      this._setMeta({ description: 'Plan epic motorcycle tours across Britain and the Channel Islands. Scenic roads, stunning viewpoints, GPX downloads, ferry guides.', image: 'public/images/heroes/homepage.jpg' });
       this.scrollToTop();
       return;
     }
@@ -456,6 +457,7 @@ class VisorUpSite {
             this.pageContent.innerHTML = this.renderRouteDetail(route) + this.renderFooter();
             this.setActiveNav('routes');
             this.setTitle(route.name + ' — Motorcycle Route');
+            this._setMeta({ description: route.tagline + ' — ' + route.days + ' days, ' + route.miles + ' miles.', image: route.image, type: 'article' });
             this.scrollToTop();
             var self = this;
             setTimeout(function() { self.initRouteGuideMap(route.slug); }, 100);
@@ -470,6 +472,7 @@ class VisorUpSite {
           this.pageContent.innerHTML = this.renderRoutes() + this.renderFooter();
           this.setActiveNav('routes');
           this.setTitle('Motorcycle Touring Routes');
+          this._setMeta({ description: 'Curated motorcycle touring routes across Britain with interactive planners, GPX downloads, and day-by-day guides.', image: 'public/images/heroes/routes.jpg' });
           this.scrollToTop();
         }
         break;
@@ -481,6 +484,7 @@ class VisorUpSite {
           if (dest) {
             this.pageContent.innerHTML = this.renderDestination(parts[1]) + this.renderFooter();
             this.setTitle(dest.name + ' — Motorcycle Destination Guide');
+            this._setMeta({ description: dest.tagline, image: dest.image, type: 'article' });
             var self2 = this;
             setTimeout(function() { self2.initDestinationMap(dest); }, 100);
           } else {
@@ -494,6 +498,7 @@ class VisorUpSite {
           this.pageContent.innerHTML = this.renderDestinations() + this.renderFooter();
           this.setActiveNav('destinations');
           this.setTitle('Motorcycle Destinations — UK & Islands');
+          this._setMeta({ description: 'Explore Britain by bike — detailed destination guides from the Highlands to the coast, with riding tips, POIs, and route suggestions.' });
           this.scrollToTop();
         }
         break;
@@ -505,6 +510,7 @@ class VisorUpSite {
           if (ferry) {
             this.pageContent.innerHTML = this.renderFerryGuide(parts[1]) + this.renderFooter();
             this.setTitle(ferry.name + ' — Motorcycle Ferry Guide');
+            this._setMeta({ description: ferry.name + ' — ' + ferry.operator + '. Motorcycle ferry guide with costs, booking tips, and what to expect. ' + ferry.bikeCost + '.', type: 'article' });
           } else {
             this.pageContent.innerHTML = this.render404();
             this.setTitle('Page Not Found');
@@ -516,6 +522,7 @@ class VisorUpSite {
           this.pageContent.innerHTML = this.renderFerries() + this.renderFooter();
           this.setActiveNav('ferries');
           this.setTitle('Motorcycle Ferry Guides');
+          this._setMeta({ description: 'Everything you need to know about getting your motorcycle on a ferry in the UK — routes, costs, booking tips, and what to expect.' });
           this.scrollToTop();
         }
         break;
@@ -525,6 +532,7 @@ class VisorUpSite {
         this.pageContent.innerHTML = this.renderPlanning() + this.renderFooter();
         this.setActiveNav('planning');
         this.setTitle('Trip Planning Tools');
+        this._setMeta({ description: 'Free motorcycle trip planning tools — packing lists, fuel strategy, weather guidance, and route planning for UK touring.' });
         this.scrollToTop();
         break;
 
@@ -536,6 +544,7 @@ class VisorUpSite {
             this.pageContent.innerHTML = this.renderBikeDetail(bike) + this.renderFooter();
             this.setActiveNav('bikes');
             this.setTitle(bike.name + ' — Touring Setup Guide');
+            this._setMeta({ description: bike.name + ' touring setup guide — specs, luggage options, and rider verdict for UK motorcycle touring.', image: bike.image, type: 'article' });
             this.scrollToTop();
           } else {
             this.showSiteView();
@@ -548,6 +557,7 @@ class VisorUpSite {
           this.pageContent.innerHTML = this.renderBikes() + this.renderFooter();
           this.setActiveNav('bikes');
           this.setTitle('Motorcycle Touring Setup — Bike Guides');
+          this._setMeta({ description: 'Touring bike guides with specs, luggage options, and rider verdicts — find the right motorcycle for your UK adventure.' });
           this.scrollToTop();
         }
         break;
@@ -581,6 +591,7 @@ class VisorUpSite {
         this.pageContent.innerHTML = '<div id="routeBuilderContainer" style="height:calc(100vh - 60px);width:100%;"></div>';
         this.setActiveNav('planning');
         this.setTitle('Build Your Own Route');
+        this._setMeta({ description: 'Free interactive motorcycle route builder — drag-and-drop waypoints, road-accurate routing, elevation profiles, fuel stations, and GPX export.' });
         if (typeof RouteBuilder !== 'undefined') {
           setTimeout(async function() {
             var rb = new RouteBuilder('routeBuilderContainer');
@@ -658,7 +669,7 @@ class VisorUpSite {
             this.pageContent.innerHTML = this.renderArticle(article) + this.renderFooter();
             this.setActiveNav('guides');
             this.setTitle(article.title);
-            this._setMeta(article.metaDescription);
+            this._setMeta({ description: article.metaDescription, image: article.heroImage, type: 'article' });
             this._injectJsonLd(article);
             this.scrollToTop();
           } else {
@@ -672,6 +683,7 @@ class VisorUpSite {
           this.setActiveNav('guides');
           var catName = parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
           this.setTitle(catName + ' Guides — Motorcycle Touring');
+          this._setMeta({ description: catName + ' guides for UK motorcycle touring — expert tips, reviews, and advice.' });
           this.scrollToTop();
         } else {
           this.showSiteView();
@@ -688,6 +700,7 @@ class VisorUpSite {
         this.pageContent.innerHTML = '<div id="tripPlannerContainer" style="height:calc(100vh - 60px);width:100%;"></div>';
         this.setActiveNav('planning');
         this.setTitle('AI Trip Planner');
+        this._setMeta({ description: 'Plan your motorcycle trip with our AI-powered trip planner — personalised itineraries, accommodation, and POI suggestions.' });
         if (typeof AITripPlanner !== 'undefined') {
           setTimeout(function() { new AITripPlanner('tripPlannerContainer'); }, 50);
         }
@@ -719,6 +732,7 @@ class VisorUpSite {
         this.showSiteView();
         this.pageContent.innerHTML = this.renderAbout() + this.renderFooter();
         this.setTitle('About VisorUp');
+        this._setMeta({ description: 'VisorUp is the definitive motorcycle touring resource for Britain — built by riders, for riders.' });
         this.scrollToTop();
         break;
 
@@ -726,6 +740,7 @@ class VisorUpSite {
         this.showSiteView();
         this.pageContent.innerHTML = this.renderContact() + this.renderFooter();
         this.setTitle('Contact Us');
+        this._setMeta({ description: 'Get in touch with the VisorUp team — feedback, route suggestions, partnership enquiries.' });
         this.scrollToTop();
         break;
 
@@ -733,6 +748,7 @@ class VisorUpSite {
         this.showSiteView();
         this.pageContent.innerHTML = this.renderPrivacy() + this.renderFooter();
         this.setTitle('Privacy Policy');
+        this._setMeta({ description: 'VisorUp privacy policy — how we handle your data, cookies, and account information.' });
         this.scrollToTop();
         break;
 
@@ -740,6 +756,7 @@ class VisorUpSite {
         this.showSiteView();
         this.pageContent.innerHTML = this.renderTerms() + this.renderFooter();
         this.setTitle('Terms of Service');
+        this._setMeta({ description: 'VisorUp terms of service — usage terms for our motorcycle touring tools and content.' });
         this.scrollToTop();
         break;
 
@@ -2419,20 +2436,50 @@ class VisorUpSite {
     '</section>';
   }
 
-  _setMeta(description) {
-    var existing = document.querySelector('meta[name="description"]');
-    if (existing) existing.setAttribute('content', description);
-    var ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', description);
-    var ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', document.title);
+  _setMeta(opts) {
+    if (typeof opts === 'string') opts = { description: opts };
+    var title = opts.title || document.title;
+    var desc = opts.description || '';
+    var image = opts.image || '';
+    var url = opts.url || (window.location.origin + window.location.pathname);
+    var type = opts.type || 'website';
+
+    function setTag(sel, attr, val) {
+      var el = document.querySelector(sel);
+      if (el) { el.setAttribute(attr, val); }
+      else {
+        el = document.createElement('meta');
+        if (sel.indexOf('property=') !== -1) el.setAttribute('property', sel.match(/property="([^"]+)"/)[1]);
+        else if (sel.indexOf('name=') !== -1) el.setAttribute('name', sel.match(/name="([^"]+)"/)[1]);
+        el.setAttribute(attr, val);
+        document.head.appendChild(el);
+      }
+    }
+
+    if (desc) {
+      setTag('meta[name="description"]', 'content', desc);
+      setTag('meta[property="og:description"]', 'content', desc);
+      setTag('meta[name="twitter:description"]', 'content', desc);
+    }
+    setTag('meta[property="og:title"]', 'content', title);
+    setTag('meta[name="twitter:title"]', 'content', title);
+    setTag('meta[property="og:url"]', 'content', url);
+    setTag('meta[property="og:type"]', 'content', type);
+    setTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
+    if (image) {
+      var absImage = image.startsWith('http') ? image : (window.location.origin + '/' + image);
+      setTag('meta[property="og:image"]', 'content', absImage);
+      setTag('meta[name="twitter:image"]', 'content', absImage);
+    }
+    setTag('meta[property="og:site_name"]', 'content', 'VisorUp');
+
     var canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
       canonical.rel = 'canonical';
       document.head.appendChild(canonical);
     }
-    canonical.href = window.location.origin + window.location.pathname;
+    canonical.href = url;
   }
 
   _injectJsonLd(article) {
@@ -2850,18 +2897,24 @@ class VisorUpSite {
     if (!user) { this.showAuthModal('login'); return; }
 
     this.setTitle('My Profile');
+    this._setMeta({ description: 'Your VisorUp profile — saved routes, favourites, and motorcycle garage.' });
     this.pageContent.innerHTML = '<section class="page-section"><div class="container"><p style="color:var(--text-muted)">Loading profile...</p></div></section>' + this.renderFooter();
 
-    var results = await Promise.all([
-      VisorUpAuth.getProfile(),
-      VisorUpTrips.list(),
-      VisorUpFavourites.list(),
-      (typeof VisorUpGarage !== 'undefined') ? VisorUpGarage.list() : Promise.resolve([])
-    ]);
-    var profile = results[0];
-    var trips = results[1];
-    var favs = results[2];
-    var garageBikes = results[3];
+    var profile = null, trips = [], favs = [], garageBikes = [];
+    try {
+      var results = await Promise.all([
+        VisorUpAuth.getProfile().catch(function() { return null; }),
+        (typeof VisorUpTrips !== 'undefined') ? VisorUpTrips.list().catch(function() { return []; }) : [],
+        (typeof VisorUpFavourites !== 'undefined') ? VisorUpFavourites.list().catch(function() { return []; }) : [],
+        (typeof VisorUpGarage !== 'undefined') ? VisorUpGarage.list().catch(function() { return []; }) : []
+      ]);
+      profile = results[0];
+      trips = results[1] || [];
+      favs = results[2] || [];
+      garageBikes = results[3] || [];
+    } catch (e) {
+      console.error('Profile data load error:', e);
+    }
 
     var avatarInner = profile && profile.avatar_url
       ? '<img src="' + profile.avatar_url + '" class="profile-avatar" alt="">'
