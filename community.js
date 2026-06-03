@@ -398,6 +398,17 @@ const VisorUpCommunity = {
 
   // ── Render Helpers ────────────────────────────────────────
 
+  _isCurrentUser(userId) {
+    if (!userId || userId === 'local') return true;
+    try {
+      if (typeof VisorUpAuth !== 'undefined' && window._supabase) {
+        var session = window._supabase.auth.session && window._supabase.auth.session();
+        if (session && session.user) return session.user.id === userId;
+      }
+    } catch (e) {}
+    return false;
+  },
+
   _esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; },
 
   _timeAgo(dateStr) {
@@ -482,6 +493,7 @@ const VisorUpCommunity = {
       '<div class="feed-post-actions">' +
         '<button class="feed-action-btn feed-like-btn' + (liked ? ' feed-liked' : '') + '" data-post-id="' + post.id + '"><i class="fas fa-heart"></i> ' + (post.likeCount || 0) + '</button>' +
         '<button class="feed-action-btn feed-comment-toggle" data-post-id="' + post.id + '"><i class="fas fa-comment"></i> ' + (post.commentCount || 0) + '</button>' +
+        (post.userId === 'local' || this._isCurrentUser(post.userId) ? '<button class="feed-action-btn feed-delete-btn" data-post-id="' + post.id + '" title="Delete post"><i class="fas fa-trash"></i></button>' : '') +
       '</div>' +
       '<div class="feed-comments" id="comments-' + post.id + '" style="display:none"></div>' +
     '</div>';

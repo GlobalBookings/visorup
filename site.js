@@ -2005,6 +2005,17 @@ class VisorUpSite {
       });
     });
 
+    // Bind delete buttons
+    feedList.querySelectorAll('.feed-delete-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (!confirm('Delete this post?')) return;
+        var postId = btn.dataset.postId;
+        VisorUpCommunity.deletePost(postId);
+        var postEl = btn.closest('.feed-post');
+        if (postEl) postEl.remove();
+      });
+    });
+
     // Lazy load images in feed
     feedList.querySelectorAll('[data-bg]').forEach(function(el) {
       el.style.backgroundImage = 'url(' + el.dataset.bg + ')';

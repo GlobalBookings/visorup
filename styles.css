@@ -3765,6 +3765,8 @@ ul, ol { list-style: none; }
 .feed-action-btn:hover { color:var(--accent); background:rgba(214,138,45,0.08); }
 .feed-liked { color:#ff6b6b !important; }
 .feed-liked:hover { color:#ff4444 !important; }
+.feed-delete-btn { margin-left:auto; }
+.feed-delete-btn:hover { color:#ff4444 !important; background:rgba(255,68,68,0.08) !important; }
 
 /* Activity Item */
 .feed-activity-item { display:flex; align-items:center; gap:12px; padding:12px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-sm); margin-bottom:6px; }
