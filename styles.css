@@ -3550,3 +3550,77 @@ ul, ol { list-style: none; }
   .saved-trip-card { flex-direction:column; align-items:flex-start; }
   .saved-trip-actions { width:100%; justify-content:flex-end; }
 }
+
+/* ── Hero CTA Group ────────────────────────────────── */
+.hero-cta-group { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:8px; }
+.hero-cta-secondary { background:transparent; border:2px solid rgba(255,255,255,0.6); }
+.hero-cta-secondary:hover { background:rgba(255,255,255,0.12); border-color:#fff; box-shadow:0 0 30px rgba(255,255,255,0.1); }
+
+/* ── Home Split Layout ─────────────────────────────── */
+.home-split { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.home-split-reverse .home-split-text { order:1; }
+.home-split-reverse .home-split-visual { order:0; }
+.home-feature-list { list-style:none; padding:0; margin:20px 0 0; }
+.home-feature-list li { padding:8px 0; font-size:14px; color:var(--text-secondary); display:flex; align-items:center; gap:10px; }
+.home-feature-list li i { color:var(--accent); font-size:12px; flex-shrink:0; }
+.coming-soon-tag { display:inline-block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; background:rgba(214,138,45,0.15); color:var(--accent); padding:2px 8px; border-radius:20px; margin-left:8px; }
+
+/* ── Route Builder Preview ─────────────────────────── */
+.home-builder-preview { background:var(--bg-secondary); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.3); }
+.builder-preview-bar { display:flex; gap:6px; padding:12px 16px; background:rgba(0,0,0,0.2); border-bottom:1px solid var(--border); }
+.builder-dot { width:10px; height:10px; border-radius:50%; background:var(--border); }
+.builder-preview-body { display:grid; grid-template-columns:2fr 1fr; min-height:240px; }
+.builder-preview-map { display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.15); color:var(--text-muted); font-size:48px; }
+.builder-preview-sidebar { padding:16px; display:flex; flex-direction:column; gap:10px; }
+.builder-preview-wp { font-size:13px; color:var(--text-secondary); display:flex; align-items:center; gap:8px; }
+.wp-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.wp-dot-start { background:#6BCB77; }
+.wp-dot-mid { background:var(--accent); }
+.wp-dot-end { background:#FF6B6B; }
+.builder-preview-stats { margin-top:auto; font-size:12px; color:var(--text-muted); border-top:1px solid var(--border); padding-top:10px; }
+
+/* ── Guides Section ────────────────────────────────── */
+.home-guides-cats { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:32px; }
+.home-guide-cat { display:flex; align-items:center; gap:6px; padding:8px 18px; background:var(--bg-secondary); border:1px solid var(--border); border-radius:50px; font-size:13px; font-weight:600; color:var(--text-secondary); text-decoration:none; transition:all var(--transition); }
+.home-guide-cat:hover { border-color:var(--accent); color:var(--accent); background:rgba(214,138,45,0.08); }
+.home-guide-cat i { font-size:12px; }
+.home-guides-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.home-guide-card { border-radius:12px; overflow:hidden; background:var(--bg-secondary); border:1px solid var(--border); text-decoration:none; transition:all var(--transition); }
+.home-guide-card:hover { border-color:var(--accent); transform:translateY(-3px); box-shadow:0 8px 32px rgba(0,0,0,0.2); }
+.home-guide-card-img { height:140px; background-size:cover; background-position:center; }
+.home-guide-card-body { padding:16px; }
+.home-guide-card-cat { display:inline-block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--accent); margin-bottom:6px; }
+.home-guide-card-body h4 { font-size:14px; color:var(--text-primary); margin:0 0 8px; line-height:1.4; }
+.home-guide-card-meta { font-size:11px; color:var(--text-muted); }
+
+/* ── Tools Grid 6 ──────────────────────────────────── */
+.tools-grid-6 { grid-template-columns:repeat(3,1fr); }
+
+/* ── Garage Preview ────────────────────────────────── */
+.home-garage-preview { background:var(--bg-secondary); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.3); }
+.garage-preview-header { padding:16px 20px; font-size:14px; font-weight:700; color:var(--text-primary); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+.garage-preview-header i { color:var(--accent); }
+.garage-preview-bikes { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:20px; }
+.garage-preview-bike { background:rgba(0,0,0,0.15); border-radius:10px; overflow:hidden; border:1px solid var(--border); }
+.garage-preview-img { height:80px; display:flex; align-items:center; justify-content:center; font-size:28px; color:var(--text-muted); background:rgba(0,0,0,0.1); }
+.garage-preview-name { padding:10px 12px; font-size:12px; font-weight:600; color:var(--text-primary); line-height:1.4; }
+.garage-preview-name small { font-weight:400; color:var(--text-muted); }
+.garage-preview-stats { display:flex; gap:16px; padding:12px 20px; border-top:1px solid var(--border); font-size:12px; color:var(--text-muted); }
+.garage-preview-stats i { color:var(--accent); margin-right:4px; }
+
+/* ── Homepage Responsive ───────────────────────────── */
+@media (max-width:900px) {
+  .home-split { grid-template-columns:1fr; gap:32px; }
+  .home-split-reverse .home-split-text { order:0; }
+  .home-split-reverse .home-split-visual { order:1; }
+  .home-guides-grid { grid-template-columns:repeat(2,1fr); }
+  .tools-grid-6 { grid-template-columns:repeat(2,1fr); }
+  .hero-cta-group { flex-direction:column; align-items:center; }
+}
+@media (max-width:600px) {
+  .home-guides-grid { grid-template-columns:1fr; }
+  .tools-grid-6 { grid-template-columns:1fr; }
+  .garage-preview-bikes { grid-template-columns:1fr; }
+  .builder-preview-body { grid-template-columns:1fr; }
+  .builder-preview-map { min-height:120px; }
+}

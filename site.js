@@ -793,6 +793,24 @@ class VisorUpSite {
   // ── Page Renderers ────────────────────────────────────────────
 
   renderHome() {
+    var guideCards = '';
+    if (typeof ARTICLES !== 'undefined' && ARTICLES.length) {
+      var cats = ['gear','bikes','routes','destinations','planning','scenic','seasonal'];
+      var picked = [];
+      cats.forEach(function(c) { var a = ARTICLES.find(function(x) { return x.category === c && picked.indexOf(x.slug) === -1; }); if (a) picked.push(a.slug); });
+      var featured = picked.map(function(s) { return ARTICLES.find(function(x) { return x.slug === s; }); }).filter(Boolean).slice(0, 6);
+      guideCards = '<div class="home-guides-grid">' + featured.map(function(a) {
+        return '<a href="/guides/' + a.category + '/' + a.slug + '" class="home-guide-card">' +
+          '<div class="home-guide-card-img" style="background-image:url(' + a.heroImage + ')"></div>' +
+          '<div class="home-guide-card-body">' +
+            '<span class="home-guide-card-cat">' + a.category + '</span>' +
+            '<h4>' + a.title + '</h4>' +
+            '<span class="home-guide-card-meta">' + a.readTime + '</span>' +
+          '</div>' +
+        '</a>';
+      }).join('') + '</div>';
+    }
+
     var destCards = DESTINATIONS.slice(0, 6).map(function(d) {
       return '<div class="dest-card-wrapper">' +
         '<a href="/destinations/' + d.slug + '" class="dest-card">' +
@@ -826,12 +844,15 @@ class VisorUpSite {
       '<div class="hero-content">' +
         '<h1 class="hero-title">Motorcycle Adventures<br>Across Britain</h1>' +
         '<p class="hero-sub">From Island Roads To Highland Horizons</p>' +
-        '<a href="/routes/island-to-highlands" class="hero-cta">Explore Our Flagship Route <i class="fas fa-arrow-right"></i></a>' +
+        '<div class="hero-cta-group">' +
+          '<a href="/routes/island-to-highlands" class="hero-cta">Explore Our Flagship Route <i class="fas fa-arrow-right"></i></a>' +
+          '<a href="/build-route" class="hero-cta hero-cta-secondary">Build Your Own Route <i class="fas fa-pencil-ruler"></i></a>' +
+        '</div>' +
         '<div class="hero-stats">' +
           '<div class="hero-stat"><span class="hero-stat-value">7</span><span class="hero-stat-label">Curated Routes</span></div>' +
-          '<div class="hero-stat"><span class="hero-stat-value">4,000+</span><span class="hero-stat-label">Miles Mapped</span></div>' +
-          '<div class="hero-stat"><span class="hero-stat-value">300+</span><span class="hero-stat-label">Points of Interest</span></div>' +
-          '<div class="hero-stat"><span class="hero-stat-value">Free</span><span class="hero-stat-label">GPX Downloads</span></div>' +
+          '<div class="hero-stat"><span class="hero-stat-value">9,900+</span><span class="hero-stat-label">Fuel Stations</span></div>' +
+          '<div class="hero-stat"><span class="hero-stat-value">500+</span><span class="hero-stat-label">Points of Interest</span></div>' +
+          '<div class="hero-stat"><span class="hero-stat-value">250</span><span class="hero-stat-label">Riding Guides</span></div>' +
         '</div>' +
       '</div>' +
       '<div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>' +
@@ -887,33 +908,132 @@ class VisorUpSite {
       '</div>' +
     '</section>' +
 
-    '<!-- PLANNING TOOLS -->' +
+    '<!-- ROUTE BUILDER -->' +
     '<section class="home-section home-section-alt">' +
       '<div class="container">' +
-        '<span class="section-eyebrow"><i class="fas fa-tools"></i> Planning</span>' +
-        '<h2 class="section-heading">Trip Planning Tools</h2>' +
-        '<p class="section-desc">Packing lists, fuel strategy, weather guidance, and route planning tools to prepare you for the road.</p>' +
-        '<div class="tools-grid">' +
+        '<div class="home-split">' +
+          '<div class="home-split-text">' +
+            '<span class="section-eyebrow"><i class="fas fa-pencil-ruler"></i> Route Builder</span>' +
+            '<h2 class="section-heading">Build Your Perfect Ride</h2>' +
+            '<p class="section-desc" style="text-align:left">Drop waypoints on an interactive map, get road-accurate routing, elevation profiles, fuel range warnings, and export GPX files — all free. Start from a destination or build from scratch.</p>' +
+            '<ul class="home-feature-list">' +
+              '<li><i class="fas fa-check"></i> Road-accurate routing via OSRM</li>' +
+              '<li><i class="fas fa-check"></i> 9,900+ real UK fuel stations mapped</li>' +
+              '<li><i class="fas fa-check"></i> Elevation profiles and ride time estimates</li>' +
+              '<li><i class="fas fa-check"></i> One-click GPX export for your sat nav</li>' +
+              '<li><i class="fas fa-check"></i> Save routes to your profile</li>' +
+            '</ul>' +
+            '<a href="/build-route" class="hero-cta" style="margin-top:20px;font-size:14px;">Open Route Builder <i class="fas fa-arrow-right"></i></a>' +
+          '</div>' +
+          '<div class="home-split-visual">' +
+            '<div class="home-builder-preview">' +
+              '<div class="builder-preview-bar"><span class="builder-dot"></span><span class="builder-dot"></span><span class="builder-dot"></span></div>' +
+              '<div class="builder-preview-body">' +
+                '<div class="builder-preview-map"><i class="fas fa-map-marked-alt"></i></div>' +
+                '<div class="builder-preview-sidebar">' +
+                  '<div class="builder-preview-wp"><span class="wp-dot wp-dot-start"></span> Start Point</div>' +
+                  '<div class="builder-preview-wp"><span class="wp-dot wp-dot-mid"></span> Waypoint 1</div>' +
+                  '<div class="builder-preview-wp"><span class="wp-dot wp-dot-mid"></span> Waypoint 2</div>' +
+                  '<div class="builder-preview-wp"><span class="wp-dot wp-dot-end"></span> End Point</div>' +
+                  '<div class="builder-preview-stats"><i class="fas fa-road"></i> 142 mi &nbsp; <i class="fas fa-clock"></i> 3h 20m</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>' +
+
+    '<!-- GUIDES -->' +
+    '<section class="home-section">' +
+      '<div class="container">' +
+        '<span class="section-eyebrow"><i class="fas fa-book-open"></i> Riding Guides</span>' +
+        '<h2 class="section-heading">250 Guides for Every Rider</h2>' +
+        '<p class="section-desc">Gear reviews, bike comparisons, route breakdowns, and seasonal tips — written by riders, for riders.</p>' +
+        '<div class="home-guides-cats">' +
+          '<a href="/guides/gear" class="home-guide-cat"><i class="fas fa-hard-hat"></i><span>Gear</span></a>' +
+          '<a href="/guides/bikes" class="home-guide-cat"><i class="fas fa-motorcycle"></i><span>Bikes</span></a>' +
+          '<a href="/guides/routes" class="home-guide-cat"><i class="fas fa-route"></i><span>Routes</span></a>' +
+          '<a href="/guides/destinations" class="home-guide-cat"><i class="fas fa-map-pin"></i><span>Destinations</span></a>' +
+          '<a href="/guides/planning" class="home-guide-cat"><i class="fas fa-clipboard-list"></i><span>Planning</span></a>' +
+          '<a href="/guides/scenic" class="home-guide-cat"><i class="fas fa-mountain"></i><span>Scenic</span></a>' +
+          '<a href="/guides/seasonal" class="home-guide-cat"><i class="fas fa-snowflake"></i><span>Seasonal</span></a>' +
+        '</div>' +
+        guideCards +
+        '<div style="text-align:center;margin-top:32px">' +
+          '<a href="/guides" class="btn-outline">Browse All Guides <i class="fas fa-arrow-right"></i></a>' +
+        '</div>' +
+      '</div>' +
+    '</section>' +
+
+    '<!-- FREE TOOLS -->' +
+    '<section class="home-section home-section-alt">' +
+      '<div class="container">' +
+        '<span class="section-eyebrow"><i class="fas fa-tools"></i> Free Tools</span>' +
+        '<h2 class="section-heading">Everything You Need to Plan a Tour</h2>' +
+        '<p class="section-desc">Professional planning tools — completely free. Sign up to save your routes, trips, and favourites.</p>' +
+        '<div class="tools-grid tools-grid-6">' +
+          '<a href="/build-route" class="tool-card">' +
+            '<div class="tool-card-icon"><i class="fas fa-pencil-ruler"></i></div>' +
+            '<h3>Route Builder</h3>' +
+            '<p>Interactive drag-and-drop route planner with road-accurate mapping</p>' +
+          '</a>' +
+          '<a href="/plan-trip" class="tool-card">' +
+            '<div class="tool-card-icon"><i class="fas fa-calendar-alt"></i></div>' +
+            '<h3>Trip Planner</h3>' +
+            '<p>Multi-day itinerary builder with accommodation and POI suggestions</p>' +
+          '</a>' +
           '<a href="/planning" class="tool-card">' +
-            '<div class="tool-card-icon"><i class="fas fa-suitcase"></i></div>' +
-            '<h3>Packing Lists</h3>' +
-            '<p>Everything you need to bring on a multi-day British motorcycle tour</p>' +
+            '<div class="tool-card-icon"><i class="fas fa-gas-pump"></i></div>' +
+            '<h3>Fuel Finder</h3>' +
+            '<p>9,900+ verified UK fuel stations with fuel range calculations</p>' +
           '</a>' +
           '<a href="/planning" class="tool-card">' +
             '<div class="tool-card-icon"><i class="fas fa-cloud-sun"></i></div>' +
             '<h3>Weather Guide</h3>' +
-            '<p>Best times to ride each region and how to prepare for British weather</p>' +
+            '<p>Regional forecasts and best riding windows for every season</p>' +
           '</a>' +
           '<a href="/planning" class="tool-card">' +
-            '<div class="tool-card-icon"><i class="fas fa-route"></i></div>' +
-            '<h3>Route Planning</h3>' +
-            '<p>Interactive maps, GPX downloads, and day-by-day itineraries</p>' +
+            '<div class="tool-card-icon"><i class="fas fa-suitcase"></i></div>' +
+            '<h3>Packing Lists</h3>' +
+            '<p>Customisable checklists for weekends, week-long, and camping tours</p>' +
           '</a>' +
-          '<a href="/planning" class="tool-card">' +
-            '<div class="tool-card-icon"><i class="fas fa-gas-pump"></i></div>' +
-            '<h3>Fuel Calculator</h3>' +
-            '<p>Know where to fill up — rural fuel stations mapped for every route</p>' +
+          '<a href="/bikes" class="tool-card">' +
+            '<div class="tool-card-icon"><i class="fas fa-motorcycle"></i></div>' +
+            '<h3>Bike Guide</h3>' +
+            '<p>' + (typeof BIKES !== 'undefined' ? BIKES.length : 20) + ' touring bikes reviewed with spec comparisons and rider verdicts</p>' +
           '</a>' +
+        '</div>' +
+      '</div>' +
+    '</section>' +
+
+    '<!-- COMMUNITY -->' +
+    '<section class="home-section">' +
+      '<div class="container">' +
+        '<div class="home-split home-split-reverse">' +
+          '<div class="home-split-text">' +
+            '<span class="section-eyebrow"><i class="fas fa-users"></i> Community</span>' +
+            '<h2 class="section-heading">Your Garage. Your Profile. Your Rides.</h2>' +
+            '<p class="section-desc" style="text-align:left">Create a free account to unlock the full VisorUp experience. Save routes, build your motorcycle garage, share trips with the community, and get personalised recommendations.</p>' +
+            '<ul class="home-feature-list">' +
+              '<li><i class="fas fa-check"></i> Build your motorcycle garage with photos</li>' +
+              '<li><i class="fas fa-check"></i> Save unlimited routes and trips</li>' +
+              '<li><i class="fas fa-check"></i> Share routes with a public link</li>' +
+              '<li><i class="fas fa-check"></i> Favourite destinations and routes</li>' +
+              '<li><i class="fas fa-check"></i> Connect with riders near you <span class="coming-soon-tag">Coming Soon</span></li>' +
+            '</ul>' +
+            '<a href="/signup" class="hero-cta" style="margin-top:20px;font-size:14px;">Create Free Account <i class="fas fa-user-plus"></i></a>' +
+          '</div>' +
+          '<div class="home-split-visual">' +
+            '<div class="home-garage-preview">' +
+              '<div class="garage-preview-header"><i class="fas fa-warehouse"></i> My Garage</div>' +
+              '<div class="garage-preview-bikes">' +
+                '<div class="garage-preview-bike"><div class="garage-preview-img"><i class="fas fa-motorcycle"></i></div><div class="garage-preview-name">BMW R 1250 GS<br><small>The Beast</small></div></div>' +
+                '<div class="garage-preview-bike"><div class="garage-preview-img"><i class="fas fa-motorcycle"></i></div><div class="garage-preview-name">Triumph Tiger 900<br><small>Rally Pro</small></div></div>' +
+              '</div>' +
+              '<div class="garage-preview-stats"><span><i class="fas fa-route"></i> 12 routes</span><span><i class="fas fa-heart"></i> 8 favs</span><span><i class="fas fa-share-alt"></i> 3 shared</span></div>' +
+            '</div>' +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</section>' +
