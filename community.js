@@ -396,6 +396,45 @@ const VisorUpCommunity = {
     return results;
   },
 
+  // ── Search & Tags ──────────────────────────────────────────
+
+  searchPosts(query) {
+    var q = (query || '').toLowerCase().trim();
+    if (!q) return this.getPosts();
+    var data = this._getData();
+    return (data.posts || []).filter(function(p) {
+      return (p.title && p.title.toLowerCase().indexOf(q) !== -1) ||
+        (p.body && p.body.toLowerCase().indexOf(q) !== -1) ||
+        (p.bike && p.bike.toLowerCase().indexOf(q) !== -1) ||
+        (p.userName && p.userName.toLowerCase().indexOf(q) !== -1) ||
+        (p.tags && p.tags.some(function(t) { return t.toLowerCase().indexOf(q) !== -1; }));
+    });
+  },
+
+  getPostsByTag(tag) {
+    var t = (tag || '').toLowerCase().trim();
+    if (!t) return this.getPosts();
+    var data = this._getData();
+    return (data.posts || []).filter(function(p) {
+      return p.tags && p.tags.some(function(pt) { return pt.toLowerCase() === t; });
+    });
+  },
+
+  getTrendingTags(limit) {
+    limit = limit || 10;
+    var data = this._getData();
+    var counts = {};
+    (data.posts || []).forEach(function(p) {
+      (p.tags || []).forEach(function(t) {
+        var key = t.toLowerCase().trim();
+        if (key) counts[key] = (counts[key] || 0) + 1;
+      });
+    });
+    return Object.keys(counts).sort(function(a, b) { return counts[b] - counts[a]; }).slice(0, limit).map(function(tag) {
+      return { tag: tag, count: counts[tag] };
+    });
+  },
+
   // ── Render Helpers ────────────────────────────────────────
 
   _isCurrentUser(userId) {
@@ -464,7 +503,7 @@ const VisorUpCommunity = {
     var tagsHTML = '';
     if (post.tags && post.tags.length > 0) {
       tagsHTML = '<div class="feed-tags">' + post.tags.map(function(t) {
-        return '<span class="feed-tag">#' + self._esc(t) + '</span>';
+        return '<span class="feed-tag" data-tag="' + self._esc(t) + '" style="cursor:pointer">#' + self._esc(t) + '</span>';
       }).join('') + '</div>';
     }
 
@@ -493,6 +532,7 @@ const VisorUpCommunity = {
       '<div class="feed-post-actions">' +
         '<button class="feed-action-btn feed-like-btn' + (liked ? ' feed-liked' : '') + '" data-post-id="' + post.id + '"><i class="fas fa-heart"></i> ' + (post.likeCount || 0) + '</button>' +
         '<button class="feed-action-btn feed-comment-toggle" data-post-id="' + post.id + '"><i class="fas fa-comment"></i> ' + (post.commentCount || 0) + '</button>' +
+        '<button class="feed-action-btn feed-share-btn" data-post-id="' + post.id + '" data-post-title="' + this._esc(post.title || '') + '" title="Share"><i class="fas fa-share-nodes"></i></button>' +
         (post.userId === 'local' || this._isCurrentUser(post.userId) ? '<button class="feed-action-btn feed-delete-btn" data-post-id="' + post.id + '" title="Delete post"><i class="fas fa-trash"></i></button>' : '') +
       '</div>' +
       '<div class="feed-comments" id="comments-' + post.id + '" style="display:none"></div>' +

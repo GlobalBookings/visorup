@@ -1754,6 +1754,42 @@ class VisorUpSite {
     }
 
     var activeTab = this._communityTab || 'new';
+    var isLoggedIn = false;
+    var checkLoginEl = document.getElementById('navProfileBtn');
+    if (checkLoginEl && checkLoginEl.style.display !== 'none') isLoggedIn = true;
+
+    // Bike selector from garage
+    var garageBikes = [];
+    try { var gr = localStorage.getItem('vu_garage_local'); if (gr) garageBikes = JSON.parse(gr); } catch(e) {}
+    if (!Array.isArray(garageBikes)) garageBikes = [];
+    var bikeOptionsHTML = '<option value="">Select bike</option>';
+    garageBikes.forEach(function(b) {
+      var label = (b.nickname ? b.nickname + ' — ' : '') + (b.make || '') + ' ' + (b.model || '');
+      var val = (b.make || '') + ' ' + (b.model || '');
+      bikeOptionsHTML += '<option value="' + val.trim() + '">' + label.trim() + '</option>';
+    });
+    bikeOptionsHTML += '<option value="__custom">Other bike...</option>';
+
+    // Preset tags
+    var presetTags = ['nc500','highlands','scotland','wales','lake-district','peak-district','camping','rain','weekend','solo','group','cafe-stop','scenic','night-ride','first-tour','sportsbike','adventure','touring','commute'];
+
+    // Trending tags
+    var trending = VisorUpCommunity.getTrendingTags(8);
+    var trendingHTML = '';
+    if (trending.length > 0) {
+      trendingHTML = trending.map(function(t) {
+        return '<span class="feed-trending-tag" data-tag="' + t.tag + '">#' + t.tag + ' <em>' + t.count + '</em></span>';
+      }).join('');
+    } else {
+      trendingHTML = '<p style="font-size:12px;color:var(--text-muted)">Post with tags to see trends here.</p>';
+    }
+
+    // Post counts for tabs
+    var allPosts = VisorUpCommunity.getFeed('new');
+    var topPosts = VisorUpCommunity.getFeed('top');
+    var followPosts = VisorUpCommunity.getFeed('following');
+    var newCount = allPosts.length;
+    var followCount = followPosts.length;
 
     this.pageContent.innerHTML = '' +
     '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
@@ -1765,7 +1801,7 @@ class VisorUpSite {
     '</section>' +
     '<section class="page-section">' +
       '<div class="container">' +
-        '<div class="feed-layout">' +
+        '<div class="feed-layout' + (!isLoggedIn ? ' feed-gated' : '') + '">' +
           '<div class="feed-main">' +
             '<div class="feed-compose">' +
               '<div class="feed-compose-header"><i class="fas fa-pen"></i> What\'s your latest ride?</div>' +
@@ -1774,9 +1810,17 @@ class VisorUpSite {
                 '<input type="text" id="feedPostTitle" class="feed-compose-title" placeholder="Give your ride a title...">' +
                 '<div class="feed-compose-meta">' +
                   '<input type="number" id="feedPostMiles" placeholder="Miles" style="width:80px">' +
-                  '<input type="text" id="feedPostBike" placeholder="Bike">' +
-                  '<select id="feedPostRating" class="garage-select" style="width:100px"><option value="">Rating</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>' +
-                  '<input type="text" id="feedPostTags" placeholder="Tags (comma separated)">' +
+                  (garageBikes.length > 0
+                    ? '<select id="feedPostBike" class="garage-select" style="min-width:140px">' + bikeOptionsHTML + '</select><input type="text" id="feedPostBikeCustom" class="feed-compose-title" placeholder="Enter bike..." style="display:none;flex:1">'
+                    : '<input type="text" id="feedPostBike" placeholder="Bike">') +
+                  '<select id="feedPostRating" class="garage-select" style="width:100px"><option value="">Rating</option><option value="5">\u2605\u2605\u2605\u2605\u2605</option><option value="4">\u2605\u2605\u2605\u2605</option><option value="3">\u2605\u2605\u2605</option><option value="2">\u2605\u2605</option><option value="1">\u2605</option></select>' +
+                '</div>' +
+                '<div class="feed-tag-picker" id="feedTagPicker">' +
+                  '<label style="font-size:11px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:6px;">Tags</label>' +
+                  '<div class="feed-tag-options">' +
+                    presetTags.map(function(t) { return '<span class="feed-tag-option" data-tag="' + t + '">#' + t + '</span>'; }).join('') +
+                  '</div>' +
+                  '<input type="text" id="feedPostCustomTag" class="feed-compose-title" placeholder="+ Add custom tag" style="margin-top:6px;font-size:12px;padding:6px 10px">' +
                 '</div>' +
                 '<div class="feed-compose-photos">' +
                   '<div class="photo-upload-area" id="photoUploadArea">' +
@@ -1791,14 +1835,22 @@ class VisorUpSite {
                 '<button class="btn-primary" id="feedPostSubmit" style="font-size:13px;padding:10px 20px;"><i class="fas fa-paper-plane"></i> Post</button>' +
               '</div>' +
             '</div>' +
+            '<div class="feed-search">' +
+              '<i class="fas fa-search feed-search-icon"></i>' +
+              '<input type="text" id="feedSearchInput" class="feed-search-input" placeholder="Search posts, tags, riders...">' +
+            '</div>' +
             '<div class="feed-tabs">' +
-              '<button class="feed-tab' + (activeTab === 'new' ? ' feed-tab-active' : '') + '" data-feed-tab="new"><i class="fas fa-clock"></i> New</button>' +
+              '<button class="feed-tab' + (activeTab === 'new' ? ' feed-tab-active' : '') + '" data-feed-tab="new"><i class="fas fa-clock"></i> New' + (newCount ? ' <em class="feed-tab-count">' + newCount + '</em>' : '') + '</button>' +
               '<button class="feed-tab' + (activeTab === 'top' ? ' feed-tab-active' : '') + '" data-feed-tab="top"><i class="fas fa-fire"></i> Top</button>' +
-              '<button class="feed-tab' + (activeTab === 'following' ? ' feed-tab-active' : '') + '" data-feed-tab="following"><i class="fas fa-user-friends"></i> Following</button>' +
+              '<button class="feed-tab' + (activeTab === 'following' ? ' feed-tab-active' : '') + '" data-feed-tab="following"><i class="fas fa-user-friends"></i> Following' + (followCount ? ' <em class="feed-tab-count">' + followCount + '</em>' : '') + '</button>' +
             '</div>' +
             '<div id="feedList"></div>' +
           '</div>' +
           '<div class="feed-sidebar">' +
+            '<div class="feed-sidebar-card">' +
+              '<h4><i class="fas fa-hashtag"></i> Trending</h4>' +
+              '<div class="feed-trending">' + trendingHTML + '</div>' +
+            '</div>' +
             (typeof VisorUpGamification !== 'undefined' ? '' +
               '<div class="feed-sidebar-card">' +
                 '<h4><i class="fas fa-chart-line"></i> Your Stats</h4>' +
@@ -1825,6 +1877,15 @@ class VisorUpSite {
             '</div>' +
           '</div>' +
         '</div>' +
+        (!isLoggedIn ? '<div class="feed-gate-overlay" id="feedGateOverlay">' +
+          '<div class="feed-gate-box">' +
+            '<i class="fas fa-users" style="font-size:36px;color:var(--accent);margin-bottom:12px;display:block"></i>' +
+            '<h2 style="margin:0 0 8px;font-size:22px;color:var(--text)">Join the Community</h2>' +
+            '<p style="color:var(--text-secondary);font-size:14px;margin:0 0 20px;line-height:1.5">Sign up to post ride reports, follow other riders, and join the conversation.</p>' +
+            '<a href="/signup" class="btn-primary" style="font-size:14px;padding:12px 32px;text-decoration:none;display:inline-block"><i class="fas fa-user-plus"></i> Sign Up Free</a>' +
+            '<a href="/login" style="display:block;margin-top:12px;font-size:13px;color:var(--accent);text-decoration:none">Already have an account? Log in</a>' +
+          '</div>' +
+        '</div>' : '') +
       '</div>' +
     '</section>' + this.renderFooter();
 
@@ -1835,7 +1896,55 @@ class VisorUpSite {
     // Expand compose form on focus
     var bodyInput = document.getElementById('feedPostBody');
     var expandSection = document.getElementById('feedComposeExpand');
-    bodyInput.addEventListener('focus', function() { expandSection.style.display = ''; });
+    if (bodyInput && expandSection) {
+      bodyInput.addEventListener('focus', function() { expandSection.style.display = ''; });
+    }
+
+    // Bike selector: handle "Other bike..." option
+    var bikeSelect = document.getElementById('feedPostBike');
+    var bikeCustom = document.getElementById('feedPostBikeCustom');
+    if (bikeSelect && bikeSelect.tagName === 'SELECT' && bikeCustom) {
+      bikeSelect.addEventListener('change', function() {
+        if (bikeSelect.value === '__custom') {
+          bikeSelect.style.display = 'none';
+          bikeCustom.style.display = '';
+          bikeCustom.focus();
+        }
+      });
+    }
+
+    // Tag picker
+    var selectedTags = [];
+    document.querySelectorAll('.feed-tag-option').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var tag = el.dataset.tag;
+        var idx = selectedTags.indexOf(tag);
+        if (idx !== -1) { selectedTags.splice(idx, 1); el.classList.remove('feed-tag-selected'); }
+        else { selectedTags.push(tag); el.classList.add('feed-tag-selected'); }
+      });
+    });
+    var customTagInput = document.getElementById('feedPostCustomTag');
+    if (customTagInput) {
+      customTagInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          var tag = customTagInput.value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+          if (tag && selectedTags.indexOf(tag) === -1) {
+            selectedTags.push(tag);
+            var span = document.createElement('span');
+            span.className = 'feed-tag-option feed-tag-selected';
+            span.dataset.tag = tag;
+            span.textContent = '#' + tag;
+            span.addEventListener('click', function() {
+              var i = selectedTags.indexOf(tag);
+              if (i !== -1) { selectedTags.splice(i, 1); span.remove(); }
+            });
+            document.querySelector('.feed-tag-options').appendChild(span);
+          }
+          customTagInput.value = '';
+        }
+      });
+    }
 
     // Photo upload
     var pendingPhotos = [];
@@ -1876,21 +1985,23 @@ class VisorUpSite {
       updatePhotoPreview();
     }
 
-    uploadArea.addEventListener('click', function(e) {
-      if (e.target.closest('.photo-preview-remove')) return;
-      photoInput.click();
-    });
-    photoInput.addEventListener('change', function() {
-      if (this.files.length > 0) addPhotoFiles(this.files);
-      this.value = '';
-    });
-    uploadArea.addEventListener('dragover', function(e) { e.preventDefault(); uploadArea.classList.add('photo-drag-over'); });
-    uploadArea.addEventListener('dragleave', function() { uploadArea.classList.remove('photo-drag-over'); });
-    uploadArea.addEventListener('drop', function(e) {
-      e.preventDefault();
-      uploadArea.classList.remove('photo-drag-over');
-      if (e.dataTransfer.files.length > 0) addPhotoFiles(e.dataTransfer.files);
-    });
+    if (uploadArea && photoInput) {
+      uploadArea.addEventListener('click', function(e) {
+        if (e.target.closest('.photo-preview-remove')) return;
+        photoInput.click();
+      });
+      photoInput.addEventListener('change', function() {
+        if (this.files.length > 0) addPhotoFiles(this.files);
+        this.value = '';
+      });
+      uploadArea.addEventListener('dragover', function(e) { e.preventDefault(); uploadArea.classList.add('photo-drag-over'); });
+      uploadArea.addEventListener('dragleave', function() { uploadArea.classList.remove('photo-drag-over'); });
+      uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        uploadArea.classList.remove('photo-drag-over');
+        if (e.dataTransfer.files.length > 0) addPhotoFiles(e.dataTransfer.files);
+      });
+    }
 
     // Post submission
     document.getElementById('feedPostSubmit').addEventListener('click', async function() {
@@ -1905,17 +2016,24 @@ class VisorUpSite {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
         photos = await VisorUpCommunity.uploadPostPhotos(pendingPhotos);
       }
-      var tagsEl = document.getElementById('feedPostTags');
-      var tags = tagsEl ? tagsEl.value.trim() : '';
+      // Get bike value
+      var bikeVal = '';
+      var bikeSel = document.getElementById('feedPostBike');
+      var bikeCust = document.getElementById('feedPostBikeCustom');
+      if (bikeSel && bikeSel.tagName === 'SELECT') {
+        bikeVal = (bikeSel.value === '__custom' && bikeCust) ? bikeCust.value.trim() : bikeSel.value;
+      } else if (bikeSel) {
+        bikeVal = bikeSel.value.trim();
+      }
       await VisorUpCommunity.createPost({
         type: 'ride-report',
         title: title,
         body: body,
         photos: photos,
         miles: parseInt((document.getElementById('feedPostMiles') || {}).value) || 0,
-        bike: (document.getElementById('feedPostBike') || {}).value || '',
+        bike: bikeVal,
         rating: parseInt((document.getElementById('feedPostRating') || {}).value) || 0,
-        tags: tags ? tags.split(',').map(function(t) { return t.trim(); }).filter(Boolean) : []
+        tags: selectedTags.slice()
       });
       self._communityTab = 'new';
       self.renderCommunity();
@@ -1928,7 +2046,34 @@ class VisorUpSite {
         btn.classList.add('feed-tab-active');
         var tab = btn.dataset.feedTab;
         self._communityTab = tab;
+        self._communitySearch = '';
+        var searchInput = document.getElementById('feedSearchInput');
+        if (searchInput) searchInput.value = '';
         self._renderFeedTab(tab);
+      });
+    });
+
+    // Search
+    var searchInput = document.getElementById('feedSearchInput');
+    var searchTimer = null;
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimer);
+        var q = searchInput.value.trim();
+        searchTimer = setTimeout(function() {
+          self._communitySearch = q;
+          self._renderFeedTab(self._communityTab || 'new');
+        }, 250);
+      });
+    }
+
+    // Trending tag clicks (sidebar)
+    document.querySelectorAll('.feed-trending-tag').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var tag = el.dataset.tag;
+        if (searchInput) searchInput.value = '#' + tag;
+        self._communitySearch = '#' + tag;
+        self._renderFeedTab(self._communityTab || 'new');
       });
     });
 
@@ -1940,10 +2085,31 @@ class VisorUpSite {
     var feedList = document.getElementById('feedList');
     if (!feedList) return;
 
-    var posts = VisorUpCommunity.getFeed(tab);
+    var searchQuery = self._communitySearch || '';
+    var posts;
+
+    if (searchQuery) {
+      if (searchQuery.charAt(0) === '#') {
+        posts = VisorUpCommunity.getPostsByTag(searchQuery.substring(1));
+      } else {
+        posts = VisorUpCommunity.searchPosts(searchQuery);
+      }
+      if (tab === 'top') {
+        posts.sort(function(a, b) {
+          var sa = (a.likeCount || 0) + (a.commentCount || 0);
+          var sb = (b.likeCount || 0) + (b.commentCount || 0);
+          return sb - sa;
+        });
+      }
+    } else {
+      posts = VisorUpCommunity.getFeed(tab);
+    }
+
     var feedHTML = '';
 
-    if (posts.length === 0) {
+    if (searchQuery && posts.length === 0) {
+      feedHTML = '<div class="feed-empty"><i class="fas fa-search"></i><p>No posts found for "' + searchQuery + '"</p></div>';
+    } else if (posts.length === 0) {
       var emptyMsg = tab === 'following'
         ? 'You\'re not following anyone yet. Follow riders to see their posts here.'
         : tab === 'top'
@@ -2005,6 +2171,22 @@ class VisorUpSite {
       });
     });
 
+    // Bind share buttons
+    feedList.querySelectorAll('.feed-share-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var title = btn.dataset.postTitle || 'Check out this ride on VisorUp';
+        var url = window.location.origin + '/community';
+        if (navigator.share) {
+          navigator.share({ title: title, url: url }).catch(function() {});
+        } else {
+          navigator.clipboard.writeText(title + ' — ' + url).then(function() {
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(function() { btn.innerHTML = '<i class="fas fa-share-nodes"></i>'; }, 1500);
+          });
+        }
+      });
+    });
+
     // Bind delete buttons
     feedList.querySelectorAll('.feed-delete-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
@@ -2013,6 +2195,17 @@ class VisorUpSite {
         VisorUpCommunity.deletePost(postId);
         var postEl = btn.closest('.feed-post');
         if (postEl) postEl.remove();
+      });
+    });
+
+    // Bind clickable tags on posts — filter feed by tag
+    feedList.querySelectorAll('.feed-tag[data-tag]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var tag = el.dataset.tag;
+        var searchInput = document.getElementById('feedSearchInput');
+        if (searchInput) searchInput.value = '#' + tag;
+        self._communitySearch = '#' + tag;
+        self._renderFeedTab(self._communityTab || 'new');
       });
     });
 
@@ -3091,8 +3284,8 @@ class VisorUpSite {
         '.ice-input{display:block;width:100%;padding:10px 12px;margin-bottom:12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:inherit;transition:border-color var(--transition);box-sizing:border-box}' +
         '.ice-input:focus{outline:none;border-color:var(--accent)}' +
         '.ice-textarea{min-height:60px;resize:vertical}' +
-        '.ice-card{background:#111;border-radius:14px;border:2px solid #D68A2D;padding:0;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);aspect-ratio:1.586/1;max-width:420px;display:flex;flex-direction:column}' +
-        '.ice-card-inner{padding:20px 22px 16px;display:flex;flex-direction:column;height:100%}' +
+        '.ice-card{background:#111;border-radius:14px;border:2px solid #D68A2D;padding:0;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);max-width:420px;display:flex;flex-direction:column}' +
+        '.ice-card-inner{padding:20px 22px 16px;display:flex;flex-direction:column}' +
         '.ice-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}' +
         '.ice-card-logo{font-size:11px;color:#888;letter-spacing:1px}' +
         '.ice-card-logo i{color:#D68A2D;margin-right:4px}' +
