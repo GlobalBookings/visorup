@@ -736,6 +736,7 @@ class VisorUpSite {
             this.setTitle(article.title);
             this._setMeta({ description: article.metaDescription, image: article.heroImage, type: 'article' });
             this._injectJsonLd(article);
+            this._bindShareCopyBtns();
             this.scrollToTop();
           } else {
             this.pageContent.innerHTML = this.render404();
@@ -3309,7 +3310,7 @@ class VisorUpSite {
         '@media print{' +
           'body *{visibility:hidden!important}' +
           '#iceCardPreview,#iceCardPreview *{visibility:visible!important}' +
-          '#iceCardPreview{position:fixed!important;top:50%;left:50%;transform:translate(-50%,-50%)!important;width:86mm!important;height:54mm!important;max-width:none!important;aspect-ratio:auto!important;border:2px solid #D68A2D!important;box-shadow:none!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}' +
+          '#iceCardPreview{position:fixed!important;top:10mm!important;left:50%!important;transform:translateX(-50%)!important;width:86mm!important;height:auto!important;max-width:none!important;aspect-ratio:auto!important;border:2px solid #D68A2D!important;box-shadow:none!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}' +
         '}';
       document.head.appendChild(style);
     }
@@ -4766,6 +4767,20 @@ class VisorUpSite {
 
     var catLabel = a.category.charAt(0).toUpperCase() + a.category.slice(1);
 
+    var articleUrl = window.location.origin + '/guides/' + a.category + '/' + a.slug;
+    var shareTitle = a.title;
+    var shareText = a.metaDescription || a.title;
+
+    var shareBar = '<div class="article-share-bar">' +
+      '<span class="article-share-label">Share</span>' +
+      '<a href="https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(articleUrl) + '" target="_blank" rel="noopener" class="article-share-btn share-facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>' +
+      '<a href="https://twitter.com/intent/tweet?url=' + encodeURIComponent(articleUrl) + '&text=' + encodeURIComponent(shareTitle) + '" target="_blank" rel="noopener" class="article-share-btn share-twitter" title="Share on X"><i class="fab fa-x-twitter"></i></a>' +
+      '<a href="https://wa.me/?text=' + encodeURIComponent(shareTitle + ' ' + articleUrl) + '" target="_blank" rel="noopener" class="article-share-btn share-whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>' +
+      '<a href="https://www.reddit.com/submit?url=' + encodeURIComponent(articleUrl) + '&title=' + encodeURIComponent(shareTitle) + '" target="_blank" rel="noopener" class="article-share-btn share-reddit" title="Share on Reddit"><i class="fab fa-reddit-alien"></i></a>' +
+      '<a href="mailto:?subject=' + encodeURIComponent(shareTitle) + '&body=' + encodeURIComponent(shareText + '\n\n' + articleUrl) + '" class="article-share-btn share-email" title="Share via Email"><i class="fas fa-envelope"></i></a>' +
+      '<button class="article-share-btn share-copy" data-url="' + articleUrl + '" title="Copy link"><i class="fas fa-link"></i></button>' +
+    '</div>';
+
     return '' +
     '<section class="page-hero" style="background-image:url(' + a.heroImage + ')">' +
       '<div class="hero-overlay"></div>' +
@@ -4778,6 +4793,7 @@ class VisorUpSite {
     '<section class="page-section">' +
       '<div class="container">' +
         '<nav class="breadcrumb"><a href="/">Home</a> <i class="fas fa-chevron-right"></i> <a href="/guides">Guides</a> <i class="fas fa-chevron-right"></i> <a href="/guides/' + a.category + '">' + catLabel + '</a> <i class="fas fa-chevron-right"></i> <span>' + a.title + '</span></nav>' +
+        shareBar +
         '<div class="article-layout">' +
           '<article class="article-body">' +
             a.content +
@@ -4788,6 +4804,7 @@ class VisorUpSite {
           '</aside>' +
         '</div>' +
         related +
+        shareBar +
       '</div>' +
     '</section>';
   }
@@ -4836,6 +4853,18 @@ class VisorUpSite {
       document.head.appendChild(canonical);
     }
     canonical.href = url;
+  }
+
+  _bindShareCopyBtns() {
+    document.querySelectorAll('.share-copy').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var url = btn.dataset.url;
+        navigator.clipboard.writeText(url).then(function() {
+          btn.innerHTML = '<i class="fas fa-check"></i>';
+          setTimeout(function() { btn.innerHTML = '<i class="fas fa-link"></i>'; }, 1500);
+        });
+      });
+    });
   }
 
   _injectJsonLd(article) {

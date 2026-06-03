@@ -3247,6 +3247,18 @@ ul, ol { list-style: none; }
 .article-tags h4 { font-size:13px; font-weight:700; margin-bottom:10px; }
 .article-tag { display:inline-block; padding:3px 10px; background:var(--accent-glow); border:1px solid rgba(214,138,45,0.15); border-radius:20px; font-size:10px; color:var(--accent); font-weight:600; margin:0 4px 4px 0; }
 
+.article-share-bar { display:flex; align-items:center; gap:8px; padding:12px 0; margin-bottom:8px; }
+.article-share-bar:last-child { margin-top:24px; padding-top:20px; border-top:1px solid var(--border); margin-bottom:0; }
+.article-share-label { font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-right:4px; }
+.article-share-btn { display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:var(--bg-card); color:var(--text-muted); font-size:14px; cursor:pointer; text-decoration:none; transition:all var(--transition); }
+.article-share-btn:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-1px); }
+.share-facebook:hover { color:#1877F2; border-color:#1877F2; }
+.share-twitter:hover { color:#000; border-color:#000; }
+[data-theme="dark"] .share-twitter:hover { color:#fff; border-color:#fff; }
+.share-whatsapp:hover { color:#25D366; border-color:#25D366; }
+.share-reddit:hover { color:#FF4500; border-color:#FF4500; }
+.share-email:hover { color:var(--accent); border-color:var(--accent); }
+
 .article-related { margin-top:40px; padding-top:32px; border-top:1px solid var(--border); }
 .article-related h3 { font-size:18px; font-weight:700; margin-bottom:16px; }
 .related-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px; }
