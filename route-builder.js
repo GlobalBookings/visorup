@@ -283,6 +283,7 @@ class RouteBuilder {
     this._weatherCache = null;
     this._weatherCacheTime = 0;
     this._fuelGapLines = [];
+    this._recommendedFuelStops = [];
 
     // Merge external POI data files into static arrays
     RouteBuilder._mergeExternalPOI();
@@ -377,6 +378,11 @@ class RouteBuilder {
       .rb-suggest-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#152220;border:1px solid #2a3e38;border-radius:6px;font-size:12px;color:#D68A2D;margin-top:8px}
       .rb-loading{position:absolute;top:16px;left:50%;transform:translateX(-50%);background:rgba(15,22,20,0.92);color:#D68A2D;padding:8px 18px;border-radius:8px;font-size:13px;z-index:500;display:none}
       .rb-loading.active{display:block}
+      .rb-fuel-marker{width:32px;height:32px;border-radius:50%;background:#fdcb6e;border:2px solid #fff;display:flex;align-items:center;justify-content:center;color:#080c0b;font-size:13px;box-shadow:0 2px 10px rgba(253,203,110,0.5);animation:rb-fuel-pop .3s ease}
+      @keyframes rb-fuel-pop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+      .rb-fuel-inline{display:flex;align-items:center;gap:8px;padding:4px 8px;margin:2px 0;font-size:11px;color:#fdcb6e;opacity:0.7}
+      .rb-fuel-inline i{font-size:10px}
+      .rb-fuel-inline span{color:#7a8a85;margin-left:auto;font-size:10px}
       .rb-poi-popup-btn{display:inline-block;margin-top:6px;padding:4px 10px;background:#D68A2D;color:#080c0b;border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer}
       .rb-poi-popup-btn:hover{background:#e09a3d}
       .rb-poi-toggle{position:absolute;top:80px;right:12px;z-index:450;background:rgba(15,22,20,0.92);border:1px solid #2a3e38;color:#D68A2D;padding:8px 12px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;font-family:inherit;transition:all .2s}
@@ -1239,6 +1245,21 @@ class RouteBuilder {
           '</button>' +
           '<span class="rb-seg-line' + (isFast ? ' rb-seg-line-fast' : '') + '"></span>' +
         '</div>';
+
+        // Show fuel stops that fall between this waypoint and the next
+        if (this._recommendedFuelStops && this._segmentResults && this._segmentResults[i]) {
+          var segStartMile = 0;
+          for (var si = 0; si < i; si++) {
+            segStartMile += (this._legDistances[si] || 0) / 1609.34;
+          }
+          var segEndMile = segStartMile + (this._legDistances[i] || 0) / 1609.34;
+          for (var fi = 0; fi < this._recommendedFuelStops.length; fi++) {
+            var fs = this._recommendedFuelStops[fi];
+            if (fs.routeMiles >= segStartMile && fs.routeMiles <= segEndMile) {
+              html += '<div class="rb-fuel-inline"><i class="fas fa-gas-pump"></i> ' + this._esc(fs.name) + '<span>' + Math.round(fs.routeMiles) + ' mi</span></div>';
+            }
+          }
+        }
       }
     }
 
@@ -1978,28 +1999,43 @@ class RouteBuilder {
       }
     }
 
-    // Split into days enforcing BOTH mile and hour limits
+    // Split into days enforcing BOTH mile and hour limits,
+    // preserving per-segment mode boundaries within each day
     var segments = [];
     var dayStart = 0;
     var dayStartDist = 0;
     var dayStartDur = 0;
+
+    function buildDaySubSegments(from, to) {
+      var subs = [];
+      var currentMode = flatCoords[from].mode;
+      var currentCoords = [flatCoords[from].coord];
+      var hasFast = currentMode === 'fast';
+
+      for (var k = from + 1; k < to; k++) {
+        if (flatCoords[k].mode !== currentMode) {
+          subs.push({ coords: currentCoords, mode: currentMode });
+          currentMode = flatCoords[k].mode;
+          currentCoords = [currentCoords[currentCoords.length - 1]];
+          if (currentMode === 'fast') hasFast = true;
+        }
+        currentCoords.push(flatCoords[k].coord);
+      }
+      if (currentCoords.length > 0) subs.push({ coords: currentCoords, mode: currentMode });
+      return { subs: subs, hasFast: hasFast };
+    }
 
     for (var j = 1; j < flatCoords.length; j++) {
       var dayDist = flatCoords[j].dist - dayStartDist;
       var dayDur = flatCoords[j].dur - dayStartDur;
 
       if ((dayDist > maxMiles || dayDur > maxHours) && j > dayStart + 1) {
-        var dayCoords = [];
-        var hasFast = false;
-        for (var k = dayStart; k < j; k++) {
-          dayCoords.push(flatCoords[k].coord);
-          if (flatCoords[k].mode === 'fast') hasFast = true;
-        }
+        var built = buildDaySubSegments(dayStart, j);
         segments.push({
-          subSegments: [{ coords: dayCoords, mode: hasFast ? 'fast' : 'scenic', distance: flatCoords[j - 1].dist - dayStartDist, duration: flatCoords[j - 1].dur - dayStartDur }],
+          subSegments: built.subs,
           distance: flatCoords[j - 1].dist - dayStartDist,
           duration: flatCoords[j - 1].dur - dayStartDur,
-          hasFast: hasFast
+          hasFast: built.hasFast
         });
         dayStart = j - 1;
         dayStartDist = flatCoords[j - 1].dist;
@@ -2009,17 +2045,12 @@ class RouteBuilder {
 
     // Final day
     if (dayStart < flatCoords.length - 1) {
-      var lastCoords = [];
-      var lastHasFast = false;
-      for (var m = dayStart; m < flatCoords.length; m++) {
-        lastCoords.push(flatCoords[m].coord);
-        if (flatCoords[m].mode === 'fast') lastHasFast = true;
-      }
+      var lastBuilt = buildDaySubSegments(dayStart, flatCoords.length);
       segments.push({
-        subSegments: [{ coords: lastCoords, mode: lastHasFast ? 'fast' : 'scenic', distance: flatCoords[flatCoords.length - 1].dist - dayStartDist, duration: flatCoords[flatCoords.length - 1].dur - dayStartDur }],
+        subSegments: lastBuilt.subs,
         distance: flatCoords[flatCoords.length - 1].dist - dayStartDist,
         duration: flatCoords[flatCoords.length - 1].dur - dayStartDur,
-        hasFast: lastHasFast
+        hasFast: lastBuilt.hasFast
       });
     }
 
@@ -2956,36 +2987,42 @@ class RouteBuilder {
       warnings.push({ miles: Math.round(finalGap), station: 'route end' });
     }
 
-    // Build HTML: show recommended stops, not error warnings
+    // Store recommended stops for display in waypoint list
+    this._recommendedFuelStops = recommended;
+
+    // Build HTML
     var html = '';
     if (recommended.length > 0) {
-      html += '<div class="rb-fuel-stops" style="padding:8px 12px;background:#152220;border-radius:8px;margin-bottom:8px;font-size:12px;">';
-      html += '<div style="font-weight:600;color:#fdcb6e;margin-bottom:6px;"><i class="fas fa-gas-pump"></i> Recommended Fuel Stops</div>';
+      html += '<div class="rb-fuel-stops" style="padding:10px 14px;background:#152220;border:1px solid rgba(253,203,110,0.2);border-radius:8px;margin-bottom:8px;font-size:12px;">';
+      html += '<div style="font-weight:700;color:#fdcb6e;margin-bottom:8px;font-size:13px;"><i class="fas fa-gas-pump"></i> Recommended Fuel Stops</div>';
       for (var rs = 0; rs < recommended.length; rs++) {
         var st = recommended[rs];
-        html += '<div style="padding:3px 0;color:#c8d6d0;display:flex;justify-content:space-between;">' +
-          '<span><i class="fas fa-map-pin" style="color:#fdcb6e;margin-right:4px;font-size:10px;"></i>' + this._esc(st.name) + '</span>' +
-          '<span style="color:#7a8a85;">' + Math.round(st.routeMiles) + ' mi</span></div>';
+        html += '<div style="padding:4px 0;color:#c8d6d0;display:flex;justify-content:space-between;align-items:center;">' +
+          '<span><i class="fas fa-gas-pump" style="color:#fdcb6e;margin-right:6px;font-size:10px;"></i>' + this._esc(st.name) + '</span>' +
+          '<span style="color:#7a8a85;white-space:nowrap;margin-left:8px;">' + Math.round(st.routeMiles) + ' mi</span></div>';
 
-        // Add fuel stop marker on map
+        // Add prominent fuel stop marker on map
         var fuelIcon = L.divIcon({
           className: '',
-          html: '<div class="custom-marker" style="width:24px;height:24px;background:#fdcb6e;border:2px solid #fff;"><i class="fas fa-gas-pump" style="font-size:10px;color:#080c0b;"></i></div>',
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
-          popupAnchor: [0, -16]
+          html: '<div class="rb-fuel-marker"><i class="fas fa-gas-pump"></i></div>',
+          iconSize: [32, 32],
+          iconAnchor: [16, 16],
+          popupAnchor: [0, -20]
         });
-        var fuelMarker = L.marker([st.lat, st.lng], { icon: fuelIcon }).addTo(this.map);
-        fuelMarker.bindPopup('<b>' + this._esc(st.name) + '</b><br><span style="font-size:11px;color:#aaa;">Recommended fuel stop at ~' + Math.round(st.routeMiles) + ' miles</span>');
+        var fuelMarker = L.marker([st.lat, st.lng], { icon: fuelIcon, zIndexOffset: 500 }).addTo(this.map);
+        fuelMarker.bindPopup(
+          '<div style="font-size:13px;"><b><i class="fas fa-gas-pump" style="color:#fdcb6e"></i> ' + this._esc(st.name) + '</b>' +
+          '<div style="color:#aaa;font-size:11px;margin-top:4px;">Recommended fuel stop at ~' + Math.round(st.routeMiles) + ' miles along your route</div></div>'
+        );
         this._fuelGapLines.push(fuelMarker);
       }
       html += '</div>';
     }
 
     if (warnings.length > 0) {
-      html += '<div style="padding:6px 12px;background:#2d1a1a;border-radius:6px;margin-bottom:8px;font-size:11px;color:#ff6b6b;">';
+      html += '<div style="padding:8px 12px;background:#2d1a1a;border:1px solid rgba(255,75,75,0.2);border-radius:6px;margin-bottom:8px;font-size:11px;color:#ff6b6b;">';
       for (var w = 0; w < warnings.length; w++) {
-        html += '<div><i class="fas fa-exclamation-triangle"></i> ' + warnings[w].miles + ' mile gap before ' + this._esc(warnings[w].station) + ' — consider extra fuel</div>';
+        html += '<div style="padding:2px 0;"><i class="fas fa-exclamation-triangle"></i> ' + warnings[w].miles + ' mile gap before ' + this._esc(warnings[w].station) + ' — consider extra fuel</div>';
       }
       html += '</div>';
     }
