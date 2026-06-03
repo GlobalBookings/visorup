@@ -11,15 +11,40 @@ import { run as runContentPublisher } from './agents/content-publisher.js';
 import { run as runShareableContent } from './agents/shareable-content.js';
 import { run as runInfographicGen } from './agents/infographic-generator.js';
 import express from 'express';
+import {
+  handleIncomingEmail, verifyWebhook,
+  getInbox, getEmail, deleteEmail, getSent, sendEmail,
+} from './core/email.js';
 
 const log = createLogger('main');
 const PORT = parseInt(process.env.APPROVAL_PORT || '3100');
+const ADMIN_SECRET = process.env.ADMIN_API_SECRET || 'bealachNaBa99';
 
 log.info('VisorUp Agent System starting...');
 
-// ── Express server for health check and manual triggers ───
+// ── Express server ────────────────────────────────────────
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
+app.use(express.text({ type: 'application/json', limit: '5mb' }));
+
+// CORS for admin panel requests from visorup.co.uk
+app.use((req, res, next) => {
+  const origin = req.headers.origin || '';
+  if (origin.includes('visorup.co.uk') || origin.includes('localhost')) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Admin-Key');
+  }
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  next();
+});
+
+function requireAdmin(req, res, next) {
+  if (req.headers['x-admin-key'] !== ADMIN_SECRET) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next();
+}
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', agents: listJobs().length, uptime: process.uptime() });
@@ -45,6 +70,55 @@ app.post('/trigger/:agent', async (req, res) => {
   }
   res.json({ status: 'triggered', agent });
   try { await handler(); } catch (err) { log.error(`Triggered ${agent} failed: ${err.message}`); }
+});
+
+// ── Email webhook (from Resend) ───────────────────────────
+app.post('/email/incoming', (req, res) => {
+  const raw = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+  const sig = req.headers['resend-signature'] || req.headers['svix-signature'] || '';
+
+  res.sendStatus(200);
+
+  try {
+    const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    const email = handleIncomingEmail(data);
+    if (email) log.info(`Webhook: email received from ${email.from}`);
+  } catch (err) {
+    log.error(`Email webhook error: ${err.message}`);
+  }
+});
+
+// ── Email API (admin panel) ──────────────────────────────
+app.get('/api/emails/inbox', requireAdmin, (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  res.json(getInbox(page));
+});
+
+app.get('/api/emails/sent', requireAdmin, (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  res.json(getSent(page));
+});
+
+app.get('/api/emails/:id', requireAdmin, (req, res) => {
+  const email = getEmail(req.params.id);
+  if (!email) return res.status(404).json({ error: 'Not found' });
+  res.json(email);
+});
+
+app.delete('/api/emails/:id', requireAdmin, (req, res) => {
+  const ok = deleteEmail(req.params.id);
+  res.json({ deleted: ok });
+});
+
+app.post('/api/emails/send', requireAdmin, async (req, res) => {
+  try {
+    const { to, subject, html, text, replyTo } = req.body;
+    if (!to || !subject) return res.status(400).json({ error: 'to and subject required' });
+    const result = await sendEmail({ to, subject, html, text, replyTo });
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.listen(PORT, () => { log.info(`Server listening on port ${PORT}`); });
