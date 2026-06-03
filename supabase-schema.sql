@@ -139,6 +139,32 @@ create policy "Users can delete their own bikes"
 
 create index idx_user_bikes_user on public.user_bikes(user_id);
 
+-- ── Follows ──
+create table if not exists public.follows (
+  id uuid default uuid_generate_v4() primary key,
+  follower_id uuid references public.profiles(id) on delete cascade not null,
+  following_id uuid references public.profiles(id) on delete cascade not null,
+  created_at timestamptz default now(),
+  unique(follower_id, following_id)
+);
+
+alter table public.follows enable row level security;
+
+create policy "Users can view their own follows"
+  on public.follows for select using (auth.uid() = follower_id);
+
+create policy "Users can view who follows them"
+  on public.follows for select using (auth.uid() = following_id);
+
+create policy "Users can follow others"
+  on public.follows for insert with check (auth.uid() = follower_id);
+
+create policy "Users can unfollow"
+  on public.follows for delete using (auth.uid() = follower_id);
+
+create index idx_follows_follower on public.follows(follower_id);
+create index idx_follows_following on public.follows(following_id);
+
 -- ── Updated_at trigger ──
 create or replace function public.update_updated_at()
 returns trigger as $$
@@ -195,3 +221,23 @@ create policy "Users can delete bike photos"
 create policy "Anyone can view bike photos"
   on storage.objects for select
   using (bucket_id = 'bike-photos');
+
+-- ── Community Photo Storage ──
+insert into storage.buckets (id, name, public) values ('community-photos', 'community-photos', true)
+  on conflict do nothing;
+
+create policy "Users can upload community photos"
+  on storage.objects for insert
+  with check (bucket_id = 'community-photos' and (storage.foldername(name))[1] = auth.uid()::text);
+
+create policy "Users can update community photos"
+  on storage.objects for update
+  using (bucket_id = 'community-photos' and (storage.foldername(name))[1] = auth.uid()::text);
+
+create policy "Users can delete community photos"
+  on storage.objects for delete
+  using (bucket_id = 'community-photos' and (storage.foldername(name))[1] = auth.uid()::text);
+
+create policy "Anyone can view community photos"
+  on storage.objects for select
+  using (bucket_id = 'community-photos');

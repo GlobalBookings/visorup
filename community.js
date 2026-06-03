@@ -123,6 +123,11 @@ const VisorUpCommunity = {
       if (post.likeCount < 0) post.likeCount = 0;
     }
     this._saveData(data);
+
+    if (!liked && typeof VisorUpNotifications !== 'undefined') {
+      VisorUpNotifications.notify('like', 'Your post was liked', 'fa-heart', '/community');
+    }
+
     return !liked;
   },
 
@@ -158,6 +163,11 @@ const VisorUpCommunity = {
     if (post) post.commentCount = (post.commentCount || 0) + 1;
 
     this._saveData(data);
+
+    if (typeof VisorUpNotifications !== 'undefined') {
+      VisorUpNotifications.notify('comment', 'New comment on your post', 'fa-comment', '/community');
+    }
+
     return comment;
   },
 
@@ -173,6 +183,72 @@ const VisorUpCommunity = {
       if (post) post.commentCount = Math.max(0, (post.commentCount || 0) - 1);
     }
     this._saveData(data);
+  },
+
+  // ── Follows ───────────────────────────────────────────────
+
+  _followsKey: 'vu_follows',
+
+  _getFollows() {
+    try {
+      var raw = localStorage.getItem(this._followsKey);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return [];
+  },
+
+  _saveFollows(list) {
+    try { localStorage.setItem(this._followsKey, JSON.stringify(list)); } catch (e) {}
+  },
+
+  async followUser(userId) {
+    var list = this._getFollows();
+    if (list.indexOf(userId) === -1) {
+      list.push(userId);
+      this._saveFollows(list);
+      if (typeof VisorUpNotifications !== 'undefined') {
+        VisorUpNotifications.notify('follow', 'You have a new follower', 'fa-user-plus', '/community');
+      }
+    }
+    if (typeof VisorUpAuth !== 'undefined') {
+      try {
+        var user = await VisorUpAuth.getUser();
+        var sb = window._supabase || (window.supabase && window.VISORUP_SUPABASE ? window.supabase.createClient(window.VISORUP_SUPABASE.url, window.VISORUP_SUPABASE.anonKey) : null);
+        if (sb && user) {
+          await sb.from('follows').upsert({ follower_id: user.id, following_id: userId });
+        }
+      } catch (e) { console.warn('Community: Supabase follow failed', e); }
+    }
+  },
+
+  async unfollowUser(userId) {
+    var list = this._getFollows();
+    var idx = list.indexOf(userId);
+    if (idx !== -1) {
+      list.splice(idx, 1);
+      this._saveFollows(list);
+    }
+    if (typeof VisorUpAuth !== 'undefined') {
+      try {
+        var user = await VisorUpAuth.getUser();
+        var sb = window._supabase || (window.supabase && window.VISORUP_SUPABASE ? window.supabase.createClient(window.VISORUP_SUPABASE.url, window.VISORUP_SUPABASE.anonKey) : null);
+        if (sb && user) {
+          await sb.from('follows').delete().match({ follower_id: user.id, following_id: userId });
+        }
+      } catch (e) { console.warn('Community: Supabase unfollow failed', e); }
+    }
+  },
+
+  isFollowing(userId) {
+    return this._getFollows().indexOf(userId) !== -1;
+  },
+
+  getFollowing() {
+    return this._getFollows();
+  },
+
+  getFollowerCount(userId) {
+    return this._getFollows().indexOf(userId) !== -1 ? 1 : 0;
   },
 
   // ── Activity Feed (auto-generated from gamification) ──────
@@ -232,6 +308,56 @@ const VisorUpCommunity = {
     var all = activities.concat(posts);
     all.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
     return all;
+  },
+
+  // ── Photo Upload ─────────────────────────────────────────
+
+  async uploadPostPhotos(files) {
+    var validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    var maxSize = 5 * 1024 * 1024;
+    var maxPhotos = 4;
+    var results = [];
+    var validated = [];
+    for (var i = 0; i < files.length && validated.length < maxPhotos; i++) {
+      if (validTypes.indexOf(files[i].type) === -1) continue;
+      if (files[i].size > maxSize) continue;
+      validated.push(files[i]);
+    }
+    if (validated.length === 0) return results;
+
+    var user = null;
+    if (typeof VisorUpAuth !== 'undefined') {
+      user = await VisorUpAuth.getUser();
+    }
+    var sb = null;
+    if (user) {
+      sb = window._supabase || (window.supabase && window.VISORUP_SUPABASE ? window.supabase.createClient(window.VISORUP_SUPABASE.url, window.VISORUP_SUPABASE.anonKey) : null);
+    }
+
+    for (var j = 0; j < validated.length; j++) {
+      var file = validated[j];
+      if (sb && user) {
+        try {
+          var ext = file.name.split('.').pop().toLowerCase();
+          var path = user.id + '/' + Date.now() + '-' + j + '.' + ext;
+          var { data, error } = await sb.storage.from('community-photos').upload(path, file, { contentType: file.type });
+          if (!error && data) {
+            var { data: urlData } = sb.storage.from('community-photos').getPublicUrl(data.path);
+            if (urlData && urlData.publicUrl) {
+              results.push(urlData.publicUrl);
+              continue;
+            }
+          }
+        } catch (e) { console.warn('Community: photo upload failed, using data URL', e); }
+      }
+      var dataUrl = await new Promise(function(resolve) {
+        var reader = new FileReader();
+        reader.onload = function() { resolve(reader.result); };
+        reader.readAsDataURL(file);
+      });
+      results.push(dataUrl);
+    }
+    return results;
   },
 
   // ── Render Helpers ────────────────────────────────────────
@@ -297,13 +423,20 @@ const VisorUpCommunity = {
 
     var liked = this.isLiked(post.id);
 
-    return '<div class="feed-post" data-post-id="' + post.id + '">' +
+    var followBtnHTML = '';
+    if (post.userId && post.userId !== 'local') {
+      var following = this.isFollowing(post.userId);
+      followBtnHTML = '<button class="feed-follow-btn' + (following ? ' feed-following' : '') + '" data-follow-user="' + post.userId + '">' + (following ? 'Following' : 'Follow') + '</button>';
+    }
+
+    return '<div class="feed-post" data-post-id="' + post.id + '" data-user-id="' + (post.userId || '') + '">' +
       '<div class="feed-post-header">' +
         avatarHTML +
         '<div class="feed-post-author">' +
           '<span class="feed-author-name">' + this._esc(post.userName) + '</span>' +
           '<span class="feed-post-time">' + this._timeAgo(post.createdAt) + '</span>' +
         '</div>' +
+        followBtnHTML +
       '</div>' +
       (post.title ? '<h3 class="feed-post-title">' + this._esc(post.title) + '</h3>' : '') +
       (post.body ? '<div class="feed-post-body">' + this._esc(post.body) + '</div>' : '') +

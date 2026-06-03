@@ -397,6 +397,7 @@ class VisorUpSite {
     this.bindPlannerBack();
     this.bindNavLinks();
     this.bindAuth();
+    this.bindNotifications();
 
     // History API routing
     window.addEventListener('popstate', () => this.route(location.pathname));
@@ -1719,6 +1720,14 @@ class VisorUpSite {
                 '<select id="feedPostRating" class="garage-select" style="width:100px"><option value="">Rating</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>' +
                 '<input type="text" id="feedPostTags" placeholder="Tags (comma separated)">' +
               '</div>' +
+              '<div class="feed-compose-photos">' +
+                '<div class="photo-upload-area" id="photoUploadArea">' +
+                  '<i class="fas fa-camera"></i>' +
+                  '<span>Add photos (max 4, jpg/png/webp, 5MB each)</span>' +
+                  '<input type="file" id="feedPostPhotos" multiple accept="image/jpeg,image/png,image/webp" style="display:none">' +
+                '</div>' +
+                '<div class="photo-preview-grid" id="photoPreviewGrid"></div>' +
+              '</div>' +
               '<div class="feed-compose-actions">' +
                 '<button class="btn-primary" id="feedPostSubmit" style="font-size:13px;padding:10px 20px;"><i class="fas fa-paper-plane"></i> Post</button>' +
               '</div>' +
@@ -1727,6 +1736,7 @@ class VisorUpSite {
               '<button class="feed-filter-btn feed-filter-active" data-feed-filter="all"><i class="fas fa-stream"></i> All</button>' +
               '<button class="feed-filter-btn" data-feed-filter="ride-report"><i class="fas fa-pen"></i> Reports</button>' +
               '<button class="feed-filter-btn" data-feed-filter="activity"><i class="fas fa-bolt"></i> Activity</button>' +
+              '<button class="feed-filter-btn" data-feed-filter="following"><i class="fas fa-user-friends"></i> Following</button>' +
             '</div>' +
             '<div id="feedList">' + feedHTML + '</div>' +
           '</div>' +
@@ -1761,17 +1771,79 @@ class VisorUpSite {
     '</section>' + this.renderFooter();
 
     var self = this;
+    var pendingPhotos = [];
+
+    var uploadArea = document.getElementById('photoUploadArea');
+    var photoInput = document.getElementById('feedPostPhotos');
+    var previewGrid = document.getElementById('photoPreviewGrid');
+
+    function updatePhotoPreview() {
+      previewGrid.innerHTML = '';
+      pendingPhotos.forEach(function(file, idx) {
+        var thumb = document.createElement('div');
+        thumb.className = 'photo-preview-thumb';
+        var img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        var removeBtn = document.createElement('button');
+        removeBtn.className = 'photo-preview-remove';
+        removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+        removeBtn.addEventListener('click', function() {
+          pendingPhotos.splice(idx, 1);
+          updatePhotoPreview();
+        });
+        thumb.appendChild(img);
+        thumb.appendChild(removeBtn);
+        previewGrid.appendChild(thumb);
+      });
+      if (pendingPhotos.length >= 4) uploadArea.style.display = 'none';
+      else uploadArea.style.display = '';
+    }
+
+    function addPhotoFiles(files) {
+      var validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+      var maxSize = 5 * 1024 * 1024;
+      for (var i = 0; i < files.length && pendingPhotos.length < 4; i++) {
+        if (validTypes.indexOf(files[i].type) === -1) continue;
+        if (files[i].size > maxSize) continue;
+        pendingPhotos.push(files[i]);
+      }
+      updatePhotoPreview();
+    }
+
+    uploadArea.addEventListener('click', function(e) {
+      if (e.target.closest('.photo-preview-remove')) return;
+      photoInput.click();
+    });
+    photoInput.addEventListener('change', function() {
+      if (this.files.length > 0) addPhotoFiles(this.files);
+      this.value = '';
+    });
+    uploadArea.addEventListener('dragover', function(e) { e.preventDefault(); uploadArea.classList.add('photo-drag-over'); });
+    uploadArea.addEventListener('dragleave', function() { uploadArea.classList.remove('photo-drag-over'); });
+    uploadArea.addEventListener('drop', function(e) {
+      e.preventDefault();
+      uploadArea.classList.remove('photo-drag-over');
+      if (e.dataTransfer.files.length > 0) addPhotoFiles(e.dataTransfer.files);
+    });
 
     // Post submission
     document.getElementById('feedPostSubmit').addEventListener('click', async function() {
       var title = document.getElementById('feedPostTitle').value.trim();
       var body = document.getElementById('feedPostBody').value.trim();
       if (!title && !body) { alert('Write something to share!'); return; }
+      var submitBtn = document.getElementById('feedPostSubmit');
+      var photos = [];
+      if (pendingPhotos.length > 0) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+        photos = await VisorUpCommunity.uploadPostPhotos(pendingPhotos);
+      }
       var tags = document.getElementById('feedPostTags').value.trim();
       await VisorUpCommunity.createPost({
         type: 'ride-report',
         title: title,
         body: body,
+        photos: photos,
         miles: parseInt(document.getElementById('feedPostMiles').value) || 0,
         bike: document.getElementById('feedPostBike').value.trim(),
         rating: parseInt(document.getElementById('feedPostRating').value) || 0,
@@ -1793,6 +1865,11 @@ class VisorUpSite {
           var isActivity = el.classList.contains('feed-activity-item');
           if (filter === 'ride-report') el.style.display = isPost ? '' : 'none';
           else if (filter === 'activity') el.style.display = isActivity ? '' : 'none';
+          else if (filter === 'following') {
+            var following = VisorUpCommunity.getFollowing();
+            var uid = el.dataset.userId || '';
+            el.style.display = (isPost && following.indexOf(uid) !== -1) ? '' : 'none';
+          }
         });
       });
     });
@@ -1820,6 +1897,29 @@ class VisorUpSite {
           section.innerHTML = VisorUpCommunity.renderCommentSection(postId);
           self._bindCommentForm(section, postId);
         }
+      });
+    });
+
+    // Follow buttons
+    document.querySelectorAll('.feed-follow-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var userId = btn.dataset.followUser;
+        if (!userId) return;
+        var isFollowing = btn.classList.contains('feed-following');
+        if (isFollowing) {
+          VisorUpCommunity.unfollowUser(userId);
+        } else {
+          VisorUpCommunity.followUser(userId);
+        }
+        document.querySelectorAll('.feed-follow-btn[data-follow-user="' + userId + '"]').forEach(function(b) {
+          if (isFollowing) {
+            b.classList.remove('feed-following');
+            b.textContent = 'Follow';
+          } else {
+            b.classList.add('feed-following');
+            b.textContent = 'Following';
+          }
+        });
       });
     });
 
@@ -3564,6 +3664,125 @@ class VisorUpSite {
         if (progFill) progFill.style.width = pct + '%';
       });
     });
+  }
+
+  // ── Notifications ─────────────────────────────────────────
+
+  bindNotifications() {
+    var self = this;
+    var bellBtn = document.getElementById('navNotifBtn');
+    if (!bellBtn) return;
+
+    // Update badge on load
+    if (typeof VisorUpNotifications !== 'undefined') {
+      VisorUpNotifications._updateBadge();
+    }
+
+    bellBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var existing = document.getElementById('notifPanel');
+      if (existing) { existing.remove(); return; }
+      self._showNotifPanel();
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#notifPanel') && !e.target.closest('#navNotifBtn')) {
+        var panel = document.getElementById('notifPanel');
+        if (panel) panel.remove();
+      }
+    });
+  }
+
+  _showNotifPanel() {
+    var self = this;
+    var existing = document.getElementById('notifPanel');
+    if (existing) existing.remove();
+
+    var notifications = typeof VisorUpNotifications !== 'undefined' ? VisorUpNotifications.getAll() : [];
+
+    var itemsHTML = '';
+    if (notifications.length === 0) {
+      itemsHTML = '<div class="notif-empty"><i class="fas fa-bell-slash"></i><p>No notifications yet</p></div>';
+    } else {
+      itemsHTML = notifications.map(function(n) {
+        var readClass = n.read ? 'notif-item-read' : '';
+        var timeAgo = self._notifTimeAgo(n.createdAt);
+        return '<div class="notif-item ' + readClass + '" data-notif-id="' + n.id + '"' + (n.link ? ' data-notif-link="' + n.link + '"' : '') + '>' +
+          '<div class="notif-item-icon"><i class="fas ' + (n.icon || 'fa-bell') + '"></i></div>' +
+          '<div class="notif-item-body">' +
+            '<div class="notif-item-msg">' + n.message + '</div>' +
+            '<div class="notif-item-time">' + timeAgo + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    var panel = document.createElement('div');
+    panel.id = 'notifPanel';
+    panel.className = 'notif-panel';
+    panel.innerHTML = '<div class="notif-panel-header">' +
+      '<span class="notif-panel-title">Notifications</span>' +
+      '<div class="notif-panel-actions">' +
+        '<button class="notif-mark-all" id="notifMarkAll">Mark all read</button>' +
+        '<button class="notif-clear-all" id="notifClearAll">Clear</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="notif-panel-list">' + itemsHTML + '</div>';
+
+    var bellBtn = document.getElementById('navNotifBtn');
+    bellBtn.parentElement.appendChild(panel);
+
+    // Mark all read
+    var markAllBtn = document.getElementById('notifMarkAll');
+    if (markAllBtn) {
+      markAllBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (typeof VisorUpNotifications !== 'undefined') {
+          VisorUpNotifications.markAllRead();
+          panel.querySelectorAll('.notif-item').forEach(function(el) { el.classList.add('notif-item-read'); });
+        }
+      });
+    }
+
+    // Clear all
+    var clearBtn = document.getElementById('notifClearAll');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (typeof VisorUpNotifications !== 'undefined') {
+          VisorUpNotifications.clear();
+          panel.querySelector('.notif-panel-list').innerHTML = '<div class="notif-empty"><i class="fas fa-bell-slash"></i><p>No notifications yet</p></div>';
+        }
+      });
+    }
+
+    // Click on item — mark read and navigate
+    panel.querySelectorAll('.notif-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var id = item.dataset.notifId;
+        var link = item.dataset.notifLink;
+        if (typeof VisorUpNotifications !== 'undefined') VisorUpNotifications.markRead(id);
+        item.classList.add('notif-item-read');
+        if (link) {
+          panel.remove();
+          self.navigate(link);
+        }
+      });
+    });
+  }
+
+  _notifTimeAgo(dateStr) {
+    var now = Date.now();
+    var then = new Date(dateStr).getTime();
+    var diff = now - then;
+    var mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return mins + 'm ago';
+    var hours = Math.floor(mins / 60);
+    if (hours < 24) return hours + 'h ago';
+    var days = Math.floor(hours / 24);
+    if (days < 7) return days + 'd ago';
+    return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
   }
 
   // ── Shared Trip Page ────────────────────────────────────────

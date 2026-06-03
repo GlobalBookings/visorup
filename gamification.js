@@ -134,8 +134,25 @@ const VisorUpGamification = {
 
   addXP(amount, reason) {
     var data = this._getData();
-    data.xp = (data.xp || 0) + amount;
+    var oldXP = data.xp || 0;
+    data.xp = oldXP + amount;
     this._saveData(data);
+
+    // Detect level-up
+    if (typeof VisorUpNotifications !== 'undefined') {
+      var oldLevel = RIDER_LEVELS[0];
+      for (var i = RIDER_LEVELS.length - 1; i >= 0; i--) {
+        if (oldXP >= RIDER_LEVELS[i].xpRequired) { oldLevel = RIDER_LEVELS[i]; break; }
+      }
+      var newLevel = RIDER_LEVELS[0];
+      for (var j = RIDER_LEVELS.length - 1; j >= 0; j--) {
+        if (data.xp >= RIDER_LEVELS[j].xpRequired) { newLevel = RIDER_LEVELS[j]; break; }
+      }
+      if (newLevel.level > oldLevel.level) {
+        VisorUpNotifications.notify('level-up', 'Level up! You are now ' + newLevel.name, newLevel.icon, '/profile');
+      }
+    }
+
     return data.xp;
   },
 
@@ -154,6 +171,11 @@ const VisorUpGamification = {
     data.badges.push({ id: id, earnedAt: new Date().toISOString() });
     this._saveData(data);
     this.addXP(XP_AWARDS.badgeEarned, 'Badge: ' + badge.name);
+
+    if (typeof VisorUpNotifications !== 'undefined') {
+      VisorUpNotifications.notify('badge', 'Badge unlocked: ' + badge.name, badge.icon, '/profile');
+    }
+
     return true;
   },
 

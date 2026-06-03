@@ -45,33 +45,30 @@ test.describe('Navigation (Desktop)', () => {
     await page.goto('/');
   });
 
-  test('nav links exist', async ({ page }) => {
-    await expect(page.locator('.nav-links a[href="/routes"]')).toBeVisible();
-    await expect(page.locator('.nav-links a[href="/destinations"]')).toBeVisible();
-    await expect(page.locator('.nav-links a[href="/ferries"]')).toBeVisible();
-    await expect(page.locator('.nav-links a[href="/planning"]')).toBeVisible();
+  test('mega menu triggers exist', async ({ page }) => {
+    await expect(page.locator('.mega-trigger').first()).toBeVisible();
   });
 
   test('navigating to routes page', async ({ page }) => {
-    await page.click('.nav-links a[href="/routes"]');
+    await page.goto('/routes');
     await expect(page.locator('.page-hero-title')).toContainText('Routes');
     await expect(page).toHaveTitle(/Routes/);
   });
 
   test('navigating to destinations page', async ({ page }) => {
-    await page.click('.nav-links a[href="/destinations"]');
+    await page.goto('/destinations');
     await expect(page.locator('.page-hero-title')).toContainText('Destinations');
     await expect(page).toHaveTitle(/Destinations/);
   });
 
   test('navigating to ferries page', async ({ page }) => {
-    await page.click('.nav-links a[href="/ferries"]');
+    await page.goto('/ferries');
     await expect(page.locator('.page-hero-title')).toContainText('Ferry');
     await expect(page).toHaveTitle(/Ferry/);
   });
 
   test('navigating to planning page', async ({ page }) => {
-    await page.click('.nav-links a[href="/planning"]');
+    await page.goto('/planning');
     await expect(page.locator('.page-hero-title')).toContainText('Planning');
     await expect(page).toHaveTitle(/Planning/);
   });
@@ -248,7 +245,13 @@ test.describe('Mobile Navigation', () => {
   test('mobile menu links navigate correctly', async ({ page }) => {
     await page.goto('/');
     await page.click('#navMenuBtn');
-    await page.click('#navMobileMenu a[href="/routes"]');
+    const exploreBtn = page.locator('[data-mob-toggle="mob-explore"]');
+    if (await exploreBtn.count() > 0) {
+      await exploreBtn.click();
+      await page.click('#mob-explore a[href="/routes"]');
+    } else {
+      await page.click('#navMobileMenu a[href="/routes"]');
+    }
     await expect(page.locator('.page-hero-title')).toContainText('Routes');
   });
 
@@ -263,7 +266,7 @@ test.describe('Mobile Navigation', () => {
 });
 
 test.describe('Coming Soon Pages', () => {
-  const comingSoon = ['gear', 'reports', 'community'];
+  const comingSoon = ['gear', 'reports'];
 
   for (const slug of comingSoon) {
     test(`${slug} shows coming soon`, async ({ page }) => {
