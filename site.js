@@ -823,6 +823,25 @@ class VisorUpSite {
         this.pageContent.innerHTML = this.renderContact() + this.renderFooter();
         this.setTitle('Contact Us');
         this._setMeta({ description: 'Get in touch with the VisorUp team — feedback, route suggestions, partnership enquiries.' });
+        this._bindSecureForm('contactForm', 'Contact');
+        this.scrollToTop();
+        break;
+
+      case 'feature-requests':
+        this.showSiteView();
+        this.pageContent.innerHTML = this.renderFeatureRequest() + this.renderFooter();
+        this.setTitle('Feature Requests');
+        this._setMeta({ description: 'Suggest features for VisorUp — help us build the motorcycle touring tools riders actually need.' });
+        this._bindSecureForm('featureForm', 'Feature Request');
+        this.scrollToTop();
+        break;
+
+      case 'bug-report':
+        this.showSiteView();
+        this.pageContent.innerHTML = this.renderBugReport() + this.renderFooter();
+        this.setTitle('Report a Bug');
+        this._setMeta({ description: 'Found something broken on VisorUp? Report a bug and we\'ll fix it.' });
+        this._bindSecureForm('bugForm', 'Bug Report');
         this.scrollToTop();
         break;
 
@@ -4164,7 +4183,7 @@ class VisorUpSite {
     this.pageContent.innerHTML = '' +
     '<section class="page-section">' +
       '<div class="container">' +
-        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">' +
           '<div><h1 style="margin:0;font-size:24px"><i class="fas fa-motorcycle" style="color:var(--accent);margin-right:8px"></i>Iron Horse HQ</h1>' +
           '<p style="color:var(--text-muted);font-size:13px;margin:4px 0 0">Business intelligence dashboard</p></div>' +
           '<div style="display:flex;gap:8px">' +
@@ -4172,6 +4191,15 @@ class VisorUpSite {
             '<button class="btn-outline" id="adminLogout" style="font-size:12px;padding:8px 16px"><i class="fas fa-sign-out-alt"></i> Lock</button>' +
           '</div>' +
         '</div>' +
+
+        '<!-- Admin Tabs -->' +
+        '<div class="admin-tabs" style="margin-bottom:24px">' +
+          '<button class="admin-tab active" data-tab="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</button>' +
+          '<button class="admin-tab" data-tab="email"><i class="fas fa-envelope"></i> Email <span id="adminUnreadBadge" style="display:none;background:var(--accent);color:#0F1413;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:4px"></span></button>' +
+        '</div>' +
+
+        '<!-- Tab: Dashboard -->' +
+        '<div id="adminTabDashboard" class="admin-tab-content">' +
 
         '<!-- Section: Revenue & Monetisation -->' +
         '<div class="admin-section-header"><i class="fas fa-sterling-sign"></i> Revenue & Monetisation</div>' +
@@ -4268,8 +4296,118 @@ class VisorUpSite {
           '</table>' +
         '</div>' +
 
+        '</div><!-- /adminTabDashboard -->' +
+
+        '<!-- Tab: Email -->' +
+        '<div id="adminTabEmail" class="admin-tab-content" style="display:none">' +
+          '<div class="admin-section-header"><i class="fas fa-envelope"></i> Email — hello@visorup.co.uk</div>' +
+
+          '<!-- Email sub-tabs -->' +
+          '<div style="display:flex;gap:8px;margin-bottom:16px">' +
+            '<button class="btn-primary admin-email-subtab active" data-subtab="inbox" style="font-size:12px;padding:8px 16px"><i class="fas fa-inbox"></i> Inbox</button>' +
+            '<button class="btn-outline admin-email-subtab" data-subtab="sent" style="font-size:12px;padding:8px 16px"><i class="fas fa-paper-plane"></i> Sent</button>' +
+            '<button class="btn-outline admin-email-subtab" data-subtab="compose" style="font-size:12px;padding:8px 16px"><i class="fas fa-pen"></i> Compose</button>' +
+          '</div>' +
+
+          '<!-- Inbox -->' +
+          '<div id="adminEmailInbox" class="admin-email-panel">' +
+            '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:20px"><i class="fas fa-spinner fa-spin"></i> Loading inbox...</p></div>' +
+          '</div>' +
+
+          '<!-- Sent -->' +
+          '<div id="adminEmailSent" class="admin-email-panel" style="display:none">' +
+            '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:20px"><i class="fas fa-spinner fa-spin"></i> Loading sent...</p></div>' +
+          '</div>' +
+
+          '<!-- Compose -->' +
+          '<div id="adminEmailCompose" class="admin-email-panel" style="display:none">' +
+            '<div class="admin-card">' +
+              '<div style="display:flex;flex-direction:column;gap:12px">' +
+                '<div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">To</label>' +
+                '<input type="email" id="composeEmailTo" placeholder="recipient@example.com" style="width:100%;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:inherit;box-sizing:border-box"></div>' +
+                '<div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Subject</label>' +
+                '<input type="text" id="composeEmailSubject" placeholder="Subject" style="width:100%;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:inherit;box-sizing:border-box"></div>' +
+                '<div><label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px">Message</label>' +
+                '<textarea id="composeEmailBody" rows="10" placeholder="Write your message..." style="width:100%;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:inherit;resize:vertical;box-sizing:border-box"></textarea></div>' +
+                '<div style="display:flex;gap:8px;justify-content:flex-end">' +
+                  '<button class="btn-outline" id="composeClear" style="font-size:13px;padding:10px 20px"><i class="fas fa-times"></i> Clear</button>' +
+                  '<button class="btn-primary" id="composeSend" style="font-size:13px;padding:10px 20px"><i class="fas fa-paper-plane"></i> Send</button>' +
+                '</div>' +
+                '<div id="composeStatus" style="display:none;font-size:13px;text-align:center;padding:8px"></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          '<!-- Email detail viewer -->' +
+          '<div id="adminEmailDetail" style="display:none"></div>' +
+
+        '</div><!-- /adminTabEmail -->' +
+
       '</div>' +
     '</section>';
+
+    // ── Admin tab switching ──
+    var AGENT_API = 'https://visorup-agents-qkyks.ondigitalocean.app';
+    var ADMIN_KEY = 'bealachNaBa99';
+
+    function adminFetch(path, opts) {
+      opts = opts || {};
+      opts.headers = Object.assign({ 'X-Admin-Key': ADMIN_KEY, 'Content-Type': 'application/json' }, opts.headers || {});
+      return fetch(AGENT_API + path, opts);
+    }
+
+    document.querySelectorAll('.admin-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var target = tab.dataset.tab;
+        document.getElementById('adminTabDashboard').style.display = target === 'dashboard' ? '' : 'none';
+        document.getElementById('adminTabEmail').style.display = target === 'email' ? '' : 'none';
+        if (target === 'email') self._loadEmailInbox();
+      });
+    });
+
+    // ── Email sub-tab switching ──
+    document.querySelectorAll('.admin-email-subtab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.admin-email-subtab').forEach(function(b) { b.classList.remove('active'); b.className = b.className.replace('btn-primary', 'btn-outline'); });
+        btn.classList.add('active');
+        btn.className = btn.className.replace('btn-outline', 'btn-primary');
+        var t = btn.dataset.subtab;
+        document.getElementById('adminEmailInbox').style.display = t === 'inbox' ? '' : 'none';
+        document.getElementById('adminEmailSent').style.display = t === 'sent' ? '' : 'none';
+        document.getElementById('adminEmailCompose').style.display = t === 'compose' ? '' : 'none';
+        document.getElementById('adminEmailDetail').style.display = 'none';
+        if (t === 'inbox') self._loadEmailInbox();
+        if (t === 'sent') self._loadEmailSent();
+      });
+    });
+
+    // ── Compose handlers ──
+    document.getElementById('composeSend').addEventListener('click', function() {
+      var to = document.getElementById('composeEmailTo').value.trim();
+      var subject = document.getElementById('composeEmailSubject').value.trim();
+      var body = document.getElementById('composeEmailBody').value.trim();
+      var status = document.getElementById('composeStatus');
+      if (!to || !subject) { status.style.display = ''; status.style.color = '#ff4444'; status.textContent = 'To and Subject are required.'; return; }
+      status.style.display = ''; status.style.color = 'var(--accent)'; status.textContent = 'Sending...';
+      document.getElementById('composeSend').disabled = true;
+      adminFetch('/api/emails/send', {
+        method: 'POST',
+        body: JSON.stringify({ to: to, subject: subject, html: '<div style="font-family:sans-serif;line-height:1.6">' + body.replace(/\n/g, '<br>') + '</div>' }),
+      }).then(function(r) { return r.json(); }).then(function(data) {
+        if (data.error) { status.style.color = '#ff4444'; status.textContent = 'Error: ' + data.error; }
+        else { status.style.color = '#4CAF50'; status.textContent = 'Sent!'; document.getElementById('composeEmailTo').value = ''; document.getElementById('composeEmailSubject').value = ''; document.getElementById('composeEmailBody').value = ''; }
+        document.getElementById('composeSend').disabled = false;
+      }).catch(function(e) { status.style.color = '#ff4444'; status.textContent = 'Failed: ' + e.message; document.getElementById('composeSend').disabled = false; });
+    });
+
+    document.getElementById('composeClear').addEventListener('click', function() {
+      document.getElementById('composeEmailTo').value = '';
+      document.getElementById('composeEmailSubject').value = '';
+      document.getElementById('composeEmailBody').value = '';
+      document.getElementById('composeStatus').style.display = 'none';
+    });
 
     // Bind logout
     document.getElementById('adminLogout').addEventListener('click', function() {
@@ -4290,6 +4428,7 @@ class VisorUpSite {
 
     // Load Supabase user data
     this._loadAdminUsers();
+    this._checkUnreadEmails();
   }
 
   async _loadAdminUsers() {
@@ -4374,6 +4513,158 @@ class VisorUpSite {
     }
   }
 
+  _loadEmailInbox() {
+    var self = this;
+    var panel = document.getElementById('adminEmailInbox');
+    var AGENT_API = 'https://visorup-agents-qkyks.ondigitalocean.app';
+    var ADMIN_KEY = 'bealachNaBa99';
+    if (!panel) return;
+    panel.innerHTML = '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:20px"><i class="fas fa-spinner fa-spin"></i> Loading inbox...</p></div>';
+
+    fetch(AGENT_API + '/api/emails/inbox', { headers: { 'X-Admin-Key': ADMIN_KEY } })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var badge = document.getElementById('adminUnreadBadge');
+        if (badge && data.unread > 0) { badge.style.display = ''; badge.textContent = data.unread; }
+        else if (badge) { badge.style.display = 'none'; }
+
+        if (!data.emails || data.emails.length === 0) {
+          panel.innerHTML = '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:40px"><i class="fas fa-inbox" style="font-size:32px;display:block;margin-bottom:12px;color:var(--border)"></i>No emails yet.<br><span style="font-size:12px">Emails to hello@visorup.co.uk will appear here.</span></p></div>';
+          return;
+        }
+
+        function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+        var rows = data.emails.map(function(e) {
+          var date = new Date(e.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+          var unreadDot = e.read ? '' : '<span style="width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:6px;flex-shrink:0"></span>';
+          return '<div class="admin-email-row' + (e.read ? '' : ' unread') + '" data-email-id="' + e.id + '" style="cursor:pointer">' +
+            '<div style="display:flex;align-items:center;gap:4px">' + unreadDot + '<strong style="font-size:13px">' + esc(e.from) + '</strong></div>' +
+            '<div style="font-size:13px;color:var(--text);margin:2px 0">' + esc(e.subject) + '</div>' +
+            '<div style="font-size:11px;color:var(--text-muted)">' + date + '</div>' +
+          '</div>';
+        }).join('');
+
+        panel.innerHTML = '<div class="admin-card" style="padding:0;overflow:hidden">' + rows + '</div>';
+
+        panel.querySelectorAll('.admin-email-row').forEach(function(row) {
+          row.addEventListener('click', function() { self._openEmail(row.dataset.emailId); });
+        });
+      })
+      .catch(function(err) {
+        panel.innerHTML = '<div class="admin-card"><p style="color:#ff4444;text-align:center;padding:20px">Failed to load inbox: ' + err.message + '</p></div>';
+      });
+  }
+
+  _loadEmailSent() {
+    var panel = document.getElementById('adminEmailSent');
+    var AGENT_API = 'https://visorup-agents-qkyks.ondigitalocean.app';
+    var ADMIN_KEY = 'bealachNaBa99';
+    if (!panel) return;
+    panel.innerHTML = '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:20px"><i class="fas fa-spinner fa-spin"></i> Loading sent...</p></div>';
+
+    fetch(AGENT_API + '/api/emails/sent', { headers: { 'X-Admin-Key': ADMIN_KEY } })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.emails || data.emails.length === 0) {
+          panel.innerHTML = '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:40px"><i class="fas fa-paper-plane" style="font-size:32px;display:block;margin-bottom:12px;color:var(--border)"></i>No sent emails yet.</p></div>';
+          return;
+        }
+
+        function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+        var rows = data.emails.map(function(e) {
+          var date = new Date(e.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+          var toStr = Array.isArray(e.to) ? e.to.join(', ') : e.to;
+          return '<div class="admin-email-row" style="cursor:default">' +
+            '<div style="font-size:13px"><strong>To:</strong> ' + esc(toStr) + '</div>' +
+            '<div style="font-size:13px;color:var(--text);margin:2px 0">' + esc(e.subject) + '</div>' +
+            '<div style="font-size:11px;color:var(--text-muted)">' + date + '</div>' +
+          '</div>';
+        }).join('');
+
+        panel.innerHTML = '<div class="admin-card" style="padding:0;overflow:hidden">' + rows + '</div>';
+      })
+      .catch(function(err) {
+        panel.innerHTML = '<div class="admin-card"><p style="color:#ff4444;text-align:center;padding:20px">Failed to load sent: ' + err.message + '</p></div>';
+      });
+  }
+
+  _openEmail(id) {
+    var detail = document.getElementById('adminEmailDetail');
+    var AGENT_API = 'https://visorup-agents-qkyks.ondigitalocean.app';
+    var ADMIN_KEY = 'bealachNaBa99';
+    var self = this;
+    if (!detail) return;
+
+    document.getElementById('adminEmailInbox').style.display = 'none';
+    detail.style.display = '';
+    detail.innerHTML = '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:20px"><i class="fas fa-spinner fa-spin"></i> Loading...</p></div>';
+
+    fetch(AGENT_API + '/api/emails/' + id, { headers: { 'X-Admin-Key': ADMIN_KEY } })
+      .then(function(r) { return r.json(); })
+      .then(function(e) {
+        if (e.error) { detail.innerHTML = '<div class="admin-card"><p style="color:#ff4444">Email not found</p></div>'; return; }
+        function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+        var date = new Date(e.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        detail.innerHTML = '<div class="admin-card">' +
+          '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:16px;flex-wrap:wrap;gap:8px">' +
+            '<div>' +
+              '<h3 style="margin:0 0 4px;font-size:18px">' + esc(e.subject) + '</h3>' +
+              '<div style="font-size:13px;color:var(--text-muted)">From: <strong style="color:var(--text)">' + esc(e.from) + '</strong> &middot; ' + date + '</div>' +
+            '</div>' +
+            '<div style="display:flex;gap:8px">' +
+              '<button class="btn-primary" id="emailReplyBtn" style="font-size:12px;padding:8px 14px"><i class="fas fa-reply"></i> Reply</button>' +
+              '<button class="btn-outline" id="emailDeleteBtn" style="font-size:12px;padding:8px 14px;color:#ff4444;border-color:#ff4444"><i class="fas fa-trash"></i></button>' +
+              '<button class="btn-outline" id="emailBackBtn" style="font-size:12px;padding:8px 14px"><i class="fas fa-arrow-left"></i> Back</button>' +
+            '</div>' +
+          '</div>' +
+          '<div style="border-top:1px solid var(--border);padding-top:16px;font-size:14px;line-height:1.7;color:var(--text-secondary)">' +
+            (e.html || esc(e.text || '').replace(/\n/g, '<br>')) +
+          '</div>' +
+        '</div>';
+
+        document.getElementById('emailBackBtn').addEventListener('click', function() {
+          detail.style.display = 'none';
+          document.getElementById('adminEmailInbox').style.display = '';
+          self._loadEmailInbox();
+        });
+
+        document.getElementById('emailDeleteBtn').addEventListener('click', function() {
+          if (!confirm('Delete this email?')) return;
+          fetch(AGENT_API + '/api/emails/' + id, { method: 'DELETE', headers: { 'X-Admin-Key': ADMIN_KEY } })
+            .then(function() { detail.style.display = 'none'; document.getElementById('adminEmailInbox').style.display = ''; self._loadEmailInbox(); });
+        });
+
+        document.getElementById('emailReplyBtn').addEventListener('click', function() {
+          detail.style.display = 'none';
+          document.getElementById('adminEmailInbox').style.display = 'none';
+          document.getElementById('adminEmailSent').style.display = 'none';
+          document.getElementById('adminEmailCompose').style.display = '';
+          document.querySelectorAll('.admin-email-subtab').forEach(function(b) { b.classList.remove('active'); b.className = b.className.replace('btn-primary', 'btn-outline'); });
+          var composeTab = document.querySelector('.admin-email-subtab[data-subtab="compose"]');
+          if (composeTab) { composeTab.classList.add('active'); composeTab.className = composeTab.className.replace('btn-outline', 'btn-primary'); }
+          document.getElementById('composeEmailTo').value = e.from || '';
+          document.getElementById('composeEmailSubject').value = (e.subject || '').startsWith('Re: ') ? e.subject : 'Re: ' + (e.subject || '');
+          document.getElementById('composeEmailBody').value = '\n\n--- Original message ---\n' + (e.text || '');
+        });
+      })
+      .catch(function(err) {
+        detail.innerHTML = '<div class="admin-card"><p style="color:#ff4444">Failed to load: ' + err.message + '</p></div>';
+      });
+  }
+
+  // Check unread count on dashboard load
+  _checkUnreadEmails() {
+    var AGENT_API = 'https://visorup-agents-qkyks.ondigitalocean.app';
+    var ADMIN_KEY = 'bealachNaBa99';
+    fetch(AGENT_API + '/api/emails/inbox?page=1', { headers: { 'X-Admin-Key': ADMIN_KEY } })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var badge = document.getElementById('adminUnreadBadge');
+        if (badge && data.unread > 0) { badge.style.display = ''; badge.textContent = data.unread; }
+      }).catch(function() {});
+  }
+
   renderAbout() {
     return '' +
     '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg">' +
@@ -4415,9 +4706,288 @@ class VisorUpSite {
     '</section>';
   }
 
+  _bindSecureForm(formId, emailSubjectPrefix) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    var loadTime = Date.now();
+    var a = Math.floor(Math.random() * 10) + 1;
+    var b = Math.floor(Math.random() * 10) + 1;
+    var mathLabel = form.querySelector('.vu-math-label');
+    if (mathLabel) mathLabel.textContent = 'What is ' + a + ' + ' + b + '?';
+    form._mathAnswer = a + b;
+    form._loadTime = loadTime;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var honeypot = form.querySelector('[name="website"]');
+      if (honeypot && honeypot.value) return;
+      if (Date.now() - form._loadTime < 3000) { alert('Please wait a moment before submitting.'); return; }
+      var mathInput = form.querySelector('[name="math_answer"]');
+      if (parseInt(mathInput.value) !== form._mathAnswer) { alert('Incorrect answer to the security question.'); return; }
+
+      var btn = form.querySelector('button[type="submit"]');
+      var btnOriginal = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+      var data = new FormData(form);
+      var fields = {};
+      data.forEach(function(v, k) { if (k !== 'website' && k !== 'math_answer') fields[k] = v; });
+
+      var subject = emailSubjectPrefix + (fields.subject ? ' — ' + fields.subject : (fields.title ? ' — ' + fields.title : ''));
+      var rows = '';
+      Object.keys(fields).forEach(function(k) {
+        if (k === 'newsletter') return;
+        var label = k.replace(/_/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+        rows += '<tr><td style="padding:8px 12px;border:1px solid #e2e8f0;font-weight:600;background:#f7fafc;vertical-align:top;width:160px">' + label + '</td><td style="padding:8px 12px;border:1px solid #e2e8f0">' + (fields[k] || '').replace(/</g, '&lt;').replace(/\n/g, '<br>') + '</td></tr>';
+      });
+      if (fields.newsletter) {
+        rows += '<tr><td style="padding:8px 12px;border:1px solid #e2e8f0;font-weight:600;background:#f7fafc;vertical-align:top;width:160px">Newsletter</td><td style="padding:8px 12px;border:1px solid #e2e8f0">Opted in</td></tr>';
+      }
+      var html = '<div style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;max-width:600px;margin:0 auto">' +
+        '<div style="background:#1a1a2e;padding:24px 20px;border-radius:8px 8px 0 0">' +
+          '<h2 style="color:#22d3ee;margin:0;font-size:20px">' + emailSubjectPrefix + '</h2>' +
+          '<p style="color:#94a3b8;margin:6px 0 0;font-size:13px">Submitted via VisorUp</p>' +
+        '</div>' +
+        '<table style="width:100%;border-collapse:collapse;margin-top:0">' + rows + '</table>' +
+        '<p style="color:#64748b;font-size:12px;margin-top:16px;padding:0 4px">Sent from visorup.co.uk at ' + new Date().toLocaleString('en-GB') + '</p>' +
+      '</div>';
+
+      fetch('https://visorup-agents-qkyks.ondigitalocean.app/api/emails/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Key': 'bealachNaBa99' },
+        body: JSON.stringify({ to: 'hello@visorup.co.uk', subject: subject, html: html })
+      }).then(function(res) {
+        if (!res.ok) throw new Error('Failed');
+        form.reset();
+        form.innerHTML = '<div style="text-align:center;padding:40px 20px"><i class="fas fa-check-circle" style="font-size:48px;color:#22c55e;margin-bottom:16px;display:block"></i><h3 style="color:var(--text);margin-bottom:8px">Message Sent!</h3><p style="color:var(--text-muted)">Thanks for getting in touch. We\'ll get back to you soon.</p></div>';
+      }).catch(function() {
+        btn.disabled = false;
+        btn.innerHTML = btnOriginal;
+        alert('Something went wrong. Please try again or email us directly at hello@visorup.co.uk');
+      });
+    });
+  }
+
+  renderFeatureRequest() {
+    return '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Feature Requests</h1>' +
+        '<p class="page-hero-sub">Help us build the tools riders actually need.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="detail-grid">' +
+          '<div class="detail-main">' +
+            '<h2 class="detail-heading">Suggest a Feature</h2>' +
+            '<p class="detail-text">VisorUp is built by riders, for riders. If there\'s something you wish the platform did, we want to hear about it. The best features come from the community.</p>' +
+
+            '<h3 style="margin-top:32px;margin-bottom:16px;font-size:16px;color:var(--text)"><i class="fas fa-lightbulb" style="color:var(--accent);margin-right:8px"></i>The kind of requests we\'re looking for</h3>' +
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px">' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-cloud-sun-rain" style="color:var(--accent);margin-right:6px"></i>Route weather overlay</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">Show live rain radar on the route builder map</p>' +
+              '</div>' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-users" style="color:var(--accent);margin-right:6px"></i>Group ride planner</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">Coordinate rides with mates, share waypoints, set meeting points</p>' +
+              '</div>' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-gas-pump" style="color:var(--accent);margin-right:6px"></i>Bike-specific fuel range</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">Factor in my bike\'s actual tank size and MPG</p>' +
+              '</div>' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-moon" style="color:var(--accent);margin-right:6px"></i>Dark mode for night riding</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">Reduce glare when checking routes at night</p>' +
+              '</div>' +
+            '</div>' +
+
+            '<form id="featureForm" style="margin-top:24px">' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Your Name</label>' +
+                '<input type="text" name="name" required placeholder="Full name" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Email Address</label>' +
+                '<input type="email" name="email" required placeholder="you@example.com" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Feature Title</label>' +
+                '<input type="text" name="title" required placeholder="e.g. Route weather overlay" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Description</label>' +
+                '<textarea name="description" required rows="5" placeholder="Describe the feature in detail — what would it do, how would it work?" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Priority</label>' +
+                '<select name="priority" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+                  '<option>Nice to have</option>' +
+                  '<option>Important</option>' +
+                  '<option>Critical</option>' +
+                '</select>' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">How would this help your riding?</label>' +
+                '<textarea name="use_case" rows="3" placeholder="Tell us how you\'d use this feature on the road..." style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>' +
+              '</div>' +
+              '<div style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden" aria-hidden="true">' +
+                '<input type="text" name="website" tabindex="-1" autocomplete="off">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px" class="vu-math-label">What is ? + ?</label>' +
+                '<input type="number" name="math_answer" required placeholder="Type the answer" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<button type="submit" class="btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> Submit Feature Request</button>' +
+            '</form>' +
+          '</div>' +
+          '<div class="detail-sidebar">' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-cogs"></i> How It Works</h4>' +
+              '<ol style="padding-left:18px;margin:8px 0 0;font-size:13px;color:var(--text-muted);line-height:1.7">' +
+                '<li>You submit your idea below</li>' +
+                '<li>We review and assess feasibility</li>' +
+                '<li>Popular requests get prioritised</li>' +
+                '<li>We build it and let you know</li>' +
+              '</ol>' +
+            '</div>' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-fire"></i> Top Requested</h4>' +
+              '<ul style="padding-left:18px;margin:8px 0 0;font-size:13px;color:var(--text-muted);line-height:1.7">' +
+                '<li>Offline map downloads</li>' +
+                '<li>Group ride coordination</li>' +
+                '<li>Live traffic overlay</li>' +
+                '<li>Motorcycle-specific sat nav mode</li>' +
+              '</ul>' +
+            '</div>' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-envelope"></i> Prefer Email?</h4>' +
+              '<p>Send feature ideas directly to <a href="mailto:hello@visorup.co.uk" style="color:var(--accent)">hello@visorup.co.uk</a> or use our <a href="#contact" style="color:var(--accent)">contact page</a>.</p>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  renderBugReport() {
+    return '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Report a Bug</h1>' +
+        '<p class="page-hero-sub">Spotted something broken? Let us know and we\'ll fix it.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="detail-grid">' +
+          '<div class="detail-main">' +
+            '<h2 class="detail-heading">Report an Issue</h2>' +
+            '<p class="detail-text">Found a glitch, broken link, or something that\'s not working as expected? We take every report seriously. The more detail you can give us, the faster we can squash it.</p>' +
+
+            '<h3 style="margin-top:32px;margin-bottom:16px;font-size:16px;color:var(--text)"><i class="fas fa-bug" style="color:var(--accent);margin-right:8px"></i>Example reports</h3>' +
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px">' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-save" style="color:var(--accent);margin-right:6px"></i>Route builder won\'t save</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">Clicking save does nothing, console shows an error</p>' +
+              '</div>' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-map-marker-alt" style="color:var(--accent);margin-right:6px"></i>Fuel station marker wrong</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">The Shell on the A82 at Tyndrum shows as closed but it\'s open</p>' +
+              '</div>' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-mobile-alt" style="color:var(--accent);margin-right:6px"></i>Page won\'t load on mobile</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">The packing checklist page is blank on iPhone Safari</p>' +
+              '</div>' +
+              '<div class="info-card" style="margin-bottom:0">' +
+                '<h4 style="font-size:14px;margin-bottom:4px"><i class="fas fa-file-export" style="color:var(--accent);margin-right:6px"></i>GPX export missing waypoints</h4>' +
+                '<p style="font-size:13px;color:var(--text-muted);margin:0">Exported file only has start and end, missing intermediate stops</p>' +
+              '</div>' +
+            '</div>' +
+
+            '<form id="bugForm" style="margin-top:24px">' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Your Name</label>' +
+                '<input type="text" name="name" required placeholder="Full name" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Email Address</label>' +
+                '<input type="email" name="email" required placeholder="you@example.com" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Bug Title</label>' +
+                '<input type="text" name="title" required placeholder="e.g. Route builder won\'t save" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">What happened?</label>' +
+                '<textarea name="what_happened" required rows="4" placeholder="Describe what went wrong..." style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">What did you expect?</label>' +
+                '<textarea name="expected_behaviour" required rows="3" placeholder="What should have happened instead?" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Steps to reproduce</label>' +
+                '<textarea name="steps_to_reproduce" rows="3" placeholder="1. Go to route builder\n2. Add waypoints\n3. Click save..." style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Browser / Device</label>' +
+                '<input type="text" name="browser_device" placeholder="e.g. Chrome on iPhone 15, Safari on MacBook" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Screenshot URL <span style="font-weight:400;color:var(--text-muted)">(optional)</span></label>' +
+                '<input type="url" name="screenshot_url" placeholder="https://..." style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Severity</label>' +
+                '<select name="severity" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+                  '<option>Minor</option>' +
+                  '<option>Major</option>' +
+                  '<option>Critical</option>' +
+                '</select>' +
+              '</div>' +
+              '<div style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden" aria-hidden="true">' +
+                '<input type="text" name="website" tabindex="-1" autocomplete="off">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px" class="vu-math-label">What is ? + ?</label>' +
+                '<input type="number" name="math_answer" required placeholder="Type the answer" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<button type="submit" class="btn-primary" style="width:100%"><i class="fas fa-bug"></i> Submit Bug Report</button>' +
+            '</form>' +
+          '</div>' +
+          '<div class="detail-sidebar">' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-clipboard-check"></i> What Makes a Good Report</h4>' +
+              '<ul style="padding-left:18px;margin:8px 0 0;font-size:13px;color:var(--text-muted);line-height:1.7">' +
+                '<li>Be specific — include the page URL</li>' +
+                '<li>Describe what you expected vs what happened</li>' +
+                '<li>Include steps to reproduce the issue</li>' +
+                '<li>Mention your browser and device</li>' +
+                '<li>Screenshots help enormously</li>' +
+              '</ul>' +
+            '</div>' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-clock"></i> Response Time</h4>' +
+              '<p>Critical bugs are triaged within 24 hours. All other reports are reviewed within 48 hours. We\'ll email you when the fix is live.</p>' +
+            '</div>' +
+            '<div class="info-card">' +
+              '<h4><i class="fas fa-envelope"></i> Prefer Email?</h4>' +
+              '<p>Send bug reports directly to <a href="mailto:hello@visorup.co.uk" style="color:var(--accent)">hello@visorup.co.uk</a> or use our <a href="#contact" style="color:var(--accent)">contact page</a>.</p>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
   renderContact() {
     return '' +
-    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg">' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/routes.jpg)">' +
       '<div class="hero-overlay"></div>' +
       '<div class="page-hero-content">' +
         '<h1 class="page-hero-title">Contact Us</h1>' +
@@ -4430,37 +5000,42 @@ class VisorUpSite {
           '<div class="detail-main">' +
             '<h2 class="detail-heading">Get In Touch</h2>' +
             '<p class="detail-text">Whether you\'ve found a road we need to add, spotted an error in our data, want to suggest a feature, or just want to share your ride photos, we\'re all ears.</p>' +
-            '<form id="contactForm" style="margin-top:24px;">' +
-              '<div style="margin-bottom:16px;">' +
-                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">Your Name</label>' +
-                '<input type="text" name="name" required placeholder="Full name" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;">' +
+            '<form id="contactForm" style="margin-top:24px">' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Your Name</label>' +
+                '<input type="text" name="name" required placeholder="Full name" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
               '</div>' +
-              '<div style="margin-bottom:16px;">' +
-                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">Email Address</label>' +
-                '<input type="email" name="email" required placeholder="you@example.com" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;">' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Email Address</label>' +
+                '<input type="email" name="email" required placeholder="you@example.com" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
               '</div>' +
-              '<div style="margin-bottom:16px;">' +
-                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">Subject</label>' +
-                '<select name="subject" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;">' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Subject</label>' +
+                '<select name="subject" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
                   '<option>General Enquiry</option>' +
                   '<option>Route Suggestion</option>' +
-                  '<option>Data Correction</option>' +
-                  '<option>Feature Request</option>' +
                   '<option>Partnership / Advertising</option>' +
                   '<option>Press / Media</option>' +
-                  '<option>Bug Report</option>' +
+                  '<option>Other</option>' +
                 '</select>' +
               '</div>' +
-              '<div style="margin-bottom:16px;">' +
-                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">Message</label>' +
-                '<textarea name="message" required rows="6" placeholder="Tell us what\'s on your mind..." style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;resize:vertical;"></textarea>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Message</label>' +
+                '<textarea name="message" required rows="6" placeholder="Tell us what\'s on your mind..." style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;resize:vertical;box-sizing:border-box"></textarea>' +
               '</div>' +
-              '<div style="margin-bottom:16px;">' +
-                '<label style="font-size:12px;color:var(--text-muted);display:flex;align-items:flex-start;gap:8px;">' +
-                  '<input type="checkbox" name="newsletter" style="margin-top:3px;"> I\'d like to receive occasional emails about new routes, destination guides, and VisorUp updates. You can unsubscribe at any time.' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="font-size:12px;color:var(--text-muted);display:flex;align-items:flex-start;gap:8px">' +
+                  '<input type="checkbox" name="newsletter" style="margin-top:3px"> I\'d like to receive occasional emails about new routes, destination guides, and VisorUp updates. You can unsubscribe at any time.' +
                 '</label>' +
               '</div>' +
-              '<button type="submit" class="btn-primary" style="width:100%;"><i class="fas fa-paper-plane"></i> Send Message</button>' +
+              '<div style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden" aria-hidden="true">' +
+                '<input type="text" name="website" tabindex="-1" autocomplete="off">' +
+              '</div>' +
+              '<div style="margin-bottom:16px">' +
+                '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px" class="vu-math-label">What is ? + ?</label>' +
+                '<input type="number" name="math_answer" required placeholder="Type the answer" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;box-sizing:border-box">' +
+              '</div>' +
+              '<button type="submit" class="btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> Send Message</button>' +
             '</form>' +
           '</div>' +
           '<div class="detail-sidebar">' +
@@ -4475,11 +5050,11 @@ class VisorUpSite {
             '<div class="info-card">' +
               '<h4><i class="fab fa-instagram"></i> Social</h4>' +
               '<p>Follow us for ride photos, route tips, and community updates.</p>' +
-              '<p style="margin-top:8px;">' +
-                '<a href="#" style="color:var(--accent);margin-right:12px;font-size:18px;"><i class="fab fa-instagram"></i></a>' +
-                '<a href="#" style="color:var(--accent);margin-right:12px;font-size:18px;"><i class="fab fa-facebook"></i></a>' +
-                '<a href="#" style="color:var(--accent);margin-right:12px;font-size:18px;"><i class="fab fa-youtube"></i></a>' +
-                '<a href="#" style="color:var(--accent);font-size:18px;"><i class="fab fa-x-twitter"></i></a>' +
+              '<p style="margin-top:8px">' +
+                '<a href="#" style="color:var(--accent);margin-right:12px;font-size:18px"><i class="fab fa-instagram"></i></a>' +
+                '<a href="#" style="color:var(--accent);margin-right:12px;font-size:18px"><i class="fab fa-facebook"></i></a>' +
+                '<a href="#" style="color:var(--accent);margin-right:12px;font-size:18px"><i class="fab fa-youtube"></i></a>' +
+                '<a href="#" style="color:var(--accent);font-size:18px"><i class="fab fa-x-twitter"></i></a>' +
               '</p>' +
             '</div>' +
             '<div class="info-card">' +
