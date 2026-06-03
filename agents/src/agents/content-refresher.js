@@ -9,6 +9,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { execSync } from 'node:child_process';
 import Anthropic from '@anthropic-ai/sdk';
 import { google } from 'googleapis';
@@ -26,7 +28,7 @@ const GA4_PROPERTY = process.env.GA4_PROPERTY_ID;
 const SC_SITE = process.env.SEARCH_CONSOLE_SITE_URL || 'https://visorup.com';
 const SITE_URL = process.env.SITE_URL || 'https://visorup.com';
 const MAX_REFRESHES = 2;
-const WORK_DIR = process.env.WORK_DIR || process.cwd();
+const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
 
 /* ── Repo paths ─────────────────────────────────────────────────────── */
 function getRepoPaths() {

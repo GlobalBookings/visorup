@@ -50,7 +50,7 @@ function dateRange(daysAgo = 7) {
   const end = new Date();
   const start = new Date();
   start.setDate(end.getDate() - daysAgo);
-  const fmt = (d) => d.toISOString().slice(0, 10).replace(/-/g, '');
+  const fmt = (d) => d.toISOString().slice(0, 10);
   return { startDate: fmt(start), endDate: fmt(end) };
 }
 

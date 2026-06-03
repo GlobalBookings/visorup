@@ -10,6 +10,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { execSync } from 'node:child_process';
 import Anthropic from '@anthropic-ai/sdk';
 import { createLogger } from '../core/logger.js';
@@ -23,7 +25,7 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SITE_URL = process.env.SITE_URL || 'https://visorup.com';
-const WORK_DIR = process.env.WORK_DIR || process.cwd();
+const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
 
 /* ── Content templates ──────────────────────────────────────────────── */
 const CONTENT_TYPES = {

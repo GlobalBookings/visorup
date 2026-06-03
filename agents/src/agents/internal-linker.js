@@ -9,6 +9,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { execSync } from 'node:child_process';
 import { createLogger } from '../core/logger.js';
 import { sendSlack, slackHeader, slackSection, slackDivider } from '../core/slack.js';
@@ -19,7 +21,7 @@ const log = createLogger('internal-linker');
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SITE_URL = process.env.SITE_URL || 'https://visorup.com';
-const WORK_DIR = process.env.WORK_DIR || process.cwd();
+const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
 const MAX_LINKS_PER_ARTICLE = 5;
 const MIN_CONTENT_LENGTH = 500;
 
