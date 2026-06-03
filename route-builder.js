@@ -363,8 +363,14 @@ class RouteBuilder {
       .rb-wp-list-item.rb-drag-over{border-top:2px solid #D68A2D}
       .rb-wp-drag-handle{cursor:grab;color:#7a8a85;font-size:14px;flex-shrink:0;user-select:none}
       .rb-wp-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c0c8c5}
-      .rb-wp-mode-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:2px 4px;border-radius:4px;flex-shrink:0}
-      .rb-wp-mode-btn:hover{background:#2a3e38}
+      .rb-seg-mode-row{display:flex;align-items:center;gap:0;padding:0 8px;cursor:pointer;margin:2px 0}
+      .rb-seg-line{flex:1;height:2px;background:#2a3e38}
+      .rb-seg-line-fast{background:#666;background:repeating-linear-gradient(90deg,#666 0,#666 6px,transparent 6px,transparent 10px)}
+      .rb-seg-mode-btn{flex-shrink:0;background:#1a2e2a;border:1px solid #2a3e38;color:#7a8a85;cursor:pointer;font-size:10px;font-weight:600;padding:3px 10px;border-radius:12px;display:flex;align-items:center;gap:4px;transition:all .15s;text-transform:uppercase;letter-spacing:0.3px}
+      .rb-seg-mode-btn i{font-size:9px}
+      .rb-seg-mode-btn:hover{border-color:#D68A2D;color:#D68A2D}
+      .rb-seg-mode-fast{background:rgba(102,102,102,0.2);border-color:#666;color:#aaa}
+      .rb-seg-mode-fast:hover{border-color:#fff;color:#fff}
       .rb-wp-del-btn{background:none;border:none;cursor:pointer;font-size:12px;color:#ff7675;padding:2px 6px;border-radius:4px;flex-shrink:0}
       .rb-wp-del-btn:hover{background:#4a1a1a}
       .rb-suggest-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#152220;border:1px solid #2a3e38;border-radius:6px;font-size:12px;color:#D68A2D;margin-top:8px}
@@ -1159,9 +1165,6 @@ class RouteBuilder {
 
     for (var i = 0; i < this.waypoints.length; i++) {
       var name = this.waypointNames[i] || ('Waypoint ' + (i + 1));
-      var mode = this.segmentModes[i] || 'scenic';
-      var modeIcon = mode === 'fast' ? '\uD83C\uDFCE\uFE0F' : '\uD83C\uDFCD\uFE0F';
-      var modeTitle = mode === 'fast' ? 'Fast (motorway)' : 'Scenic';
       var showModeBtn = i < this.waypoints.length - 1;
 
       html += '<div class="rb-wp-list-item" draggable="true" data-wp-idx="' + i + '">' +
@@ -1169,20 +1172,29 @@ class RouteBuilder {
         '<span class="rb-wp-name" title="' + this._escAttr(name) + '">' +
           '<strong style="color:#D68A2D;margin-right:4px">' + (i + 1) + '.</strong>' + this._esc(name) +
         '</span>' +
-        (showModeBtn ?
-          '<button class="rb-wp-mode-btn" data-mode-idx="' + i + '" title="' + modeTitle + ' — click to toggle">' + modeIcon + '</button>' :
-          '') +
         '<button class="rb-wp-del-btn" data-del-idx="' + i + '" title="Remove">\u2715</button>' +
       '</div>';
+
+      if (showModeBtn) {
+        var mode = this.segmentModes[i] || 'scenic';
+        var isFast = mode === 'fast';
+        html += '<div class="rb-seg-mode-row" data-mode-idx="' + i + '" title="Click to switch between scenic and fast routing for this segment">' +
+          '<span class="rb-seg-line' + (isFast ? ' rb-seg-line-fast' : '') + '"></span>' +
+          '<button class="rb-seg-mode-btn' + (isFast ? ' rb-seg-mode-fast' : '') + '" data-mode-idx="' + i + '">' +
+            (isFast ? '<i class="fas fa-road"></i> Fast' : '<i class="fas fa-mountain"></i> Scenic') +
+          '</button>' +
+          '<span class="rb-seg-line' + (isFast ? ' rb-seg-line-fast' : '') + '"></span>' +
+        '</div>';
+      }
     }
 
     container.innerHTML = html;
 
-    // Bind mode toggle buttons
-    container.querySelectorAll('.rb-wp-mode-btn').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
+    // Bind mode toggle buttons (row and button)
+    container.querySelectorAll('.rb-seg-mode-row').forEach(function (row) {
+      row.addEventListener('click', function (e) {
         e.stopPropagation();
-        var idx = parseInt(btn.dataset.modeIdx);
+        var idx = parseInt(row.dataset.modeIdx);
         self._toggleSegmentMode(idx);
       });
     });
@@ -1364,11 +1376,7 @@ class RouteBuilder {
         var coordsStr = from.lng.toFixed(6) + ',' + from.lat.toFixed(6) + ';' +
           to.lng.toFixed(6) + ',' + to.lat.toFixed(6);
         var url = 'https://router.project-osrm.org/route/v1/driving/' + coordsStr +
-          '?overview=full&geometries=geojson&steps=true';
-
-        if (mode === 'fast') {
-          url += '&exclude=ferry';
-        }
+          '?overview=full&geometries=geojson&steps=true&alternatives=true';
 
         try {
           var resp = await fetch(url);
@@ -1376,7 +1384,22 @@ class RouteBuilder {
           var data = await resp.json();
 
           if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-            var route = data.routes[0];
+            var route;
+            if (mode === 'fast') {
+              // Pick the shortest duration route (fastest / motorway-biased)
+              route = data.routes.reduce(function(best, r) {
+                return r.duration < best.duration ? r : best;
+              }, data.routes[0]);
+            } else {
+              // Scenic: pick the longest distance route (more likely B-roads)
+              // but cap at 1.5x the shortest to avoid absurd detours
+              var shortest = data.routes[0];
+              var maxDist = shortest.distance * 1.5;
+              var scenic = data.routes.filter(function(r) { return r.distance <= maxDist; });
+              route = scenic.reduce(function(best, r) {
+                return r.distance > best.distance ? r : best;
+              }, scenic[0] || shortest);
+            }
             var coords = route.geometry.coordinates.map(function (c) { return [c[1], c[0]]; });
             segResults.push({
               coords: coords,
