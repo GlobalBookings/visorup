@@ -594,6 +594,7 @@ class VisorUpSite {
         this.setTitle('Motorcycle Packing Checklist — What to Pack for a Bike Trip');
         this._setMeta({ description: 'Interactive motorcycle packing checklist for UK touring. Customised lists for day rides, weekend tours, camping trips, and European adventures. Never forget essential gear again.' });
         this.renderPackingChecklist();
+        VisorUpAnalytics.trackToolUsage('packing-checklist');
         this.scrollToTop();
         break;
 
@@ -603,6 +604,7 @@ class VisorUpSite {
         this.setTitle('Motorcycle Ride Cost Calculator — Trip Budget Planner');
         this._setMeta({ description: 'Calculate the cost of your next motorcycle trip. Fuel, accommodation, food, ferries — get a full breakdown and budget for UK touring.' });
         this.renderCostCalculator();
+        VisorUpAnalytics.trackToolUsage('cost-calculator');
         this.scrollToTop();
         break;
 
@@ -612,6 +614,7 @@ class VisorUpSite {
         this.setTitle('Motorcycle Riding Weather — 7-Day UK Forecast');
         this._setMeta({ description: 'Check riding weather for any UK location. 7-day forecast with riding verdicts, wind speeds, and rainfall — plan your ride around the best days.' });
         this.renderWeatherDashboard();
+        VisorUpAnalytics.trackToolUsage('weather');
         this.scrollToTop();
         break;
 
@@ -621,6 +624,7 @@ class VisorUpSite {
         this.setTitle('Sunrise & Sunset Times — Plan Your Riding Hours');
         this._setMeta({ description: 'Check sunrise, sunset, and golden hour times for any UK location. Maximise daylight riding hours and plan scenic photography stops.' });
         this.renderSunriseSunset();
+        VisorUpAnalytics.trackToolUsage('sunrise-sunset');
         this.scrollToTop();
         break;
 
@@ -630,6 +634,7 @@ class VisorUpSite {
         this.setTitle('Motorcycle Service Tracker — Tyres, Chain, Oil & Servicing');
         this._setMeta({ description: 'Track tyre wear, chain maintenance, oil changes, and service intervals for every bike in your garage. Never miss a service before a big trip.' });
         this.renderServiceTracker();
+        VisorUpAnalytics.trackToolUsage('service-tracker');
         this.scrollToTop();
         break;
 
@@ -639,6 +644,7 @@ class VisorUpSite {
         this.setTitle('MOT & Tax Tracker — Motorcycle Expiry Reminders');
         this._setMeta({ description: 'Track MOT, tax, and insurance expiry dates for all your bikes. Clear dashboard with countdown warnings so you never ride with expired documents.' });
         this.renderMOTChecker();
+        VisorUpAnalytics.trackToolUsage('mot-tax');
         this.scrollToTop();
         break;
 
@@ -648,6 +654,7 @@ class VisorUpSite {
         this.setTitle('Emergency Info Card — ICE Details for Motorcyclists');
         this._setMeta({ description: 'Create a printable emergency card with your ICE contacts, medical info, bike details, and breakdown cover. Carry it in your jacket — it could save your life.' });
         this.renderEmergencyCard();
+        VisorUpAnalytics.trackToolUsage('emergency-card');
         this.scrollToTop();
         break;
 
@@ -656,6 +663,7 @@ class VisorUpSite {
         this.pageContent.innerHTML = '<div id="routeBuilderContainer" style="height:calc(100vh - 60px);width:100%;"></div>';
         this.setActiveNav('planning');
         this.setTitle('Build Your Own Route');
+        VisorUpAnalytics.trackToolUsage('build-route');
         this._setMeta({ description: 'Free interactive motorcycle route builder — drag-and-drop waypoints, road-accurate routing, elevation profiles, fuel stations, and GPX export.' });
         if (typeof RouteBuilder !== 'undefined') {
           setTimeout(async function() {
@@ -737,6 +745,7 @@ class VisorUpSite {
             this._setMeta({ description: article.metaDescription, image: article.heroImage, type: 'article' });
             this._injectJsonLd(article);
             this._bindShareCopyBtns();
+            VisorUpAnalytics.trackGuideView(article.slug, article.category);
             this.scrollToTop();
           } else {
             this.pageContent.innerHTML = this.render404();
@@ -792,6 +801,13 @@ class VisorUpSite {
           this.renderSharedTrip(parts[1]);
           this.scrollToTop();
         }
+        break;
+
+      case 'iron-horse-hq':
+        this.showSiteView();
+        this.renderAdminDashboard();
+        this.setTitle('HQ Dashboard');
+        this.scrollToTop();
         break;
 
       case 'about':
@@ -4076,6 +4092,151 @@ class VisorUpSite {
     '</section>';
   }
 
+  renderAdminDashboard() {
+    var self = this;
+    var savedPass = sessionStorage.getItem('vu_admin_auth');
+    if (savedPass !== 'ironhorse2026') {
+      this.pageContent.innerHTML = '' +
+        '<section class="page-section" style="min-height:80vh;display:flex;align-items:center;justify-content:center">' +
+          '<div style="text-align:center;max-width:360px">' +
+            '<i class="fas fa-lock" style="font-size:40px;color:var(--accent);margin-bottom:16px;display:block"></i>' +
+            '<h2 style="margin:0 0 8px">HQ Access</h2>' +
+            '<p style="color:var(--text-muted);font-size:13px;margin:0 0 20px">Enter the passphrase to continue.</p>' +
+            '<input type="password" id="adminPassInput" style="width:100%;padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;text-align:center;font-family:inherit;box-sizing:border-box" placeholder="Passphrase">' +
+            '<button class="btn-primary" id="adminPassBtn" style="margin-top:12px;width:100%;padding:12px"><i class="fas fa-key"></i> Enter</button>' +
+            '<p id="adminPassError" style="color:#ff4444;font-size:12px;margin-top:10px;display:none">Incorrect passphrase.</p>' +
+          '</div>' +
+        '</section>';
+      document.getElementById('adminPassBtn').addEventListener('click', function() {
+        var val = document.getElementById('adminPassInput').value;
+        if (val === 'ironhorse2026') {
+          sessionStorage.setItem('vu_admin_auth', val);
+          self.renderAdminDashboard();
+        } else {
+          document.getElementById('adminPassError').style.display = '';
+        }
+      });
+      document.getElementById('adminPassInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') document.getElementById('adminPassBtn').click();
+      });
+      return;
+    }
+
+    // Gather stats
+    var communityData = {};
+    try { communityData = JSON.parse(localStorage.getItem('vu_community')) || {}; } catch(e) {}
+    var posts = communityData.posts || [];
+    var totalLikes = 0;
+    var totalComments = 0;
+    posts.forEach(function(p) { totalLikes += (p.likeCount || 0); totalComments += (p.commentCount || 0); });
+
+    var gamData = {};
+    try { gamData = JSON.parse(localStorage.getItem('vu_gamification')) || {}; } catch(e) {}
+    var rides = gamData.rideLog || [];
+    var totalMiles = rides.reduce(function(s, r) { return s + (r.miles || 0); }, 0);
+    var badges = gamData.badges || [];
+    var destinations = gamData.visitedDestinations || [];
+
+    var garageBikes = [];
+    try { garageBikes = JSON.parse(localStorage.getItem('vu_garage_local')) || []; } catch(e) {}
+
+    var follows = [];
+    try { follows = JSON.parse(localStorage.getItem('vu_follows')) || []; } catch(e) {}
+
+    var motReminders = [];
+    try { motReminders = JSON.parse(localStorage.getItem('vu_mot_reminders')) || []; } catch(e) {}
+
+    // Top tags
+    var tagCounts = {};
+    posts.forEach(function(p) { (p.tags || []).forEach(function(t) { tagCounts[t] = (tagCounts[t] || 0) + 1; }); });
+    var topTags = Object.keys(tagCounts).sort(function(a, b) { return tagCounts[b] - tagCounts[a]; }).slice(0, 10);
+
+    // Recent posts
+    var recentPosts = posts.slice(0, 5);
+
+    function statCard(icon, label, value, colour) {
+      return '<div class="admin-stat">' +
+        '<div class="admin-stat-icon" style="background:' + (colour || 'rgba(214,138,45,0.12)') + '"><i class="fas ' + icon + '" style="color:' + (colour ? '#fff' : 'var(--accent)') + '"></i></div>' +
+        '<div class="admin-stat-info"><div class="admin-stat-value">' + value + '</div><div class="admin-stat-label">' + label + '</div></div>' +
+      '</div>';
+    }
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px">' +
+          '<div><h1 style="margin:0;font-size:24px"><i class="fas fa-motorcycle" style="color:var(--accent);margin-right:8px"></i>Iron Horse HQ</h1>' +
+          '<p style="color:var(--text-muted);font-size:13px;margin:4px 0 0">Admin dashboard &mdash; high-level metrics</p></div>' +
+          '<button class="btn-outline" id="adminLogout" style="font-size:12px;padding:8px 16px"><i class="fas fa-sign-out-alt"></i> Lock</button>' +
+        '</div>' +
+
+        '<div class="admin-stats-grid">' +
+          statCard('fa-pen-fancy', 'Community Posts', posts.length) +
+          statCard('fa-heart', 'Total Likes', totalLikes) +
+          statCard('fa-comment', 'Total Comments', totalComments) +
+          statCard('fa-motorcycle', 'Rides Logged', rides.length) +
+          statCard('fa-road', 'Total Miles', totalMiles.toLocaleString()) +
+          statCard('fa-medal', 'Badges Earned', badges.length) +
+          statCard('fa-map-pin', 'Destinations Visited', destinations.length) +
+          statCard('fa-warehouse', 'Garage Bikes', garageBikes.length) +
+          statCard('fa-user-friends', 'Follows', follows.length) +
+          statCard('fa-file-circle-check', 'MOT Reminders', motReminders.length) +
+        '</div>' +
+
+        '<div class="admin-grid">' +
+          '<div class="admin-card">' +
+            '<h3><i class="fas fa-hashtag" style="color:var(--accent)"></i> Top Tags</h3>' +
+            (topTags.length > 0 ? topTags.map(function(t, i) {
+              return '<div class="admin-tag-row"><span class="admin-tag-rank">' + (i + 1) + '</span><span class="admin-tag-name">#' + t + '</span><span class="admin-tag-count">' + tagCounts[t] + ' posts</span></div>';
+            }).join('') : '<p style="color:var(--text-muted);font-size:13px">No tags yet.</p>') +
+          '</div>' +
+
+          '<div class="admin-card">' +
+            '<h3><i class="fas fa-clock" style="color:var(--accent)"></i> Recent Posts</h3>' +
+            (recentPosts.length > 0 ? recentPosts.map(function(p) {
+              var date = new Date(p.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+              return '<div class="admin-post-row">' +
+                '<div class="admin-post-info"><strong>' + (p.title || 'Untitled') + '</strong><span>' + p.userName + ' &middot; ' + date + '</span></div>' +
+                '<div class="admin-post-stats"><span><i class="fas fa-heart"></i> ' + (p.likeCount || 0) + '</span><span><i class="fas fa-comment"></i> ' + (p.commentCount || 0) + '</span></div>' +
+              '</div>';
+            }).join('') : '<p style="color:var(--text-muted);font-size:13px">No posts yet.</p>') +
+          '</div>' +
+
+          '<div class="admin-card">' +
+            '<h3><i class="fas fa-chart-line" style="color:var(--accent)"></i> GA4 Analytics</h3>' +
+            '<p style="color:var(--text-secondary);font-size:13px;line-height:1.6">Full traffic data, guide views, tool usage, and affiliate clickouts are tracked in Google Analytics.</p>' +
+            '<a href="https://analytics.google.com/analytics/web/#/p/G-HXLLQLTLP0" target="_blank" class="btn-primary" style="display:inline-block;font-size:13px;padding:10px 20px;text-decoration:none;margin-top:8px"><i class="fas fa-chart-bar"></i> Open GA4 Dashboard</a>' +
+            '<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
+              '<h4 style="font-size:12px;color:var(--text-muted);margin:0 0 8px;text-transform:uppercase;letter-spacing:0.5px">Events Being Tracked</h4>' +
+              '<div style="font-size:12px;color:var(--text-secondary);line-height:2">' +
+                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">tool_used</code>' +
+                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">guide_viewed</code>' +
+                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">affiliate_click</code>' +
+                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">button_click</code>' +
+                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">community_post</code>' +
+                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">sign_up</code>' +
+                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px">page_view</code>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="admin-card">' +
+            '<h3><i class="fas fa-link" style="color:var(--accent)"></i> Affiliate Tracking</h3>' +
+            '<p style="color:var(--text-secondary);font-size:13px;line-height:1.6">All SportsBikeShop clickouts fire <code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px">affiliate_click</code> events to GA4 with product name, source page, and outbound URL.</p>' +
+            '<p style="color:var(--text-secondary);font-size:13px;margin-top:8px">View in GA4: <strong>Reports &rarr; Engagement &rarr; Events &rarr; affiliate_click</strong></p>' +
+            '<p style="color:var(--text-muted);font-size:12px;margin-top:12px">Tracking ID: <code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px">#/28914,3714,0</code> &middot; 160 product links active</p>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>' +
+    '</section>';
+
+    document.getElementById('adminLogout').addEventListener('click', function() {
+      sessionStorage.removeItem('vu_admin_auth');
+      self.navigate('/');
+    });
+  }
+
   renderAbout() {
     return '' +
     '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg">' +
@@ -5950,6 +6111,59 @@ class VisorUpSite {
   }
 }
 
+
+// ── GA4 Event Tracking ──────────────────────────────────────────
+
+const VisorUpAnalytics = {
+  track(eventName, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params || {});
+    }
+  },
+
+  trackPageView(page) {
+    this.track('page_view', { page_path: page, page_title: document.title });
+  },
+
+  trackToolUsage(tool) {
+    this.track('tool_used', { tool_name: tool });
+  },
+
+  trackGuideView(slug, category) {
+    this.track('guide_viewed', { guide_slug: slug, guide_category: category });
+  },
+
+  trackAffiliateClick(url, productName, sourcePage) {
+    this.track('affiliate_click', {
+      affiliate_url: url,
+      product_name: productName || '',
+      source_page: sourcePage || window.location.pathname,
+      affiliate_partner: 'sportsbikeshop'
+    });
+  },
+
+  trackButtonClick(buttonName, context) {
+    this.track('button_click', { button_name: buttonName, context: context || '' });
+  },
+
+  trackSignup() {
+    this.track('sign_up', { method: 'email' });
+  },
+
+  trackCommunityPost() {
+    this.track('community_post', { page: '/community' });
+  }
+};
+
+// Intercept all affiliate clicks globally
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a[href*="sportsbikeshop.co.uk"]');
+  if (link) {
+    var productEl = link.querySelector('strong') || link.querySelector('.article-affiliate-name');
+    var productName = productEl ? productEl.textContent.trim() : link.textContent.trim().substring(0, 60);
+    VisorUpAnalytics.trackAffiliateClick(link.href, productName, window.location.pathname);
+  }
+});
 
 // ── Initialise ──────────────────────────────────────────────────
 
