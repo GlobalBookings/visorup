@@ -3028,6 +3028,20 @@ class VisorUpSite {
           '</div>' +
         '</div>' +
 
+        (typeof VisorUpGamification !== 'undefined' ? (function() {
+          VisorUpGamification.checkActivityBadges(trips, favs, garageBikes);
+          var stats = VisorUpGamification.getStats();
+          return '<div class="profile-section">' +
+            VisorUpGamification.renderLevelBadge() +
+            '<div class="profile-stats-row">' +
+              '<div class="profile-stat-card"><span class="profile-stat-val">' + stats.rideCount + '</span><span class="profile-stat-label">Rides</span></div>' +
+              '<div class="profile-stat-card"><span class="profile-stat-val">' + stats.totalMiles.toLocaleString() + '</span><span class="profile-stat-label">Miles</span></div>' +
+              '<div class="profile-stat-card"><span class="profile-stat-val">' + stats.badgeCount + '/' + stats.totalBadges + '</span><span class="profile-stat-label">Badges</span></div>' +
+              '<div class="profile-stat-card"><span class="profile-stat-val">' + stats.destinationsVisited + '/' + stats.totalDestinations + '</span><span class="profile-stat-label">Destinations</span></div>' +
+            '</div>' +
+          '</div>';
+        })() : '') +
+
         '<div class="profile-section">' +
           '<h3><i class="fas fa-warehouse"></i> My Garage (' + garageBikes.length + ') <button class="garage-add-trigger" id="garageAddTrigger"><i class="fas fa-plus"></i> Add Bike</button></h3>' +
           garageHTML +
@@ -3043,6 +3057,34 @@ class VisorUpSite {
           '<h3><i class="fas fa-heart"></i> Favourites (' + favs.length + ')</h3>' +
           favsHTML +
         '</div>' +
+
+        (typeof VisorUpGamification !== 'undefined' ? '' +
+        '<div class="profile-section">' +
+          '<h3><i class="fas fa-motorcycle"></i> Ride Log <button class="garage-add-trigger" id="rideLogAddTrigger"><i class="fas fa-plus"></i> Log a Ride</button></h3>' +
+          '<div class="ride-log-form" id="rideLogForm" style="display:none">' +
+            '<div class="garage-form-grid">' +
+              '<div><label>Ride Name *</label><input type="text" id="rideLogName" placeholder="e.g. NC500 Day 1"></div>' +
+              '<div><label>Date *</label><input type="date" id="rideLogDate" value="' + new Date().toISOString().split('T')[0] + '"></div>' +
+              '<div><label>Miles</label><input type="number" id="rideLogMiles" placeholder="e.g. 180"></div>' +
+              '<div><label>Rating</label><select id="rideLogRating" class="garage-select"><option value="">Rate...</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select></div>' +
+            '</div>' +
+            '<div style="margin-top:8px"><label>Notes</label><input type="text" id="rideLogNotes" placeholder="Weather, highlights, memories..." style="width:100%"></div>' +
+            '<div class="garage-form-actions"><button class="btn-primary" id="rideLogSaveBtn" style="font-size:13px;padding:10px 20px;"><i class="fas fa-plus"></i> Log Ride</button><button class="btn-outline" id="rideLogCancelBtn" style="font-size:13px;padding:10px 20px;">Cancel</button></div>' +
+          '</div>' +
+          VisorUpGamification.renderRideLog() +
+        '</div>' +
+
+        '<div class="profile-section">' +
+          '<h3><i class="fas fa-map"></i> Scratch Map</h3>' +
+          '<p class="section-desc" style="text-align:left;margin:0 0 16px;font-size:13px;color:var(--text-muted)">Tick off destinations as you ride them. Complete all regions to earn badges.</p>' +
+          VisorUpGamification.renderScratchMap() +
+        '</div>' +
+
+        '<div class="profile-section">' +
+          '<h3><i class="fas fa-medal"></i> Badges (' + VisorUpGamification.getEarnedBadges().length + '/' + BADGES.length + ')</h3>' +
+          VisorUpGamification.renderBadgeGrid() +
+        '</div>' : '') +
+
       '</div>' +
     '</section>' + this.renderFooter();
 
@@ -3273,6 +3315,63 @@ class VisorUpSite {
           await VisorUpGarage.remove(btn.dataset.bikeId);
           btn.closest('.garage-card').remove();
         } catch (e) { console.error(e); }
+      });
+    });
+
+    // Ride log
+    var rideLogTrigger = document.getElementById('rideLogAddTrigger');
+    var rideLogForm = document.getElementById('rideLogForm');
+    if (rideLogTrigger && rideLogForm) {
+      rideLogTrigger.addEventListener('click', function() {
+        rideLogForm.style.display = rideLogForm.style.display === 'none' ? '' : 'none';
+      });
+      document.getElementById('rideLogCancelBtn').addEventListener('click', function() {
+        rideLogForm.style.display = 'none';
+      });
+      document.getElementById('rideLogSaveBtn').addEventListener('click', function() {
+        var name = document.getElementById('rideLogName').value.trim();
+        var date = document.getElementById('rideLogDate').value;
+        if (!name || !date) { alert('Name and date are required'); return; }
+        VisorUpGamification.logRide({
+          name: name,
+          date: date,
+          miles: parseInt(document.getElementById('rideLogMiles').value) || 0,
+          rating: parseInt(document.getElementById('rideLogRating').value) || 0,
+          notes: document.getElementById('rideLogNotes').value.trim() || ''
+        });
+        self.renderProfile();
+      });
+    }
+    document.querySelectorAll('.ride-log-delete').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (!confirm('Delete this ride?')) return;
+        VisorUpGamification.deleteRide(btn.dataset.rideId);
+        btn.closest('.ride-log-item').remove();
+      });
+    });
+
+    // Scratch map
+    document.querySelectorAll('.scratch-dest').forEach(function(card) {
+      card.addEventListener('click', function() {
+        var slug = card.dataset.destSlug;
+        var visited = VisorUpGamification.getVisitedDestinations();
+        if (visited.indexOf(slug) !== -1) {
+          VisorUpGamification.unvisitDestination(slug);
+          card.classList.remove('scratch-visited');
+          card.querySelector('.scratch-check, .scratch-unvisited').outerHTML = '<div class="scratch-unvisited"><i class="fas fa-map-pin"></i></div>';
+        } else {
+          VisorUpGamification.visitDestination(slug);
+          card.classList.add('scratch-visited');
+          card.querySelector('.scratch-check, .scratch-unvisited').outerHTML = '<div class="scratch-check"><i class="fas fa-check-circle"></i></div>';
+        }
+        // Update progress bar
+        var allVisited = VisorUpGamification.getVisitedDestinations();
+        var total = typeof DESTINATIONS !== 'undefined' ? DESTINATIONS.length : 13;
+        var pct = Math.round((allVisited.length / total) * 100);
+        var progText = document.querySelector('.scratch-progress-text');
+        var progFill = document.querySelector('.scratch-progress-fill');
+        if (progText) progText.textContent = allVisited.length + ' / ' + total + ' destinations visited (' + pct + '%)';
+        if (progFill) progFill.style.width = pct + '%';
       });
     });
   }

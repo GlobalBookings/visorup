@@ -3636,3 +3636,73 @@ ul, ol { list-style: none; }
   .builder-preview-body { grid-template-columns:1fr; }
   .builder-preview-map { min-height:120px; }
 }
+
+/* ── Rider Level Badge ─────────────────────────────── */
+.rider-level-badge { display:flex; align-items:center; gap:16px; padding:16px 20px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; }
+.rider-level-icon { font-size:32px; flex-shrink:0; }
+.rider-level-info { flex:1; min-width:0; }
+.rider-level-name { font-size:15px; font-weight:700; margin-bottom:2px; }
+.rider-level-xp { font-size:12px; color:var(--text-muted); margin-bottom:6px; }
+.rider-level-bar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+.rider-level-fill { height:100%; border-radius:3px; transition:width 0.6s ease; }
+
+/* ── Profile Stats Row ─────────────────────────────── */
+.profile-stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.profile-stat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:14px; text-align:center; }
+.profile-stat-val { display:block; font-size:22px; font-weight:800; color:var(--accent); }
+.profile-stat-label { display:block; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; margin-top:2px; }
+
+/* ── Badge Grid ────────────────────────────────────── */
+.badge-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; }
+.badge-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:14px 10px; text-align:center; position:relative; transition:all var(--transition); }
+.badge-earned { border-color:var(--accent); }
+.badge-earned .badge-icon { color:var(--accent); }
+.badge-locked { opacity:0.4; }
+.badge-locked .badge-icon { color:var(--text-muted); }
+.badge-icon { font-size:24px; margin-bottom:6px; }
+.badge-name { font-size:11px; font-weight:600; color:var(--text-primary); line-height:1.3; }
+.badge-date { font-size:9px; color:var(--text-muted); margin-top:4px; }
+.badge-locked-label { font-size:10px; color:var(--text-muted); margin-top:4px; }
+
+/* ── Ride Log ──────────────────────────────────────── */
+.ride-log-form { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:16px; }
+.ride-log-form label { display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
+.ride-log-form input, .ride-log-form select { width:100%; padding:9px 12px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-size:13px; font-family:inherit; }
+.ride-log-list { display:flex; flex-direction:column; gap:6px; }
+.ride-log-item { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-sm); }
+.ride-log-icon { color:var(--accent); font-size:16px; flex-shrink:0; }
+.ride-log-info { flex:1; min-width:0; }
+.ride-log-name { font-size:13px; font-weight:600; color:var(--text-primary); }
+.ride-log-meta { font-size:11px; color:var(--text-muted); margin-top:2px; }
+.ride-log-delete { background:none; border:none; color:#ff7675; cursor:pointer; font-size:12px; padding:4px 8px; border-radius:4px; flex-shrink:0; }
+.ride-log-delete:hover { background:rgba(255,118,117,0.1); }
+
+/* ── Scratch Map ───────────────────────────────────── */
+.scratch-map-header { margin-bottom:16px; }
+.scratch-progress-text { font-size:13px; color:var(--text-secondary); margin-bottom:6px; }
+.scratch-progress-bar { height:8px; background:var(--border); border-radius:4px; overflow:hidden; }
+.scratch-progress-fill { height:100%; background:var(--accent); border-radius:4px; transition:width 0.4s ease; }
+.scratch-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; }
+.scratch-dest { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; transition:all var(--transition); position:relative; }
+.scratch-dest:hover { border-color:var(--accent); transform:translateY(-2px); }
+.scratch-visited { border-color:var(--accent); }
+.scratch-dest-img { height:80px; background-size:cover; background-position:center; position:relative; }
+.scratch-visited .scratch-dest-img { filter:none; }
+.scratch-dest:not(.scratch-visited) .scratch-dest-img { filter:grayscale(1) brightness(0.5); }
+.scratch-check { position:absolute; top:6px; right:6px; color:#6BCB77; font-size:18px; text-shadow:0 1px 4px rgba(0,0,0,0.5); }
+.scratch-unvisited { position:absolute; top:6px; right:6px; color:var(--text-muted); font-size:14px; opacity:0.6; }
+.scratch-dest-info { padding:8px 10px; }
+.scratch-dest-name { display:block; font-size:12px; font-weight:600; color:var(--text-primary); }
+.scratch-dest-region { display:block; font-size:10px; color:var(--text-muted); margin-top:2px; }
+
+/* ── Gamification Responsive ───────────────────────── */
+@media (max-width:768px) {
+  .profile-stats-row { grid-template-columns:repeat(2,1fr); }
+  .badge-grid { grid-template-columns:repeat(3,1fr); }
+  .scratch-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:480px) {
+  .badge-grid { grid-template-columns:repeat(2,1fr); }
+  .scratch-grid { grid-template-columns:repeat(2,1fr); }
+  .rider-level-badge { flex-direction:column; text-align:center; }
+}
