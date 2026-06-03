@@ -580,9 +580,10 @@ class VisorUpSite {
 
       case 'community':
         this.showSiteView();
-        this.pageContent.innerHTML = this.renderComingSoon('Community', 'Connect with fellow riders, share routes, plan group tours, and swap stories from the tarmac.', 'fa-users') + this.renderFooter();
         this.setActiveNav('community');
-        this.setTitle('Community — Coming Soon');
+        this.setTitle('Community');
+        this._setMeta({ description: 'VisorUp rider community — ride reports, activity feed, and shared adventures from motorcyclists across Britain.' });
+        this.renderCommunity();
         this.scrollToTop();
         break;
 
@@ -1680,6 +1681,174 @@ class VisorUpSite {
         '</div>' +
       '</div>' +
     '</section>';
+  }
+
+  renderCommunity() {
+    if (typeof VisorUpCommunity === 'undefined') {
+      this.pageContent.innerHTML = this.renderComingSoon('Community', 'Coming soon.', 'fa-users') + this.renderFooter();
+      return;
+    }
+
+    var feed = VisorUpCommunity.generateActivityFeed();
+    var feedHTML = '';
+    if (feed.length === 0) {
+      feedHTML = '<div class="feed-empty"><i class="fas fa-motorcycle"></i><p>No activity yet. Log a ride, visit a destination, or post a ride report to get started!</p></div>';
+    } else {
+      feedHTML = feed.map(function(item) { return VisorUpCommunity.renderPostCard(item); }).join('');
+    }
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Community</h1>' +
+        '<p class="page-hero-sub">Ride reports, shared adventures, and activity from riders across Britain.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="feed-layout">' +
+          '<div class="feed-main">' +
+            '<div class="feed-compose">' +
+              '<div class="feed-compose-header"><i class="fas fa-pen"></i> Share a Ride Report</div>' +
+              '<input type="text" id="feedPostTitle" class="feed-compose-title" placeholder="Give your ride a title...">' +
+              '<textarea id="feedPostBody" class="feed-compose-body" placeholder="Tell us about your ride — the roads, the weather, the highlights..." rows="3"></textarea>' +
+              '<div class="feed-compose-meta">' +
+                '<input type="number" id="feedPostMiles" placeholder="Miles" style="width:80px">' +
+                '<input type="text" id="feedPostBike" placeholder="Bike">' +
+                '<select id="feedPostRating" class="garage-select" style="width:100px"><option value="">Rating</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>' +
+                '<input type="text" id="feedPostTags" placeholder="Tags (comma separated)">' +
+              '</div>' +
+              '<div class="feed-compose-actions">' +
+                '<button class="btn-primary" id="feedPostSubmit" style="font-size:13px;padding:10px 20px;"><i class="fas fa-paper-plane"></i> Post</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="feed-filter-bar">' +
+              '<button class="feed-filter-btn feed-filter-active" data-feed-filter="all"><i class="fas fa-stream"></i> All</button>' +
+              '<button class="feed-filter-btn" data-feed-filter="ride-report"><i class="fas fa-pen"></i> Reports</button>' +
+              '<button class="feed-filter-btn" data-feed-filter="activity"><i class="fas fa-bolt"></i> Activity</button>' +
+            '</div>' +
+            '<div id="feedList">' + feedHTML + '</div>' +
+          '</div>' +
+          '<div class="feed-sidebar">' +
+            (typeof VisorUpGamification !== 'undefined' ? '' +
+              '<div class="feed-sidebar-card">' +
+                '<h4><i class="fas fa-chart-line"></i> Your Stats</h4>' +
+                VisorUpGamification.renderLevelBadge() +
+              '</div>' : '') +
+            '<div class="feed-sidebar-card">' +
+              '<h4><i class="fas fa-fire"></i> Quick Actions</h4>' +
+              '<a href="/build-route" class="feed-quick-link"><i class="fas fa-pencil-ruler"></i> Build a Route</a>' +
+              '<a href="/guides" class="feed-quick-link"><i class="fas fa-book-open"></i> Browse Guides</a>' +
+              '<a href="/destinations" class="feed-quick-link"><i class="fas fa-map-pin"></i> Explore Destinations</a>' +
+              '<a href="/profile" class="feed-quick-link"><i class="fas fa-user"></i> My Profile</a>' +
+            '</div>' +
+            '<div class="feed-sidebar-card">' +
+              '<h4><i class="fas fa-medal"></i> Recent Badges</h4>' +
+              (typeof VisorUpGamification !== 'undefined' ? (function() {
+                var badges = VisorUpGamification.getEarnedBadges().slice(-5).reverse();
+                if (badges.length === 0) return '<p style="font-size:12px;color:var(--text-muted)">No badges yet. Start riding!</p>';
+                return badges.map(function(b) {
+                  var badge = BADGES.find(function(bd) { return bd.id === b.id; });
+                  if (!badge) return '';
+                  return '<div class="feed-badge-mini"><i class="fas ' + badge.icon + '"></i> ' + badge.name + '</div>';
+                }).join('');
+              })() : '') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>' + this.renderFooter();
+
+    var self = this;
+
+    // Post submission
+    document.getElementById('feedPostSubmit').addEventListener('click', async function() {
+      var title = document.getElementById('feedPostTitle').value.trim();
+      var body = document.getElementById('feedPostBody').value.trim();
+      if (!title && !body) { alert('Write something to share!'); return; }
+      var tags = document.getElementById('feedPostTags').value.trim();
+      await VisorUpCommunity.createPost({
+        type: 'ride-report',
+        title: title,
+        body: body,
+        miles: parseInt(document.getElementById('feedPostMiles').value) || 0,
+        bike: document.getElementById('feedPostBike').value.trim(),
+        rating: parseInt(document.getElementById('feedPostRating').value) || 0,
+        tags: tags ? tags.split(',').map(function(t) { return t.trim(); }).filter(Boolean) : []
+      });
+      self.renderCommunity();
+      self.scrollToTop();
+    });
+
+    // Feed filters
+    document.querySelectorAll('.feed-filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.feed-filter-btn').forEach(function(b) { b.classList.remove('feed-filter-active'); });
+        btn.classList.add('feed-filter-active');
+        var filter = btn.dataset.feedFilter;
+        document.querySelectorAll('#feedList > *').forEach(function(el) {
+          if (filter === 'all') { el.style.display = ''; return; }
+          var isPost = el.classList.contains('feed-post');
+          var isActivity = el.classList.contains('feed-activity-item');
+          if (filter === 'ride-report') el.style.display = isPost ? '' : 'none';
+          else if (filter === 'activity') el.style.display = isActivity ? '' : 'none';
+        });
+      });
+    });
+
+    // Likes
+    document.querySelectorAll('.feed-like-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var postId = btn.dataset.postId;
+        var nowLiked = VisorUpCommunity.toggleLike(postId);
+        btn.classList.toggle('feed-liked', nowLiked);
+        var count = parseInt(btn.textContent.trim().split(' ').pop()) || 0;
+        btn.innerHTML = '<i class="fas fa-heart"></i> ' + (nowLiked ? count + 1 : Math.max(0, count - 1));
+      });
+    });
+
+    // Comment toggles
+    document.querySelectorAll('.feed-comment-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var postId = btn.dataset.postId;
+        var section = document.getElementById('comments-' + postId);
+        if (!section) return;
+        var isOpen = section.style.display !== 'none';
+        section.style.display = isOpen ? 'none' : '';
+        if (!isOpen) {
+          section.innerHTML = VisorUpCommunity.renderCommentSection(postId);
+          self._bindCommentForm(section, postId);
+        }
+      });
+    });
+
+    this._initLazyImages();
+  }
+
+  _bindCommentForm(section, postId) {
+    var self = this;
+    var input = section.querySelector('.feed-comment-input');
+    var sendBtn = section.querySelector('.feed-comment-send');
+    if (!input || !sendBtn) return;
+
+    function submitComment() {
+      var text = input.value.trim();
+      if (!text) return;
+      VisorUpCommunity.addComment(postId, text).then(function() {
+        section.innerHTML = VisorUpCommunity.renderCommentSection(postId);
+        self._bindCommentForm(section, postId);
+        // Update comment count on button
+        var btn = document.querySelector('.feed-comment-toggle[data-post-id="' + postId + '"]');
+        if (btn) {
+          var comments = VisorUpCommunity.getComments(postId);
+          btn.innerHTML = '<i class="fas fa-comment"></i> ' + comments.length;
+        }
+      });
+    }
+
+    sendBtn.addEventListener('click', submitComment);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitComment(); });
   }
 
   renderComingSoon(title, desc, icon) {
