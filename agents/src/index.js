@@ -72,13 +72,13 @@ app.post('/trigger/:agent', async (req, res) => {
 });
 
 // ── Email webhook (from Resend) ───────────────────────────
-app.post('/email/incoming', (req, res) => {
+app.post('/email/incoming', async (req, res) => {
   res.sendStatus(200);
 
   try {
     const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     log.info(`Email webhook payload: ${JSON.stringify(data).slice(0, 500)}`);
-    const email = handleIncomingEmail(data);
+    const email = await handleIncomingEmail(data);
     if (email) log.info(`Webhook: email stored — ${email.from}: ${email.subject}`);
   } catch (err) {
     log.error(`Email webhook error: ${err.message}`);

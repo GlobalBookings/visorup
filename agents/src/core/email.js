@@ -55,24 +55,40 @@ export function verifyWebhook(payload, signature) {
   }
 }
 
-export function handleIncomingEmail(webhookData) {
+async function fetchEmailBody(emailId) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey || !emailId) return { text: '', html: '' };
+  try {
+    const res = await fetch(`https://api.resend.com/emails/receiving/${emailId}`, {
+      headers: { Authorization: `Bearer ${apiKey}` },
+    });
+    if (!res.ok) { log.info(`Resend API ${res.status} fetching body for ${emailId}`); return { text: '', html: '' }; }
+    const full = await res.json();
+    return { text: full.text || '', html: full.html || '' };
+  } catch (err) {
+    log.info(`Failed to fetch email body: ${err.message}`);
+    return { text: '', html: '' };
+  }
+}
+
+export async function handleIncomingEmail(webhookData) {
   const type = webhookData.type;
   const data = webhookData.data || {};
 
-  // Log raw payload for debugging
   log.info(`Webhook type: ${type}, keys: ${Object.keys(data).join(', ')}`);
 
   if (type === 'email.received') {
-    // Resend webhook fields: from, to, subject, text, html, created_at
-    // May also be nested differently — try multiple paths
+    const resendId = data.email_id || data.id;
+    const body = await fetchEmailBody(resendId);
+
     const email = {
-      id: data.email_id || data.id || crypto.randomUUID(),
-      from: data.from || data.sender || data.reply_to || 'unknown',
-      to: data.to || data.recipients || [],
+      id: resendId || crypto.randomUUID(),
+      from: data.from || 'unknown',
+      to: data.to || [],
       subject: data.subject || '(no subject)',
-      text: data.text || data.body || data.plain_text || '',
-      html: data.html || data.body_html || '',
-      date: data.created_at || data.timestamp || new Date().toISOString(),
+      text: body.text,
+      html: body.html,
+      date: data.created_at || new Date().toISOString(),
       read: false,
     };
 
@@ -81,14 +97,15 @@ export function handleIncomingEmail(webhookData) {
     if (inbox.length > 500) inbox.length = 500;
     saveInbox(inbox);
 
-    log.info(`Email stored — from: ${email.from}, subject: ${email.subject}`);
+    log.info(`Email stored — from: ${email.from}, subject: ${email.subject}, body: ${(email.text || email.html || '').length} chars`);
 
+    const previewText = (email.text || email.html?.replace(/<[^>]*>/g, '') || '').slice(0, 300);
     sendSlack([
       slackHeader('New Email — VisorUp'),
       slackSection(
         `:envelope: *${email.subject}*\n` +
         `From: *${email.from}*\n` +
-        `${(email.text || '').slice(0, 300)}${(email.text || '').length > 300 ? '...' : ''}`
+        `${previewText}${previewText.length >= 300 ? '...' : ''}`
       ),
       slackDivider(),
       slackSection('_Check the <https://visorup.co.uk/iron-horse-hq|admin panel> to reply._'),
@@ -97,46 +114,10 @@ export function handleIncomingEmail(webhookData) {
     return email;
   }
 
-  // For delivered/bounced events, also log but don't store
   if (type === 'email.delivered' || type === 'email.bounced') {
     log.info(`Email event: ${type} — ${data.email_id || data.id || 'unknown'}`);
-    return null;
   }
 
-  // If unknown type but has email-like fields, store it anyway
-  if (data.from || data.subject || data.sender) {
-    log.info(`Storing email from unrecognised webhook type: ${type}`);
-    const email = {
-      id: data.email_id || data.id || crypto.randomUUID(),
-      from: data.from || data.sender || 'unknown',
-      to: data.to || data.recipients || [],
-      subject: data.subject || '(no subject)',
-      text: data.text || data.body || data.plain_text || '',
-      html: data.html || data.body_html || '',
-      date: data.created_at || data.timestamp || new Date().toISOString(),
-      read: false,
-    };
-
-    const inbox = loadInbox();
-    inbox.unshift(email);
-    if (inbox.length > 500) inbox.length = 500;
-    saveInbox(inbox);
-
-    sendSlack([
-      slackHeader('New Email — VisorUp'),
-      slackSection(
-        `:envelope: *${email.subject}*\n` +
-        `From: *${email.from}*\n` +
-        `${(email.text || '').slice(0, 300)}${(email.text || '').length > 300 ? '...' : ''}`
-      ),
-      slackDivider(),
-      slackSection('_Check the <https://visorup.co.uk/iron-horse-hq|admin panel> to reply._'),
-    ], `New email from ${email.from}`).catch(() => {});
-
-    return email;
-  }
-
-  log.info(`Ignoring webhook: ${type}`);
   return null;
 }
 
