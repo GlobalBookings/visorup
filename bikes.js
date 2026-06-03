@@ -54,29 +54,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "BMW Vario Panniers", price: "£850", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Vario%20Panniers", note: "OEM fit, expandable, weatherproof" },
-          { name: "Givi Trekker Outback 48L", price: "£260 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%20Outback%2048L", note: "Rugged aluminium alternative" }
+          { name: "BMW Vario Panniers", price: "£850", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Vario%20Panniers#/28914,3714,0", note: "OEM fit, expandable, weatherproof" },
+          { name: "Givi Trekker Outback 48L", price: "£260 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%20Outback%2048L#/28914,3714,0", note: "Rugged aluminium alternative" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "SW-Motech Engine Guard", price: "£180", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Engine%20Guard", note: "Essential for gravel tracks" },
-          { name: "Touratech Skid Plate", price: "£220", url: "https://www.sportsbikeshop.co.uk/search/?search=Touratech%20Skid%20Plate", note: "Aluminium belly pan protection" }
+          { name: "SW-Motech Engine Guard", price: "£180", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Engine%20Guard#/28914,3714,0", note: "Essential for gravel tracks" },
+          { name: "Touratech Skid Plate", price: "£220", url: "https://www.sportsbikeshop.co.uk/search/?search=Touratech%20Skid%20Plate#/28914,3714,0", note: "Aluminium belly pan protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Sargent World Sport Seat", price: "£450", url: "https://www.sportsbikeshop.co.uk/search/?search=Sargent%20World%20Sport%20Seat", note: "All-day comfort upgrade" },
-          { name: "MRA Vario Touring Screen", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Vario%20Touring%20Screen", note: "Adjustable wind deflection" }
+          { name: "Sargent World Sport Seat", price: "£450", url: "https://www.sportsbikeshop.co.uk/search/?search=Sargent%20World%20Sport%20Seat#/28914,3714,0", note: "All-day comfort upgrade" },
+          { name: "MRA Vario Touring Screen", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Vario%20Touring%20Screen#/28914,3714,0", note: "Adjustable wind deflection" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger", note: "Keep devices charged on tour" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger#/28914,3714,0", note: "Keep devices charged on tour" }
         ]
       }
     ],
@@ -132,29 +132,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Triumph Expedition Panniers", price: "£780", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Expedition%20Panniers", note: "OEM aluminium, quick-release" },
-          { name: "Kriega OS-32 Soft Panniers", price: "£280 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-32%20Soft%20Panniers", note: "Waterproof, lightweight, versatile" }
+          { name: "Triumph Expedition Panniers", price: "£780", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Expedition%20Panniers#/28914,3714,0", note: "OEM aluminium, quick-release" },
+          { name: "Kriega OS-32 Soft Panniers", price: "£280 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-32%20Soft%20Panniers#/28914,3714,0", note: "Waterproof, lightweight, versatile" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "SW-Motech Crash Bars", price: "£195", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Crash%20Bars", note: "Steel engine protection" },
-          { name: "Triumph Sump Guard", price: "£160", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Sump%20Guard", note: "OEM aluminium bash plate" }
+          { name: "SW-Motech Crash Bars", price: "£195", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Crash%20Bars#/28914,3714,0", note: "Steel engine protection" },
+          { name: "Triumph Sump Guard", price: "£160", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Sump%20Guard#/28914,3714,0", note: "OEM aluminium bash plate" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Triumph Touring Seat", price: "£320", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Touring%20Seat", note: "Lower profile, longer-range comfort" },
-          { name: "Puig Touring Screen", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Screen", note: "Taller, wider wind protection" }
+          { name: "Triumph Touring Seat", price: "£320", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Touring%20Seat#/28914,3714,0", note: "Lower profile, longer-range comfort" },
+          { name: "Puig Touring Screen", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Screen#/28914,3714,0", note: "Taller, wider wind protection" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Optimate USB Charger", price: "£30", url: "https://www.sportsbikeshop.co.uk/search/?search=Optimate%20USB%20Charger", note: "Reliable SAE-connected charging" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Optimate USB Charger", price: "£30", url: "https://www.sportsbikeshop.co.uk/search/?search=Optimate%20USB%20Charger#/28914,3714,0", note: "Reliable SAE-connected charging" }
         ]
       }
     ],
@@ -210,29 +210,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Honda OEM Aluminium Panniers", price: "£720", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Aluminium%20Panniers", note: "Perfect fit, 37L each side" },
-          { name: "SW-Motech TRAX ADV 45L", price: "£310 each", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20TRAX%20ADV%2045L", note: "Premium aluminium, tool-free removal" }
+          { name: "Honda OEM Aluminium Panniers", price: "£720", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Aluminium%20Panniers#/28914,3714,0", note: "Perfect fit, 37L each side" },
+          { name: "SW-Motech TRAX ADV 45L", price: "£310 each", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20TRAX%20ADV%2045L#/28914,3714,0", note: "Premium aluminium, tool-free removal" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Hepco & Becker Engine Guard", price: "£175", url: "https://www.sportsbikeshop.co.uk/search/?search=Hepco%20%26%20Becker%20Engine%20Guard", note: "Full wrap-around engine protection" },
-          { name: "Honda OEM Skid Plate", price: "£140", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Skid%20Plate", note: "Aluminium underbody shield" }
+          { name: "Hepco & Becker Engine Guard", price: "£175", url: "https://www.sportsbikeshop.co.uk/search/?search=Hepco%20%26%20Becker%20Engine%20Guard#/28914,3714,0", note: "Full wrap-around engine protection" },
+          { name: "Honda OEM Skid Plate", price: "£140", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Skid%20Plate#/28914,3714,0", note: "Aluminium underbody shield" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Corbin Dual Touring Seat", price: "£480", url: "https://www.sportsbikeshop.co.uk/search/?search=Corbin%20Dual%20Touring%20Seat", note: "Shaped foam for all-day riding" },
-          { name: "Givi Airflow Touring Screen", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Airflow%20Touring%20Screen", note: "Height-adjustable, reduces buffeting" }
+          { name: "Corbin Dual Touring Seat", price: "£480", url: "https://www.sportsbikeshop.co.uk/search/?search=Corbin%20Dual%20Touring%20Seat#/28914,3714,0", note: "Shaped foam for all-day riding" },
+          { name: "Givi Airflow Touring Screen", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Airflow%20Touring%20Screen#/28914,3714,0", note: "Height-adjustable, reduces buffeting" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "TomTom Rider 550", price: "£350", url: "https://www.sportsbikeshop.co.uk/search/?search=TomTom%20Rider%20550", note: "Dedicated motorcycle sat-nav, rain-proof" },
-          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger", note: "Hardwired dual USB for phone and camera" }
+          { name: "TomTom Rider 550", price: "£350", url: "https://www.sportsbikeshop.co.uk/search/?search=TomTom%20Rider%20550#/28914,3714,0", note: "Dedicated motorcycle sat-nav, rain-proof" },
+          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger#/28914,3714,0", note: "Hardwired dual USB for phone and camera" }
         ]
       }
     ],
@@ -288,29 +288,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Kriega OS-32 Soft Panniers", price: "£280 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-32%20Soft%20Panniers", note: "Waterproof, lightweight, flexible mounting" },
-          { name: "SW-Motech TRAX ION 38L", price: "£250 each", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20TRAX%20ION%2038L", note: "Aluminium hard panniers" }
+          { name: "Kriega OS-32 Soft Panniers", price: "£280 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-32%20Soft%20Panniers#/28914,3714,0", note: "Waterproof, lightweight, flexible mounting" },
+          { name: "SW-Motech TRAX ION 38L", price: "£250 each", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20TRAX%20ION%2038L#/28914,3714,0", note: "Aluminium hard panniers" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "AltRider Crash Bars", price: "£210", url: "https://www.sportsbikeshop.co.uk/search/?search=AltRider%20Crash%20Bars", note: "Heavy-duty steel engine guard" },
-          { name: "Touratech Expedition Skid Plate", price: "£195", url: "https://www.sportsbikeshop.co.uk/search/?search=Touratech%20Expedition%20Skid%20Plate", note: "Full coverage aluminium" }
+          { name: "AltRider Crash Bars", price: "£210", url: "https://www.sportsbikeshop.co.uk/search/?search=AltRider%20Crash%20Bars#/28914,3714,0", note: "Heavy-duty steel engine guard" },
+          { name: "Touratech Expedition Skid Plate", price: "£195", url: "https://www.sportsbikeshop.co.uk/search/?search=Touratech%20Expedition%20Skid%20Plate#/28914,3714,0", note: "Full coverage aluminium" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Seat Concepts Comfort Seat", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Seat%20Concepts%20Comfort%20Seat", note: "Reshaped foam with grippy cover" },
-          { name: "Rally Raid Tall Touring Screen", price: "£145", url: "https://www.sportsbikeshop.co.uk/search/?search=Rally%20Raid%20Tall%20Touring%20Screen", note: "Purpose-built wind protection" }
+          { name: "Seat Concepts Comfort Seat", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Seat%20Concepts%20Comfort%20Seat#/28914,3714,0", note: "Reshaped foam with grippy cover" },
+          { name: "Rally Raid Tall Touring Screen", price: "£145", url: "https://www.sportsbikeshop.co.uk/search/?search=Rally%20Raid%20Tall%20Touring%20Screen#/28914,3714,0", note: "Purpose-built wind protection" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford EL114 USB Socket", price: "£22", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20EL114%20USB%20Socket", note: "Flush-mount USB charging" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford EL114 USB Socket", price: "£22", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20EL114%20USB%20Socket#/28914,3714,0", note: "Flush-mount USB charging" }
         ]
       }
     ],
@@ -366,29 +366,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "KTM Touring Aluminium Cases", price: "£920 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=KTM%20Touring%20Aluminium%20Cases", note: "OEM fit, 37+45 litre capacity" },
-          { name: "Givi Trekker Dolomiti 36L", price: "£280 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%20Dolomiti%2036L", note: "Aluminium with Monokey fitting" }
+          { name: "KTM Touring Aluminium Cases", price: "£920 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=KTM%20Touring%20Aluminium%20Cases#/28914,3714,0", note: "OEM fit, 37+45 litre capacity" },
+          { name: "Givi Trekker Dolomiti 36L", price: "£280 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%20Dolomiti%2036L#/28914,3714,0", note: "Aluminium with Monokey fitting" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Touratech Engine Guard", price: "£220", url: "https://www.sportsbikeshop.co.uk/search/?search=Touratech%20Engine%20Guard", note: "Stainless steel, full wrap" },
-          { name: "SW-Motech Sump Guard", price: "£170", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Sump%20Guard", note: "Aluminium underbody protection" }
+          { name: "Touratech Engine Guard", price: "£220", url: "https://www.sportsbikeshop.co.uk/search/?search=Touratech%20Engine%20Guard#/28914,3714,0", note: "Stainless steel, full wrap" },
+          { name: "SW-Motech Sump Guard", price: "£170", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Sump%20Guard#/28914,3714,0", note: "Aluminium underbody protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "KTM Ergo Heated Seat", price: "£520", url: "https://www.sportsbikeshop.co.uk/search/?search=KTM%20Ergo%20Heated%20Seat", note: "OEM heated touring seat" },
-          { name: "WRS Touring Windscreen", price: "£130", url: "https://www.sportsbikeshop.co.uk/search/?search=WRS%20Touring%20Windscreen", note: "Extended height and width" }
+          { name: "KTM Ergo Heated Seat", price: "£520", url: "https://www.sportsbikeshop.co.uk/search/?search=KTM%20Ergo%20Heated%20Seat#/28914,3714,0", note: "OEM heated touring seat" },
+          { name: "WRS Touring Windscreen", price: "£130", url: "https://www.sportsbikeshop.co.uk/search/?search=WRS%20Touring%20Windscreen#/28914,3714,0", note: "Extended height and width" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Wireless Charger", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Wireless%20Charger", note: "Vibration-dampened with Qi charging" },
-          { name: "Garmin Zumo XT2", price: "£450", url: "https://www.sportsbikeshop.co.uk/search/?search=Garmin%20Zumo%20XT2", note: "Premium motorcycle GPS" }
+          { name: "Quad Lock Wireless Charger", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Wireless%20Charger#/28914,3714,0", note: "Vibration-dampened with Qi charging" },
+          { name: "Garmin Zumo XT2", price: "£450", url: "https://www.sportsbikeshop.co.uk/search/?search=Garmin%20Zumo%20XT2#/28914,3714,0", note: "Premium motorcycle GPS" }
         ]
       }
     ],
@@ -444,29 +444,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Ducati Aluminium Panniers", price: "£1,100 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Aluminium%20Panniers", note: "OEM fit, integrated design" },
-          { name: "SW-Motech TRAX ADV 45L", price: "£310 each", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20TRAX%20ADV%2045L", note: "Aluminium, quick-release" }
+          { name: "Ducati Aluminium Panniers", price: "£1,100 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Aluminium%20Panniers#/28914,3714,0", note: "OEM fit, integrated design" },
+          { name: "SW-Motech TRAX ADV 45L", price: "£310 each", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20TRAX%20ADV%2045L#/28914,3714,0", note: "Aluminium, quick-release" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Ducati Tubular Engine Guard", price: "£250", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Tubular%20Engine%20Guard", note: "OEM steel protection" },
-          { name: "Evotech Performance Frame Sliders", price: "£80", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Performance%20Frame%20Sliders", note: "Crash protection without bulk" }
+          { name: "Ducati Tubular Engine Guard", price: "£250", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Tubular%20Engine%20Guard#/28914,3714,0", note: "OEM steel protection" },
+          { name: "Evotech Performance Frame Sliders", price: "£80", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Performance%20Frame%20Sliders#/28914,3714,0", note: "Crash protection without bulk" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Ducati Comfort Seat", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Comfort%20Seat", note: "Wider, lower profile for long rides" },
-          { name: "Ducati Touring Windscreen", price: "£170", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Touring%20Windscreen", note: "Extended height OEM screen" }
+          { name: "Ducati Comfort Seat", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Comfort%20Seat#/28914,3714,0", note: "Wider, lower profile for long rides" },
+          { name: "Ducati Touring Windscreen", price: "£170", url: "https://www.sportsbikeshop.co.uk/search/?search=Ducati%20Touring%20Windscreen#/28914,3714,0", note: "Extended height OEM screen" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Interphone U-COM 4 Bluetooth", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=Interphone%20U-COM%204%20Bluetooth", note: "Helmet comms for rider-pillion" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Interphone U-COM 4 Bluetooth", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=Interphone%20U-COM%204%20Bluetooth#/28914,3714,0", note: "Helmet comms for rider-pillion" }
         ]
       }
     ],
@@ -522,29 +522,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Givi Trekker 46L Panniers", price: "£240 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%2046L%20Panniers", note: "Good value hard cases" },
-          { name: "Kriega US-30 Drypack", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-30%20Drypack", note: "Waterproof tail bag, quick attach" }
+          { name: "Givi Trekker 46L Panniers", price: "£240 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%2046L%20Panniers#/28914,3714,0", note: "Good value hard cases" },
+          { name: "Kriega US-30 Drypack", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-30%20Drypack#/28914,3714,0", note: "Waterproof tail bag, quick attach" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Suzuki OEM Engine Guard", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=Suzuki%20OEM%20Engine%20Guard", note: "Steel crash bars, direct fit" },
-          { name: "Givi Sump Guard", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Sump%20Guard", note: "Aluminium lower protection" }
+          { name: "Suzuki OEM Engine Guard", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=Suzuki%20OEM%20Engine%20Guard#/28914,3714,0", note: "Steel crash bars, direct fit" },
+          { name: "Givi Sump Guard", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Sump%20Guard#/28914,3714,0", note: "Aluminium lower protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Airhawk Seat Cushion", price: "£90", url: "https://www.sportsbikeshop.co.uk/search/?search=Airhawk%20Seat%20Cushion", note: "Air cell comfort pad for long days" },
-          { name: "Givi D3117ST Touring Screen", price: "£65", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20D3117ST%20Touring%20Screen", note: "Taller replacement windscreen" }
+          { name: "Airhawk Seat Cushion", price: "£90", url: "https://www.sportsbikeshop.co.uk/search/?search=Airhawk%20Seat%20Cushion#/28914,3714,0", note: "Air cell comfort pad for long days" },
+          { name: "Givi D3117ST Touring Screen", price: "£65", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20D3117ST%20Touring%20Screen#/28914,3714,0", note: "Taller replacement windscreen" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips", note: "Essential for Scottish touring — OEM grips won't cut it" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips#/28914,3714,0", note: "Essential for Scottish touring — OEM grips won't cut it" }
         ]
       }
     ],
@@ -600,29 +600,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Royal Enfield Waterproof Panniers", price: "£380 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20Waterproof%20Panniers", note: "OEM soft luggage, easy remove" },
-          { name: "Kriega OS-18 Adventure Packs", price: "£120 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-18%20Adventure%20Packs", note: "Modular waterproof soft bags" }
+          { name: "Royal Enfield Waterproof Panniers", price: "£380 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20Waterproof%20Panniers#/28914,3714,0", note: "OEM soft luggage, easy remove" },
+          { name: "Kriega OS-18 Adventure Packs", price: "£120 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-18%20Adventure%20Packs#/28914,3714,0", note: "Modular waterproof soft bags" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Royal Enfield OEM Crash Guard", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20OEM%20Crash%20Guard", note: "Steel engine protection bars" },
-          { name: "Royal Enfield Sump Guard", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20Sump%20Guard", note: "OEM aluminium bash plate" }
+          { name: "Royal Enfield OEM Crash Guard", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20OEM%20Crash%20Guard#/28914,3714,0", note: "Steel engine protection bars" },
+          { name: "Royal Enfield Sump Guard", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20Sump%20Guard#/28914,3714,0", note: "OEM aluminium bash plate" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Royal Enfield Touring Seat", price: "£180", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20Touring%20Seat", note: "Wider, thicker padding OEM" },
-          { name: "Puig Touring Windscreen", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Windscreen", note: "Taller aftermarket screen" }
+          { name: "Royal Enfield Touring Seat", price: "£180", url: "https://www.sportsbikeshop.co.uk/search/?search=Royal%20Enfield%20Touring%20Seat#/28914,3714,0", note: "Wider, thicker padding OEM" },
+          { name: "Puig Touring Windscreen", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Windscreen#/28914,3714,0", note: "Taller aftermarket screen" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips", note: "Essential upgrade for UK weather" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips#/28914,3714,0", note: "Essential upgrade for UK weather" }
         ]
       }
     ],
@@ -682,29 +682,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Kawasaki 28L Panniers", price: "£580 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%2028L%20Panniers", note: "OEM colour-matched, clean fit" },
-          { name: "Givi V35 Monokey Side Cases", price: "£240 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20V35%20Monokey%20Side%20Cases", note: "Larger capacity alternative" }
+          { name: "Kawasaki 28L Panniers", price: "£580 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%2028L%20Panniers#/28914,3714,0", note: "OEM colour-matched, clean fit" },
+          { name: "Givi V35 Monokey Side Cases", price: "£240 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20V35%20Monokey%20Side%20Cases#/28914,3714,0", note: "Larger capacity alternative" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Evotech Frame Sliders", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Frame%20Sliders", note: "Low-profile crash protection" },
-          { name: "R&G Aero Crash Protectors", price: "£55", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Aero%20Crash%20Protectors", note: "Lightweight frame bobbins" }
+          { name: "Evotech Frame Sliders", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Frame%20Sliders#/28914,3714,0", note: "Low-profile crash protection" },
+          { name: "R&G Aero Crash Protectors", price: "£55", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Aero%20Crash%20Protectors#/28914,3714,0", note: "Lightweight frame bobbins" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Kawasaki Comfort Seat", price: "£260", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%20Comfort%20Seat", note: "Wider, lower profile OEM seat" },
-          { name: "MRA Vario Touring Screen", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Vario%20Touring%20Screen", note: "Adjustable height wind deflection" }
+          { name: "Kawasaki Comfort Seat", price: "£260", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%20Comfort%20Seat#/28914,3714,0", note: "Wider, lower profile OEM seat" },
+          { name: "MRA Vario Touring Screen", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Vario%20Touring%20Screen#/28914,3714,0", note: "Adjustable height wind deflection" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Cardo Packtalk Edge", price: "£290", url: "https://www.sportsbikeshop.co.uk/search/?search=Cardo%20Packtalk%20Edge", note: "Premium Bluetooth helmet comms" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Cardo Packtalk Edge", price: "£290", url: "https://www.sportsbikeshop.co.uk/search/?search=Cardo%20Packtalk%20Edge#/28914,3714,0", note: "Premium Bluetooth helmet comms" }
         ]
       }
     ],
@@ -760,29 +760,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Yamaha 30L Top Case", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Yamaha%2030L%20Top%20Case", note: "Colour-matched OEM top box" },
-          { name: "Kriega US-20 Drypack", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-20%20Drypack", note: "Waterproof tail bag for extras" }
+          { name: "Yamaha 30L Top Case", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Yamaha%2030L%20Top%20Case#/28914,3714,0", note: "Colour-matched OEM top box" },
+          { name: "Kriega US-20 Drypack", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-20%20Drypack#/28914,3714,0", note: "Waterproof tail bag for extras" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "SW-Motech Crash Bars", price: "£160", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Crash%20Bars", note: "Steel engine protection" },
-          { name: "Evotech Radiator Guard", price: "£55", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard", note: "Protect the radiator from road debris" }
+          { name: "SW-Motech Crash Bars", price: "£160", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Crash%20Bars#/28914,3714,0", note: "Steel engine protection" },
+          { name: "Evotech Radiator Guard", price: "£55", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard#/28914,3714,0", note: "Protect the radiator from road debris" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Yamaha Comfort Seat", price: "£240", url: "https://www.sportsbikeshop.co.uk/search/?search=Yamaha%20Comfort%20Seat", note: "Wider padding, lower profile" },
-          { name: "Puig Touring Screen", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Screen", note: "Taller screen reduces turbulence" }
+          { name: "Yamaha Comfort Seat", price: "£240", url: "https://www.sportsbikeshop.co.uk/search/?search=Yamaha%20Comfort%20Seat#/28914,3714,0", note: "Wider padding, lower profile" },
+          { name: "Puig Touring Screen", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Screen#/28914,3714,0", note: "Taller screen reduces turbulence" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Cardo Freecom 4x", price: "£150", url: "https://www.sportsbikeshop.co.uk/search/?search=Cardo%20Freecom%204x", note: "Bluetooth comms with JBL speakers" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Cardo Freecom 4x", price: "£150", url: "https://www.sportsbikeshop.co.uk/search/?search=Cardo%20Freecom%204x#/28914,3714,0", note: "Bluetooth comms with JBL speakers" }
         ]
       }
     ],
@@ -838,29 +838,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Honda 50L Top Box", price: "£350", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%2050L%20Top%20Box", note: "OEM colour-matched, fits two helmets" },
-          { name: "Kriega US-30 Drypack", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-30%20Drypack", note: "Waterproof tail bag for overflow gear" }
+          { name: "Honda 50L Top Box", price: "£350", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%2050L%20Top%20Box#/28914,3714,0", note: "OEM colour-matched, fits two helmets" },
+          { name: "Kriega US-30 Drypack", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-30%20Drypack#/28914,3714,0", note: "Waterproof tail bag for overflow gear" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Honda OEM Engine Guard", price: "£130", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Engine%20Guard", note: "Steel protection bars" },
-          { name: "Evotech Radiator Guard", price: "£50", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard", note: "Stainless steel mesh protection" }
+          { name: "Honda OEM Engine Guard", price: "£130", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Engine%20Guard#/28914,3714,0", note: "Steel protection bars" },
+          { name: "Evotech Radiator Guard", price: "£50", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard#/28914,3714,0", note: "Stainless steel mesh protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Honda Heated Grips", price: "£180", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Heated%20Grips", note: "OEM integrated, switchable" },
-          { name: "Givi Airflow Screen", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Airflow%20Screen", note: "Adjustable height touring screen" }
+          { name: "Honda Heated Grips", price: "£180", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Heated%20Grips#/28914,3714,0", note: "OEM integrated, switchable" },
+          { name: "Givi Airflow Screen", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Airflow%20Screen#/28914,3714,0", note: "Adjustable height touring screen" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger", note: "Keep devices charged all day" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger#/28914,3714,0", note: "Keep devices charged all day" }
         ]
       }
     ],
@@ -916,29 +916,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "BMW Touring Panniers", price: "£750 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Touring%20Panniers", note: "OEM integrated, quick-release" },
-          { name: "SW-Motech BLAZE Panniers", price: "£340 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20BLAZE%20Panniers", note: "Sport-fit semi-rigid soft bags" }
+          { name: "BMW Touring Panniers", price: "£750 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Touring%20Panniers#/28914,3714,0", note: "OEM integrated, quick-release" },
+          { name: "SW-Motech BLAZE Panniers", price: "£340 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20BLAZE%20Panniers#/28914,3714,0", note: "Sport-fit semi-rigid soft bags" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Wunderlich Engine Guard", price: "£240", url: "https://www.sportsbikeshop.co.uk/search/?search=Wunderlich%20Engine%20Guard", note: "Steel tube protection" },
-          { name: "Evotech Frame Sliders", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Frame%20Sliders", note: "Low-profile crash protection" }
+          { name: "Wunderlich Engine Guard", price: "£240", url: "https://www.sportsbikeshop.co.uk/search/?search=Wunderlich%20Engine%20Guard#/28914,3714,0", note: "Steel tube protection" },
+          { name: "Evotech Frame Sliders", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Frame%20Sliders#/28914,3714,0", note: "Low-profile crash protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "BMW Comfort Seat", price: "£350", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Comfort%20Seat", note: "Lower, wider OEM touring seat" },
-          { name: "Wunderlich Ergo Screen", price: "£165", url: "https://www.sportsbikeshop.co.uk/search/?search=Wunderlich%20Ergo%20Screen", note: "Taller, wider wind deflection" }
+          { name: "BMW Comfort Seat", price: "£350", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Comfort%20Seat#/28914,3714,0", note: "Lower, wider OEM touring seat" },
+          { name: "Wunderlich Ergo Screen", price: "£165", url: "https://www.sportsbikeshop.co.uk/search/?search=Wunderlich%20Ergo%20Screen#/28914,3714,0", note: "Taller, wider wind deflection" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Sena 50S Mesh Intercom", price: "£300", url: "https://www.sportsbikeshop.co.uk/search/?search=Sena%2050S%20Mesh%20Intercom", note: "Premium mesh Bluetooth system" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Sena 50S Mesh Intercom", price: "£300", url: "https://www.sportsbikeshop.co.uk/search/?search=Sena%2050S%20Mesh%20Intercom#/28914,3714,0", note: "Premium mesh Bluetooth system" }
         ]
       }
     ],
@@ -998,29 +998,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Longride Waxed Canvas Roll Bags", price: "£260 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Longride%20Waxed%20Canvas%20Roll%20Bags", note: "Heritage look, waterproof lined" },
-          { name: "Triumph Heritage Leather Panniers", price: "£580 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Heritage%20Leather%20Panniers", note: "OEM classic styling, quick-release" }
+          { name: "Longride Waxed Canvas Roll Bags", price: "£260 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Longride%20Waxed%20Canvas%20Roll%20Bags#/28914,3714,0", note: "Heritage look, waterproof lined" },
+          { name: "Triumph Heritage Leather Panniers", price: "£580 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Heritage%20Leather%20Panniers#/28914,3714,0", note: "OEM classic styling, quick-release" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "SW-Motech Engine Guard", price: "£145", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Engine%20Guard", note: "Steel bar protection, subtle design" },
-          { name: "R&G Bar End Sliders", price: "£35", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Bar%20End%20Sliders", note: "Handlebar-end protection" }
+          { name: "SW-Motech Engine Guard", price: "£145", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Engine%20Guard#/28914,3714,0", note: "Steel bar protection, subtle design" },
+          { name: "R&G Bar End Sliders", price: "£35", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Bar%20End%20Sliders#/28914,3714,0", note: "Handlebar-end protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Triumph Touring Seat", price: "£290", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Touring%20Seat", note: "Thicker padding for longer rides" },
-          { name: "Dart Classic Flyscreen", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Dart%20Classic%20Flyscreen", note: "Period-look windshield, some protection" }
+          { name: "Triumph Touring Seat", price: "£290", url: "https://www.sportsbikeshop.co.uk/search/?search=Triumph%20Touring%20Seat#/28914,3714,0", note: "Thicker padding for longer rides" },
+          { name: "Dart Classic Flyscreen", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Dart%20Classic%20Flyscreen#/28914,3714,0", note: "Period-look windshield, some protection" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Beeline Moto Navigation", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Beeline%20Moto%20Navigation", note: "Minimalist compass-style nav — suits the retro vibe" },
-          { name: "Oxford USB Socket", price: "£22", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Socket", note: "Discreet flush-mount USB charging" }
+          { name: "Beeline Moto Navigation", price: "£100", url: "https://www.sportsbikeshop.co.uk/search/?search=Beeline%20Moto%20Navigation#/28914,3714,0", note: "Minimalist compass-style nav — suits the retro vibe" },
+          { name: "Oxford USB Socket", price: "£22", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Socket#/28914,3714,0", note: "Discreet flush-mount USB charging" }
         ]
       }
     ],
@@ -1076,29 +1076,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Kriega US-20 Drypack", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-20%20Drypack", note: "Waterproof tail bag, straps to seat" },
-          { name: "Oxford T-40 Tail Pack", price: "£60", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20T-40%20Tail%20Pack", note: "Budget-friendly expandable bag" }
+          { name: "Kriega US-20 Drypack", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-20%20Drypack#/28914,3714,0", note: "Waterproof tail bag, straps to seat" },
+          { name: "Oxford T-40 Tail Pack", price: "£60", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20T-40%20Tail%20Pack#/28914,3714,0", note: "Budget-friendly expandable bag" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "R&G Crash Protectors", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Crash%20Protectors", note: "Frame-mount bobbins" },
-          { name: "Evotech Radiator Guard", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard", note: "Stainless steel mesh protection" }
+          { name: "R&G Crash Protectors", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Crash%20Protectors#/28914,3714,0", note: "Frame-mount bobbins" },
+          { name: "Evotech Radiator Guard", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard#/28914,3714,0", note: "Stainless steel mesh protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "MRA Touring Screen", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Touring%20Screen", note: "Bolt-on screen — essential for touring" },
-          { name: "Airhawk Seat Cushion", price: "£90", url: "https://www.sportsbikeshop.co.uk/search/?search=Airhawk%20Seat%20Cushion", note: "Air cell comfort pad for longer rides" }
+          { name: "MRA Touring Screen", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Touring%20Screen#/28914,3714,0", note: "Bolt-on screen — essential for touring" },
+          { name: "Airhawk Seat Cushion", price: "£90", url: "https://www.sportsbikeshop.co.uk/search/?search=Airhawk%20Seat%20Cushion#/28914,3714,0", note: "Air cell comfort pad for longer rides" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips", note: "Absolutely essential for UK touring" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips#/28914,3714,0", note: "Absolutely essential for UK touring" }
         ]
       }
     ],
@@ -1158,29 +1158,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "BMW System Panniers", price: "£980 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20System%20Panniers", note: "OEM expanding cases, 37L each" },
-          { name: "BMW Top Case 49L", price: "£520", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Top%20Case%2049L", note: "Integrated top box with backrest" }
+          { name: "BMW System Panniers", price: "£980 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20System%20Panniers#/28914,3714,0", note: "OEM expanding cases, 37L each" },
+          { name: "BMW Top Case 49L", price: "£520", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Top%20Case%2049L#/28914,3714,0", note: "Integrated top box with backrest" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Wunderlich Engine Guard", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Wunderlich%20Engine%20Guard", note: "Full wrap-around steel protection" },
-          { name: "BMW Cylinder Head Covers", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Cylinder%20Head%20Covers", note: "Protect the inline-six heads from grounding" }
+          { name: "Wunderlich Engine Guard", price: "£280", url: "https://www.sportsbikeshop.co.uk/search/?search=Wunderlich%20Engine%20Guard#/28914,3714,0", note: "Full wrap-around steel protection" },
+          { name: "BMW Cylinder Head Covers", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Cylinder%20Head%20Covers#/28914,3714,0", note: "Protect the inline-six heads from grounding" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "BMW Comfort Seat Low", price: "£380", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Comfort%20Seat%20Low", note: "Lowered seat option for shorter riders" },
-          { name: "BMW Backrest for Pillion", price: "£260", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Backrest%20for%20Pillion", note: "Adjustable pillion backrest — luxury" }
+          { name: "BMW Comfort Seat Low", price: "£380", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Comfort%20Seat%20Low#/28914,3714,0", note: "Lowered seat option for shorter riders" },
+          { name: "BMW Backrest for Pillion", price: "£260", url: "https://www.sportsbikeshop.co.uk/search/?search=BMW%20Backrest%20for%20Pillion#/28914,3714,0", note: "Adjustable pillion backrest — luxury" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Garmin Zumo XT2", price: "£450", url: "https://www.sportsbikeshop.co.uk/search/?search=Garmin%20Zumo%20XT2", note: "Premium motorcycle GPS" },
-          { name: "Sena 50S Mesh Intercom", price: "£300", url: "https://www.sportsbikeshop.co.uk/search/?search=Sena%2050S%20Mesh%20Intercom", note: "Rider-pillion communication" }
+          { name: "Garmin Zumo XT2", price: "£450", url: "https://www.sportsbikeshop.co.uk/search/?search=Garmin%20Zumo%20XT2#/28914,3714,0", note: "Premium motorcycle GPS" },
+          { name: "Sena 50S Mesh Intercom", price: "£300", url: "https://www.sportsbikeshop.co.uk/search/?search=Sena%2050S%20Mesh%20Intercom#/28914,3714,0", note: "Rider-pillion communication" }
         ]
       }
     ],
@@ -1236,29 +1236,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Honda Integrated Top Box 61L", price: "£580", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Integrated%20Top%20Box%2061L", note: "Massive OEM top case with passenger backrest" },
-          { name: "Goldstrike Trunk Rack", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=Goldstrike%20Trunk%20Rack", note: "Extra rack for dry bags on top of the trunk" }
+          { name: "Honda Integrated Top Box 61L", price: "£580", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Integrated%20Top%20Box%2061L#/28914,3714,0", note: "Massive OEM top case with passenger backrest" },
+          { name: "Goldstrike Trunk Rack", price: "£120", url: "https://www.sportsbikeshop.co.uk/search/?search=Goldstrike%20Trunk%20Rack#/28914,3714,0", note: "Extra rack for dry bags on top of the trunk" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Honda OEM Engine Guard", price: "£220", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Engine%20Guard", note: "Chrome or black, full lower coverage" },
-          { name: "Kuryakyn Highway Pegs", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Kuryakyn%20Highway%20Pegs", note: "Rest your feet on long straights" }
+          { name: "Honda OEM Engine Guard", price: "£220", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Engine%20Guard#/28914,3714,0", note: "Chrome or black, full lower coverage" },
+          { name: "Kuryakyn Highway Pegs", price: "£95", url: "https://www.sportsbikeshop.co.uk/search/?search=Kuryakyn%20Highway%20Pegs#/28914,3714,0", note: "Rest your feet on long straights" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Corbin Dual Touring Saddle", price: "£550", url: "https://www.sportsbikeshop.co.uk/search/?search=Corbin%20Dual%20Touring%20Saddle", note: "Custom-shaped all-day seat" },
-          { name: "Honda Tall Windscreen", price: "£210", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Tall%20Windscreen", note: "Extended height electric screen" }
+          { name: "Corbin Dual Touring Saddle", price: "£550", url: "https://www.sportsbikeshop.co.uk/search/?search=Corbin%20Dual%20Touring%20Saddle#/28914,3714,0", note: "Custom-shaped all-day seat" },
+          { name: "Honda Tall Windscreen", price: "£210", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Tall%20Windscreen#/28914,3714,0", note: "Extended height electric screen" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Sena 50S Mesh Intercom", price: "£300", url: "https://www.sportsbikeshop.co.uk/search/?search=Sena%2050S%20Mesh%20Intercom", note: "Rider-pillion Bluetooth comms" },
-          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger", note: "Backup charging for multiple devices" }
+          { name: "Sena 50S Mesh Intercom", price: "£300", url: "https://www.sportsbikeshop.co.uk/search/?search=Sena%2050S%20Mesh%20Intercom#/28914,3714,0", note: "Rider-pillion Bluetooth comms" },
+          { name: "Oxford USB Dual Charger", price: "£25", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Dual%20Charger#/28914,3714,0", note: "Backup charging for multiple devices" }
         ]
       }
     ],
@@ -1318,29 +1318,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Kriega US-20 Drypack", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-20%20Drypack", note: "Waterproof tail bag — all the luggage you'll manage" },
-          { name: "Kriega R20 Backpack", price: "£115", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20R20%20Backpack", note: "Waterproof rucksack when the tail is full" }
+          { name: "Kriega US-20 Drypack", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20US-20%20Drypack#/28914,3714,0", note: "Waterproof tail bag — all the luggage you'll manage" },
+          { name: "Kriega R20 Backpack", price: "£115", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20R20%20Backpack#/28914,3714,0", note: "Waterproof rucksack when the tail is full" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "R&G Aero Crash Protectors", price: "£55", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Aero%20Crash%20Protectors", note: "Frame bobbins — essential for touring drops" },
-          { name: "Evotech Tail Tidy", price: "£60", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Tail%20Tidy", note: "Cleaner rear end and number plate protection" }
+          { name: "R&G Aero Crash Protectors", price: "£55", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Aero%20Crash%20Protectors#/28914,3714,0", note: "Frame bobbins — essential for touring drops" },
+          { name: "Evotech Tail Tidy", price: "£60", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Tail%20Tidy#/28914,3714,0", note: "Cleaner rear end and number plate protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Airhawk Seat Cushion", price: "£90", url: "https://www.sportsbikeshop.co.uk/search/?search=Airhawk%20Seat%20Cushion", note: "Air cell pad — difference between agony and merely uncomfortable" },
-          { name: "Puig Racing Screen Tall", price: "£80", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Racing%20Screen%20Tall", note: "Slightly better wind protection than standard" }
+          { name: "Airhawk Seat Cushion", price: "£90", url: "https://www.sportsbikeshop.co.uk/search/?search=Airhawk%20Seat%20Cushion#/28914,3714,0", note: "Air cell pad — difference between agony and merely uncomfortable" },
+          { name: "Puig Racing Screen Tall", price: "£80", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Racing%20Screen%20Tall#/28914,3714,0", note: "Slightly better wind protection than standard" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford USB Socket", price: "£22", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Socket", note: "Essential — the phone is your only navigation" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford USB Socket", price: "£22", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20USB%20Socket#/28914,3714,0", note: "Essential — the phone is your only navigation" }
         ]
       }
     ],
@@ -1396,29 +1396,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Givi E22 Side Cases", price: "£180 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20E22%20Side%20Cases", note: "Budget hard panniers, 22L each" },
-          { name: "Oxford T-40 Tail Pack", price: "£60", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20T-40%20Tail%20Pack", note: "Expandable waterproof seat bag" }
+          { name: "Givi E22 Side Cases", price: "£180 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20E22%20Side%20Cases#/28914,3714,0", note: "Budget hard panniers, 22L each" },
+          { name: "Oxford T-40 Tail Pack", price: "£60", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20T-40%20Tail%20Pack#/28914,3714,0", note: "Expandable waterproof seat bag" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "R&G Aero Crash Protectors", price: "£50", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Aero%20Crash%20Protectors", note: "Frame-mount crash bobbins" },
-          { name: "Evotech Radiator Guard", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard", note: "Stainless steel mesh protection" }
+          { name: "R&G Aero Crash Protectors", price: "£50", url: "https://www.sportsbikeshop.co.uk/search/?search=R%26G%20Aero%20Crash%20Protectors#/28914,3714,0", note: "Frame-mount crash bobbins" },
+          { name: "Evotech Radiator Guard", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Evotech%20Radiator%20Guard#/28914,3714,0", note: "Stainless steel mesh protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Kawasaki Comfort Seat", price: "£230", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%20Comfort%20Seat", note: "Wider padding, better shape" },
-          { name: "Puig Touring Screen", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Screen", note: "Taller screen for improved motorway comfort" }
+          { name: "Kawasaki Comfort Seat", price: "£230", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%20Comfort%20Seat#/28914,3714,0", note: "Wider padding, better shape" },
+          { name: "Puig Touring Screen", price: "£85", url: "https://www.sportsbikeshop.co.uk/search/?search=Puig%20Touring%20Screen#/28914,3714,0", note: "Taller screen for improved motorway comfort" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips", note: "Essential for year-round UK riding" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips#/28914,3714,0", note: "Essential for year-round UK riding" }
         ]
       }
     ],
@@ -1478,29 +1478,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Kawasaki 28L Panniers", price: "£500 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%2028L%20Panniers", note: "OEM colour-matched hard cases" },
-          { name: "Givi Trekker 33L", price: "£220 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%2033L", note: "Rugged aluminium alternative" }
+          { name: "Kawasaki 28L Panniers", price: "£500 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%2028L%20Panniers#/28914,3714,0", note: "OEM colour-matched hard cases" },
+          { name: "Givi Trekker 33L", price: "£220 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Trekker%2033L#/28914,3714,0", note: "Rugged aluminium alternative" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "SW-Motech Crash Bars", price: "£140", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Crash%20Bars", note: "Steel engine protection" },
-          { name: "Givi Sump Guard", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Sump%20Guard", note: "Aluminium lower protection" }
+          { name: "SW-Motech Crash Bars", price: "£140", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Crash%20Bars#/28914,3714,0", note: "Steel engine protection" },
+          { name: "Givi Sump Guard", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Sump%20Guard#/28914,3714,0", note: "Aluminium lower protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Kawasaki Comfort Seat", price: "£240", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%20Comfort%20Seat", note: "Wider padding OEM seat" },
-          { name: "MRA Vario Touring Screen", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Vario%20Touring%20Screen", note: "Height-adjustable screen upgrade" }
+          { name: "Kawasaki Comfort Seat", price: "£240", url: "https://www.sportsbikeshop.co.uk/search/?search=Kawasaki%20Comfort%20Seat#/28914,3714,0", note: "Wider padding OEM seat" },
+          { name: "MRA Vario Touring Screen", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=MRA%20Vario%20Touring%20Screen#/28914,3714,0", note: "Height-adjustable screen upgrade" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips", note: "Essential for UK touring comfort" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips#/28914,3714,0", note: "Essential for UK touring comfort" }
         ]
       }
     ],
@@ -1556,29 +1556,29 @@ const BIKES = [
       {
         category: "Luggage",
         items: [
-          { name: "Honda 35L Panniers", price: "£420 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%2035L%20Panniers", note: "OEM colour-matched hard cases" },
-          { name: "Kriega OS-18 Adventure Packs", price: "£120 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-18%20Adventure%20Packs", note: "Modular waterproof soft bags" }
+          { name: "Honda 35L Panniers", price: "£420 pair", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%2035L%20Panniers#/28914,3714,0", note: "OEM colour-matched hard cases" },
+          { name: "Kriega OS-18 Adventure Packs", price: "£120 each", url: "https://www.sportsbikeshop.co.uk/search/?search=Kriega%20OS-18%20Adventure%20Packs#/28914,3714,0", note: "Modular waterproof soft bags" }
         ]
       },
       {
         category: "Protection",
         items: [
-          { name: "Honda OEM Crash Bars", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Crash%20Bars", note: "Steel engine protection" },
-          { name: "SW-Motech Sump Guard", price: "£80", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Sump%20Guard", note: "Aluminium lower protection" }
+          { name: "Honda OEM Crash Bars", price: "£110", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20OEM%20Crash%20Bars#/28914,3714,0", note: "Steel engine protection" },
+          { name: "SW-Motech Sump Guard", price: "£80", url: "https://www.sportsbikeshop.co.uk/search/?search=SW-Motech%20Sump%20Guard#/28914,3714,0", note: "Aluminium lower protection" }
         ]
       },
       {
         category: "Comfort",
         items: [
-          { name: "Honda Comfort Seat", price: "£200", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Comfort%20Seat", note: "Wider, softer OEM seat" },
-          { name: "Givi Touring Screen", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Touring%20Screen", note: "Taller replacement windscreen" }
+          { name: "Honda Comfort Seat", price: "£200", url: "https://www.sportsbikeshop.co.uk/search/?search=Honda%20Comfort%20Seat#/28914,3714,0", note: "Wider, softer OEM seat" },
+          { name: "Givi Touring Screen", price: "£75", url: "https://www.sportsbikeshop.co.uk/search/?search=Givi%20Touring%20Screen#/28914,3714,0", note: "Taller replacement windscreen" }
         ]
       },
       {
         category: "Electronics",
         items: [
-          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount", note: "Vibration-dampened phone mount" },
-          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips", note: "Essential for year-round UK riding" }
+          { name: "Quad Lock Motorcycle Mount", price: "£70", url: "https://www.sportsbikeshop.co.uk/search/?search=Quad%20Lock%20Motorcycle%20Mount#/28914,3714,0", note: "Vibration-dampened phone mount" },
+          { name: "Oxford Heated Grips", price: "£45", url: "https://www.sportsbikeshop.co.uk/search/?search=Oxford%20Heated%20Grips#/28914,3714,0", note: "Essential for year-round UK riding" }
         ]
       }
     ],
