@@ -225,8 +225,6 @@ ul, ol { list-style: none; }
 .mega-tools-grid {
   grid-template-columns: repeat(3, 1fr);
   min-width: 720px;
-  right: 0;
-  left: auto;
 }
 
 /* ── Mega Columns ── */
