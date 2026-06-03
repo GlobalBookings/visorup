@@ -4095,7 +4095,7 @@ class VisorUpSite {
   renderAdminDashboard() {
     var self = this;
     var savedPass = sessionStorage.getItem('vu_admin_auth');
-    if (savedPass !== 'ironhorse2026') {
+    if (savedPass !== 'bealachNaBa99') {
       this.pageContent.innerHTML = '' +
         '<section class="page-section" style="min-height:80vh;display:flex;align-items:center;justify-content:center">' +
           '<div style="text-align:center;max-width:360px">' +
@@ -4109,7 +4109,7 @@ class VisorUpSite {
         '</section>';
       document.getElementById('adminPassBtn').addEventListener('click', function() {
         var val = document.getElementById('adminPassInput').value;
-        if (val === 'ironhorse2026') {
+        if (val === 'bealachNaBa99') {
           sessionStorage.setItem('vu_admin_auth', val);
           self.renderAdminDashboard();
         } else {
