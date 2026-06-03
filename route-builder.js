@@ -425,6 +425,10 @@ class RouteBuilder {
       .rb-cost-days{margin-top:8px;border-top:1px solid #1e2e2a;padding-top:8px}
       .rb-cost-day-row{display:flex;justify-content:space-between;font-size:12px;color:#c8d6d0;padding:2px 0}
       .rb-cost-day-row span:last-child{color:#D68A2D}
+      .rb-nav-apps{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+      .rb-nav-btn{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#1a1f1e;border:1px solid #2a302e;border-radius:8px;color:#c5ccc9;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s}
+      .rb-nav-btn:hover{border-color:#D68A2D;color:#D68A2D;background:#1e2422}
+      .rb-nav-btn i{font-size:16px;width:20px;text-align:center}
       @media(max-width:768px){
         .rb-sidebar{position:absolute;top:0;left:0;height:100%;transform:translateX(-100%);box-shadow:4px 0 20px rgba(0,0,0,.5)}
         .rb-sidebar.open{transform:translateX(0)}
@@ -546,6 +550,19 @@ class RouteBuilder {
             '</div>' +
             '<div id="rb-suggestBadge"></div>' +
             '<input type="file" id="rb-gpxFile" accept=".gpx" style="display:none">' +
+          '</div>' +
+
+          '<div class="rb-section">' +
+            '<h3>\uD83D\uDCF1 Send to Nav App</h3>' +
+            '<div class="rb-nav-apps" id="rb-navApps">' +
+              '<button class="rb-nav-btn" id="rb-googleMaps" title="Open in Google Maps"><i class="fas fa-map-location-dot" style="color:#4285F4"></i> Google Maps</button>' +
+              '<button class="rb-nav-btn" id="rb-appleMaps" title="Open in Apple Maps"><i class="fas fa-map" style="color:currentColor"></i> Apple Maps</button>' +
+              '<button class="rb-nav-btn" id="rb-waze" title="Open in Waze"><i class="fas fa-location-arrow" style="color:#33ccff"></i> Waze</button>' +
+              '<button class="rb-nav-btn" id="rb-kurviger" title="Open in Kurviger"><i class="fas fa-route" style="color:#ff6600"></i> Kurviger</button>' +
+              '<button class="rb-nav-btn" id="rb-qrCode" title="QR Code for phone"><i class="fas fa-qrcode"></i> QR Code</button>' +
+            '</div>' +
+            '<div id="rb-qrDisplay" style="display:none;text-align:center;margin-top:12px"></div>' +
+            '<p style="font-size:11px;color:#7a8a85;margin-top:8px">GPX export works with Garmin Zumo, Calimoto, and any GPX-compatible device.</p>' +
           '</div>' +
 
           '<div class="rb-section">' +
@@ -698,6 +715,13 @@ class RouteBuilder {
     this.container.querySelector('#rb-suggestBtn').addEventListener('click', function () { self._suggestStops(); });
     this.container.querySelector('#rb-shareBtn').addEventListener('click', function () { self._shareRoute(); });
     this.container.querySelector('#rb-fastTrackBtn').addEventListener('click', function () { self._setAllFastTrack(); });
+
+    // Nav app buttons
+    this.container.querySelector('#rb-googleMaps').addEventListener('click', function () { self._openGoogleMaps(); });
+    this.container.querySelector('#rb-appleMaps').addEventListener('click', function () { self._openAppleMaps(); });
+    this.container.querySelector('#rb-waze').addEventListener('click', function () { self._openWaze(); });
+    this.container.querySelector('#rb-kurviger').addEventListener('click', function () { self._openKurviger(); });
+    this.container.querySelector('#rb-qrCode').addEventListener('click', function () { self._showQRCode(); });
 
     // Import GPX
     var gpxFileInput = this.container.querySelector('#rb-gpxFile');
@@ -2752,6 +2776,61 @@ class RouteBuilder {
     if (costPanel) costPanel.innerHTML = '<p style="font-size:12px;color:#7a8a85">Add a route to see costs</p>';
     this._weatherCache = null;
     this._weatherCacheTime = 0;
+  }
+
+  // ── Nav App Export ─────────────────────────────────────────
+
+  _openGoogleMaps() {
+    if (this.waypoints.length < 2) { alert('Add at least 2 waypoints first.'); return; }
+    var origin = this.waypoints[0].lat + ',' + this.waypoints[0].lng;
+    var dest = this.waypoints[this.waypoints.length - 1].lat + ',' + this.waypoints[this.waypoints.length - 1].lng;
+    var mid = this.waypoints.slice(1, -1);
+    if (mid.length > 23) mid = mid.slice(0, 23);
+    var waypoints = mid.map(function(w) { return w.lat + ',' + w.lng; }).join('|');
+    var url = 'https://www.google.com/maps/dir/?api=1&origin=' + origin + '&destination=' + dest;
+    if (waypoints) url += '&waypoints=' + waypoints;
+    url += '&travelmode=driving';
+    window.open(url, '_blank');
+  }
+
+  _openAppleMaps() {
+    if (this.waypoints.length < 2) { alert('Add at least 2 waypoints first.'); return; }
+    var coords = this.waypoints.map(function(w) { return w.lat + ',' + w.lng; });
+    var url = 'https://maps.apple.com/?dirflg=d&saddr=' + coords[0] + '&daddr=' + coords.slice(1).join('+to:');
+    window.open(url, '_blank');
+  }
+
+  _openWaze() {
+    if (this.waypoints.length < 1) { alert('Add at least 1 waypoint first.'); return; }
+    var dest = this.waypoints[this.waypoints.length - 1];
+    var url = 'https://waze.com/ul?ll=' + dest.lat + ',' + dest.lng + '&navigate=yes';
+    window.open(url, '_blank');
+  }
+
+  _openKurviger() {
+    if (this.waypoints.length < 2) { alert('Add at least 2 waypoints first.'); return; }
+    var params = this.waypoints.map(function(w) { return 'point=' + w.lat + ',' + w.lng; }).join('&');
+    var url = 'https://kurviger.de/en?plan=route&' + params + '&vehicle=motorcycle';
+    window.open(url, '_blank');
+  }
+
+  _showQRCode() {
+    if (this.waypoints.length < 2) { alert('Add at least 2 waypoints first.'); return; }
+    var display = this.container.querySelector('#rb-qrDisplay');
+    if (display.style.display !== 'none') { display.style.display = 'none'; return; }
+
+    var origin = this.waypoints[0].lat + ',' + this.waypoints[0].lng;
+    var dest = this.waypoints[this.waypoints.length - 1].lat + ',' + this.waypoints[this.waypoints.length - 1].lng;
+    var mid = this.waypoints.slice(1, -1).slice(0, 23);
+    var waypoints = mid.map(function(w) { return w.lat + ',' + w.lng; }).join('|');
+    var url = 'https://www.google.com/maps/dir/?api=1&origin=' + origin + '&destination=' + dest;
+    if (waypoints) url += '&waypoints=' + waypoints;
+    url += '&travelmode=driving';
+
+    var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(url);
+    display.innerHTML = '<img src="' + qrUrl + '" alt="QR Code" style="border-radius:8px;border:2px solid #333">' +
+      '<p style="font-size:11px;color:#7a8a85;margin-top:8px">Scan with your phone to open in Google Maps</p>';
+    display.style.display = '';
   }
 
   // ── GPX Export ──────────────────────────────────────────────

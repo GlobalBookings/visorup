@@ -957,6 +957,24 @@ class VisorUpSite {
       '<div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>' +
     '</section>' +
 
+    '<!-- WORKS WITH -->' +
+    '<section class="works-with-bar">' +
+      '<div class="container">' +
+        '<div class="works-with-inner">' +
+          '<span class="works-with-label">Export routes to</span>' +
+          '<div class="works-with-logos">' +
+            '<div class="works-with-logo" title="Google Maps"><i class="fas fa-map-location-dot" style="color:#4285F4;font-size:20px"></i><span>Google Maps</span></div>' +
+            '<div class="works-with-logo" title="Apple Maps"><i class="fab fa-apple" style="font-size:20px"></i><span>Apple Maps</span></div>' +
+            '<div class="works-with-logo" title="Waze"><i class="fas fa-location-arrow" style="color:#33ccff;font-size:20px"></i><span>Waze</span></div>' +
+            '<div class="works-with-logo" title="Garmin"><i class="fas fa-satellite-dish" style="color:#007cc3;font-size:20px"></i><span>Garmin</span></div>' +
+            '<div class="works-with-logo" title="Kurviger"><i class="fas fa-route" style="color:#ff6600;font-size:20px"></i><span>Kurviger</span></div>' +
+            '<div class="works-with-logo" title="Calimoto"><i class="fas fa-motorcycle" style="color:#1db954;font-size:20px"></i><span>Calimoto</span></div>' +
+            '<div class="works-with-logo" title="GPX Compatible"><i class="fas fa-file-export" style="color:var(--accent);font-size:20px"></i><span>GPX Export</span></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>' +
+
     '<!-- FEATURED ROUTE -->' +
     '<section class="home-section">' +
       '<div class="container">' +

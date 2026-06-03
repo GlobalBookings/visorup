@@ -598,6 +598,21 @@ ul, ol { list-style: none; }
 }
 
 
+/* ── WORKS WITH BAR ── */
+.works-with-bar { padding:20px 0; background:var(--bg-secondary); border-bottom:1px solid var(--border); }
+.works-with-inner { display:flex; align-items:center; gap:24px; justify-content:center; flex-wrap:wrap; }
+.works-with-label { font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1.5px; white-space:nowrap; }
+.works-with-logos { display:flex; align-items:center; gap:20px; flex-wrap:wrap; justify-content:center; }
+.works-with-logo { display:flex; align-items:center; gap:6px; color:var(--text-muted); font-size:12px; font-weight:600; opacity:0.7; transition:opacity var(--transition); }
+.works-with-logo:hover { opacity:1; }
+.works-with-logo i { flex-shrink:0; }
+@media (max-width:680px) {
+  .works-with-inner { flex-direction:column; gap:12px; }
+  .works-with-logos { gap:16px; }
+  .works-with-logo span { display:none; }
+  .works-with-logos { gap:24px; }
+}
+
 /* ── 4. HOMEPAGE SECTIONS (.home-section) ── */
 
 .home-section {
