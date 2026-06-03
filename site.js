@@ -4537,10 +4537,16 @@ class VisorUpSite {
         var rows = data.emails.map(function(e) {
           var date = new Date(e.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
           var unreadDot = e.read ? '' : '<span style="width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:6px;flex-shrink:0"></span>';
+          var preview = (e.text || '').replace(/\s+/g, ' ').slice(0, 120);
+          if (preview.length >= 120) preview += '...';
+          var fontWeight = e.read ? '400' : '700';
           return '<div class="admin-email-row' + (e.read ? '' : ' unread') + '" data-email-id="' + e.id + '" style="cursor:pointer">' +
-            '<div style="display:flex;align-items:center;gap:4px">' + unreadDot + '<strong style="font-size:13px">' + esc(e.from) + '</strong></div>' +
-            '<div style="font-size:13px;color:var(--text);margin:2px 0">' + esc(e.subject) + '</div>' +
-            '<div style="font-size:11px;color:var(--text-muted)">' + date + '</div>' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+              '<div style="display:flex;align-items:center;gap:4px;min-width:0">' + unreadDot + '<strong style="font-size:13px;font-weight:' + fontWeight + '">' + esc(e.from) + '</strong></div>' +
+              '<span style="font-size:11px;color:var(--text-muted);white-space:nowrap;flex-shrink:0">' + date + '</span>' +
+            '</div>' +
+            '<div style="font-size:13px;color:var(--text);margin:4px 0 2px;font-weight:' + fontWeight + '">' + esc(e.subject) + '</div>' +
+            (preview ? '<div style="font-size:12px;color:var(--text-muted);line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(preview) + '</div>' : '') +
           '</div>';
         }).join('');
 
