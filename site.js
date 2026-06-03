@@ -4122,119 +4122,238 @@ class VisorUpSite {
       return;
     }
 
-    // Gather stats
+    // Gather community stats (localStorage)
     var communityData = {};
     try { communityData = JSON.parse(localStorage.getItem('vu_community')) || {}; } catch(e) {}
     var posts = communityData.posts || [];
     var totalLikes = 0;
     var totalComments = 0;
     posts.forEach(function(p) { totalLikes += (p.likeCount || 0); totalComments += (p.commentCount || 0); });
+    var postsThisWeek = posts.filter(function(p) { return (Date.now() - new Date(p.createdAt).getTime()) < 7 * 86400000; }).length;
 
-    var gamData = {};
-    try { gamData = JSON.parse(localStorage.getItem('vu_gamification')) || {}; } catch(e) {}
-    var rides = gamData.rideLog || [];
-    var totalMiles = rides.reduce(function(s, r) { return s + (r.miles || 0); }, 0);
-    var badges = gamData.badges || [];
-    var destinations = gamData.visitedDestinations || [];
-
-    var garageBikes = [];
-    try { garageBikes = JSON.parse(localStorage.getItem('vu_garage_local')) || []; } catch(e) {}
-
-    var follows = [];
-    try { follows = JSON.parse(localStorage.getItem('vu_follows')) || []; } catch(e) {}
-
-    var motReminders = [];
-    try { motReminders = JSON.parse(localStorage.getItem('vu_mot_reminders')) || []; } catch(e) {}
-
-    // Top tags
     var tagCounts = {};
     posts.forEach(function(p) { (p.tags || []).forEach(function(t) { tagCounts[t] = (tagCounts[t] || 0) + 1; }); });
     var topTags = Object.keys(tagCounts).sort(function(a, b) { return tagCounts[b] - tagCounts[a]; }).slice(0, 10);
 
-    // Recent posts
-    var recentPosts = posts.slice(0, 5);
+    var recentPosts = posts.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); }).slice(0, 10);
 
-    function statCard(icon, label, value, colour) {
-      return '<div class="admin-stat">' +
-        '<div class="admin-stat-icon" style="background:' + (colour || 'rgba(214,138,45,0.12)') + '"><i class="fas ' + icon + '" style="color:' + (colour ? '#fff' : 'var(--accent)') + '"></i></div>' +
-        '<div class="admin-stat-info"><div class="admin-stat-value">' + value + '</div><div class="admin-stat-label">' + label + '</div></div>' +
-      '</div>';
+    function sc(icon, label, value) {
+      return '<div class="admin-stat"><div class="admin-stat-icon"><i class="fas ' + icon + '"></i></div><div class="admin-stat-info"><div class="admin-stat-value">' + value + '</div><div class="admin-stat-label">' + label + '</div></div></div>';
     }
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
     this.pageContent.innerHTML = '' +
     '<section class="page-section">' +
       '<div class="container">' +
-        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px">' +
           '<div><h1 style="margin:0;font-size:24px"><i class="fas fa-motorcycle" style="color:var(--accent);margin-right:8px"></i>Iron Horse HQ</h1>' +
-          '<p style="color:var(--text-muted);font-size:13px;margin:4px 0 0">Admin dashboard &mdash; high-level metrics</p></div>' +
-          '<button class="btn-outline" id="adminLogout" style="font-size:12px;padding:8px 16px"><i class="fas fa-sign-out-alt"></i> Lock</button>' +
+          '<p style="color:var(--text-muted);font-size:13px;margin:4px 0 0">Business intelligence dashboard</p></div>' +
+          '<div style="display:flex;gap:8px">' +
+            '<a href="https://analytics.google.com/analytics/web/#/p/G-HXLLQLTLP0" target="_blank" class="btn-primary" style="font-size:12px;padding:8px 16px;text-decoration:none"><i class="fas fa-chart-bar"></i> GA4</a>' +
+            '<button class="btn-outline" id="adminLogout" style="font-size:12px;padding:8px 16px"><i class="fas fa-sign-out-alt"></i> Lock</button>' +
+          '</div>' +
         '</div>' +
 
-        '<div class="admin-stats-grid">' +
-          statCard('fa-pen-fancy', 'Community Posts', posts.length) +
-          statCard('fa-heart', 'Total Likes', totalLikes) +
-          statCard('fa-comment', 'Total Comments', totalComments) +
-          statCard('fa-motorcycle', 'Rides Logged', rides.length) +
-          statCard('fa-road', 'Total Miles', totalMiles.toLocaleString()) +
-          statCard('fa-medal', 'Badges Earned', badges.length) +
-          statCard('fa-map-pin', 'Destinations Visited', destinations.length) +
-          statCard('fa-warehouse', 'Garage Bikes', garageBikes.length) +
-          statCard('fa-user-friends', 'Follows', follows.length) +
-          statCard('fa-file-circle-check', 'MOT Reminders', motReminders.length) +
+        '<!-- Section: Revenue & Monetisation -->' +
+        '<div class="admin-section-header"><i class="fas fa-sterling-sign"></i> Revenue & Monetisation</div>' +
+        '<div class="admin-card" style="margin-bottom:24px">' +
+          '<div class="admin-grid" style="margin:0">' +
+            '<div>' +
+              '<h3><i class="fas fa-link" style="color:var(--accent)"></i> Affiliate Clickouts</h3>' +
+              '<p style="color:var(--text-secondary);font-size:13px;line-height:1.6;margin-bottom:12px">Every click on a SportsBikeShop link fires an <code class="admin-code">affiliate_click</code> event to GA4 with product name, source page, and URL.</p>' +
+              '<div class="admin-ga4-path"><strong>View data:</strong> GA4 &rarr; Reports &rarr; Engagement &rarr; Events &rarr; <code class="admin-code">affiliate_click</code></div>' +
+              '<div class="admin-ga4-path" style="margin-top:4px"><strong>Top products:</strong> GA4 &rarr; Explore &rarr; Event parameter: <code class="admin-code">product_name</code></div>' +
+              '<div class="admin-ga4-path" style="margin-top:4px"><strong>Top pages:</strong> GA4 &rarr; Explore &rarr; Event parameter: <code class="admin-code">source_page</code></div>' +
+              '<p style="color:var(--text-muted);font-size:12px;margin-top:12px">Tracking ID: <code class="admin-code">#/28914,3714,0</code> &middot; 160 product links across bike guides &middot; Packing checklist CTA</p>' +
+            '</div>' +
+            '<div>' +
+              '<h3><i class="fas fa-bullseye" style="color:var(--accent)"></i> Conversion Funnel</h3>' +
+              '<div class="admin-funnel">' +
+                '<div class="admin-funnel-step"><span class="admin-funnel-label">Page Visit</span><span class="admin-funnel-event"><code class="admin-code">page_view</code></span></div>' +
+                '<div class="admin-funnel-arrow"><i class="fas fa-arrow-down"></i></div>' +
+                '<div class="admin-funnel-step"><span class="admin-funnel-label">Tool / Guide Used</span><span class="admin-funnel-event"><code class="admin-code">tool_used</code> <code class="admin-code">guide_viewed</code></span></div>' +
+                '<div class="admin-funnel-arrow"><i class="fas fa-arrow-down"></i></div>' +
+                '<div class="admin-funnel-step"><span class="admin-funnel-label">Sign Up</span><span class="admin-funnel-event"><code class="admin-code">sign_up</code></span></div>' +
+                '<div class="admin-funnel-arrow"><i class="fas fa-arrow-down"></i></div>' +
+                '<div class="admin-funnel-step admin-funnel-money"><span class="admin-funnel-label">Affiliate Click</span><span class="admin-funnel-event"><code class="admin-code">affiliate_click</code></span></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
         '</div>' +
 
+        '<!-- Section: Users & Growth -->' +
+        '<div class="admin-section-header"><i class="fas fa-users"></i> Users & Growth</div>' +
+        '<div id="adminUsersSection"><div class="admin-card"><p style="color:var(--text-muted);font-size:13px;padding:20px;text-align:center"><i class="fas fa-spinner fa-spin" style="margin-right:6px"></i>Loading from Supabase...</p></div></div>' +
+
+        '<!-- Section: Engagement -->' +
+        '<div class="admin-section-header"><i class="fas fa-fire"></i> Engagement</div>' +
+        '<div class="admin-stats-grid" style="margin-bottom:20px">' +
+          sc('fa-pen-fancy', 'Community Posts', posts.length) +
+          sc('fa-pen-fancy', 'Posts This Week', postsThisWeek) +
+          sc('fa-heart', 'Total Likes', totalLikes) +
+          sc('fa-comment', 'Total Comments', totalComments) +
+        '</div>' +
         '<div class="admin-grid">' +
           '<div class="admin-card">' +
             '<h3><i class="fas fa-hashtag" style="color:var(--accent)"></i> Top Tags</h3>' +
             (topTags.length > 0 ? topTags.map(function(t, i) {
-              return '<div class="admin-tag-row"><span class="admin-tag-rank">' + (i + 1) + '</span><span class="admin-tag-name">#' + t + '</span><span class="admin-tag-count">' + tagCounts[t] + ' posts</span></div>';
+              return '<div class="admin-tag-row"><span class="admin-tag-rank">' + (i + 1) + '</span><span class="admin-tag-name">#' + t + '</span><span class="admin-tag-count">' + tagCounts[t] + '</span></div>';
             }).join('') : '<p style="color:var(--text-muted);font-size:13px">No tags yet.</p>') +
           '</div>' +
-
           '<div class="admin-card">' +
-            '<h3><i class="fas fa-clock" style="color:var(--accent)"></i> Recent Posts</h3>' +
+            '<h3><i class="fas fa-clock" style="color:var(--accent)"></i> Recent Posts <span style="font-size:11px;font-weight:400;color:var(--text-muted);margin-left:auto">admin can delete</span></h3>' +
             (recentPosts.length > 0 ? recentPosts.map(function(p) {
-              var date = new Date(p.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-              return '<div class="admin-post-row">' +
-                '<div class="admin-post-info"><strong>' + (p.title || 'Untitled') + '</strong><span>' + p.userName + ' &middot; ' + date + '</span></div>' +
-                '<div class="admin-post-stats"><span><i class="fas fa-heart"></i> ' + (p.likeCount || 0) + '</span><span><i class="fas fa-comment"></i> ' + (p.commentCount || 0) + '</span></div>' +
+              var date = new Date(p.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+              return '<div class="admin-post-row" data-post-id="' + p.id + '">' +
+                '<div class="admin-post-info"><strong>' + esc(p.title || 'Untitled') + '</strong><span>' + esc(p.userName) + ' &middot; ' + date + '</span></div>' +
+                '<div class="admin-post-stats"><span><i class="fas fa-heart"></i> ' + (p.likeCount || 0) + '</span><span><i class="fas fa-comment"></i> ' + (p.commentCount || 0) + '</span>' +
+                '<button class="admin-delete-post" data-post-id="' + p.id + '" title="Delete"><i class="fas fa-trash"></i></button></div>' +
               '</div>';
             }).join('') : '<p style="color:var(--text-muted);font-size:13px">No posts yet.</p>') +
           '</div>' +
+        '</div>' +
 
-          '<div class="admin-card">' +
-            '<h3><i class="fas fa-chart-line" style="color:var(--accent)"></i> GA4 Analytics</h3>' +
-            '<p style="color:var(--text-secondary);font-size:13px;line-height:1.6">Full traffic data, guide views, tool usage, and affiliate clickouts are tracked in Google Analytics.</p>' +
-            '<a href="https://analytics.google.com/analytics/web/#/p/G-HXLLQLTLP0" target="_blank" class="btn-primary" style="display:inline-block;font-size:13px;padding:10px 20px;text-decoration:none;margin-top:8px"><i class="fas fa-chart-bar"></i> Open GA4 Dashboard</a>' +
-            '<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">' +
-              '<h4 style="font-size:12px;color:var(--text-muted);margin:0 0 8px;text-transform:uppercase;letter-spacing:0.5px">Events Being Tracked</h4>' +
-              '<div style="font-size:12px;color:var(--text-secondary);line-height:2">' +
-                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">tool_used</code>' +
-                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">guide_viewed</code>' +
-                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">affiliate_click</code>' +
-                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">button_click</code>' +
-                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">community_post</code>' +
-                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px;margin-right:4px">sign_up</code>' +
-                '<code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px">page_view</code>' +
-              '</div>' +
+        '<!-- Section: Content Performance -->' +
+        '<div class="admin-section-header"><i class="fas fa-book-open"></i> Content Performance</div>' +
+        '<div class="admin-card" style="margin-bottom:24px">' +
+          '<div class="admin-grid" style="margin:0">' +
+            '<div>' +
+              '<h3><i class="fas fa-book" style="color:var(--accent)"></i> Guide Views</h3>' +
+              '<p style="color:var(--text-secondary);font-size:13px;line-height:1.6">250 guides across 7 categories. Views tracked via <code class="admin-code">guide_viewed</code> with slug and category.</p>' +
+              '<div class="admin-ga4-path" style="margin-top:8px"><strong>Top guides:</strong> GA4 &rarr; Explore &rarr; Event: guide_viewed &rarr; Parameter: <code class="admin-code">guide_slug</code></div>' +
+              '<div class="admin-ga4-path" style="margin-top:4px"><strong>By category:</strong> GA4 &rarr; Explore &rarr; Parameter: <code class="admin-code">guide_category</code></div>' +
+            '</div>' +
+            '<div>' +
+              '<h3><i class="fas fa-tools" style="color:var(--accent)"></i> Tool Usage</h3>' +
+              '<p style="color:var(--text-secondary);font-size:13px;line-height:1.6">10 tools tracked. Each visit fires <code class="admin-code">tool_used</code> with tool name.</p>' +
+              '<div class="admin-ga4-path" style="margin-top:8px"><strong>Breakdown:</strong> GA4 &rarr; Events &rarr; tool_used &rarr; Parameter: <code class="admin-code">tool_name</code></div>' +
+              '<p style="font-size:12px;color:var(--text-muted);margin-top:12px">Tools: build-route, plan-trip, packing-checklist, cost-calculator, weather, sunrise-sunset, service-tracker, mot-tax, emergency-card</p>' +
             '</div>' +
           '</div>' +
+        '</div>' +
 
-          '<div class="admin-card">' +
-            '<h3><i class="fas fa-link" style="color:var(--accent)"></i> Affiliate Tracking</h3>' +
-            '<p style="color:var(--text-secondary);font-size:13px;line-height:1.6">All SportsBikeShop clickouts fire <code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px">affiliate_click</code> events to GA4 with product name, source page, and outbound URL.</p>' +
-            '<p style="color:var(--text-secondary);font-size:13px;margin-top:8px">View in GA4: <strong>Reports &rarr; Engagement &rarr; Events &rarr; affiliate_click</strong></p>' +
-            '<p style="color:var(--text-muted);font-size:12px;margin-top:12px">Tracking ID: <code style="background:var(--bg-secondary);padding:2px 6px;border-radius:3px">#/28914,3714,0</code> &middot; 160 product links active</p>' +
-          '</div>' +
+        '<!-- Section: GA4 Events Reference -->' +
+        '<div class="admin-section-header"><i class="fas fa-code"></i> GA4 Events Reference</div>' +
+        '<div class="admin-card" style="margin-bottom:24px">' +
+          '<table class="admin-events-table">' +
+            '<thead><tr><th>Event</th><th>Parameters</th><th>Where to Find</th></tr></thead>' +
+            '<tbody>' +
+              '<tr><td><code class="admin-code">affiliate_click</code></td><td>product_name, source_page, affiliate_url</td><td>Events &rarr; affiliate_click</td></tr>' +
+              '<tr><td><code class="admin-code">tool_used</code></td><td>tool_name</td><td>Events &rarr; tool_used</td></tr>' +
+              '<tr><td><code class="admin-code">guide_viewed</code></td><td>guide_slug, guide_category</td><td>Events &rarr; guide_viewed</td></tr>' +
+              '<tr><td><code class="admin-code">sign_up</code></td><td>method</td><td>Events &rarr; sign_up</td></tr>' +
+              '<tr><td><code class="admin-code">community_post</code></td><td>page</td><td>Events &rarr; community_post</td></tr>' +
+              '<tr><td><code class="admin-code">button_click</code></td><td>button_name, context</td><td>Events &rarr; button_click</td></tr>' +
+              '<tr><td><code class="admin-code">page_view</code></td><td>page_path, page_title</td><td>Reports &rarr; Pages</td></tr>' +
+            '</tbody>' +
+          '</table>' +
         '</div>' +
 
       '</div>' +
     '</section>';
 
+    // Bind logout
     document.getElementById('adminLogout').addEventListener('click', function() {
       sessionStorage.removeItem('vu_admin_auth');
       self.navigate('/');
     });
+
+    // Bind post delete buttons
+    document.querySelectorAll('.admin-delete-post').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var postId = btn.dataset.postId;
+        if (!confirm('Delete this post permanently?')) return;
+        if (typeof VisorUpCommunity !== 'undefined') VisorUpCommunity.deletePost(postId);
+        var row = btn.closest('.admin-post-row');
+        if (row) row.remove();
+      });
+    });
+
+    // Load Supabase user data
+    this._loadAdminUsers();
+  }
+
+  async _loadAdminUsers() {
+    var section = document.getElementById('adminUsersSection');
+    if (!section) return;
+
+    var sb = typeof getSupabase === 'function' ? getSupabase() : null;
+    var dbStats = null;
+
+    if (sb) {
+      try {
+        var { data, error } = await sb.rpc('admin_dashboard_stats');
+        if (!error && data) dbStats = data;
+      } catch (e) { console.warn('Admin: Supabase RPC failed', e); }
+    }
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+    if (dbStats && dbStats.users) {
+      var users = dbStats.users || [];
+      var usersHTML = '<div class="admin-stats-grid" style="margin-bottom:20px">';
+      usersHTML += '<div class="admin-stat"><div class="admin-stat-icon"><i class="fas fa-users"></i></div><div class="admin-stat-info"><div class="admin-stat-value">' + (dbStats.total_users || 0) + '</div><div class="admin-stat-label">Total Users</div></div></div>';
+      usersHTML += '<div class="admin-stat"><div class="admin-stat-icon"><i class="fas fa-user-plus"></i></div><div class="admin-stat-info"><div class="admin-stat-value">' + (dbStats.users_this_week || 0) + '</div><div class="admin-stat-label">New This Week</div></div></div>';
+      usersHTML += '<div class="admin-stat"><div class="admin-stat-icon"><i class="fas fa-calendar-check"></i></div><div class="admin-stat-info"><div class="admin-stat-value">' + (dbStats.users_this_month || 0) + '</div><div class="admin-stat-label">New This Month</div></div></div>';
+      usersHTML += '<div class="admin-stat"><div class="admin-stat-icon"><i class="fas fa-warehouse"></i></div><div class="admin-stat-info"><div class="admin-stat-value">' + (dbStats.total_bikes || 0) + '</div><div class="admin-stat-label">Total Garage Bikes</div></div></div>';
+      usersHTML += '<div class="admin-stat"><div class="admin-stat-icon"><i class="fas fa-route"></i></div><div class="admin-stat-info"><div class="admin-stat-value">' + (dbStats.total_trips || 0) + '</div><div class="admin-stat-label">Saved Trips</div></div></div>';
+      usersHTML += '<div class="admin-stat"><div class="admin-stat-icon"><i class="fas fa-share-alt"></i></div><div class="admin-stat-info"><div class="admin-stat-value">' + (dbStats.total_public_trips || 0) + '</div><div class="admin-stat-label">Public Trips</div></div></div>';
+      usersHTML += '</div>';
+
+      // Users table
+      usersHTML += '<div class="admin-card" style="margin-bottom:20px"><h3><i class="fas fa-address-book" style="color:var(--accent)"></i> All Users <button class="btn-outline admin-export-emails" style="font-size:11px;padding:4px 12px;margin-left:auto"><i class="fas fa-copy"></i> Copy Emails</button></h3>';
+      usersHTML += '<div class="admin-table-wrap"><table class="admin-users-table"><thead><tr><th>User</th><th>Email</th><th>Signed Up</th><th>Bikes</th><th>Trips</th><th>Garage</th></tr></thead><tbody>';
+      users.forEach(function(u) {
+        var signupDate = u.created_at ? new Date(u.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+        var bikesStr = '—';
+        if (u.bikes && u.bikes.length > 0) {
+          bikesStr = u.bikes.map(function(b) { return (b.nickname ? b.nickname + ' — ' : '') + (b.make || '') + ' ' + (b.model || ''); }).join(', ');
+        }
+        usersHTML += '<tr>' +
+          '<td><strong>' + esc(u.display_name) + '</strong></td>' +
+          '<td><a href="mailto:' + esc(u.email) + '" style="color:var(--accent);text-decoration:none">' + esc(u.email) + '</a></td>' +
+          '<td>' + signupDate + '</td>' +
+          '<td>' + (u.bike_count || 0) + '</td>' +
+          '<td>' + (u.trip_count || 0) + '</td>' +
+          '<td style="font-size:11px;color:var(--text-muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(bikesStr) + '">' + esc(bikesStr) + '</td>' +
+        '</tr>';
+      });
+      usersHTML += '</tbody></table></div></div>';
+
+      // Popular bikes
+      if (dbStats.popular_bikes && dbStats.popular_bikes.length > 0) {
+        usersHTML += '<div class="admin-card"><h3><i class="fas fa-motorcycle" style="color:var(--accent)"></i> Most Popular Bikes</h3>';
+        dbStats.popular_bikes.forEach(function(b, i) {
+          usersHTML += '<div class="admin-tag-row"><span class="admin-tag-rank">' + (i + 1) + '</span><span class="admin-tag-name">' + esc(b.make) + ' ' + esc(b.model) + '</span><span class="admin-tag-count">' + b.rider_count + ' riders</span></div>';
+        });
+        usersHTML += '</div>';
+      }
+
+      section.innerHTML = usersHTML;
+
+      // Bind export emails
+      var exportBtn = section.querySelector('.admin-export-emails');
+      if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+          var emails = users.map(function(u) { return u.email; }).filter(Boolean).join('\n');
+          navigator.clipboard.writeText(emails).then(function() {
+            exportBtn.innerHTML = '<i class="fas fa-check"></i> Copied ' + users.length + ' emails';
+            setTimeout(function() { exportBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Emails'; }, 2000);
+          });
+        });
+      }
+    } else {
+      section.innerHTML = '<div class="admin-card">' +
+        '<h3><i class="fas fa-users" style="color:var(--accent)"></i> Users</h3>' +
+        '<p style="color:var(--text-muted);font-size:13px;line-height:1.6">Could not load user data from Supabase. This requires:</p>' +
+        '<ol style="color:var(--text-secondary);font-size:13px;line-height:1.8;padding-left:20px;margin:12px 0 0">' +
+          '<li>Be logged in as <strong>jackchittenden@googlemail.com</strong></li>' +
+          '<li>Run <code class="admin-code">supabase-admin-setup.sql</code> in Supabase SQL Editor</li>' +
+          '<li>Refresh this page</li>' +
+        '</ol>' +
+      '</div>';
+    }
   }
 
   renderAbout() {
