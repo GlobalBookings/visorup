@@ -25,7 +25,6 @@ log.info('VisorUp Agent System starting...');
 // ── Express server ────────────────────────────────────────
 const app = express();
 app.use(express.json({ limit: '5mb' }));
-app.use(express.text({ type: 'application/json', limit: '5mb' }));
 
 // CORS for admin panel requests from visorup.co.uk
 app.use((req, res, next) => {
