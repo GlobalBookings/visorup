@@ -264,9 +264,10 @@ class RouteBuilder {
 
     this.poiLayers = {};
     this.poiVisible = {};
+    this._poiPanelOpen = false;
     for (var k in RouteBuilder.POI_CONFIG) {
       this.poiLayers[k] = null;
-      this.poiVisible[k] = true;
+      this.poiVisible[k] = false;
     }
 
     this.startLocation = null;
@@ -378,6 +379,28 @@ class RouteBuilder {
       .rb-loading.active{display:block}
       .rb-poi-popup-btn{display:inline-block;margin-top:6px;padding:4px 10px;background:#D68A2D;color:#080c0b;border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer}
       .rb-poi-popup-btn:hover{background:#e09a3d}
+      .rb-poi-toggle{position:absolute;top:80px;right:12px;z-index:450;background:rgba(15,22,20,0.92);border:1px solid #2a3e38;color:#D68A2D;padding:8px 12px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;font-family:inherit;transition:all .2s}
+      .rb-poi-toggle:hover{background:#1a2e2a;border-color:#D68A2D}
+      .rb-poi-toggle.active{background:#D68A2D;color:#080c0b;border-color:#D68A2D}
+      .rb-poi-toggle span{font-size:11px}
+      @keyframes rb-poi-pulse{0%,100%{box-shadow:0 0 0 0 rgba(214,138,45,0.4)}50%{box-shadow:0 0 0 10px rgba(214,138,45,0)}}
+      .rb-poi-toggle.pulse{animation:rb-poi-pulse 1.5s ease 3}
+      .rb-poi-panel{position:absolute;top:80px;right:12px;z-index:440;background:rgba(15,22,20,0.95);border:1px solid #2a3e38;border-radius:10px;width:220px;max-height:calc(100% - 140px);display:none;flex-direction:column;backdrop-filter:blur(8px);box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+      .rb-poi-panel.open{display:flex}
+      .rb-poi-panel-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid #1e2e2a}
+      .rb-poi-panel-header h4{margin:0;font-size:13px;color:#c0c8c5;display:flex;align-items:center;gap:6px}
+      .rb-poi-panel-header h4 i{color:#D68A2D}
+      .rb-poi-panel-close{background:none;border:none;color:#7a8a85;cursor:pointer;font-size:14px;padding:4px}
+      .rb-poi-panel-close:hover{color:#fff}
+      .rb-poi-panel-body{padding:8px 14px;overflow-y:auto;flex:1}
+      .rb-poi-panel-body label{display:flex;align-items:center;gap:8px;font-size:12px;color:#c0c8c5;cursor:pointer;padding:5px 0}
+      .rb-poi-panel-body label:hover{color:#fff}
+      .rb-poi-panel-footer{display:flex;gap:6px;padding:10px 14px;border-top:1px solid #1e2e2a}
+      .rb-poi-panel-all,.rb-poi-panel-none{flex:1;padding:6px;font-size:11px;font-weight:600;border:none;border-radius:5px;cursor:pointer;font-family:inherit}
+      .rb-poi-panel-all{background:#D68A2D;color:#080c0b}
+      .rb-poi-panel-all:hover{background:#e09a3d}
+      .rb-poi-panel-none{background:#1e2e2a;color:#7a8a85}
+      .rb-poi-panel-none:hover{background:#2a3e38;color:#c0c8c5}
       .rb-weather-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
       .rb-weather-day{background:#152220;border-radius:6px;padding:6px 8px;text-align:center;min-width:42px;flex:1}
       .rb-weather-label{font-size:10px;color:#7a8a85;margin-bottom:2px}
@@ -415,7 +438,7 @@ class RouteBuilder {
       var cfg = RouteBuilder.POI_CONFIG[type];
       var data = RouteBuilder[cfg.dataKey];
       var count = data ? data.length : 0;
-      poiChecks += '<label><input type="checkbox" checked data-poi-type="' + type + '"> ' +
+      poiChecks += '<label><input type="checkbox" data-poi-type="' + type + '"> ' +
         '<span style="display:inline-flex;width:18px;height:18px;border-radius:50%;background:' + cfg.color + ';align-items:center;justify-content:center;margin-right:4px"><i class="fas ' + cfg.faIcon + '" style="font-size:9px;color:#fff"></i></span>' +
         cfg.label + ' (' + count + ')</label>';
     }
@@ -483,11 +506,6 @@ class RouteBuilder {
           '</div>' +
 
           '<div class="rb-section">' +
-            '<h3>\uD83D\uDCCD POI Filters</h3>' +
-            poiChecks +
-          '</div>' +
-
-          '<div class="rb-section">' +
             '<h3>\uD83D\uDCCC Waypoints</h3>' +
             '<div class="rb-geo-row" style="margin-bottom:8px">' +
               '<input type="text" id="rb-wpSearchInput" placeholder="Search location to add...">' +
@@ -534,6 +552,12 @@ class RouteBuilder {
           '<div id="rb-map" style="width:100%;flex:1;min-height:0"></div>' +
           '<div class="rb-overlay" id="rb-overlay">Click on the map to add waypoints</div>' +
           '<div class="rb-loading" id="rb-loading">Calculating route\u2026</div>' +
+          '<button class="rb-poi-toggle" id="rb-poiToggle" title="Show/hide points of interest"><i class="fas fa-map-marker-alt"></i><span>POI</span></button>' +
+          '<div class="rb-poi-panel" id="rb-poiPanel">' +
+            '<div class="rb-poi-panel-header"><h4><i class="fas fa-map-marker-alt"></i> Points of Interest</h4><button class="rb-poi-panel-close" id="rb-poiPanelClose"><i class="fas fa-times"></i></button></div>' +
+            '<div class="rb-poi-panel-body">' + poiChecks + '</div>' +
+            '<div class="rb-poi-panel-footer"><button class="rb-poi-panel-all" id="rb-poiAll">Show All</button><button class="rb-poi-panel-none" id="rb-poiNone">Hide All</button></div>' +
+          '</div>' +
           '<div class="rb-elevation" id="rb-elevation">' +
             '<canvas id="rb-elevCanvas"></canvas>' +
             '<div class="rb-elevation-stats" id="rb-elevStats"></div>' +
@@ -600,6 +624,34 @@ class RouteBuilder {
     // Cost inputs change
     this.container.querySelector('#rbMPG').addEventListener('change', function () { self._calculateCosts(); });
     this.container.querySelector('#rbFuelPrice').addEventListener('change', function () { self._calculateCosts(); });
+
+    // POI panel toggle
+    var poiToggleBtn = this.container.querySelector('#rb-poiToggle');
+    var poiPanel = this.container.querySelector('#rb-poiPanel');
+    poiToggleBtn.addEventListener('click', function() {
+      self._poiPanelOpen = !self._poiPanelOpen;
+      poiPanel.classList.toggle('open', self._poiPanelOpen);
+      poiToggleBtn.classList.toggle('active', self._poiPanelOpen);
+    });
+    this.container.querySelector('#rb-poiPanelClose').addEventListener('click', function() {
+      self._poiPanelOpen = false;
+      poiPanel.classList.remove('open');
+      poiToggleBtn.classList.remove('active');
+    });
+    this.container.querySelector('#rb-poiAll').addEventListener('click', function() {
+      self.container.querySelectorAll('input[data-poi-type]').forEach(function(cb) {
+        cb.checked = true;
+        self._togglePOI(cb.dataset.poiType, true);
+      });
+    });
+    this.container.querySelector('#rb-poiNone').addEventListener('click', function() {
+      self.container.querySelectorAll('input[data-poi-type]').forEach(function(cb) {
+        cb.checked = false;
+        self._togglePOI(cb.dataset.poiType, false);
+      });
+    });
+    // Flash the POI button on first load
+    setTimeout(function() { poiToggleBtn.classList.add('pulse'); }, 1500);
 
     // POI filter toggles
     this.container.querySelectorAll('input[data-poi-type]').forEach(function (cb) {
@@ -707,7 +759,9 @@ class RouteBuilder {
     }
 
     this.poiLayers[type] = group;
-    group.addTo(this.map);
+    if (this.poiVisible[type]) {
+      group.addTo(this.map);
+    }
   }
 
   _buildPOIPopup(type, poi, idx) {
