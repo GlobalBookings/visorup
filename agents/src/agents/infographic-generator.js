@@ -22,7 +22,7 @@ const log = createLogger('infographic-generator');
 /* ── Config ─────────────────────────────────────────────────────────── */
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
-const SITE_URL = process.env.SITE_URL || 'https://visorup.com';
+const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
 
 /* ── Brand colours ──────────────────────────────────────────────────── */
@@ -573,26 +573,86 @@ function gitCommitAndPush(repoRoot, files, message) {
   }
 }
 
+/* ── Publish as guide page ───────────────────────────────────────────── */
+function buildArticleContent(info, pngPublicPath) {
+  const embedCode = `<a href="${SITE_URL}/guides/${info.id}"><img src="${SITE_URL}/${pngPublicPath}" alt="${info.title}" style="max-width:100%;height:auto;" /></a>\n<p>Source: <a href="${SITE_URL}" rel="follow">VisorUp.co.uk</a> — UK Motorcycle Touring</p>`;
+  const escapedEmbed = embedCode.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  return `<div style="text-align:center;margin-bottom:32px">
+  <img src="/${pngPublicPath}" alt="${info.title} — ${info.subtitle}" style="max-width:100%;height:auto;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.3)" />
+</div>
+
+<h2>${info.title}</h2>
+<p>${info.subtitle}. Created by <a href="${SITE_URL}">VisorUp</a> — the UK's motorcycle touring platform.</p>
+<p>Feel free to share this infographic on your website, blog, or forum. Just use the embed code below — it includes a link back to VisorUp so your readers can explore more.</p>
+
+<h3>Embed This Infographic</h3>
+<p>Copy and paste this HTML code into your site:</p>
+<div style="position:relative;margin:16px 0 32px">
+  <pre style="background:#1A1F1E;border:1px solid #2a302e;border-radius:8px;padding:16px 48px 16px 16px;overflow-x:auto;font-size:13px;line-height:1.6;color:#c5ccc9;white-space:pre-wrap;word-break:break-all"><code>${escapedEmbed}</code></pre>
+  <button onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').textContent.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'\\&quot;'));this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)" style="position:absolute;top:8px;right:8px;background:#D68A2D;color:#0F1413;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">Copy</button>
+</div>
+
+<div style="background:#1A1F1E;border:1px solid #2a302e;border-radius:12px;padding:20px;margin:24px 0">
+  <h4 style="color:#D68A2D;margin:0 0 8px;font-size:14px">Preview of embed:</h4>
+  <a href="${SITE_URL}/guides/${info.id}"><img src="/${pngPublicPath}" alt="${info.title}" style="max-width:100%;height:auto;border-radius:8px" /></a>
+  <p style="font-size:12px;color:#7a8a85;margin:8px 0 0">Source: <a href="${SITE_URL}" style="color:#D68A2D">VisorUp.co.uk</a> — UK Motorcycle Touring</p>
+</div>`;
+}
+
+function writeArticleFile(articlesDir, slug, content) {
+  const filePath = path.join(articlesDir, `${slug}.js`);
+  const fileContent = `export const content = \`${content.replace(/`/g, '\\`')}\`;\n`;
+  fs.writeFileSync(filePath, fileContent, 'utf-8');
+  return filePath;
+}
+
+function appendToArticlesIndex(indexPath, metadata) {
+  let src = fs.readFileSync(indexPath, 'utf-8');
+  const lastEntry = src.lastIndexOf('}');
+  if (lastEntry === -1) return false;
+  const arrayEnd = src.indexOf(']', lastEntry);
+  if (arrayEnd === -1) return false;
+  const entry = ',\n' + JSON.stringify(metadata);
+  src = src.slice(0, arrayEnd) + entry + '\n' + src.slice(arrayEnd);
+  fs.writeFileSync(indexPath, src, 'utf-8');
+  return true;
+}
+
+function parseExistingSlugs(indexPath) {
+  try {
+    const src = fs.readFileSync(indexPath, 'utf-8');
+    const slugs = [...src.matchAll(/"slug"\s*:\s*"([^"]+)"/g)].map(m => m[1]);
+    return new Set(slugs);
+  } catch { return new Set(); }
+}
+
 /* ── Main run ───────────────────────────────────────────────────────── */
 export async function run() {
   log.info('Infographic Generator starting');
 
   const outputDir = path.join(WORK_DIR, 'data', 'infographics');
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
-  }
+  const publicImgDir = path.join(WORK_DIR, 'public', 'images', 'infographics');
+  const articlesDir = path.join(WORK_DIR, 'articles');
+  const articlesIndex = path.join(WORK_DIR, 'articles.js');
+
+  fs.mkdirSync(outputDir, { recursive: true });
+  fs.mkdirSync(publicImgDir, { recursive: true });
+
+  const existingSlugs = parseExistingSlugs(articlesIndex);
 
   const results = [];
   const changedFiles = [];
 
   for (const info of INFOGRAPHICS) {
-    const outputPath = path.join(outputDir, `${info.id}.png`);
-
-    // Skip if already generated
-    if (fs.existsSync(outputPath)) {
-      log.info(`Skipping ${info.id} — already exists`);
+    // Skip if already published as a guide
+    if (existingSlugs.has(info.id)) {
+      log.info(`Skipping ${info.id} — already published`);
       continue;
     }
+
+    const outputPath = path.join(outputDir, `${info.id}.png`);
+    const publicPngPath = path.join(publicImgDir, `${info.id}.png`);
 
     log.info(`Generating: ${info.title}`);
 
@@ -604,30 +664,56 @@ export async function run() {
         heroDataUrl = `data:${imgResult.mimeType};base64,${imgResult.buffer.toString('base64')}`;
       }
 
-      // Build HTML
+      // Build HTML infographic
       const html = info.buildHtml(heroDataUrl);
 
-      // Save HTML for debugging
+      // Save HTML for reference
       const htmlPath = path.join(outputDir, `${info.id}.html`);
       fs.writeFileSync(htmlPath, html, 'utf-8');
 
       // Render to PNG
       await renderToPng(html, outputPath);
 
+      // Copy PNG to public dir for the site
+      fs.copyFileSync(outputPath, publicPngPath);
+
+      const pngPublicPath = `public/images/infographics/${info.id}.png`;
+
+      // Create article content with embed code
+      const articleContent = buildArticleContent(info, pngPublicPath);
+      writeArticleFile(articlesDir, info.id, articleContent);
+
+      // Add to articles.js
+      const metadata = {
+        slug: info.id,
+        category: 'Guides',
+        title: info.title + ' [Infographic]',
+        metaDescription: `${info.subtitle}. Free to share — embed code included. By VisorUp.`,
+        heroImage: pngPublicPath,
+        author: 'VisorUp Team',
+        publishDate: new Date().toISOString().split('T')[0],
+        readTime: '2 min read',
+        tags: ['infographic', 'shareable'],
+        relatedSlugs: [],
+        affiliateLinks: [],
+      };
+      appendToArticlesIndex(articlesIndex, metadata);
+
       changedFiles.push(
-        path.join('data', 'infographics', `${info.id}.png`),
-        path.join('data', 'infographics', `${info.id}.html`),
+        `articles/${info.id}.js`,
+        'articles.js',
+        pngPublicPath,
       );
 
-      results.push({ id: info.id, title: info.title });
-      log.info(`Generated: ${info.title}`);
+      results.push({ id: info.id, title: info.title, url: `${SITE_URL}/guides/${info.id}` });
+      log.info(`Published: ${info.title} -> /guides/${info.id}`);
     } catch (err) {
       log.error(`Failed to generate ${info.id}: ${err.message}`);
     }
   }
 
   if (!results.length) {
-    log.info('No new infographics generated');
+    log.info('No new infographics to publish');
     return;
   }
 
@@ -635,21 +721,21 @@ export async function run() {
   const sha = gitCommitAndPush(
     WORK_DIR,
     changedFiles,
-    `content: generate ${results.length} infographic(s)`,
+    `content: publish ${results.length} infographic(s) as guide pages`,
   );
 
   // Slack report
   const blocks = [
-    slackHeader('📊 Infographic Generator — VisorUp'),
+    slackHeader('Infographic Generator — VisorUp'),
     slackSection(
-      `Generated *${results.length}* infographic(s)` +
+      `Published *${results.length}* infographic(s) as shareable guide pages` +
       (sha ? ` • commit \`${sha}\`` : ''),
     ),
     slackDivider(),
-    ...results.map(r => slackSection(`*${r.title}*\n\`data/infographics/${r.id}.png\``)),
+    ...results.map(r => slackSection(`*${r.title}*\n${r.url}\n_Embed code included on page_`)),
   ];
 
-  await sendSlack(blocks, `Infographic Generator: ${results.length} infographic(s) created`);
+  await sendSlack(blocks, `Infographic Generator: ${results.length} published`);
 
-  log.info(`Infographic Generator complete — ${results.length} infographic(s) generated`);
+  log.info(`Infographic Generator complete — ${results.length} infographic(s) published`);
 }

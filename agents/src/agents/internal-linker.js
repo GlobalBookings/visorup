@@ -20,7 +20,7 @@ const log = createLogger('internal-linker');
 /* ── Config ─────────────────────────────────────────────────────────── */
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
-const SITE_URL = process.env.SITE_URL || 'https://visorup.com';
+const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
 const MAX_LINKS_PER_ARTICLE = 5;
 const MIN_CONTENT_LENGTH = 500;

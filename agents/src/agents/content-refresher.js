@@ -25,8 +25,8 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const GA4_PROPERTY = process.env.GA4_PROPERTY_ID;
-const SC_SITE = process.env.SEARCH_CONSOLE_SITE_URL || 'https://visorup.com';
-const SITE_URL = process.env.SITE_URL || 'https://visorup.com';
+const SC_SITE = process.env.SEARCH_CONSOLE_SITE_URL || 'https://visorup.co.uk';
+const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const MAX_REFRESHES = 2;
 const WORK_DIR = process.env.WORK_DIR || path.join(__dirname, '..', '..', '..');
 
