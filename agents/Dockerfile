@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     libxrandr2 \
     xdg-utils \
     git \
+    ca-certificates \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
