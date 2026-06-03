@@ -2305,7 +2305,7 @@ class VisorUpSite {
 
     var cards = ARTICLES.map(function(a) {
       return '<a href="/guides/' + a.category + '/' + a.slug + '" class="guide-card" data-category="' + a.category + '">' +
-        '<div class="guide-card-img" style="background-image:url(' + a.heroImage + ')">' +
+        '<div class="guide-card-img" data-bg="' + a.heroImage + '">' +
           '<span class="guide-card-cat">' + a.category + '</span>' +
         '</div>' +
         '<div class="guide-card-body">' +
@@ -2354,7 +2354,7 @@ class VisorUpSite {
 
     var cards = catArticles.map(function(a) {
       return '<a href="/guides/' + a.category + '/' + a.slug + '" class="guide-card">' +
-        '<div class="guide-card-img" style="background-image:url(' + a.heroImage + ')">' +
+        '<div class="guide-card-img" data-bg="' + a.heroImage + '">' +
           '<span class="guide-card-cat">' + a.category + '</span>' +
         '</div>' +
         '<div class="guide-card-body">' +
@@ -2388,7 +2388,7 @@ class VisorUpSite {
         var r = ARTICLES.find(function(ar) { return ar.slug === slug; });
         if (!r) return '';
         return '<a href="/guides/' + r.category + '/' + r.slug + '" class="related-card">' +
-          '<div class="related-card-img" style="background-image:url(' + r.heroImage + ')"></div>' +
+          '<div class="related-card-img" data-bg="' + r.heroImage + '"></div>' +
           '<div class="related-card-body"><h4>' + r.title + '</h4><span>' + r.readTime + '</span></div>' +
         '</a>';
       }).filter(Boolean).join('');
@@ -2579,7 +2579,28 @@ class VisorUpSite {
   scrollToTop() {
     if (this.siteView) this.siteView.scrollTop = 0;
     window.scrollTo(0, 0);
+    this._initLazyImages();
     this._syncFavourites();
+  }
+
+  _initLazyImages() {
+    var els = document.querySelectorAll('[data-bg]:not([data-bg-loaded])');
+    if (els.length === 0) return;
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function(el) { el.style.backgroundImage = 'url(' + el.dataset.bg + ')'; el.setAttribute('data-bg-loaded', '1'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          el.style.backgroundImage = 'url(' + el.dataset.bg + ')';
+          el.setAttribute('data-bg-loaded', '1');
+          observer.unobserve(el);
+        }
+      });
+    }, { rootMargin: '200px' });
+    els.forEach(function(el) { observer.observe(el); });
   }
 
   async _syncFavourites() {

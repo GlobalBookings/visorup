@@ -1,0 +1,31 @@
+# Cache static assets aggressively
+/public/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/public/images/guides/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/public/images/heroes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/public/images/bikes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/public/images/destinations/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/public/images/routes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache JS/CSS for 1 week (may change more often)
+/*.js
+  Cache-Control: public, max-age=604800
+
+/*.css
+  Cache-Control: public, max-age=604800
+
+# HTML - short cache, revalidate
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+/
+  Cache-Control: public, max-age=300, must-revalidate
