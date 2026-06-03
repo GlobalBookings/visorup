@@ -156,11 +156,19 @@ export function getInbox(page = 1, limit = 20) {
 export function getEmail(id) {
   const inbox = loadInbox();
   const email = inbox.find(e => e.id === id);
-  if (email && !email.read) {
-    email.read = true;
-    saveInbox(inbox);
+  if (email) {
+    if (!email.read) {
+      email.read = true;
+      saveInbox(inbox);
+    }
+    return email;
   }
-  return email || null;
+
+  const sent = loadSent();
+  const sentEmail = sent.find(e => e.id === id);
+  if (sentEmail) return { ...sentEmail, from: 'hello@visorup.co.uk', read: true, source: 'sent' };
+
+  return null;
 }
 
 export function deleteEmail(id) {

@@ -4562,6 +4562,7 @@ class VisorUpSite {
   }
 
   _loadEmailSent() {
+    var self = this;
     var panel = document.getElementById('adminEmailSent');
     var AGENT_API = 'https://visorup-agents-qkyks.ondigitalocean.app';
     var ADMIN_KEY = 'bealachNaBa99';
@@ -4580,14 +4581,23 @@ class VisorUpSite {
         var rows = data.emails.map(function(e) {
           var date = new Date(e.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
           var toStr = Array.isArray(e.to) ? e.to.join(', ') : e.to;
-          return '<div class="admin-email-row" style="cursor:default">' +
-            '<div style="font-size:13px"><strong>To:</strong> ' + esc(toStr) + '</div>' +
-            '<div style="font-size:13px;color:var(--text);margin:2px 0">' + esc(e.subject) + '</div>' +
-            '<div style="font-size:11px;color:var(--text-muted)">' + date + '</div>' +
+          var preview = (e.html || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').slice(0, 120);
+          if (preview.length >= 120) preview += '...';
+          return '<div class="admin-email-row" data-email-id="' + e.id + '" style="cursor:pointer">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+              '<div style="font-size:13px"><strong>To:</strong> ' + esc(toStr) + '</div>' +
+              '<span style="font-size:11px;color:var(--text-muted);white-space:nowrap;flex-shrink:0">' + date + '</span>' +
+            '</div>' +
+            '<div style="font-size:13px;color:var(--text);margin:4px 0 2px">' + esc(e.subject) + '</div>' +
+            (preview ? '<div style="font-size:12px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(preview) + '</div>' : '') +
           '</div>';
         }).join('');
 
         panel.innerHTML = '<div class="admin-card" style="padding:0;overflow:hidden">' + rows + '</div>';
+
+        panel.querySelectorAll('.admin-email-row').forEach(function(row) {
+          row.addEventListener('click', function() { self._openEmailSent(row.dataset.emailId); });
+        });
       })
       .catch(function(err) {
         panel.innerHTML = '<div class="admin-card"><p style="color:#ff4444;text-align:center;padding:20px">Failed to load sent: ' + err.message + '</p></div>';
@@ -4652,6 +4662,48 @@ class VisorUpSite {
           document.getElementById('composeEmailTo').value = e.from || '';
           document.getElementById('composeEmailSubject').value = (e.subject || '').startsWith('Re: ') ? e.subject : 'Re: ' + (e.subject || '');
           document.getElementById('composeEmailBody').value = '\n\n--- Original message ---\n' + (e.text || '');
+        });
+      })
+      .catch(function(err) {
+        detail.innerHTML = '<div class="admin-card"><p style="color:#ff4444">Failed to load: ' + err.message + '</p></div>';
+      });
+  }
+
+  _openEmailSent(id) {
+    var detail = document.getElementById('adminEmailDetail');
+    var AGENT_API = 'https://visorup-agents-qkyks.ondigitalocean.app';
+    var ADMIN_KEY = 'bealachNaBa99';
+    var self = this;
+    if (!detail) return;
+
+    document.getElementById('adminEmailSent').style.display = 'none';
+    detail.style.display = '';
+    detail.innerHTML = '<div class="admin-card"><p style="color:var(--text-muted);text-align:center;padding:20px"><i class="fas fa-spinner fa-spin"></i> Loading...</p></div>';
+
+    fetch(AGENT_API + '/api/emails/' + id, { headers: { 'X-Admin-Key': ADMIN_KEY } })
+      .then(function(r) { return r.json(); })
+      .then(function(e) {
+        if (e.error) { detail.innerHTML = '<div class="admin-card"><p style="color:#ff4444">Email not found</p></div>'; return; }
+        function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+        var date = new Date(e.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        var toStr = Array.isArray(e.to) ? e.to.join(', ') : (e.to || '');
+
+        detail.innerHTML = '<div class="admin-card">' +
+          '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:16px;flex-wrap:wrap;gap:8px">' +
+            '<div>' +
+              '<h3 style="margin:0 0 4px;font-size:18px">' + esc(e.subject) + '</h3>' +
+              '<div style="font-size:13px;color:var(--text-muted)">To: <strong style="color:var(--text)">' + esc(toStr) + '</strong> &middot; ' + date + '</div>' +
+            '</div>' +
+            '<button class="btn-outline" id="emailBackBtnSent" style="font-size:12px;padding:8px 14px"><i class="fas fa-arrow-left"></i> Back</button>' +
+          '</div>' +
+          '<div style="border-top:1px solid var(--border);padding-top:16px;font-size:14px;line-height:1.7;color:var(--text-secondary)">' +
+            (e.html || esc(e.text || '').replace(/\n/g, '<br>')) +
+          '</div>' +
+        '</div>';
+
+        document.getElementById('emailBackBtnSent').addEventListener('click', function() {
+          detail.style.display = 'none';
+          document.getElementById('adminEmailSent').style.display = '';
         });
       })
       .catch(function(err) {
