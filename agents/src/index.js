@@ -73,15 +73,13 @@ app.post('/trigger/:agent', async (req, res) => {
 
 // ── Email webhook (from Resend) ───────────────────────────
 app.post('/email/incoming', (req, res) => {
-  const raw = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
-  const sig = req.headers['resend-signature'] || req.headers['svix-signature'] || '';
-
   res.sendStatus(200);
 
   try {
     const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    log.info(`Email webhook payload: ${JSON.stringify(data).slice(0, 500)}`);
     const email = handleIncomingEmail(data);
-    if (email) log.info(`Webhook: email received from ${email.from}`);
+    if (email) log.info(`Webhook: email stored — ${email.from}: ${email.subject}`);
   } catch (err) {
     log.error(`Email webhook error: ${err.message}`);
   }
