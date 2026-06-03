@@ -1690,13 +1690,7 @@ class VisorUpSite {
       return;
     }
 
-    var feed = VisorUpCommunity.generateActivityFeed();
-    var feedHTML = '';
-    if (feed.length === 0) {
-      feedHTML = '<div class="feed-empty"><i class="fas fa-motorcycle"></i><p>No activity yet. Log a ride, visit a destination, or post a ride report to get started!</p></div>';
-    } else {
-      feedHTML = feed.map(function(item) { return VisorUpCommunity.renderPostCard(item); }).join('');
-    }
+    var activeTab = this._communityTab || 'new';
 
     this.pageContent.innerHTML = '' +
     '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
@@ -1711,34 +1705,35 @@ class VisorUpSite {
         '<div class="feed-layout">' +
           '<div class="feed-main">' +
             '<div class="feed-compose">' +
-              '<div class="feed-compose-header"><i class="fas fa-pen"></i> Share a Ride Report</div>' +
-              '<input type="text" id="feedPostTitle" class="feed-compose-title" placeholder="Give your ride a title...">' +
-              '<textarea id="feedPostBody" class="feed-compose-body" placeholder="Tell us about your ride — the roads, the weather, the highlights..." rows="3"></textarea>' +
-              '<div class="feed-compose-meta">' +
-                '<input type="number" id="feedPostMiles" placeholder="Miles" style="width:80px">' +
-                '<input type="text" id="feedPostBike" placeholder="Bike">' +
-                '<select id="feedPostRating" class="garage-select" style="width:100px"><option value="">Rating</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>' +
-                '<input type="text" id="feedPostTags" placeholder="Tags (comma separated)">' +
-              '</div>' +
-              '<div class="feed-compose-photos">' +
-                '<div class="photo-upload-area" id="photoUploadArea">' +
-                  '<i class="fas fa-camera"></i>' +
-                  '<span>Add photos (max 4, jpg/png/webp, 5MB each)</span>' +
-                  '<input type="file" id="feedPostPhotos" multiple accept="image/jpeg,image/png,image/webp" style="display:none">' +
+              '<div class="feed-compose-header"><i class="fas fa-pen"></i> What\'s your latest ride?</div>' +
+              '<textarea id="feedPostBody" class="feed-compose-body" placeholder="Tell us about your ride — the roads, the weather, the highlights..." rows="2"></textarea>' +
+              '<div class="feed-compose-expand" id="feedComposeExpand" style="display:none">' +
+                '<input type="text" id="feedPostTitle" class="feed-compose-title" placeholder="Give your ride a title...">' +
+                '<div class="feed-compose-meta">' +
+                  '<input type="number" id="feedPostMiles" placeholder="Miles" style="width:80px">' +
+                  '<input type="text" id="feedPostBike" placeholder="Bike">' +
+                  '<select id="feedPostRating" class="garage-select" style="width:100px"><option value="">Rating</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>' +
+                  '<input type="text" id="feedPostTags" placeholder="Tags (comma separated)">' +
                 '</div>' +
-                '<div class="photo-preview-grid" id="photoPreviewGrid"></div>' +
+                '<div class="feed-compose-photos">' +
+                  '<div class="photo-upload-area" id="photoUploadArea">' +
+                    '<i class="fas fa-camera"></i>' +
+                    '<span>Add photos (max 4)</span>' +
+                    '<input type="file" id="feedPostPhotos" multiple accept="image/jpeg,image/png,image/webp" style="display:none">' +
+                  '</div>' +
+                  '<div class="photo-preview-grid" id="photoPreviewGrid"></div>' +
+                '</div>' +
               '</div>' +
               '<div class="feed-compose-actions">' +
                 '<button class="btn-primary" id="feedPostSubmit" style="font-size:13px;padding:10px 20px;"><i class="fas fa-paper-plane"></i> Post</button>' +
               '</div>' +
             '</div>' +
-            '<div class="feed-filter-bar">' +
-              '<button class="feed-filter-btn feed-filter-active" data-feed-filter="all"><i class="fas fa-stream"></i> All</button>' +
-              '<button class="feed-filter-btn" data-feed-filter="ride-report"><i class="fas fa-pen"></i> Reports</button>' +
-              '<button class="feed-filter-btn" data-feed-filter="activity"><i class="fas fa-bolt"></i> Activity</button>' +
-              '<button class="feed-filter-btn" data-feed-filter="following"><i class="fas fa-user-friends"></i> Following</button>' +
+            '<div class="feed-tabs">' +
+              '<button class="feed-tab' + (activeTab === 'new' ? ' feed-tab-active' : '') + '" data-feed-tab="new"><i class="fas fa-clock"></i> New</button>' +
+              '<button class="feed-tab' + (activeTab === 'top' ? ' feed-tab-active' : '') + '" data-feed-tab="top"><i class="fas fa-fire"></i> Top</button>' +
+              '<button class="feed-tab' + (activeTab === 'following' ? ' feed-tab-active' : '') + '" data-feed-tab="following"><i class="fas fa-user-friends"></i> Following</button>' +
             '</div>' +
-            '<div id="feedList">' + feedHTML + '</div>' +
+            '<div id="feedList"></div>' +
           '</div>' +
           '<div class="feed-sidebar">' +
             (typeof VisorUpGamification !== 'undefined' ? '' +
@@ -1771,8 +1766,16 @@ class VisorUpSite {
     '</section>' + this.renderFooter();
 
     var self = this;
-    var pendingPhotos = [];
 
+    this._renderFeedTab(activeTab);
+
+    // Expand compose form on focus
+    var bodyInput = document.getElementById('feedPostBody');
+    var expandSection = document.getElementById('feedComposeExpand');
+    bodyInput.addEventListener('focus', function() { expandSection.style.display = ''; });
+
+    // Photo upload
+    var pendingPhotos = [];
     var uploadArea = document.getElementById('photoUploadArea');
     var photoInput = document.getElementById('feedPostPhotos');
     var previewGrid = document.getElementById('photoPreviewGrid');
@@ -1828,8 +1831,9 @@ class VisorUpSite {
 
     // Post submission
     document.getElementById('feedPostSubmit').addEventListener('click', async function() {
-      var title = document.getElementById('feedPostTitle').value.trim();
       var body = document.getElementById('feedPostBody').value.trim();
+      var titleEl = document.getElementById('feedPostTitle');
+      var title = titleEl ? titleEl.value.trim() : '';
       if (!title && !body) { alert('Write something to share!'); return; }
       var submitBtn = document.getElementById('feedPostSubmit');
       var photos = [];
@@ -1838,44 +1842,59 @@ class VisorUpSite {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
         photos = await VisorUpCommunity.uploadPostPhotos(pendingPhotos);
       }
-      var tags = document.getElementById('feedPostTags').value.trim();
+      var tagsEl = document.getElementById('feedPostTags');
+      var tags = tagsEl ? tagsEl.value.trim() : '';
       await VisorUpCommunity.createPost({
         type: 'ride-report',
         title: title,
         body: body,
         photos: photos,
-        miles: parseInt(document.getElementById('feedPostMiles').value) || 0,
-        bike: document.getElementById('feedPostBike').value.trim(),
-        rating: parseInt(document.getElementById('feedPostRating').value) || 0,
+        miles: parseInt((document.getElementById('feedPostMiles') || {}).value) || 0,
+        bike: (document.getElementById('feedPostBike') || {}).value || '',
+        rating: parseInt((document.getElementById('feedPostRating') || {}).value) || 0,
         tags: tags ? tags.split(',').map(function(t) { return t.trim(); }).filter(Boolean) : []
       });
+      self._communityTab = 'new';
       self.renderCommunity();
-      self.scrollToTop();
     });
 
-    // Feed filters
-    document.querySelectorAll('.feed-filter-btn').forEach(function(btn) {
+    // Tab switching
+    document.querySelectorAll('.feed-tab').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        document.querySelectorAll('.feed-filter-btn').forEach(function(b) { b.classList.remove('feed-filter-active'); });
-        btn.classList.add('feed-filter-active');
-        var filter = btn.dataset.feedFilter;
-        document.querySelectorAll('#feedList > *').forEach(function(el) {
-          if (filter === 'all') { el.style.display = ''; return; }
-          var isPost = el.classList.contains('feed-post');
-          var isActivity = el.classList.contains('feed-activity-item');
-          if (filter === 'ride-report') el.style.display = isPost ? '' : 'none';
-          else if (filter === 'activity') el.style.display = isActivity ? '' : 'none';
-          else if (filter === 'following') {
-            var following = VisorUpCommunity.getFollowing();
-            var uid = el.dataset.userId || '';
-            el.style.display = (isPost && following.indexOf(uid) !== -1) ? '' : 'none';
-          }
-        });
+        document.querySelectorAll('.feed-tab').forEach(function(b) { b.classList.remove('feed-tab-active'); });
+        btn.classList.add('feed-tab-active');
+        var tab = btn.dataset.feedTab;
+        self._communityTab = tab;
+        self._renderFeedTab(tab);
       });
     });
 
-    // Likes
-    document.querySelectorAll('.feed-like-btn').forEach(function(btn) {
+    this._initLazyImages();
+  }
+
+  _renderFeedTab(tab) {
+    var self = this;
+    var feedList = document.getElementById('feedList');
+    if (!feedList) return;
+
+    var posts = VisorUpCommunity.getFeed(tab);
+    var feedHTML = '';
+
+    if (posts.length === 0) {
+      var emptyMsg = tab === 'following'
+        ? 'You\'re not following anyone yet. Follow riders to see their posts here.'
+        : tab === 'top'
+        ? 'No posts yet. Be the first to share a ride report!'
+        : 'No posts yet. Share your latest ride to get things started!';
+      feedHTML = '<div class="feed-empty"><i class="fas fa-motorcycle"></i><p>' + emptyMsg + '</p></div>';
+    } else {
+      feedHTML = posts.map(function(post) { return VisorUpCommunity.renderPostCard(post); }).join('');
+    }
+
+    feedList.innerHTML = feedHTML;
+
+    // Bind likes
+    feedList.querySelectorAll('.feed-like-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var postId = btn.dataset.postId;
         var nowLiked = VisorUpCommunity.toggleLike(postId);
@@ -1885,8 +1904,8 @@ class VisorUpSite {
       });
     });
 
-    // Comment toggles
-    document.querySelectorAll('.feed-comment-toggle').forEach(function(btn) {
+    // Bind comment toggles
+    feedList.querySelectorAll('.feed-comment-toggle').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var postId = btn.dataset.postId;
         var section = document.getElementById('comments-' + postId);
@@ -1900,8 +1919,8 @@ class VisorUpSite {
       });
     });
 
-    // Follow buttons
-    document.querySelectorAll('.feed-follow-btn').forEach(function(btn) {
+    // Bind follow buttons
+    feedList.querySelectorAll('.feed-follow-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var userId = btn.dataset.followUser;
         if (!userId) return;
@@ -1911,7 +1930,7 @@ class VisorUpSite {
         } else {
           VisorUpCommunity.followUser(userId);
         }
-        document.querySelectorAll('.feed-follow-btn[data-follow-user="' + userId + '"]').forEach(function(b) {
+        feedList.querySelectorAll('.feed-follow-btn[data-follow-user="' + userId + '"]').forEach(function(b) {
           if (isFollowing) {
             b.classList.remove('feed-following');
             b.textContent = 'Follow';
@@ -1923,7 +1942,10 @@ class VisorUpSite {
       });
     });
 
-    this._initLazyImages();
+    // Lazy load images in feed
+    feedList.querySelectorAll('[data-bg]').forEach(function(el) {
+      el.style.backgroundImage = 'url(' + el.dataset.bg + ')';
+    });
   }
 
   _bindCommentForm(section, postId) {
@@ -1949,6 +1971,1804 @@ class VisorUpSite {
 
     sendBtn.addEventListener('click', submitComment);
     input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitComment(); });
+  }
+
+  renderPackingChecklist() {
+    var self = this;
+    var tripTypes = [
+      { id: 'day', label: 'Day Ride' },
+      { id: 'weekend', label: 'Weekend Tour' },
+      { id: 'week', label: 'Week Tour' },
+      { id: 'camping', label: 'Camping Tour' },
+      { id: 'european', label: 'European Tour' }
+    ];
+
+    var categories = [
+      {
+        id: 'riding-gear',
+        name: 'Riding Gear',
+        icon: 'fa-helmet-safety',
+        items: ['Helmet', 'Jacket', 'Trousers', 'Boots', 'Gloves', 'Base layer', 'Waterproof oversuit', 'Neck tube', 'Ear plugs'],
+        showFor: ['day', 'weekend', 'week', 'camping', 'european']
+      },
+      {
+        id: 'bike-essentials',
+        name: 'Bike Essentials',
+        icon: 'fa-motorcycle',
+        items: ['Disc lock', 'Chain lock', 'Cover', 'Toolkit', 'Tyre repair kit', 'USB charger', 'Phone mount', 'Tank bag', 'Panniers/top box'],
+        showFor: ['day', 'weekend', 'week', 'camping', 'european']
+      },
+      {
+        id: 'navigation-tech',
+        name: 'Navigation & Tech',
+        icon: 'fa-location-dot',
+        items: ['Phone', 'Charger cable', 'Powerbank', 'Paper map (backup)', 'GoPro/camera'],
+        showFor: ['day', 'weekend', 'week', 'camping', 'european']
+      },
+      {
+        id: 'weather-safety',
+        name: 'Weather & Safety',
+        icon: 'fa-cloud-sun-rain',
+        items: ['Hi-vis vest', 'Visor cleaner', 'Sunglasses', 'Rain gloves', 'Heated grips liner', 'First aid kit'],
+        showFor: ['day', 'weekend', 'week', 'camping', 'european']
+      },
+      {
+        id: 'camping',
+        name: 'Camping',
+        icon: 'fa-campground',
+        items: ['Tent', 'Sleeping bag', 'Mat', 'Stove', 'Gas', 'Mug/cutlery', 'Head torch'],
+        showFor: ['camping']
+      },
+      {
+        id: 'documents',
+        name: 'Documents',
+        icon: 'fa-id-card',
+        items: ['Driving licence', 'Insurance', 'MOT cert', 'Breakdown cover card'],
+        showFor: ['day', 'weekend', 'week', 'camping', 'european']
+      },
+      {
+        id: 'personal',
+        name: 'Personal',
+        icon: 'fa-suitcase',
+        items: ['Cash', 'Bank card', 'Toothbrush', 'Medications', 'Spare keys', 'Plastic bags (for wet gear)'],
+        showFor: ['day', 'weekend', 'week', 'camping', 'european']
+      }
+    ];
+
+    var defaultTrip = 'weekend';
+
+    function getStorageKey(tripType) {
+      return 'vu_packing_' + tripType;
+    }
+
+    function loadChecked(tripType) {
+      try {
+        var raw = localStorage.getItem(getStorageKey(tripType));
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveChecked(tripType, checkedMap) {
+      try {
+        localStorage.setItem(getStorageKey(tripType), JSON.stringify(checkedMap));
+      } catch (e) { /* storage full or unavailable */ }
+    }
+
+    function loadCustomItems(tripType) {
+      try {
+        var raw = localStorage.getItem(getStorageKey(tripType) + '_custom');
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveCustomItems(tripType, customMap) {
+      try {
+        localStorage.setItem(getStorageKey(tripType) + '_custom', JSON.stringify(customMap));
+      } catch (e) { /* storage full or unavailable */ }
+    }
+
+    function getVisibleCategories(tripType) {
+      return categories.filter(function(cat) {
+        if (cat.id === 'camping' && tripType !== 'camping') return false;
+        return cat.showFor.indexOf(tripType) !== -1;
+      });
+    }
+
+    function getDocumentItems(tripType) {
+      var base = ['Driving licence', 'Insurance', 'MOT cert', 'Breakdown cover card'];
+      if (tripType === 'european') base.push('EU green card');
+      return base;
+    }
+
+    function buildChecklistHTML(tripType) {
+      var checkedMap = loadChecked(tripType);
+      var customMap = loadCustomItems(tripType);
+      var visibleCats = getVisibleCategories(tripType);
+      var totalItems = 0;
+      var checkedCount = 0;
+      var catHTML = '';
+
+      visibleCats.forEach(function(cat) {
+        var items = cat.id === 'documents' ? getDocumentItems(tripType) : cat.items.slice();
+        var customs = customMap[cat.id] || [];
+        var allItems = items.concat(customs);
+        var itemsHTML = '';
+        allItems.forEach(function(item) {
+          var itemKey = cat.id + ':' + item;
+          var isChecked = !!checkedMap[itemKey];
+          totalItems++;
+          if (isChecked) checkedCount++;
+          itemsHTML +=
+            '<label class="packing-item' + (isChecked ? ' packing-item-checked' : '') + '">' +
+              '<input type="checkbox" class="packing-cb" data-cat="' + cat.id + '" data-item="' + item.replace(/"/g, '&quot;') + '"' + (isChecked ? ' checked' : '') + '>' +
+              '<span class="packing-item-label">' + item + '</span>' +
+            '</label>';
+        });
+        catHTML +=
+          '<div class="packing-category" data-cat-id="' + cat.id + '">' +
+            '<div class="packing-category-header">' +
+              '<i class="fas ' + cat.icon + '"></i>' +
+              '<h3>' + cat.name + '</h3>' +
+            '</div>' +
+            '<div class="packing-category-items">' + itemsHTML + '</div>' +
+            '<div class="packing-add-custom">' +
+              '<input type="text" class="packing-custom-input" data-cat="' + cat.id + '" placeholder="Add custom item..." maxlength="60">' +
+              '<button class="packing-add-btn" data-cat="' + cat.id + '"><i class="fas fa-plus"></i></button>' +
+            '</div>' +
+          '</div>';
+      });
+
+      var pct = totalItems > 0 ? Math.round((checkedCount / totalItems) * 100) : 0;
+      var progressHTML =
+        '<div class="packing-progress">' +
+          '<div class="packing-progress-text"><strong>' + checkedCount + '</strong> of <strong>' + totalItems + '</strong> items packed</div>' +
+          '<div class="packing-progress-bar"><div class="packing-progress-fill" style="width:' + pct + '%"></div></div>' +
+        '</div>';
+
+      return progressHTML + '<div class="packing-categories">' + catHTML + '</div>';
+    }
+
+    var tripSelectorHTML = '<div class="packing-trip-selector">';
+    tripTypes.forEach(function(t) {
+      tripSelectorHTML += '<button class="packing-trip-btn' + (t.id === defaultTrip ? ' packing-trip-active' : '') + '" data-trip="' + t.id + '">' + t.label + '</button>';
+    });
+    tripSelectorHTML += '</div>';
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Packing Checklist</h1>' +
+        '<p class="page-hero-sub">Be prepared for every ride — never forget a thing.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<p class="section-desc" style="max-width:720px;margin:0 auto 28px;text-align:center;line-height:1.7">' +
+          'A comprehensive, interactive packing checklist for UK motorcycle touring. Select your trip type to see the right gear list — from a quick day ride through the Cotswolds to a week-long Highland adventure or a cross-Channel European tour. ' +
+          'Tick off items as you pack, add your own custom gear, and your progress is saved automatically so you can come back any time.' +
+        '</p>' +
+        tripSelectorHTML +
+        '<div id="packingChecklistBody">' + buildChecklistHTML(defaultTrip) + '</div>' +
+        '<div class="packing-actions">' +
+          '<button class="btn-outline packing-reset-btn" id="packingResetBtn"><i class="fas fa-rotate-left"></i> Reset All</button>' +
+        '</div>' +
+      '</div>' +
+    '</section>' + this.renderFooter();
+
+    // --- Wire up events ---
+    var currentTrip = defaultTrip;
+    var checklistBody = document.getElementById('packingChecklistBody');
+
+    function refreshChecklist() {
+      checklistBody.innerHTML = buildChecklistHTML(currentTrip);
+    }
+
+    // Trip type selector
+    document.querySelectorAll('.packing-trip-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.packing-trip-btn').forEach(function(b) { b.classList.remove('packing-trip-active'); });
+        btn.classList.add('packing-trip-active');
+        currentTrip = btn.dataset.trip;
+        refreshChecklist();
+      });
+    });
+
+    // Checkbox changes (delegated)
+    checklistBody.addEventListener('change', function(e) {
+      if (!e.target.classList.contains('packing-cb')) return;
+      var catId = e.target.dataset.cat;
+      var itemName = e.target.dataset.item;
+      var checkedMap = loadChecked(currentTrip);
+      var key = catId + ':' + itemName;
+      if (e.target.checked) {
+        checkedMap[key] = true;
+      } else {
+        delete checkedMap[key];
+      }
+      saveChecked(currentTrip, checkedMap);
+      refreshChecklist();
+    });
+
+    // Add custom item (delegated)
+    checklistBody.addEventListener('click', function(e) {
+      var addBtn = e.target.closest('.packing-add-btn');
+      if (!addBtn) return;
+      var catId = addBtn.dataset.cat;
+      var input = checklistBody.querySelector('.packing-custom-input[data-cat="' + catId + '"]');
+      if (!input) return;
+      var val = input.value.trim();
+      if (!val) return;
+      var customMap = loadCustomItems(currentTrip);
+      if (!customMap[catId]) customMap[catId] = [];
+      if (customMap[catId].indexOf(val) !== -1) return;
+      customMap[catId].push(val);
+      saveCustomItems(currentTrip, customMap);
+      refreshChecklist();
+    });
+
+    checklistBody.addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      var input = e.target.closest('.packing-custom-input');
+      if (!input) return;
+      var catId = input.dataset.cat;
+      var btn = checklistBody.querySelector('.packing-add-btn[data-cat="' + catId + '"]');
+      if (btn) btn.click();
+    });
+
+    // Reset all
+    document.getElementById('packingResetBtn').addEventListener('click', function() {
+      var checkedMap = {};
+      saveChecked(currentTrip, checkedMap);
+      var customMap = loadCustomItems(currentTrip);
+      Object.keys(customMap).forEach(function(k) { customMap[k] = []; });
+      saveCustomItems(currentTrip, customMap);
+      refreshChecklist();
+    });
+  }
+
+  // ── Service Tracker ──────────────────────────────────────────
+
+  renderServiceTracker() {
+    var self = this;
+    var garageRaw = localStorage.getItem('vu_garage_local');
+    var garageBikes = [];
+    try { garageBikes = garageRaw ? JSON.parse(garageRaw) : []; } catch (e) { garageBikes = []; }
+    if (!Array.isArray(garageBikes)) garageBikes = [];
+
+    var html = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Service Tracker</h1>' +
+        '<p class="page-hero-sub">Keep your bike in top shape for the road</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<p class="section-desc" style="margin-bottom:32px">Track tyre wear, chain maintenance, and service intervals for every bike in your garage. Never miss a service before a big trip.</p>';
+
+    if (garageBikes.length === 0) {
+      html += '' +
+        '<div class="tips-callout" style="margin-bottom:24px">' +
+          '<div class="tips-callout-icon"><i class="fas fa-motorcycle"></i></div>' +
+          '<div class="tips-callout-body">' +
+            '<h4>No Bikes in Your Garage</h4>' +
+            '<p>Add a bike to your garage first to start tracking services, or use the tracker without a garage account.</p>' +
+            '<a href="/profile" class="hero-cta" style="display:inline-flex;margin-top:12px;font-size:13px;"><i class="fas fa-plus"></i> Add a Bike</a>' +
+          '</div>' +
+        '</div>' +
+        '<div style="margin-bottom:32px">' +
+          '<p style="color:var(--text-muted);font-size:14px;margin-bottom:12px"><strong>Or use without garage:</strong></p>' +
+          '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' +
+            '<input type="text" id="stQuickBikeName" placeholder="e.g. My Honda CB500" style="padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;flex:1;min-width:200px">' +
+            '<button id="stQuickBikeAdd" class="btn-primary" style="white-space:nowrap"><i class="fas fa-plus"></i> Start Tracking</button>' +
+          '</div>' +
+        '</div>';
+      html += '</div></section>';
+      this.pageContent.innerHTML = html + this.renderFooter();
+
+      var addBtn = document.getElementById('stQuickBikeAdd');
+      if (addBtn) {
+        addBtn.addEventListener('click', function() {
+          var nameInput = document.getElementById('stQuickBikeName');
+          var name = nameInput ? nameInput.value.trim() : '';
+          if (!name) { nameInput.focus(); return; }
+          var quickBike = { id: 'quick_' + Date.now(), make: name, model: '', nickname: name };
+          localStorage.setItem('vu_garage_local', JSON.stringify([quickBike]));
+          self.renderServiceTracker();
+        });
+      }
+      return;
+    }
+
+    // Bike selector
+    var bikeOptions = garageBikes.map(function(b) {
+      var label = (b.nickname || ((b.make || '') + ' ' + (b.model || '')).trim()) || 'Bike ' + b.id;
+      return '<option value="' + b.id + '">' + label + '</option>';
+    }).join('');
+
+    html += '' +
+      '<div style="margin-bottom:24px">' +
+        '<label style="display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">Select Bike</label>' +
+        '<select id="stBikeSelector" style="width:100%;max-width:400px;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;">' +
+          bikeOptions +
+        '</select>' +
+      '</div>' +
+      '<div id="stDashboard"></div>' +
+    '</div></section>';
+
+    this.pageContent.innerHTML = html + this.renderFooter();
+
+    var selector = document.getElementById('stBikeSelector');
+    var dashboard = document.getElementById('stDashboard');
+
+    function getStatusColour(pct) {
+      if (pct < 50) return '#22c55e';
+      if (pct <= 80) return '#f59e0b';
+      return '#ef4444';
+    }
+
+    function getStatusLabel(pct) {
+      if (pct < 50) return 'Good';
+      if (pct <= 80) return 'Due Soon';
+      return 'Overdue';
+    }
+
+    function loadData(bikeId) {
+      var raw = localStorage.getItem('vu_service_' + bikeId);
+      var defaults = {
+        tyreFrontBrand: '', tyreFrontDate: '', tyreFrontMiles: 0, tyreFrontLife: 8000,
+        tyreRearBrand: '', tyreRearDate: '', tyreRearMiles: 0, tyreRearLife: 8000,
+        chainDate: '', chainMiles: 0, chainInterval: 500,
+        oilDate: '', oilMiles: 0, oilInterval: 6000,
+        serviceDate: '', serviceMiles: 0, serviceInterval: 6000
+      };
+      if (!raw) return defaults;
+      try { var parsed = JSON.parse(raw); return Object.assign({}, defaults, parsed); } catch (e) { return defaults; }
+    }
+
+    function saveData(bikeId, data) {
+      localStorage.setItem('vu_service_' + bikeId, JSON.stringify(data));
+    }
+
+    function progressBar(miles, interval) {
+      var pct = interval > 0 ? Math.min(Math.round((miles / interval) * 100), 100) : 0;
+      var colour = getStatusColour(pct);
+      return '<div style="display:flex;align-items:center;gap:12px;margin-top:8px">' +
+        '<div style="flex:1;height:10px;border-radius:5px;background:var(--border);overflow:hidden">' +
+          '<div style="width:' + pct + '%;height:100%;background:' + colour + ';border-radius:5px;transition:width 0.3s"></div>' +
+        '</div>' +
+        '<span style="font-size:13px;font-weight:600;color:' + colour + ';min-width:80px;text-align:right">' + pct + '% — ' + getStatusLabel(pct) + '</span>' +
+      '</div>';
+    }
+
+    function renderServiceCard(icon, title, fields, data, bikeId) {
+      var rows = fields.map(function(f) {
+        var val = data[f.key] !== undefined ? data[f.key] : '';
+        var inputType = f.type || 'text';
+        return '<div style="margin-bottom:12px">' +
+          '<label style="display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">' + f.label + '</label>' +
+          '<input type="' + inputType + '" data-key="' + f.key + '" value="' + val + '" ' +
+            'style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:13px" ' +
+            (f.placeholder ? 'placeholder="' + f.placeholder + '"' : '') + '>' +
+        '</div>';
+      }).join('');
+
+      var bar = '';
+      if (typeof fields[fields.length - 1] !== 'undefined') {
+        var milesField = fields.find(function(f) { return f.key.indexOf('Miles') > -1; });
+        var intervalField = fields.find(function(f) { return f.key.indexOf('Interval') > -1 || f.key.indexOf('Life') > -1; });
+        if (milesField && intervalField) {
+          bar = progressBar(parseInt(data[milesField.key]) || 0, parseInt(data[intervalField.key]) || 1);
+        }
+      }
+
+      return '<div class="info-card" style="margin-bottom:20px">' +
+        '<h4 style="margin-bottom:12px"><i class="fas ' + icon + '"></i> ' + title + '</h4>' +
+        rows +
+        bar +
+        '<button class="btn-primary st-log-btn" data-section="' + title + '" data-bike="' + bikeId + '" style="margin-top:12px;font-size:13px;padding:8px 16px"><i class="fas fa-check"></i> Log Service</button>' +
+      '</div>';
+    }
+
+    function renderDashboard(bikeId) {
+      var data = loadData(bikeId);
+
+      var content = '' +
+        '<div class="detail-grid">' +
+          '<div class="detail-main">' +
+            renderServiceCard('fa-circle', 'Front Tyre', [
+              { key: 'tyreFrontBrand', label: 'Brand / Model', placeholder: 'e.g. Michelin Road 6' },
+              { key: 'tyreFrontDate', label: 'Date Fitted', type: 'date' },
+              { key: 'tyreFrontMiles', label: 'Miles Since Fitted', type: 'number', placeholder: '0' },
+              { key: 'tyreFrontLife', label: 'Expected Life (miles)', type: 'number', placeholder: '8000' }
+            ], data, bikeId) +
+            renderServiceCard('fa-circle', 'Rear Tyre', [
+              { key: 'tyreRearBrand', label: 'Brand / Model', placeholder: 'e.g. Michelin Road 6' },
+              { key: 'tyreRearDate', label: 'Date Fitted', type: 'date' },
+              { key: 'tyreRearMiles', label: 'Miles Since Fitted', type: 'number', placeholder: '0' },
+              { key: 'tyreRearLife', label: 'Expected Life (miles)', type: 'number', placeholder: '8000' }
+            ], data, bikeId) +
+            renderServiceCard('fa-link', 'Chain', [
+              { key: 'chainDate', label: 'Last Cleaned / Lubed', type: 'date' },
+              { key: 'chainMiles', label: 'Miles Since Service', type: 'number', placeholder: '0' },
+              { key: 'chainInterval', label: 'Service Interval (miles)', type: 'number', placeholder: '500' }
+            ], data, bikeId) +
+          '</div>' +
+          '<div class="detail-sidebar">' +
+            renderServiceCard('fa-oil-can', 'Oil', [
+              { key: 'oilDate', label: 'Last Changed', type: 'date' },
+              { key: 'oilMiles', label: 'Miles Since Change', type: 'number', placeholder: '0' },
+              { key: 'oilInterval', label: 'Change Interval (miles)', type: 'number', placeholder: '6000' }
+            ], data, bikeId) +
+            renderServiceCard('fa-wrench', 'General Service', [
+              { key: 'serviceDate', label: 'Last Service Date', type: 'date' },
+              { key: 'serviceMiles', label: 'Miles Since Service', type: 'number', placeholder: '0' },
+              { key: 'serviceInterval', label: 'Service Interval (miles)', type: 'number', placeholder: '6000' }
+            ], data, bikeId) +
+            '<div class="tips-callout" style="margin-top:8px">' +
+              '<div class="tips-callout-icon"><i class="fas fa-lightbulb"></i></div>' +
+              '<div class="tips-callout-body">' +
+                '<h4>Pre-Trip Check</h4>' +
+                '<p>Before any big ride, check tyre pressures, chain tension and oil level. A few minutes in the garage can save a breakdown on the A87.</p>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      dashboard.innerHTML = content;
+
+      // Save on input change
+      dashboard.addEventListener('input', function(e) {
+        if (e.target.dataset.key) {
+          var current = loadData(bikeId);
+          var key = e.target.dataset.key;
+          current[key] = e.target.type === 'number' ? (parseInt(e.target.value) || 0) : e.target.value;
+          saveData(bikeId, current);
+          // Re-render progress bars
+          var card = e.target.closest('.info-card');
+          if (card) {
+            var milesInput = card.querySelector('input[data-key*="Miles"]');
+            var intervalInput = card.querySelector('input[data-key*="Life"]') || card.querySelector('input[data-key*="Interval"]');
+            if (milesInput && intervalInput) {
+              var barContainer = card.querySelector('div[style*="display:flex"][style*="align-items:center"]');
+              if (barContainer) {
+                var temp = document.createElement('div');
+                temp.innerHTML = progressBar(parseInt(milesInput.value) || 0, parseInt(intervalInput.value) || 1);
+                barContainer.parentNode.replaceChild(temp.firstChild, barContainer);
+              }
+            }
+          }
+        }
+      });
+
+      // Log service buttons — reset miles to 0 and date to today
+      dashboard.addEventListener('click', function(e) {
+        var btn = e.target.closest('.st-log-btn');
+        if (!btn) return;
+        var current = loadData(bikeId);
+        var today = new Date().toISOString().split('T')[0];
+        var section = btn.dataset.section;
+        if (section === 'Front Tyre') { current.tyreFrontMiles = 0; current.tyreFrontDate = today; }
+        else if (section === 'Rear Tyre') { current.tyreRearMiles = 0; current.tyreRearDate = today; }
+        else if (section === 'Chain') { current.chainMiles = 0; current.chainDate = today; }
+        else if (section === 'Oil') { current.oilMiles = 0; current.oilDate = today; }
+        else if (section === 'General Service') { current.serviceMiles = 0; current.serviceDate = today; }
+        saveData(bikeId, current);
+        renderDashboard(bikeId);
+      });
+    }
+
+    if (selector) {
+      renderDashboard(selector.value);
+      selector.addEventListener('change', function() {
+        renderDashboard(selector.value);
+      });
+    }
+  }
+
+  // ── MOT & Tax Tracker ────────────────────────────────────────
+
+  renderMOTChecker() {
+    var self = this;
+    var storageKey = 'vu_mot_reminders';
+
+    function loadVehicles() {
+      var raw = localStorage.getItem(storageKey);
+      try { return raw ? JSON.parse(raw) : []; } catch (e) { return []; }
+    }
+
+    function saveVehicles(vehicles) {
+      localStorage.setItem(storageKey, JSON.stringify(vehicles));
+    }
+
+    function daysUntil(dateStr) {
+      if (!dateStr) return null;
+      var expiry = new Date(dateStr);
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      expiry.setHours(0, 0, 0, 0);
+      return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+    }
+
+    function statusBadge(days) {
+      if (days === null) return '<span style="color:var(--text-muted);font-size:13px">Not set</span>';
+      if (days < 0) return '<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:#ef4444;color:#fff;font-size:12px;font-weight:700">Expired ' + Math.abs(days) + ' days ago!</span>';
+      if (days === 0) return '<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:#ef4444;color:#fff;font-size:12px;font-weight:700">Expires today!</span>';
+      if (days <= 30) return '<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:#ef4444;color:#fff;font-size:12px;font-weight:700">' + days + ' days</span>';
+      if (days <= 60) return '<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:#f59e0b;color:#000;font-size:12px;font-weight:700">' + days + ' days</span>';
+      return '<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:#22c55e;color:#fff;font-size:12px;font-weight:700">' + days + ' days</span>';
+    }
+
+    function renderVehicleCard(v, idx) {
+      var motDays = daysUntil(v.motExpiry);
+      var taxDays = daysUntil(v.taxExpiry);
+      var insDays = daysUntil(v.insuranceExpiry);
+
+      return '<div class="info-card" style="margin-bottom:16px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">' +
+          '<h4 style="margin:0"><i class="fas fa-motorcycle"></i> ' + (v.registration || 'Unknown').toUpperCase() + '</h4>' +
+          '<button class="mot-delete-btn" data-idx="' + idx + '" title="Remove vehicle" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:16px;padding:4px 8px"><i class="fas fa-trash"></i></button>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:16px">' +
+          '<div>' +
+            '<div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">MOT Expiry</div>' +
+            '<div style="font-size:14px;margin-bottom:6px">' + (v.motExpiry || '—') + '</div>' +
+            statusBadge(motDays) +
+          '</div>' +
+          '<div>' +
+            '<div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tax Expiry</div>' +
+            '<div style="font-size:14px;margin-bottom:6px">' + (v.taxExpiry || '—') + '</div>' +
+            statusBadge(taxDays) +
+          '</div>' +
+          '<div>' +
+            '<div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Insurance Expiry</div>' +
+            '<div style="font-size:14px;margin-bottom:6px">' + (v.insuranceExpiry || '—') + '</div>' +
+            statusBadge(insDays) +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function render() {
+      var vehicles = loadVehicles();
+      var vehicleCards = '';
+      if (vehicles.length === 0) {
+        vehicleCards = '<div class="tips-callout" style="margin-bottom:24px">' +
+          '<div class="tips-callout-icon"><i class="fas fa-clipboard-list"></i></div>' +
+          '<div class="tips-callout-body">' +
+            '<h4>No Vehicles Added</h4>' +
+            '<p>Add your first vehicle below to start tracking MOT, tax, and insurance dates.</p>' +
+          '</div>' +
+        '</div>';
+      } else {
+        vehicleCards = vehicles.map(function(v, i) { return renderVehicleCard(v, i); }).join('');
+      }
+
+      var dashHTML = '' +
+        '<div id="motVehicleList">' + vehicleCards + '</div>' +
+        '<div class="tips-callout" style="margin-top:24px;border-left:4px solid var(--accent)">' +
+          '<div class="tips-callout-icon"><i class="fas fa-exclamation-triangle"></i></div>' +
+          '<div class="tips-callout-body">' +
+            '<h4>Pre-Trip Check</h4>' +
+            '<p>Make sure MOT, tax and insurance are all valid before you ride. Riding without any of these is an offence and could invalidate your cover entirely.</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="info-card" style="margin-top:32px">' +
+          '<h4 style="margin-bottom:16px"><i class="fas fa-plus-circle"></i> Add Vehicle</h4>' +
+          '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">' +
+            '<div>' +
+              '<label style="display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Registration</label>' +
+              '<input type="text" id="motRegInput" placeholder="e.g. AB12 CDE" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px;text-transform:uppercase">' +
+            '</div>' +
+            '<div>' +
+              '<label style="display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">MOT Expiry</label>' +
+              '<input type="date" id="motExpiryInput" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px">' +
+            '</div>' +
+            '<div>' +
+              '<label style="display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Tax Expiry</label>' +
+              '<input type="date" id="motTaxInput" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px">' +
+            '</div>' +
+            '<div>' +
+              '<label style="display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px">Insurance Expiry</label>' +
+              '<input type="date" id="motInsuranceInput" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:14px">' +
+            '</div>' +
+          '</div>' +
+          '<button id="motAddBtn" class="btn-primary" style="margin-top:16px;font-size:13px;padding:8px 20px"><i class="fas fa-plus"></i> Add Vehicle</button>' +
+        '</div>';
+
+      var container = document.getElementById('motDashboard');
+      if (container) container.innerHTML = dashHTML;
+
+      // Delete handler
+      var deleteButtons = container ? container.querySelectorAll('.mot-delete-btn') : [];
+      deleteButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var idx = parseInt(btn.dataset.idx);
+          var list = loadVehicles();
+          list.splice(idx, 1);
+          saveVehicles(list);
+          render();
+        });
+      });
+
+      // Add handler
+      var addBtn = document.getElementById('motAddBtn');
+      if (addBtn) {
+        addBtn.addEventListener('click', function() {
+          var reg = document.getElementById('motRegInput');
+          var mot = document.getElementById('motExpiryInput');
+          var tax = document.getElementById('motTaxInput');
+          var ins = document.getElementById('motInsuranceInput');
+          var regVal = reg ? reg.value.trim() : '';
+          if (!regVal) { if (reg) reg.focus(); return; }
+          var vehicle = {
+            registration: regVal.toUpperCase(),
+            motExpiry: mot ? mot.value : '',
+            taxExpiry: tax ? tax.value : '',
+            insuranceExpiry: ins ? ins.value : ''
+          };
+          var list = loadVehicles();
+          list.push(vehicle);
+          saveVehicles(list);
+          render();
+        });
+      }
+    }
+
+    var pageHTML = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">MOT & Tax Tracker</h1>' +
+        '<p class="page-hero-sub">Never ride with an expired MOT</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<p class="section-desc" style="margin-bottom:32px">Keep track of MOT, tax, and insurance expiry dates for all your bikes. Get a clear dashboard showing what needs renewing and when.</p>' +
+        '<div id="motDashboard"></div>' +
+      '</div>' +
+    '</section>';
+
+    this.pageContent.innerHTML = pageHTML + this.renderFooter();
+    render();
+  }
+
+  renderCostCalculator() {
+    var inputStyle = 'width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:var(--card-bg);color:var(--text);';
+    var labelStyle = 'display:block;font-weight:600;margin-bottom:6px;font-size:14px;';
+    var presetStyle = 'padding:4px 10px;border:1px solid var(--border);border-radius:16px;background:var(--card-bg);color:var(--text);cursor:pointer;font-size:12px;transition:all 0.2s;';
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Ride Cost Calculator</h1>' +
+        '<p class="page-hero-sub">Work out what your next motorcycle trip will cost. Enter your route details and we\'ll break down fuel, accommodation, food, and extras.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:32px;">' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Trip Distance (miles)</label>' +
+            '<input type="number" id="ccDistance" value="0" min="0" style="' + inputStyle + '" />' +
+            '<small style="color:var(--muted);display:block;margin-top:4px;">Use our <a href="/build-route">Route Builder</a> to calculate exact distance</small>' +
+          '</div>' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Number of Days</label>' +
+            '<input type="number" id="ccDays" value="1" min="1" style="' + inputStyle + '" />' +
+          '</div>' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Bike\'s MPG</label>' +
+            '<input type="number" id="ccMpg" value="50" min="1" style="' + inputStyle + '" />' +
+            '<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">' +
+              '<button class="cc-preset" data-target="ccMpg" data-value="40" style="' + presetStyle + '">Sportsbike ~40</button>' +
+              '<button class="cc-preset" data-target="ccMpg" data-value="50" style="' + presetStyle + '">Tourer ~50</button>' +
+              '<button class="cc-preset" data-target="ccMpg" data-value="45" style="' + presetStyle + '">Adventure ~45</button>' +
+              '<button class="cc-preset" data-target="ccMpg" data-value="65" style="' + presetStyle + '">Small bike ~65</button>' +
+            '</div>' +
+          '</div>' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Fuel Price per Litre (£)</label>' +
+            '<input type="number" id="ccFuelPrice" value="1.45" min="0" step="0.01" style="' + inputStyle + '" />' +
+          '</div>' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Accommodation per Night (£)</label>' +
+            '<input type="number" id="ccAccom" value="0" min="0" style="' + inputStyle + '" />' +
+            '<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">' +
+              '<button class="cc-preset" data-target="ccAccom" data-value="0" style="' + presetStyle + '">Wild camping £0</button>' +
+              '<button class="cc-preset" data-target="ccAccom" data-value="15" style="' + presetStyle + '">Camping £15</button>' +
+              '<button class="cc-preset" data-target="ccAccom" data-value="70" style="' + presetStyle + '">B&amp;B £70</button>' +
+              '<button class="cc-preset" data-target="ccAccom" data-value="100" style="' + presetStyle + '">Hotel £100</button>' +
+            '</div>' +
+          '</div>' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Food per Day (£)</label>' +
+            '<input type="number" id="ccFood" value="25" min="0" style="' + inputStyle + '" />' +
+            '<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">' +
+              '<button class="cc-preset" data-target="ccFood" data-value="15" style="' + presetStyle + '">Self-catering £15</button>' +
+              '<button class="cc-preset" data-target="ccFood" data-value="30" style="' + presetStyle + '">Pub grub £30</button>' +
+              '<button class="cc-preset" data-target="ccFood" data-value="50" style="' + presetStyle + '">Restaurants £50</button>' +
+            '</div>' +
+          '</div>' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Ferry Costs (£)</label>' +
+            '<input type="number" id="ccFerry" value="0" min="0" style="' + inputStyle + '" />' +
+          '</div>' +
+
+          '<div>' +
+            '<label style="' + labelStyle + '">Extras (£)</label>' +
+            '<input type="number" id="ccExtras" value="0" min="0" style="' + inputStyle + '" />' +
+            '<small style="color:var(--muted);display:block;margin-top:4px;">Attractions, parking, tolls, etc.</small>' +
+          '</div>' +
+
+        '</div>' +
+
+        '<div id="ccResults" style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px;"></div>' +
+        '<div id="ccChart" style="margin-bottom:24px;"></div>' +
+
+        '<div style="display:flex;gap:12px;margin-top:24px;">' +
+          '<button id="ccSave" class="hero-cta" style="display:inline-flex;align-items:center;gap:8px;"><i class="fas fa-save"></i> Save Estimate</button>' +
+          '<button id="ccShare" class="btn-outline" style="display:inline-flex;align-items:center;gap:8px;"><i class="fas fa-share-alt"></i> Share</button>' +
+        '</div>' +
+
+      '</div>' +
+    '</section>' + this.renderFooter();
+
+    // ── Live cost calculation ──────────────────────────────────
+    function updateCalc() {
+      var distance = parseFloat(document.getElementById('ccDistance').value) || 0;
+      var days = parseInt(document.getElementById('ccDays').value) || 1;
+      var mpg = parseFloat(document.getElementById('ccMpg').value) || 50;
+      var fuelPrice = parseFloat(document.getElementById('ccFuelPrice').value) || 1.45;
+      var accomRate = parseFloat(document.getElementById('ccAccom').value) || 0;
+      var foodRate = parseFloat(document.getElementById('ccFood').value) || 0;
+      var ferry = parseFloat(document.getElementById('ccFerry').value) || 0;
+      var extras = parseFloat(document.getElementById('ccExtras').value) || 0;
+
+      var nights = Math.max(days - 1, 0);
+      var fuelCost = distance / mpg * 4.546 * fuelPrice;
+      var accomTotal = nights * accomRate;
+      var foodTotal = days * foodRate;
+      var total = fuelCost + accomTotal + foodTotal + ferry + extras;
+      var costPerDay = days > 0 ? total / days : 0;
+      var costPerMile = distance > 0 ? total / distance : 0;
+
+      var resultsEl = document.getElementById('ccResults');
+      if (resultsEl) {
+        resultsEl.innerHTML = '' +
+          '<h3 style="margin:0 0 16px;font-size:18px;"><i class="fas fa-receipt" style="margin-right:8px;color:var(--accent);"></i>Cost Breakdown</h3>' +
+          '<div style="display:grid;grid-template-columns:1fr auto;gap:8px 16px;font-size:15px;">' +
+            '<span><i class="fas fa-gas-pump" style="width:20px;color:#3b82f6;"></i> Fuel cost</span><span style="text-align:right;">£' + fuelCost.toFixed(2) + '</span>' +
+            '<span><i class="fas fa-bed" style="width:20px;color:#10b981;"></i> Accommodation (' + nights + ' night' + (nights !== 1 ? 's' : '') + ')</span><span style="text-align:right;">£' + accomTotal.toFixed(2) + '</span>' +
+            '<span><i class="fas fa-utensils" style="width:20px;color:#f59e0b;"></i> Food (' + days + ' day' + (days !== 1 ? 's' : '') + ')</span><span style="text-align:right;">£' + foodTotal.toFixed(2) + '</span>' +
+            '<span><i class="fas fa-ship" style="width:20px;color:#8b5cf6;"></i> Ferry costs</span><span style="text-align:right;">£' + ferry.toFixed(2) + '</span>' +
+            '<span><i class="fas fa-ticket" style="width:20px;color:#6b7280;"></i> Extras</span><span style="text-align:right;">£' + extras.toFixed(2) + '</span>' +
+          '</div>' +
+          '<hr style="border:none;border-top:2px solid var(--accent);margin:16px 0;" />' +
+          '<div style="display:grid;grid-template-columns:1fr auto;gap:8px 16px;">' +
+            '<span style="font-size:20px;font-weight:700;">TOTAL</span><span style="font-size:20px;font-weight:700;text-align:right;color:var(--accent);">£' + total.toFixed(2) + '</span>' +
+            '<span style="font-size:14px;color:var(--muted);">Cost per day</span><span style="font-size:14px;color:var(--muted);text-align:right;">£' + costPerDay.toFixed(2) + '</span>' +
+            '<span style="font-size:14px;color:var(--muted);">Cost per mile</span><span style="font-size:14px;color:var(--muted);text-align:right;">£' + costPerMile.toFixed(2) + '</span>' +
+          '</div>';
+      }
+
+      var chartEl = document.getElementById('ccChart');
+      if (chartEl) {
+        var items = [
+          { label: 'Fuel', value: fuelCost, color: '#3b82f6' },
+          { label: 'Accommodation', value: accomTotal, color: '#10b981' },
+          { label: 'Food', value: foodTotal, color: '#f59e0b' },
+          { label: 'Ferry', value: ferry, color: '#8b5cf6' },
+          { label: 'Extras', value: extras, color: '#6b7280' }
+        ];
+        var chartTotal = total > 0 ? total : 1;
+        var barHtml = '<div style="display:flex;height:32px;border-radius:8px;overflow:hidden;margin-bottom:12px;background:var(--border);">';
+        items.forEach(function(item) {
+          var pct = item.value / chartTotal * 100;
+          if (pct > 0) {
+            barHtml += '<div style="width:' + pct + '%;background:' + item.color + ';min-width:2px;transition:width 0.3s;" title="' + item.label + ': £' + item.value.toFixed(2) + '"></div>';
+          }
+        });
+        barHtml += '</div>';
+        barHtml += '<div style="display:flex;gap:16px;flex-wrap:wrap;">';
+        items.forEach(function(item) {
+          barHtml += '<div style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:12px;height:12px;border-radius:3px;background:' + item.color + ';display:inline-block;"></span>' + item.label + ' £' + item.value.toFixed(2) + '</div>';
+        });
+        barHtml += '</div>';
+        chartEl.innerHTML = barHtml;
+      }
+    }
+
+    // Bind input listeners for live updating
+    var inputIds = ['ccDistance', 'ccDays', 'ccMpg', 'ccFuelPrice', 'ccAccom', 'ccFood', 'ccFerry', 'ccExtras'];
+    inputIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', updateCalc);
+        el.addEventListener('change', updateCalc);
+      }
+    });
+
+    // Preset button handlers
+    document.querySelectorAll('.cc-preset').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var target = btn.getAttribute('data-target');
+        var value = btn.getAttribute('data-value');
+        var el = document.getElementById(target);
+        if (el) {
+          el.value = value;
+          updateCalc();
+        }
+      });
+    });
+
+    // Save Estimate — store to localStorage
+    var saveBtn = document.getElementById('ccSave');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function() {
+        var estimate = {
+          date: new Date().toISOString(),
+          distance: parseFloat(document.getElementById('ccDistance').value) || 0,
+          days: parseInt(document.getElementById('ccDays').value) || 1,
+          mpg: parseFloat(document.getElementById('ccMpg').value) || 50,
+          fuelPrice: parseFloat(document.getElementById('ccFuelPrice').value) || 1.45,
+          accomRate: parseFloat(document.getElementById('ccAccom').value) || 0,
+          foodRate: parseFloat(document.getElementById('ccFood').value) || 0,
+          ferry: parseFloat(document.getElementById('ccFerry').value) || 0,
+          extras: parseFloat(document.getElementById('ccExtras').value) || 0
+        };
+        var nights = Math.max(estimate.days - 1, 0);
+        estimate.total = (estimate.distance / estimate.mpg * 4.546 * estimate.fuelPrice) + (nights * estimate.accomRate) + (estimate.days * estimate.foodRate) + estimate.ferry + estimate.extras;
+        var saved = [];
+        try { saved = JSON.parse(localStorage.getItem('visorup_cost_estimates') || '[]'); } catch(e) { saved = []; }
+        saved.push(estimate);
+        localStorage.setItem('visorup_cost_estimates', JSON.stringify(saved));
+        saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+        setTimeout(function() { saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Estimate'; }, 2000);
+      });
+    }
+
+    // Share — copy text summary to clipboard
+    var shareBtn = document.getElementById('ccShare');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', function() {
+        var distance = parseFloat(document.getElementById('ccDistance').value) || 0;
+        var days = parseInt(document.getElementById('ccDays').value) || 1;
+        var nights = Math.max(days - 1, 0);
+        var mpg = parseFloat(document.getElementById('ccMpg').value) || 50;
+        var fuelPrice = parseFloat(document.getElementById('ccFuelPrice').value) || 1.45;
+        var accomRate = parseFloat(document.getElementById('ccAccom').value) || 0;
+        var foodRate = parseFloat(document.getElementById('ccFood').value) || 0;
+        var ferry = parseFloat(document.getElementById('ccFerry').value) || 0;
+        var extras = parseFloat(document.getElementById('ccExtras').value) || 0;
+        var fuelCost = distance / mpg * 4.546 * fuelPrice;
+        var accomTotal = nights * accomRate;
+        var foodTotal = days * foodRate;
+        var total = fuelCost + accomTotal + foodTotal + ferry + extras;
+
+        var text = 'Motorcycle Trip Cost Estimate\n' +
+          '------------------------\n' +
+          'Distance: ' + distance + ' miles | ' + days + ' day' + (days !== 1 ? 's' : '') + '\n' +
+          'Fuel: £' + fuelCost.toFixed(2) + ' (' + mpg + ' MPG @ £' + fuelPrice.toFixed(2) + '/L)\n' +
+          'Accommodation: £' + accomTotal.toFixed(2) + ' (' + nights + ' night' + (nights !== 1 ? 's' : '') + ')\n' +
+          'Food: £' + foodTotal.toFixed(2) + '\n' +
+          'Ferry: £' + ferry.toFixed(2) + '\n' +
+          'Extras: £' + extras.toFixed(2) + '\n' +
+          '------------------------\n' +
+          'TOTAL: £' + total.toFixed(2) + '\n' +
+          'Calculated at visorup.com';
+
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(function() {
+            shareBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(function() { shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Share'; }, 2000);
+          });
+        }
+      });
+    }
+
+    // Run initial calculation
+    updateCalc();
+  }
+
+  renderEmergencyCard() {
+    var self = this;
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem('vu_emergency_card')) || {}; } catch(e) { saved = {}; }
+
+    var bloodTypes = ['A+','A-','B+','B-','AB+','AB-','O+','O-','Unknown'];
+    var bloodOptions = bloodTypes.map(function(bt) {
+      return '<option value="' + bt + '"' + (saved.bloodType === bt ? ' selected' : '') + '>' + bt + '</option>';
+    }).join('');
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Emergency Info Card</h1>' +
+        '<p class="page-hero-sub">Ride prepared \u2014 carry your ICE details everywhere</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<p class="section-desc" style="max-width:720px;margin:0 auto 32px;text-align:center;">Create a printable emergency card with your medical info, ICE contacts, and breakdown cover details. Print it, laminate it, and keep it in your jacket.</p>' +
+
+        '<div class="ice-layout">' +
+
+          '<div>' +
+            '<div class="ice-form-section">' +
+              '<h3 class="ice-form-heading"><i class="fas fa-user"></i> Rider Info</h3>' +
+              '<label class="ice-label">Full Name</label>' +
+              '<input type="text" class="ice-input" id="iceFullName" placeholder="Your full name" value="' + (saved.fullName || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">Blood Type</label>' +
+              '<select class="ice-input" id="iceBloodType"><option value="">Select</option>' + bloodOptions + '</select>' +
+              '<label class="ice-label">Allergies / Medical Conditions</label>' +
+              '<textarea class="ice-input ice-textarea" id="iceAllergies" placeholder="e.g. Penicillin allergy, asthma, diabetes">' + (saved.allergies || '') + '</textarea>' +
+              '<label class="ice-label">Medications</label>' +
+              '<input type="text" class="ice-input" id="iceMedications" placeholder="e.g. Insulin, Ventolin" value="' + (saved.medications || '').replace(/"/g, '&quot;') + '">' +
+            '</div>' +
+
+            '<div class="ice-form-section">' +
+              '<h3 class="ice-form-heading"><i class="fas fa-phone"></i> Emergency Contacts</h3>' +
+              '<label class="ice-label">ICE 1 \u2014 Name</label>' +
+              '<input type="text" class="ice-input" id="iceContact1Name" placeholder="Contact name" value="' + (saved.contact1Name || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">ICE 1 \u2014 Phone</label>' +
+              '<input type="tel" class="ice-input" id="iceContact1Phone" placeholder="Phone number" value="' + (saved.contact1Phone || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">ICE 2 \u2014 Name</label>' +
+              '<input type="text" class="ice-input" id="iceContact2Name" placeholder="Contact name" value="' + (saved.contact2Name || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">ICE 2 \u2014 Phone</label>' +
+              '<input type="tel" class="ice-input" id="iceContact2Phone" placeholder="Phone number" value="' + (saved.contact2Phone || '').replace(/"/g, '&quot;') + '">' +
+            '</div>' +
+
+            '<div class="ice-form-section">' +
+              '<h3 class="ice-form-heading"><i class="fas fa-motorcycle"></i> Bike Details</h3>' +
+              '<label class="ice-label">Make / Model</label>' +
+              '<input type="text" class="ice-input" id="iceBikeMake" placeholder="e.g. Triumph Tiger 900" value="' + (saved.bikeMake || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">Registration</label>' +
+              '<input type="text" class="ice-input" id="iceBikeReg" placeholder="e.g. AB12 CDE" value="' + (saved.bikeReg || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">Colour</label>' +
+              '<input type="text" class="ice-input" id="iceBikeColour" placeholder="e.g. Matt Black" value="' + (saved.bikeColour || '').replace(/"/g, '&quot;') + '">' +
+            '</div>' +
+
+            '<div class="ice-form-section">' +
+              '<h3 class="ice-form-heading"><i class="fas fa-shield-halved"></i> Cover Details</h3>' +
+              '<label class="ice-label">Breakdown Cover Provider</label>' +
+              '<input type="text" class="ice-input" id="iceBreakdownProvider" placeholder="e.g. RAC, AA" value="' + (saved.breakdownProvider || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">Breakdown Policy Number</label>' +
+              '<input type="text" class="ice-input" id="iceBreakdownPolicy" placeholder="Policy number" value="' + (saved.breakdownPolicy || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">Insurance Provider</label>' +
+              '<input type="text" class="ice-input" id="iceInsuranceProvider" placeholder="e.g. Bennetts, Devitt" value="' + (saved.insuranceProvider || '').replace(/"/g, '&quot;') + '">' +
+              '<label class="ice-label">Insurance Policy Number</label>' +
+              '<input type="text" class="ice-input" id="iceInsurancePolicy" placeholder="Policy number" value="' + (saved.insurancePolicy || '').replace(/"/g, '&quot;') + '">' +
+            '</div>' +
+          '</div>' +
+
+          '<div style="position:sticky;top:80px;">' +
+            '<h3 class="ice-form-heading" style="margin-bottom:16px;"><i class="fas fa-eye"></i> Live Preview</h3>' +
+            '<div id="iceCardPreview" class="ice-card">' +
+              '<div class="ice-card-inner">' +
+                '<div class="ice-card-header">' +
+                  '<span class="ice-card-logo"><i class="fas fa-motorcycle"></i> VISOR<strong>UP</strong></span>' +
+                  '<span class="ice-card-title">IN CASE OF EMERGENCY</span>' +
+                '</div>' +
+                '<div class="ice-card-body">' +
+                  '<div class="ice-card-rider">' +
+                    '<span class="ice-card-name" id="icePreviewName">Your Name</span>' +
+                    '<span class="ice-card-blood" id="icePreviewBlood">?</span>' +
+                  '</div>' +
+                  '<div class="ice-card-row" id="icePreviewMedical"><span class="ice-card-dim">Medical: </span><span>\u2014</span></div>' +
+                  '<div class="ice-card-row" id="icePreviewMeds"><span class="ice-card-dim">Meds: </span><span>\u2014</span></div>' +
+                  '<div class="ice-card-divider"></div>' +
+                  '<div class="ice-card-contacts">' +
+                    '<div class="ice-card-contact"><span class="ice-card-dim">ICE 1:</span> <span id="icePreviewICE1">\u2014</span></div>' +
+                    '<div class="ice-card-contact"><span class="ice-card-dim">ICE 2:</span> <span id="icePreviewICE2">\u2014</span></div>' +
+                  '</div>' +
+                  '<div class="ice-card-divider"></div>' +
+                  '<div class="ice-card-row" id="icePreviewBike"><span class="ice-card-dim">Bike: </span><span>\u2014</span></div>' +
+                  '<div class="ice-card-row" id="icePreviewReg"><span class="ice-card-dim">Reg: </span><span>\u2014</span></div>' +
+                  '<div class="ice-card-divider"></div>' +
+                  '<div class="ice-card-row" id="icePreviewBreakdown"><span class="ice-card-dim">Breakdown: </span><span>\u2014</span></div>' +
+                  '<div class="ice-card-row" id="icePreviewInsurance"><span class="ice-card-dim">Insurance: </span><span>\u2014</span></div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="ice-card-actions">' +
+              '<button class="btn-primary" id="icePrintBtn"><i class="fas fa-print"></i> Print Card</button>' +
+              '<button class="btn-outline" id="iceSaveImgBtn"><i class="fas fa-mobile-screen"></i> Save to Phone</button>' +
+            '</div>' +
+          '</div>' +
+
+        '</div>' +
+
+        '<div class="ice-safety-note">' +
+          '<i class="fas fa-heart-pulse"></i>' +
+          '<p><strong>This card could save your life.</strong> First responders look for ICE (In Case of Emergency) information. Always carry this with your riding documents.</p>' +
+        '</div>' +
+
+      '</div>' +
+    '</section>' + this.renderFooter();
+
+    /* ── Style injection ── */
+    if (!document.getElementById('iceCardStyles')) {
+      var style = document.createElement('style');
+      style.id = 'iceCardStyles';
+      style.textContent = '' +
+        '.ice-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}' +
+        '@media(max-width:860px){.ice-layout{grid-template-columns:1fr!important}}' +
+        '.ice-form-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}' +
+        '.ice-form-heading{font-size:15px;font-weight:700;color:var(--text);margin:0 0 16px;display:flex;align-items:center;gap:8px}' +
+        '.ice-form-heading i{color:var(--accent);font-size:14px}' +
+        '.ice-label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin:0 0 4px;text-transform:uppercase;letter-spacing:0.5px}' +
+        '.ice-input{display:block;width:100%;padding:10px 12px;margin-bottom:12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:inherit;transition:border-color var(--transition);box-sizing:border-box}' +
+        '.ice-input:focus{outline:none;border-color:var(--accent)}' +
+        '.ice-textarea{min-height:60px;resize:vertical}' +
+        '.ice-card{background:#111;border-radius:14px;border:2px solid #D68A2D;padding:0;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);aspect-ratio:1.586/1;max-width:420px;display:flex;flex-direction:column}' +
+        '.ice-card-inner{padding:20px 22px 16px;display:flex;flex-direction:column;height:100%}' +
+        '.ice-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}' +
+        '.ice-card-logo{font-size:11px;color:#888;letter-spacing:1px}' +
+        '.ice-card-logo i{color:#D68A2D;margin-right:4px}' +
+        '.ice-card-logo strong{color:#D68A2D}' +
+        '.ice-card-title{font-size:11px;font-weight:800;color:#D68A2D;letter-spacing:1.5px;text-transform:uppercase}' +
+        '.ice-card-body{flex:1;display:flex;flex-direction:column;justify-content:space-between}' +
+        '.ice-card-rider{display:flex;align-items:center;gap:10px;margin-bottom:8px}' +
+        '.ice-card-name{font-size:18px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+        '.ice-card-blood{background:#D68A2D;color:#111;font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:0.5px}' +
+        '.ice-card-row{font-size:12px;color:#ccc;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+        '.ice-card-dim{color:#777}' +
+        '.ice-card-divider{height:1px;background:#333;margin:6px 0}' +
+        '.ice-card-contacts{display:grid;grid-template-columns:1fr 1fr;gap:4px}' +
+        '.ice-card-contact{font-size:12px;color:#ccc}' +
+        '.ice-card-actions{display:flex;gap:12px;margin-top:20px}' +
+        '.ice-card-actions .btn-primary,.ice-card-actions .btn-outline{flex:1;text-align:center;font-size:13px;padding:12px 16px}' +
+        '.ice-safety-note{display:flex;align-items:flex-start;gap:16px;margin-top:48px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-left:4px solid #D68A2D;border-radius:var(--radius)}' +
+        '.ice-safety-note i{font-size:24px;color:#D68A2D;flex-shrink:0;margin-top:2px}' +
+        '.ice-safety-note p{font-size:14px;color:var(--text-secondary);line-height:1.6;margin:0}' +
+        '.ice-safety-note strong{color:var(--text)}' +
+        '@media print{' +
+          'body *{visibility:hidden!important}' +
+          '#iceCardPreview,#iceCardPreview *{visibility:visible!important}' +
+          '#iceCardPreview{position:fixed!important;top:50%;left:50%;transform:translate(-50%,-50%)!important;width:86mm!important;height:54mm!important;max-width:none!important;aspect-ratio:auto!important;border:2px solid #D68A2D!important;box-shadow:none!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}' +
+        '}';
+      document.head.appendChild(style);
+    }
+
+    /* ── Live preview updater ── */
+    function updatePreview() {
+      var fullName = document.getElementById('iceFullName').value.trim();
+      var bloodType = document.getElementById('iceBloodType').value;
+      var allergies = document.getElementById('iceAllergies').value.trim();
+      var medications = document.getElementById('iceMedications').value.trim();
+      var c1Name = document.getElementById('iceContact1Name').value.trim();
+      var c1Phone = document.getElementById('iceContact1Phone').value.trim();
+      var c2Name = document.getElementById('iceContact2Name').value.trim();
+      var c2Phone = document.getElementById('iceContact2Phone').value.trim();
+      var bikeMake = document.getElementById('iceBikeMake').value.trim();
+      var bikeReg = document.getElementById('iceBikeReg').value.trim();
+      var bikeColour = document.getElementById('iceBikeColour').value.trim();
+      var breakdownProvider = document.getElementById('iceBreakdownProvider').value.trim();
+      var breakdownPolicy = document.getElementById('iceBreakdownPolicy').value.trim();
+      var insuranceProvider = document.getElementById('iceInsuranceProvider').value.trim();
+      var insurancePolicy = document.getElementById('iceInsurancePolicy').value.trim();
+
+      document.getElementById('icePreviewName').textContent = fullName || 'Your Name';
+      document.getElementById('icePreviewBlood').textContent = bloodType || '?';
+      document.getElementById('icePreviewMedical').innerHTML = '<span class="ice-card-dim">Medical: </span><span>' + (allergies || '\u2014') + '</span>';
+      document.getElementById('icePreviewMeds').innerHTML = '<span class="ice-card-dim">Meds: </span><span>' + (medications || '\u2014') + '</span>';
+
+      var ice1 = c1Name ? (c1Name + (c1Phone ? ' \u2014 ' + c1Phone : '')) : '\u2014';
+      var ice2 = c2Name ? (c2Name + (c2Phone ? ' \u2014 ' + c2Phone : '')) : '\u2014';
+      document.getElementById('icePreviewICE1').textContent = ice1;
+      document.getElementById('icePreviewICE2').textContent = ice2;
+
+      var bikeStr = bikeMake || '\u2014';
+      if (bikeColour && bikeMake) bikeStr = bikeMake + ' (' + bikeColour + ')';
+      document.getElementById('icePreviewBike').innerHTML = '<span class="ice-card-dim">Bike: </span><span>' + bikeStr + '</span>';
+      document.getElementById('icePreviewReg').innerHTML = '<span class="ice-card-dim">Reg: </span><span>' + (bikeReg || '\u2014') + '</span>';
+
+      var bdStr = breakdownProvider ? (breakdownProvider + (breakdownPolicy ? ' #' + breakdownPolicy : '')) : '\u2014';
+      var insStr = insuranceProvider ? (insuranceProvider + (insurancePolicy ? ' #' + insurancePolicy : '')) : '\u2014';
+      document.getElementById('icePreviewBreakdown').innerHTML = '<span class="ice-card-dim">Breakdown: </span><span>' + bdStr + '</span>';
+      document.getElementById('icePreviewInsurance').innerHTML = '<span class="ice-card-dim">Insurance: </span><span>' + insStr + '</span>';
+
+      /* Auto-save to localStorage */
+      var data = {
+        fullName: fullName,
+        bloodType: bloodType,
+        allergies: allergies,
+        medications: medications,
+        contact1Name: c1Name,
+        contact1Phone: c1Phone,
+        contact2Name: c2Name,
+        contact2Phone: c2Phone,
+        bikeMake: bikeMake,
+        bikeReg: bikeReg,
+        bikeColour: bikeColour,
+        breakdownProvider: breakdownProvider,
+        breakdownPolicy: breakdownPolicy,
+        insuranceProvider: insuranceProvider,
+        insurancePolicy: insurancePolicy
+      };
+      try { localStorage.setItem('vu_emergency_card', JSON.stringify(data)); } catch(e) {}
+    }
+
+    /* ── Bind input events ── */
+    var fields = [
+      'iceFullName','iceBloodType','iceAllergies','iceMedications',
+      'iceContact1Name','iceContact1Phone','iceContact2Name','iceContact2Phone',
+      'iceBikeMake','iceBikeReg','iceBikeColour',
+      'iceBreakdownProvider','iceBreakdownPolicy','iceInsuranceProvider','iceInsurancePolicy'
+    ];
+    fields.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', updatePreview);
+        el.addEventListener('change', updatePreview);
+      }
+    });
+
+    /* ── Print button ── */
+    document.getElementById('icePrintBtn').addEventListener('click', function() {
+      window.print();
+    });
+
+    /* ── Save to Phone button ── */
+    document.getElementById('iceSaveImgBtn').addEventListener('click', function() {
+      var card = document.getElementById('iceCardPreview');
+      var canvas = document.createElement('canvas');
+      var scale = 2;
+      var w = card.offsetWidth;
+      var h = card.offsetHeight;
+      canvas.width = w * scale;
+      canvas.height = h * scale;
+      var ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+
+      /* Draw card background */
+      ctx.fillStyle = '#111';
+      ctx.beginPath();
+      ctx.roundRect(0, 0, w, h, 14);
+      ctx.fill();
+
+      /* Draw accent border */
+      ctx.strokeStyle = '#D68A2D';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(1.5, 1.5, w - 3, h - 3, 13);
+      ctx.stroke();
+
+      var px = 22;
+      var py = 20;
+      var fullName = document.getElementById('iceFullName').value.trim() || 'Your Name';
+      var bloodType = document.getElementById('iceBloodType').value || '?';
+      var allergies = document.getElementById('iceAllergies').value.trim() || '\u2014';
+      var medications = document.getElementById('iceMedications').value.trim() || '\u2014';
+      var c1Name = document.getElementById('iceContact1Name').value.trim();
+      var c1Phone = document.getElementById('iceContact1Phone').value.trim();
+      var c2Name = document.getElementById('iceContact2Name').value.trim();
+      var c2Phone = document.getElementById('iceContact2Phone').value.trim();
+      var bikeMake = document.getElementById('iceBikeMake').value.trim();
+      var bikeColour = document.getElementById('iceBikeColour').value.trim();
+      var bikeReg = document.getElementById('iceBikeReg').value.trim();
+      var breakdownProvider = document.getElementById('iceBreakdownProvider').value.trim();
+      var breakdownPolicy = document.getElementById('iceBreakdownPolicy').value.trim();
+      var insuranceProvider = document.getElementById('iceInsuranceProvider').value.trim();
+      var insurancePolicy = document.getElementById('iceInsurancePolicy').value.trim();
+
+      /* Header */
+      ctx.font = '11px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#888';
+      ctx.fillText('\u{1F3CD} VISORUP', px, py + 10);
+      ctx.fillStyle = '#D68A2D';
+      ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, sans-serif';
+      var titleText = 'IN CASE OF EMERGENCY';
+      var titleW = ctx.measureText(titleText).width;
+      ctx.fillText(titleText, w - px - titleW, py + 10);
+
+      var y = py + 30;
+
+      /* Rider name + blood type */
+      ctx.font = 'bold 18px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#fff';
+      ctx.fillText(fullName, px, y);
+      var nameW = ctx.measureText(fullName).width;
+      ctx.fillStyle = '#D68A2D';
+      ctx.beginPath();
+      ctx.roundRect(px + nameW + 10, y - 12, ctx.measureText(bloodType).width + 16, 18, 4);
+      ctx.fill();
+      ctx.fillStyle = '#111';
+      ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillText(bloodType, px + nameW + 18, y - 1);
+
+      y += 18;
+      ctx.font = '12px -apple-system, BlinkMacSystemFont, sans-serif';
+
+      /* Medical */
+      ctx.fillStyle = '#777';
+      ctx.fillText('Medical: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(allergies, px + ctx.measureText('Medical: ').width, y);
+      y += 16;
+      ctx.fillStyle = '#777';
+      ctx.fillText('Meds: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(medications, px + ctx.measureText('Meds: ').width, y);
+
+      /* Divider */
+      y += 10;
+      ctx.fillStyle = '#333';
+      ctx.fillRect(px, y, w - px * 2, 1);
+      y += 10;
+
+      /* ICE contacts */
+      var ice1 = c1Name ? (c1Name + (c1Phone ? ' \u2014 ' + c1Phone : '')) : '\u2014';
+      var ice2 = c2Name ? (c2Name + (c2Phone ? ' \u2014 ' + c2Phone : '')) : '\u2014';
+      ctx.fillStyle = '#777';
+      ctx.fillText('ICE 1: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(ice1, px + ctx.measureText('ICE 1: ').width, y);
+      y += 16;
+      ctx.fillStyle = '#777';
+      ctx.fillText('ICE 2: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(ice2, px + ctx.measureText('ICE 2: ').width, y);
+
+      /* Divider */
+      y += 10;
+      ctx.fillStyle = '#333';
+      ctx.fillRect(px, y, w - px * 2, 1);
+      y += 10;
+
+      /* Bike */
+      var bikeStr = bikeMake || '\u2014';
+      if (bikeColour && bikeMake) bikeStr = bikeMake + ' (' + bikeColour + ')';
+      ctx.fillStyle = '#777';
+      ctx.fillText('Bike: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(bikeStr, px + ctx.measureText('Bike: ').width, y);
+      y += 16;
+      ctx.fillStyle = '#777';
+      ctx.fillText('Reg: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(bikeReg || '\u2014', px + ctx.measureText('Reg: ').width, y);
+
+      /* Divider */
+      y += 10;
+      ctx.fillStyle = '#333';
+      ctx.fillRect(px, y, w - px * 2, 1);
+      y += 10;
+
+      /* Cover */
+      var bdStr = breakdownProvider ? (breakdownProvider + (breakdownPolicy ? ' #' + breakdownPolicy : '')) : '\u2014';
+      var insStr = insuranceProvider ? (insuranceProvider + (insurancePolicy ? ' #' + insurancePolicy : '')) : '\u2014';
+      ctx.fillStyle = '#777';
+      ctx.fillText('Breakdown: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(bdStr, px + ctx.measureText('Breakdown: ').width, y);
+      y += 16;
+      ctx.fillStyle = '#777';
+      ctx.fillText('Insurance: ', px, y);
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(insStr, px + ctx.measureText('Insurance: ').width, y);
+
+      /* Download */
+      var link = document.createElement('a');
+      link.download = 'visorup-emergency-card.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+
+    /* Run initial preview with saved data */
+    updatePreview();
+    this._initLazyImages();
+  }
+
+  renderWeatherDashboard() {
+    var self = this;
+    var presets = [
+      { name: 'Inverness', lat: 57.4778, lon: -4.2247 },
+      { name: 'Fort William', lat: 56.8198, lon: -5.1052 },
+      { name: 'Snowdonia', lat: 52.9184, lon: -3.8918 },
+      { name: 'Lake District', lat: 54.4609, lon: -3.0886 },
+      { name: 'Peak District', lat: 53.3497, lon: -1.8311 },
+      { name: 'Bath', lat: 51.3811, lon: -2.3590 },
+      { name: 'Isle of Skye', lat: 57.2736, lon: -6.2155 }
+    ];
+
+    var presetBtns = presets.map(function(p) {
+      return '<button class="weather-preset-btn" data-lat="' + p.lat + '" data-lon="' + p.lon + '" data-name="' + p.name + '" style="padding:8px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:13px;cursor:pointer;transition:all var(--transition);font-family:inherit;">' + p.name + '</button>';
+    }).join('');
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Riding Weather</h1>' +
+        '<p class="page-hero-sub">Check conditions before you head out</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<p class="section-desc" style="margin-bottom:24px">Plan your ride around the weather. We check 7-day forecasts for any UK location so you can pick the best days to get out on two wheels.</p>' +
+        '<div style="max-width:600px;margin:0 auto 32px;">' +
+          '<div style="display:flex;gap:8px;margin-bottom:12px;">' +
+            '<input type="text" id="weatherLocationInput" placeholder="Enter a UK location..." style="flex:1;padding:12px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;outline:none;">' +
+            '<button id="weatherSearchBtn" class="btn-outline" style="white-space:nowrap;padding:12px 20px;"><i class="fas fa-search"></i> Search</button>' +
+          '</div>' +
+          '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">' + presetBtns + '</div>' +
+        '</div>' +
+        '<div id="weatherResults"></div>' +
+      '</div>' +
+    '</section>' + this.renderFooter();
+
+    function getWeatherEmoji(code) {
+      if (code === 0) return '☀️';
+      if (code >= 1 && code <= 3) return '⛅';
+      if (code >= 45 && code <= 48) return '🌫️';
+      if (code >= 51 && code <= 67) return '🌧️';
+      if (code >= 71 && code <= 77) return '🌨️';
+      if (code >= 80 && code <= 82) return '🌦️';
+      if (code >= 95 && code <= 99) return '⛈️';
+      return '🌤️';
+    }
+
+    function getWeatherLabel(code) {
+      if (code === 0) return 'Clear';
+      if (code >= 1 && code <= 3) return 'Partly cloudy';
+      if (code >= 45 && code <= 48) return 'Foggy';
+      if (code >= 51 && code <= 55) return 'Drizzle';
+      if (code >= 56 && code <= 57) return 'Freezing drizzle';
+      if (code >= 61 && code <= 63) return 'Rain';
+      if (code >= 65 && code <= 67) return 'Heavy rain';
+      if (code >= 71 && code <= 75) return 'Snow';
+      if (code >= 77 && code <= 77) return 'Snow grains';
+      if (code >= 80 && code <= 82) return 'Showers';
+      if (code >= 95 && code <= 99) return 'Thunderstorm';
+      return 'Mixed';
+    }
+
+    function getRidingVerdict(code, precipMm, windMph) {
+      var heavyRain = (code >= 65 && code <= 67) || code === 82 || (code >= 95 && code <= 99);
+      var snow = code >= 71 && code <= 77;
+      if (heavyRain || snow || precipMm > 10 || windMph > 45) return { text: 'Stay in', color: '#e74c3c' };
+      var dry = code <= 3 || (code >= 45 && code <= 48);
+      if (dry && windMph < 30 && precipMm < 2) return { text: 'Great riding', color: '#27ae60' };
+      return { text: 'Rideable', color: '#f39c12' };
+    }
+
+    function getDayName(dateStr) {
+      var d = new Date(dateStr + 'T00:00:00');
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      return days[d.getDay()];
+    }
+
+    function getFullDayName(dateStr) {
+      var d = new Date(dateStr + 'T00:00:00');
+      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      return days[d.getDay()];
+    }
+
+    function fetchWeather(lat, lon, name) {
+      var resultsDiv = document.getElementById('weatherResults');
+      resultsDiv.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-muted);"><i class="fas fa-spinner fa-spin" style="font-size:24px;"></i><p style="margin-top:12px;">Loading forecast for ' + name + '...</p></div>';
+
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,weathercode&timezone=Europe/London';
+
+      fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (!data.daily || !data.daily.time) {
+            resultsDiv.innerHTML = '<div class="tips-callout"><div class="tips-callout-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="tips-callout-body"><h4>No Data</h4><p>Could not load forecast data for this location. Try another search.</p></div></div>';
+            return;
+          }
+
+          var daily = data.daily;
+          var bestDays = [];
+          var cards = '';
+
+          for (var i = 0; i < daily.time.length; i++) {
+            var code = daily.weathercode[i];
+            var maxTemp = daily.temperature_2m_max[i];
+            var minTemp = daily.temperature_2m_min[i];
+            var precip = daily.precipitation_sum[i];
+            var windKmh = daily.windspeed_10m_max[i];
+            var windMph = Math.round(windKmh * 0.621);
+            var emoji = getWeatherEmoji(code);
+            var label = getWeatherLabel(code);
+            var verdict = getRidingVerdict(code, precip, windMph);
+            var dayName = getDayName(daily.time[i]);
+            var fullDay = getFullDayName(daily.time[i]);
+
+            if (verdict.text === 'Great riding') bestDays.push(fullDay);
+
+            cards += '' +
+            '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;min-width:140px;">' +
+              '<div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">' + dayName + '</div>' +
+              '<div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">' + daily.time[i] + '</div>' +
+              '<div style="font-size:36px;margin-bottom:8px;">' + emoji + '</div>' +
+              '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">' + label + '</div>' +
+              '<div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:2px;">' + Math.round(maxTemp) + '°<span style="color:var(--text-muted);font-size:14px;font-weight:400;">/' + Math.round(minTemp) + '°C</span></div>' +
+              '<div style="display:flex;justify-content:center;gap:12px;margin:10px 0;font-size:12px;color:var(--text-secondary);">' +
+                '<span><i class="fas fa-droplet" style="color:#3498db;"></i> ' + precip.toFixed(1) + 'mm</span>' +
+                '<span><i class="fas fa-wind" style="color:#95a5a6;"></i> ' + windMph + 'mph</span>' +
+              '</div>' +
+              '<div style="padding:6px 12px;border-radius:50px;font-size:12px;font-weight:700;color:#fff;background:' + verdict.color + ';display:inline-block;">' + verdict.text + '</div>' +
+            '</div>';
+          }
+
+          var summaryHTML = '';
+          if (bestDays.length > 0) {
+            summaryHTML = '<div class="tips-callout" style="margin-bottom:32px;border-left:4px solid #27ae60;">' +
+              '<div class="tips-callout-icon" style="background:#27ae60;"><i class="fas fa-motorcycle"></i></div>' +
+              '<div class="tips-callout-body">' +
+                '<h4 style="color:#27ae60;">Best riding days this week: ' + bestDays.join(', ') + '</h4>' +
+                '<p>Dry skies and manageable winds — get out there!</p>' +
+              '</div>' +
+            '</div>';
+          } else {
+            summaryHTML = '<div class="tips-callout" style="margin-bottom:32px;border-left:4px solid #e74c3c;">' +
+              '<div class="tips-callout-icon" style="background:#e74c3c;"><i class="fas fa-cloud-rain"></i></div>' +
+              '<div class="tips-callout-body">' +
+                '<h4 style="color:#e74c3c;">Tough week ahead</h4>' +
+                '<p>No perfect riding days in this forecast — but check back, British weather changes fast!</p>' +
+              '</div>' +
+            '</div>';
+          }
+
+          resultsDiv.innerHTML = '' +
+            '<h2 class="section-heading" style="margin-bottom:8px;">7-Day Forecast for ' + name + '</h2>' +
+            '<p class="section-desc" style="margin-bottom:24px;">Temperatures in °C, wind in mph, rainfall in mm.</p>' +
+            summaryHTML +
+            '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;">' + cards + '</div>';
+        })
+        .catch(function() {
+          resultsDiv.innerHTML = '<div class="tips-callout" style="border-left:4px solid #e74c3c;"><div class="tips-callout-icon" style="background:#e74c3c;"><i class="fas fa-exclamation-triangle"></i></div><div class="tips-callout-body"><h4 style="color:#e74c3c;">Connection Error</h4><p>Failed to load weather data. Please check your connection and try again.</p></div></div>';
+        });
+    }
+
+    function searchLocation(query) {
+      var resultsDiv = document.getElementById('weatherResults');
+      resultsDiv.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-muted);"><i class="fas fa-spinner fa-spin" style="font-size:24px;"></i><p style="margin-top:12px;">Searching...</p></div>';
+
+      fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + encodeURIComponent(query) + '&count=5&language=en&format=json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.results && data.results.length) {
+            var loc = data.results[0];
+            fetchWeather(loc.latitude, loc.longitude, loc.name);
+          } else {
+            resultsDiv.innerHTML = '<div class="tips-callout"><div class="tips-callout-icon"><i class="fas fa-map-marker-alt"></i></div><div class="tips-callout-body"><h4>No Location Found</h4><p>We couldn\'t find that location. Try a town or city name, e.g. "Fort William" or "Keswick".</p></div></div>';
+          }
+        })
+        .catch(function() {
+          resultsDiv.innerHTML = '<div class="tips-callout" style="border-left:4px solid #e74c3c;"><div class="tips-callout-icon" style="background:#e74c3c;"><i class="fas fa-exclamation-triangle"></i></div><div class="tips-callout-body"><h4 style="color:#e74c3c;">Connection Error</h4><p>Failed to search location. Please check your connection and try again.</p></div></div>';
+        });
+    }
+
+    var searchBtn = document.getElementById('weatherSearchBtn');
+    var locationInput = document.getElementById('weatherLocationInput');
+
+    searchBtn.addEventListener('click', function() {
+      var query = locationInput.value.trim();
+      if (query) searchLocation(query);
+    });
+
+    locationInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        var query = locationInput.value.trim();
+        if (query) searchLocation(query);
+      }
+    });
+
+    document.querySelectorAll('.weather-preset-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var lat = parseFloat(btn.dataset.lat);
+        var lon = parseFloat(btn.dataset.lon);
+        var name = btn.dataset.name;
+        locationInput.value = name;
+        fetchWeather(lat, lon, name);
+      });
+    });
+  }
+
+  renderSunriseSunset() {
+    var self = this;
+    var presets = [
+      { name: 'Inverness', lat: 57.4778, lon: -4.2247 },
+      { name: 'Fort William', lat: 56.8198, lon: -5.1052 },
+      { name: 'Snowdonia', lat: 52.9184, lon: -3.8918 },
+      { name: 'Lake District', lat: 54.4609, lon: -3.0886 },
+      { name: 'Peak District', lat: 53.3497, lon: -1.8311 },
+      { name: 'Bath', lat: 51.3811, lon: -2.3590 },
+      { name: 'Isle of Skye', lat: 57.2736, lon: -6.2155 }
+    ];
+
+    var today = new Date();
+    var todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+    var presetBtns = presets.map(function(p) {
+      return '<button class="sunrise-preset-btn" data-lat="' + p.lat + '" data-lon="' + p.lon + '" data-name="' + p.name + '" style="padding:8px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:13px;cursor:pointer;transition:all var(--transition);font-family:inherit;">' + p.name + '</button>';
+    }).join('');
+
+    this.pageContent.innerHTML = '' +
+    '<section class="page-hero" style="background-image:url(public/images/heroes/homepage.jpg)">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Sunrise & Sunset</h1>' +
+        '<p class="page-hero-sub">Plan your riding hours</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<p class="section-desc" style="margin-bottom:24px">Make the most of every daylight hour. Check sunrise and sunset times for any UK location to plan your riding window, time golden hour photo stops, and know exactly when to set off and when to call it a day.</p>' +
+        '<div style="max-width:600px;margin:0 auto 32px;">' +
+          '<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">' +
+            '<input type="text" id="sunriseLocationInput" placeholder="Enter a UK location..." style="flex:1;min-width:200px;padding:12px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;outline:none;">' +
+            '<input type="date" id="sunriseDateInput" value="' + todayStr + '" style="padding:12px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;outline:none;">' +
+            '<button id="sunriseSearchBtn" class="btn-outline" style="white-space:nowrap;padding:12px 20px;"><i class="fas fa-search"></i> Search</button>' +
+          '</div>' +
+          '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">' + presetBtns + '</div>' +
+        '</div>' +
+        '<div id="sunriseResults"></div>' +
+      '</div>' +
+    '</section>' + this.renderFooter();
+
+    function formatTime(isoStr) {
+      if (!isoStr) return '--:--';
+      var d = new Date(isoStr);
+      var h = d.getHours();
+      var m = String(d.getMinutes()).padStart(2, '0');
+      return String(h).padStart(2, '0') + ':' + m;
+    }
+
+    function parseHoursFromISO(isoStr) {
+      if (!isoStr) return 0;
+      var d = new Date(isoStr);
+      return d.getHours() + d.getMinutes() / 60;
+    }
+
+    function getDayName(dateStr) {
+      var d = new Date(dateStr + 'T00:00:00');
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      return days[d.getDay()];
+    }
+
+    function getFullDayName(dateStr) {
+      var d = new Date(dateStr + 'T00:00:00');
+      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      return days[d.getDay()];
+    }
+
+    function buildTimeline(sunriseH, sunsetH) {
+      var totalH = 24;
+      var pctSunrise = (sunriseH / totalH) * 100;
+      var pctSunset = (sunsetH / totalH) * 100;
+      var goldenMornEnd = ((sunriseH + 1) / totalH) * 100;
+      var goldenEveStart = ((sunsetH - 1) / totalH) * 100;
+      var daylightWidth = pctSunset - pctSunrise;
+
+      return '' +
+      '<div style="position:relative;height:48px;background:var(--bg);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);margin:20px 0;">' +
+        '<div style="position:absolute;left:' + pctSunrise + '%;width:' + daylightWidth + '%;height:100%;background:linear-gradient(90deg,#f39c12 0%,#f1c40f 15%,#3498db 50%,#f1c40f 85%,#e67e22 100%);opacity:0.3;"></div>' +
+        '<div style="position:absolute;left:' + pctSunrise + '%;width:' + (goldenMornEnd - pctSunrise) + '%;height:100%;background:rgba(241,196,15,0.4);"></div>' +
+        '<div style="position:absolute;left:' + goldenEveStart + '%;width:' + (pctSunset - goldenEveStart) + '%;height:100%;background:rgba(230,126,34,0.4);"></div>' +
+        '<div style="position:absolute;left:' + pctSunrise + '%;top:0;bottom:0;width:2px;background:#f39c12;"></div>' +
+        '<div style="position:absolute;left:' + pctSunset + '%;top:0;bottom:0;width:2px;background:#e67e22;"></div>' +
+        '<div style="position:absolute;left:' + pctSunrise + '%;top:4px;transform:translateX(-50%);font-size:10px;color:var(--text);font-weight:700;">🌅</div>' +
+        '<div style="position:absolute;left:' + pctSunset + '%;top:4px;transform:translateX(-50%);font-size:10px;color:var(--text);font-weight:700;">🌇</div>' +
+        '<div style="position:absolute;bottom:2px;left:4px;font-size:9px;color:var(--text-muted);">00:00</div>' +
+        '<div style="position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--text-muted);">12:00</div>' +
+        '<div style="position:absolute;bottom:2px;right:4px;font-size:9px;color:var(--text-muted);">24:00</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--text-muted);margin-bottom:8px;">' +
+        '<span><span style="display:inline-block;width:12px;height:12px;background:rgba(241,196,15,0.4);border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Golden hour</span>' +
+        '<span><span style="display:inline-block;width:12px;height:12px;background:rgba(52,152,219,0.3);border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Daylight</span>' +
+        '<span><span style="display:inline-block;width:12px;height:12px;background:var(--bg);border:1px solid var(--border);border-radius:2px;vertical-align:middle;margin-right:4px;"></span>Dark</span>' +
+      '</div>';
+    }
+
+    function fetchSunrise(lat, lon, name, date) {
+      var resultsDiv = document.getElementById('sunriseResults');
+      resultsDiv.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-muted);"><i class="fas fa-spinner fa-spin" style="font-size:24px;"></i><p style="margin-top:12px;">Loading sunrise data for ' + name + '...</p></div>';
+
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&daily=sunrise,sunset&timezone=Europe/London&start_date=' + date + '&end_date=' + date;
+
+      fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (!data.daily || !data.daily.sunrise || !data.daily.sunrise[0]) {
+            resultsDiv.innerHTML = '<div class="tips-callout"><div class="tips-callout-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="tips-callout-body"><h4>No Data</h4><p>Could not load sunrise data for this location and date.</p></div></div>';
+            return;
+          }
+
+          var sunrise = data.daily.sunrise[0];
+          var sunset = data.daily.sunset[0];
+          var sunriseTime = formatTime(sunrise);
+          var sunsetTime = formatTime(sunset);
+          var sunriseH = parseHoursFromISO(sunrise);
+          var sunsetH = parseHoursFromISO(sunset);
+          var daylightH = sunsetH - sunriseH;
+          var daylightHrs = Math.floor(daylightH);
+          var daylightMins = Math.round((daylightH - daylightHrs) * 60);
+
+          var goldenMornEndDate = new Date(new Date(sunrise).getTime() + 60 * 60 * 1000);
+          var goldenMornEnd = String(goldenMornEndDate.getHours()).padStart(2, '0') + ':' + String(goldenMornEndDate.getMinutes()).padStart(2, '0');
+          var goldenEveStartDate = new Date(new Date(sunset).getTime() - 60 * 60 * 1000);
+          var goldenEveStart = String(goldenEveStartDate.getHours()).padStart(2, '0') + ':' + String(goldenEveStartDate.getMinutes()).padStart(2, '0');
+
+          var rideSuggestion = daylightH >= 14 ? 'plenty for a full day trip with stops' : daylightH >= 10 ? 'enough for a solid day ride' : daylightH >= 7 ? 'good for a half-day ride' : 'best for a short afternoon spin';
+          var dayLabel = getFullDayName(date);
+
+          var timeline = buildTimeline(sunriseH, sunsetH);
+
+          var html = '' +
+            '<h2 class="section-heading" style="margin-bottom:8px;">Daylight for ' + name + '</h2>' +
+            '<p class="section-desc" style="margin-bottom:24px;">' + dayLabel + ' ' + date + '</p>' +
+            '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:24px;">' +
+              '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;">' +
+                '<div style="font-size:28px;margin-bottom:8px;">🌅</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">Sunrise</div>' +
+                '<div style="font-size:22px;font-weight:700;color:var(--text);">' + sunriseTime + '</div>' +
+              '</div>' +
+              '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;">' +
+                '<div style="font-size:28px;margin-bottom:8px;">🌇</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">Sunset</div>' +
+                '<div style="font-size:22px;font-weight:700;color:var(--text);">' + sunsetTime + '</div>' +
+              '</div>' +
+              '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;">' +
+                '<div style="font-size:28px;margin-bottom:8px;">☀️</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">Daylight</div>' +
+                '<div style="font-size:22px;font-weight:700;color:var(--text);">' + daylightHrs + 'h ' + daylightMins + 'm</div>' +
+              '</div>' +
+              '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;">' +
+                '<div style="font-size:28px;margin-bottom:8px;">📸</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">Golden Hours</div>' +
+                '<div style="font-size:14px;font-weight:600;color:var(--accent);">' + sunriseTime + '–' + goldenMornEnd + '</div>' +
+                '<div style="font-size:14px;font-weight:600;color:var(--accent);">' + goldenEveStart + '–' + sunsetTime + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<h3 style="font-size:14px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Visual Timeline</h3>' +
+            timeline +
+            '<div class="tips-callout" style="margin:24px 0;border-left:4px solid var(--accent);">' +
+              '<div class="tips-callout-icon"><i class="fas fa-motorcycle"></i></div>' +
+              '<div class="tips-callout-body">' +
+                '<h4>' + daylightHrs + ' hours ' + daylightMins + ' minutes of daylight</h4>' +
+                '<p>That\'s ' + rideSuggestion + '. Golden hour is perfect for pulling over at a viewpoint with the camera.</p>' +
+              '</div>' +
+            '</div>' +
+            '<div style="text-align:center;margin-top:24px;">' +
+              '<button id="sunriseWeekBtn" class="btn-outline" style="padding:12px 24px;"><i class="fas fa-calendar-week"></i> Show Next 7 Days</button>' +
+            '</div>' +
+            '<div id="sunriseWeekTable"></div>';
+
+          resultsDiv.innerHTML = html;
+
+          document.getElementById('sunriseWeekBtn').addEventListener('click', function() {
+            fetchWeekSunrise(lat, lon, name, date);
+          });
+        })
+        .catch(function() {
+          resultsDiv.innerHTML = '<div class="tips-callout" style="border-left:4px solid #e74c3c;"><div class="tips-callout-icon" style="background:#e74c3c;"><i class="fas fa-exclamation-triangle"></i></div><div class="tips-callout-body"><h4 style="color:#e74c3c;">Connection Error</h4><p>Failed to load sunrise data. Please check your connection and try again.</p></div></div>';
+        });
+    }
+
+    function fetchWeekSunrise(lat, lon, name, startDate) {
+      var start = new Date(startDate + 'T00:00:00');
+      var end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+      var endStr = end.getFullYear() + '-' + String(end.getMonth() + 1).padStart(2, '0') + '-' + String(end.getDate()).padStart(2, '0');
+
+      var tableDiv = document.getElementById('sunriseWeekTable');
+      tableDiv.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Loading week data...</div>';
+
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&daily=sunrise,sunset&timezone=Europe/London&start_date=' + startDate + '&end_date=' + endStr;
+
+      fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (!data.daily || !data.daily.sunrise) {
+            tableDiv.innerHTML = '<p style="color:var(--text-muted);text-align:center;">Could not load week data.</p>';
+            return;
+          }
+
+          var rows = '';
+          for (var i = 0; i < data.daily.time.length; i++) {
+            var sr = formatTime(data.daily.sunrise[i]);
+            var ss = formatTime(data.daily.sunset[i]);
+            var srH = parseHoursFromISO(data.daily.sunrise[i]);
+            var ssH = parseHoursFromISO(data.daily.sunset[i]);
+            var dl = ssH - srH;
+            var dlH = Math.floor(dl);
+            var dlM = Math.round((dl - dlH) * 60);
+            var day = getDayName(data.daily.time[i]);
+
+            rows += '<tr style="border-bottom:1px solid var(--border);">' +
+              '<td style="padding:10px 12px;font-weight:600;color:var(--text);">' + day + '</td>' +
+              '<td style="padding:10px 12px;color:var(--text-secondary);">' + data.daily.time[i] + '</td>' +
+              '<td style="padding:10px 12px;color:var(--accent);font-weight:600;">🌅 ' + sr + '</td>' +
+              '<td style="padding:10px 12px;color:var(--accent);font-weight:600;">🌇 ' + ss + '</td>' +
+              '<td style="padding:10px 12px;color:var(--text);">' + dlH + 'h ' + dlM + 'm</td>' +
+            '</tr>';
+          }
+
+          tableDiv.innerHTML = '' +
+            '<h3 class="section-heading" style="margin-top:32px;margin-bottom:16px;">7-Day Sunrise & Sunset — ' + name + '</h3>' +
+            '<div style="overflow-x:auto;">' +
+              '<table style="width:100%;border-collapse:collapse;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:13px;">' +
+                '<thead><tr style="background:var(--bg-surface);border-bottom:2px solid var(--border);">' +
+                  '<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Day</th>' +
+                  '<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Date</th>' +
+                  '<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Sunrise</th>' +
+                  '<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Sunset</th>' +
+                  '<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;">Daylight</th>' +
+                '</tr></thead>' +
+                '<tbody>' + rows + '</tbody>' +
+              '</table>' +
+            '</div>';
+        })
+        .catch(function() {
+          tableDiv.innerHTML = '<p style="color:#e74c3c;text-align:center;margin-top:16px;">Failed to load week data.</p>';
+        });
+    }
+
+    function searchLocation(query) {
+      var resultsDiv = document.getElementById('sunriseResults');
+      resultsDiv.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-muted);"><i class="fas fa-spinner fa-spin" style="font-size:24px;"></i><p style="margin-top:12px;">Searching...</p></div>';
+      var date = document.getElementById('sunriseDateInput').value || todayStr;
+
+      fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + encodeURIComponent(query) + '&count=5&language=en&format=json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.results && data.results.length) {
+            var loc = data.results[0];
+            fetchSunrise(loc.latitude, loc.longitude, loc.name, date);
+          } else {
+            resultsDiv.innerHTML = '<div class="tips-callout"><div class="tips-callout-icon"><i class="fas fa-map-marker-alt"></i></div><div class="tips-callout-body"><h4>No Location Found</h4><p>We couldn\'t find that location. Try a town or city name, e.g. "Fort William" or "Keswick".</p></div></div>';
+          }
+        })
+        .catch(function() {
+          resultsDiv.innerHTML = '<div class="tips-callout" style="border-left:4px solid #e74c3c;"><div class="tips-callout-icon" style="background:#e74c3c;"><i class="fas fa-exclamation-triangle"></i></div><div class="tips-callout-body"><h4 style="color:#e74c3c;">Connection Error</h4><p>Failed to search location. Please check your connection and try again.</p></div></div>';
+        });
+    }
+
+    var searchBtn = document.getElementById('sunriseSearchBtn');
+    var locationInput = document.getElementById('sunriseLocationInput');
+
+    searchBtn.addEventListener('click', function() {
+      var query = locationInput.value.trim();
+      if (query) searchLocation(query);
+    });
+
+    locationInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        var query = locationInput.value.trim();
+        if (query) searchLocation(query);
+      }
+    });
+
+    document.querySelectorAll('.sunrise-preset-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var lat = parseFloat(btn.dataset.lat);
+        var lon = parseFloat(btn.dataset.lon);
+        var name = btn.dataset.name;
+        var date = document.getElementById('sunriseDateInput').value || todayStr;
+        locationInput.value = name;
+        fetchSunrise(lat, lon, name, date);
+      });
+    });
   }
 
   renderComingSoon(title, desc, icon) {

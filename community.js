@@ -94,11 +94,47 @@ const VisorUpCommunity = {
     if (opts.type) posts = posts.filter(function(p) { return p.type === opts.type; });
     if (opts.userId) posts = posts.filter(function(p) { return p.userId === opts.userId; });
 
-    posts.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
+    if (opts.followingOnly) {
+      var following = this.getFollowing();
+      posts = posts.filter(function(p) { return following.indexOf(p.userId) !== -1; });
+    }
+
+    if (opts.sort === 'top') {
+      posts.sort(function(a, b) {
+        var scoreA = (a.likeCount || 0) + (a.commentCount || 0);
+        var scoreB = (b.likeCount || 0) + (b.commentCount || 0);
+        return scoreB - scoreA;
+      });
+    } else {
+      posts.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
+    }
 
     var limit = opts.limit || 50;
     var offset = opts.offset || 0;
     return posts.slice(offset, offset + limit);
+  },
+
+  getFeed(tab) {
+    tab = tab || 'new';
+    var data = this._getData();
+    var posts = data.posts || [];
+
+    if (tab === 'following') {
+      var following = this.getFollowing();
+      posts = posts.filter(function(p) { return following.indexOf(p.userId) !== -1; });
+      posts.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
+    } else if (tab === 'top') {
+      posts.sort(function(a, b) {
+        var scoreA = (a.likeCount || 0) + (a.commentCount || 0);
+        var scoreB = (b.likeCount || 0) + (b.commentCount || 0);
+        if (scoreB !== scoreA) return scoreB - scoreA;
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+    } else {
+      posts.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
+    }
+
+    return posts.slice(0, 50);
   },
 
   deletePost(id) {

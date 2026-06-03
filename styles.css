@@ -3727,6 +3727,12 @@ ul, ol { list-style: none; }
 .feed-filter-btn:hover { border-color:var(--accent); color:var(--accent); }
 .feed-filter-active { background:var(--accent); border-color:var(--accent); color:#080c0b; }
 
+.feed-tabs { display:flex; border-bottom:2px solid var(--border); margin-bottom:20px; }
+.feed-tab { flex:1; padding:12px 0; background:none; border:none; border-bottom:2px solid transparent; margin-bottom:-2px; color:var(--text-muted); font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:6px; transition:all var(--transition); }
+.feed-tab:hover { color:var(--text-primary); }
+.feed-tab-active { color:var(--accent); border-bottom-color:var(--accent); }
+.feed-compose-expand { margin-top:8px; }
+
 .feed-empty { text-align:center; padding:40px 20px; color:var(--text-muted); }
 .feed-empty i { font-size:40px; margin-bottom:12px; display:block; }
 .feed-empty p { font-size:14px; }
