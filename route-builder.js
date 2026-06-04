@@ -195,10 +195,15 @@ class RouteBuilder {
     distilleries: { dataKey: 'DISTILLERIES', color: '#d35400', faIcon: 'fa-flask',           size: 26, label: 'Distilleries' },
     landmarks:    { dataKey: 'LANDMARKS',    color: '#9b59b6', faIcon: 'fa-monument',        size: 28, label: 'Landmarks' },
     fossils:      { dataKey: 'FOSSILS',      color: '#cd853f', faIcon: 'fa-bone',            size: 28, label: 'Fossils' },
-    ferries:      { dataKey: 'FERRIES',      color: '#3498db', faIcon: 'fa-ship',            size: 32, label: 'Ferries' }
+    ferries:      { dataKey: 'FERRIES',      color: '#3498db', faIcon: 'fa-ship',            size: 32, label: 'Ferries' },
+    ev_charging:  { dataKey: 'EV_CHARGING',  color: '#27ae60', faIcon: 'fa-bolt',            size: 24, label: 'EV Charging' },
+    motorcycle_parking: { dataKey: 'MOTORCYCLE_PARKING', color: '#2d98da', faIcon: 'fa-parking', size: 24, label: 'Bike Parking' },
+    repair_shops: { dataKey: 'REPAIR_SHOPS', color: '#e74c3c', faIcon: 'fa-wrench',          size: 24, label: 'Repair Shops' },
+    hotels:       { dataKey: 'HOTELS',       color: '#9b59b6', faIcon: 'fa-bed',             size: 26, label: 'Hotels & B&Bs' },
+    mountain_passes: { dataKey: 'MOUNTAIN_PASSES', color: '#e74c3c', faIcon: 'fa-mountain',  size: 28, label: 'Mountain Passes' }
   };
 
-  // New categories (populated from external POI files)
+  // Categories populated from external POI files
   static CASTLES = [];
   static WATERFALLS = [];
   static BEACHES = [];
@@ -206,6 +211,11 @@ class RouteBuilder {
   static LANDMARKS = [];
   static FOSSILS = [];
   static FERRIES = [];
+  static EV_CHARGING = [];
+  static MOTORCYCLE_PARKING = [];
+  static REPAIR_SHOPS = [];
+  static HOTELS = [];
+  static MOUNTAIN_PASSES = [];
 
   static _poiMerged = false;
   static _mergeExternalPOI() {
@@ -219,7 +229,9 @@ class RouteBuilder {
       campsites:'CAMPSITES', bridges:'BRIDGES', wildlife:'WILDLIFE', roads:'ROADS',
       fuel:'FUEL', viewpoints:'VIEWPOINTS', pubs:'PUBS', castles:'CASTLES',
       waterfalls:'WATERFALLS', beaches:'BEACHES', distilleries:'DISTILLERIES',
-      landmarks:'LANDMARKS', fossils:'FOSSILS', ferries:'FERRIES'
+      landmarks:'LANDMARKS', fossils:'FOSSILS', ferries:'FERRIES',
+      ev_charging:'EV_CHARGING', motorcycle_parking:'MOTORCYCLE_PARKING',
+      repair_shops:'REPAIR_SHOPS', hotels:'HOTELS', mountain_passes:'MOUNTAIN_PASSES'
     };
     for (var s = 0; s < sources.length; s++) {
       var src = sources[s];
@@ -579,7 +591,15 @@ class RouteBuilder {
           '<div class="rb-poi-panel" id="rb-poiPanel">' +
             '<div class="rb-poi-panel-header"><h4><i class="fas fa-map-marker-alt"></i> Points of Interest</h4><button class="rb-poi-panel-close" id="rb-poiPanelClose"><i class="fas fa-times"></i></button></div>' +
             '<div class="rb-poi-panel-body">' + poiChecks + '</div>' +
-            '<div class="rb-poi-panel-footer"><button class="rb-poi-panel-all" id="rb-poiAll">Show All</button><button class="rb-poi-panel-none" id="rb-poiNone">Hide All</button></div>' +
+            '<div class="rb-poi-panel-footer">' +
+              '<button class="rb-poi-panel-all" id="rb-poiAll">Show All</button><button class="rb-poi-panel-none" id="rb-poiNone">Hide All</button>' +
+              '<div style="display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);width:100%;">' +
+                '<span style="font-size:10px;font-weight:700;color:#D68A2D;white-space:nowrap;">MIN RATING</span>' +
+                '<input id="rb-ratingSlider" type="range" min="1" max="5" value="4" step="1" style="flex:1;accent-color:#D68A2D;cursor:pointer;">' +
+                '<span id="rb-ratingLabel" style="font-size:11px;font-weight:700;min-width:28px;text-align:center;">4\u2605+</span>' +
+                '<button id="rb-ratingAuto" style="padding:2px 8px;background:rgba(214,138,45,0.15);border:1px solid rgba(214,138,45,0.2);border-radius:8px;color:#D68A2D;font-size:9px;font-weight:700;cursor:pointer;">Auto</button>' +
+              '</div>' +
+            '</div>' +
           '</div>' +
           '<div class="rb-elevation" id="rb-elevation">' +
             '<canvas id="rb-elevCanvas"></canvas>' +
@@ -592,12 +612,16 @@ class RouteBuilder {
   // ── Map Initialization ───────────────────────────────────────
 
   _initMap() {
+    var self = this;
     this.map = L.map('rb-map', {
       center: [54.5, -3.5],
       zoom: 6,
       zoomControl: false,
       attributionControl: true
     });
+
+    this.map.createPane('editorPickPane');
+    this.map.getPane('editorPickPane').style.zIndex = 650;
 
     L.control.zoom({ position: 'topright' }).addTo(this.map);
 
@@ -606,6 +630,23 @@ class RouteBuilder {
       subdomains: 'abcd',
       maxZoom: 19
     }).addTo(this.map);
+
+    this._poiMinRating = 4;
+    this._poiUserOverride = false;
+
+    this.map.on('zoomend', function() {
+      if (self._poiUserOverride) return;
+      var z = self.map.getZoom();
+      var autoMin = z >= 13 ? 1 : z >= 11 ? 2 : z >= 10 ? 3 : 4;
+      if (autoMin !== self._poiMinRating) {
+        self._poiMinRating = autoMin;
+        self._applyPoiRatingFilter();
+        var slider = self.container.querySelector('#rb-ratingSlider');
+        if (slider) slider.value = autoMin;
+        var label = self.container.querySelector('#rb-ratingLabel');
+        if (label) label.textContent = autoMin === 1 ? 'All' : autoMin + '\u2605+';
+      }
+    });
   }
 
   // ── Event Binding ────────────────────────────────────────────
@@ -682,6 +723,29 @@ class RouteBuilder {
         self._togglePOI(cb.dataset.poiType, cb.checked);
       });
     });
+
+    // Rating slider
+    var ratingSlider = this.container.querySelector('#rb-ratingSlider');
+    var ratingLabel = this.container.querySelector('#rb-ratingLabel');
+    if (ratingSlider) {
+      ratingSlider.addEventListener('input', function() {
+        self._poiUserOverride = true;
+        self._poiMinRating = parseInt(ratingSlider.value);
+        if (ratingLabel) ratingLabel.textContent = self._poiMinRating === 1 ? 'All' : self._poiMinRating + '\u2605+';
+        self._applyPoiRatingFilter();
+      });
+    }
+    var ratingAuto = this.container.querySelector('#rb-ratingAuto');
+    if (ratingAuto) {
+      ratingAuto.addEventListener('click', function() {
+        self._poiUserOverride = false;
+        var z = self.map.getZoom();
+        self._poiMinRating = z >= 13 ? 1 : z >= 11 ? 2 : z >= 10 ? 3 : 4;
+        if (ratingSlider) ratingSlider.value = self._poiMinRating;
+        if (ratingLabel) ratingLabel.textContent = self._poiMinRating === 1 ? 'All' : self._poiMinRating + '\u2605+';
+        self._applyPoiRatingFilter();
+      });
+    }
 
     // Geocoding — Start
     var startInput = this.container.querySelector('#rb-startInput');
@@ -773,16 +837,39 @@ class RouteBuilder {
 
     for (var i = 0; i < data.length; i++) {
       var poi = data[i];
-      var sz = cfg.size || 28;
+      var r = poi.rating || 1;
+      var isTop = poi.top === true;
+      var sz, markerHtml, pane;
+
+      if (isTop) {
+        sz = 34;
+        var eName = (poi.name || '').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+        markerHtml =
+          '<div class="editor-pick-wrap">' +
+            '<div class="editor-pick-badge"><i class="fas fa-star"></i></div>' +
+            '<div class="rb-poi-marker" style="width:' + sz + 'px;height:' + sz + 'px;background:' + cfg.color + '"><i class="fas ' + cfg.faIcon + '" style="font-size:' + Math.round(sz * 0.4) + 'px"></i></div>' +
+            '<div class="editor-pick-ribbon">Editor\'s Pick</div>' +
+            '<div class="editor-pick-name">' + eName + '</div>' +
+          '</div>';
+        pane = 'editorPickPane';
+      } else {
+        sz = r >= 4 ? (cfg.size || 28) : r >= 3 ? 22 : 18;
+        var opacity = r >= 4 ? 1 : r >= 3 ? 0.85 : 0.6;
+        markerHtml = '<div class="rb-poi-marker" style="width:' + sz + 'px;height:' + sz + 'px;background:' + cfg.color + ';opacity:' + opacity + '"><i class="fas ' + cfg.faIcon + '" style="font-size:' + Math.round(sz * 0.4) + 'px"></i></div>';
+        pane = 'markerPane';
+      }
+
       var poiIcon = L.divIcon({
         className: '',
-        html: '<div class="rb-poi-marker" style="width:' + sz + 'px;height:' + sz + 'px;background:' + cfg.color + '"><i class="fas ' + cfg.faIcon + '" style="font-size:' + Math.round(sz * 0.4) + 'px"></i></div>',
+        html: markerHtml,
         iconSize: [sz, sz],
         iconAnchor: [sz / 2, sz / 2],
         popupAnchor: [0, -(sz / 2) - 4]
       });
 
-      var marker = L.marker([poi.lat, poi.lng], { icon: poiIcon });
+      var marker = L.marker([poi.lat, poi.lng], { icon: poiIcon, pane: pane });
+      marker._poiRating = r;
+      marker._isEditorPick = isTop;
       var popupHtml = this._buildPOIPopup(type, poi, i);
       marker.bindPopup(popupHtml, { maxWidth: 280, closeButton: true });
       group.addLayer(marker);
@@ -796,9 +883,13 @@ class RouteBuilder {
 
   _buildPOIPopup(type, poi, idx) {
     var cfg = RouteBuilder.POI_CONFIG[type] || {};
+    var r = poi.rating || 1;
+    var stars = '';
+    for (var si = 0; si < 5; si++) stars += '<span style="color:' + (si < r ? '#D68A2D' : '#444') + ';font-size:10px;">&#9733;</span>';
+    var epBadge = poi.top ? ' <span style="color:#D68A2D;font-size:10px;font-weight:700;">Editor\'s Pick</span>' : '';
     var html = '<div style="font-size:13px;max-width:260px;">';
-    html += '<b>' + this._esc(poi.name) + '</b>';
-    html += '<div style="color:' + (cfg.color || '#D68A2D') + ';font-size:11px;font-weight:600;margin:2px 0;">' + (cfg.label || type) + '</div>';
+    html += '<b>' + this._esc(poi.name) + '</b>' + epBadge;
+    html += '<div style="margin:2px 0;">' + stars + ' <span style="color:' + (cfg.color || '#D68A2D') + ';font-size:11px;font-weight:600;">' + (cfg.label || type) + '</span></div>';
     html += '<span style="color:#aaa;font-size:11px;">' + this._esc(poi.desc) + '</span>';
 
     if (poi.surface) {
@@ -837,11 +928,31 @@ class RouteBuilder {
     if (show) {
       if (this.poiLayers[type]) {
         this.poiLayers[type].addTo(this.map);
+        this._applyPoiRatingFilter();
       }
     } else {
       if (this.poiLayers[type]) {
         this.map.removeLayer(this.poiLayers[type]);
       }
+    }
+  }
+
+  _applyPoiRatingFilter() {
+    var min = this._poiMinRating || 1;
+    var types = Object.keys(RouteBuilder.POI_CONFIG);
+    for (var t = 0; t < types.length; t++) {
+      var type = types[t];
+      var layer = this.poiLayers[type];
+      if (!layer || !this.poiVisible[type]) continue;
+      layer.eachLayer(function(marker) {
+        var el = marker.getElement();
+        if (!el) return;
+        if (marker._isEditorPick || marker._poiRating >= min) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
     }
   }
 
