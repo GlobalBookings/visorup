@@ -4,7 +4,7 @@ export const content = `<div style="text-align:center;margin-bottom:32px">
 
 <h2>Which Touring Bike Do You Need?</h2>
 <p>A decision flowchart for every type of UK rider. Created by <a href="https://visorup.co.uk">VisorUp</a> — the UK's motorcycle touring platform.</p>
-<p>Feel free to share this infographic on your website, blog, or forum. Just use the embed code below — it includes a link back to VisorUp so your readers can explore more.</p>
+<p>Feel free to share this <a href="/guides/motorcycle-touring-packing-list">infographic</a> on your website, blog, or forum. Just use the embed code below — it includes a link back to VisorUp so your readers can explore more.</p>
 
 <h3>Embed This Infographic</h3>
 <p>Copy and paste this HTML code into your site:</p>
@@ -17,5 +17,5 @@ export const content = `<div style="text-align:center;margin-bottom:32px">
 <div style="background:#1A1F1E;border:1px solid #2a302e;border-radius:12px;padding:20px;margin:24px 0">
   <h4 style="color:#D68A2D;margin:0 0 8px;font-size:14px">Preview of embed:</h4>
   <a href="https://visorup.co.uk/guides/bike-touring-decision-tree"><img src="/public/images/infographics/bike-touring-decision-tree.png" alt="Which Touring Bike Do You Need?" style="max-width:100%;height:auto;border-radius:8px" /></a>
-  <p style="font-size:12px;color:#7a8a85;margin:8px 0 0">Source: <a href="https://visorup.co.uk" style="color:#D68A2D">VisorUp.co.uk</a> — UK Motorcycle Touring</p>
+  <p style="font-size:12px;color:#7a8a85;margin:8px 0 0">Source: <a href="https://visorup.co.uk" style="color:#D68A2D">VisorUp.co.uk</a> — UK Motorcycle Touring Read our <a href="/guides/best-motorcycle-roads-scotland">Best Motorcycle Roads in Scotland: 15 Must-Ride Routes</a> guide for more. Read our <a href="/guides/uk-motorcycle-roads-ranked">Top 15 UK Motorcycle Roads [Infographic]</a> guide for more. Read our <a href="/guides/nc500-illustrated-map">NC500 Motorcycle Route [Infographic]</a> guide for more. Read our <a href="/guides/uk-biker-wildlife-hazards">UK Biker Hazard Guide [Infographic]</a> guide for more.</p>
 </div>`;

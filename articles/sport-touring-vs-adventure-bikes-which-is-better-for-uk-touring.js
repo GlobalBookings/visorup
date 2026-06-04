@@ -1,6 +1,6 @@
 export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better for UK Touring?</h2>
 
-<p>I've spent fifteen years and 200,000 miles touring Britain on everything from naked bikes to full-fat adventure machines. The biggest question I get asked isn't about routes or gear – it's this: "Should I buy a sport tourer or an adventure bike?" Here's the truth nobody wants to tell you: the answer depends entirely on how honest you are about where you actually ride.</p>
+<p>I've spent fifteen years and 200,000 miles touring Britain on everything from naked bikes to full-fat <a href="/guides/adventure-helmets-review">adventure</a> machines. The biggest question I get asked isn't about routes or gear – it's this: "Should I buy a sport tourer or an adventure bike?" Here's the truth nobody wants to tell you: the answer depends entirely on how honest you are about where you actually ride.</p>
 
 <p>Both categories have evolved massively in recent years. Modern sport tourers like the BMW R1250RT and Yamaha FJR1300 offer more comfort and technology than ever. Meanwhile, adventure bikes have shed weight and gained road manners – the latest BMW R1250GS feels almost car-like on tarmac. But underneath the marketing hype, these are fundamentally different tools for different jobs.</p>
 
@@ -16,7 +16,7 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <h3>What Sport Tourers Excel At</h3>
 
-<p>Wind protection is everything on British roads. When you're battling crosswinds on the A85 around Loch Lomond or grinding through horizontal rain on the A66 across the Pennines, that full fairing isn't just comfort – it's essential kit. My RT cuts through wind that would leave adventure bike riders fighting the handlebars.</p>
+<p>Wind protection is everything on British roads. When you're battling crosswinds on the A85 around Loch Lomond or grinding through horizontal rain on the A66 across the Pennines, that full fairing isn't just comfort – it's essential kit. My RT cuts through wind that would leave adventure bike <a href="/guides/leather-motorcycle-trousers">riders</a> fighting the handlebars.</p>
 
 <p>The riding position works for hours at a time. Yes, you're leaning forward, but it's a supported, aerodynamic position that puts your weight on your core, not your wrists. I've done 600-mile days to the Highlands without the usual back pain that comes with more upright positions.</p>
 
@@ -34,7 +34,7 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <h2>Adventure Bikes: The Swiss Army Knives</h2>
 
-<p>Adventure bikes promise to do everything, and in 2026, the best ones actually deliver. I've put serious miles on everything from the BMW R1250GS to the new Triumph Tiger 1200, and the latest generation genuinely works on British roads.</p>
+<p>Adventure bikes promise to do everything, and in 2026, the <a href="/guides/best-motorcycle-roads-scotland">best</a> ones actually deliver. I've put serious miles on everything from the BMW R1250GS to the new Triumph Tiger 1200, and the latest generation genuinely works on British roads.</p>
 
 <h3>What Adventure Bikes Excel At</h3>
 
@@ -220,7 +220,7 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <h2>My Verdict After 200,000 Miles</h2>
 
-<p>This isn't the answer most people want, but here's my honest take: both categories are excellent for UK touring in 2026. The question isn't which is objectively better – it's which matches your actual riding reality.</p>
+<p>This isn't the answer most people want, but here's my honest take: both categories are excellent for UK touring in 2026. The question isn't <a href="/guides/gps-vs-phone-navigation-motorcycle">which</a> is objectively better – it's which matches your actual riding reality.</p>
 
 <p>If I could only own one bike for UK touring, I'd choose an adventure bike. Not because it's better at everything, but because it's good enough at everything. The RT is superior on motorways and fast A-roads, but the GS is only marginally worse while being significantly better on rough roads and more engaging overall.</p>
 
@@ -240,4 +240,4 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <p>The best bike for UK touring is the one that gets you excited to plan the next trip. Both sport tourers and adventure bikes can deliver incredible experiences on British roads – they just deliver them differently.</p>
 
-<p>What matters isn't the category you choose, but matching that choice to how and where you actually ride. Be honest about your priorities, test ride both categories if possible, and choose the bike that makes you want to explore more of this incredible country we have on our doorstep.</p>`;
+<p>What matters isn't the category you choose, but matching that choice to how and where you actually ride. Be honest about your priorities, test ride both categories if possible, and choose the bike that makes you want to explore more of this incredible country we have on our doorstep. Read our <a href="/guides/adventure-motorcycle-boots">Adventure Motorcycle Boots for On and Off-Road UK Touring</a> guide for more.</p>`;

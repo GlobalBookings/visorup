@@ -1,8 +1,8 @@
 export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Everything I've Learned on UK Roads</h2>
 
-<p>Right, let me tell you something straight off: I've been touring British roads for over a decade, and I've made every packing mistake you can imagine. From forgetting waterproofs on the NC500 (learned that lesson the hard way near Durness) to overpacking so badly my bike handled like a shopping trolley through the Yorkshire Dales. If you're planning your first touring trip, I'll save you the grief I've endured.</p>
+<p>Right, let me tell you something straight off: I've been <a href="/guides/best-touring-helmets-uk">touring</a> British roads for over a decade, and I've made every packing mistake you can imagine. From forgetting waterproofs on the NC500 (learned that lesson the hard way near Durness) to overpacking so badly my bike handled like a shopping trolley through the Yorkshire Dales. If you're planning your first touring trip, I'll save you the grief I've endured.</p>
 
-<p>The thing about motorcycle touring is that every gram matters, every cubic centimetre of space counts, and every decision you make about what to pack affects how your bike handles. Get it wrong, and you'll be miserable. Get it right, and you'll understand why we do this mad, brilliant thing called touring.</p>
+<p>The thing about <a href="/guides/best-motorcycle-roads-scotland">motorcycle</a> touring is that every gram matters, every cubic centimetre of space counts, and every decision you make about what to pack affects how your bike handles. Get it wrong, and you'll be miserable. Get it right, and you'll understand why we do this mad, brilliant thing called touring.</p>
 
 <h2>The Golden Rules I Wish Someone Had Told Me</h2>
 
@@ -20,7 +20,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <h3>Understanding Your Bike's Limits</h3>
 
-<p>Your bike has a maximum payload, and I guarantee it's less than you think. My Triumph Tiger 800 is rated for 199kg total, including me, fuel, and luggage. That sounds like loads until you realise a full tank of fuel weighs 20kg, I weigh 75kg in gear, and suddenly I've got maybe 100kg for everything else.</p>
+<p>Your bike has a maximum payload, and I guarantee it's less than you think. My Triumph Tiger 800 is rated for 199kg total, including me, fuel, and luggage. That sounds like loads until you realise a full <a href="/guides/tank-bags-touring">tank</a> of fuel weighs 20kg, I weigh 75kg in gear, and suddenly I've got maybe 100kg for everything else.</p>
 
 <p>Check your manual, weigh yourself in full gear, and do the maths. I've seen riders loading 40kg of kit onto bikes that were already at their limit. The result? Wallowing handling, overheated brakes on Alpine descents, and potentially dangerous instability.</p>
 
@@ -43,7 +43,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <h3>Soft Luggage Systems</h3>
 
-<p>Before hard cases, I toured with Kriega bags for three years. Quality soft luggage like theirs is genuinely waterproof and incredibly versatile. The benefits:</p>
+<p>Before hard cases, I toured with Kriega <a href="/guides/tail-packs-roll-bags">bags</a> for three years. Quality soft luggage like theirs is genuinely waterproof and incredibly versatile. The benefits:</p>
 
 <ul>
 <li>Lighter than hard cases</li>
@@ -234,4 +234,4 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <p>Your first tour won't be perfect, and that's fine. I've been touring for years and I'm still tweaking my setup. The important thing is getting out there and experiencing what British touring offers. Start with shorter trips, build your confidence and kit knowledge, then tackle the bigger adventures like the NC500 or multi-week European tours.</p>
 
-<p>Now stop reading and start planning. Britain's roads are waiting, and they're absolutely brilliant once you know how to pack properly for them.</p>`;
+<p>Now stop reading and start planning. Britain's roads are waiting, and they're absolutely brilliant once you know how to pack properly for them. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more.</p>`;
