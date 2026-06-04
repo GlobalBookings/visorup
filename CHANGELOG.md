@@ -2,6 +2,31 @@
 
 All notable changes to the VisorUp motorcycle touring platform.
 
+## [1.1.0] - 2026-06-04
+
+### Massive POI Scrape + Top Picks Glow Effect
+
+#### Part 1: POI Data Expansion
+- Built Overpass API scraper (`scripts/scrape-pois.mjs`) querying OpenStreetMap for 14 POI categories across the UK
+- Scraped 22,753 new POIs from OSM, merged with 686 existing hand-curated POIs for a total of 23,439
+- Deduplication removed 117 duplicates within 500m radius (curated POIs always preserved)
+- 5 new POI categories added: EV charging stations (5,000), motorcycle parking (600), repair shops (500), hotels/B&Bs (2,000), mountain passes (143)
+- Existing categories expanded: campsites (2,500), pubs (3,000), viewpoints (1,579), castles (1,000), waterfalls (600), beaches (1,548), bridges (600), distilleries (800), landmarks (3,000)
+- Scraper supports `--cached` flag to re-merge without re-querying Overpass API
+- POI data split by region: England (15,952), Scotland (3,717), Wales/Islands (3,770)
+
+#### Part 2: Top 10 Glow Effect
+- Top 10 POIs per category per region tagged with `top: true` flag (542 total top picks)
+- Selection criteria: curated descriptions get highest score, then Wikipedia/Wikidata presence, website links, tag richness
+- Golden pulsing glow CSS animation (`@keyframes topPickPulse`) on top-pick markers using box-shadow
+- Star badge overlay via `::after` pseudo-element on top-pick markers
+- Top pick markers render at 28px (vs 22px regular) with higher z-index for visibility
+- "Show Top Picks Only" toggle button added below destination maps
+- Toggle hides/shows regular markers, keeping only starred top picks visible
+- New category icons and colours wired into app.js, site.js, and trip-builder.js
+
+---
+
 ## [1.0.0] - 2026-06-01
 
 ### Initial Release — Full Platform Launch

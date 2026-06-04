@@ -1306,7 +1306,9 @@ class VisorUpSite {
       beach:'#e17055', castle:'#6c5ce7', distillery:'#d35400', pub:'#c0392b',
       bridge:'#2d98da', fossil:'#cd853f', lighthouse:'#e8713a', museum:'#9b59b6',
       harbour:'#3498db', church:'#9b59b6', fort:'#6c5ce7', historical:'#9b59b6',
-      cave:'#cd853f', 'road':'#e74c3c'
+      cave:'#cd853f', 'road':'#e74c3c',
+      ev_charging:'#27ae60', motorcycle_parking:'#2d98da', repair_shops:'#e74c3c',
+      hotels:'#9b59b6', mountain_passes:'#e74c3c'
     };
     var markerFA = {
       ferry:'fa-ship', landmark:'fa-monument', viewpoint:'fa-binoculars', waterfall:'fa-water',
@@ -1314,12 +1316,15 @@ class VisorUpSite {
       beach:'fa-umbrella-beach', castle:'fa-chess-rook', distillery:'fa-flask', pub:'fa-beer-mug-empty',
       bridge:'fa-bridge', fossil:'fa-bone', lighthouse:'fa-tower-observation', museum:'fa-landmark',
       harbour:'fa-anchor', church:'fa-church', fort:'fa-chess-rook', historical:'fa-scroll',
-      cave:'fa-mountain'
+      cave:'fa-mountain',
+      ev_charging:'fa-bolt', motorcycle_parking:'fa-parking', repair_shops:'fa-wrench',
+      hotels:'fa-bed', mountain_passes:'fa-mountain'
     };
     var markerSizes = {
       ferry:32, landmark:28, viewpoint:28, waterfall:28, road:28, camp:30, camping:30,
       wildlife:26, fuel:24, beach:28, castle:28, distillery:26, pub:26, bridge:30,
-      fossil:28, lighthouse:28, museum:28, harbour:28, church:26, fort:28, historical:26, cave:26
+      fossil:28, lighthouse:28, museum:28, harbour:28, church:26, fort:28, historical:26, cave:26,
+      ev_charging:24, motorcycle_parking:24, repair_shops:24, hotels:26, mountain_passes:28
     };
     var allBounds = [];
 
@@ -1448,18 +1453,24 @@ class VisorUpSite {
       campsites:'#27ae60', bridges:'#2d98da', wildlife:'#f39c12', roads:'#e74c3c',
       fuel:'#fdcb6e', viewpoints:'#e8713a', pubs:'#c0392b', castles:'#6c5ce7',
       waterfalls:'#00cec9', beaches:'#e17055', distilleries:'#d35400',
-      landmarks:'#9b59b6', fossils:'#cd853f', ferries:'#3498db'
+      landmarks:'#9b59b6', fossils:'#cd853f', ferries:'#3498db',
+      ev_charging:'#27ae60', motorcycle_parking:'#2d98da', repair_shops:'#e74c3c',
+      hotels:'#9b59b6', mountain_passes:'#e74c3c'
     };
     var markerFA = {
       campsites:'fa-campground', bridges:'fa-bridge', wildlife:'fa-paw', roads:'fa-road',
       fuel:'fa-gas-pump', viewpoints:'fa-binoculars', pubs:'fa-beer-mug-empty',
       castles:'fa-chess-rook', waterfalls:'fa-water', beaches:'fa-umbrella-beach',
-      distilleries:'fa-flask', landmarks:'fa-monument', fossils:'fa-bone', ferries:'fa-ship'
+      distilleries:'fa-flask', landmarks:'fa-monument', fossils:'fa-bone', ferries:'fa-ship',
+      ev_charging:'fa-bolt', motorcycle_parking:'fa-parking', repair_shops:'fa-wrench',
+      hotels:'fa-bed', mountain_passes:'fa-mountain'
     };
 
     var poiRange = 0.5;
     var latMin = dest.center[0] - poiRange, latMax = dest.center[0] + poiRange;
     var lngMin = dest.center[1] - poiRange, lngMax = dest.center[1] + poiRange;
+    var poiMarkers = { top: [], regular: [] };
+    var topPicksOnly = false;
 
     for (var s = 0; s < poiSources.length; s++) {
       var src = poiSources[s];
@@ -1470,18 +1481,35 @@ class VisorUpSite {
         for (var p = 0; p < src[cat].length; p++) {
           var poi = src[cat][p];
           if (poi.lat >= latMin && poi.lat <= latMax && poi.lng >= lngMin && poi.lng <= lngMax) {
+            var isTop = poi.top === true;
+            var sz = isTop ? 28 : 22;
+            var topClass = isTop ? ' top-pick' : '';
             var pIcon = L.divIcon({
               className: '',
-              html: '<div class="custom-marker" style="width:22px;height:22px;background:' + color2 + '"><i class="fas ' + fa + '" style="font-size:9px"></i></div>',
-              iconSize: [22, 22], iconAnchor: [11, 11], popupAnchor: [0, -15]
+              html: '<div class="custom-marker' + topClass + '" style="width:' + sz + 'px;height:' + sz + 'px;background:' + color2 + '"><i class="fas ' + fa + '" style="font-size:' + Math.round(sz * 0.4) + 'px"></i></div>',
+              iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -sz/2 - 4]
             });
-            L.marker([poi.lat, poi.lng], { icon: pIcon }).addTo(map)
-              .bindPopup('<div style="font-size:12px;"><b>' + poi.name + '</b><br><span style="color:' + color2 + ';font-size:11px;font-weight:600;">' + cat + '</span>' +
+            var topBadge = isTop ? '<span style="color:#D68A2D;font-size:10px;font-weight:700;"> &#9733; Top Pick</span>' : '';
+            var m = L.marker([poi.lat, poi.lng], { icon: pIcon, zIndexOffset: isTop ? 500 : 0 }).addTo(map)
+              .bindPopup('<div style="font-size:12px;"><b>' + poi.name + '</b>' + topBadge + '<br><span style="color:' + color2 + ';font-size:11px;font-weight:600;">' + cat + '</span>' +
                 (poi.desc ? '<br><span style="color:#aaa;font-size:11px;">' + poi.desc.substring(0, 120) + '</span>' : '') + '</div>');
+            poiMarkers[isTop ? 'top' : 'regular'].push(m);
           }
         }
       }
     }
+
+    window._toggleTopPicks = function() {
+      topPicksOnly = !topPicksOnly;
+      var btn = document.getElementById('topPicksToggle');
+      if (topPicksOnly) {
+        poiMarkers.regular.forEach(function(m) { map.removeLayer(m); });
+        if (btn) { btn.innerHTML = '<i class="fas fa-star"></i> Show All POIs'; btn.style.background = 'var(--accent)'; btn.style.color = '#fff'; }
+      } else {
+        poiMarkers.regular.forEach(function(m) { m.addTo(map); });
+        if (btn) { btn.innerHTML = '<i class="fas fa-star"></i> Show Top Picks Only'; btn.style.background = 'var(--accent-glow)'; btn.style.color = 'var(--accent)'; }
+      }
+    };
 
     // OSRM route through waypoints
     var coords = wps.map(function(w) { return w[1].toFixed(6) + ',' + w[0].toFixed(6); }).join(';');
@@ -1570,9 +1598,10 @@ class VisorUpSite {
             (d.waypoints && d.waypoints.length > 1 ?
               '<h3 class="detail-heading" style="margin-top:32px;"><i class="fas fa-map-marked-alt" style="color:var(--accent);margin-right:6px;"></i>Destination Route Map</h3>' +
               '<div id="destMap" style="width:100%;height:450px;border-radius:12px;margin-top:12px;border:1px solid var(--border);"></div>' +
-              '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--text-muted);">' +
+              '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--text-muted);align-items:center;">' +
                 '<span><i class="fas fa-route" style="color:var(--accent)"></i> ' + d.waypoints.length + ' waypoints · OSRM road-accurate route</span>' +
                 '<span><i class="fas fa-map-pin" style="color:var(--accent)"></i> Click markers for details</span>' +
+                '<button id="topPicksToggle" onclick="window._toggleTopPicks()" style="margin-left:auto;padding:5px 14px;background:var(--accent-glow);border:1px solid rgba(214,138,45,0.3);border-radius:20px;color:var(--accent);font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;"><i class="fas fa-star"></i> Show Top Picks Only</button>' +
               '</div>'
             : '') +
           '</div>' +

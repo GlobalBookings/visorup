@@ -12,14 +12,20 @@ const MARKER_ICONS = {
   distillery: 'fa-flask',
   pub: 'fa-beer-mug-empty',
   bridge: 'fa-bridge',
-  fossil: 'fa-bone'
+  fossil: 'fa-bone',
+  ev_charging: 'fa-bolt',
+  motorcycle_parking: 'fa-parking',
+  repair_shops: 'fa-wrench',
+  hotels: 'fa-bed',
+  mountain_passes: 'fa-mountain'
 };
 
 const MARKER_SIZES = {
   ferry: 32, landmark: 28, viewpoint: 28, waterfall: 28,
   road: 28, camp: 30, wildlife: 26, fuel: 24,
   beach: 28, castle: 28, distillery: 26, pub: 26, bridge: 30,
-  fossil: 28
+  fossil: 28, ev_charging: 24, motorcycle_parking: 24,
+  repair_shops: 24, hotels: 26, mountain_passes: 28
 };
 
 class TripPlanner {

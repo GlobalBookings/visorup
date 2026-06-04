@@ -92,7 +92,9 @@ class TripBuilder {
       waterfall: 'fa-water', road: 'fa-road', camp: 'fa-campground',
       wildlife: 'fa-paw', fuel: 'fa-gas-pump', beach: 'fa-umbrella-beach',
       castle: 'fa-chess-rook', distillery: 'fa-flask', pub: 'fa-beer-mug-empty',
-      bridge: 'fa-bridge', fossil: 'fa-bone'
+      bridge: 'fa-bridge', fossil: 'fa-bone',
+      ev_charging: 'fa-bolt', motorcycle_parking: 'fa-parking',
+      repair_shops: 'fa-wrench', hotels: 'fa-bed', mountain_passes: 'fa-mountain'
     };
   }
 
