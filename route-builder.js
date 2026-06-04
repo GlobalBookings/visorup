@@ -196,7 +196,6 @@ class RouteBuilder {
     landmarks:    { dataKey: 'LANDMARKS',    color: '#9b59b6', faIcon: 'fa-monument',        size: 28, label: 'Landmarks' },
     fossils:      { dataKey: 'FOSSILS',      color: '#cd853f', faIcon: 'fa-bone',            size: 28, label: 'Fossils' },
     ferries:      { dataKey: 'FERRIES',      color: '#3498db', faIcon: 'fa-ship',            size: 32, label: 'Ferries' },
-    ev_charging:  { dataKey: 'EV_CHARGING',  color: '#27ae60', faIcon: 'fa-bolt',            size: 24, label: 'EV Charging' },
     motorcycle_parking: { dataKey: 'MOTORCYCLE_PARKING', color: '#2d98da', faIcon: 'fa-parking', size: 24, label: 'Bike Parking' },
     repair_shops: { dataKey: 'REPAIR_SHOPS', color: '#e74c3c', faIcon: 'fa-wrench',          size: 24, label: 'Repair Shops' },
     hotels:       { dataKey: 'HOTELS',       color: '#9b59b6', faIcon: 'fa-bed',             size: 26, label: 'Hotels & B&Bs' },
@@ -211,7 +210,6 @@ class RouteBuilder {
   static LANDMARKS = [];
   static FOSSILS = [];
   static FERRIES = [];
-  static EV_CHARGING = [];
   static MOTORCYCLE_PARKING = [];
   static REPAIR_SHOPS = [];
   static HOTELS = [];
@@ -230,7 +228,7 @@ class RouteBuilder {
       fuel:'FUEL', viewpoints:'VIEWPOINTS', pubs:'PUBS', castles:'CASTLES',
       waterfalls:'WATERFALLS', beaches:'BEACHES', distilleries:'DISTILLERIES',
       landmarks:'LANDMARKS', fossils:'FOSSILS', ferries:'FERRIES',
-      ev_charging:'EV_CHARGING', motorcycle_parking:'MOTORCYCLE_PARKING',
+      motorcycle_parking:'MOTORCYCLE_PARKING',
       repair_shops:'REPAIR_SHOPS', hotels:'HOTELS', mountain_passes:'MOUNTAIN_PASSES'
     };
     for (var s = 0; s < sources.length; s++) {
@@ -419,6 +417,16 @@ class RouteBuilder {
       .rb-poi-panel-all:hover{background:#e09a3d}
       .rb-poi-panel-none{background:#1e2e2a;color:#7a8a85}
       .rb-poi-panel-none:hover{background:#2a3e38;color:#c0c8c5}
+      .rb-poi-rating-row{display:flex;align-items:center;gap:8px;padding:8px 14px;border-top:1px solid #1e2e2a;background:rgba(214,138,45,0.06)}
+      .rb-poi-rating-label{font-size:9px;font-weight:800;color:#D68A2D;letter-spacing:0.5px;white-space:nowrap}
+      .rb-poi-rating-row input[type=range]{flex:1;accent-color:#D68A2D;cursor:pointer;min-width:0}
+      .rb-poi-rating-value{font-size:11px;font-weight:700;color:#D68A2D;min-width:30px;text-align:center}
+      .rb-poi-rating-auto{padding:3px 8px;background:rgba(214,138,45,0.15);border:1px solid rgba(214,138,45,0.2);border-radius:8px;color:#D68A2D;font-size:9px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+      .rb-poi-rating-auto:hover{background:rgba(214,138,45,0.3)}
+      .rb-suggest-float{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:450;background:linear-gradient(135deg,#D68A2D 0%,#c07820 100%);color:#fff;border:none;padding:10px 20px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,0.3);font-family:inherit;transition:all .2s}
+      .rb-suggest-float:hover{transform:translateX(-50%) translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.4)}
+      .rb-suggest-float:disabled{opacity:0.5;cursor:default;transform:translateX(-50%)}
+      .rb-suggest-float .rb-suggest-count{background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:12px;font-size:11px;margin-left:4px}
       .rb-weather-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
       .rb-weather-day{background:#152220;border-radius:6px;padding:6px 8px;text-align:center;min-width:42px;flex:1}
       .rb-weather-label{font-size:10px;color:#7a8a85;margin-bottom:2px}
@@ -557,7 +565,6 @@ class RouteBuilder {
             '</div>' +
             '<div class="rb-btn-row">' +
               '<button class="rb-btn rb-btn-secondary" id="rb-reverseBtn">\uD83D\uDD04 Reverse</button>' +
-              '<button class="rb-btn rb-btn-secondary" id="rb-suggestBtn">\uD83D\uDD0D Suggest Stops</button>' +
               '<button class="rb-btn rb-btn-danger" id="rb-clearBtn">\uD83D\uDDD1\uFE0F Clear</button>' +
             '</div>' +
             '<div id="rb-suggestBadge"></div>' +
@@ -587,18 +594,19 @@ class RouteBuilder {
           '<div id="rb-map" style="width:100%;flex:1;min-height:0"></div>' +
           '<div class="rb-overlay" id="rb-overlay">Click on the map to add waypoints</div>' +
           '<div class="rb-loading" id="rb-loading">Calculating route\u2026</div>' +
+          '<button class="rb-suggest-float" id="rb-suggestFloat" disabled><i class="fas fa-wand-magic-sparkles"></i> Suggest Stops</button>' +
           '<button class="rb-poi-toggle" id="rb-poiToggle" title="Show/hide points of interest"><i class="fas fa-map-marker-alt"></i><span>POI</span></button>' +
           '<div class="rb-poi-panel" id="rb-poiPanel">' +
             '<div class="rb-poi-panel-header"><h4><i class="fas fa-map-marker-alt"></i> Points of Interest</h4><button class="rb-poi-panel-close" id="rb-poiPanelClose"><i class="fas fa-times"></i></button></div>' +
             '<div class="rb-poi-panel-body">' + poiChecks + '</div>' +
-            '<div class="rb-poi-panel-footer">' +
+            '<div class="rb-poi-panel-footer" style="flex-wrap:wrap;">' +
               '<button class="rb-poi-panel-all" id="rb-poiAll">Show All</button><button class="rb-poi-panel-none" id="rb-poiNone">Hide All</button>' +
-              '<div style="display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);width:100%;">' +
-                '<span style="font-size:10px;font-weight:700;color:#D68A2D;white-space:nowrap;">MIN RATING</span>' +
-                '<input id="rb-ratingSlider" type="range" min="1" max="5" value="4" step="1" style="flex:1;accent-color:#D68A2D;cursor:pointer;">' +
-                '<span id="rb-ratingLabel" style="font-size:11px;font-weight:700;min-width:28px;text-align:center;">4\u2605+</span>' +
-                '<button id="rb-ratingAuto" style="padding:2px 8px;background:rgba(214,138,45,0.15);border:1px solid rgba(214,138,45,0.2);border-radius:8px;color:#D68A2D;font-size:9px;font-weight:700;cursor:pointer;">Auto</button>' +
-              '</div>' +
+            '</div>' +
+            '<div class="rb-poi-rating-row">' +
+              '<span class="rb-poi-rating-label">QUALITY</span>' +
+              '<input id="rb-ratingSlider" type="range" min="1" max="5" value="5" step="1">' +
+              '<span id="rb-ratingLabel" class="rb-poi-rating-value">5\u2605+</span>' +
+              '<button id="rb-ratingAuto" class="rb-poi-rating-auto">Auto</button>' +
             '</div>' +
           '</div>' +
           '<div class="rb-elevation" id="rb-elevation">' +
@@ -631,13 +639,13 @@ class RouteBuilder {
       maxZoom: 19
     }).addTo(this.map);
 
-    this._poiMinRating = 4;
+    this._poiMinRating = 5;
     this._poiUserOverride = false;
 
     this.map.on('zoomend', function() {
       if (self._poiUserOverride) return;
       var z = self.map.getZoom();
-      var autoMin = z >= 13 ? 1 : z >= 11 ? 2 : z >= 10 ? 3 : 4;
+      var autoMin = z >= 14 ? 1 : z >= 12 ? 2 : z >= 11 ? 3 : z >= 9 ? 4 : 5;
       if (autoMin !== self._poiMinRating) {
         self._poiMinRating = autoMin;
         self._applyPoiRatingFilter();
@@ -776,7 +784,7 @@ class RouteBuilder {
     this.container.querySelector('#rb-exportBtn').addEventListener('click', function () { self._exportGPX(); });
     this.container.querySelector('#rb-clearBtn').addEventListener('click', function () { self._clearRoute(); });
     this.container.querySelector('#rb-reverseBtn').addEventListener('click', function () { self._reverseRoute(); });
-    this.container.querySelector('#rb-suggestBtn').addEventListener('click', function () { self._suggestStops(); });
+    this.container.querySelector('#rb-suggestFloat').addEventListener('click', function () { self._suggestStops(); });
     this.container.querySelector('#rb-shareBtn').addEventListener('click', function () { self._shareRoute(); });
     this.container.querySelector('#rb-fastTrackBtn').addEventListener('click', function () { self._setAllFastTrack(); });
 
@@ -2207,6 +2215,8 @@ class RouteBuilder {
     this.container.querySelector('#rb-totalTime').textContent = this._fmtTime(this.routeDuration);
     this.container.querySelector('#rb-wpCount').textContent = this.waypoints.length;
     this.container.querySelector('#rb-dayCount').textContent = Math.max(1, this.daySegments.length);
+    var suggestBtn = this.container.querySelector('#rb-suggestFloat');
+    if (suggestBtn) suggestBtn.disabled = this.routeCoords.length < 2;
   }
 
   _updateDayCards() {
@@ -2312,7 +2322,9 @@ class RouteBuilder {
       this.ghostMarkers.push(marker);
     }
 
-    // Update badge
+    // Update floating button with count
+    var floatBtn = this.container.querySelector('#rb-suggestFloat');
+    if (floatBtn) floatBtn.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Suggest Stops <span class="rb-suggest-count">' + nearby.length + '</span>';
     var badge = this.container.querySelector('#rb-suggestBadge');
     if (nearby.length > 0) {
       badge.innerHTML = '<div class="rb-suggest-badge">\uD83D\uDD0D ' + nearby.length + ' stops found nearby</div>';

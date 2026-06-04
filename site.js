@@ -424,6 +424,9 @@ class VisorUpSite {
   // ── Routing ──────────────────────────────────────────────────
 
   route(pathname) {
+    // SPA page view tracking — single event per route change
+    VisorUpAnalytics.trackPageView(pathname || '/');
+
     // Close mobile menu and mega panels on navigation
     var mobileMenu = document.getElementById('navMobileMenu');
     if (mobileMenu) mobileMenu.classList.remove('open');
