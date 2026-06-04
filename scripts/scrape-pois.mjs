@@ -310,7 +310,7 @@ const CATEGORIES = [
 // ── Parse existing POI files ──
 
 function readExistingPOIs(filename) {
-  const path = resolve(ROOT, filename);
+  const path = filename.startsWith('/') ? filename : resolve(ROOT, filename);
   if (!existsSync(path)) return {};
   const content = readFileSync(path, 'utf8');
   const sandbox = { window: {} };
@@ -397,10 +397,30 @@ async function scrapeAll() {
   return allScraped;
 }
 
-// ── Select top 10 per category ──
+// ── Rate POIs 1-5 stars and select Editor's Picks ──
 
-function selectTop10(mergedPois) {
+function computeRating(poi) {
+  // 5 = curated by VisorUp editors (long hand-written descriptions)
+  if (poi._curated) return 5;
+  const s = poi._score || 0;
+  const descLen = (poi.desc || '').length;
+  // 4 = strong signals: high OSM score (wikipedia/wikidata/heritage + website + description)
+  if (s >= 16 || (s >= 10 && descLen > 60)) return 4;
+  // 3 = moderate signals: has website or decent tags
+  if (s >= 6 || (poi.url && descLen > 20)) return 3;
+  // 2 = minimal: has a name plus at least a website or one quality tag
+  if (s >= 3 || poi.url) return 2;
+  // 1 = stub: name and coordinates only
+  return 1;
+}
+
+function rateAndSelectPicks(mergedPois) {
   for (const [cat, pois] of Object.entries(mergedPois)) {
+    // Assign star ratings
+    for (const p of pois) {
+      p.rating = computeRating(p);
+    }
+    // Editor's Picks: top 10 by score within each category
     const scored = pois.map((p, i) => ({
       idx: i,
       score: (p._score || 0) + (p.desc && p.desc.length > 80 ? 5 : 0)
@@ -428,6 +448,7 @@ function serializePOI(poi) {
   if (poi.hazard) s += `, hazard: '${esc(poi.hazard)}'`;
   if (poi.sLat !== undefined) s += `, sLat: ${poi.sLat}, sLng: ${poi.sLng}, eLat: ${poi.eLat}, eLng: ${poi.eLng}`;
   if (poi.miles) s += `, miles: ${poi.miles}`;
+  if (poi.rating) s += `, rating: ${poi.rating}`;
   if (poi.top) s += `, top: true`;
   s += ' }';
   return s;
@@ -469,12 +490,14 @@ async function main() {
     console.log(`\nCache saved to ${CACHE_FILE}`);
   }
 
-  // Read existing curated data
-  console.log('\nReading existing curated POIs...');
+  // Read original curated data (use --curated-from=<dir> to point at originals)
+  const curatedArg = process.argv.find(a => a.startsWith('--curated-from='));
+  const curatedDir = curatedArg ? curatedArg.split('=')[1] : ROOT;
+  console.log('\nReading curated POIs from: ' + curatedDir);
   const existing = {
-    england: readExistingPOIs('poi-england.js'),
-    scotland: readExistingPOIs('poi-scotland.js'),
-    wales: readExistingPOIs('poi-wales-islands.js')
+    england: readExistingPOIs(resolve(curatedDir, 'poi-england.js')),
+    scotland: readExistingPOIs(resolve(curatedDir, 'poi-scotland.js')),
+    wales: readExistingPOIs(resolve(curatedDir, 'poi-wales-islands.js'))
   };
 
   // Count curated
@@ -495,10 +518,11 @@ async function main() {
     }
   }
 
-  // Mark curated POIs with high scores for top-10 selection
+  // Mark curated POIs with high scores and curated flag
   for (const region of Object.values(existing)) {
     for (const pois of Object.values(region)) {
       for (const p of pois) {
+        p._curated = true;
         p._score = 20 + (p.desc ? Math.min(p.desc.length / 10, 10) : 0) + (p.url ? 3 : 0);
       }
     }
@@ -542,9 +566,9 @@ async function main() {
     }
   }
 
-  // Select top 10 per category per region
+  // Rate all POIs and select Editor's Picks
   for (const region of Object.values(merged)) {
-    selectTop10(region);
+    rateAndSelectPicks(region);
   }
 
   // Write output files
@@ -571,15 +595,17 @@ async function main() {
 
   for (const f of files) {
     const data = merged[f.region];
-    // Clean internal score fields before writing
+    // Clean internal fields before writing
     for (const pois of Object.values(data)) {
-      for (const p of pois) delete p._score;
+      for (const p of pois) { delete p._score; delete p._curated; }
     }
     const content = generateFile(f.varName, f.header, data);
     writeFileSync(resolve(ROOT, f.filename), content);
     const total = Object.values(data).reduce((s, a) => s + a.length, 0);
     const topCount = Object.values(data).reduce((s, a) => s + a.filter(p => p.top).length, 0);
-    console.log(`  ${f.filename}: ${total} POIs (${topCount} top picks)`);
+    const rDist = [0,0,0,0,0,0];
+    for (const pois of Object.values(data)) for (const p of pois) rDist[p.rating || 1]++;
+    console.log(`  ${f.filename}: ${total} POIs (${topCount} editor's picks) [5★:${rDist[5]} 4★:${rDist[4]} 3★:${rDist[3]} 2★:${rDist[2]} 1★:${rDist[1]}]`);
   }
 
   const grandTotal = Object.values(merged).reduce((s, region) =>

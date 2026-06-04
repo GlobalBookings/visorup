@@ -1471,9 +1471,10 @@ class VisorUpSite {
     var poiRange = 0.5;
     var latMin = dest.center[0] - poiRange, latMax = dest.center[0] + poiRange;
     var lngMin = dest.center[1] - poiRange, lngMax = dest.center[1] + poiRange;
-    var poiMarkers = { top: [], regular: [] };
-    var topPicksOnly = false;
-    var hasTopPicks = false;
+    var allPoiMarkers = [];
+    var minRating = 4;
+
+    function starHtml(n) { var s = ''; for (var i = 0; i < 5; i++) s += '<span style="color:' + (i < n ? '#D68A2D' : '#444') + ';font-size:10px;">&#9733;</span>'; return s; }
 
     for (var s = 0; s < poiSources.length; s++) {
       var src = poiSources[s];
@@ -1484,11 +1485,11 @@ class VisorUpSite {
         for (var p = 0; p < src[cat].length; p++) {
           var poi = src[cat][p];
           if (poi.lat >= latMin && poi.lat <= latMax && poi.lng >= lngMin && poi.lng <= lngMax) {
+            var r = poi.rating || 1;
             var isTop = poi.top === true;
             var markerHtml, iconSz, anchorOff, popupOff, pane;
 
             if (isTop) {
-              hasTopPicks = true;
               iconSz = 34;
               anchorOff = 17;
               popupOff = -22;
@@ -1504,60 +1505,74 @@ class VisorUpSite {
                 '</div>';
               pane = 'editorPickPane';
             } else {
-              iconSz = 22;
-              anchorOff = 11;
-              popupOff = -15;
-              markerHtml = '<div class="custom-marker" style="width:22px;height:22px;background:' + color2 + '"><i class="fas ' + fa + '" style="font-size:9px"></i></div>';
+              iconSz = r >= 4 ? 24 : 20;
+              anchorOff = iconSz / 2;
+              popupOff = -(iconSz / 2) - 4;
+              markerHtml = '<div class="custom-marker" style="width:' + iconSz + 'px;height:' + iconSz + 'px;background:' + color2 + ';opacity:' + (r >= 4 ? '1' : r >= 3 ? '0.85' : '0.65') + '"><i class="fas ' + fa + '" style="font-size:' + Math.round(iconSz * 0.4) + 'px"></i></div>';
               pane = 'markerPane';
             }
 
-            var pIcon = L.divIcon({
-              className: '',
-              html: markerHtml,
-              iconSize: [iconSz, iconSz],
-              iconAnchor: [anchorOff, anchorOff],
-              popupAnchor: [0, popupOff]
-            });
+            var pIcon = L.divIcon({ className: '', html: markerHtml, iconSize: [iconSz, iconSz], iconAnchor: [anchorOff, anchorOff], popupAnchor: [0, popupOff] });
             var epLabel = isTop ? '<span style="color:#D68A2D;font-size:10px;font-weight:700;"> &#9733; Editor\'s Pick</span>' : '';
-            var m = L.marker([poi.lat, poi.lng], { icon: pIcon, pane: pane }).addTo(map)
-              .bindPopup('<div style="font-size:12px;"><b>' + poi.name + '</b>' + epLabel + '<br><span style="color:' + color2 + ';font-size:11px;font-weight:600;">' + cat.replace(/_/g, ' ') + '</span>' +
-                (poi.desc ? '<br><span style="color:#aaa;font-size:11px;">' + poi.desc.substring(0, 140) + '</span>' : '') + '</div>');
-            poiMarkers[isTop ? 'top' : 'regular'].push(m);
+            var m = L.marker([poi.lat, poi.lng], { icon: pIcon, pane: pane });
+            m._poiRating = r;
+            m._isEditorPick = isTop;
+            m.bindPopup('<div style="font-size:12px;"><b>' + poi.name + '</b>' + epLabel + '<br>' + starHtml(r) + ' <span style="color:' + color2 + ';font-size:11px;font-weight:600;">' + cat.replace(/_/g, ' ') + '</span>' +
+              (poi.desc ? '<br><span style="color:#aaa;font-size:11px;">' + poi.desc.substring(0, 140) + '</span>' : '') + '</div>');
+            allPoiMarkers.push(m);
           }
         }
       }
     }
 
-    // Editor's Pick toggle
-    window._toggleTopPicks = function() {
-      topPicksOnly = !topPicksOnly;
-      var btn = document.getElementById('topPicksToggle');
-      if (topPicksOnly) {
-        poiMarkers.regular.forEach(function(m) { map.removeLayer(m); });
-        if (btn) { btn.innerHTML = '<i class="fas fa-star"></i> Show All POIs'; btn.style.background = 'var(--accent)'; btn.style.color = '#fff'; }
-      } else {
-        poiMarkers.regular.forEach(function(m) { m.addTo(map); });
-        if (btn) { btn.innerHTML = '<i class="fas fa-star"></i> Editor\'s Picks Only'; btn.style.background = 'var(--accent-glow)'; btn.style.color = 'var(--accent)'; }
+    // Apply rating filter
+    function applyFilter(min) {
+      minRating = min;
+      for (var i = 0; i < allPoiMarkers.length; i++) {
+        var mk = allPoiMarkers[i];
+        if (mk._isEditorPick || mk._poiRating >= min) {
+          if (!map.hasLayer(mk)) mk.addTo(map);
+        } else {
+          if (map.hasLayer(mk)) map.removeLayer(mk);
+        }
       }
-    };
+      var label = document.getElementById('ratingLabel');
+      if (label) label.textContent = min === 1 ? 'All POIs' : min + '★+';
+    }
+
+    // Zoom-based progressive reveal
+    function ratingForZoom(z) { if (z >= 13) return 1; if (z >= 11) return 2; if (z >= 10) return 3; return 4; }
+    var userOverride = false;
+
+    map.on('zoomend', function() {
+      if (userOverride) return;
+      var autoMin = ratingForZoom(map.getZoom());
+      applyFilter(autoMin);
+      var slider = document.getElementById('ratingSlider');
+      if (slider) slider.value = autoMin;
+    });
+
+    // Initial render at default zoom
+    applyFilter(ratingForZoom(map.getZoom()));
+
+    // Slider control
+    window._onRatingSlider = function(val) { userOverride = true; applyFilter(parseInt(val)); };
+    window._resetAutoZoom = function() { userOverride = false; applyFilter(ratingForZoom(map.getZoom())); var slider = document.getElementById('ratingSlider'); if (slider) slider.value = ratingForZoom(map.getZoom()); };
 
     // One-time onboarding callout
-    if (hasTopPicks && !localStorage.getItem('visorup-ep-seen')) {
+    if (!localStorage.getItem('visorup-ep-seen')) {
       var callout = document.createElement('div');
       callout.className = 'ep-callout';
       callout.innerHTML =
         '<div class="ep-callout-icon"><i class="fas fa-star"></i></div>' +
         '<div class="ep-callout-body">' +
-          '<strong>Editor\'s Picks</strong> are highlighted with a gold glow and star badge. ' +
-          'These are our most recommended stops in each category. Use the <strong>Editor\'s Picks Only</strong> button below the map to filter.' +
+          'POIs are rated 1-5 stars. <strong>Editor\'s Picks</strong> (gold glow) are our top recommendations. ' +
+          'Zoom in to reveal more POIs, or use the <strong>rating slider</strong> below the map to filter manually.' +
         '</div>' +
         '<button class="ep-callout-close" title="Dismiss">&times;</button>';
       mapEl.style.position = 'relative';
       mapEl.appendChild(callout);
-      callout.querySelector('.ep-callout-close').addEventListener('click', function() {
-        callout.remove();
-        localStorage.setItem('visorup-ep-seen', '1');
-      });
+      callout.querySelector('.ep-callout-close').addEventListener('click', function() { callout.remove(); localStorage.setItem('visorup-ep-seen', '1'); });
       setTimeout(function() { if (callout.parentNode) { callout.remove(); localStorage.setItem('visorup-ep-seen', '1'); } }, 12000);
     }
 
@@ -1648,10 +1663,14 @@ class VisorUpSite {
             (d.waypoints && d.waypoints.length > 1 ?
               '<h3 class="detail-heading" style="margin-top:32px;"><i class="fas fa-map-marked-alt" style="color:var(--accent);margin-right:6px;"></i>Destination Route Map</h3>' +
               '<div id="destMap" style="width:100%;height:450px;border-radius:12px;margin-top:12px;border:1px solid var(--border);"></div>' +
-              '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--text-muted);align-items:center;">' +
-                '<span><i class="fas fa-route" style="color:var(--accent)"></i> ' + d.waypoints.length + ' waypoints · OSRM road-accurate route</span>' +
-                '<span><i class="fas fa-map-pin" style="color:var(--accent)"></i> Click markers for details</span>' +
-                '<button id="topPicksToggle" onclick="window._toggleTopPicks()" style="margin-left:auto;padding:5px 14px;background:var(--accent-glow);border:1px solid rgba(214,138,45,0.3);border-radius:20px;color:var(--accent);font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;"><i class="fas fa-star"></i> Editor\'s Picks Only</button>' +
+              '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--text-muted);align-items:center;">' +
+                '<span><i class="fas fa-route" style="color:var(--accent)"></i> ' + d.waypoints.length + ' waypoints</span>' +
+                '<span style="display:flex;align-items:center;gap:6px;margin-left:auto;">' +
+                  '<span style="font-weight:700;color:var(--accent);font-size:10px;">MIN RATING</span>' +
+                  '<input id="ratingSlider" type="range" min="1" max="5" value="4" step="1" oninput="window._onRatingSlider(this.value)" style="width:90px;accent-color:#D68A2D;cursor:pointer;">' +
+                  '<span id="ratingLabel" style="font-weight:700;min-width:38px;text-align:center;">4★+</span>' +
+                  '<button onclick="window._resetAutoZoom()" style="padding:3px 10px;background:var(--accent-glow);border:1px solid rgba(214,138,45,0.2);border-radius:12px;color:var(--accent);font-size:10px;font-weight:700;cursor:pointer;" title="Reset to auto-zoom filtering">Auto</button>' +
+                '</span>' +
               '</div>'
             : '') +
           '</div>' +

@@ -15,15 +15,18 @@ All notable changes to the VisorUp motorcycle touring platform.
 - Scraper supports `--cached` flag to re-merge without re-querying Overpass API
 - POI data split by region: England (15,952), Scotland (3,717), Wales/Islands (3,770)
 
-#### Part 2: Editor's Picks Glow Effect
-- Top 10 POIs per category per region tagged with `top: true` flag (542 total Editor's Picks)
-- Selection criteria: curated descriptions get highest score, then Wikipedia/Wikidata presence, website links, tag richness
-- Golden pulsing glow CSS animation (`@keyframes editorPickPulse`) on Editor's Pick markers
-- Inline star badge and gold "Editor's Pick" ribbon beneath markers (no clipped pseudo-elements)
-- Editor's Pick markers render at 34px (vs 22px regular) in a dedicated Leaflet pane (z-index 650) so they always display in front of regular markers
-- POI name tooltip appears on hover beneath the gold ribbon
-- "Editor's Picks Only" toggle button below destination maps to filter regular markers
-- One-time onboarding callout on first map view explaining gold markers and the toggle (auto-dismisses after 12s, stored in localStorage)
+#### Part 2: 1-5 Star Rating System + Editor's Picks
+- Every POI rated 1-5 stars based on data quality signals:
+  - 5★ = curated by VisorUp editors (686 hand-written POIs)
+  - 4★ = strong OSM signals: Wikipedia/Wikidata + heritage + website (2,287 POIs)
+  - 3★ = moderate signals: website + decent tags (7,202 POIs)
+  - 2★ = minimal: name + website or one quality tag (5,775 POIs)
+  - 1★ = stub: name and coordinates only (7,489 POIs)
+- Zoom-based progressive reveal: zoomed out shows only 4-5★; zoom in to reveal lower-rated POIs
+- Manual rating slider below destination maps (range 1-5★) with "Auto" button to reset to zoom-based filtering
+- Star ratings shown in POI popups
+- Editor's Picks (top 10 per category per region) rendered at 34px with gold glow, star badge, ribbon, and hover name in a dedicated Leaflet pane (z-index 650)
+- One-time onboarding callout explains the system on first map view
 - New category icons and colours wired into app.js, site.js, and trip-builder.js
 
 ---
