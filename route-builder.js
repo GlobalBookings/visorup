@@ -2271,12 +2271,15 @@ class RouteBuilder {
       var data = RouteBuilder[cfg.dataKey];
       if (!data) continue;
       for (var p = 0; p < data.length; p++) {
+        var poi = data[p];
+        if ((poi.rating || 1) < 5 && !poi.top) continue;
         allPOIs.push({
-          lat: data[p].lat,
-          lng: data[p].lng,
-          name: data[p].name,
-          desc: data[p].desc,
-          type: type
+          lat: poi.lat,
+          lng: poi.lng,
+          name: poi.name,
+          desc: poi.desc,
+          type: type,
+          top: poi.top
         });
       }
     }
@@ -2300,21 +2303,34 @@ class RouteBuilder {
       }
     }
 
-    // Create ghost markers
+    // Create ghost markers (5-star and Editor's Picks only)
     for (var g = 0; g < nearby.length; g++) {
       var np = nearby[g];
       var cfg2 = RouteBuilder.POI_CONFIG[np.type];
-      var gsz = cfg2.size || 28;
+      var gsz = np.top ? 34 : (cfg2.size || 28);
+      var markerHtml;
+      if (np.top) {
+        var eName = (np.name || '').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+        markerHtml =
+          '<div class="editor-pick-wrap">' +
+            '<div class="editor-pick-badge"><i class="fas fa-star"></i></div>' +
+            '<div class="rb-poi-marker rb-poi-ghost" style="width:' + gsz + 'px;height:' + gsz + 'px;background:' + cfg2.color + '"><i class="fas ' + cfg2.faIcon + '" style="font-size:' + Math.round(gsz * 0.4) + 'px"></i></div>' +
+            '<div class="editor-pick-ribbon">Editor\'s Pick</div>' +
+          '</div>';
+      } else {
+        markerHtml = '<div class="rb-poi-marker rb-poi-ghost" style="width:' + gsz + 'px;height:' + gsz + 'px;background:' + cfg2.color + '"><i class="fas ' + cfg2.faIcon + '" style="font-size:' + Math.round(gsz * 0.4) + 'px"></i></div>';
+      }
       var ghostIcon = L.divIcon({
         className: '',
-        html: '<div class="rb-poi-marker rb-poi-ghost" style="width:' + gsz + 'px;height:' + gsz + 'px;background:' + cfg2.color + '"><i class="fas ' + cfg2.faIcon + '" style="font-size:' + Math.round(gsz * 0.4) + 'px"></i></div>',
+        html: markerHtml,
         iconSize: [gsz, gsz],
         iconAnchor: [gsz / 2, gsz / 2],
         popupAnchor: [0, -(gsz / 2) - 4]
       });
-      var marker = L.marker([np.lat, np.lng], { icon: ghostIcon }).addTo(this.map);
-      var popupHtml = '<b>' + this._esc(np.name) + '</b>' +
-        '<br><span style="font-size:12px;color:#555">' + this._esc(np.desc) + '</span><br>' +
+      var epLabel = np.top ? '<span style="color:#D68A2D;font-size:10px;font-weight:700;"> &#9733; Editor\'s Pick</span>' : '';
+      var marker = L.marker([np.lat, np.lng], { icon: ghostIcon, pane: np.top ? 'editorPickPane' : 'markerPane' }).addTo(this.map);
+      var popupHtml = '<b>' + this._esc(np.name) + '</b>' + epLabel +
+        '<br><span style="font-size:12px;color:#aaa">' + this._esc(np.desc) + '</span><br>' +
         '<button class="rb-poi-popup-btn" data-poitype="' + np.type +
         '" data-lat="' + np.lat + '" data-lng="' + np.lng +
         '" data-name="' + this._escAttr(np.name) + '">Add to Route</button>';
