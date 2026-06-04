@@ -4,7 +4,7 @@ All notable changes to the VisorUp motorcycle touring platform.
 
 ## [1.1.0] - 2026-06-04
 
-### Massive POI Scrape + Top Picks Glow Effect
+### Massive POI Scrape + Editor's Picks Glow Effect
 
 #### Part 1: POI Data Expansion
 - Built Overpass API scraper (`scripts/scrape-pois.mjs`) querying OpenStreetMap for 14 POI categories across the UK
@@ -15,14 +15,15 @@ All notable changes to the VisorUp motorcycle touring platform.
 - Scraper supports `--cached` flag to re-merge without re-querying Overpass API
 - POI data split by region: England (15,952), Scotland (3,717), Wales/Islands (3,770)
 
-#### Part 2: Top 10 Glow Effect
-- Top 10 POIs per category per region tagged with `top: true` flag (542 total top picks)
+#### Part 2: Editor's Picks Glow Effect
+- Top 10 POIs per category per region tagged with `top: true` flag (542 total Editor's Picks)
 - Selection criteria: curated descriptions get highest score, then Wikipedia/Wikidata presence, website links, tag richness
-- Golden pulsing glow CSS animation (`@keyframes topPickPulse`) on top-pick markers using box-shadow
-- Star badge overlay via `::after` pseudo-element on top-pick markers
-- Top pick markers render at 28px (vs 22px regular) with higher z-index for visibility
-- "Show Top Picks Only" toggle button added below destination maps
-- Toggle hides/shows regular markers, keeping only starred top picks visible
+- Golden pulsing glow CSS animation (`@keyframes editorPickPulse`) on Editor's Pick markers
+- Inline star badge and gold "Editor's Pick" ribbon beneath markers (no clipped pseudo-elements)
+- Editor's Pick markers render at 34px (vs 22px regular) in a dedicated Leaflet pane (z-index 650) so they always display in front of regular markers
+- POI name tooltip appears on hover beneath the gold ribbon
+- "Editor's Picks Only" toggle button below destination maps to filter regular markers
+- One-time onboarding callout on first map view explaining gold markers and the toggle (auto-dismisses after 12s, stored in localStorage)
 - New category icons and colours wired into app.js, site.js, and trip-builder.js
 
 ---

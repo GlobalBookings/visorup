@@ -1419,6 +1419,8 @@ class VisorUpSite {
     if (!mapEl || !dest.waypoints || dest.waypoints.length < 2) return;
 
     var map = L.map('destMap', { scrollWheelZoom: false });
+    map.createPane('editorPickPane');
+    map.getPane('editorPickPane').style.zIndex = 650;
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OSM &copy; CARTO', maxZoom: 19
     }).addTo(map);
@@ -1471,6 +1473,7 @@ class VisorUpSite {
     var lngMin = dest.center[1] - poiRange, lngMax = dest.center[1] + poiRange;
     var poiMarkers = { top: [], regular: [] };
     var topPicksOnly = false;
+    var hasTopPicks = false;
 
     for (var s = 0; s < poiSources.length; s++) {
       var src = poiSources[s];
@@ -1482,23 +1485,50 @@ class VisorUpSite {
           var poi = src[cat][p];
           if (poi.lat >= latMin && poi.lat <= latMax && poi.lng >= lngMin && poi.lng <= lngMax) {
             var isTop = poi.top === true;
-            var sz = isTop ? 28 : 22;
-            var topClass = isTop ? ' top-pick' : '';
+            var markerHtml, iconSz, anchorOff, popupOff, pane;
+
+            if (isTop) {
+              hasTopPicks = true;
+              iconSz = 34;
+              anchorOff = 17;
+              popupOff = -22;
+              var escapedName = (poi.name || '').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+              markerHtml =
+                '<div class="editor-pick-wrap">' +
+                  '<div class="editor-pick-badge"><i class="fas fa-star"></i></div>' +
+                  '<div class="custom-marker" style="width:' + iconSz + 'px;height:' + iconSz + 'px;background:' + color2 + '">' +
+                    '<i class="fas ' + fa + '" style="font-size:' + Math.round(iconSz * 0.4) + 'px"></i>' +
+                  '</div>' +
+                  '<div class="editor-pick-ribbon">Editor\'s Pick</div>' +
+                  '<div class="editor-pick-name">' + escapedName + '</div>' +
+                '</div>';
+              pane = 'editorPickPane';
+            } else {
+              iconSz = 22;
+              anchorOff = 11;
+              popupOff = -15;
+              markerHtml = '<div class="custom-marker" style="width:22px;height:22px;background:' + color2 + '"><i class="fas ' + fa + '" style="font-size:9px"></i></div>';
+              pane = 'markerPane';
+            }
+
             var pIcon = L.divIcon({
               className: '',
-              html: '<div class="custom-marker' + topClass + '" style="width:' + sz + 'px;height:' + sz + 'px;background:' + color2 + '"><i class="fas ' + fa + '" style="font-size:' + Math.round(sz * 0.4) + 'px"></i></div>',
-              iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -sz/2 - 4]
+              html: markerHtml,
+              iconSize: [iconSz, iconSz],
+              iconAnchor: [anchorOff, anchorOff],
+              popupAnchor: [0, popupOff]
             });
-            var topBadge = isTop ? '<span style="color:#D68A2D;font-size:10px;font-weight:700;"> &#9733; Top Pick</span>' : '';
-            var m = L.marker([poi.lat, poi.lng], { icon: pIcon, zIndexOffset: isTop ? 500 : 0 }).addTo(map)
-              .bindPopup('<div style="font-size:12px;"><b>' + poi.name + '</b>' + topBadge + '<br><span style="color:' + color2 + ';font-size:11px;font-weight:600;">' + cat + '</span>' +
-                (poi.desc ? '<br><span style="color:#aaa;font-size:11px;">' + poi.desc.substring(0, 120) + '</span>' : '') + '</div>');
+            var epLabel = isTop ? '<span style="color:#D68A2D;font-size:10px;font-weight:700;"> &#9733; Editor\'s Pick</span>' : '';
+            var m = L.marker([poi.lat, poi.lng], { icon: pIcon, pane: pane }).addTo(map)
+              .bindPopup('<div style="font-size:12px;"><b>' + poi.name + '</b>' + epLabel + '<br><span style="color:' + color2 + ';font-size:11px;font-weight:600;">' + cat.replace(/_/g, ' ') + '</span>' +
+                (poi.desc ? '<br><span style="color:#aaa;font-size:11px;">' + poi.desc.substring(0, 140) + '</span>' : '') + '</div>');
             poiMarkers[isTop ? 'top' : 'regular'].push(m);
           }
         }
       }
     }
 
+    // Editor's Pick toggle
     window._toggleTopPicks = function() {
       topPicksOnly = !topPicksOnly;
       var btn = document.getElementById('topPicksToggle');
@@ -1507,9 +1537,29 @@ class VisorUpSite {
         if (btn) { btn.innerHTML = '<i class="fas fa-star"></i> Show All POIs'; btn.style.background = 'var(--accent)'; btn.style.color = '#fff'; }
       } else {
         poiMarkers.regular.forEach(function(m) { m.addTo(map); });
-        if (btn) { btn.innerHTML = '<i class="fas fa-star"></i> Show Top Picks Only'; btn.style.background = 'var(--accent-glow)'; btn.style.color = 'var(--accent)'; }
+        if (btn) { btn.innerHTML = '<i class="fas fa-star"></i> Editor\'s Picks Only'; btn.style.background = 'var(--accent-glow)'; btn.style.color = 'var(--accent)'; }
       }
     };
+
+    // One-time onboarding callout
+    if (hasTopPicks && !localStorage.getItem('visorup-ep-seen')) {
+      var callout = document.createElement('div');
+      callout.className = 'ep-callout';
+      callout.innerHTML =
+        '<div class="ep-callout-icon"><i class="fas fa-star"></i></div>' +
+        '<div class="ep-callout-body">' +
+          '<strong>Editor\'s Picks</strong> are highlighted with a gold glow and star badge. ' +
+          'These are our most recommended stops in each category. Use the <strong>Editor\'s Picks Only</strong> button below the map to filter.' +
+        '</div>' +
+        '<button class="ep-callout-close" title="Dismiss">&times;</button>';
+      mapEl.style.position = 'relative';
+      mapEl.appendChild(callout);
+      callout.querySelector('.ep-callout-close').addEventListener('click', function() {
+        callout.remove();
+        localStorage.setItem('visorup-ep-seen', '1');
+      });
+      setTimeout(function() { if (callout.parentNode) { callout.remove(); localStorage.setItem('visorup-ep-seen', '1'); } }, 12000);
+    }
 
     // OSRM route through waypoints
     var coords = wps.map(function(w) { return w[1].toFixed(6) + ',' + w[0].toFixed(6); }).join(';');
@@ -1601,7 +1651,7 @@ class VisorUpSite {
               '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--text-muted);align-items:center;">' +
                 '<span><i class="fas fa-route" style="color:var(--accent)"></i> ' + d.waypoints.length + ' waypoints · OSRM road-accurate route</span>' +
                 '<span><i class="fas fa-map-pin" style="color:var(--accent)"></i> Click markers for details</span>' +
-                '<button id="topPicksToggle" onclick="window._toggleTopPicks()" style="margin-left:auto;padding:5px 14px;background:var(--accent-glow);border:1px solid rgba(214,138,45,0.3);border-radius:20px;color:var(--accent);font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;"><i class="fas fa-star"></i> Show Top Picks Only</button>' +
+                '<button id="topPicksToggle" onclick="window._toggleTopPicks()" style="margin-left:auto;padding:5px 14px;background:var(--accent-glow);border:1px solid rgba(214,138,45,0.3);border-radius:20px;color:var(--accent);font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;"><i class="fas fa-star"></i> Editor\'s Picks Only</button>' +
               '</div>'
             : '') +
           '</div>' +
