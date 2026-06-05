@@ -58,7 +58,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <h2>Clothing Strategy: Layers and Versatility</h2>
 
-<p>British weather is mental. I've experienced four seasons in one day riding from Edinburgh to Inverness. Your clothing strategy needs to cope with everything from scorching A-roads to freezing Highland passes.</p>
+<p>British <a href="/guides/textile-touring-jackets">weather</a> is mental. I've experienced four seasons in one day riding from Edinburgh to Inverness. Your clothing strategy needs to cope with everything from scorching A-roads to freezing Highland passes.</p>
 
 <h3>Base Layer System</h3>
 
@@ -74,11 +74,11 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <h3>Insulation Layer</h3>
 
-<p>One decent fleece or down jacket. I prefer fleece because it insulates when wet - crucial when you're caught in a Lake District downpour. My Patagonia R1 fleece has been with me on every tour for five years.</p>
+<p>One decent fleece or down jacket. I prefer fleece because it insulates when wet - crucial when you're caught in a <a href="/guides/best-motorcycle-roads-lake-district">Lake</a> District downpour. My Patagonia R1 fleece has been with me on every tour for five years.</p>
 
 <h3>Outer Shell</h3>
 
-<p>This is where many beginners mess up. Your motorcycle jacket provides protection, but it's not always the most comfortable thing for walking around towns or sitting in pubs. I pack a lightweight, packable rain jacket that I can wear over everything else.</p>
+<p>This is where many beginners mess up. Your motorcycle jacket provides protection, but it's not always the most comfortable thing for walking around towns or sitting in pubs. I pack a <a href="/guides/summer-motorcycle-jackets">lightweight</a>, packable rain jacket that I can wear over everything else.</p>
 
 <h3>Off-Bike Clothing</h3>
 
@@ -200,7 +200,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <h3>Cornwall and Devon</h3>
 
-<p>Narrow lanes and steep hills. Pack light and keep weight low. Heavy touring loads make Cornish hills challenging and narrow lanes terrifying.</p>
+<p>Narrow lanes and steep <a href="/guides/cotswolds-motorcycle-touring-routes">hills</a>. Pack light and keep weight low. Heavy touring loads make Cornish hills challenging and narrow lanes terrifying.</p>
 
 <h3>Lake District</h3>
 
@@ -234,4 +234,4 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <p>Your first tour won't be perfect, and that's fine. I've been touring for years and I'm still tweaking my setup. The important thing is getting out there and experiencing what British touring offers. Start with shorter trips, build your confidence and kit knowledge, then tackle the bigger adventures like the NC500 or multi-week European tours.</p>
 
-<p>Now stop reading and start planning. Britain's roads are waiting, and they're absolutely brilliant once you know how to pack properly for them. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more.</p>`;
+<p>Now stop reading and start planning. Britain's roads are waiting, and they're absolutely brilliant once you know how to pack properly for them. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;

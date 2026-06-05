@@ -42,7 +42,7 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <p>Rough road capability extends far beyond green lanes. British B-roads are getting worse every year, and adventure bikes simply absorb the punishment better. The A939 over the Lecht, the B4518 through mid-Wales – these roads feel smooth on a GS that would have a sport tourer skipping across the surface.</p>
 
-<p>Weather versatility matters more than you might think. That upright position means less water pooling on your visor in heavy rain. The higher ground clearance means puddles that would swamp a sport tourer are just minor inconveniences.</p>
+<p><a href="/guides/textile-touring-jackets">Weather</a> versatility matters more than you might think. That upright position means less water pooling on your visor in heavy rain. The higher ground clearance means puddles that would swamp a sport tourer are just minor inconveniences.</p>
 
 <h3>Where Adventure Bikes Fall Short</h3>
 
@@ -138,13 +138,13 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <h2>The Practical Reality of UK Touring</h2>
 
-<p>Here's what five years of serious UK touring has taught me: most riders overestimate how much off-road capability they need and underestimate how much time they'll spend on motorways and A-roads. Even on adventures to the remotest parts of Scotland, 80% of your miles will be on tarmac.</p>
+<p>Here's what five years of serious UK touring has taught me: most riders overestimate how much off-road capability they need and underestimate how much time they'll spend on motorways and A-roads. Even on <a href="/guides/best-touring-helmets-uk">adventures</a> to the remotest parts of Scotland, 80% of your miles will be on tarmac.</p>
 
 <p>But that remaining 20% can define your entire trip. The difference between confidently tackling a rough section of the B846 to Mallaig versus nervously tip-toeing across loose gravel affects your whole riding experience.</p>
 
 <h3>Weather Considerations</h3>
 
-<p>British weather demands compromise from both categories. Sport tourers handle crosswinds better but offer fewer options for position changes during long, wet rides. Adventure bikes let you stand occasionally for relief, but you'll work harder maintaining speed in headwinds.</p>
+<p>British weather demands compromise from both categories. Sport tourers handle crosswinds better but offer fewer options for position changes during long, wet <a href="/guides/day-ride-vs-multi-day-motorcycle-touring">rides</a>. Adventure bikes let you stand occasionally for relief, but you'll work harder maintaining speed in headwinds.</p>
 
 <p>I've ridden through proper Highland storms on both. The sport tourer keeps you drier and more comfortable, but the adventure bike feels more stable when road conditions deteriorate.</p>
 
@@ -240,4 +240,4 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <p>The best bike for UK touring is the one that gets you excited to plan the next trip. Both sport tourers and adventure bikes can deliver incredible experiences on British roads – they just deliver them differently.</p>
 
-<p>What matters isn't the category you choose, but matching that choice to how and where you actually ride. Be honest about your priorities, test ride both categories if possible, and choose the bike that makes you want to explore more of this incredible country we have on our doorstep. Read our <a href="/guides/adventure-motorcycle-boots">Adventure Motorcycle Boots for On and Off-Road UK Touring</a> guide for more.</p>`;
+<p>What matters isn't the category you choose, but matching that choice to how and where you actually ride. Be honest about your priorities, test ride both categories if possible, and choose the bike that makes you want to explore more of this incredible country we have on our doorstep. Read our <a href="/guides/adventure-motorcycle-boots">Adventure Motorcycle Boots for On and Off-Road UK Touring</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more.</p>`;

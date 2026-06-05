@@ -1,8 +1,8 @@
 export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider's Complete Guide</h2>
 
-<p>I've been riding through the Lake District for over fifteen years, and I can tell you this much – it's the closest thing we have to motorcycling paradise in England. The combination of challenging mountain passes, stunning lakeside sweepers, and proper British weather makes every ride an adventure. Whether you're on a sports bike, touring machine, or adventure bike, Cumbria's roads will test your skills and reward your efforts.</p>
+<p>I've been riding through the <a href="/guides/lake-district-destination-guide">Lake</a> District for over fifteen years, and I can tell you this much – it's the closest thing we have to motorcycling paradise in England. The combination of challenging mountain passes, stunning lakeside sweepers, and proper British weather makes every ride an adventure. Whether you're on a sports bike, touring machine, or adventure bike, Cumbria's roads will test your skills and reward your efforts.</p>
 
-<p>The Lake District isn't just about pretty scenery (though there's plenty of that). These roads demand respect. I've seen too many riders come unstuck on wet limestone or get caught out by wandering sheep. But ride them right, and you'll understand why this UNESCO World Heritage site draws motorcyclists from across Europe.</p>
+<p>The Lake <a href="/guides/best-motorcycle-roads-lake-district">District</a> isn't just about pretty scenery (though there's plenty of that). These roads demand respect. I've seen too many riders come unstuck on wet limestone or get caught out by wandering sheep. But ride them right, and you'll understand why this UNESCO World Heritage site draws motorcyclists from across Europe.</p>
 
 <h2>The Hardknott and Wrynose Pass Combo: England's Most Challenging Ride</h2>
 
@@ -25,7 +25,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <h2>Kirkstone Pass: The Tourist Route That's Actually Brilliant</h2>
 
-<p>The A592 over Kirkstone Pass gets dismissed by some riders as too touristy, but they're missing out. Yes, it's busy during summer weekends, but ride it on a crisp autumn morning or winter afternoon, and it's transformed.</p>
+<p>The A592 over Kirkstone Pass gets dismissed by some riders as too touristy, but they're missing out. Yes, it's busy during <a href="/guides/summer-motorcycle-gloves">summer</a> weekends, but ride it on a crisp autumn morning or winter afternoon, and it's transformed.</p>
 
 <p>Starting from Windermere, the climb begins gently through Troutbeck before the serious ascent starts. The road surface is excellent – this is a proper A-road that gets regular maintenance. The gradient is challenging without being terrifying, and the corners flow beautifully once you find your rhythm.</p>
 
@@ -69,7 +69,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <h3>Seasonal Considerations</h3>
 
-<p>Spring (March-May) offers the best balance of decent weather and fewer tourists. Road surfaces are usually good after winter maintenance, but watch for loose gravel on mountain passes. Lambing season means more farm traffic and livestock on roads.</p>
+<p>Spring (March-May) offers the <a href="/guides/best-motorcycle-roads-scotland">best</a> balance of decent weather and fewer tourists. Road surfaces are usually good after winter maintenance, but watch for loose gravel on mountain passes. Lambing season means more farm traffic and livestock on roads.</p>
 
 <p>Summer (June-August) brings the best weather but also the worst traffic. Popular routes like the A591 can be gridlocked on sunny weekends. Start early or ride midweek if possible. Tourist drivers can be unpredictable – many aren't used to narrow mountain roads.</p>
 
@@ -118,7 +118,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <h2>Making the Most of Your Lake District Adventure</h2>
 
-<p>The Lake District offers some of Britain's finest motorcycle roads, but they demand respect and preparation. Start with the easier lakeside routes to get a feel for local conditions, then progress to the mountain passes as your confidence builds.</p>
+<p>The Lake District offers some of Britain's finest <a href="/guides/best-touring-helmets-uk">motorcycle</a> roads, but they demand respect and preparation. Start with the easier lakeside routes to get a feel for local conditions, then progress to the mountain passes as your confidence builds.</p>
 
 <p>Remember to check weather conditions, inform someone of your plans, and carry appropriate gear. The mountain passes can be challenging enough in good conditions – don't let poor preparation turn a great ride into a survival exercise.</p>
 
