@@ -2263,7 +2263,12 @@ class RouteBuilder {
 
     var RANGE_M = 8 * 1609.34; // 8 miles in meters
     var allPOIs = [];
-    var types = Object.keys(RouteBuilder.POI_CONFIG);
+    var suggestTypes = {
+      bridges:1, campsites:1, wildlife:1, roads:1, viewpoints:1,
+      pubs:1, castles:1, waterfalls:1, beaches:1, landmarks:1,
+      distilleries:1, fossils:1, mountain_passes:1
+    };
+    var types = Object.keys(suggestTypes);
 
     for (var t = 0; t < types.length; t++) {
       var type = types[t];
