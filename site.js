@@ -2240,6 +2240,9 @@ class VisorUpSite {
     var feedList = document.getElementById('feedList');
     if (!feedList) return;
 
+    // Guard against race conditions from rapid tab switches
+    var renderToken = (this._feedRenderToken = (this._feedRenderToken || 0) + 1);
+
     var searchQuery = self._communitySearch || '';
     var posts;
 
@@ -2263,6 +2266,9 @@ class VisorUpSite {
     // Batch-fetch liked status for all posts
     var postIds = posts.filter(function(p) { return p.type !== 'activity'; }).map(function(p) { return p.id; });
     var likedMap = await VisorUpCommunity.getLikedMap(postIds);
+
+    // Discard stale renders from overtaken tab switches
+    if (renderToken !== this._feedRenderToken) return;
 
     var feedHTML = '';
 

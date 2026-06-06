@@ -2881,13 +2881,16 @@ class RouteBuilder {
       try { await VisorUpTrips.delete(route._cloudId); } catch (e) { console.warn('Cloud delete failed:', e); }
     }
 
-    // Delete from localStorage
-    if (route._localIdx !== undefined) {
-      var saved = this._getSavedRoutes();
-      saved.splice(route._localIdx, 1);
-      localStorage.setItem('rb_routes', JSON.stringify(saved));
+    // Always remove matching name from localStorage (covers both local-only
+    // and cloud routes that may have a stale local copy)
+    var saved = this._getSavedRoutes();
+    var routeName = route.name;
+    var filtered = saved.filter(function(r) { return r.name !== routeName; });
+    if (filtered.length !== saved.length) {
+      localStorage.setItem('rb_routes', JSON.stringify(filtered));
     }
 
+    if (this._cloudTripId === route._cloudId) this._cloudTripId = null;
     this._loadSavedList();
   }
 
@@ -2971,11 +2974,14 @@ class RouteBuilder {
     container.innerHTML = html;
 
     container.querySelectorAll('button[data-action]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', async function () {
         var action = btn.dataset.action;
         var idx = parseInt(btn.dataset.idx);
         if (action === 'load') self._loadRoute(idx);
-        else if (action === 'del') self._deleteRoute(idx);
+        else if (action === 'del') {
+          if (!confirm('Delete "' + (self._mergedRoutes[idx] || {}).name + '"?')) return;
+          await self._deleteRoute(idx);
+        }
         else if (action === 'gpx') self._downloadCloudGPX(idx);
       });
     });
