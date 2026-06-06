@@ -1,6 +1,6 @@
 /**
  * VisorUp Community — Activity feed, ride reports, likes, and comments.
- * Uses Supabase for persistence with localStorage fallback for demo/offline.
+ * Uses Supabase via VisorUpPosts (supabase-client.js) with localStorage fallback.
  */
 
 const VisorUpCommunity = {
@@ -19,16 +19,47 @@ const VisorUpCommunity = {
     try { localStorage.setItem(this._storageKey, JSON.stringify(data)); } catch (e) {}
   },
 
+  _hasSupabase() {
+    return typeof VisorUpPosts !== 'undefined' && typeof getSupabase === 'function' && !!getSupabase();
+  },
+
+  async _getUser() {
+    if (typeof VisorUpAuth !== 'undefined') {
+      try { return await VisorUpAuth.getUser(); } catch (e) {}
+    }
+    return null;
+  },
+
+  async _getProfile() {
+    if (typeof VisorUpAuth !== 'undefined') {
+      try {
+        var user = await VisorUpAuth.getUser();
+        return user ? await VisorUpAuth.getProfile() : null;
+      } catch (e) {}
+    }
+    return null;
+  },
+
   // ── Posts (Ride Reports) ──────────────────────────────────
 
   async createPost(post) {
-    var user = null;
-    var profile = null;
-    if (typeof VisorUpAuth !== 'undefined') {
-      user = await VisorUpAuth.getUser();
-      profile = user ? await VisorUpAuth.getProfile() : null;
+    var user = await this._getUser();
+    var profile = await this._getProfile();
+
+    // Try Supabase first
+    if (this._hasSupabase() && user) {
+      try {
+        var sbPost = await VisorUpPosts.create(post);
+        if (sbPost) {
+          if (typeof VisorUpGamification !== 'undefined') {
+            VisorUpGamification.addXP(30, 'Posted ride report');
+          }
+          return this._normalisePost(sbPost);
+        }
+      } catch (e) { console.warn('Community: Supabase create failed, using local', e); }
     }
 
+    // Fallback to localStorage
     var newPost = {
       id: Date.now().toString(36) + Math.random().toString(36).substr(2, 6),
       userId: user ? user.id : 'local',
@@ -49,45 +80,61 @@ const VisorUpCommunity = {
       commentCount: 0
     };
 
-    // Try Supabase first
-    if (typeof VisorUpAuth !== 'undefined' && user) {
-      try {
-        var sb = window._supabase || (window.supabase && window.VISORUP_SUPABASE ? window.supabase.createClient(window.VISORUP_SUPABASE.url, window.VISORUP_SUPABASE.anonKey) : null);
-        if (sb) {
-          var { data, error } = await sb.from('community_posts').insert({
-            user_id: user.id,
-            type: newPost.type,
-            title: newPost.title,
-            body: newPost.body,
-            photos: newPost.photos,
-            route_slug: newPost.routeSlug,
-            destination_slug: newPost.destinationSlug,
-            miles: newPost.miles,
-            rating: newPost.rating,
-            bike: newPost.bike,
-            tags: newPost.tags
-          }).select().single();
-          if (!error && data) { newPost.id = data.id; }
-        }
-      } catch (e) { console.warn('Community: Supabase insert failed, using local', e); }
-    }
-
-    // Always save locally too
     var local = this._getData();
     local.posts.unshift(newPost);
     if (local.posts.length > 200) local.posts = local.posts.slice(0, 200);
     this._saveData(local);
 
-    // Award XP
     if (typeof VisorUpGamification !== 'undefined') {
       VisorUpGamification.addXP(30, 'Posted ride report');
     }
-
     return newPost;
   },
 
-  getPosts(opts) {
+  _normalisePost(sbRow) {
+    var profile = sbRow.profiles || {};
+    return {
+      id: sbRow.id,
+      userId: sbRow.user_id,
+      userName: profile.display_name || 'Rider',
+      userAvatar: profile.avatar_url || null,
+      type: sbRow.type || 'ride-report',
+      title: sbRow.title || '',
+      body: sbRow.body || '',
+      photos: sbRow.photos || [],
+      routeSlug: sbRow.route_slug,
+      destinationSlug: sbRow.destination_slug,
+      miles: sbRow.miles || 0,
+      rating: sbRow.rating || 0,
+      bike: sbRow.bike || '',
+      tags: sbRow.tags || [],
+      createdAt: sbRow.created_at,
+      likeCount: sbRow.likes_count || 0,
+      commentCount: sbRow.comments_count || 0
+    };
+  },
+
+  async getPosts(opts) {
     opts = opts || {};
+    var self = this;
+
+    // Try Supabase
+    if (this._hasSupabase()) {
+      try {
+        var rows;
+        if (opts.followingOnly) {
+          var followingIds = await VisorUpPosts.getFollowing();
+          rows = await VisorUpPosts.listByFollowing(followingIds, opts.limit || 50);
+        } else if (opts.sort === 'top') {
+          rows = await VisorUpPosts.listTop(opts.limit || 50);
+        } else {
+          rows = await VisorUpPosts.list(opts);
+        }
+        return rows.map(function(r) { return self._normalisePost(r); });
+      } catch (e) { console.warn('Community: Supabase list failed, using local', e); }
+    }
+
+    // Fallback to localStorage
     var data = this._getData();
     var posts = data.posts || [];
 
@@ -114,30 +161,26 @@ const VisorUpCommunity = {
     return posts.slice(offset, offset + limit);
   },
 
-  getFeed(tab) {
+  async getFeed(tab) {
     tab = tab || 'new';
-    var data = this._getData();
-    var posts = data.posts || [];
-
     if (tab === 'following') {
-      var following = this.getFollowing();
-      posts = posts.filter(function(p) { return following.indexOf(p.userId) !== -1; });
-      posts.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
+      return this.getPosts({ followingOnly: true });
     } else if (tab === 'top') {
-      posts.sort(function(a, b) {
-        var scoreA = (a.likeCount || 0) + (a.commentCount || 0);
-        var scoreB = (b.likeCount || 0) + (b.commentCount || 0);
-        if (scoreB !== scoreA) return scoreB - scoreA;
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      });
-    } else {
-      posts.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
+      return this.getPosts({ sort: 'top' });
     }
-
-    return posts.slice(0, 50);
+    return this.getPosts();
   },
 
-  deletePost(id) {
+  async deletePost(id) {
+    // Try Supabase
+    if (this._hasSupabase()) {
+      try {
+        await VisorUpPosts.remove(id);
+        return;
+      } catch (e) { console.warn('Community: Supabase delete failed, trying local', e); }
+    }
+
+    // Fallback
     var data = this._getData();
     data.posts = (data.posts || []).filter(function(p) { return p.id !== id; });
     delete data.likes[id];
@@ -147,40 +190,82 @@ const VisorUpCommunity = {
 
   // ── Likes ─────────────────────────────────────────────────
 
-  toggleLike(postId) {
+  async toggleLike(postId) {
+    // Try Supabase
+    if (this._hasSupabase()) {
+      try {
+        var liked = await VisorUpPosts.toggleLike(postId);
+        if (liked && typeof VisorUpNotifications !== 'undefined') {
+          VisorUpNotifications.notify('like', 'Your post was liked', 'fa-heart', '/community');
+        }
+        return liked;
+      } catch (e) { console.warn('Community: Supabase like failed, using local', e); }
+    }
+
+    // Fallback
     var data = this._getData();
     data.likes = data.likes || {};
-    var liked = data.likes[postId] || false;
-    data.likes[postId] = !liked;
+    var wasLiked = data.likes[postId] || false;
+    data.likes[postId] = !wasLiked;
 
     var post = (data.posts || []).find(function(p) { return p.id === postId; });
     if (post) {
-      post.likeCount = (post.likeCount || 0) + (liked ? -1 : 1);
+      post.likeCount = (post.likeCount || 0) + (wasLiked ? -1 : 1);
       if (post.likeCount < 0) post.likeCount = 0;
     }
     this._saveData(data);
 
-    if (!liked && typeof VisorUpNotifications !== 'undefined') {
+    if (!wasLiked && typeof VisorUpNotifications !== 'undefined') {
       VisorUpNotifications.notify('like', 'Your post was liked', 'fa-heart', '/community');
     }
-
-    return !liked;
+    return !wasLiked;
   },
 
-  isLiked(postId) {
+  async isLiked(postId) {
+    if (this._hasSupabase()) {
+      try { return await VisorUpPosts.isLiked(postId); } catch (e) {}
+    }
     return !!(this._getData().likes || {})[postId];
+  },
+
+  async getLikedMap(postIds) {
+    if (this._hasSupabase()) {
+      try { return await VisorUpPosts.getLikedPostIds(postIds); } catch (e) {}
+    }
+    var likes = this._getData().likes || {};
+    var map = {};
+    postIds.forEach(function(id) { if (likes[id]) map[id] = true; });
+    return map;
   },
 
   // ── Comments ──────────────────────────────────────────────
 
   async addComment(postId, text) {
-    var user = null;
-    var profile = null;
-    if (typeof VisorUpAuth !== 'undefined') {
-      user = await VisorUpAuth.getUser();
-      profile = user ? await VisorUpAuth.getProfile() : null;
+    var user = await this._getUser();
+    var profile = await this._getProfile();
+
+    // Try Supabase
+    if (this._hasSupabase() && user) {
+      try {
+        var sbComment = await VisorUpPosts.addComment(postId, text);
+        if (sbComment) {
+          if (typeof VisorUpNotifications !== 'undefined') {
+            VisorUpNotifications.notify('comment', 'New comment on your post', 'fa-comment', '/community');
+          }
+          var cp = sbComment.profiles || {};
+          return {
+            id: sbComment.id,
+            userId: sbComment.user_id,
+            userName: cp.display_name || 'Rider',
+            userAvatar: cp.avatar_url || null,
+            text: sbComment.content,
+            createdAt: sbComment.created_at
+          };
+        }
+      } catch (e) { console.warn('Community: Supabase comment failed, using local', e); }
     }
 
+    // Fallback
     var comment = {
       id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
       userId: user ? user.id : 'local',
@@ -203,15 +288,34 @@ const VisorUpCommunity = {
     if (typeof VisorUpNotifications !== 'undefined') {
       VisorUpNotifications.notify('comment', 'New comment on your post', 'fa-comment', '/community');
     }
-
     return comment;
   },
 
-  getComments(postId) {
+  async getComments(postId) {
+    if (this._hasSupabase()) {
+      try {
+        var rows = await VisorUpPosts.getComments(postId);
+        return rows.map(function(c) {
+          var cp = c.profiles || {};
+          return {
+            id: c.id,
+            userId: c.user_id,
+            userName: cp.display_name || 'Rider',
+            userAvatar: cp.avatar_url || null,
+            text: c.content,
+            createdAt: c.created_at
+          };
+        });
+      } catch (e) { console.warn('Community: Supabase comments failed, using local', e); }
+    }
     return (this._getData().comments || {})[postId] || [];
   },
 
-  deleteComment(postId, commentId) {
+  async deleteComment(postId, commentId) {
+    if (this._hasSupabase()) {
+      try { await VisorUpPosts.deleteComment(commentId); return; } catch (e) {}
+    }
+
     var data = this._getData();
     if (data.comments && data.comments[postId]) {
       data.comments[postId] = data.comments[postId].filter(function(c) { return c.id !== commentId; });
@@ -242,14 +346,14 @@ const VisorUpCommunity = {
     if (list.indexOf(userId) === -1) {
       list.push(userId);
       this._saveFollows(list);
-      if (typeof VisorUpNotifications !== 'undefined') {
-        VisorUpNotifications.notify('follow', 'You have a new follower', 'fa-user-plus', '/community');
-      }
     }
-    if (typeof VisorUpAuth !== 'undefined') {
+    if (typeof VisorUpNotifications !== 'undefined') {
+      VisorUpNotifications.notify('follow', 'You have a new follower', 'fa-user-plus', '/community');
+    }
+    if (this._hasSupabase()) {
       try {
-        var user = await VisorUpAuth.getUser();
-        var sb = window._supabase || (window.supabase && window.VISORUP_SUPABASE ? window.supabase.createClient(window.VISORUP_SUPABASE.url, window.VISORUP_SUPABASE.anonKey) : null);
+        var user = await this._getUser();
+        var sb = getSupabase();
         if (sb && user) {
           await sb.from('follows').upsert({ follower_id: user.id, following_id: userId });
         }
@@ -264,10 +368,10 @@ const VisorUpCommunity = {
       list.splice(idx, 1);
       this._saveFollows(list);
     }
-    if (typeof VisorUpAuth !== 'undefined') {
+    if (this._hasSupabase()) {
       try {
-        var user = await VisorUpAuth.getUser();
-        var sb = window._supabase || (window.supabase && window.VISORUP_SUPABASE ? window.supabase.createClient(window.VISORUP_SUPABASE.url, window.VISORUP_SUPABASE.anonKey) : null);
+        var user = await this._getUser();
+        var sb = getSupabase();
         if (sb && user) {
           await sb.from('follows').delete().match({ follower_id: user.id, following_id: userId });
         }
@@ -289,10 +393,9 @@ const VisorUpCommunity = {
 
   // ── Activity Feed (auto-generated from gamification) ──────
 
-  generateActivityFeed() {
+  async generateActivityFeed() {
     var activities = [];
 
-    // Pull from ride log
     if (typeof VisorUpGamification !== 'undefined') {
       var rides = VisorUpGamification.getRideLog();
       rides.forEach(function(r) {
@@ -307,10 +410,9 @@ const VisorUpCommunity = {
         });
       });
 
-      // Badges
       var badges = VisorUpGamification.getEarnedBadges();
       badges.forEach(function(b) {
-        var badge = BADGES.find(function(bd) { return bd.id === b.id; });
+        var badge = typeof BADGES !== 'undefined' ? BADGES.find(function(bd) { return bd.id === b.id; }) : null;
         if (badge) {
           activities.push({
             id: 'badge-' + b.id,
@@ -323,7 +425,6 @@ const VisorUpCommunity = {
         }
       });
 
-      // Destinations visited
       var visited = VisorUpGamification.getVisitedDestinations();
       visited.forEach(function(slug) {
         var dest = typeof DESTINATIONS !== 'undefined' ? DESTINATIONS.find(function(d) { return d.slug === slug; }) : null;
@@ -339,8 +440,7 @@ const VisorUpCommunity = {
       });
     }
 
-    // Merge with posts
-    var posts = this.getPosts();
+    var posts = await this.getPosts();
     var all = activities.concat(posts);
     all.sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); });
     return all;
@@ -361,14 +461,8 @@ const VisorUpCommunity = {
     }
     if (validated.length === 0) return results;
 
-    var user = null;
-    if (typeof VisorUpAuth !== 'undefined') {
-      user = await VisorUpAuth.getUser();
-    }
-    var sb = null;
-    if (user) {
-      sb = window._supabase || (window.supabase && window.VISORUP_SUPABASE ? window.supabase.createClient(window.VISORUP_SUPABASE.url, window.VISORUP_SUPABASE.anonKey) : null);
-    }
+    var user = await this._getUser();
+    var sb = user ? getSupabase() : null;
 
     for (var j = 0; j < validated.length; j++) {
       var file = validated[j];
@@ -398,11 +492,11 @@ const VisorUpCommunity = {
 
   // ── Search & Tags ──────────────────────────────────────────
 
-  searchPosts(query) {
+  async searchPosts(query) {
     var q = (query || '').toLowerCase().trim();
     if (!q) return this.getPosts();
-    var data = this._getData();
-    return (data.posts || []).filter(function(p) {
+    var posts = await this.getPosts();
+    return posts.filter(function(p) {
       return (p.title && p.title.toLowerCase().indexOf(q) !== -1) ||
         (p.body && p.body.toLowerCase().indexOf(q) !== -1) ||
         (p.bike && p.bike.toLowerCase().indexOf(q) !== -1) ||
@@ -411,20 +505,20 @@ const VisorUpCommunity = {
     });
   },
 
-  getPostsByTag(tag) {
+  async getPostsByTag(tag) {
     var t = (tag || '').toLowerCase().trim();
     if (!t) return this.getPosts();
-    var data = this._getData();
-    return (data.posts || []).filter(function(p) {
+    var posts = await this.getPosts();
+    return posts.filter(function(p) {
       return p.tags && p.tags.some(function(pt) { return pt.toLowerCase() === t; });
     });
   },
 
-  getTrendingTags(limit) {
+  async getTrendingTags(limit) {
     limit = limit || 10;
-    var data = this._getData();
+    var posts = await this.getPosts({ limit: 200 });
     var counts = {};
-    (data.posts || []).forEach(function(p) {
+    posts.forEach(function(p) {
       (p.tags || []).forEach(function(t) {
         var key = t.toLowerCase().trim();
         if (key) counts[key] = (counts[key] || 0) + 1;
@@ -464,7 +558,7 @@ const VisorUpCommunity = {
     return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
   },
 
-  renderPostCard(post) {
+  renderPostCard(post, likedMap) {
     var self = this;
     var isPost = post.type === 'ride-report' || post.type === 'post';
     var isActivity = post.type === 'activity';
@@ -507,7 +601,7 @@ const VisorUpCommunity = {
       }).join('') + '</div>';
     }
 
-    var liked = this.isLiked(post.id);
+    var liked = likedMap ? !!likedMap[post.id] : false;
 
     var followBtnHTML = '';
     if (post.userId && post.userId !== 'local') {
@@ -540,7 +634,11 @@ const VisorUpCommunity = {
   },
 
   renderCommentSection(postId) {
-    var comments = this.getComments(postId);
+    var comments = [];
+    // Sync version for initial render -- caller should use getComments() async and re-render
+    if (!this._hasSupabase()) {
+      comments = (this._getData().comments || {})[postId] || [];
+    }
     var html = '';
     if (comments.length > 0) {
       html += comments.map(function(c) {

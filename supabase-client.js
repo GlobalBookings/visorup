@@ -375,3 +375,169 @@ const VisorUpFavourites = {
     return !!data;
   }
 };
+
+// ── Community Posts ──────────────────────────────────────────────
+
+const VisorUpPosts = {
+
+  async create(post) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    const { data, error } = await sb.from('community_posts')
+      .insert({
+        user_id: user.id,
+        type: post.type || 'ride-report',
+        title: post.title || '',
+        body: post.body || '',
+        photos: post.photos || [],
+        route_slug: post.routeSlug || null,
+        destination_slug: post.destinationSlug || null,
+        miles: post.miles || 0,
+        rating: post.rating || 0,
+        bike: post.bike || '',
+        tags: post.tags || []
+      })
+      .select('*, profiles!inner(display_name, avatar_url)')
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async list(opts) {
+    opts = opts || {};
+    const sb = getSupabase();
+    if (!sb) return [];
+    var query = sb.from('community_posts')
+      .select('*, profiles!inner(display_name, avatar_url)')
+      .order('created_at', { ascending: false })
+      .limit(opts.limit || 50);
+
+    if (opts.userId) query = query.eq('user_id', opts.userId);
+    if (opts.type) query = query.eq('type', opts.type);
+    if (opts.offset) query = query.range(opts.offset, opts.offset + (opts.limit || 50) - 1);
+
+    const { data, error } = await query;
+    if (error) throw error;
+    return data || [];
+  },
+
+  async listByFollowing(followingIds, limit) {
+    const sb = getSupabase();
+    if (!sb || !followingIds.length) return [];
+    const { data, error } = await sb.from('community_posts')
+      .select('*, profiles!inner(display_name, avatar_url)')
+      .in('user_id', followingIds)
+      .order('created_at', { ascending: false })
+      .limit(limit || 50);
+    if (error) throw error;
+    return data || [];
+  },
+
+  async listTop(limit) {
+    const sb = getSupabase();
+    if (!sb) return [];
+    const { data, error } = await sb.from('community_posts')
+      .select('*, profiles!inner(display_name, avatar_url)')
+      .order('likes_count', { ascending: false })
+      .order('comments_count', { ascending: false })
+      .limit(limit || 50);
+    if (error) throw error;
+    return data || [];
+  },
+
+  async remove(id) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    const { error } = await sb.from('community_posts').delete().eq('id', id).eq('user_id', user.id);
+    if (error) throw error;
+  },
+
+  async toggleLike(postId) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+
+    const { data: existing } = await sb.from('community_likes')
+      .select('id')
+      .eq('post_id', postId)
+      .eq('user_id', user.id)
+      .single();
+
+    if (existing) {
+      await sb.from('community_likes').delete().eq('id', existing.id);
+      return false;
+    } else {
+      await sb.from('community_likes').insert({ post_id: postId, user_id: user.id });
+      return true;
+    }
+  },
+
+  async isLiked(postId) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) return false;
+    const sb = getSupabase();
+    const { data } = await sb.from('community_likes')
+      .select('id')
+      .eq('post_id', postId)
+      .eq('user_id', user.id)
+      .single();
+    return !!data;
+  },
+
+  async getLikedPostIds(postIds) {
+    const user = await VisorUpAuth.getUser();
+    if (!user || !postIds.length) return {};
+    const sb = getSupabase();
+    const { data } = await sb.from('community_likes')
+      .select('post_id')
+      .eq('user_id', user.id)
+      .in('post_id', postIds);
+    var map = {};
+    (data || []).forEach(function(r) { map[r.post_id] = true; });
+    return map;
+  },
+
+  async addComment(postId, content) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    const { data, error } = await sb.from('community_comments')
+      .insert({ post_id: postId, user_id: user.id, content: content })
+      .select('*, profiles!inner(display_name, avatar_url)')
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async getComments(postId) {
+    const sb = getSupabase();
+    if (!sb) return [];
+    const { data, error } = await sb.from('community_comments')
+      .select('*, profiles!inner(display_name, avatar_url)')
+      .eq('post_id', postId)
+      .order('created_at', { ascending: true });
+    if (error) throw error;
+    return data || [];
+  },
+
+  async deleteComment(commentId) {
+    const user = await VisorUpAuth.getUser();
+    if (!user) throw new Error('Not logged in');
+    const sb = getSupabase();
+    const { error } = await sb.from('community_comments').delete().eq('id', commentId).eq('user_id', user.id);
+    if (error) throw error;
+  },
+
+  async getFollowing() {
+    const user = await VisorUpAuth.getUser();
+    if (!user) return [];
+    const sb = getSupabase();
+    const { data, error } = await sb.from('follows')
+      .select('following_id')
+      .eq('follower_id', user.id);
+    if (error) return [];
+    return (data || []).map(function(r) { return r.following_id; });
+  }
+};

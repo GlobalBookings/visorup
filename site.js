@@ -1902,7 +1902,7 @@ class VisorUpSite {
     '</section>';
   }
 
-  renderCommunity() {
+  async renderCommunity() {
     if (typeof VisorUpCommunity === 'undefined') {
       this.pageContent.innerHTML = this.renderComingSoon('Community', 'Coming soon.', 'fa-users') + this.renderFooter();
       return;
@@ -1929,7 +1929,7 @@ class VisorUpSite {
     var presetTags = ['nc500','highlands','scotland','wales','lake-district','peak-district','camping','rain','weekend','solo','group','cafe-stop','scenic','night-ride','first-tour','sportsbike','adventure','touring','commute'];
 
     // Trending tags
-    var trending = VisorUpCommunity.getTrendingTags(8);
+    var trending = await VisorUpCommunity.getTrendingTags(8);
     var trendingHTML = '';
     if (trending.length > 0) {
       trendingHTML = trending.map(function(t) {
@@ -1940,9 +1940,9 @@ class VisorUpSite {
     }
 
     // Post counts for tabs
-    var allPosts = VisorUpCommunity.getFeed('new');
-    var topPosts = VisorUpCommunity.getFeed('top');
-    var followPosts = VisorUpCommunity.getFeed('following');
+    var allPosts = await VisorUpCommunity.getFeed('new');
+    var topPosts = await VisorUpCommunity.getFeed('top');
+    var followPosts = await VisorUpCommunity.getFeed('following');
     var newCount = allPosts.length;
     var followCount = followPosts.length;
 
@@ -2235,7 +2235,7 @@ class VisorUpSite {
     this._initLazyImages();
   }
 
-  _renderFeedTab(tab) {
+  async _renderFeedTab(tab) {
     var self = this;
     var feedList = document.getElementById('feedList');
     if (!feedList) return;
@@ -2245,9 +2245,9 @@ class VisorUpSite {
 
     if (searchQuery) {
       if (searchQuery.charAt(0) === '#') {
-        posts = VisorUpCommunity.getPostsByTag(searchQuery.substring(1));
+        posts = await VisorUpCommunity.getPostsByTag(searchQuery.substring(1));
       } else {
-        posts = VisorUpCommunity.searchPosts(searchQuery);
+        posts = await VisorUpCommunity.searchPosts(searchQuery);
       }
       if (tab === 'top') {
         posts.sort(function(a, b) {
@@ -2257,8 +2257,12 @@ class VisorUpSite {
         });
       }
     } else {
-      posts = VisorUpCommunity.getFeed(tab);
+      posts = await VisorUpCommunity.getFeed(tab);
     }
+
+    // Batch-fetch liked status for all posts
+    var postIds = posts.filter(function(p) { return p.type !== 'activity'; }).map(function(p) { return p.id; });
+    var likedMap = await VisorUpCommunity.getLikedMap(postIds);
 
     var feedHTML = '';
 
@@ -2272,32 +2276,33 @@ class VisorUpSite {
         : 'No posts yet. Share your latest ride to get things started!';
       feedHTML = '<div class="feed-empty"><i class="fas fa-motorcycle"></i><p>' + emptyMsg + '</p></div>';
     } else {
-      feedHTML = posts.map(function(post) { return VisorUpCommunity.renderPostCard(post); }).join('');
+      feedHTML = posts.map(function(post) { return VisorUpCommunity.renderPostCard(post, likedMap); }).join('');
     }
 
     feedList.innerHTML = feedHTML;
 
     // Bind likes
     feedList.querySelectorAll('.feed-like-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', async function() {
         var postId = btn.dataset.postId;
-        var nowLiked = VisorUpCommunity.toggleLike(postId);
-        btn.classList.toggle('feed-liked', nowLiked);
         var count = parseInt(btn.textContent.trim().split(' ').pop()) || 0;
+        var nowLiked = await VisorUpCommunity.toggleLike(postId);
+        btn.classList.toggle('feed-liked', nowLiked);
         btn.innerHTML = '<i class="fas fa-heart"></i> ' + (nowLiked ? count + 1 : Math.max(0, count - 1));
       });
     });
 
     // Bind comment toggles
     feedList.querySelectorAll('.feed-comment-toggle').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', async function() {
         var postId = btn.dataset.postId;
         var section = document.getElementById('comments-' + postId);
         if (!section) return;
         var isOpen = section.style.display !== 'none';
         section.style.display = isOpen ? 'none' : '';
         if (!isOpen) {
-          section.innerHTML = VisorUpCommunity.renderCommentSection(postId);
+          var comments = await VisorUpCommunity.getComments(postId);
+          section.innerHTML = self._renderCommentsHTML(comments, postId);
           self._bindCommentForm(section, postId);
         }
       });
@@ -2344,10 +2349,10 @@ class VisorUpSite {
 
     // Bind delete buttons
     feedList.querySelectorAll('.feed-delete-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', async function() {
         if (!confirm('Delete this post?')) return;
         var postId = btn.dataset.postId;
-        VisorUpCommunity.deletePost(postId);
+        await VisorUpCommunity.deletePost(postId);
         var postEl = btn.closest('.feed-post');
         if (postEl) postEl.remove();
       });
@@ -2370,25 +2375,45 @@ class VisorUpSite {
     });
   }
 
+  _renderCommentsHTML(comments, postId) {
+    var html = '';
+    if (comments.length > 0) {
+      html += comments.map(function(c) {
+        var avatar = c.userAvatar
+          ? '<img src="' + c.userAvatar + '" class="feed-comment-avatar" alt="">'
+          : '<div class="feed-comment-avatar-ph">' + (c.userName || 'A').charAt(0).toUpperCase() + '</div>';
+        return '<div class="feed-comment">' +
+          avatar +
+          '<div class="feed-comment-body">' +
+            '<span class="feed-comment-author">' + (c.userName || 'Rider') + '</span> ' +
+            '<span class="feed-comment-text">' + c.text + '</span>' +
+            '<div class="feed-comment-time">' + VisorUpCommunity._timeAgo(c.createdAt) + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+    html += '<div class="feed-comment-form">' +
+      '<input type="text" class="feed-comment-input" data-post-id="' + postId + '" placeholder="Write a comment...">' +
+      '<button class="feed-comment-send" data-post-id="' + postId + '"><i class="fas fa-paper-plane"></i></button>' +
+    '</div>';
+    return html;
+  }
+
   _bindCommentForm(section, postId) {
     var self = this;
     var input = section.querySelector('.feed-comment-input');
     var sendBtn = section.querySelector('.feed-comment-send');
     if (!input || !sendBtn) return;
 
-    function submitComment() {
+    async function submitComment() {
       var text = input.value.trim();
       if (!text) return;
-      VisorUpCommunity.addComment(postId, text).then(function() {
-        section.innerHTML = VisorUpCommunity.renderCommentSection(postId);
-        self._bindCommentForm(section, postId);
-        // Update comment count on button
-        var btn = document.querySelector('.feed-comment-toggle[data-post-id="' + postId + '"]');
-        if (btn) {
-          var comments = VisorUpCommunity.getComments(postId);
-          btn.innerHTML = '<i class="fas fa-comment"></i> ' + comments.length;
-        }
-      });
+      await VisorUpCommunity.addComment(postId, text);
+      var comments = await VisorUpCommunity.getComments(postId);
+      section.innerHTML = self._renderCommentsHTML(comments, postId);
+      self._bindCommentForm(section, postId);
+      var btn = document.querySelector('.feed-comment-toggle[data-post-id="' + postId + '"]');
+      if (btn) btn.innerHTML = '<i class="fas fa-comment"></i> ' + comments.length;
     }
 
     sendBtn.addEventListener('click', submitComment);
