@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>VisorUp — Offline</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#080c0b;color:#c0c8c5;font-family:Inter,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px}
+    .offline-card{max-width:420px}
+    .offline-icon{font-size:64px;margin-bottom:24px;opacity:0.6}
+    h1{font-family:'Playfair Display',Georgia,serif;font-size:28px;color:#D68A2D;margin-bottom:8px}
+    p{font-size:15px;line-height:1.6;color:#7a8a85;margin-bottom:24px}
+    .retry-btn{display:inline-block;padding:12px 32px;background:#D68A2D;color:#080c0b;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none}
+    .retry-btn:hover{background:#e09a3d}
+    .tip{margin-top:32px;padding:16px;background:rgba(214,138,45,0.08);border:1px solid rgba(214,138,45,0.15);border-radius:8px;font-size:13px;color:#c0c8c5}
+    .tip strong{color:#D68A2D}
+  </style>
+</head>
+<body>
+  <div class="offline-card">
+    <div class="offline-icon">&#x1F6A7;</div>
+    <h1>You're Offline</h1>
+    <p>No internet connection available. Any routes and maps you've previously viewed may still be cached and accessible.</p>
+    <a href="/" class="retry-btn">Try Again</a>
+    <div class="tip">
+      <strong>Tip:</strong> Download maps for offline use before your ride. Open the route builder, save your route, and your viewed map tiles will be cached automatically.
+    </div>
+  </div>
+</body>
+</html>

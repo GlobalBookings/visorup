@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0D3B2E"/>
+  <text x="256" y="280" text-anchor="middle" dominant-baseline="central" font-family="Inter,system-ui,sans-serif" font-weight="900" font-size="140" fill="#D68A2D">V</text>
+  <text x="256" y="390" text-anchor="middle" dominant-baseline="central" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="48" fill="#c0c8c5" letter-spacing="8">VISORUP</text>
+  <circle cx="256" cy="168" r="28" fill="none" stroke="#D68A2D" stroke-width="6"/>
+  <line x1="256" y1="140" x2="256" y2="118" stroke="#D68A2D" stroke-width="6" stroke-linecap="round"/>
+  <line x1="240" y1="146" x2="228" y2="130" stroke="#D68A2D" stroke-width="4" stroke-linecap="round"/>
+  <line x1="272" y1="146" x2="284" y2="130" stroke="#D68A2D" stroke-width="4" stroke-linecap="round"/>
+</svg>
