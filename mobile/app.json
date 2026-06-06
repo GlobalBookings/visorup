@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "VisorUp",
+    "slug": "visorup",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "visorup",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "co.uk.visorup.app",
+      "config": {
+        "googleMapsApiKey": ""
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0D3B2E",
+        "foregroundImage": "./assets/icon.png"
+      },
+      "package": "co.uk.visorup.app",
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
+      }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
