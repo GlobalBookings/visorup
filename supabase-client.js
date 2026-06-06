@@ -166,7 +166,10 @@ const VisorUpTrips = {
       waypoints: trip.waypoints,
       settings: trip.settings || {},
       route_stats: trip.routeStats || {},
-      is_public: trip.isPublic || false
+      is_public: trip.isPublic || false,
+      route_coords: trip.routeCoords || [],
+      gpx_data: trip.gpxData || null,
+      day_segments: trip.daySegments || []
     };
 
     if (trip.id) {

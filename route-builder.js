@@ -285,6 +285,8 @@ class RouteBuilder {
     this.startMarker = null;
     this.endMarker = null;
     this.ghostMarkers = [];
+    this._mergedRoutes = [];
+    this._cloudTripId = null;
 
     this._routeDebounce = null;
     this._osrmLastCall = 0;
@@ -2707,18 +2709,21 @@ class RouteBuilder {
       prefMode: prefMode,
       maxMiles: parseFloat(this.container.querySelector('#rb-maxMiles').value) || 150,
       maxHours: parseFloat(this.container.querySelector('#rb-maxHours').value) || 4,
+      routeCoords: this.routeCoords.slice(),
       savedAt: new Date().toISOString()
     };
 
+    // Always save to localStorage (without heavy route_coords to keep it small)
+    var localRoute = Object.assign({}, route);
+    delete localRoute.routeCoords;
     var saved = this._getSavedRoutes();
     var existing = saved.findIndex(function (r) { return r.name === name; });
-    if (existing >= 0) saved[existing] = route;
-    else saved.push(route);
-
+    if (existing >= 0) saved[existing] = localRoute;
+    else saved.push(localRoute);
     localStorage.setItem('rb_routes', JSON.stringify(saved));
     this._loadSavedList();
 
-    // Cloud save if logged in
+    // Cloud save with full route data
     var self = this;
     if (typeof VisorUpAuth !== 'undefined' && typeof VisorUpTrips !== 'undefined') {
       VisorUpAuth.getUser().then(function(user) {
@@ -2743,11 +2748,26 @@ class RouteBuilder {
           },
           routeStats: {
             distance: Math.round(totalDist),
+            duration: self.routeDuration || 0,
             waypoints: route.waypoints.length
-          }
-        }).then(function(saved) {
-          self._cloudTripId = saved.id;
+          },
+          routeCoords: route.routeCoords,
+          gpxData: self._buildGPXString(name),
+          daySegments: (self.daySegments || []).map(function(seg) {
+            return {
+              start: seg.startIdx,
+              end: seg.endIdx,
+              distance: seg.distance,
+              duration: seg.duration,
+              subSegments: (seg.subSegments || []).map(function(ss) {
+                return { coords: ss.coords, distance: ss.distance, duration: ss.duration };
+              })
+            };
+          })
+        }).then(function(savedTrip) {
+          self._cloudTripId = savedTrip.id;
           alert('Route "' + name + '" saved to your profile!');
+          self._loadSavedList();
         }).catch(function(err) {
           console.error('Cloud save failed:', err);
           alert('Route saved locally. Cloud save failed: ' + err.message);
@@ -2758,44 +2778,76 @@ class RouteBuilder {
     }
   }
 
+  _buildGPXString(name) {
+    if (this.routeCoords.length < 2) return null;
+    var totalMiles = this._fmtMiles(this.routeDistance);
+    var gpx = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<gpx version="1.1" creator="VisorUp RouteBuilder"\n' +
+      '  xmlns="http://www.topografix.com/GPX/1/1">\n' +
+      '  <metadata><name>' + this._esc(name) + '</name>' +
+      '<desc>Custom motorcycle route — ' + totalMiles + ' miles</desc></metadata>\n';
+    for (var i = 0; i < this.waypoints.length; i++) {
+      var wp = this.waypoints[i];
+      var wpName = this.waypointNames[i] || ('Waypoint ' + (i + 1));
+      gpx += '  <wpt lat="' + wp.lat.toFixed(7) + '" lon="' + wp.lng.toFixed(7) + '"><name>' + this._esc(wpName) + '</name></wpt>\n';
+    }
+    gpx += '  <trk><name>' + this._esc(name) + '</name><trkseg>\n';
+    for (var c = 0; c < this.routeCoords.length; c++) {
+      gpx += '    <trkpt lat="' + this.routeCoords[c][0].toFixed(7) + '" lon="' + this.routeCoords[c][1].toFixed(7) + '"></trkpt>\n';
+    }
+    gpx += '  </trkseg></trk>\n</gpx>';
+    return gpx;
+  }
+
   _loadRoute(idx) {
-    var saved = this._getSavedRoutes();
-    if (idx < 0 || idx >= saved.length) return;
-    var route = saved[idx];
+    var route = this._mergedRoutes[idx];
+    if (!route) return;
 
     this._clearRoute();
     this.container.querySelector('#rb-routeName').value = route.name;
+    if (route._cloudId) this._cloudTripId = route._cloudId;
+
+    // Normalise waypoints from cloud format {lat,lng,name} or local format [lat,lng]
+    var waypoints = (route.waypoints || []).map(function(wp) {
+      if (wp.lat !== undefined && wp.lng !== undefined) return { lat: wp.lat, lng: wp.lng };
+      return { lat: wp[0], lng: wp[1] };
+    });
+    var names = route.waypointNames || route.waypoints.map(function(wp) { return wp.name || ''; });
 
     // Set preferences
-    if (route.prefMode) {
+    var settings = route.settings || {};
+    var prefMode = settings.prefMode || route.prefMode;
+    if (prefMode) {
       this.container.querySelectorAll('#rb-prefToggle button').forEach(function (b) {
-        b.classList.toggle('active', b.dataset.mode === route.prefMode);
+        b.classList.toggle('active', b.dataset.mode === prefMode);
       });
-      this.container.querySelector('#rb-milesLabel').style.display = route.prefMode === 'miles' ? '' : 'none';
-      this.container.querySelector('#rb-hoursLabel').style.display = route.prefMode === 'hours' ? '' : 'none';
+      this.container.querySelector('#rb-milesLabel').style.display = prefMode === 'miles' ? '' : 'none';
+      this.container.querySelector('#rb-hoursLabel').style.display = prefMode === 'hours' ? '' : 'none';
     }
-    if (route.maxMiles) this.container.querySelector('#rb-maxMiles').value = route.maxMiles;
-    if (route.maxHours) this.container.querySelector('#rb-maxHours').value = route.maxHours;
+    var maxMiles = settings.maxMiles || route.maxMiles;
+    var maxHours = settings.maxHours || route.maxHours;
+    if (maxMiles) this.container.querySelector('#rb-maxMiles').value = maxMiles;
+    if (maxHours) this.container.querySelector('#rb-maxHours').value = maxHours;
 
     // Set segment modes
-    if (route.segmentModes) this.segmentModes = Object.assign({}, route.segmentModes);
+    var segModes = settings.segmentModes || route.segmentModes;
+    if (segModes) this.segmentModes = Object.assign({}, segModes);
 
     // Set start/end locations
-    if (route.startLocation) {
-      this.startLocation = route.startLocation;
-      this.container.querySelector('#rb-startInput').value = route.startLocation.name || '';
+    var startLoc = settings.startLocation || route.startLocation;
+    var endLoc = settings.endLocation || route.endLocation;
+    if (startLoc) {
+      this.startLocation = startLoc;
+      this.container.querySelector('#rb-startInput').value = startLoc.name || '';
     }
-    if (route.endLocation) {
-      this.endLocation = route.endLocation;
-      this.container.querySelector('#rb-endInput').value = route.endLocation.name || '';
+    if (endLoc) {
+      this.endLocation = endLoc;
+      this.container.querySelector('#rb-endInput').value = endLoc.name || '';
     }
 
     // Add waypoints
-    var names = route.waypointNames || [];
-    for (var i = 0; i < route.waypoints.length; i++) {
-      var wp = route.waypoints[i];
-      var nm = names[i] || null;
-      this._addWaypoint(wp.lat, wp.lng, nm, this.waypoints.length);
+    for (var i = 0; i < waypoints.length; i++) {
+      this._addWaypoint(waypoints[i].lat, waypoints[i].lng, names[i] || null, this.waypoints.length);
     }
 
     // Place start/end markers
@@ -2817,16 +2869,25 @@ class RouteBuilder {
     }
 
     this._renumberMarkers();
-
-    // Fit map
     this._fitToWaypoints();
   }
 
-  _deleteRoute(idx) {
-    var saved = this._getSavedRoutes();
-    if (idx < 0 || idx >= saved.length) return;
-    saved.splice(idx, 1);
-    localStorage.setItem('rb_routes', JSON.stringify(saved));
+  async _deleteRoute(idx) {
+    var route = this._mergedRoutes[idx];
+    if (!route) return;
+
+    // Delete from cloud
+    if (route._cloudId && typeof VisorUpTrips !== 'undefined') {
+      try { await VisorUpTrips.delete(route._cloudId); } catch (e) { console.warn('Cloud delete failed:', e); }
+    }
+
+    // Delete from localStorage
+    if (route._localIdx !== undefined) {
+      var saved = this._getSavedRoutes();
+      saved.splice(route._localIdx, 1);
+      localStorage.setItem('rb_routes', JSON.stringify(saved));
+    }
+
     this._loadSavedList();
   }
 
@@ -2835,24 +2896,74 @@ class RouteBuilder {
     catch (e) { return []; }
   }
 
-  _loadSavedList() {
+  async _loadSavedList() {
     var container = this.container.querySelector('#rb-savedList');
-    var saved = this._getSavedRoutes();
-    if (saved.length === 0) {
+    var self = this;
+    var merged = [];
+
+    // 1. Load cloud routes if authenticated
+    var cloudRoutes = [];
+    if (typeof VisorUpAuth !== 'undefined' && typeof VisorUpTrips !== 'undefined') {
+      try {
+        var user = await VisorUpAuth.getUser();
+        if (user) cloudRoutes = await VisorUpTrips.list();
+      } catch (e) { console.warn('Cloud route list failed:', e); }
+    }
+
+    // 2. Normalise cloud routes into display format
+    var cloudNames = {};
+    for (var c = 0; c < cloudRoutes.length; c++) {
+      var cr = cloudRoutes[c];
+      cloudNames[cr.name] = true;
+      merged.push({
+        name: cr.name,
+        waypoints: cr.waypoints || [],
+        waypointNames: (cr.waypoints || []).map(function(wp) { return wp.name || ''; }),
+        settings: cr.settings || {},
+        routeCoords: cr.route_coords || [],
+        savedAt: cr.updated_at || cr.created_at,
+        _cloudId: cr.id,
+        _source: 'cloud'
+      });
+    }
+
+    // 3. Merge local-only routes (not already in cloud)
+    var localRoutes = this._getSavedRoutes();
+    for (var l = 0; l < localRoutes.length; l++) {
+      if (!cloudNames[localRoutes[l].name]) {
+        var lr = localRoutes[l];
+        lr._localIdx = l;
+        lr._source = 'local';
+        merged.push(lr);
+      }
+    }
+
+    // Sort by date descending
+    merged.sort(function(a, b) {
+      return new Date(b.savedAt || 0) - new Date(a.savedAt || 0);
+    });
+
+    this._mergedRoutes = merged;
+
+    if (merged.length === 0) {
       container.innerHTML = '<p style="font-size:12px;color:#7a8a85">No saved routes</p>';
       return;
     }
 
-    var self = this;
     var html = '';
-    for (var i = 0; i < saved.length; i++) {
-      var route = saved[i];
+    for (var i = 0; i < merged.length; i++) {
+      var route = merged[i];
       var date = route.savedAt ? new Date(route.savedAt).toLocaleDateString() : '';
-      var wpCount = route.waypoints ? route.waypoints.length : 0;
+      var wps = route.waypoints || [];
+      var wpCount = wps.length;
+      var sourceIcon = route._source === 'cloud'
+        ? '<i class="fas fa-cloud" style="color:#D68A2D;font-size:10px;margin-right:4px" title="Saved to cloud"></i>'
+        : '<i class="fas fa-hard-drive" style="color:#7a8a85;font-size:10px;margin-right:4px" title="Local only"></i>';
       html += '<div class="rb-saved-item">' +
-        '<span>' + this._esc(route.name) + ' <small style="color:#7a8a85">(' + wpCount + ' pts' + (date ? ', ' + date : '') + ')</small></span>' +
+        '<span>' + sourceIcon + this._esc(route.name) + ' <small style="color:#7a8a85">(' + wpCount + ' pts' + (date ? ', ' + date : '') + ')</small></span>' +
         '<div class="rb-saved-btns">' +
           '<button title="Load" data-action="load" data-idx="' + i + '">\uD83D\uDCC2</button>' +
+          (route._source === 'cloud' && route.routeCoords && route.routeCoords.length > 0 ? '<button title="Download GPX" data-action="gpx" data-idx="' + i + '"><i class="fas fa-download" style="font-size:11px"></i></button>' : '') +
           '<button title="Delete" data-action="del" data-idx="' + i + '">\uD83D\uDDD1\uFE0F</button>' +
         '</div>' +
       '</div>';
@@ -2865,8 +2976,30 @@ class RouteBuilder {
         var idx = parseInt(btn.dataset.idx);
         if (action === 'load') self._loadRoute(idx);
         else if (action === 'del') self._deleteRoute(idx);
+        else if (action === 'gpx') self._downloadCloudGPX(idx);
       });
     });
+  }
+
+  async _downloadCloudGPX(idx) {
+    var route = this._mergedRoutes[idx];
+    if (!route || !route._cloudId) return;
+    try {
+      var trip = await VisorUpTrips.get(route._cloudId);
+      if (trip && trip.gpx_data) {
+        var blob = new Blob([trip.gpx_data], { type: 'application/gpx+xml' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (route.name || 'route').toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.gpx';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } else {
+        alert('GPX data not available for this route. Re-save the route to generate it.');
+      }
+    } catch (e) { alert('Failed to download GPX: ' + e.message); }
   }
 
   // ── Clear Route ─────────────────────────────────────────────
