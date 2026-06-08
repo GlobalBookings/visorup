@@ -668,6 +668,66 @@ class VisorUpSite {
         this.scrollToTop();
         break;
 
+      case 'fuel-range':
+        this.showSiteView();
+        this.pageContent.innerHTML = renderFuelRange() + this.renderFooter();
+        this.setActiveNav('tools');
+        this.setTitle('Fuel Range Planner — How Far Can You Ride?');
+        this._setMeta({ description: 'Calculate your motorcycle fuel range based on tank size, MPG, and riding style. Find fuel stations along UK touring routes.' });
+        VisorUpAnalytics.trackToolUsage('fuel-range');
+        this.scrollToTop();
+        break;
+
+      case 'weather-window':
+        this.showSiteView();
+        this.pageContent.innerHTML = renderWeatherWindow() + this.renderFooter();
+        this.setActiveNav('tools');
+        this.setTitle('Ride Weather Window Finder');
+        this._setMeta({ description: 'Find the best dry riding days for any UK region. 14-day motorcycle weather forecast with riding condition scores.' });
+        VisorUpAnalytics.trackToolUsage('weather-window');
+        this.scrollToTop();
+        break;
+
+      case 'motorcycle-law':
+        this.showSiteView();
+        this.pageContent.innerHTML = renderMotorcycleLaw() + this.renderFooter();
+        this.setActiveNav('planning');
+        this.setTitle('UK Motorcycle Law — Quick Reference Guide');
+        this._setMeta({ description: 'Complete UK motorcycle law reference — speed limits, filtering, bus lanes, helmet rules, licence categories, penalty points. Everything riders need to know.' });
+        this.scrollToTop();
+        break;
+
+      case 'tyre-chain-guide':
+        this.showSiteView();
+        this.pageContent.innerHTML = renderTyreChainGuide() + this.renderFooter();
+        this.setActiveNav('planning');
+        this.setTitle('Tyre Pressure & Chain Maintenance Guide');
+        this._setMeta({ description: 'Interactive motorcycle tyre pressure calculator and chain maintenance guide. Get recommended pressures for your bike type and riding conditions.' });
+        VisorUpAnalytics.trackToolUsage('tyre-chain-guide');
+        this.scrollToTop();
+        break;
+
+      case 'road-ratings':
+        this.showSiteView();
+        this.pageContent.innerHTML = renderRoadRatings() + this.renderFooter();
+        this.setActiveNav('routes');
+        this.setTitle('UK Biker Road Ratings — Best Motorcycle Roads');
+        this._setMeta({ description: 'Rated and reviewed: the 48 best motorcycle roads in the UK. Filter by region, difficulty, and scenery. From Cat & Fiddle to Bealach na Ba.' });
+        this.scrollToTop();
+        if (typeof roadRatings !== 'undefined') setTimeout(function() { roadRatings.renderCards(); }, 100);
+        break;
+
+      case 'regional-rides':
+      case 'rides-near-me':
+        this.showSiteView();
+        this.pageContent.innerHTML = renderRegionalRides() + this.renderFooter();
+        this.setActiveNav('routes');
+        this.setTitle('Best Motorcycle Rides Near You — By City');
+        this._setMeta({ description: 'Find the best motorcycle rides within 2 hours of London, Manchester, Edinburgh, Bristol, Leeds, and more. 64 curated routes across 10 UK cities.' });
+        this.scrollToTop();
+        if (typeof regionalRides !== 'undefined') setTimeout(function() { regionalRides.selectCity('london'); }, 100);
+        break;
+
       case 'build-route':
         this.showSiteView();
         this.pageContent.innerHTML = '<div id="routeBuilderContainer" style="height:calc(100vh - 60px);width:100%;"></div>';
