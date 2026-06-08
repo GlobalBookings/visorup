@@ -568,9 +568,16 @@ class VisorUpSite {
 
       case 'gear':
         this.showSiteView();
-        this.pageContent.innerHTML = this.renderComingSoon('Gear Reviews', 'In-depth reviews of motorcycle touring gear, luggage systems, and riding kit — tested on real British roads.', 'fa-helmet-safety') + this.renderFooter();
+        if (parts[1] === 'finder') {
+          this.pageContent.innerHTML = renderGearFinder() + this.renderFooter();
+          this.setTitle('Find Your Perfect Motorcycle Gear');
+          this._setMeta({ description: 'Interactive gear finder — get personalised motorcycle gear recommendations based on your riding style, experience, weather conditions, and budget.' });
+        } else {
+          this.pageContent.innerHTML = renderGearFinder() + this.renderFooter();
+          this.setTitle('Find Your Perfect Motorcycle Gear');
+          this._setMeta({ description: 'Interactive gear finder — get personalised motorcycle gear recommendations based on your riding style, experience, weather conditions, and budget.' });
+        }
         this.setActiveNav('gear');
-        this.setTitle('Gear Reviews — Coming Soon');
         this.scrollToTop();
         break;
 
@@ -7017,7 +7024,17 @@ class VisorUpSite {
 // ── GA4 Event Tracking ──────────────────────────────────────────
 
 const VisorUpAnalytics = {
+  _isBot: null,
+  _checkBot() {
+    if (this._isBot !== null) return this._isBot;
+    var ua = navigator.userAgent || '';
+    // Detect common bots, crawlers, headless browsers
+    this._isBot = /bot|crawl|spider|slurp|facebookexternalhit|Bytespider|PetalBot|SemrushBot|AhrefsBot|DotBot|MJ12bot|Barkrowler|headless|puppet|phantom|prerender|lighthouse|pingdom|uptimerobot|StatusCake|GTmetrix|wget|curl|python-requests|Go-http-client|Apache-HttpClient|Java\//i.test(ua)
+      || navigator.webdriver === true;
+    return this._isBot;
+  },
   track(eventName, params) {
+    if (this._checkBot()) return;
     if (typeof gtag === 'function') {
       gtag('event', eventName, params || {});
     }

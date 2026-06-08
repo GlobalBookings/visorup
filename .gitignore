@@ -6,3 +6,20 @@ screenshots/
 supabase-env.json
 .DS_Store
 *.log
+
+# Scraper data (large files, progress tracking)
+data/products.json
+data/full-catalogue.json
+data/products-catalogue.json
+data/scrape-progress.json
+data/category-progress.json
+data/catalogue-stats.json
+data/title-cache.json
+data/failed-urls.json
+data/scrape-*.log
+
+# Proxy scraper (contains credentials)
+scripts/scrape-proxy.mjs
+
+# Playwright
+playwright-report/

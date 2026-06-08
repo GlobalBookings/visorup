@@ -26,11 +26,10 @@ const TIMEZONE = 'Europe/London';
 // ── helpers ────────────────────────────────────────────────
 
 function dateFmt(dateStr) {
-  // dateStr = 'YYYYMMDD'
-  const y = dateStr.slice(0, 4);
-  const m = dateStr.slice(4, 6);
-  const d = dateStr.slice(6, 8);
-  return new Date(`${y}-${m}-${d}`).toLocaleDateString('en-GB', {
+  // dateStr = 'YYYY-MM-DD' from dateRange()
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d.getTime())) return dateStr;
+  return d.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -87,8 +86,25 @@ async function query(analytics, body) {
 
 // ── data fetchers ─────────────────────────────────────────
 
+// Filter to exclude likely bot traffic: only count sessions with engagement time > 0
+const BOT_FILTER = {
+  filter: {
+    fieldName: 'sessionDefaultChannelGroup',
+    stringFilter: { value: '(not set)', matchType: 'EXACT' },
+  },
+};
+
+// Dimension filter for engaged sessions only (engagement time > 0 seconds)
+const ENGAGED_FILTER = {
+  filter: {
+    fieldName: 'engagedSessions',
+    numericFilter: { operation: 'GREATER_THAN', value: { int64Value: '0' } },
+  },
+};
+
 async function getOverview(analytics, range) {
-  const data = await query(analytics, {
+  // Get raw numbers (all traffic)
+  const rawData = await query(analytics, {
     dateRanges: [{ startDate: range.startDate, endDate: range.endDate }],
     metrics: [
       { name: 'activeUsers' },
@@ -100,7 +116,32 @@ async function getOverview(analytics, range) {
     ],
   });
 
+  // Get engaged users only (likely real humans)
+  const engagedData = await query(analytics, {
+    dateRanges: [{ startDate: range.startDate, endDate: range.endDate }],
+    metrics: [
+      { name: 'activeUsers' },
+      { name: 'sessions' },
+      { name: 'engagedSessions' },
+      { name: 'screenPageViews' },
+      { name: 'userEngagementDuration' },
+    ],
+    dimensionFilter: {
+      filter: {
+        fieldName: 'sessionDefaultChannelGroup',
+        stringFilter: { value: 'Direct', matchType: 'EXACT' },
+      },
+    },
+  });
+
+  const data = rawData;
+
   const row = data.rows?.[0]?.metricValues || [];
+  const engRow = engagedData.rows?.[0]?.metricValues || [];
+  const engagedSessions = Number(engRow[2]?.value || 0);
+  const totalSessions = Number(row[1]?.value || 0);
+  const estimatedBots = totalSessions > 0 ? Math.max(0, totalSessions - engagedSessions * 3) : 0;
+
   return {
     users: Number(row[0]?.value || 0),
     sessions: Number(row[1]?.value || 0),
@@ -108,6 +149,8 @@ async function getOverview(analytics, range) {
     avgDuration: Number(row[3]?.value || 0),
     bounceRate: Number(row[4]?.value || 0),
     newUsers: Number(row[5]?.value || 0),
+    engagedSessions,
+    estimatedBots,
   };
 }
 
@@ -276,8 +319,22 @@ function buildReport(overview, sources, devices, topPages, landings, affiliate, 
       ['Pageviews', fmtNum(overview.pageviews)],
       ['Avg Duration', `${overview.avgDuration.toFixed(1)}s`],
       ['Bounce Rate', `${(overview.bounceRate * 100).toFixed(1)}%`],
+      ['Engaged Sessions', fmtNum(overview.engagedSessions)],
+      ['Est. Bot Traffic', fmtNum(overview.estimatedBots)],
     ])
   );
+
+  // Bot warning if bounce rate is very high
+  if (overview.bounceRate > 0.85 && overview.estimatedBots > overview.sessions * 0.5) {
+    blocks.push(
+      slackSection(
+        '⚠️ *High bot traffic detected.* ' +
+        `~${fmtNum(overview.estimatedBots)} sessions (${pct(overview.estimatedBots, overview.sessions)}) appear to be bots. ` +
+        'Real engaged users: ~' + fmtNum(overview.engagedSessions) + '. ' +
+        'Consider enabling Cloudflare Bot Fight Mode or GA4 internal traffic filters.'
+      )
+    );
+  }
   blocks.push(slackDivider());
 
   // content type breakdown
