@@ -668,6 +668,18 @@ class VisorUpSite {
         this.scrollToTop();
         break;
 
+      case 'garage-finder':
+      case 'garages':
+        this.showSiteView();
+        this.pageContent.innerHTML = renderGarageFinder() + this.renderFooter();
+        this.setActiveNav('tools');
+        this.setTitle('Find a Motorcycle Garage Near You');
+        this._setMeta({ description: 'Find motorcycle garages, dealers, and repair shops near you. ' + UK_MOTORCYCLE_GARAGES.length + ' locations across the UK with phone, website, and directions.' });
+        VisorUpAnalytics.trackToolUsage('garage-finder');
+        this.scrollToTop();
+        setTimeout(function() { garageFinder.init(); }, 100);
+        break;
+
       case 'fuel-range':
         this.showSiteView();
         this.pageContent.innerHTML = renderFuelRange() + this.renderFooter();
