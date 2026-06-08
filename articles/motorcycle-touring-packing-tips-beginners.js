@@ -22,7 +22,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <p>Your bike has a maximum payload, and I guarantee it's less than you think. My Triumph Tiger 800 is rated for 199kg total, including me, fuel, and luggage. That sounds like loads until you realise a full <a href="/guides/tank-bags-touring">tank</a> of fuel weighs 20kg, I weigh 75kg in gear, and suddenly I've got maybe 100kg for everything else.</p>
 
-<p>Check your manual, weigh yourself in full gear, and do the maths. I've seen riders loading 40kg of kit onto bikes that were already at their limit. The result? Wallowing handling, overheated brakes on Alpine descents, and potentially dangerous instability.</p>
+<p>Check your manual, weigh yourself in full gear, and do the maths. I've seen <a href="/guides/leather-motorcycle-trousers">riders</a> loading 40kg of kit onto bikes that were already at their limit. The result? Wallowing handling, overheated brakes on Alpine descents, and potentially dangerous instability.</p>
 
 <h2>Luggage Systems: Hard Cases vs Soft Bags</h2>
 
@@ -39,7 +39,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 <li>Quick to remove for loading</li>
 </ul>
 
-<p>The downsides? They're expensive initially, and they stick out wide. I've clipped my panniers on Cornish lane hedges more times than I care to admit. They also amplify wind buffeting on motorways.</p>
+<p>The downsides? They're expensive initially, and they stick out wide. I've clipped my <a href="/guides/motorcycle-panniers-guide">panniers</a> on Cornish lane hedges more times than I care to admit. They also amplify wind buffeting on motorways.</p>
 
 <h3>Soft Luggage Systems</h3>
 
@@ -169,7 +169,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <h3>Hydration</h3>
 
-<p>I carry a 2-litre hydration bladder in my backpack and a 750ml bottle on the bike. Dehydration kills concentration, and concentrated riding demands constant hydration. I've learned this the hard way crossing Dartmoor on a hot day.</p>
+<p>I carry a 2-litre hydration bladder in my backpack and a 750ml bottle on the bike. Dehydration kills concentration, and concentrated <a href="/guides/motorcycle-riding-jeans">riding</a> demands constant hydration. I've learned this the hard way crossing Dartmoor on a hot day.</p>
 
 <h2>Packing Methodology: Weight Distribution</h2>
 
@@ -184,7 +184,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 <li>Tools and spares in panniers, clothes in top box</li>
 </ul>
 
-<p>I pack tools, spare parts, and heavy items like boots in the panniers. Clothes, which are lighter and bulkier, go in the top box. This keeps the centre of gravity low and maintains proper weight distribution.</p>
+<p>I pack tools, spare parts, and heavy items like <a href="/guides/touring-motorcycle-boots">boots</a> in the panniers. Clothes, which are lighter and bulkier, go in the top box. This keeps the centre of gravity low and maintains proper weight distribution.</p>
 
 <h3>Testing Your Setup</h3>
 
@@ -234,4 +234,4 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 
 <p>Your first tour won't be perfect, and that's fine. I've been touring for years and I'm still tweaking my setup. The important thing is getting out there and experiencing what British touring offers. Start with shorter trips, build your confidence and kit knowledge, then tackle the bigger adventures like the NC500 or multi-week European tours.</p>
 
-<p>Now stop reading and start planning. Britain's roads are waiting, and they're absolutely brilliant once you know how to pack properly for them. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;
+<p>Now stop reading and start planning. Britain's roads are waiting, and they're absolutely brilliant once you know how to pack properly for them. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/adventure-motorcycle-boots">Adventure Motorcycle Boots for On and Off-Road UK Touring</a> guide for more.</p>`;

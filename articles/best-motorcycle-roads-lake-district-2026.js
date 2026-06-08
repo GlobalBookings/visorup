@@ -35,7 +35,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <h2>The Honister Pass: Raw and Remote</h2>
 
-<p>The B5289 over Honister Pass connects Borrowdale with the Buttermere Valley, and it's properly remote. This isn't a road for showing off – it's about soaking up some of the wildest scenery in England while navigating a challenging mountain route.</p>
+<p>The B5289 over Honister Pass connects Borrowdale with the Buttermere Valley, and it's properly remote. This isn't a road for showing off – it's about soaking up some of the wildest scenery in England while navigating a challenging <a href="/guides/lake-district-mountain-passes">mountain</a> route.</p>
 
 <p>The approach from Borrowdale starts innocuously enough, following the valley floor past Rosthwaite and Seatoller. Then the climbing begins, and the road narrows significantly. The surface is generally good, but there are sections where water runs across the tarmac even in dry weather.</p>
 
@@ -100,7 +100,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <h3>Accommodation and Services</h3>
 
-<p>Biker-friendly accommodation in the Lakes has improved massively over recent years. Many B&Bs now offer secure parking and drying facilities. YHA hostels are budget-friendly and welcome motorcyclists, though booking ahead is essential during peak season.</p>
+<p>Biker-friendly accommodation in the Lakes has improved massively over recent years. Many B&Bs now offer secure parking and drying facilities. YHA hostels are budget-friendly and welcome motorcyclists, though booking ahead is essential during <a href="/guides/peak-district-villages-guide">peak</a> season.</p>
 
 <p>For fuel, plan ahead. Petrol stations are sparse in the central fells, and prices increase with altitude. Windermere, Ambleside, and Keswick have the most options.</p>
 
@@ -124,4 +124,4 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <p>Most importantly, take time to stop and appreciate where you are. Yes, the roads are fantastic, but the Lake District is about more than just the riding. The landscape, history, and culture make this region special. Balance your throttle time with some proper exploration on foot.</p>
 
-<p>Use our <a href="/packing-checklist">comprehensive packing checklist</a> to ensure you have everything needed for a successful Lake District tour, and don't hesitate to extend your adventure into the wider region – some of Britain's best motorcycle roads await just beyond the national park boundaries.</p>`;
+<p>Use our <a href="/packing-checklist">comprehensive packing checklist</a> to ensure you have everything needed for a successful Lake District tour, and don't hesitate to extend your adventure into the wider region – some of Britain's best motorcycle roads await just beyond the national park boundaries. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more.</p>`;
