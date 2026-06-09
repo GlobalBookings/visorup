@@ -4627,7 +4627,12 @@ ul, ol { list-style: none; }
 }
 
 /* ── Infographic Pages ── */
-.ig-listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+.content-hero { text-align: center; padding: 80px 24px 48px; display: flex; align-items: center; justify-content: center; }
+.content-hero .hero-content { max-width: 700px; margin: 0 auto; }
+.content-hero .hero-badge { display: inline-block; background: rgba(245,158,11,0.15); color: var(--accent); font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.5px; }
+.content-hero h1 { font-size: 2.4rem; font-weight: 800; color: var(--text); margin: 0 0 12px; line-height: 1.2; }
+.content-hero .hero-subtitle { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin: 0; max-width: 560px; margin-left: auto; margin-right: auto; }
+.ig-listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
 .ig-list-card { display: flex; flex-direction: column; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); overflow: hidden; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
 .ig-list-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 .ig-list-img { height: 220px; background-size: cover; background-position: top center; }
@@ -4642,7 +4647,13 @@ ul, ol { list-style: none; }
 .ig-card:hover { transform: translateY(-3px); }
 .ig-card .ig-card-img { height: 140px; background-size: cover; background-position: top center; }
 .ig-card h4 { padding: 12px 14px; margin: 0; font-size: 13px; color: var(--text); }
-@media (max-width: 600px) { .ig-listing-grid { grid-template-columns: 1fr; } .ig-more-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) {
+  .content-hero { padding: 70px 16px 36px; }
+  .content-hero h1 { font-size: 1.6rem; }
+  .content-hero .hero-subtitle { font-size: 14px; }
+  .ig-listing-grid { grid-template-columns: 1fr; gap: 16px; }
+  .ig-more-grid { grid-template-columns: 1fr 1fr; }
+}
 
 /* ── Dark mode fixes for tool inline styles ── */
 [data-theme="dark"] .tcg-container [style*="background:#fff3cd"],
