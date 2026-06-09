@@ -816,6 +816,33 @@ class VisorUpSite {
         }
         break;
 
+      case 'infographics':
+        this.showSiteView();
+        if (parts[1]) {
+          var infographic = typeof ARTICLES !== 'undefined' && ARTICLES.find(function(a) { return a.slug === parts[1] && a.tags && a.tags.indexOf('infographic') >= 0; });
+          if (infographic) {
+            this.pageContent.innerHTML = this.renderInfographic(infographic) + this.renderFooter();
+            this.setActiveNav('explore');
+            this.setTitle(infographic.title);
+            this._setMeta({ description: infographic.metaDescription, image: infographic.heroImage, type: 'article' });
+            this._bindShareCopyBtns();
+            VisorUpAnalytics.trackGuideView(infographic.slug, 'infographic');
+            this.scrollToTop();
+          } else {
+            this.pageContent.innerHTML = this.render404();
+            this.setTitle('Page Not Found');
+            this.scrollToTop();
+          }
+        } else {
+          var infographics = typeof ARTICLES !== 'undefined' ? ARTICLES.filter(function(a) { return a.tags && a.tags.indexOf('infographic') >= 0; }) : [];
+          this.pageContent.innerHTML = this.renderInfographicsListing(infographics) + this.renderFooter();
+          this.setActiveNav('explore');
+          this.setTitle('Motorcycle Touring Infographics — Free to Share');
+          this._setMeta({ description: 'Free motorcycle touring infographics — UK road rankings, packing lists, bike guides, and more. Download and embed on your site with a link back to VisorUp.' });
+          this.scrollToTop();
+        }
+        break;
+
       case 'guides':
         this.showSiteView();
         if (parts[1] && parts[2]) {
@@ -5954,6 +5981,96 @@ class VisorUpSite {
         '</div>' +
         related +
         shareBar +
+      '</div>' +
+    '</section>';
+  }
+
+  renderInfographic(a) {
+    var imgUrl = window.location.origin + '/' + a.heroImage;
+    var pageUrl = window.location.origin + '/infographics/' + a.slug;
+    var embedCode = '<a href="' + pageUrl + '" target="_blank" rel="noopener">' +
+      '<img src="' + imgUrl + '" alt="' + a.title + '" style="max-width:100%;height:auto;" />' +
+      '</a>\n<p>Source: <a href="https://visorup.co.uk" rel="follow">VisorUp.co.uk</a> — UK Motorcycle Touring</p>';
+
+    var shareBar = '<div class="article-share-bar">' +
+      '<span class="article-share-label">Share</span>' +
+      '<a href="https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl) + '" target="_blank" rel="noopener" class="article-share-btn share-facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>' +
+      '<a href="https://twitter.com/intent/tweet?url=' + encodeURIComponent(pageUrl) + '&text=' + encodeURIComponent(a.title + ' — free infographic from @VisorUp') + '" target="_blank" rel="noopener" class="article-share-btn share-twitter" title="Share on X"><i class="fab fa-x-twitter"></i></a>' +
+      '<a href="https://www.pinterest.com/pin/create/button/?url=' + encodeURIComponent(pageUrl) + '&media=' + encodeURIComponent(imgUrl) + '&description=' + encodeURIComponent(a.title) + '" target="_blank" rel="noopener" class="article-share-btn share-pinterest" title="Pin on Pinterest"><i class="fab fa-pinterest-p"></i></a>' +
+      '<a href="https://wa.me/?text=' + encodeURIComponent(a.title + ' ' + pageUrl) + '" target="_blank" rel="noopener" class="article-share-btn share-whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>' +
+      '<button class="article-share-btn share-copy" data-url="' + pageUrl + '" title="Copy link"><i class="fas fa-link"></i></button>' +
+    '</div>';
+
+    var otherInfographics = typeof ARTICLES !== 'undefined' ? ARTICLES.filter(function(ar) { return ar.tags && ar.tags.indexOf('infographic') >= 0 && ar.slug !== a.slug; }) : [];
+    var moreCards = otherInfographics.map(function(ig) {
+      return '<a href="/infographics/' + ig.slug + '" class="ig-card">' +
+        '<div class="ig-card-img" style="background-image:url(' + ig.heroImage + ')"></div>' +
+        '<h4>' + ig.title + '</h4>' +
+      '</a>';
+    }).join('');
+    var moreSection = moreCards ? '<div class="ig-more"><h3><i class="fas fa-images" style="color:var(--accent);margin-right:8px"></i>More Infographics</h3><div class="ig-more-grid">' + moreCards + '</div></div>' : '';
+
+    return '' +
+    '<section class="page-section" style="padding-top:calc(var(--nav-h, 60px) + 32px)">' +
+      '<div class="container" style="max-width:900px">' +
+        '<nav class="breadcrumb"><a href="/">Home</a> <i class="fas fa-chevron-right"></i> <a href="/infographics">Infographics</a> <i class="fas fa-chevron-right"></i> <span>' + a.title + '</span></nav>' +
+        '<h1 style="font-size:2rem;margin:0 0 8px;color:var(--text)">' + a.title + '</h1>' +
+        '<p style="color:var(--text-muted);margin:0 0 24px;font-size:15px">' + a.metaDescription + '</p>' +
+        shareBar +
+        '<div class="ig-image-wrap" style="margin:24px 0;text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg, 12px);padding:24px;overflow:hidden">' +
+          '<img src="' + a.heroImage + '" alt="' + a.title + '" style="max-width:100%;height:auto;border-radius:8px" loading="lazy" />' +
+        '</div>' +
+        '<div style="display:flex;gap:12px;justify-content:center;margin:0 0 32px;flex-wrap:wrap">' +
+          '<a href="' + a.heroImage + '" download class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--accent);color:#080c0b;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none"><i class="fas fa-download"></i> Download Full Size</a>' +
+        '</div>' +
+        '<div class="ig-embed-box" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg, 12px);padding:24px;margin:0 0 32px">' +
+          '<h3 style="margin:0 0 8px;font-size:18px;color:var(--text)"><i class="fas fa-code" style="color:var(--accent);margin-right:8px"></i>Embed This Infographic</h3>' +
+          '<p style="margin:0 0 16px;font-size:14px;color:var(--text-muted)">Free to use on your website, blog, or forum. Just copy the code below — it includes a link back to VisorUp.</p>' +
+          '<div style="position:relative">' +
+            '<pre style="background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:16px 48px 16px 16px;overflow-x:auto;font-size:13px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-all"><code id="igEmbedCode">' + embedCode.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') + '</code></pre>' +
+            '<button onclick="var code=document.getElementById(\'igEmbedCode\').textContent;navigator.clipboard.writeText(code);this.textContent=\'Copied!\';setTimeout(()=>this.innerHTML=\'<i class=\\\'fas fa-copy\\\'></i> Copy\',2000)" style="position:absolute;top:8px;right:8px;background:var(--accent);color:#080c0b;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit"><i class="fas fa-copy"></i> Copy</button>' +
+          '</div>' +
+          '<div style="margin-top:16px;padding:16px;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px">' +
+            '<h4 style="margin:0 0 8px;font-size:14px;color:var(--text)"><i class="fas fa-eye" style="color:var(--accent);margin-right:6px"></i>Preview</h4>' +
+            '<div style="border:1px dashed var(--border);border-radius:6px;padding:12px;text-align:center">' +
+              '<img src="' + a.heroImage + '" alt="' + a.title + '" style="max-width:300px;height:auto;border-radius:4px" />' +
+              '<p style="font-size:12px;color:var(--text-muted);margin:8px 0 0">Source: <a href="https://visorup.co.uk" style="color:var(--accent)">VisorUp.co.uk</a> — UK Motorcycle Touring</p>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        (a.content ? '<div class="article-body" style="margin:0 0 32px">' + a.content + '</div>' : '') +
+        shareBar +
+        moreSection +
+      '</div>' +
+    '</section>';
+  }
+
+  renderInfographicsListing(infographics) {
+    var cards = infographics.map(function(ig) {
+      return '<a href="/infographics/' + ig.slug + '" class="ig-list-card">' +
+        '<div class="ig-list-img" style="background-image:url(' + ig.heroImage + ')"></div>' +
+        '<div class="ig-list-body">' +
+          '<h3>' + ig.title + '</h3>' +
+          '<p>' + ig.metaDescription + '</p>' +
+          '<span class="ig-list-cta"><i class="fas fa-eye"></i> View & Embed</span>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+
+    var empty = infographics.length === 0 ? '<p style="color:var(--text-muted);text-align:center;padding:40px 0">Infographics coming soon. Check back shortly!</p>' : '';
+
+    return '' +
+    '<div class="content-hero" style="background:linear-gradient(135deg, var(--bg-primary), var(--bg-card))">' +
+      '<div class="hero-content">' +
+        '<span class="hero-badge"><i class="fas fa-images"></i> Free Resources</span>' +
+        '<h1>Motorcycle Touring Infographics</h1>' +
+        '<p class="hero-subtitle">Shareable infographics for riders, bloggers, and forums. Free to download and embed on your site with a link back to VisorUp.</p>' +
+      '</div>' +
+    '</div>' +
+    '<section class="page-section">' +
+      '<div class="container" style="max-width:1000px">' +
+        '<div class="ig-listing-grid">' + cards + '</div>' +
+        empty +
       '</div>' +
     '</section>';
   }
