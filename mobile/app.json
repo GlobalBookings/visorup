@@ -3,13 +3,25 @@
     "name": "VisorUp",
     "slug": "visorup",
     "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "scheme": "visorup",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#080c0b"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "co.uk.visorup.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "VisorUp needs your location to track your ride and show progress along your route.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "VisorUp uses background location to keep tracking your ride when the app is minimised.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
       "config": {
         "googleMapsApiKey": ""
       }
@@ -17,21 +29,65 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#0D3B2E",
-        "foregroundImage": "./assets/icon.png"
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "package": "co.uk.visorup.app",
+      "versionCode": 1,
       "config": {
         "googleMaps": {
-          "apiKey": ""
+          "apiKey": "AIzaSyCB4tB8fpEzGbX0GcOsTWe56FBaY7pza2s"
         }
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.VIBRATE",
+        "android.permission.POST_NOTIFICATIONS"
+      ]
     },
     "plugins": [
       "expo-router",
-      "expo-secure-store"
+      "expo-secure-store",
+      "expo-web-browser",
+      "expo-splash-screen",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "VisorUp needs your location to track your ride and show progress along your route.",
+          "locationAlwaysAndWhenInUsePermission": "VisorUp uses background location to keep tracking your ride when minimised.",
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "VisorUp needs access to your photos to share ride pictures.",
+          "cameraPermission": "VisorUp needs camera access to take ride photos."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#D68A2D"
+        }
+      ],
+      "expo-sharing"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0480fa18-4bf3-406a-a646-0e3b9eea0168"
+      },
+      "router": {}
+    },
+    "owner": "spiresdigital"
   }
 }

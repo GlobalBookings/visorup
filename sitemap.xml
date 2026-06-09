@@ -18,6 +18,16 @@
   <url><loc>https://visorup.co.uk/service-tracker</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://visorup.co.uk/mot-tax</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://visorup.co.uk/emergency-card</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- Interactive Tools -->
+  <url><loc>https://visorup.co.uk/gear</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/fuel-range</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/weather-window</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/motorcycle-law</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/tyre-chain-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/road-ratings</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/regional-rides</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/garage-finder</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
   <url><loc>https://visorup.co.uk/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://visorup.co.uk/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://visorup.co.uk/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>

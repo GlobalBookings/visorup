@@ -27,6 +27,37 @@
   <meta name="twitter:title" content="VisorUp — Motorcycle Adventures Across Britain">
   <meta name="twitter:description" content="The definitive motorcycle touring resource for Britain and the islands. Routes, destinations, ferries, GPX downloads.">
   <meta name="twitter:image" content="https://visorup.co.uk/public/images/heroes/homepage.jpg">
+  <link rel="canonical" href="https://visorup.co.uk/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "VisorUp",
+        "url": "https://visorup.co.uk",
+        "description": "The definitive motorcycle touring resource for Britain and the Channel Islands. Routes, destinations, ferries, bike guides, and interactive planning tools.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://visorup.co.uk/guides?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "name": "VisorUp",
+        "url": "https://visorup.co.uk",
+        "logo": "https://visorup.co.uk/public/icons/icon-512x512.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "hello@visorup.co.uk",
+          "contactType": "customer service"
+        },
+        "sameAs": []
+      }
+    ]
+  }
+  </script>
   <link rel="icon" href="/public/icons/icon.svg" type="image/svg+xml">
   <link rel="icon" href="/public/icons/icon-192x192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="/public/icons/apple-touch-icon.png">
@@ -158,6 +189,7 @@
           </div>
         </div>
         <a href="/community" data-nav="community">Community</a>
+        <a href="/garage-finder" data-nav="breakdown" class="nav-breakdown"><i class="fas fa-screwdriver-wrench"></i> Breakdown</a>
       </div>
       <div class="nav-actions">
         <a href="/build-route" class="nav-build-route-btn"><i class="fas fa-pencil-ruler"></i> Build Route</a>
@@ -173,6 +205,7 @@
     </div>
   </nav>
   <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="/garage-finder" class="mob-direct mob-breakdown"><i class="fas fa-screwdriver-wrench"></i> Breakdown — Find a Garage</a>
     <div class="mob-section">
       <button class="mob-heading" data-mob-toggle="mob-explore"><i class="fas fa-compass"></i> Explore <i class="fas fa-chevron-down mob-chevron"></i></button>
       <div class="mob-sub" id="mob-explore">

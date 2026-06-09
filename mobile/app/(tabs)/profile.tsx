@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase, Profile, UserBike } from '../../lib/supabase';
+import { signInWithGoogle } from '../../lib/auth';
 import { colors, spacing } from '../../lib/theme';
 
 export default function ProfileScreen() {
@@ -38,6 +39,20 @@ export default function ProfileScreen() {
   }, []);
 
   useEffect(() => { fetchProfile(); }, [fetchProfile]);
+
+  // Listen for auth state changes (e.g. after Google redirect)
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        fetchProfile();
+      } else {
+        setUser(null);
+        setProfile(null);
+        setBikes([]);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [fetchProfile]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -100,6 +115,30 @@ export default function ProfileScreen() {
           <Text style={styles.primaryBtnText}>
             {authLoading ? 'Loading...' : authMode === 'login' ? 'Sign In' : 'Create Account'}
           </Text>
+        </TouchableOpacity>
+
+        <View style={styles.dividerRow}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.dividerText}>or</Text>
+          <View style={styles.dividerLine} />
+        </View>
+
+        <TouchableOpacity
+          style={styles.googleBtn}
+          onPress={async () => {
+            setAuthLoading(true);
+            try {
+              const success = await signInWithGoogle();
+              if (success) await fetchProfile();
+            } catch (e: any) {
+              Alert.alert('Google Sign-In Error', e.message);
+            }
+            setAuthLoading(false);
+          }}
+          disabled={authLoading}
+        >
+          <Ionicons name="logo-google" size={18} color="#fff" />
+          <Text style={styles.googleBtnText}>Continue with Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}>
@@ -203,6 +242,20 @@ const styles = StyleSheet.create({
     marginTop: spacing.sm,
   },
   primaryBtnText: { color: colors.background, fontSize: 15, fontWeight: '700' },
+  dividerRow: { flexDirection: 'row', alignItems: 'center', width: '100%', marginVertical: spacing.md },
+  dividerLine: { flex: 1, height: 1, backgroundColor: colors.border },
+  dividerText: { color: colors.textMuted, fontSize: 12, marginHorizontal: spacing.sm },
+  googleBtn: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    backgroundColor: '#4285F4',
+    borderRadius: 10,
+    padding: spacing.md,
+  },
+  googleBtnText: { color: '#fff', fontSize: 15, fontWeight: '700' },
   switchAuth: { color: colors.accent, fontSize: 13, marginTop: spacing.md },
   profileHeader: { alignItems: 'center', paddingVertical: spacing.xl },
   avatar: { width: 80, height: 80, borderRadius: 40, borderWidth: 2, borderColor: colors.accent },

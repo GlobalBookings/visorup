@@ -24,6 +24,14 @@ https://visorup.co.uk
 - Service Tracker: https://visorup.co.uk/service-tracker
 - MOT & Tax Tracker: https://visorup.co.uk/mot-tax
 - Emergency Info Card: https://visorup.co.uk/emergency-card
+- Gear Finder: https://visorup.co.uk/gear
+- Fuel Range Planner: https://visorup.co.uk/fuel-range
+- Weather Window Finder: https://visorup.co.uk/weather-window
+- UK Motorcycle Law: https://visorup.co.uk/motorcycle-law
+- Tyre Pressure & Chain Guide: https://visorup.co.uk/tyre-chain-guide
+- UK Biker Road Ratings: https://visorup.co.uk/road-ratings
+- Regional Rides: https://visorup.co.uk/regional-rides
+- Garage Finder: https://visorup.co.uk/garage-finder
 - About: https://visorup.co.uk/about
 - Contact: https://visorup.co.uk/contact
 - Privacy Policy: https://visorup.co.uk/privacy
@@ -97,12 +105,23 @@ Each guide includes full specifications, UK touring review, scoring (touring/com
 - Honda CB500X: https://visorup.co.uk/bikes/honda-cb500x
 
 ## Interactive Tools
-- **Route Builder**: Click-to-add waypoints, OSRM road-accurate routing, 800+ POI markers (campsites, bridges, wildlife, fuel stations, viewpoints, biker pubs, scenic roads), scenic/fast mode toggle, GPX export, auto day-splitting
-- **AI Trip Planner**: 4-step wizard — enter start location, duration (1-14 days), daily riding hours (2-8h), select interests from 13 POI types, generates optimised multi-day tour with GPX download
-- **Elevation Profiles**: Route elevation charts powered by Open-Meteo API
-- **Weather Forecasts**: 7-day weather overlay for route planning
-- **Fuel Range Warnings**: Tank range input with recommended fuel stops
-- **Cost Estimator**: Trip cost calculation with MPG and fuel price inputs
+- **Route Builder**: https://visorup.co.uk/build-route — Click-to-add waypoints, OSRM road-accurate routing, 800+ POI markers (campsites, bridges, wildlife, fuel stations, viewpoints, biker pubs, scenic roads), scenic/fast mode toggle, GPX export, auto day-splitting
+- **AI Trip Planner**: https://visorup.co.uk/plan-trip — 4-step wizard — enter start location, duration (1-14 days), daily riding hours (2-8h), select interests from 13 POI types, generates optimised multi-day tour with GPX download
+- **Gear Finder**: https://visorup.co.uk/gear — Interactive 5-step quiz recommending motorcycle gear based on experience level, riding style, weather conditions, budget, and gear type. Personalised product recommendations across helmets, jackets, trousers, boots, gloves, and luggage with SportsBikeShop links
+- **Fuel Range Planner**: https://visorup.co.uk/fuel-range — Calculate motorcycle fuel range based on tank size, MPG, and riding style. Covers 18 common touring bikes with preset specs. Shows how far you can ride before needing fuel across UK regions
+- **Weather Window Finder**: https://visorup.co.uk/weather-window — 14-day motorcycle riding weather forecast for any UK location. Scores each day for riding conditions based on rain, wind, temperature, and visibility. Identifies the best dry riding windows
+- **UK Motorcycle Law Reference**: https://visorup.co.uk/motorcycle-law — Complete quick-reference guide to UK motorcycle law across 15 sections: speed limits, filtering, bus lanes, helmet law, licence categories, pillions, modifications, insurance, penalty points, drink-drive limits, and more. Searchable with FAQ
+- **Tyre Pressure & Chain Guide**: https://visorup.co.uk/tyre-chain-guide — Interactive tyre pressure calculator for 6 bike types across 4 load levels and 3 riding conditions, plus comprehensive chain maintenance guide with tension, cleaning, and lubrication instructions
+- **UK Biker Road Ratings**: https://visorup.co.uk/road-ratings — 48 rated and reviewed UK motorcycle roads. Each road scored for scenery, bends, surface quality, and traffic. Filter by region (Scotland, England, Wales) and difficulty level
+- **Regional Rides**: https://visorup.co.uk/regional-rides — 64 curated motorcycle rides near 10 major UK cities (London, Manchester, Edinburgh, Bristol, Leeds, Birmingham, Glasgow, Cardiff, Newcastle, Sheffield). Each ride includes distance, duration, difficulty, and highlights
+- **Garage Finder**: https://visorup.co.uk/garage-finder — Find motorcycle garages, dealers, and repair shops across the UK. 406 locations sourced from OpenStreetMap with GPS-based nearest search, text search, phone numbers, websites, and directions
+- **Packing Checklist**: https://visorup.co.uk/packing-checklist — Interactive motorcycle packing checklist customised for day rides, weekend tours, camping trips, and European adventures
+- **Ride Cost Calculator**: https://visorup.co.uk/cost-calculator — Trip budget planner covering fuel, accommodation, food, and ferries with full cost breakdown
+- **Riding Weather**: https://visorup.co.uk/weather — 7-day weather forecast for any UK location with riding verdicts, wind speeds, and rainfall
+- **Sunrise & Sunset**: https://visorup.co.uk/sunrise-sunset — Check sunrise, sunset, and golden hour times for any UK location to maximise daylight riding hours
+- **Service Tracker**: https://visorup.co.uk/service-tracker — Track tyre wear, chain maintenance, oil changes, and service intervals for every bike in your garage
+- **MOT & Tax Tracker**: https://visorup.co.uk/mot-tax — Track MOT, tax, and insurance expiry dates with countdown warnings
+- **Emergency Info Card**: https://visorup.co.uk/emergency-card — Create a printable emergency card with ICE contacts, medical info, bike details, and breakdown cover numbers
 
 ## Points of Interest Database
 800+ POIs across the UK covering: campsites, bridges, wildlife lookouts, scenic roads, fuel stations, viewpoints, biker pubs, fossils, and more. All data categorised by region (Scotland, England, Wales, Channel Islands).

@@ -672,9 +672,9 @@ class VisorUpSite {
       case 'garages':
         this.showSiteView();
         this.pageContent.innerHTML = renderGarageFinder() + this.renderFooter();
-        this.setActiveNav('tools');
-        this.setTitle('Find a Motorcycle Garage Near You');
-        this._setMeta({ description: 'Find motorcycle garages, dealers, and repair shops near you. ' + UK_MOTORCYCLE_GARAGES.length + ' locations across the UK with phone, website, and directions.' });
+        this.setActiveNav('breakdown');
+        this.setTitle('Breakdown — Find a Motorcycle Garage Near You');
+        this._setMeta({ description: 'Broken down? Find the nearest motorcycle garage, dealer, or repair shop. ' + UK_MOTORCYCLE_GARAGES.length + ' locations across the UK with phone numbers, websites, and directions.' });
         VisorUpAnalytics.trackToolUsage('garage-finder');
         this.scrollToTop();
         setTimeout(function() { garageFinder.init(); }, 100);
@@ -6002,6 +6002,39 @@ class VisorUpSite {
       document.head.appendChild(canonical);
     }
     canonical.href = url;
+
+    var existing = document.querySelector('script[data-ld="page"]');
+    if (existing) existing.remove();
+    if (type === 'article' && desc) {
+      var ld = document.createElement('script');
+      ld.type = 'application/ld+json';
+      ld.setAttribute('data-ld', 'page');
+      ld.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        'headline': title,
+        'description': desc,
+        'url': url,
+        'image': image ? (image.startsWith('http') ? image : (window.location.origin + '/' + image)) : undefined,
+        'publisher': { '@type': 'Organization', 'name': 'VisorUp', 'url': 'https://visorup.co.uk' }
+      });
+      document.head.appendChild(ld);
+    } else if (type === 'website' && window.location.pathname !== '/') {
+      var ld = document.createElement('script');
+      ld.type = 'application/ld+json';
+      ld.setAttribute('data-ld', 'page');
+      ld.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        'name': title,
+        'description': desc,
+        'url': url,
+        'applicationCategory': 'TravelApplication',
+        'operatingSystem': 'Web',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'GBP' }
+      });
+      document.head.appendChild(ld);
+    }
   }
 
   _bindShareCopyBtns() {

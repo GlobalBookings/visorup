@@ -29,3 +29,11 @@
   Cache-Control: public, max-age=300, must-revalidate
 /
   Cache-Control: public, max-age=300, must-revalidate
+
+# SEO files - short cache
+/robots.txt
+  Cache-Control: public, max-age=86400
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+/llms.txt
+  Cache-Control: public, max-age=86400
