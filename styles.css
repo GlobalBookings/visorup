@@ -17,6 +17,7 @@
 [data-theme="dark"] {
   --bg: #080c0b;
   --bg-surface: #0f1614;
+  --bg-primary: #0f1614;
   --bg-card: #152220;
   --bg-card-hover: #1c2e2a;
   --accent: #D68A2D;
@@ -38,6 +39,7 @@
 [data-theme="light"] {
   --bg: #F4F4F4;
   --bg-surface: #ffffff;
+  --bg-primary: #f8f9fa;
   --bg-card: #ffffff;
   --bg-card-hover: #f0f2f1;
   --accent: #c07820;
@@ -4622,4 +4624,80 @@ ul, ol { list-style: none; }
   .gf-search-row { flex-direction: column; }
   .gf-card-header { flex-direction: column; }
   .gf-card-meta { flex-direction: row; align-items: center; }
+}
+
+/* ── Dark mode fixes for tool inline styles ── */
+[data-theme="dark"] .tcg-container [style*="background:#fff3cd"],
+[data-theme="dark"] .law-container [style*="background:#fff3cd"],
+[data-theme="dark"] .rr-container [style*="background:#fff3cd"],
+[data-theme="dark"] .gear-finder-container [style*="background:#fff3cd"] {
+  background: rgba(255,193,7,0.12) !important;
+  border-color: rgba(255,193,7,0.3) !important;
+  color: #ffd54f !important;
+}
+[data-theme="dark"] .tcg-container [style*="background:#e3f2fd"],
+[data-theme="dark"] .law-container [style*="background:#e3f2fd"],
+[data-theme="dark"] .rr-container [style*="background:#e3f2fd"],
+[data-theme="dark"] .gear-finder-container [style*="background:#e3f2fd"] {
+  background: rgba(66,165,245,0.10) !important;
+  border-color: rgba(66,165,245,0.25) !important;
+  color: #90caf9 !important;
+}
+[data-theme="dark"] .tcg-container [style*="background:#e8f5e9"],
+[data-theme="dark"] .law-container [style*="background:#e8f5e9"],
+[data-theme="dark"] .rr-container [style*="background:#e8f5e9"],
+[data-theme="dark"] .gear-finder-container [style*="background:#e8f5e9"] {
+  background: rgba(76,175,80,0.10) !important;
+  border-color: rgba(76,175,80,0.25) !important;
+  color: #a5d6a7 !important;
+}
+[data-theme="dark"] .tcg-container [style*="background:#ffebee"],
+[data-theme="dark"] .law-container [style*="background:#ffebee"],
+[data-theme="dark"] .rr-container [style*="background:#ffebee"],
+[data-theme="dark"] .gear-finder-container [style*="background:#ffebee"] {
+  background: rgba(244,67,54,0.10) !important;
+  border-color: rgba(244,67,54,0.25) !important;
+  color: #ef9a9a !important;
+}
+[data-theme="dark"] .tcg-container [style*="color:#1565c0"],
+[data-theme="dark"] .law-container [style*="color:#1565c0"] {
+  color: #90caf9 !important;
+}
+[data-theme="dark"] .tcg-container [style*="color:#d32f2f"],
+[data-theme="dark"] .law-container [style*="color:#d32f2f"] {
+  color: #ef5350 !important;
+}
+[data-theme="dark"] .tcg-container [style*="color:#2e7d32"],
+[data-theme="dark"] .law-container [style*="color:#2e7d32"] {
+  color: #66bb6a !important;
+}
+/* Form inputs in tools — dark mode */
+[data-theme="dark"] .tcg-container input,
+[data-theme="dark"] .tcg-container select,
+[data-theme="dark"] .law-container input,
+[data-theme="dark"] .law-container select,
+[data-theme="dark"] .rr-container input,
+[data-theme="dark"] .rr-container select,
+[data-theme="dark"] .gear-finder-container input,
+[data-theme="dark"] .gear-finder-container select,
+[data-theme="dark"] .fuel-range-container input,
+[data-theme="dark"] .fuel-range-container select,
+[data-theme="dark"] .ww-container input,
+[data-theme="dark"] .ww-container select {
+  background: var(--bg-card) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+/* Tool option buttons — dark mode */
+[data-theme="dark"] .tcg-opt-btn,
+[data-theme="dark"] .law-container .opt-btn,
+[data-theme="dark"] .rr-container .opt-btn {
+  background: var(--bg-card) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+/* Monospace/code blocks in tools */
+[data-theme="dark"] .tcg-container [style*="font-family:monospace"],
+[data-theme="dark"] .law-container [style*="font-family:monospace"] {
+  color: var(--text) !important;
 }
