@@ -75,7 +75,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <p>Autumn (September-November) is my favourite season for Lake District riding. The colours are spectacular, tourist numbers drop after the schools return, and weather is often settled. However, fallen leaves on wet roads can be treacherous – treat them like ice.</p>
 
-<p>Winter (December-February) requires serious preparation. Mountain passes can close with little warning, and ice is a constant threat. But clear winter days offer incredible visibility and empty roads. Always check conditions before setting out and carry proper gear.</p>
+<p>Winter (December-February) requires serious preparation. Mountain passes can close with little warning, and ice is a constant threat. But clear winter days offer incredible visibility and <a href="/guides/scottish-borders-destination-guide">empty</a> roads. Always check conditions before setting out and carry proper gear.</p>
 
 <h3>Essential Gear for Lake District Riding</h3>
 
@@ -106,7 +106,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <h2>Beyond the Obvious: Hidden Gems</h2>
 
-<p>Once you've conquered the famous passes, there are plenty of lesser-known roads worth exploring. The loop around Tarn Hows offers gentle riding through working farmland. The road from Hawkshead to Grizedale Forest is technical and challenging without being dangerous.</p>
+<p>Once you've conquered the famous passes, there are plenty of lesser-known roads worth exploring. The loop <a href="/guides/planning-motorcycle-ferry-crossings-uk">around</a> Tarn Hows offers gentle riding through working farmland. The road from Hawkshead to Grizedale Forest is technical and challenging without being dangerous.</p>
 
 <p>For those planning longer tours, the Lake District works perfectly as part of larger Scottish adventures. Check out our <a href="/routes/nc500-complete">complete NC500 guide</a> for inspiration on extending your northern riding.</p>
 
@@ -124,4 +124,4 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <p>Most importantly, take time to stop and appreciate where you are. Yes, the roads are fantastic, but the Lake District is about more than just the riding. The landscape, history, and culture make this region special. Balance your throttle time with some proper exploration on foot.</p>
 
-<p>Use our <a href="/packing-checklist">comprehensive packing checklist</a> to ensure you have everything needed for a successful Lake District tour, and don't hesitate to extend your adventure into the wider region – some of Britain's best motorcycle roads await just beyond the national park boundaries. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more.</p>`;
+<p>Use our <a href="/packing-checklist">comprehensive packing checklist</a> to ensure you have everything needed for a successful Lake District tour, and don't hesitate to extend your adventure into the wider region – some of Britain's best motorcycle roads await just beyond the national park boundaries. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more. Read our <a href="/guides/budget-touring-guide-500-pounds">UK Motorcycle Tour on £500: The Complete Budget Guide</a> guide for more. Read our <a href="/guides/how-to-use-gpx-files-motorcycle">How to Use GPX Files for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more.</p>`;

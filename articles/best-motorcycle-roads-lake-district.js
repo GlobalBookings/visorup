@@ -1,6 +1,6 @@
 export const content = `<h2>The Best Motorcycle Roads in the Lake District: A Rider's Complete Guide</h2>
 
-<p>I've been touring the Lake District on two wheels for over a decade, and I can tell you there's nowhere quite like it in Britain for motorcycle touring. The combination of challenging mountain passes, stunning lakeside routes, and proper riding roads makes this corner of Cumbria absolutely essential for any serious tourer. After countless trips through these fells, I've put together what I reckon are the absolute best roads for getting the most out of your Lake District adventure.</p>
+<p>I've been touring the Lake District on two wheels for over a decade, and I can tell you there's nowhere quite like it in Britain for motorcycle touring. The combination of challenging mountain passes, stunning lakeside routes, and proper riding roads makes this corner of Cumbria absolutely essential for any serious tourer. After countless trips through these fells, I've put together what I reckon are the absolute <a href="/guides/best-motorcycle-roads-scotland">best</a> roads for getting the most out of your Lake District adventure.</p>
 
 <p>The Lakes offer everything from gentle cruise routes perfect for pillion passengers to proper mountain passes that'll test your skills and your bike. I've ridden every road mentioned here in all conditions – sunshine, torrential rain, and that peculiar Lakes mist that can roll in without warning. Here's what you need to know to make the most of your trip.</p>
 
@@ -8,9 +8,9 @@ export const content = `<h2>The Best Motorcycle Roads in the Lake District: A Ri
 
 <h3>Kirkstone Pass (A592): The Classic Challenge</h3>
 
-<p>Starting with the big one – Kirkstone Pass remains my go-to recommendation for anyone wanting to experience proper Lake District riding. This 1,489-foot pass between Ambleside and Patterdale is the highest road pass in the Lakes, and you'll feel every foot of that elevation gain.</p>
+<p>Starting with the big one – Kirkstone Pass remains my go-to recommendation for anyone wanting to experience proper <a href="/guides/lake-district-destination-guide">Lake</a> District riding. This 1,489-foot pass between Ambleside and Patterdale is the highest road pass in the Lakes, and you'll feel every foot of that elevation gain.</p>
 
-<p>The approach from Ambleside is relentless – a steady climb with hairpins that tighten as you gain height. Your bike will work for this one, especially if you're two-up with touring kit. I always drop down a gear earlier than I think I need to; the gradient catches out plenty of riders who find themselves lugging the engine halfway up.</p>
+<p>The approach from Ambleside is relentless – a steady climb with hairpins that tighten as you gain height. Your bike will work for this one, especially if you're two-up with <a href="/guides/best-touring-helmets-uk">touring</a> kit. I always drop down a gear earlier than I think I need to; the gradient catches out plenty of riders who find themselves lugging the engine halfway up.</p>
 
 <p>The descent into Patterdale on the eastern side is where the real fun begins. The road opens up with sweeping bends that flow beautifully, giving you proper views across to Helvellyn. Just watch for sheep – they've got absolutely no road sense and will wander into your line without warning.</p>
 
@@ -46,7 +46,7 @@ export const content = `<h2>The Best Motorcycle Roads in the Lake District: A Ri
 
 <p>Starting from Pooley Bridge, the A5091 runs along the western shore through some lovely wooded sections. The road surface is generally excellent, and the curves are gentle enough to maintain a good pace while still enjoying the views. Howtown is a perfect coffee stop – there's good parking for bikes and the café does proper bacon sandwiches.</p>
 
-<p>The A592 return leg along the eastern shore is more open, with long sweeping bends and better overtaking opportunities. The views across the lake towards Helvellyn are spectacular, especially in late afternoon light. Just watch for tourists in rental cars moving at glacial pace – patience is a virtue on Lake District roads.</p>
+<p>The A592 return leg along the eastern shore is more open, with long sweeping bends and better overtaking opportunities. The views across the lake towards Helvellyn are spectacular, especially in late afternoon light. Just watch for tourists in rental cars moving at glacial pace – patience is a virtue on Lake <a href="/guides/best-motorcycle-roads-lake-district-2026">District</a> roads.</p>
 
 <h3>Coniston Water and the Old Man</h3>
 
@@ -88,7 +88,7 @@ The Lake District rewards riders who take time to explore beyond the obvious rou
 
 <p>Petrol stations are scarcer than you might expect, especially once you're deep in the valleys. I always fill up in Ambleside, Keswick, or Kendal before heading into the more remote areas. There's nothing worse than watching your fuel light come on halfway up Hardknott Pass.</p>
 
-<p>Most of the traditional biker cafés are still going strong. The Yan at Kirkstone Pass Inn has been feeding hungry bikers for years, and the portions are generous enough to fuel the next mountain pass. Just be prepared for crowds on summer weekends – arrival before 10am or after 3pm usually guarantees a table.</p>
+<p>Most of the traditional biker cafés are still going strong. The Yan at Kirkstone Pass Inn has been feeding hungry bikers for years, and the portions are generous enough to fuel the next mountain pass. Just be prepared for crowds on <a href="/guides/summer-motorcycle-gloves">summer</a> weekends – arrival before 10am or after 3pm usually guarantees a table.</p>
 
 <h3>Traffic and Timing</h3>
 
