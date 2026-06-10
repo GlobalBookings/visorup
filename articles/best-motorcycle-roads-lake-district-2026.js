@@ -37,14 +37,14 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <p>The B5289 over Honister Pass connects Borrowdale with the Buttermere Valley, and it's properly remote. This isn't a road for showing off – it's about soaking up some of the wildest scenery in England while navigating a challenging <a href="/guides/lake-district-mountain-passes">mountain</a> route.</p>
 
-<p>The approach from Borrowdale starts innocuously enough, following the valley floor past Rosthwaite and Seatoller. Then the climbing begins, and the road narrows significantly. The surface is generally good, but there are sections where water runs across the tarmac even in dry weather.</p>
+<p>The approach from Borrowdale starts innocuously enough, following the valley floor past Rosthwaite and Seatoller. Then the climbing begins, and the road narrows significantly. The surface is generally good, but there are sections where water runs across the tarmac even in dry <a href="/guides/textile-touring-jackets">weather</a>.</p>
 
 <p>At the summit, you'll find the Honister Slate Mine. It's worth a stop, not just for the facilities but because the views back across the valley are incredible. The mine shop does decent coffee, and the car park provides a good opportunity to check your bike and gear.</p>
 
 <p>The descent towards Buttermere is technical. The hairpins are tighter than they look, and the road surface can be slippery when damp. I always take this section steadily – there's no shame in taking your time when the consequences of getting it wrong are severe.</p>
 
 <blockquote>
-<p>The Lake District's mountain passes aren't just roads – they're challenges that demand respect, preparation, and the right mindset. Ride them with humility, and they'll reward you with some of Britain's finest motorcycling experiences.</p>
+<p>The Lake District's mountain passes aren't just <a href="/guides/north-york-moors-motorcycle-destination">roads</a> – they're challenges that demand respect, preparation, and the right mindset. Ride them with humility, and they'll reward you with some of Britain's finest motorcycling experiences.</p>
 </blockquote>
 
 <h2>Lakeside Cruising: The Gentle Side of Lakeland</h2>
@@ -65,7 +65,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <h2>Weather and Conditions: What Every Lake District Rider Needs to Know</h2>
 
-<p>Lake District weather changes faster than a politician's promises, and it can vary dramatically between valleys. I've started rides in brilliant sunshine at Windermere and hit snow on Kirkstone Pass thirty minutes later.</p>
+<p>Lake District weather changes faster than a politician's promises, and it can vary dramatically between valleys. I've started <a href="/guides/touring-motorcycle-boots">rides</a> in brilliant sunshine at Windermere and hit snow on Kirkstone Pass thirty minutes later.</p>
 
 <h3>Seasonal Considerations</h3>
 
@@ -124,4 +124,4 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 
 <p>Most importantly, take time to stop and appreciate where you are. Yes, the roads are fantastic, but the Lake District is about more than just the riding. The landscape, history, and culture make this region special. Balance your throttle time with some proper exploration on foot.</p>
 
-<p>Use our <a href="/packing-checklist">comprehensive packing checklist</a> to ensure you have everything needed for a successful Lake District tour, and don't hesitate to extend your adventure into the wider region – some of Britain's best motorcycle roads await just beyond the national park boundaries. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more. Read our <a href="/guides/budget-touring-guide-500-pounds">UK Motorcycle Tour on £500: The Complete Budget Guide</a> guide for more. Read our <a href="/guides/how-to-use-gpx-files-motorcycle">How to Use GPX Files for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more.</p>`;
+<p>Use our <a href="/packing-checklist">comprehensive packing checklist</a> to ensure you have everything needed for a successful Lake District tour, and don't hesitate to extend your adventure into the wider region – some of Britain's best motorcycle roads await just beyond the national park boundaries. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more. Read our <a href="/guides/budget-touring-guide-500-pounds">UK Motorcycle Tour on £500: The Complete Budget Guide</a> guide for more. Read our <a href="/guides/how-to-use-gpx-files-motorcycle">How to Use GPX Files for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more. Read our <a href="/guides/norfolk-coast-motorcycle-destination">Norfolk Coast Motorcycle Guide: Big Skies and Quiet Roads</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more.</p>`;

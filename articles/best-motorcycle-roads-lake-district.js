@@ -2,7 +2,7 @@ export const content = `<h2>The Best Motorcycle Roads in the Lake District: A Ri
 
 <p>I've been touring the Lake District on two wheels for over a decade, and I can tell you there's nowhere quite like it in Britain for motorcycle touring. The combination of challenging mountain passes, stunning lakeside routes, and proper riding roads makes this corner of Cumbria absolutely essential for any serious tourer. After countless trips through these fells, I've put together what I reckon are the absolute <a href="/guides/best-motorcycle-roads-scotland">best</a> roads for getting the most out of your Lake District adventure.</p>
 
-<p>The Lakes offer everything from gentle cruise routes perfect for pillion passengers to proper mountain passes that'll test your skills and your bike. I've ridden every road mentioned here in all conditions – sunshine, torrential rain, and that peculiar Lakes mist that can roll in without warning. Here's what you need to know to make the most of your trip.</p>
+<p>The Lakes offer everything from gentle cruise routes perfect for pillion passengers to proper <a href="/guides/lake-district-mountain-passes">mountain</a> passes that'll test your skills and your bike. I've ridden every road mentioned here in all conditions – sunshine, torrential rain, and that peculiar Lakes mist that can roll in without warning. Here's what you need to know to make the most of your trip.</p>
 
 <h2>Essential Lake District Motorcycle Routes</h2>
 
@@ -28,7 +28,7 @@ export const content = `<h2>The Best Motorcycle Roads in the Lake District: A Ri
 
 <h3>Hardknott and Wrynose Passes: The Double Challenge</h3>
 
-<p>Right, this is where we separate the committed tourers from the Sunday riders. The combination of Hardknott Pass (30% gradient) and Wrynose Pass makes for one of the most challenging motorcycle routes in England. I won't lie – these roads will test you and your machine.</p>
+<p>Right, this is where we separate the committed tourers from the Sunday riders. The combination of Hardknott Pass (30% gradient) and Wrynose Pass makes for one of the most challenging <a href="/guides/motorcycle-intercom-systems">motorcycle</a> routes in England. I won't lie – these roads will test you and your machine.</p>
 
 <p>Starting from the west, the approach to Hardknott from Eskdale is deceptive. It starts as a pleasant cruise through the valley, then hits you with gradients that would make a mountain goat think twice. I've seen cars rolling backwards here, and motorcycles struggling with clutch slip.</p>
 
@@ -124,4 +124,4 @@ The Lake District rewards riders who take time to explore beyond the obvious rou
 
 <p>The Lake District offers some of the finest motorcycle touring in Britain, but it demands respect and preparation. Start with the easier routes like the Ullswater circuit to get a feel for Lakes riding, then progress to the mountain passes as your confidence builds. Use our <a href="/build-route">route builder</a> to plan your itinerary, allowing plenty of time for the unexpected – because in the Lakes, the unexpected is often the highlight of your trip.</p>
 
-<p>Most importantly, ride within your limits and be prepared for changing conditions. The Lakes will still be here next time, and it's better to return safely with stories of great riding than to push beyond your abilities on unfamiliar roads. Pack your wet weather gear, fill your tank, and prepare for some of the most memorable motorcycle touring Britain has to offer.</p>`;
+<p>Most importantly, ride within your limits and be prepared for changing conditions. The Lakes will still be here next time, and it's better to return safely with stories of great riding than to push beyond your abilities on unfamiliar roads. Pack your wet weather gear, fill your tank, and prepare for some of the most memorable motorcycle touring Britain has to offer. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more.</p>`;
