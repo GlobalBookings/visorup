@@ -42,7 +42,7 @@ export const content = `<h2>The Best Motorcycle Roads in the Lake District: A Ri
 
 <h3>Ullswater Circuit (A592 and A5091): Perfect for Pillions</h3>
 
-<p>When I want to show someone why the Lakes are special without scaring them senseless, this is where I take them. The circuit around Ullswater combines proper riding roads with scenery that'll have you stopping every few miles for photos.</p>
+<p>When I want to show someone why the Lakes are special without scaring them senseless, this is where I take them. The circuit around Ullswater combines proper riding <a href="/guides/scottish-borders-destination-guide">roads</a> with scenery that'll have you stopping every few miles for photos.</p>
 
 <p>Starting from Pooley Bridge, the A5091 runs along the western shore through some lovely wooded sections. The road surface is generally excellent, and the curves are gentle enough to maintain a good pace while still enjoying the views. Howtown is a perfect coffee stop – there's good parking for bikes and the café does proper bacon sandwiches.</p>
 
@@ -62,7 +62,7 @@ export const content = `<h2>The Best Motorcycle Roads in the Lake District: A Ri
 
 <p>The initial section through Elterwater is gentle enough, but as you head deeper into the valley, the road becomes more challenging. There are some lovely fast sections with well-sighted bends, and the backdrop of the Langdale Pikes is genuinely stunning.</p>
 
-<p>The road ends at the Old Dungeon Ghyll Hotel, which has been serving walkers and bikers for decades. The car park can get busy, but there's usually space for bikes, and the beer garden has brilliant views up towards Pike of Blisco.</p>
+<p>The road ends at the Old Dungeon Ghyll Hotel, which has been serving walkers and <a href="/guides/best-campsites-england-bikers">bikers</a> for decades. The car park can get busy, but there's usually space for bikes, and the beer garden has brilliant views up towards Pike of Blisco.</p>
 
 <h3>Thirlmere Circuit</h3>
 
@@ -100,7 +100,7 @@ The Lake District rewards riders who take time to explore beyond the obvious rou
 
 <p>A proper Lake District motorcycle tour needs more planning than your average touring route. The roads are demanding, distances can be deceptive, and facilities are limited in some areas. I always use our <a href="/plan-trip">trip planning tool</a> to work out realistic daily mileages – what looks like 50 easy miles on the map can take half a day when you factor in the mountain passes and inevitable photo stops.</p>
 
-<p>Accommodation fills up quickly, especially during peak season. B&Bs that welcome motorcyclists and offer secure parking are worth their weight in gold. Book early, and always confirm parking arrangements when you reserve.</p>
+<p>Accommodation fills up quickly, especially during <a href="/guides/peak-district-villages-guide">peak</a> season. B&Bs that welcome motorcyclists and offer secure parking are worth their weight in gold. Book early, and always confirm parking arrangements when you reserve.</p>
 
 <p>For route planning, I recommend breaking the Lakes down into day-long circuits rather than trying to cover everything in one go. A typical day might combine one major pass with some lakeside cruising and time for proper stops. Rushing through the Lakes defeats the entire purpose – this is scenery that demands to be savoured.</p>
 
@@ -124,4 +124,4 @@ The Lake District rewards riders who take time to explore beyond the obvious rou
 
 <p>The Lake District offers some of the finest motorcycle touring in Britain, but it demands respect and preparation. Start with the easier routes like the Ullswater circuit to get a feel for Lakes riding, then progress to the mountain passes as your confidence builds. Use our <a href="/build-route">route builder</a> to plan your itinerary, allowing plenty of time for the unexpected – because in the Lakes, the unexpected is often the highlight of your trip.</p>
 
-<p>Most importantly, ride within your limits and be prepared for changing conditions. The Lakes will still be here next time, and it's better to return safely with stories of great riding than to push beyond your abilities on unfamiliar roads. Pack your wet weather gear, fill your tank, and prepare for some of the most memorable motorcycle touring Britain has to offer. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more.</p>`;
+<p>Most importantly, ride within your limits and be prepared for changing conditions. The Lakes will still be here next time, and it's better to return safely with stories of great riding than to push beyond your abilities on unfamiliar roads. Pack your wet weather gear, fill your tank, and prepare for some of the most memorable motorcycle touring Britain has to offer. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more. Read our <a href="/guides/snowdonia-motorcycle-guide">Snowdonia Motorcycle Guide: Wales' Mountain Kingdom</a> guide for more. Read our <a href="/guides/budget-touring-guide-500-pounds">UK Motorcycle Tour on £500: The Complete Budget Guide</a> guide for more. Read our <a href="/guides/how-to-use-gpx-files-motorcycle">How to Use GPX Files for Motorcycle Touring: Complete Guide</a> guide for more.</p>`;
