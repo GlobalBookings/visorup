@@ -603,6 +603,7 @@ class VisorUpSite {
           this._setMeta({ description: 'Interactive gear finder — get personalised motorcycle gear recommendations based on your riding style, experience, weather conditions, and budget.' });
         }
         this.setActiveNav('gear');
+        setTimeout(function() { if (typeof gearFinder !== 'undefined') gearFinder.loadPicks(); }, 100);
         this.scrollToTop();
         break;
 

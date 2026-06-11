@@ -360,9 +360,19 @@ function renderGearFinder() {
   `;
 }
 
+var GEAR_PICKS = null;
+
 const gearFinder = {
   answers: { experience: '', style: '', weather: '', budget: '', gear: [] },
   currentStep: 1,
+
+  loadPicks: function() {
+    if (GEAR_PICKS) return;
+    fetch('public/data/shop/gear-picks.json')
+      .then(function(r) { return r.json(); })
+      .then(function(j) { GEAR_PICKS = j; })
+      .catch(function() {});
+  },
 
   setAnswer(key, value) {
     this.answers[key] = value;
@@ -494,11 +504,13 @@ const gearFinder = {
   },
 
   getRecommendations(category, subKey, budget) {
-    var cat = GEAR_RECOMMENDATIONS[category];
+    var source = (GEAR_PICKS && GEAR_PICKS[category]) ? GEAR_PICKS : GEAR_RECOMMENDATIONS;
+    var cat = source[category];
     if (!cat) return null;
     var sub = cat[subKey] || cat[Object.keys(cat)[0]];
     if (!sub) return null;
-    return sub[budget] || sub['mid'] || sub[Object.keys(sub)[0]];
+    var picks = sub[budget] || sub['mid'] || sub[Object.keys(sub)[0]];
+    return (picks && picks.length) ? picks : null;
   },
 
   renderCategory(title, icon, items, affiliate) {
@@ -507,15 +519,21 @@ const gearFinder = {
       '<div class="gf-product-grid">';
 
     items.forEach(function(item) {
-      var searchUrl = 'https://www.sportsbikeshop.co.uk/search/?search=' + encodeURIComponent(item.search) + affiliate;
-      html += '<div class="gf-product-card">' +
+      var url = item.url ? item.url
+        : 'https://www.sportsbikeshop.co.uk/search/?search=' + encodeURIComponent(item.search) + affiliate;
+      var img = item.thumb
+        ? '<a href="' + url + '" target="_blank" rel="noopener sponsored" class="gf-product-img"><img src="' + item.thumb + '" alt="' + (item.name || '').replace(/"/g, '&quot;') + '" loading="lazy"></a>'
+        : '';
+      var brand = item.brand ? '<span class="gf-product-brand">' + item.brand + '</span>' : '';
+      html += '<div class="gf-product-card">' + img +
         '<div class="gf-product-info">' +
+        brand +
         '<strong>' + item.name + '</strong>' +
         '<span class="gf-product-price">' + item.price + '</span>' +
         '<p class="gf-product-why">' + item.why + '</p>' +
         '</div>' +
-        '<a href="' + searchUrl + '" target="_blank" rel="noopener sponsored" class="gf-buy-btn">' +
-        'View <i class="fas fa-external-link-alt" style="font-size:10px"></i></a>' +
+        '<a href="' + url + '" target="_blank" rel="noopener sponsored" class="gf-buy-btn">' +
+        'View product <i class="fas fa-external-link-alt" style="font-size:10px"></i></a>' +
         '</div>';
     });
 
