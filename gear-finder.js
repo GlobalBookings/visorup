@@ -331,6 +331,10 @@ function renderGearFinder() {
               <i class="fas fa-vest"></i>
               <strong>Jacket</strong>
             </button>
+            <button class="gf-option gf-toggle" data-gear="trousers" onclick="gearFinder.toggleGear(this,'trousers')">
+              <i class="fas fa-person-walking"></i>
+              <strong>Trousers</strong>
+            </button>
             <button class="gf-option gf-toggle" data-gear="gloves" onclick="gearFinder.toggleGear(this,'gloves')">
               <i class="fas fa-mitten"></i>
               <strong>Gloves</strong>
@@ -338,6 +342,10 @@ function renderGearFinder() {
             <button class="gf-option gf-toggle" data-gear="boots" onclick="gearFinder.toggleGear(this,'boots')">
               <i class="fas fa-shoe-prints"></i>
               <strong>Boots</strong>
+            </button>
+            <button class="gf-option gf-toggle" data-gear="armour" onclick="gearFinder.toggleGear(this,'armour')">
+              <i class="fas fa-user-shield"></i>
+              <strong>Body Armour</strong>
             </button>
             <button class="gf-option gf-toggle" data-gear="luggage" onclick="gearFinder.toggleGear(this,'luggage')">
               <i class="fas fa-suitcase-rolling"></i>
@@ -433,6 +441,12 @@ const gearFinder = {
       if (jackets) html += this.renderCategory('Jacket', 'fa-vest', jackets, affiliate);
     }
 
+    // Trousers
+    if (a.gear.includes('trousers')) {
+      var trousers = this.getRecommendations('trousers', a.weather, a.budget);
+      if (trousers) html += this.renderCategory('Trousers', 'fa-person-walking', trousers, affiliate);
+    }
+
     // Gloves
     if (a.gear.includes('gloves')) {
       var weather = a.weather === 'winter' ? 'allWeather' : a.weather;
@@ -444,6 +458,12 @@ const gearFinder = {
     if (a.gear.includes('boots')) {
       var boots = this.getRecommendations('boots', 'touring', a.budget);
       if (boots) html += this.renderCategory('Boots', 'fa-shoe-prints', boots, affiliate);
+    }
+
+    // Body armour
+    if (a.gear.includes('armour')) {
+      var armour = this.getRecommendations('armour', 'all', a.budget);
+      if (armour) html += this.renderCategory('Body Armour', 'fa-user-shield', armour, affiliate);
     }
 
     // Luggage
@@ -480,6 +500,12 @@ const gearFinder = {
     }
     if (a.budget === 'budget') {
       html += '<li><strong>Last season\'s gear is fantastic value.</strong> Check the clearance section — same quality, 30-50% off.</li>';
+    }
+    if (a.gear.includes('trousers')) {
+      html += '<li><strong>Match trousers to your jacket.</strong> A full connection zip keeps the two together in a slide — staying within one brand\'s range makes this easy.</li>';
+    }
+    if (a.gear.includes('armour')) {
+      html += '<li><strong>Upgrade the back protector.</strong> Many jackets ship with only a foam insert — a CE Level 2 back protector (or an airbag) is the single biggest safety upgrade you can make.</li>';
     }
 
     html += '</ul></div>';

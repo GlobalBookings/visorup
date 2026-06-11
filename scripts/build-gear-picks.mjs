@@ -14,7 +14,7 @@ const SHOP_DIR = path.join(__dirname, '..', 'public', 'data', 'shop');
 
 // Minimum sensible price per category so trivial accessories (a £9 strap, a £15 part)
 // never get recommended as if they were the real product.
-const FLOORS = { helmets: 55, jackets: 60, gloves: 25, boots: 60, luggage: 25, electronics: 30 };
+const FLOORS = { helmets: 55, jackets: 60, trousers: 45, gloves: 25, boots: 60, luggage: 25, electronics: 30 };
 
 function load(cat) {
   const f = path.join(SHOP_DIR, cat + '.json');
@@ -71,7 +71,13 @@ function reason(category, subKey, tier, p) {
       allWeather: `Waterproof ${b} gloves that stay comfortable in the wet.`,
       winter: `Insulated ${b} gloves to keep your hands warm in the cold.`,
     },
+    trousers: {
+      fairWeather: `Lightweight, protective ${b} trousers that keep you cool on warmer rides.`,
+      allWeather: `Waterproof ${b} trousers ready for whatever the forecast throws at you.`,
+      winter: `Warm, weatherproof ${b} trousers for cold-season touring.`,
+    },
     boots: { touring: `Comfortable, weatherproof ${b} boots built for the long haul.` },
+    armour: { all: `Serious ${b} impact protection — one of the smartest safety upgrades you can make.` },
     luggage: { touring: `Practical ${b} luggage to carry kit securely on tour.` },
     electronics: { all: `Popular ${b} tech to upgrade your ride.` },
   };
@@ -103,20 +109,28 @@ function buildCategory(items, subKeyFilters) {
   return out;
 }
 
+// Rider body armour lives inside the 'protection' catalogue (which is mostly bike
+// crash protection), so positively select only wearable armour.
+const isArmour = (p) => has(p, 'back protector', 'body armour', 'chest protector', 'armoured shirt', 'armour shirt', 'protective shirt', 'knee armour', 'armour insert', 'protector vest', 'safety jacket', 'airbag', 'tech-air', 'rib protector', 'shoulder armour');
+
 // --- Load catalogues ---
 const helmets = load('helmets');
 const jackets = load('jackets');
+const trousers = load('trousers');
 const gloves = load('gloves');
 const boots = load('boots');
 const luggage = load('luggage');
 const electronics = load('electronics');
+const armour = load('protection').filter((p) => isArmour(p) && p.priceNum >= 30);
 
 // --- Filters per subKey ---
 const out = {
   helmets: {},
   jackets: {},
+  trousers: {},
   gloves: {},
   boots: {},
+  armour: {},
   luggage: {},
   electronics: {},
 };
@@ -136,6 +150,11 @@ const weatherGloveFilters = {
   allWeather: (p) => has(p, 'waterproof', 'gore-tex', 'gtx', 'membrane', 'drystar', 'h2o', 'aqua') && not(p, 'casual'),
   winter: (p) => has(p, 'winter', 'thermal', 'heated') && not(p, 'casual'),
 };
+const weatherTrouserFilters = {
+  fairWeather: (p) => has(p, 'mesh', ' air', 'summer', 'ventilat', 'vented', 'jean', 'denim') && not(p, 'kids', 'junior'),
+  allWeather: (p) => has(p, 'waterproof', 'gore-tex', 'gore tex', 'gtx', 'laminat', 'membrane', 'h2o', 'aqua', 'drystar', 'textile') && not(p, 'kids', 'junior'),
+  winter: (p) => has(p, 'winter', 'thermal', 'gore-tex', 'gtx', 'laminat', 'h2o') && not(p, 'kids', 'junior'),
+};
 
 for (const [subKey, fn] of Object.entries(helmetFilters)) {
   out.helmets[subKey] = {};
@@ -149,6 +168,12 @@ for (const [subKey, fn] of Object.entries(weatherJacketFilters)) {
     out.jackets[subKey][tier] = pick(jackets, fn, tierFn).map((p) => toProduct('jackets', subKey, tier, p));
   }
 }
+for (const [subKey, fn] of Object.entries(weatherTrouserFilters)) {
+  out.trousers[subKey] = {};
+  for (const [tier, tierFn] of Object.entries(TIERS)) {
+    out.trousers[subKey][tier] = pick(trousers, fn, tierFn).map((p) => toProduct('trousers', subKey, tier, p));
+  }
+}
 for (const [subKey, fn] of Object.entries(weatherGloveFilters)) {
   out.gloves[subKey] = {};
   for (const [tier, tierFn] of Object.entries(TIERS)) {
@@ -160,6 +185,10 @@ out.boots.touring = {};
 for (const [tier, tierFn] of Object.entries(TIERS)) {
   out.boots.touring[tier] = pick(boots, (p) => has(p, 'touring', 'waterproof', 'gore-tex', 'gtx', 'adventure', 'sport', 'road'), tierFn)
     .map((p) => toProduct('boots', 'touring', tier, p));
+}
+out.armour.all = {};
+for (const [tier, tierFn] of Object.entries(TIERS)) {
+  out.armour.all[tier] = pick(armour, () => true, tierFn).map((p) => toProduct('armour', 'all', tier, p));
 }
 out.luggage.touring = {};
 for (const [tier, tierFn] of Object.entries(TIERS)) {

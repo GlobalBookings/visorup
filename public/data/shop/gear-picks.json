@@ -591,6 +591,302 @@
    ]
   }
  },
+ "trousers": {
+  "fairWeather": {
+   "budget": [
+    {
+     "name": "Oxford Original Approved AA Super Stretch Jeans",
+     "brand": "Oxford",
+     "price": "£149.99",
+     "priceNum": 149.99,
+     "why": "Lightweight, protective Oxford trousers that keep you cool on warmer rides. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/754772#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/754772.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Merlin Brody D3O Riding Chino Single Layer Jeans",
+     "brand": "Merlin",
+     "price": "£132.99",
+     "priceNum": 132.99,
+     "why": "Lightweight, protective Merlin trousers that keep you cool on warmer rides. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2354327#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2354327.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Spada Drifter Denim Jeans",
+     "brand": "Spada",
+     "price": "£107.99",
+     "priceNum": 107.99,
+     "why": "Lightweight, protective Spada trousers that keep you cool on warmer rides. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2558529#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2558529.0.jpg",
+     "colourCount": 4
+    }
+   ],
+   "mid": [
+    {
+     "name": "Trilobite Parado AAA Jeans",
+     "brand": "Trilobite",
+     "price": "£199.99",
+     "priceNum": 199.99,
+     "why": "Lightweight, protective Trilobite trousers that keep you cool on warmer rides.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2585955#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/trilobite_aramid-jeans_parado-skinny-fit_black.jpg",
+     "colourCount": 7
+    },
+    {
+     "name": "John Doe Cargo XTM Aramid Jeans",
+     "brand": "John",
+     "price": "£235",
+     "priceNum": 235,
+     "why": "Lightweight, protective John trousers that keep you cool on warmer rides.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/440690#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/john-doe-cargo-xtm-aramid-jeans-stroker-camouflage.jpg",
+     "colourCount": 6
+    },
+    {
+     "name": "Trilobite Ladies Parado AAA Jeans",
+     "brand": "Trilobite",
+     "price": "£199.99",
+     "priceNum": 199.99,
+     "why": "Lightweight, protective Trilobite trousers that keep you cool on warmer rides.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2588526#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/trilobite_ladies_aramid-jeans_parado-regular-fit-double-layer-aaa_blue.jpg",
+     "colourCount": 6
+    }
+   ],
+   "premium": [
+    {
+     "name": "Dane Lyngby Air 2 Gore-Tex Pro Trousers",
+     "brand": "Dane",
+     "price": "£669.99",
+     "priceNum": 669.99,
+     "why": "Lightweight, protective Dane trousers that keep you cool on warmer rides. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/831911#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/dane_lyngby_air_2_trousers_black.jpg",
+     "colourCount": 1
+    },
+    {
+     "name": "Rukka Air Vihti Trousers",
+     "brand": "Rukka",
+     "price": "£439.99",
+     "priceNum": 439.99,
+     "why": "Lightweight, protective Rukka trousers that keep you cool on warmer rides. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2445365#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2445365.jpg",
+     "colourCount": 1
+    },
+    {
+     "name": "Klim Carlsbad V4 Gore-Tex CE Textile Trousers",
+     "brand": "Klim",
+     "price": "£660",
+     "priceNum": 660,
+     "why": "Lightweight, protective Klim trousers that keep you cool on warmer rides. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2577105#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2577105.0.jpg",
+     "colourCount": 5
+    }
+   ]
+  },
+  "allWeather": {
+   "budget": [
+    {
+     "name": "Merlin Neptune 2 WP Textile Trousers",
+     "brand": "Merlin",
+     "price": "£109.99",
+     "priceNum": 109.99,
+     "why": "Waterproof Merlin trousers ready for whatever the forecast throws at you. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/507518#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/merlin_textile-trousers_neptune-2_grey.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Spada Ladies Dash Textile Trousers",
+     "brand": "Spada",
+     "price": "£107.99",
+     "priceNum": 107.99,
+     "why": "Waterproof Spada trousers ready for whatever the forecast throws at you. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2559423#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2559423.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Spidi Charged Textile Trousers",
+     "brand": "Spidi",
+     "price": "£143.91",
+     "priceNum": 143.91,
+     "why": "Waterproof Spidi trousers ready for whatever the forecast throws at you. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2356130#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/spidi_textile-trousers_charged-textile-trousers_anthracite.jpg",
+     "colourCount": 3
+    }
+   ],
+   "mid": [
+    {
+     "name": "RST Pro Series Adventure-X CE Textile Trousers",
+     "brand": "RST",
+     "price": "£179.99",
+     "priceNum": 179.99,
+     "why": "Waterproof RST trousers ready for whatever the forecast throws at you.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/548299#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/548299.jpg",
+     "colourCount": 6
+    },
+    {
+     "name": "RST Pro Series Adventure D3O Textile Trousers",
+     "brand": "RST",
+     "price": "£224.99",
+     "priceNum": 224.99,
+     "why": "Waterproof RST trousers ready for whatever the forecast throws at you.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2526231#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2526231-1.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Klim XC Lite V6 Textile Pants",
+     "brand": "Klim",
+     "price": "£190",
+     "priceNum": 190,
+     "why": "Waterproof Klim trousers ready for whatever the forecast throws at you.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/876587#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/876587.jpg",
+     "colourCount": 4
+    }
+   ],
+   "premium": [
+    {
+     "name": "Klim Carlsbad V4 Gore-Tex CE Textile Trousers",
+     "brand": "Klim",
+     "price": "£660",
+     "priceNum": 660,
+     "why": "Waterproof Klim trousers ready for whatever the forecast throws at you. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2577105#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2577105.0.jpg",
+     "colourCount": 5
+    },
+    {
+     "name": "Klim Badlands Pro A3 Gore-Tex Textile Trousers",
+     "brand": "Klim",
+     "price": "£1000",
+     "priceNum": 1000,
+     "why": "Waterproof Klim trousers ready for whatever the forecast throws at you. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/690392#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/690392.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Klim Badlands Pro V5 Gore-Tex Trousers",
+     "brand": "Klim",
+     "price": "£900",
+     "priceNum": 900,
+     "why": "Waterproof Klim trousers ready for whatever the forecast throws at you. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2576295#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2576295.0.jpg",
+     "colourCount": 4
+    }
+   ]
+  },
+  "winter": {
+   "budget": [
+    {
+     "name": "Weise Tempest Thermal Trousers",
+     "brand": "Weise",
+     "price": "£69.99",
+     "priceNum": 69.99,
+     "why": "Warm, weatherproof Weise trousers for cold-season touring. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2464116#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2464116.jpg",
+     "colourCount": 2
+    },
+    {
+     "name": "Rev'it Axis 3 H2O Textile Trousers",
+     "brand": "Rev'it",
+     "price": "£149.99",
+     "priceNum": 149.99,
+     "why": "Warm, weatherproof Rev'it trousers for cold-season touring. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2571333#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2571333.jpg",
+     "colourCount": 1
+    },
+    {
+     "name": "Spidi Thunder H2OUT Textile Trousers",
+     "brand": "Spidi",
+     "price": "£144.99",
+     "priceNum": 144.99,
+     "why": "Warm, weatherproof Spidi trousers for cold-season touring. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/200992#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/spidi_textile-jeans_thunder__black_u66-026.jpg",
+     "colourCount": 1
+    }
+   ],
+   "mid": [
+    {
+     "name": "Alpinestars Halo Pro Drystar XF Laminated Trousers",
+     "brand": "Alpinestars",
+     "price": "£386.99",
+     "priceNum": 386.99,
+     "why": "Warm, weatherproof Alpinestars trousers for cold-season touring.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2467836#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2467836.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Rev'it Convergent H2O Textile Trousers",
+     "brand": "Rev'it",
+     "price": "£199.99",
+     "priceNum": 199.99,
+     "why": "Warm, weatherproof Rev'it trousers for cold-season touring.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2570943#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2570943.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Merlin Borderlands D3O Laminated Trousers",
+     "brand": "Merlin",
+     "price": "£175",
+     "priceNum": 175,
+     "why": "Warm, weatherproof Merlin trousers for cold-season touring.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2363552#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2363552.jpg",
+     "colourCount": 3
+    }
+   ],
+   "premium": [
+    {
+     "name": "Klim Carlsbad V4 Gore-Tex CE Textile Trousers",
+     "brand": "Klim",
+     "price": "£660",
+     "priceNum": 660,
+     "why": "Warm, weatherproof Klim trousers for cold-season touring. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2577105#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2577105.0.jpg",
+     "colourCount": 5
+    },
+    {
+     "name": "Klim Badlands Pro A3 Gore-Tex Textile Trousers",
+     "brand": "Klim",
+     "price": "£1000",
+     "priceNum": 1000,
+     "why": "Warm, weatherproof Klim trousers for cold-season touring. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/690392#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/690392.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Klim Badlands Pro V5 Gore-Tex Trousers",
+     "brand": "Klim",
+     "price": "£900",
+     "priceNum": 900,
+     "why": "Warm, weatherproof Klim trousers for cold-season touring. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2576295#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2576295.0.jpg",
+     "colourCount": 4
+    }
+   ]
+  }
+ },
  "gloves": {
   "fairWeather": {
    "budget": [
@@ -953,6 +1249,106 @@
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2561247#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2561247.jpg",
      "colourCount": 3
+    }
+   ]
+  }
+ },
+ "armour": {
+  "all": {
+   "budget": [
+    {
+     "name": "Troy Lee Designs RockFight CE Chest Protector",
+     "brand": "Troy",
+     "price": "£139.99",
+     "priceNum": 139.99,
+     "why": "Serious Troy impact protection — one of the smartest safety upgrades you can make. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2509590#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2509590.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Troy Lee Designs RockFight CE Flex Chest Protector",
+     "brand": "Troy",
+     "price": "£130",
+     "priceNum": 130,
+     "why": "Serious Troy impact protection — one of the smartest safety upgrades you can make. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2509050#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2509050.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Thor Sentinel Pro Chest / Back Protector",
+     "brand": "Thor",
+     "price": "£118.99",
+     "priceNum": 118.99,
+     "why": "Serious Thor impact protection — one of the smartest safety upgrades you can make. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2311952#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/thor_body-armour_sentinel-pro-chest-back_red.jpg",
+     "colourCount": 4
+    }
+   ],
+   "mid": [
+    {
+     "name": "Knox Tor Duo Armoured Shirt",
+     "brand": "Knox",
+     "price": "£399.99",
+     "priceNum": 399.99,
+     "why": "Serious Knox impact protection — one of the smartest safety upgrades you can make.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/911420#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/911420.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Knox Tor Armoured Shirt",
+     "brand": "Knox",
+     "price": "£329.99",
+     "priceNum": 329.99,
+     "why": "Serious Knox impact protection — one of the smartest safety upgrades you can make.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2607264#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2607264.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Knox Urbane Pro Move Armoured Shirt",
+     "brand": "Knox",
+     "price": "£299.99",
+     "priceNum": 299.99,
+     "why": "Serious Knox impact protection — one of the smartest safety upgrades you can make.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2607114#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2607114.0.jpg",
+     "colourCount": 3
+    }
+   ],
+   "premium": [
+    {
+     "name": "Alpinestars Tech-Air Off-Road Airbag",
+     "brand": "Alpinestars",
+     "price": "£949.99",
+     "priceNum": 949.99,
+     "why": "Serious Alpinestars impact protection — one of the smartest safety upgrades you can make. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2422172#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2422172.jpg",
+     "colourCount": 2
+    },
+    {
+     "name": "Alpinestars Tech-Air 7X Airbag",
+     "brand": "Alpinestars",
+     "price": "£899.99",
+     "priceNum": 899.99,
+     "why": "Serious Alpinestars impact protection — one of the smartest safety upgrades you can make. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2422151#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/alpnestars_airbag-vest_tech-air-7x.jpg",
+     "colourCount": 2
+    },
+    {
+     "name": "Alpinestars Tech-Air 3 v2 Canvas Airbag System",
+     "brand": "Alpinestars",
+     "price": "£579.99",
+     "priceNum": 579.99,
+     "why": "Serious Alpinestars impact protection — one of the smartest safety upgrades you can make. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2478702#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2478702.jpg",
+     "colourCount": 2
     }
    ]
   }

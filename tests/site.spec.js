@@ -325,6 +325,25 @@ test.describe('Gear Finder', () => {
     expect(prices.length).toBeGreaterThan(0);
     for (const n of prices) { expect(n).toBeGreaterThanOrEqual(150); expect(n).toBeLessThan(400); }
   });
+
+  test('trousers option returns in-budget trousers with valid images', async ({ page }) => {
+    const results = await runQuiz(page, { experience: 'Beginner', style: 'Touring', weather: 'All Weather', budget: 'Budget-Friendly', gear: 'trousers' });
+    await expect(results.locator('.gf-category h3', { hasText: 'Trousers' })).toBeVisible();
+    const prices = await priceNums(results);
+    expect(prices.length).toBeGreaterThan(0);
+    for (const n of prices) expect(n).toBeLessThan(150);
+    const imgs = results.locator('.gf-product-img img');
+    expect(await imgs.count()).toBeGreaterThanOrEqual(1);
+    expect(await imgs.first().getAttribute('src')).toMatch(/^https?:\/\//);
+  });
+
+  test('body armour option returns premium armour (>= £400)', async ({ page }) => {
+    const results = await runQuiz(page, { experience: 'Advanced', style: 'Touring', weather: 'All Weather', budget: 'Premium', gear: 'armour' });
+    await expect(results.locator('.gf-category h3', { hasText: 'Body Armour' })).toBeVisible();
+    const prices = await priceNums(results);
+    expect(prices.length).toBeGreaterThan(0);
+    for (const n of prices) expect(n).toBeGreaterThanOrEqual(400);
+  });
 });
 
 test.describe('Route Detail Pages', () => {
