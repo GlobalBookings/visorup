@@ -33,6 +33,7 @@ https://visorup.co.uk
 - Regional Rides: https://visorup.co.uk/regional-rides
 - Garage Finder: https://visorup.co.uk/garage-finder
 - Infographics: https://visorup.co.uk/infographics
+- Gear Shop (16,000+ products): https://visorup.co.uk/shop
 - About: https://visorup.co.uk/about
 - Contact: https://visorup.co.uk/contact
 - Privacy Policy: https://visorup.co.uk/privacy
@@ -124,6 +125,24 @@ Each guide includes full specifications, UK touring review, scoring (touring/com
 - **MOT & Tax Tracker**: https://visorup.co.uk/mot-tax — Track MOT, tax, and insurance expiry dates with countdown warnings
 - **Emergency Info Card**: https://visorup.co.uk/emergency-card — Create a printable emergency card with ICE contacts, medical info, bike details, and breakdown cover numbers
 
+## Motorcycle Gear Shop
+Browse 16,449 motorcycle products from SportsBikeShop across 14 categories. Direct affiliate product links with live prices, free UK delivery, and 365-day returns. Colour variants merged for cleaner browsing; filter by brand, price, and sort.
+
+- Helmets (1,106 products, from £3): https://visorup.co.uk/shop/helmets — Full-face, modular, adventure & open-face
+- Jackets (1,801 products, from £8): https://visorup.co.uk/shop/jackets — Textile, leather, waterproof & summer
+- Trousers (1,381 products, from £6): https://visorup.co.uk/shop/trousers — Riding jeans, textile & leather
+- Gloves (1,201 products, from £5): https://visorup.co.uk/shop/gloves — Summer, winter, waterproof & heated
+- Boots (842 products, from £3): https://visorup.co.uk/shop/boots — Touring, adventure, sport & waterproof
+- Base Layers (152 products, from £5): https://visorup.co.uk/shop/base-layers — Thermals, neck tubes & base layers
+- Protection (702 products, from £5): https://visorup.co.uk/shop/protection — Back protectors, armour & airbags
+- Luggage (1,360 products, from £2): https://visorup.co.uk/shop/luggage — Panniers, tank bags, tail packs & racks
+- Electronics (306 products, from £3): https://visorup.co.uk/shop/electronics — Intercoms, cameras, sat navs & chargers
+- Exhausts (138 products, from £5): https://visorup.co.uk/shop/exhausts — Full systems, slip-ons & silencers
+- Parts (2,037 products, from £1): https://visorup.co.uk/shop/parts — Chains, brakes, levers, screens & filters
+- Accessories (813 products, from £1): https://visorup.co.uk/shop/accessories — Locks, covers, cleaning & care
+- Casual (579 products, from £4): https://visorup.co.uk/shop/casual — T-shirts, hoodies & off-bike clothing
+- Other (4,031 products, from £1): https://visorup.co.uk/shop/other — Everything else for bike & rider
+
 ## Points of Interest Database
 800+ POIs across the UK covering: campsites, bridges, wildlife lookouts, scenic roads, fuel stations, viewpoints, biker pubs, fossils, and more. All data categorised by region (Scotland, England, Wales, Channel Islands).
 
@@ -141,7 +160,7 @@ Each guide includes full specifications, UK touring review, scoring (touring/com
 - Legal: legal@visorup.co.uk
 - Website: https://visorup.co.uk
 
-## Touring Guides (250 articles)
+## Touring Guides (274 articles)
 
 ### Gear Guides (36 articles)
 - Best Touring Helmets for UK Motorcycle Adventures 2026: https://visorup.co.uk/guides/gear/best-touring-helmets-uk — Discover the top-rated touring helmets for UK riders in 2026. Expert picks for comfort, safety, and weather protection on British roads.
@@ -180,6 +199,33 @@ Each guide includes full specifications, UK touring review, scoring (touring/com
 - Essential Motorcycle Camping Gear for UK Tours: https://visorup.co.uk/guides/gear/motorcycle-camping-gear — Complete guide to motorcycle camping gear for UK tours. Lightweight tents, sleeping systems, and cooking gear that fits in your panniers.
 - Lightweight Tents for Motorcycle Touring in the UK: https://visorup.co.uk/guides/gear/lightweight-tent-motorcycle — Best lightweight tents for motorcycle touring in Britain. Compact, packable tents that fit in panniers and handle British weather conditions.
 - Cooking Gear for Motorcycle Camping Adventures: https://visorup.co.uk/guides/gear/motorcycle-camping-cooking — Best compact cooking gear for motorcycle camping tours. Lightweight stoves, cookware, and meal ideas for UK two-wheeled camping adventures.
+
+### Buying Guides (24 articles)
+Data-driven buying guides featuring real products with live prices, images, and direct affiliate purchase links. Updated from a 16,449-product catalogue.
+- Best Motorcycle Helmets UK 2026: Top Picks at Every Budget: https://visorup.co.uk/guides/buying-guides/best-motorcycle-helmets-uk-2026 — The right helmet is the single most important piece of kit you will buy. We have pulled together the best motorcycle helmets on sale in the UK for 2026, wi…
+- Best Modular (Flip-Up) Motorcycle Helmets UK 2026: https://visorup.co.uk/guides/buying-guides/best-modular-flip-up-helmets-uk-2026 — Flip-up convenience without losing full-face protection — modular helmets are the touring rider's favourite. These are the best modular lids you can buy in…
+- Best Adventure & Dual-Sport Helmets UK 2026: https://visorup.co.uk/guides/buying-guides/best-adventure-helmets-uk-2026 — Peak up, visor down, ready for anything — adventure helmets bridge road and trail. Here are the best ADV and dual-sport helmets for mixed-terrain UK riding.
+- Best Full-Face Motorcycle Helmets UK 2026: https://visorup.co.uk/guides/buying-guides/best-full-face-helmets-uk-2026 — For outright protection and the quietest, most aerodynamic ride, nothing beats a full-face helmet. These are our top full-face picks for UK riders in 2026.
+- Best Budget Motorcycle Helmets UK (Under £150): https://visorup.co.uk/guides/buying-guides/best-budget-motorcycle-helmets-uk — A tight budget does not mean compromising on safety — every road-legal helmet meets the same ECE standard. These are the best motorcycle helmets you can bu…
+- Best Motorcycle Jackets UK 2026: Touring, Adventure & All-Weather: https://visorup.co.uk/guides/buying-guides/best-motorcycle-jackets-uk-2026 — From summer mesh to four-season laminates, the right jacket keeps you protected and comfortable whatever the British weather throws at you. Here are the be…
+- Best Waterproof Motorcycle Jackets UK 2026: https://visorup.co.uk/guides/buying-guides/best-waterproof-motorcycle-jackets-uk-2026 — In a country that rains 150-plus days a year, a genuinely waterproof jacket is essential touring kit. These are the best waterproof motorcycle jackets for …
+- Best Summer & Mesh Motorcycle Jackets UK 2026: https://visorup.co.uk/guides/buying-guides/best-summer-mesh-motorcycle-jackets-uk — When the sun finally shows up, a mesh jacket keeps the air flowing without sacrificing armour. Here are the best summer and mesh motorcycle jackets for war…
+- Best Winter Motorcycle Jackets UK 2026: https://visorup.co.uk/guides/buying-guides/best-winter-motorcycle-jackets-uk-2026 — Cold kills concentration. A warm, windproof, waterproof jacket is your first defence against the British winter. These are the best winter motorcycle jacke…
+- Best Leather Motorcycle Jackets UK 2026: https://visorup.co.uk/guides/buying-guides/best-leather-motorcycle-jackets-uk — For timeless style and the best abrasion resistance money can buy, leather still rules. Here are the best leather motorcycle jackets on sale in the UK for …
+- Best Motorcycle Jeans UK 2026: Protective Riding Denim: https://visorup.co.uk/guides/buying-guides/best-motorcycle-jeans-uk-2026 — Modern riding jeans look like premium denim but pack aramid fibres and CE armour. These are the best motorcycle jeans for riders who want protection withou…
+- Best Textile Motorcycle Trousers UK 2026: https://visorup.co.uk/guides/buying-guides/best-textile-motorcycle-trousers-uk — Waterproof, armoured and built for all-day comfort, textile trousers are the all-weather touring essential for your lower half. Here are the best on sale i…
+- Best Leather Motorcycle Trousers & Jeans UK 2026: https://visorup.co.uk/guides/buying-guides/best-leather-motorcycle-trousers-uk — For sport-touring pace and the ultimate slide protection, leather trousers are hard to beat. These are the best leather motorcycle trousers and jeans you c…
+- Best Motorcycle Gloves UK 2026: Summer, Winter & Waterproof: https://visorup.co.uk/guides/buying-guides/best-motorcycle-gloves-uk-2026 — Your hands need protection, feel and weatherproofing in equal measure. We have rounded up the best motorcycle gloves on sale in the UK for 2026, for every …
+- Best Waterproof Motorcycle Gloves UK 2026: https://visorup.co.uk/guides/buying-guides/best-waterproof-motorcycle-gloves-uk — Cold, wet hands ruin a ride and compromise control. These waterproof motorcycle gloves keep your hands dry and working whatever the forecast.
+- Best Winter Motorcycle Gloves UK 2026: https://visorup.co.uk/guides/buying-guides/best-winter-motorcycle-gloves-uk — When temperatures drop, warm hands keep you safe and in control. Here are the best winter and heated motorcycle gloves for cold-weather UK riding.
+- Best Summer Motorcycle Gloves UK 2026: https://visorup.co.uk/guides/buying-guides/best-summer-motorcycle-gloves-uk — Ventilated, lightweight and protective — the right summer gloves keep your hands cool without leaving them exposed. These are our top picks for warm-weathe…
+- Best Motorcycle Boots UK 2026: Touring, Adventure & Waterproof: https://visorup.co.uk/guides/buying-guides/best-motorcycle-boots-uk-2026 — Protective, waterproof and comfortable enough to walk in — the best touring boots do it all. Here are our top motorcycle boot picks for UK riders in 2026.
+- Best Adventure Motorcycle Boots UK 2026: https://visorup.co.uk/guides/buying-guides/best-adventure-motorcycle-boots-uk — Tougher soles, taller shafts and serious shin protection — adventure boots handle green lanes and tarmac alike. These are the best ADV boots for UK riding.
+- Best Waterproof Motorcycle Boots UK 2026: https://visorup.co.uk/guides/buying-guides/best-waterproof-motorcycle-boots-uk — Your boots sit at the lowest point of the bike, catching every puddle and spray. These waterproof motorcycle boots keep your feet bone-dry on British tours.
+- Best Motorcycle Panniers UK 2026: Hard & Soft Luggage: https://visorup.co.uk/guides/buying-guides/best-motorcycle-panniers-uk-2026 — Panniers turn any bike into a tourer. Whether you want lockable hard cases or lightweight soft throwovers, here are the best motorcycle panniers on sale in…
+- Best Motorcycle Tank Bags UK 2026: https://visorup.co.uk/guides/buying-guides/best-motorcycle-tank-bags-uk — Keep your essentials, phone and maps within easy reach with a quality tank bag. These are the best motorcycle tank bags for UK touring in 2026.
+- Best Motorcycle Luggage UK 2026: Panniers, Tail Packs & Tank Bags: https://visorup.co.uk/guides/buying-guides/best-motorcycle-luggage-uk-2026 — From weekend roll bags to full hard-luggage systems, the right setup carries your kit securely for miles. Here is the best motorcycle luggage you can buy i…
+- Best Motorcycle Intercoms UK 2026: Cardo, Sena & More: https://visorup.co.uk/guides/buying-guides/best-motorcycle-intercoms-uk-2026 — Rider-to-rider chat, music and turn-by-turn directions in your helmet — a good intercom transforms group touring. These are the best motorcycle intercoms o…
 
 ### Bikes Guides (36 articles)
 - Best Touring Motorcycles for UK Roads in 2026: https://visorup.co.uk/guides/bikes/best-touring-bikes-uk-2026 — The definitive guide to the best touring motorcycles for UK roads in 2026. From adventure bikes to grand tourers, find your perfect touring machine.

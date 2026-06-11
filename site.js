@@ -891,7 +891,7 @@ class VisorUpSite {
           this.showSiteView();
           this.pageContent.innerHTML = this.renderGuideCategory(parts[1]) + this.renderFooter();
           this.setActiveNav('guides');
-          var catName = parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
+          var catName = parts[1] === 'buying-guides' ? 'Buying' : parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
           this.setTitle(catName + ' Guides — Motorcycle Touring');
           this._setMeta({ description: catName + ' guides for UK motorcycle touring — expert tips, reviews, and advice.' });
           this.scrollToTop();
@@ -5855,9 +5855,9 @@ class VisorUpSite {
 
   renderGuides() {
     if (typeof ARTICLES === 'undefined' || !ARTICLES.length) return this.renderComingSoon('Guides', 'Content coming soon.', 'fa-book');
-    var cats = ['All', 'gear', 'bikes', 'routes', 'destinations', 'planning', 'scenic', 'seasonal'];
+    var cats = ['All', 'buying-guides', 'gear', 'bikes', 'routes', 'destinations', 'planning', 'scenic', 'seasonal'];
     var pills = cats.map(function(c) {
-      var label = c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1);
+      var label = c === 'All' ? 'All' : (c === 'buying-guides' ? 'Buying Guides' : c.charAt(0).toUpperCase() + c.slice(1));
       var active = c === 'All' ? 'filter-pill-active' : '';
       return '<button class="filter-pill ' + active + '" data-filter="' + c + '">' + label + '</button>';
     }).join('');
@@ -5909,7 +5909,7 @@ class VisorUpSite {
     if (typeof ARTICLES === 'undefined') return this.renderComingSoon('Guides', 'Content coming soon.', 'fa-book');
     var catArticles = ARTICLES.filter(function(a) { return a.category === category; });
     if (catArticles.length === 0) return this.render404();
-    var catName = category.charAt(0).toUpperCase() + category.slice(1);
+    var catName = category === 'buying-guides' ? 'Buying Guides' : category.charAt(0).toUpperCase() + category.slice(1);
 
     var cards = catArticles.map(function(a) {
       return '<a href="/guides/' + a.category + '/' + a.slug + '" class="guide-card">' +
@@ -5967,7 +5967,7 @@ class VisorUpSite {
       affiliates = '<div class="article-affiliate-box"><h4><i class="fas fa-shopping-bag" style="color:var(--accent);margin-right:6px;"></i>Products Mentioned</h4>' + items + '</div>';
     }
 
-    var catLabel = a.category.charAt(0).toUpperCase() + a.category.slice(1);
+    var catLabel = a.category === 'buying-guides' ? 'Buying Guides' : a.category.charAt(0).toUpperCase() + a.category.slice(1);
 
     var articleUrl = window.location.origin + '/guides/' + a.category + '/' + a.slug;
     var shareTitle = a.title;
