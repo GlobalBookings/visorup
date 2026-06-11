@@ -566,6 +566,31 @@ class VisorUpSite {
         }
         break;
 
+      case 'shop':
+        this.showSiteView();
+        this.setActiveNav('shop');
+        if (parts[1] === 'search') {
+          this.pageContent.innerHTML = renderShopSearch() + this.renderFooter();
+          this.setTitle('Search Motorcycle Gear — VisorUp Shop');
+          this._setMeta({ description: 'Search 16,000+ motorcycle products — helmets, jackets, gloves, boots, luggage and parts from SportsBikeShop.' });
+          var sq = new URLSearchParams(window.location.search).get('q') || '';
+          setTimeout(function() { Shop.initSearch(sq); }, 100);
+        } else if (parts[1]) {
+          this.pageContent.innerHTML = renderShopCategory() + this.renderFooter();
+          this.setTitle('Shop Motorcycle Gear — VisorUp');
+          this._setMeta({ description: 'Browse motorcycle gear by category with brand and price filters. Free UK delivery and 365-day returns via SportsBikeShop.' });
+          var catSlug = parts[1];
+          setTimeout(function() { Shop.initCategory(catSlug); }, 100);
+        } else {
+          this.pageContent.innerHTML = renderShopHub() + this.renderFooter();
+          this.setTitle('Shop Motorcycle Gear, Helmets & Parts — VisorUp');
+          this._setMeta({ description: 'Shop 16,000+ motorcycle products — helmets, clothing, luggage, parts and accessories. Free UK delivery and 365-day returns via SportsBikeShop.' });
+          setTimeout(function() { Shop.initHub(); }, 100);
+        }
+        if (typeof VisorUpAnalytics !== 'undefined') VisorUpAnalytics.trackToolUsage('shop');
+        this.scrollToTop();
+        break;
+
       case 'gear':
         this.showSiteView();
         if (parts[1] === 'finder') {

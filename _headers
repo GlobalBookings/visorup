@@ -17,6 +17,10 @@
 /public/images/routes/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Shop catalogue data - cache 1 day, revalidate
+/public/data/shop/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
 # Cache JS/CSS for 1 week (may change more often)
 /*.js
   Cache-Control: public, max-age=604800
