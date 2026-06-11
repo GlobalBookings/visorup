@@ -48,7 +48,7 @@ function productCard(p, blurb) {
   const colours = p.colourCount > 1 ? ` <span class="bg-prod-col">${p.colourCount} colours</span>` : '';
   return '' +
   '<div class="bg-prod">' +
-    `<a href="${p.affiliateUrl}" target="_blank" rel="noopener sponsored" class="bg-prod-img"><img src="${p.thumb}" alt="${esc(p.name)}" loading="lazy"></a>` +
+    `<a href="${p.affiliateUrl}" target="_blank" rel="noopener sponsored" class="bg-prod-img"><img src="${p.thumb}" alt="${esc(p.name)}" loading="lazy" onerror="var x=this.closest('.bg-prod-img'); if(x) x.style.display='none';"></a>` +
     '<div class="bg-prod-info">' +
       `<span class="bg-prod-brand">${esc(p.brand)}</span>` +
       `<a href="${p.affiliateUrl}" target="_blank" rel="noopener sponsored" class="bg-prod-name">${esc(p.name)}</a>${colours}` +

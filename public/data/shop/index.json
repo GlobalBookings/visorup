@@ -1,92 +1,112 @@
 {
-  "generated": "2026-06-11T09:42:06.195Z",
-  "total": 16449,
+  "generated": "2026-06-11T15:01:20.254Z",
+  "total": 17300,
   "categories": {
     "Gloves": {
       "slug": "gloves",
-      "count": 1201,
-      "minPrice": 4.99,
-      "maxPrice": 549.95,
+      "count": 1459,
+      "minPrice": 2.99,
+      "maxPrice": 449.99,
       "brands": [
         {
           "brand": "Alpinestars",
-          "count": 136
+          "count": 137
         },
         {
           "brand": "Rev'it",
-          "count": 121
+          "count": 124
         },
         {
           "brand": "Richa",
-          "count": 89
+          "count": 109
         },
         {
           "brand": "Held",
+          "count": 95
+        },
+        {
+          "brand": "Tucano",
           "count": 74
+        },
+        {
+          "brand": "Furygan",
+          "count": 70
+        },
+        {
+          "brand": "Oxford",
+          "count": 66
+        },
+        {
+          "brand": "Five",
+          "count": 65
         },
         {
           "brand": "RST",
           "count": 59
         },
         {
-          "brand": "Oxford",
-          "count": 56
-        },
-        {
           "brand": "Spidi",
           "count": 50
         },
         {
-          "brand": "Tucano",
+          "brand": "Merlin",
           "count": 50
         },
         {
-          "brand": "Five",
-          "count": 49
-        },
-        {
-          "brand": "Merlin",
+          "brand": "Macna",
           "count": 48
-        },
-        {
-          "brand": "Furygan",
-          "count": 43
         },
         {
           "brand": "Dainese",
           "count": 38
         },
         {
-          "brand": "Macna",
-          "count": 34
+          "brand": "Weise",
+          "count": 37
         },
         {
           "brand": "Spada",
           "count": 33
         },
         {
-          "brand": "Weise",
-          "count": 28
+          "brand": "Thor",
+          "count": 33
+        },
+        {
+          "brand": "Bering",
+          "count": 23
+        },
+        {
+          "brand": "LS2",
+          "count": 23
+        },
+        {
+          "brand": "Rukka",
+          "count": 21
+        },
+        {
+          "brand": "T.ur",
+          "count": 21
         },
         {
           "brand": "DXR",
           "count": 21
         },
         {
-          "brand": "Thor",
-          "count": 21
-        },
-        {
-          "brand": "Rukka",
-          "count": 19
-        },
-        {
           "brand": "Klim",
-          "count": 19
+          "count": 20
         },
         {
-          "brand": "LS2",
-          "count": 19
+          "brand": "Icon",
+          "count": 20
+        },
+        {
+          "brand": "Leatt",
+          "count": 18
+        },
+        {
+          "brand": "Segura",
+          "count": 18
         },
         {
           "brand": "Keis",
@@ -94,6 +114,10 @@
         },
         {
           "brand": "Ixon",
+          "count": 17
+        },
+        {
+          "brand": "Rebelhorn",
           "count": 17
         },
         {
@@ -105,76 +129,52 @@
           "count": 14
         },
         {
-          "brand": "Rebelhorn",
-          "count": 13
-        },
-        {
-          "brand": "Icon",
-          "count": 10
+          "brand": "Acerbis",
+          "count": 12
         },
         {
           "brand": "Dane",
           "count": 9
         },
         {
-          "brand": "Leatt",
-          "count": 9
-        },
-        {
-          "brand": "T.ur",
+          "brand": "John",
           "count": 9
         },
         {
           "brand": "Halvarssons",
-          "count": 7
+          "count": 8
         },
         {
           "brand": "Duchinni",
           "count": 7
         },
         {
-          "brand": "Acerbis",
+          "brand": "Troy",
           "count": 6
-        },
-        {
-          "brand": "Bering",
-          "count": 5
         },
         {
           "brand": "Reusch",
           "count": 5
         },
         {
-          "brand": "John",
+          "brand": "ARMR",
           "count": 5
         },
         {
-          "brand": "Pharao",
-          "count": 3
+          "brand": "Trilobite",
+          "count": 4
         },
         {
           "brand": "O'Neal",
-          "count": 3
-        },
-        {
-          "brand": "FLM",
-          "count": 3
-        },
-        {
-          "brand": "Seven",
-          "count": 3
-        },
-        {
-          "brand": "Spirit",
           "count": 3
         }
       ]
     },
     "Jackets": {
       "slug": "jackets",
-      "count": 1801,
-      "minPrice": 7.81,
-      "maxPrice": 3379.99,
+      "count": 1832,
+      "minPrice": 14,
+      "maxPrice": 2429,
       "brands": [
         {
           "brand": "Alpinestars",
@@ -190,7 +190,7 @@
         },
         {
           "brand": "Held",
-          "count": 125
+          "count": 130
         },
         {
           "brand": "Dainese",
@@ -210,11 +210,11 @@
         },
         {
           "brand": "Oxford",
-          "count": 71
+          "count": 76
         },
         {
           "brand": "Tucano",
-          "count": 58
+          "count": 60
         },
         {
           "brand": "Merlin",
@@ -222,55 +222,59 @@
         },
         {
           "brand": "Weise",
-          "count": 45
+          "count": 47
+        },
+        {
+          "brand": "Rebelhorn",
+          "count": 43
         },
         {
           "brand": "Klim",
           "count": 42
         },
         {
-          "brand": "Rebelhorn",
-          "count": 40
-        },
-        {
           "brand": "Icon",
           "count": 40
         },
         {
-          "brand": "Spada",
-          "count": 36
+          "brand": "Macna",
+          "count": 37
         },
         {
-          "brand": "Macna",
-          "count": 35
+          "brand": "Spada",
+          "count": 37
         },
         {
           "brand": "Ixon",
           "count": 33
         },
         {
-          "brand": "Rukka",
-          "count": 30
-        },
-        {
           "brand": "Bering",
           "count": 29
+        },
+        {
+          "brand": "Rukka",
+          "count": 28
+        },
+        {
+          "brand": "LS2",
+          "count": 28
+        },
+        {
+          "brand": "Segura",
+          "count": 26
         },
         {
           "brand": "DXR",
           "count": 26
         },
         {
-          "brand": "Segura",
-          "count": 25
-        },
-        {
-          "brand": "LS2",
-          "count": 24
-        },
-        {
           "brand": "Leatt",
           "count": 19
+        },
+        {
+          "brand": "John",
+          "count": 18
         },
         {
           "brand": "Acerbis",
@@ -281,15 +285,19 @@
           "count": 17
         },
         {
-          "brand": "John",
-          "count": 16
-        },
-        {
           "brand": "T.ur",
-          "count": 14
+          "count": 15
         },
         {
           "brand": "Halvarssons",
+          "count": 10
+        },
+        {
+          "brand": "ARMR",
+          "count": 10
+        },
+        {
+          "brand": "Thor",
           "count": 10
         },
         {
@@ -297,15 +305,7 @@
           "count": 9
         },
         {
-          "brand": "Thor",
-          "count": 9
-        },
-        {
           "brand": "Knox",
-          "count": 8
-        },
-        {
-          "brand": "ARMR",
           "count": 8
         },
         {
@@ -317,6 +317,10 @@
           "count": 5
         },
         {
+          "brand": "Trilobite",
+          "count": 5
+        },
+        {
           "brand": "Resurgence",
           "count": 4
         },
@@ -325,24 +329,20 @@
           "count": 3
         },
         {
-          "brand": "Trilobite",
-          "count": 3
-        },
-        {
-          "brand": "Spirit",
+          "brand": "EVS",
           "count": 2
         },
         {
-          "brand": "FLM",
+          "brand": "Spirit",
           "count": 2
         }
       ]
     },
     "Boots": {
       "slug": "boots",
-      "count": 842,
-      "minPrice": 2.99,
-      "maxPrice": 679.99,
+      "count": 811,
+      "minPrice": 8,
+      "maxPrice": 629.99,
       "brands": [
         {
           "brand": "Alpinestars",
@@ -361,6 +361,10 @@
           "count": 42
         },
         {
+          "brand": "Falco",
+          "count": 39
+        },
+        {
           "brand": "Sidi",
           "count": 38
         },
@@ -377,10 +381,6 @@
           "count": 38
         },
         {
-          "brand": "Falco",
-          "count": 37
-        },
-        {
           "brand": "TCX",
           "count": 34
         },
@@ -395,10 +395,6 @@
         {
           "brand": "Dainese",
           "count": 30
-        },
-        {
-          "brand": "Shoei",
-          "count": 29
         },
         {
           "brand": "Held",
@@ -425,11 +421,11 @@
           "count": 15
         },
         {
-          "brand": "DXR",
+          "brand": "Rebelhorn",
           "count": 12
         },
         {
-          "brand": "Rebelhorn",
+          "brand": "DXR",
           "count": 12
         },
         {
@@ -441,6 +437,10 @@
           "count": 10
         },
         {
+          "brand": "Klim",
+          "count": 7
+        },
+        {
           "brand": "Xpd",
           "count": 7
         },
@@ -449,15 +449,11 @@
           "count": 7
         },
         {
-          "brand": "Duchinni",
-          "count": 7
-        },
-        {
           "brand": "Thor",
           "count": 7
         },
         {
-          "brand": "Klim",
+          "brand": "Duchinni",
           "count": 7
         },
         {
@@ -481,10 +477,6 @@
           "count": 4
         },
         {
-          "brand": "Tucano",
-          "count": 4
-        },
-        {
           "brand": "Ozone",
           "count": 3
         },
@@ -493,8 +485,12 @@
           "count": 3
         },
         {
-          "brand": "Cardo",
+          "brand": "Tucano",
           "count": 3
+        },
+        {
+          "brand": "Segura",
+          "count": 2
         },
         {
           "brand": "FLM",
@@ -503,206 +499,102 @@
         {
           "brand": "Spirit",
           "count": 2
+        },
+        {
+          "brand": "Acerbis",
+          "count": 2
         }
       ]
     },
     "Helmets": {
       "slug": "helmets",
-      "count": 1106,
-      "minPrice": 2.99,
-      "maxPrice": 649.99,
+      "count": 152,
+      "minPrice": 59.99,
+      "maxPrice": 999.99,
       "brands": [
         {
-          "brand": "HJC",
-          "count": 129
-        },
-        {
-          "brand": "LS2",
-          "count": 88
+          "brand": "Nolan",
+          "count": 31
         },
         {
           "brand": "Scorpion",
-          "count": 87
-        },
-        {
-          "brand": "Shoei",
-          "count": 84
-        },
-        {
-          "brand": "Nolan",
-          "count": 59
-        },
-        {
-          "brand": "Shark",
-          "count": 59
-        },
-        {
-          "brand": "MT",
-          "count": 53
-        },
-        {
-          "brand": "AGV",
-          "count": 51
-        },
-        {
-          "brand": "Caberg",
-          "count": 40
-        },
-        {
-          "brand": "Arai",
-          "count": 37
-        },
-        {
-          "brand": "Schuberth",
           "count": 28
         },
         {
-          "brand": "Nexx",
-          "count": 26
-        },
-        {
-          "brand": "Icon",
+          "brand": "HJC",
           "count": 25
         },
         {
-          "brand": "Alpinestars",
-          "count": 25
-        },
-        {
-          "brand": "Tucano",
-          "count": 23
-        },
-        {
-          "brand": "Airoh",
-          "count": 21
-        },
-        {
-          "brand": "Klim",
-          "count": 20
-        },
-        {
-          "brand": "SMK",
+          "brand": "Shark",
           "count": 19
         },
         {
-          "brand": "Axor",
-          "count": 14
-        },
-        {
-          "brand": "Spada",
-          "count": 13
-        },
-        {
-          "brand": "Roof",
-          "count": 13
-        },
-        {
-          "brand": "Dexter",
-          "count": 13
-        },
-        {
-          "brand": "Bell",
-          "count": 12
-        },
-        {
-          "brand": "Oxford",
-          "count": 12
-        },
-        {
-          "brand": "Furygan",
-          "count": 12
-        },
-        {
-          "brand": "Simpson",
+          "brand": "AGV",
           "count": 11
         },
         {
-          "brand": "SENA",
+          "brand": "MT",
           "count": 9
         },
         {
-          "brand": "Nexo",
-          "count": 9
+          "brand": "Shoei",
+          "count": 7
+        },
+        {
+          "brand": "LS2",
+          "count": 7
+        },
+        {
+          "brand": "Caberg",
+          "count": 5
+        },
+        {
+          "brand": "Arai",
+          "count": 3
         },
         {
           "brand": "Leatt",
-          "count": 7
+          "count": 3
         },
         {
-          "brand": "Sena",
-          "count": 7
+          "brand": "Bell",
+          "count": 2
         },
         {
-          "brand": "Oakley",
-          "count": 7
-        },
-        {
-          "brand": "Cardo",
-          "count": 6
+          "brand": "X-Lite",
+          "count": 1
         },
         {
           "brand": "Denali",
-          "count": 5
-        },
-        {
-          "brand": "Lazer",
-          "count": 5
-        },
-        {
-          "brand": "MotoGP",
-          "count": 5
-        },
-        {
-          "brand": "Merlin",
-          "count": 5
-        },
-        {
-          "brand": "Duchinni",
-          "count": 5
-        },
-        {
-          "brand": "Novic",
-          "count": 5
-        },
-        {
-          "brand": "John",
-          "count": 4
-        },
-        {
-          "brand": "Bike",
-          "count": 4
+          "count": 1
         }
       ]
     },
     "Electronics": {
       "slug": "electronics",
-      "count": 306,
+      "count": 323,
       "minPrice": 3.43,
-      "maxPrice": 529.99,
+      "maxPrice": 669,
       "brands": [
         {
           "brand": "Cardo",
-          "count": 38
+          "count": 47
         },
         {
           "brand": "SENA",
-          "count": 37
+          "count": 41
+        },
+        {
+          "brand": "SW",
+          "count": 25
         },
         {
           "brand": "Interphone",
           "count": 24
         },
         {
-          "brand": "SW",
-          "count": 24
-        },
-        {
           "brand": "RAM",
           "count": 20
-        },
-        {
-          "brand": "Starlane",
-          "count": 15
         },
         {
           "brand": "Riderr",
@@ -713,16 +605,20 @@
           "count": 8
         },
         {
-          "brand": "TecMate",
-          "count": 8
+          "brand": "Starlane",
+          "count": 7
         },
         {
-          "brand": "Quad",
-          "count": 8
+          "brand": "TecMate",
+          "count": 7
         },
         {
           "brand": "Bike",
           "count": 7
+        },
+        {
+          "brand": "Sena",
+          "count": 6
         },
         {
           "brand": "Gerbing",
@@ -733,7 +629,19 @@
           "count": 6
         },
         {
+          "brand": "Insta360",
+          "count": 5
+        },
+        {
           "brand": "Schuberth",
+          "count": 5
+        },
+        {
+          "brand": "Nexx",
+          "count": 5
+        },
+        {
+          "brand": "Quad",
           "count": 5
         },
         {
@@ -742,10 +650,6 @@
         },
         {
           "brand": "Tecmate",
-          "count": 5
-        },
-        {
-          "brand": "Insta360",
           "count": 5
         },
         {
@@ -761,15 +665,23 @@
           "count": 4
         },
         {
+          "brand": "HJC",
+          "count": 3
+        },
+        {
           "brand": "Drift",
           "count": 3
         },
         {
-          "brand": "Merlin",
+          "brand": "INNOVV",
           "count": 3
         },
         {
-          "brand": "HJC",
+          "brand": "Macna",
+          "count": 3
+        },
+        {
+          "brand": "Merlin",
           "count": 3
         },
         {
@@ -781,12 +693,24 @@
           "count": 3
         },
         {
-          "brand": "INNOVV",
+          "brand": "Ultimateaddons",
           "count": 3
         },
         {
-          "brand": "Ultimateaddons",
-          "count": 3
+          "brand": "Leatt",
+          "count": 2
+        },
+        {
+          "brand": "Shoei",
+          "count": 2
+        },
+        {
+          "brand": "Scorpion",
+          "count": 2
+        },
+        {
+          "brand": "Midland",
+          "count": 2
         },
         {
           "brand": "Garmin",
@@ -797,39 +721,11 @@
           "count": 2
         },
         {
-          "brand": "LS2",
-          "count": 2
-        },
-        {
           "brand": "Klim",
           "count": 2
         },
         {
-          "brand": "Macna",
-          "count": 2
-        },
-        {
-          "brand": "Midland",
-          "count": 2
-        },
-        {
-          "brand": "SP",
-          "count": 2
-        },
-        {
-          "brand": "Nexx",
-          "count": 2
-        },
-        {
-          "brand": "GB",
-          "count": 2
-        },
-        {
-          "brand": "Tucano",
-          "count": 2
-        },
-        {
-          "brand": "Leatt",
+          "brand": "AGV",
           "count": 2
         },
         {
@@ -837,17 +733,21 @@
           "count": 2
         },
         {
-          "brand": "R&G",
-          "count": 1
+          "brand": "Airoh",
+          "count": 2
         }
       ]
     },
     "Trousers": {
       "slug": "trousers",
-      "count": 1381,
+      "count": 1426,
       "minPrice": 5.99,
-      "maxPrice": 1199.99,
+      "maxPrice": 1259.95,
       "brands": [
+        {
+          "brand": "Held",
+          "count": 126
+        },
         {
           "brand": "Alpinestars",
           "count": 125
@@ -857,20 +757,16 @@
           "count": 124
         },
         {
-          "brand": "Held",
-          "count": 113
+          "brand": "Richa",
+          "count": 78
         },
         {
           "brand": "Bull-it",
           "count": 77
         },
         {
-          "brand": "Richa",
-          "count": 76
-        },
-        {
           "brand": "Spidi",
-          "count": 67
+          "count": 68
         },
         {
           "brand": "Oxford",
@@ -878,46 +774,46 @@
         },
         {
           "brand": "RST",
-          "count": 54
+          "count": 52
+        },
+        {
+          "brand": "Klim",
+          "count": 51
         },
         {
           "brand": "Dainese",
           "count": 50
         },
         {
-          "brand": "Klim",
-          "count": 44
-        },
-        {
           "brand": "Weise",
-          "count": 36
-        },
-        {
-          "brand": "Merlin",
-          "count": 35
+          "count": 38
         },
         {
           "brand": "Rebelhorn",
+          "count": 38
+        },
+        {
+          "brand": "Furygan",
+          "count": 34
+        },
+        {
+          "brand": "Merlin",
           "count": 34
         },
         {
           "brand": "Spada",
-          "count": 32
-        },
-        {
-          "brand": "Furygan",
-          "count": 31
+          "count": 33
         },
         {
           "brand": "Thor",
-          "count": 29
-        },
-        {
-          "brand": "John",
-          "count": 28
+          "count": 32
         },
         {
           "brand": "Tucano",
+          "count": 31
+        },
+        {
+          "brand": "John",
           "count": 28
         },
         {
@@ -926,7 +822,7 @@
         },
         {
           "brand": "Trilobite",
-          "count": 23
+          "count": 25
         },
         {
           "brand": "LS2",
@@ -938,18 +834,18 @@
         },
         {
           "brand": "Macna",
-          "count": 17
-        },
-        {
-          "brand": "Ixon",
-          "count": 16
+          "count": 18
         },
         {
           "brand": "Leatt",
           "count": 15
         },
         {
-          "brand": "Route",
+          "brand": "Ixon",
+          "count": 15
+        },
+        {
+          "brand": "Knox",
           "count": 14
         },
         {
@@ -957,19 +853,23 @@
           "count": 13
         },
         {
-          "brand": "Knox",
+          "brand": "Route",
           "count": 13
         },
         {
-          "brand": "Icon",
-          "count": 9
+          "brand": "Acerbis",
+          "count": 10
         },
         {
-          "brand": "Acerbis",
-          "count": 9
+          "brand": "Halvarssons",
+          "count": 8
         },
         {
           "brand": "Bering",
+          "count": 8
+        },
+        {
+          "brand": "Troy",
           "count": 8
         },
         {
@@ -981,11 +881,7 @@
           "count": 8
         },
         {
-          "brand": "Halvarssons",
-          "count": 8
-        },
-        {
-          "brand": "Givi",
+          "brand": "Dane",
           "count": 7
         },
         {
@@ -993,212 +889,44 @@
           "count": 7
         },
         {
-          "brand": "Troy",
+          "brand": "Icon",
           "count": 7
         },
         {
-          "brand": "iXS",
-          "count": 6
-        },
-        {
-          "brand": "O'Neal",
-          "count": 6
-        },
-        {
           "brand": "T.ur",
-          "count": 6
-        }
-      ]
-    },
-    "Other": {
-      "slug": "other",
-      "count": 4031,
-      "minPrice": 0.99,
-      "maxPrice": 1660.99,
-      "brands": [
-        {
-          "brand": "Oxford",
-          "count": 228
-        },
-        {
-          "brand": "Alpinestars",
-          "count": 187
-        },
-        {
-          "brand": "Pirelli",
-          "count": 137
+          "count": 7
         },
         {
           "brand": "Givi",
-          "count": 123
+          "count": 7
         },
         {
-          "brand": "Pyramid",
-          "count": 113
-        },
-        {
-          "brand": "R&G",
-          "count": 96
-        },
-        {
-          "brand": "Denali",
-          "count": 95
-        },
-        {
-          "brand": "Dunlop",
-          "count": 95
-        },
-        {
-          "brand": "Rizoma",
-          "count": 88
-        },
-        {
-          "brand": "Kriega",
-          "count": 83
-        },
-        {
-          "brand": "Bike",
-          "count": 81
-        },
-        {
-          "brand": "Michelin",
-          "count": 76
-        },
-        {
-          "brand": "Bridgestone",
-          "count": 74
-        },
-        {
-          "brand": "Shad",
-          "count": 69
-        },
-        {
-          "brand": "Held",
-          "count": 68
-        },
-        {
-          "brand": "Nolan",
-          "count": 67
-        },
-        {
-          "brand": "Peak",
-          "count": 62
-        },
-        {
-          "brand": "Metzeler",
-          "count": 61
-        },
-        {
-          "brand": "SW",
-          "count": 60
-        },
-        {
-          "brand": "Kappa",
-          "count": 58
-        },
-        {
-          "brand": "Enduristan",
-          "count": 58
-        },
-        {
-          "brand": "Klim",
-          "count": 54
-        },
-        {
-          "brand": "LS2",
-          "count": 54
-        },
-        {
-          "brand": "Oakley",
-          "count": 48
-        },
-        {
-          "brand": "Starlane",
-          "count": 47
-        },
-        {
-          "brand": "Interphone",
-          "count": 45
-        },
-        {
-          "brand": "Continental",
-          "count": 45
-        },
-        {
-          "brand": "Motorex",
-          "count": 45
-        },
-        {
-          "brand": "Mitas",
-          "count": 43
-        },
-        {
-          "brand": "Nexx",
-          "count": 40
-        },
-        {
-          "brand": "Scottoiler",
-          "count": 40
-        },
-        {
-          "brand": "Thor",
-          "count": 40
-        },
-        {
-          "brand": "GoPro",
-          "count": 39
-        },
-        {
-          "brand": "Tucano",
-          "count": 38
-        },
-        {
-          "brand": "Liqui",
-          "count": 37
-        },
-        {
-          "brand": "SP",
-          "count": 36
-        },
-        {
-          "brand": "Putoline",
-          "count": 36
-        },
-        {
-          "brand": "Avon",
-          "count": 35
-        },
-        {
-          "brand": "Ipone",
-          "count": 35
-        },
-        {
-          "brand": "Shark",
-          "count": 34
+          "brand": "O'Neal",
+          "count": 7
         }
       ]
     },
     "Parts": {
       "slug": "parts",
-      "count": 2037,
+      "count": 2106,
       "minPrice": 1.49,
-      "maxPrice": 550,
+      "maxPrice": 522.39,
       "brands": [
         {
           "brand": "K&N",
           "count": 216
         },
         {
-          "brand": "Rizoma",
-          "count": 166
+          "brand": "Renthal",
+          "count": 208
         },
         {
           "brand": "Oxford",
-          "count": 166
+          "count": 168
         },
         {
-          "brand": "Renthal",
-          "count": 136
+          "brand": "Rizoma",
+          "count": 154
         },
         {
           "brand": "Givi",
@@ -1206,7 +934,7 @@
         },
         {
           "brand": "Pyramid",
-          "count": 111
+          "count": 112
         },
         {
           "brand": "Bike",
@@ -1214,7 +942,7 @@
         },
         {
           "brand": "Denali",
-          "count": 59
+          "count": 62
         },
         {
           "brand": "RAM",
@@ -1222,7 +950,7 @@
         },
         {
           "brand": "Quad",
-          "count": 45
+          "count": 44
         },
         {
           "brand": "TAAC",
@@ -1237,16 +965,24 @@
           "count": 35
         },
         {
+          "brand": "HEX",
+          "count": 30
+        },
+        {
           "brand": "Shad",
           "count": 29
         },
         {
           "brand": "GoPro",
-          "count": 25
+          "count": 28
         },
         {
           "brand": "Millers",
           "count": 25
+        },
+        {
+          "brand": "Puig",
+          "count": 22
         },
         {
           "brand": "R&G",
@@ -1261,19 +997,11 @@
           "count": 20
         },
         {
-          "brand": "HEX",
-          "count": 20
-        },
-        {
           "brand": "Kappa",
           "count": 19
         },
         {
-          "brand": "Ultimateaddons",
-          "count": 18
-        },
-        {
-          "brand": "Motul",
+          "brand": "Starlane",
           "count": 18
         },
         {
@@ -1281,12 +1009,16 @@
           "count": 18
         },
         {
-          "brand": "Starlane",
+          "brand": "Motul",
+          "count": 18
+        },
+        {
+          "brand": "Ultimateaddons",
           "count": 17
         },
         {
           "brand": "Tigra",
-          "count": 16
+          "count": 17
         },
         {
           "brand": "Yuasa",
@@ -1294,6 +1026,10 @@
         },
         {
           "brand": "TecMate",
+          "count": 15
+        },
+        {
+          "brand": "GB",
           "count": 15
         },
         {
@@ -1313,11 +1049,11 @@
           "count": 14
         },
         {
-          "brand": "EBC",
+          "brand": "Scottoiler",
           "count": 13
         },
         {
-          "brand": "Scottoiler",
+          "brand": "EBC",
           "count": 13
         },
         {
@@ -1325,36 +1061,196 @@
           "count": 13
         },
         {
-          "brand": "GB",
-          "count": 12
-        },
-        {
           "brand": "Gerbing",
           "count": 12
         },
         {
-          "brand": "Puig",
+          "brand": "SW",
           "count": 12
         },
         {
           "brand": "Riderr",
           "count": 11
+        }
+      ]
+    },
+    "Other": {
+      "slug": "other",
+      "count": 4325,
+      "minPrice": 0.89,
+      "maxPrice": 1621.93,
+      "brands": [
+        {
+          "brand": "Oxford",
+          "count": 230
         },
         {
-          "brand": "Squire",
-          "count": 11
+          "brand": "Alpinestars",
+          "count": 176
+        },
+        {
+          "brand": "Pirelli",
+          "count": 150
+        },
+        {
+          "brand": "Givi",
+          "count": 128
+        },
+        {
+          "brand": "Pyramid",
+          "count": 114
+        },
+        {
+          "brand": "Rizoma",
+          "count": 100
+        },
+        {
+          "brand": "R&G",
+          "count": 98
+        },
+        {
+          "brand": "Denali",
+          "count": 97
+        },
+        {
+          "brand": "Dunlop",
+          "count": 97
+        },
+        {
+          "brand": "Kriega",
+          "count": 84
+        },
+        {
+          "brand": "Bike",
+          "count": 83
+        },
+        {
+          "brand": "Michelin",
+          "count": 81
+        },
+        {
+          "brand": "Held",
+          "count": 79
+        },
+        {
+          "brand": "Nolan",
+          "count": 74
+        },
+        {
+          "brand": "Bridgestone",
+          "count": 74
+        },
+        {
+          "brand": "Klim",
+          "count": 72
+        },
+        {
+          "brand": "Shad",
+          "count": 69
+        },
+        {
+          "brand": "SW",
+          "count": 63
+        },
+        {
+          "brand": "LS2",
+          "count": 62
+        },
+        {
+          "brand": "Peak",
+          "count": 62
+        },
+        {
+          "brand": "Metzeler",
+          "count": 61
+        },
+        {
+          "brand": "Enduristan",
+          "count": 59
+        },
+        {
+          "brand": "Kappa",
+          "count": 58
+        },
+        {
+          "brand": "Starlane",
+          "count": 54
+        },
+        {
+          "brand": "Thor",
+          "count": 53
+        },
+        {
+          "brand": "Nexx",
+          "count": 49
+        },
+        {
+          "brand": "Oakley",
+          "count": 49
+        },
+        {
+          "brand": "Mitas",
+          "count": 49
+        },
+        {
+          "brand": "Continental",
+          "count": 48
+        },
+        {
+          "brand": "Interphone",
+          "count": 45
+        },
+        {
+          "brand": "Motorex",
+          "count": 45
+        },
+        {
+          "brand": "Shoei",
+          "count": 44
+        },
+        {
+          "brand": "Tucano",
+          "count": 41
+        },
+        {
+          "brand": "Scottoiler",
+          "count": 41
+        },
+        {
+          "brand": "Avon",
+          "count": 40
+        },
+        {
+          "brand": "GoPro",
+          "count": 39
+        },
+        {
+          "brand": "Liqui",
+          "count": 37
+        },
+        {
+          "brand": "SP",
+          "count": 36
+        },
+        {
+          "brand": "Putoline",
+          "count": 36
+        },
+        {
+          "brand": "Shark",
+          "count": 35
         }
       ]
     },
     "Protection": {
       "slug": "protection",
-      "count": 702,
-      "minPrice": 4.99,
+      "count": 713,
+      "minPrice": 4.49,
       "maxPrice": 1024.99,
       "brands": [
         {
           "brand": "R&G",
-          "count": 80
+          "count": 82
         },
         {
           "brand": "Alpinestars",
@@ -1369,16 +1265,24 @@
           "count": 35
         },
         {
+          "brand": "EVS",
+          "count": 34
+        },
+        {
           "brand": "RST",
           "count": 33
         },
         {
-          "brand": "EVS",
-          "count": 32
-        },
-        {
           "brand": "Knox",
           "count": 30
+        },
+        {
+          "brand": "Klim",
+          "count": 26
+        },
+        {
+          "brand": "Troy",
+          "count": 20
         },
         {
           "brand": "Held",
@@ -1387,14 +1291,6 @@
         {
           "brand": "Rev'it",
           "count": 19
-        },
-        {
-          "brand": "Klim",
-          "count": 18
-        },
-        {
-          "brand": "Troy",
-          "count": 18
         },
         {
           "brand": "Spidi",
@@ -1417,19 +1313,19 @@
           "count": 13
         },
         {
-          "brand": "Furygan",
-          "count": 12
-        },
-        {
           "brand": "Bering",
           "count": 12
         },
         {
-          "brand": "Acerbis",
+          "brand": "Furygan",
           "count": 11
         },
         {
           "brand": "Rukka",
+          "count": 11
+        },
+        {
+          "brand": "Acerbis",
           "count": 11
         },
         {
@@ -1457,15 +1353,7 @@
           "count": 8
         },
         {
-          "brand": "Rebelhorn",
-          "count": 7
-        },
-        {
           "brand": "Fly",
-          "count": 7
-        },
-        {
-          "brand": "Merlin",
           "count": 7
         },
         {
@@ -1473,11 +1361,19 @@
           "count": 7
         },
         {
+          "brand": "Rebelhorn",
+          "count": 7
+        },
+        {
+          "brand": "Merlin",
+          "count": 7
+        },
+        {
           "brand": "John",
           "count": 7
         },
         {
-          "brand": "LS2",
+          "brand": "MOTOAIRBAG",
           "count": 6
         },
         {
@@ -1489,15 +1385,15 @@
           "count": 6
         },
         {
-          "brand": "MOTOAIRBAG",
-          "count": 5
+          "brand": "Pyramid",
+          "count": 4
         },
         {
           "brand": "BikeTek",
           "count": 4
         },
         {
-          "brand": "Pyramid",
+          "brand": "Leatt",
           "count": 4
         },
         {
@@ -1505,7 +1401,7 @@
           "count": 4
         },
         {
-          "brand": "Leatt",
+          "brand": "LS2",
           "count": 4
         },
         {
@@ -1516,9 +1412,9 @@
     },
     "Exhausts": {
       "slug": "exhausts",
-      "count": 138,
+      "count": 136,
       "minPrice": 4.99,
-      "maxPrice": 1616.2,
+      "maxPrice": 1625.4,
       "brands": [
         {
           "brand": "Scorpion",
@@ -1526,7 +1422,7 @@
         },
         {
           "brand": "R&G",
-          "count": 36
+          "count": 34
         },
         {
           "brand": "Akrapovic",
@@ -1557,15 +1453,15 @@
           "count": 1
         },
         {
-          "brand": "Oakley",
-          "count": 1
-        },
-        {
           "brand": "SW",
           "count": 1
         },
         {
           "brand": "O'Neal",
+          "count": 1
+        },
+        {
+          "brand": "Oakley",
           "count": 1
         },
         {
@@ -1580,13 +1476,13 @@
     },
     "Luggage": {
       "slug": "luggage",
-      "count": 1360,
+      "count": 1366,
       "minPrice": 1.99,
-      "maxPrice": 829.81,
+      "maxPrice": 746.83,
       "brands": [
         {
           "brand": "Givi",
-          "count": 473
+          "count": 479
         },
         {
           "brand": "Shad",
@@ -1594,11 +1490,11 @@
         },
         {
           "brand": "Kappa",
-          "count": 179
+          "count": 186
         },
         {
           "brand": "SW",
-          "count": 64
+          "count": 56
         },
         {
           "brand": "Oxford",
@@ -1645,11 +1541,11 @@
           "count": 8
         },
         {
-          "brand": "Klim",
+          "brand": "Oakley",
           "count": 6
         },
         {
-          "brand": "Oakley",
+          "brand": "Klim",
           "count": 6
         },
         {
@@ -1658,6 +1554,10 @@
         },
         {
           "brand": "Rev'it",
+          "count": 4
+        },
+        {
+          "brand": "Interphone",
           "count": 4
         },
         {
@@ -1673,10 +1573,6 @@
           "count": 4
         },
         {
-          "brand": "Interphone",
-          "count": 4
-        },
-        {
           "brand": "Rizoma",
           "count": 3
         },
@@ -1685,11 +1581,11 @@
           "count": 3
         },
         {
-          "brand": "Bagster",
+          "brand": "R&G",
           "count": 3
         },
         {
-          "brand": "R&G",
+          "brand": "Bagster",
           "count": 3
         },
         {
@@ -1705,7 +1601,7 @@
           "count": 2
         },
         {
-          "brand": "ABUS",
+          "brand": "Trackting",
           "count": 2
         },
         {
@@ -1713,7 +1609,7 @@
           "count": 2
         },
         {
-          "brand": "CTEK",
+          "brand": "Thor",
           "count": 2
         },
         {
@@ -1721,15 +1617,7 @@
           "count": 2
         },
         {
-          "brand": "Trackting",
-          "count": 2
-        },
-        {
           "brand": "HEX",
-          "count": 2
-        },
-        {
-          "brand": "Thor",
           "count": 2
         },
         {
@@ -1737,60 +1625,240 @@
           "count": 2
         },
         {
-          "brand": "Continental",
+          "brand": "ABUS",
+          "count": 2
+        },
+        {
+          "brand": "CTEK",
+          "count": 2
+        },
+        {
+          "brand": "MOTOAIRBAG",
           "count": 1
         },
         {
-          "brand": "Knox",
+          "brand": "Continental",
           "count": 1
+        }
+      ]
+    },
+    "Accessories": {
+      "slug": "accessories",
+      "count": 1822,
+      "minPrice": 1,
+      "maxPrice": 366,
+      "brands": [
+        {
+          "brand": "Oxford",
+          "count": 117
+        },
+        {
+          "brand": "HJC",
+          "count": 107
+        },
+        {
+          "brand": "LS2",
+          "count": 93
+        },
+        {
+          "brand": "R&G",
+          "count": 75
+        },
+        {
+          "brand": "Shoei",
+          "count": 70
+        },
+        {
+          "brand": "Kappa",
+          "count": 60
+        },
+        {
+          "brand": "Scorpion",
+          "count": 59
+        },
+        {
+          "brand": "Nexx",
+          "count": 54
+        },
+        {
+          "brand": "Tucano",
+          "count": 46
+        },
+        {
+          "brand": "Arai",
+          "count": 46
+        },
+        {
+          "brand": "MT",
+          "count": 46
+        },
+        {
+          "brand": "Alpinestars",
+          "count": 45
+        },
+        {
+          "brand": "Shad",
+          "count": 40
+        },
+        {
+          "brand": "Shark",
+          "count": 39
+        },
+        {
+          "brand": "Nikwax",
+          "count": 39
+        },
+        {
+          "brand": "AGV",
+          "count": 38
+        },
+        {
+          "brand": "Caberg",
+          "count": 37
+        },
+        {
+          "brand": "Quad",
+          "count": 35
+        },
+        {
+          "brand": "Schuberth",
+          "count": 34
+        },
+        {
+          "brand": "Nolan",
+          "count": 33
+        },
+        {
+          "brand": "Icon",
+          "count": 30
+        },
+        {
+          "brand": "GB",
+          "count": 29
+        },
+        {
+          "brand": "Klim",
+          "count": 28
+        },
+        {
+          "brand": "Muc-Off",
+          "count": 26
+        },
+        {
+          "brand": "Bike",
+          "count": 26
+        },
+        {
+          "brand": "Givi",
+          "count": 25
+        },
+        {
+          "brand": "Riderr",
+          "count": 22
+        },
+        {
+          "brand": "Morris",
+          "count": 21
+        },
+        {
+          "brand": "Airoh",
+          "count": 19
+        },
+        {
+          "brand": "SMK",
+          "count": 19
+        },
+        {
+          "brand": "Bell",
+          "count": 18
+        },
+        {
+          "brand": "MotoGP",
+          "count": 14
+        },
+        {
+          "brand": "S100",
+          "count": 14
+        },
+        {
+          "brand": "Axor",
+          "count": 14
+        },
+        {
+          "brand": "Dexter",
+          "count": 14
+        },
+        {
+          "brand": "BikeTek",
+          "count": 13
+        },
+        {
+          "brand": "Roof",
+          "count": 13
+        },
+        {
+          "brand": "Simpson",
+          "count": 12
+        },
+        {
+          "brand": "Kovix",
+          "count": 11
+        },
+        {
+          "brand": "Spada",
+          "count": 11
         }
       ]
     },
     "Casual": {
       "slug": "casual",
-      "count": 579,
+      "count": 667,
       "minPrice": 3.5,
-      "maxPrice": 695.5,
+      "maxPrice": 329.99,
       "brands": [
         {
           "brand": "Alpinestars",
-          "count": 106
+          "count": 107
+        },
+        {
+          "brand": "Klim",
+          "count": 54
         },
         {
           "brand": "Oakley",
-          "count": 45
+          "count": 52
+        },
+        {
+          "brand": "Thor",
+          "count": 46
         },
         {
           "brand": "Rev'it",
-          "count": 39
+          "count": 41
         },
         {
           "brand": "Dainese",
           "count": 39
         },
         {
-          "brand": "Klim",
-          "count": 38
+          "brand": "Held",
+          "count": 33
         },
         {
           "brand": "Oxford",
           "count": 23
         },
         {
-          "brand": "Held",
-          "count": 22
+          "brand": "John",
+          "count": 20
         },
         {
           "brand": "Merlin",
-          "count": 16
+          "count": 18
         },
         {
-          "brand": "Thor",
-          "count": 16
-        },
-        {
-          "brand": "John",
-          "count": 15
+          "brand": "Icon",
+          "count": 17
         },
         {
           "brand": "RST",
@@ -1801,15 +1869,15 @@
           "count": 14
         },
         {
-          "brand": "Tecmate",
-          "count": 12
-        },
-        {
-          "brand": "Givi",
-          "count": 11
+          "brand": "Troy",
+          "count": 13
         },
         {
           "brand": "RAM",
+          "count": 11
+        },
+        {
+          "brand": "Sealskinz",
           "count": 11
         },
         {
@@ -1817,55 +1885,39 @@
           "count": 10
         },
         {
+          "brand": "Tecmate",
+          "count": 10
+        },
+        {
           "brand": "Bike",
           "count": 9
         },
         {
-          "brand": "Kappa",
-          "count": 7
+          "brand": "Trilobite",
+          "count": 8
         },
         {
           "brand": "Spidi",
           "count": 7
         },
         {
-          "brand": "Icon",
+          "brand": "EVS",
           "count": 7
-        },
-        {
-          "brand": "Macna",
-          "count": 6
         },
         {
           "brand": "Rukka",
           "count": 6
         },
         {
-          "brand": "EVS",
-          "count": 6
+          "brand": "Macna",
+          "count": 5
         },
         {
           "brand": "Furygan",
           "count": 5
         },
         {
-          "brand": "Trilobite",
-          "count": 5
-        },
-        {
-          "brand": "Sealskinz",
-          "count": 5
-        },
-        {
-          "brand": "Troy",
-          "count": 5
-        },
-        {
-          "brand": "Tucano",
-          "count": 4
-        },
-        {
-          "brand": "Quad",
+          "brand": "Knox",
           "count": 4
         },
         {
@@ -1873,19 +1925,23 @@
           "count": 4
         },
         {
-          "brand": "MotoGP",
+          "brand": "Quad",
           "count": 4
         },
         {
-          "brand": "Spada",
-          "count": 3
+          "brand": "MotoGP",
+          "count": 4
         },
         {
           "brand": "Weise",
           "count": 3
         },
         {
-          "brand": "Kriega",
+          "brand": "Spada",
+          "count": 3
+        },
+        {
+          "brand": "Tucano",
           "count": 3
         },
         {
@@ -1893,15 +1949,15 @@
           "count": 3
         },
         {
-          "brand": "T.ur",
-          "count": 3
-        },
-        {
           "brand": "Acerbis",
           "count": 3
         },
         {
-          "brand": "LS2",
+          "brand": "T.ur",
+          "count": 3
+        },
+        {
+          "brand": "Kriega",
           "count": 3
         },
         {
@@ -1911,210 +1967,50 @@
         {
           "brand": "Gerbing",
           "count": 2
-        }
-      ]
-    },
-    "Accessories": {
-      "slug": "accessories",
-      "count": 813,
-      "minPrice": 1,
-      "maxPrice": 399.99,
-      "brands": [
-        {
-          "brand": "Oxford",
-          "count": 105
         },
         {
-          "brand": "R&G",
-          "count": 74
-        },
-        {
-          "brand": "Kappa",
-          "count": 60
-        },
-        {
-          "brand": "Shad",
-          "count": 40
-        },
-        {
-          "brand": "Nikwax",
-          "count": 37
-        },
-        {
-          "brand": "Quad",
-          "count": 30
-        },
-        {
-          "brand": "GB",
-          "count": 29
-        },
-        {
-          "brand": "Givi",
-          "count": 26
-        },
-        {
-          "brand": "Muc-Off",
-          "count": 25
-        },
-        {
-          "brand": "Bike",
-          "count": 22
-        },
-        {
-          "brand": "Riderr",
-          "count": 21
-        },
-        {
-          "brand": "Morris",
-          "count": 21
-        },
-        {
-          "brand": "Tucano",
-          "count": 15
-        },
-        {
-          "brand": "S100",
-          "count": 14
+          "brand": "PMJ",
+          "count": 2
         },
         {
           "brand": "BikeTek",
-          "count": 13
-        },
-        {
-          "brand": "Kovix",
-          "count": 12
-        },
-        {
-          "brand": "MotoGP",
-          "count": 10
-        },
-        {
-          "brand": "Putoline",
-          "count": 9
-        },
-        {
-          "brand": "TAAC",
-          "count": 9
-        },
-        {
-          "brand": "ROKiT",
-          "count": 9
-        },
-        {
-          "brand": "Liqui",
-          "count": 8
-        },
-        {
-          "brand": "SW",
-          "count": 7
-        },
-        {
-          "brand": "Zovii",
-          "count": 7
-        },
-        {
-          "brand": "Motorex",
-          "count": 7
-        },
-        {
-          "brand": "Mammoth",
-          "count": 7
-        },
-        {
-          "brand": "LS2",
-          "count": 7
-        },
-        {
-          "brand": "Motul",
-          "count": 7
-        },
-        {
-          "brand": "Denali",
-          "count": 6
-        },
-        {
-          "brand": "Hiplok",
-          "count": 6
-        },
-        {
-          "brand": "Peak",
-          "count": 6
-        },
-        {
-          "brand": "Gear",
-          "count": 6
-        },
-        {
-          "brand": "Acerbis",
-          "count": 6
-        },
-        {
-          "brand": "Motoverde",
-          "count": 6
-        },
-        {
-          "brand": "Alpinestars",
-          "count": 5
-        },
-        {
-          "brand": "Rev'it",
-          "count": 5
-        },
-        {
-          "brand": "Arai",
-          "count": 5
-        },
-        {
-          "brand": "Held",
-          "count": 5
-        },
-        {
-          "brand": "Ipone",
-          "count": 5
-        },
-        {
-          "brand": "Kriega",
-          "count": 5
-        },
-        {
-          "brand": "Squire",
-          "count": 4
+          "count": 2
         }
       ]
     },
     "Base Layers": {
       "slug": "base-layers",
-      "count": 152,
+      "count": 162,
       "minPrice": 4.95,
-      "maxPrice": 315,
+      "maxPrice": 320,
       "brands": [
         {
           "brand": "Alpinestars",
-          "count": 18
+          "count": 19
         },
         {
           "brand": "Oxford",
-          "count": 17
+          "count": 16
+        },
+        {
+          "brand": "Tucano",
+          "count": 12
         },
         {
           "brand": "Klim",
           "count": 10
         },
         {
+          "brand": "Held",
+          "count": 10
+        },
+        {
           "brand": "Rev'it",
           "count": 10
         },
         {
-          "brand": "Held",
-          "count": 8
-        },
-        {
           "brand": "Spada",
-          "count": 8
-        },
-        {
-          "brand": "Tucano",
-          "count": 8
+          "count": 9
         },
         {
           "brand": "Bering",
@@ -2125,15 +2021,15 @@
           "count": 7
         },
         {
+          "brand": "Rebelhorn",
+          "count": 6
+        },
+        {
           "brand": "Rukka",
           "count": 6
         },
         {
           "brand": "Zerofit",
-          "count": 6
-        },
-        {
-          "brand": "Rebelhorn",
           "count": 6
         },
         {
@@ -2145,12 +2041,12 @@
           "count": 5
         },
         {
-          "brand": "RST",
+          "brand": "Knox",
           "count": 4
         },
         {
-          "brand": "Knox",
-          "count": 3
+          "brand": "RST",
+          "count": 4
         },
         {
           "brand": "Weise",
@@ -2158,6 +2054,10 @@
         },
         {
           "brand": "Furygan",
+          "count": 3
+        },
+        {
+          "brand": "LS2",
           "count": 3
         },
         {
@@ -2169,15 +2069,7 @@
           "count": 2
         },
         {
-          "brand": "LS2",
-          "count": 2
-        },
-        {
           "brand": "Roof",
-          "count": 1
-        },
-        {
-          "brand": "iXS",
           "count": 1
         },
         {
@@ -2185,15 +2077,19 @@
           "count": 1
         },
         {
+          "brand": "iXS",
+          "count": 1
+        },
+        {
           "brand": "ARMR",
           "count": 1
         },
         {
-          "brand": "EVS",
+          "brand": "Dane",
           "count": 1
         },
         {
-          "brand": "Dane",
+          "brand": "EVS",
           "count": 1
         },
         {
@@ -2206,6 +2102,10 @@
         },
         {
           "brand": "John",
+          "count": 1
+        },
+        {
+          "brand": "T.ur",
           "count": 1
         },
         {

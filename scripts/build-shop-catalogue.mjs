@@ -66,17 +66,46 @@ const HELMET_MODELS = [
 function categorise(name, brand) {
   const ln = name.toLowerCase();
   const lb = (brand || '').toLowerCase();
-  const has = (...kw) => kw.some(k => ln.includes(k));
+  // Match on the product's own name, before the " - variant/colour/compat" suffix, so colour
+  // names ("Jet Black") and compatibility tags ("- VFX-WR") never trigger category keywords.
+  const base = ln.replace(/ - .+$/, '');
+  const has = (...kw) => kw.some(k => base.includes(k));
 
   // Care / cleaning / consumables go to Accessories first (before keyword bleed)
   if (has('wipe', 'microfibre', 'micro fibre', 'cleaning cloth', 'care kit', 'cleaner', 'cleaning kit',
-          'anti-fog', 'anti fog', 'fuse', 'polish', 'detailer', 'protectant')) return 'Accessories';
+          'anti-fog', 'anti fog', 'fuse', 'polish', 'detailer', 'protectant', 'sanitiser', 'sanitizer',
+          'foam fresh', 'deodoriser', 'deodorizer', 'freshener', 'helmet wash', 'visor proof')) return 'Accessories';
 
-  // Helmets & helmet accessories
-  if (has('helmet', 'visor', 'pinlock', 'face shield', 'helemt')) return 'Helmets';
-  if (has(' jet ', 'open face', 'full face', 'flip up', 'flip-up', 'modular')) return 'Helmets';
-  if (HELMET_BRANDS.has(lb) && HELMET_MODELS.some(m => ln.includes(m)) &&
-      !has('jacket','glove','boot','pant','bag','exhaust','rack','cover','collar','rear set')) return 'Helmets';
+  // Screens are parts — catch BEFORE the helmet 'visor' rule (windscreens often say "with visor")
+  if (has('windscreen', 'wind screen', 'windshield', 'wind shield', 'fly screen', 'double bubble',
+          'screen blade', 'touring screen', 'sports screen')) return 'Parts';
+
+  // Helmet accessories & spares → Accessories, never Helmets
+  if (has('helmet bag', 'helmet care', 'helmet lock', 'helmet stand', 'helmet liner', 'helmet hook',
+          'helmet rack', 'helmet holder', 'helmet cradle', 'helmet sticker', 'pinlock', 'tear off',
+          'tear-off', 'cheek pad', 'ear pad', 'chin curtain', 'breath guard', 'breath deflector',
+          'nose guard', 'visor', 'spoiler', 'sun shield', 'face shield', 'helmet peak',
+          'chin strap', 'chin bar', 'neck roll', 'srl', "helmet'out", "helmet'in")) return 'Accessories';
+
+  // Balaclavas / under-helmet layers
+  if (has('balaclava', 'under-helmet', 'under helmet')) return 'Base Layers';
+  // Remaining "<brand> helmet <add-on>" items → Accessories (real helmets aren't named like this)
+  if (has('helmet') && has('bag', 'bumper', 'halo', 'donut', 'servicing', 'pad', 'strap', 'ratchet',
+          'screw', 'tool', 'sticker', 'lock', 'stand', 'hook', 'rack', 'holder', 'cradle', 'peak',
+          'spoiler', 'vent', 'cover', 'cushion', 'weight', 'hanger', 'dryer', 'warmer', 'rail')) return 'Accessories';
+
+  // Actual helmets only (exclude clothing/parts that merely contain "modular"/"flip"/a model name)
+  const notHelmet = !has('jacket', 'trouser', ' pant', 'jean', 'glove', 'boot', 'light', 'lamp',
+                         'exhaust', 'bag', 'suit', 'base layer', 'intercom', 'camera', 'screen',
+                         'rack', 'cover', 'collar', 'lens', 'lever', 'mount', 'adapter', 'adaptor',
+                         't-shirt', 'tshirt', 't shirt', 'hoodie', 'sweatshirt', 'handguard', 'hand guard',
+                         'key fob', 'keyring', 'lining', 'liner', 'interior', 'base plate', 'sticker',
+                         'donut', 'screw', 'cardo', 'sena', 'packtalk', 'comms',
+                         'sunglasses', 'goggle', 'glasses', 'eyewear');
+  if (has('helmet', 'helemt') && notHelmet) return 'Helmets';
+  if (((/\bjet\b/.test(base) && (HELMET_BRANDS.has(lb) || has('helmet'))) ||
+       has('open face', 'full face', 'flip up', 'flip-up', 'modular')) && notHelmet) return 'Helmets';
+  if (HELMET_BRANDS.has(lb) && HELMET_MODELS.some(m => base.includes(m)) && notHelmet) return 'Helmets';
 
   // Exhausts (large slice of Other)
   if (has('exhaust', 'silencer', 'downpipe', 'down pipe', 'link pipe', 'collector', 'db killer',
@@ -98,8 +127,8 @@ function categorise(name, brand) {
   // Gloves
   if (has('glove', 'mitt')) return 'Gloves';
 
-  // Boots & footwear
-  if (has('boot', 'shoe', 'trainer', 'sneaker')) return 'Boots';
+  // Boots & footwear ('shoe' as a whole word so it never matches the brand "Shoei")
+  if (has('boot', 'trainer', 'sneaker') || /\bshoes?\b/.test(base)) return 'Boots';
 
   // Luggage
   if (has('pannier', 'tank bag', 'tail pack', 'roll bag', 'saddle bag', 'top box', 'top case',
@@ -155,24 +184,32 @@ function main() {
   const raw = JSON.parse(fs.readFileSync(INPUT, 'utf8'));
   console.log(`Loaded ${raw.length} raw entries`);
 
-  // Clean + normalise every entry
+  // Corrected price + image per representative id (from scrape-fix.mjs). Optional.
+  const FIX_FILE = path.resolve('data/price-image-fix.json');
+  const FIX = fs.existsSync(FIX_FILE) ? JSON.parse(fs.readFileSync(FIX_FILE, 'utf8')) : {};
+  console.log(`Loaded ${Object.keys(FIX).length} corrected price/image records`);
+
+  // Clean + normalise every entry (overlay corrected price/image where available)
   const cleaned = raw.map(p => {
     const name = decodeEntities(p.name);
     const brand = name.split(' ')[0] || decodeEntities(p.brand);
     const colourMatch = name.match(/ - (.+)$/);
     const colour = colourMatch ? colourMatch[1].trim() : '';
     const baseName = name.replace(/ - .+$/, '').trim();
+    const fix = FIX[p.id];
+    const priceNum = fix ? fix.priceNum : parsePrice(p.price);
     return {
       id: p.id,
       name, brand, baseName, colour,
       colourFamily: colourFamily(colour),
-      price: p.price ? '£' + parsePrice(p.price) : '',
-      priceNum: parsePrice(p.price),
+      price: priceNum != null ? '£' + priceNum : '',
+      priceNum,
+      priceFixed: !!fix,
       category: categorise(name, brand),
       url: p.url,
       affiliateUrl: p.url + AFFILIATE,
-      image: p.imageUrl,
-      thumb: p.thumbUrl,
+      image: fix && fix.image ? fix.image : p.imageUrl,
+      thumb: fix && fix.thumb ? fix.thumb : p.thumbUrl,
     };
   }).filter(p => p.name && p.priceNum);
 
@@ -191,6 +228,7 @@ function main() {
         category: p.category,
         priceNum: p.priceNum,
         price: p.price,
+        priceFixed: p.priceFixed,
         url: p.url,
         affiliateUrl: p.affiliateUrl,
         image: p.image,
@@ -200,8 +238,13 @@ function main() {
     }
     const g = groups.get(key);
     g.colours.push({ colour: p.colour, family: p.colourFamily, image: p.image, affiliateUrl: p.affiliateUrl });
-    // Keep the lowest price across variants as the headline price
-    if (p.priceNum < g.priceNum) { g.priceNum = p.priceNum; g.price = p.price; }
+    // The re-scraped representative variant is authoritative for price + image.
+    // (Old per-variant prices are unreliable finance figures, so never min across them.)
+    if (p.priceFixed && !g.priceFixed) {
+      g.priceNum = p.priceNum; g.price = p.price; g.priceFixed = true;
+      g.image = p.image; g.thumb = p.thumb;
+      g.id = p.id; g.url = p.url; g.affiliateUrl = p.affiliateUrl;
+    }
   }
 
   const products = [...groups.values()].map(g => ({

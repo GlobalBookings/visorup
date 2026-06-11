@@ -3,11 +3,75 @@
   "beginner": {
    "budget": [
     {
+     "name": "AGV K1 S",
+     "brand": "AGV",
+     "price": "£144.99",
+     "priceNum": 144.99,
+     "why": "Well-rounded full-face lid from AGV — a safe, comfortable first helmet. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/700238#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/700238.jpg",
+     "colourCount": 22
+    },
+    {
+     "name": "Shark Ridill 2",
+     "brand": "Shark",
+     "price": "£116.99",
+     "priceNum": 116.99,
+     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/875612#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/875612.jpg",
+     "colourCount": 18
+    },
+    {
+     "name": "MT Targo S",
+     "brand": "MT",
+     "price": "£67.49",
+     "priceNum": 67.49,
+     "why": "Well-rounded full-face lid from MT — a safe, comfortable first helmet. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2481336#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/mt_helmets_targo-s_brik-matt-fluo_illustration.jpg",
+     "colourCount": 18
+    }
+   ],
+   "mid": [
+    {
+     "name": "Shark Spartan RS",
+     "brand": "Shark",
+     "price": "£159.99",
+     "priceNum": 159.99,
+     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2337935#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/shark_full-face-helmet_spartan-rs_raceshop-matt-black-anthracite-silver.jpg",
+     "colourCount": 26
+    },
+    {
+     "name": "HJC RPHA 12",
+     "brand": "HJC",
+     "price": "£344.99",
+     "priceNum": 344.99,
+     "why": "Well-rounded full-face lid from HJC — a safe, comfortable first helmet.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2368037#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2368037.jpg",
+     "colourCount": 25
+    },
+    {
+     "name": "Shark Skwal i3",
+     "brand": "Shark",
+     "price": "£199.99",
+     "priceNum": 199.99,
+     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/829277#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/shark_skwal-i3-linik-kaa_matt-black-anthracite.jpg",
+     "colourCount": 23
+    }
+   ],
+   "premium": [
+    {
      "name": "Shoei NXR 2",
      "brand": "Shoei",
-     "price": "£10.8",
-     "priceNum": 10.8,
-     "why": "Well-rounded full-face lid from Shoei — a safe, comfortable first helmet. Great value.",
+     "price": "£449.99",
+     "priceNum": 449.99,
+     "why": "Well-rounded full-face lid from Shoei — a safe, comfortable first helmet. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/536363#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/536363.jpg",
      "colourCount": 30
@@ -15,195 +79,163 @@
     {
      "name": "Arai RX-7V Evo",
      "brand": "Arai",
-     "price": "£18.83",
-     "priceNum": 18.83,
-     "why": "Well-rounded full-face lid from Arai — a safe, comfortable first helmet. Great value.",
+     "price": "£899.99",
+     "priceNum": 899.99,
+     "why": "Well-rounded full-face lid from Arai — a safe, comfortable first helmet. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/878640#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/878640.jpg",
      "colourCount": 28
     },
     {
-     "name": "Arai Quantic",
-     "brand": "Arai",
-     "price": "£13.81",
-     "priceNum": 13.81,
-     "why": "Well-rounded full-face lid from Arai — a safe, comfortable first helmet. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2415752#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2415752.jpg",
-     "colourCount": 26
-    }
-   ],
-   "mid": [
-    {
-     "name": "Shark Skwal i3",
-     "brand": "Shark",
-     "price": "£279.99",
-     "priceNum": 279.99,
-     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/829277#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/829277.jpg",
-     "colourCount": 23
-    },
-    {
-     "name": "Shark D-Skwal 3",
-     "brand": "Shark",
-     "price": "£189.99",
-     "priceNum": 189.99,
-     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/845141#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/845141.jpg",
-     "colourCount": 21
-    },
-    {
-     "name": "Shark Ridill 2",
-     "brand": "Shark",
-     "price": "£159.99",
-     "priceNum": 159.99,
-     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/875612#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/875612.jpg",
-     "colourCount": 18
-    }
-   ],
-   "premium": [
-    {
-     "name": "Shark Spartan GT Pro Carbon",
-     "brand": "Shark",
-     "price": "£479.99",
-     "priceNum": 479.99,
-     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2599308#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2599308.jpg",
-     "colourCount": 19
-    },
-    {
-     "name": "HJC RPHA 1",
-     "brand": "HJC",
+     "name": "Shoei GT Air 3",
+     "brand": "Shoei",
      "price": "£649.99",
      "priceNum": 649.99,
-     "why": "Well-rounded full-face lid from HJC — a safe, comfortable first helmet. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/581749#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/581749.jpg",
-     "colourCount": 5
-    },
-    {
-     "name": "Shark Spartan GT Pro",
-     "brand": "Shark",
-     "price": "£429.99",
-     "priceNum": 429.99,
-     "why": "Well-rounded full-face lid from Shark — a safe, comfortable first helmet. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/737216#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/737216.jpg",
-     "colourCount": 4
+     "why": "Well-rounded full-face lid from Shoei — a safe, comfortable first helmet. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2388389#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2388389.jpg",
+     "colourCount": 26
     }
    ]
   },
   "touring": {
    "budget": [
     {
-     "name": "Shoei Neotec 3",
-     "brand": "Shoei",
-     "price": "£15.07",
-     "priceNum": 15.07,
-     "why": "Quiet, feature-rich Shoei helmet built for long days in the saddle. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/845633#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/845633.jpg",
-     "colourCount": 24
+     "name": "AGV K1 S",
+     "brand": "AGV",
+     "price": "£144.99",
+     "priceNum": 144.99,
+     "why": "Quiet, feature-rich AGV helmet built for long days in the saddle. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/700238#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/700238.jpg",
+     "colourCount": 22
     },
     {
-     "name": "Puig Touring Windscreen With Visor Smoke",
-     "brand": "Puig",
-     "price": "£43",
-     "priceNum": 43,
-     "why": "Quiet, feature-rich Puig helmet built for long days in the saddle. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/287378#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/287378.jpg",
-     "colourCount": 19
+     "name": "Shark Ridill 2",
+     "brand": "Shark",
+     "price": "£116.99",
+     "priceNum": 116.99,
+     "why": "Quiet, feature-rich Shark helmet built for long days in the saddle. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/875612#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/875612.jpg",
+     "colourCount": 18
     },
     {
-     "name": "HJC RPHA 91",
-     "brand": "HJC",
-     "price": "£11.3",
-     "priceNum": 11.3,
-     "why": "Quiet, feature-rich HJC helmet built for long days in the saddle. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/762419#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/762419.jpg",
-     "colourCount": 14
+     "name": "MT Targo S",
+     "brand": "MT",
+     "price": "£67.49",
+     "priceNum": 67.49,
+     "why": "Quiet, feature-rich MT helmet built for long days in the saddle. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2481336#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/mt_helmets_targo-s_brik-matt-fluo_illustration.jpg",
+     "colourCount": 18
     }
    ],
    "mid": [
     {
-     "name": "Spada Alberta Modular Jacket",
-     "brand": "Spada",
-     "price": "£229.99",
-     "priceNum": 229.99,
-     "why": "Quiet, feature-rich Spada helmet built for long days in the saddle.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/766382#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/766382.jpg",
-     "colourCount": 3
+     "name": "HJC RPHA 91",
+     "brand": "HJC",
+     "price": "£289.99",
+     "priceNum": 289.99,
+     "why": "Quiet, feature-rich HJC helmet built for long days in the saddle.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/762419#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/762419.jpg",
+     "colourCount": 14
     },
     {
-     "name": "Spidi Modular H2OUT Trousers",
-     "brand": "Spidi",
-     "price": "£299.99",
-     "priceNum": 299.99,
-     "why": "Quiet, feature-rich Spidi helmet built for long days in the saddle.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/383069#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/383069.jpg",
-     "colourCount": 2
+     "name": "AGV Street Modular",
+     "brand": "AGV",
+     "price": "£209.99",
+     "priceNum": 209.99,
+     "why": "Quiet, feature-rich AGV helmet built for long days in the saddle.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/700904#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/700904_7.jpg",
+     "colourCount": 13
     },
     {
-     "name": "Denali 2.0 D7 Pro LED Light Pod With Modular X-Lens System",
-     "brand": "Denali",
-     "price": "£399",
-     "priceNum": 399,
-     "why": "Quiet, feature-rich Denali helmet built for long days in the saddle.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2366078#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2366078.jpg",
-     "colourCount": 1
+     "name": "AGV Tourmodular",
+     "brand": "AGV",
+     "price": "£328.99",
+     "priceNum": 328.99,
+     "why": "Quiet, feature-rich AGV helmet built for long days in the saddle.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/559632#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/559632.jpg",
+     "colourCount": 9
     }
    ],
    "premium": [
     {
-     "name": "X-Lite X-803 Ultra Carbon RS",
-     "brand": "X-Lite",
-     "price": "£559.99",
-     "priceNum": 559.99,
-     "why": "Quiet, feature-rich X-Lite helmet built for long days in the saddle. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/759251#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/759251.jpg",
-     "colourCount": 1
+     "name": "Shoei Neotec 3",
+     "brand": "Shoei",
+     "price": "£689.99",
+     "priceNum": 689.99,
+     "why": "Quiet, feature-rich Shoei helmet built for long days in the saddle. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/845633#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/shoei_flip-front-helmet_neotec-3_satori-tc-5.jpg",
+     "colourCount": 24
     },
     {
-     "name": "Shark Spartan GT Pro Carbon",
-     "brand": "Shark",
-     "price": "£479.99",
-     "priceNum": 479.99,
-     "why": "Quiet, feature-rich Shark helmet built for long days in the saddle. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2599308#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2599308.jpg",
-     "colourCount": 19
+     "name": "Shoei NXR 2",
+     "brand": "Shoei",
+     "price": "£449.99",
+     "priceNum": 449.99,
+     "why": "Quiet, feature-rich Shoei helmet built for long days in the saddle. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/536363#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/536363.jpg",
+     "colourCount": 30
     },
     {
-     "name": "HJC RPHA 1",
-     "brand": "HJC",
-     "price": "£649.99",
-     "priceNum": 649.99,
-     "why": "Quiet, feature-rich HJC helmet built for long days in the saddle. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/581749#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/581749.jpg",
-     "colourCount": 5
+     "name": "Arai RX-7V Evo",
+     "brand": "Arai",
+     "price": "£899.99",
+     "priceNum": 899.99,
+     "why": "Quiet, feature-rich Arai helmet built for long days in the saddle. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/878640#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/878640.jpg",
+     "colourCount": 28
     }
    ]
   },
   "adventure": {
    "budget": [
     {
+     "name": "AGV K1 S",
+     "brand": "AGV",
+     "price": "£144.99",
+     "priceNum": 144.99,
+     "why": "AGV adventure helmet with peak and wide view — road and trail ready. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/700238#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/700238.jpg",
+     "colourCount": 22
+    },
+    {
+     "name": "Shark Ridill 2",
+     "brand": "Shark",
+     "price": "£116.99",
+     "priceNum": 116.99,
+     "why": "Shark adventure helmet with peak and wide view — road and trail ready. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/875612#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/875612.jpg",
+     "colourCount": 18
+    },
+    {
+     "name": "MT Targo S",
+     "brand": "MT",
+     "price": "£67.49",
+     "priceNum": 67.49,
+     "why": "MT adventure helmet with peak and wide view — road and trail ready. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2481336#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/mt_helmets_targo-s_brik-matt-fluo_illustration.jpg",
+     "colourCount": 18
+    }
+   ],
+   "mid": [
+    {
      "name": "LS2 Advant X",
      "brand": "LS2",
-     "price": "£8.19",
-     "priceNum": 8.19,
-     "why": "LS2 adventure helmet with peak and wide view — road and trail ready. Great value.",
+     "price": "£299.99",
+     "priceNum": 299.99,
+     "why": "LS2 adventure helmet with peak and wide view — road and trail ready.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2453246#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2453246.jpg",
      "colourCount": 11
@@ -211,9 +243,9 @@
     {
      "name": "LS2 Advant II",
      "brand": "LS2",
-     "price": "£83.33",
-     "priceNum": 83.33,
-     "why": "LS2 adventure helmet with peak and wide view — road and trail ready. Great value.",
+     "price": "£269.99",
+     "priceNum": 269.99,
+     "why": "LS2 adventure helmet with peak and wide view — road and trail ready.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2453501#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2453501.jpg",
      "colourCount": 8
@@ -221,76 +253,44 @@
     {
      "name": "LS2 Advant X Carbon",
      "brand": "LS2",
-     "price": "£10.04",
-     "priceNum": 10.04,
-     "why": "LS2 adventure helmet with peak and wide view — road and trail ready. Great value.",
+     "price": "£399.99",
+     "priceNum": 399.99,
+     "why": "LS2 adventure helmet with peak and wide view — road and trail ready.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2452973#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2452973.jpg",
      "colourCount": 6
     }
    ],
-   "mid": [
-    {
-     "name": "LS2 Advant",
-     "brand": "LS2",
-     "price": "£249.99",
-     "priceNum": 249.99,
-     "why": "LS2 adventure helmet with peak and wide view — road and trail ready.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/764861#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/764861.jpg",
-     "colourCount": 1
-    },
-    {
-     "name": "Shark Skwal i3",
-     "brand": "Shark",
-     "price": "£279.99",
-     "priceNum": 279.99,
-     "why": "Shark adventure helmet with peak and wide view — road and trail ready.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/829277#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/829277.jpg",
-     "colourCount": 23
-    },
-    {
-     "name": "Shark D-Skwal 3",
-     "brand": "Shark",
-     "price": "£189.99",
-     "priceNum": 189.99,
-     "why": "Shark adventure helmet with peak and wide view — road and trail ready.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/845141#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/845141.jpg",
-     "colourCount": 21
-    }
-   ],
    "premium": [
     {
-     "name": "Shark Spartan GT Pro Carbon",
-     "brand": "Shark",
-     "price": "£479.99",
-     "priceNum": 479.99,
-     "why": "Shark adventure helmet with peak and wide view — road and trail ready. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2599308#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2599308.jpg",
-     "colourCount": 19
+     "name": "Shoei NXR 2",
+     "brand": "Shoei",
+     "price": "£449.99",
+     "priceNum": 449.99,
+     "why": "Shoei adventure helmet with peak and wide view — road and trail ready. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/536363#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/536363.jpg",
+     "colourCount": 30
     },
     {
-     "name": "HJC RPHA 1",
-     "brand": "HJC",
+     "name": "Arai RX-7V Evo",
+     "brand": "Arai",
+     "price": "£899.99",
+     "priceNum": 899.99,
+     "why": "Arai adventure helmet with peak and wide view — road and trail ready. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/878640#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/878640.jpg",
+     "colourCount": 28
+    },
+    {
+     "name": "Shoei GT Air 3",
+     "brand": "Shoei",
      "price": "£649.99",
      "priceNum": 649.99,
-     "why": "HJC adventure helmet with peak and wide view — road and trail ready. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/581749#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/581749.jpg",
-     "colourCount": 5
-    },
-    {
-     "name": "Shark Spartan GT Pro",
-     "brand": "Shark",
-     "price": "£429.99",
-     "priceNum": 429.99,
-     "why": "Shark adventure helmet with peak and wide view — road and trail ready. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/737216#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/737216.jpg",
-     "colourCount": 4
+     "why": "Shoei adventure helmet with peak and wide view — road and trail ready. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2388389#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2388389.jpg",
+     "colourCount": 26
     }
    ]
   }
@@ -299,33 +299,33 @@
   "fairWeather": {
    "budget": [
     {
-     "name": "Alpinestars C-1 Air Textile Jacket",
-     "brand": "Alpinestars",
-     "price": "£139.99",
-     "priceNum": 139.99,
-     "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2377100#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2377100.jpg",
-     "colourCount": 5
-    },
-    {
-     "name": "Icon Overlord 3 Mesh Jacket",
-     "brand": "Icon",
-     "price": "£65.33",
-     "priceNum": 65.33,
-     "why": "Ventilated Icon jacket that keeps you cool when the sun's out. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2317889#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2317889.jpg",
-     "colourCount": 5
-    },
-    {
      "name": "Held Tropic 4 Textile Mesh Jacket",
      "brand": "Held",
-     "price": "£49.98",
-     "priceNum": 49.98,
+     "price": "£149.95",
+     "priceNum": 149.95,
      "why": "Ventilated Held jacket that keeps you cool when the sun's out. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2616093#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2616093.jpg",
+     "colourCount": 5
+    },
+    {
+     "name": "Held Ladies Tropic 4 Textile Mesh Jacket",
+     "brand": "Held",
+     "price": "£149.95",
+     "priceNum": 149.95,
+     "why": "Ventilated Held jacket that keeps you cool when the sun's out. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2611209#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2611209.jpg",
+     "colourCount": 5
+    },
+    {
+     "name": "Alpinestars C-1 Air Textile Jacket",
+     "brand": "Alpinestars",
+     "price": "£125.99",
+     "priceNum": 125.99,
+     "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2377100#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2377100.jpg",
      "colourCount": 5
     }
    ],
@@ -333,8 +333,8 @@
     {
      "name": "Rev'it Airwave 4 Textile Jacket",
      "brand": "Rev'it",
-     "price": "£199.99",
-     "priceNum": 199.99,
+     "price": "£179.99",
+     "priceNum": 179.99,
      "why": "Ventilated Rev'it jacket that keeps you cool when the sun's out.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2572278#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2572278.jpg",
@@ -343,40 +343,30 @@
     {
      "name": "Alpinestars T-SPS Air V2 Textile Jacket",
      "brand": "Alpinestars",
-     "price": "£169.99",
-     "priceNum": 169.99,
+     "price": "£152.99",
+     "priceNum": 152.99,
      "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2549487#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2549487.jpg",
      "colourCount": 6
     },
     {
-     "name": "Alpinestars SMX Air Textile Jacket",
+     "name": "Alpinestars GP Force V2 Airflow Leather Jacket",
      "brand": "Alpinestars",
-     "price": "£234.99",
-     "priceNum": 234.99,
+     "price": "£332.49",
+     "priceNum": 332.49,
      "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/680855#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/680855.jpg",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2469663#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2469663.jpg",
      "colourCount": 5
     }
    ],
    "premium": [
     {
-     "name": "Alpinestars GP Force V2 Airflow Leather Jacket",
-     "brand": "Alpinestars",
-     "price": "£419.99",
-     "priceNum": 419.99,
-     "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2469663#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2469663.jpg",
-     "colourCount": 5
-    },
-    {
      "name": "Alpinestars Missile V3 Airflow Leather Jacket",
      "brand": "Alpinestars",
-     "price": "£569.95",
-     "priceNum": 569.95,
+     "price": "£512.96",
+     "priceNum": 512.96,
      "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2347937#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2347937.jpg",
@@ -385,11 +375,21 @@
     {
      "name": "Alpinestars GP Plus R V4 Airflow Leather Jacket",
      "brand": "Alpinestars",
-     "price": "£479.99",
-     "priceNum": 479.99,
+     "price": "£431.99",
+     "priceNum": 431.99,
      "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/873212#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/873212.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Alpinestars Dusk Airflow Leather Jacket",
+     "brand": "Alpinestars",
+     "price": "£422.99",
+     "priceNum": 422.99,
+     "why": "Ventilated Alpinestars jacket that keeps you cool when the sun's out. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2375657#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2375657.jpg",
      "colourCount": 3
     }
    ]
@@ -397,42 +397,42 @@
   "allWeather": {
    "budget": [
     {
-     "name": "Klim Badlands Pro V4 Gore-Tex Jacket",
-     "brand": "Klim",
-     "price": "£22.01",
-     "priceNum": 22.01,
-     "why": "Waterproof Klim jacket with the protection to handle any forecast. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/547023#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/547023.jpg",
-     "colourCount": 6
-    },
-    {
-     "name": "Rev'it Ladies Outback 4 H2O Textile Jacket",
-     "brand": "Rev'it",
-     "price": "£58",
-     "priceNum": 58,
-     "why": "Waterproof Rev'it jacket with the protection to handle any forecast. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/688304#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/688304.jpg",
-     "colourCount": 5
-    },
-    {
      "name": "Rev'it Torque 2 H2O Textile Jacket",
      "brand": "Rev'it",
-     "price": "£40",
-     "priceNum": 40,
+     "price": "£119.99",
+     "priceNum": 119.99,
      "why": "Waterproof Rev'it jacket with the protection to handle any forecast. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/571536#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/571536.jpg",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/rev-it_textile-jackets_torque-2-h2o_black-grey.jpg",
      "colourCount": 5
+    },
+    {
+     "name": "Alpinestars T-SPS Waterproof Textile Jacket",
+     "brand": "Alpinestars",
+     "price": "£149.99",
+     "priceNum": 149.99,
+     "why": "Waterproof Alpinestars jacket with the protection to handle any forecast. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/478596#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/alpinestars_textile_jacket_t-sps-waterproof_black-yellow-fluo.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Rev'it Ladies Shade H2O Textile Jacket",
+     "brand": "Rev'it",
+     "price": "£139.99",
+     "priceNum": 139.99,
+     "why": "Waterproof Rev'it jacket with the protection to handle any forecast. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/540211#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/rev-it_ladies_jacket-textile_shade-h2o_blue.jpg",
+     "colourCount": 4
     }
    ],
    "mid": [
     {
      "name": "Alpinestars Bogota Pro Drystar Textile Jacket",
      "brand": "Alpinestars",
-     "price": "£389.99",
-     "priceNum": 389.99,
+     "price": "£341.98",
+     "priceNum": 341.98,
      "why": "Waterproof Alpinestars jacket with the protection to handle any forecast.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/618121#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/618121.jpg",
@@ -441,8 +441,8 @@
     {
      "name": "Rev'it Offtrack 2 H2O Textile Jacket",
      "brand": "Rev'it",
-     "price": "£379.99",
-     "priceNum": 379.99,
+     "price": "£265.99",
+     "priceNum": 265.99,
      "why": "Waterproof Rev'it jacket with the protection to handle any forecast.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/687872#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/687872.jpg",
@@ -451,8 +451,8 @@
     {
      "name": "Alpinestars Andes V4 Drystar Textile Jacket",
      "brand": "Alpinestars",
-     "price": "£279.99",
-     "priceNum": 279.99,
+     "price": "£233.65",
+     "priceNum": 233.65,
      "why": "Waterproof Alpinestars jacket with the protection to handle any forecast.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2467989#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2467989.jpg",
@@ -463,74 +463,74 @@
     {
      "name": "Rev'it Vertical Gore-Tex Textile Jacket",
      "brand": "Rev'it",
-     "price": "£549.99",
-     "priceNum": 549.99,
+     "price": "£494.99",
+     "priceNum": 494.99,
      "why": "Waterproof Rev'it jacket with the protection to handle any forecast. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2692272#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2692272.jpg",
      "colourCount": 7
     },
     {
-     "name": "Rev'it Sand 5 H2O Textile Jacket",
-     "brand": "Rev'it",
-     "price": "£469.99",
-     "priceNum": 469.99,
-     "why": "Waterproof Rev'it jacket with the protection to handle any forecast. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2377970#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2377970.jpg",
-     "colourCount": 5
+     "name": "Klim Badlands Pro V4 Gore-Tex Jacket",
+     "brand": "Klim",
+     "price": "£1240",
+     "priceNum": 1240,
+     "why": "Waterproof Klim jacket with the protection to handle any forecast. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/547023#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/klim_jackets_badlands-pro-gore-tex_peyote-potters-clay.jpg",
+     "colourCount": 6
     },
     {
-     "name": "Rev'it Dominator 3 Gore-Tex Textile Jacket",
-     "brand": "Rev'it",
-     "price": "£1369.99",
-     "priceNum": 1369.99,
-     "why": "Waterproof Rev'it jacket with the protection to handle any forecast. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2324396#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2324396.jpg",
-     "colourCount": 4
+     "name": "Klim Carlsbad V4 Gore-Tex CE Jacket",
+     "brand": "Klim",
+     "price": "£800",
+     "priceNum": 800,
+     "why": "Waterproof Klim jacket with the protection to handle any forecast. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2576448#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2576448.0.jpg",
+     "colourCount": 5
     }
    ]
   },
   "winter": {
    "budget": [
     {
-     "name": "Klim Badlands Pro V4 Gore-Tex Jacket",
-     "brand": "Klim",
-     "price": "£22.01",
-     "priceNum": 22.01,
-     "why": "Warm, weatherproof Klim jacket for cold-season touring. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/547023#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/547023.jpg",
-     "colourCount": 6
-    },
-    {
-     "name": "Rev'it Ladies Outback 4 H2O Textile Jacket",
-     "brand": "Rev'it",
-     "price": "£58",
-     "priceNum": 58,
-     "why": "Warm, weatherproof Rev'it jacket for cold-season touring. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/688304#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/688304.jpg",
-     "colourCount": 5
-    },
-    {
      "name": "Rev'it Torque 2 H2O Textile Jacket",
      "brand": "Rev'it",
-     "price": "£40",
-     "priceNum": 40,
+     "price": "£119.99",
+     "priceNum": 119.99,
      "why": "Warm, weatherproof Rev'it jacket for cold-season touring. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/571536#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/571536.jpg",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/rev-it_textile-jackets_torque-2-h2o_black-grey.jpg",
      "colourCount": 5
+    },
+    {
+     "name": "Rev'it Ladies Shade H2O Textile Jacket",
+     "brand": "Rev'it",
+     "price": "£139.99",
+     "priceNum": 139.99,
+     "why": "Warm, weatherproof Rev'it jacket for cold-season touring. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/540211#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/rev-it_ladies_jacket-textile_shade-h2o_blue.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Rev'it Duke H2O Textile Jacket",
+     "brand": "Rev'it",
+     "price": "£146.99",
+     "priceNum": 146.99,
+     "why": "Warm, weatherproof Rev'it jacket for cold-season touring. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/571149#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/rev-it_textile-jackets_duke-h2o_black.jpg",
+     "colourCount": 3
     }
    ],
    "mid": [
     {
      "name": "Rev'it Offtrack 2 H2O Textile Jacket",
      "brand": "Rev'it",
-     "price": "£379.99",
-     "priceNum": 379.99,
+     "price": "£265.99",
+     "priceNum": 265.99,
      "why": "Warm, weatherproof Rev'it jacket for cold-season touring.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/687872#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/687872.jpg",
@@ -549,8 +549,8 @@
     {
      "name": "Rev'it Control H2O Textile Jacket",
      "brand": "Rev'it",
-     "price": "£269.99",
-     "priceNum": 269.99,
+     "price": "£242.99",
+     "priceNum": 242.99,
      "why": "Warm, weatherproof Rev'it jacket for cold-season touring.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2574636#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2574636.jpg",
@@ -561,32 +561,32 @@
     {
      "name": "Rev'it Vertical Gore-Tex Textile Jacket",
      "brand": "Rev'it",
-     "price": "£549.99",
-     "priceNum": 549.99,
+     "price": "£494.99",
+     "priceNum": 494.99,
      "why": "Warm, weatherproof Rev'it jacket for cold-season touring. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2692272#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2692272.jpg",
      "colourCount": 7
     },
     {
-     "name": "Rev'it Sand 5 H2O Textile Jacket",
-     "brand": "Rev'it",
-     "price": "£469.99",
-     "priceNum": 469.99,
-     "why": "Warm, weatherproof Rev'it jacket for cold-season touring. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2377970#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2377970.jpg",
-     "colourCount": 5
+     "name": "Klim Badlands Pro V4 Gore-Tex Jacket",
+     "brand": "Klim",
+     "price": "£1240",
+     "priceNum": 1240,
+     "why": "Warm, weatherproof Klim jacket for cold-season touring. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/547023#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/klim_jackets_badlands-pro-gore-tex_peyote-potters-clay.jpg",
+     "colourCount": 6
     },
     {
-     "name": "Rev'it Dominator 3 Gore-Tex Textile Jacket",
-     "brand": "Rev'it",
-     "price": "£1369.99",
-     "priceNum": 1369.99,
-     "why": "Warm, weatherproof Rev'it jacket for cold-season touring. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2324396#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2324396.jpg",
-     "colourCount": 4
+     "name": "Klim Carlsbad V4 Gore-Tex CE Jacket",
+     "brand": "Klim",
+     "price": "£800",
+     "priceNum": 800,
+     "why": "Warm, weatherproof Klim jacket for cold-season touring. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2576448#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2576448.0.jpg",
+     "colourCount": 5
     }
    ]
   }
@@ -597,8 +597,8 @@
     {
      "name": "Rev'it Speedart Air Leather Gloves",
      "brand": "Rev'it",
-     "price": "£79.99",
-     "priceNum": 79.99,
+     "price": "£71.99",
+     "priceNum": 71.99,
      "why": "Breathable Rev'it gloves with solid summer protection. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/693035#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/693035.jpg",
@@ -607,8 +607,8 @@
     {
      "name": "RST S1 Mesh CE Gloves",
      "brand": "RST",
-     "price": "£49.99",
-     "priceNum": 49.99,
+     "price": "£34.75",
+     "priceNum": 34.75,
      "why": "Breathable RST gloves with solid summer protection. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/712736#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/712736.jpg",
@@ -617,8 +617,8 @@
     {
      "name": "Alpinestars Mongress Airflow Gloves",
      "brand": "Alpinestars",
-     "price": "£74.99",
-     "priceNum": 74.99,
+     "price": "£67.49",
+     "priceNum": 67.49,
      "why": "Breathable Alpinestars gloves with solid summer protection. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2551311#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2551311.jpg",
@@ -627,56 +627,56 @@
    ],
    "mid": [
     {
-     "name": "Oxford Spartan Air Glove",
-     "brand": "Oxford",
-     "price": "£379.99",
-     "priceNum": 379.99,
-     "why": "Breathable Oxford gloves with solid summer protection.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2380523#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2380523.jpg",
-     "colourCount": 1
+     "name": "Klim Adventure V3 Gore-Tex Short Leather Gloves",
+     "brand": "Klim",
+     "price": "£190",
+     "priceNum": 190,
+     "why": "Breathable Klim gloves with solid summer protection.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/445791#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/445791.jpg",
+     "colourCount": 4
     },
     {
-     "name": "Held Phantom Air Glove",
-     "brand": "Held",
-     "price": "£259.95",
-     "priceNum": 259.95,
-     "why": "Breathable Held gloves with solid summer protection.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/435317#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/435317.jpg",
-     "colourCount": 1
+     "name": "Klim Badlands Aero Pro V4 Short Leather Gloves",
+     "brand": "Klim",
+     "price": "£170",
+     "priceNum": 170,
+     "why": "Breathable Klim gloves with solid summer protection.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2580747#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2580747.0.jpg",
+     "colourCount": 4
     },
     {
-     "name": "Gerbing Xtreme Air Heated Gloves",
-     "brand": "Gerbing",
-     "price": "£179.99",
-     "priceNum": 179.99,
-     "why": "Breathable Gerbing gloves with solid summer protection.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2604501#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2604501.jpg",
-     "colourCount": 1
+     "name": "Klim Badlands Aero Pro V2 Short Leather Gloves",
+     "brand": "Klim",
+     "price": "£160",
+     "priceNum": 160,
+     "why": "Breathable Klim gloves with solid summer protection.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/547381#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/547381.jpg",
+     "colourCount": 4
     }
    ],
    "premium": [
     {
-     "name": "Held Titan RR Leather Gloves",
+     "name": "Held Titan XR2 Gloves",
      "brand": "Held",
-     "price": "£411.95",
-     "priceNum": 411.95,
+     "price": "£434.95",
+     "priceNum": 434.95,
      "why": "Breathable Held gloves with solid summer protection. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/477863#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/477863.jpg",
-     "colourCount": 2
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/838934#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/838934.jpg",
+     "colourCount": 3
     },
     {
-     "name": "Dainese Full Metal 6 Replica Gloves",
-     "brand": "Dainese",
-     "price": "£549.95",
-     "priceNum": 549.95,
-     "why": "Breathable Dainese gloves with solid summer protection. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/519556#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/519556.jpg",
-     "colourCount": 1
+     "name": "Five RFX Race Gloves",
+     "brand": "Five",
+     "price": "£449.99",
+     "priceNum": 449.99,
+     "why": "Breathable Five gloves with solid summer protection. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2666175#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-upscale/2666175.png",
+     "colourCount": 2
     }
    ]
   },
@@ -685,119 +685,119 @@
     {
      "name": "Alpinestars S Max Drystar Mixed Gloves",
      "brand": "Alpinestars",
-     "price": "£74.99",
-     "priceNum": 74.99,
+     "price": "£54.99",
+     "priceNum": 54.99,
      "why": "Waterproof Alpinestars gloves that stay comfortable in the wet. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/453193#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/453193.jpg",
      "colourCount": 4
     },
     {
-     "name": "Klim Adventure V3 Gore-Tex Short Leather Gloves",
-     "brand": "Klim",
-     "price": "£63.33",
-     "priceNum": 63.33,
-     "why": "Waterproof Klim gloves that stay comfortable in the wet. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/445791#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/445791.jpg",
-     "colourCount": 4
+     "name": "Spidi Alu-Pro Evo H2Out Gloves",
+     "brand": "Spidi",
+     "price": "£107.91",
+     "priceNum": 107.91,
+     "why": "Waterproof Spidi gloves that stay comfortable in the wet. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2360465#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2360465.jpg",
+     "colourCount": 3
     },
     {
-     "name": "Alpinestars SMX-1 Waterproof Gloves",
+     "name": "Alpinestars SP X Z Waterproof Gloves",
      "brand": "Alpinestars",
-     "price": "£124.99",
-     "priceNum": 124.99,
+     "price": "£103.49",
+     "priceNum": 103.49,
      "why": "Waterproof Alpinestars gloves that stay comfortable in the wet. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/619456#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/619456.jpg",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2470440#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2470440.jpg",
      "colourCount": 3
     }
    ],
    "mid": [
     {
+     "name": "Klim Adventure V3 Gore-Tex Short Leather Gloves",
+     "brand": "Klim",
+     "price": "£190",
+     "priceNum": 190,
+     "why": "Waterproof Klim gloves that stay comfortable in the wet.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/445791#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/445791.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Held Air N Dry II Gore-Tex Gloves",
+     "brand": "Held",
+     "price": "£239.95",
+     "priceNum": 239.95,
+     "why": "Waterproof Held gloves that stay comfortable in the wet.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/716342#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/716342.jpg",
+     "colourCount": 2
+    },
+    {
      "name": "Rev'it Dominator 3 Gore-Tex Gloves",
      "brand": "Rev'it",
-     "price": "£259.99",
-     "priceNum": 259.99,
+     "price": "£233.99",
+     "priceNum": 233.99,
      "why": "Waterproof Rev'it gloves that stay comfortable in the wet.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/495598#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/495598.jpg",
      "colourCount": 2
-    },
-    {
-     "name": "Alpinestars WT-8 Gore-Tex Insulated Gloves",
-     "brand": "Alpinestars",
-     "price": "£179.99",
-     "priceNum": 179.99,
-     "why": "Waterproof Alpinestars gloves that stay comfortable in the wet.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2470200#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2470200.jpg",
-     "colourCount": 2
-    },
-    {
-     "name": "Alpinestars HT-5 Heat Tech Drystar Heated Gloves",
-     "brand": "Alpinestars",
-     "price": "£329.99",
-     "priceNum": 329.99,
-     "why": "Waterproof Alpinestars gloves that stay comfortable in the wet.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/533537#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/533537.jpg",
-     "colourCount": 1
     }
    ],
    "premium": [
     {
-     "name": "Held Titan RR Leather Gloves",
+     "name": "Held Titan XR2 Gloves",
      "brand": "Held",
-     "price": "£411.95",
-     "priceNum": 411.95,
+     "price": "£434.95",
+     "priceNum": 434.95,
      "why": "Waterproof Held gloves that stay comfortable in the wet. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/477863#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/477863.jpg",
-     "colourCount": 2
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/838934#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/838934.jpg",
+     "colourCount": 3
     },
     {
-     "name": "Dainese Full Metal 6 Replica Gloves",
-     "brand": "Dainese",
-     "price": "£549.95",
-     "priceNum": 549.95,
-     "why": "Waterproof Dainese gloves that stay comfortable in the wet. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/519556#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/519556.jpg",
-     "colourCount": 1
+     "name": "Five RFX Race Gloves",
+     "brand": "Five",
+     "price": "£449.99",
+     "priceNum": 449.99,
+     "why": "Waterproof Five gloves that stay comfortable in the wet. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2666175#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-upscale/2666175.png",
+     "colourCount": 2
     }
    ]
   },
   "winter": {
    "budget": [
     {
-     "name": "Merlin Minworth II D3O Heated Gloves",
-     "brand": "Merlin",
-     "price": "£80",
-     "priceNum": 80,
-     "why": "Insulated Merlin gloves to keep your hands warm in the cold. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2364056#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2364056.jpg",
-     "colourCount": 2
-    },
-    {
      "name": "Spada Clutch Winter CE WP Leather Gloves",
      "brand": "Spada",
-     "price": "£44.99",
-     "priceNum": 44.99,
+     "price": "£40.49",
+     "priceNum": 40.49,
      "why": "Insulated Spada gloves to keep your hands warm in the cold. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2560332#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2560332.jpg",
      "colourCount": 2
     },
     {
-     "name": "Alpinestars AMT-10 Drystar XF Winter Gloves",
-     "brand": "Alpinestars",
-     "price": "£144.99",
-     "priceNum": 144.99,
-     "why": "Insulated Alpinestars gloves to keep your hands warm in the cold. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/619648#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/619648.jpg",
+     "name": "Tucano Urbano Sowarm Heated Gloves",
+     "brand": "Tucano",
+     "price": "£149.99",
+     "priceNum": 149.99,
+     "why": "Insulated Tucano gloves to keep your hands warm in the cold. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2389937#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2389937.jpg",
+     "colourCount": 1
+    },
+    {
+     "name": "Gerbing Xtreme GT Heated Gloves",
+     "brand": "Gerbing",
+     "price": "£143.99",
+     "priceNum": 143.99,
+     "why": "Insulated Gerbing gloves to keep your hands warm in the cold. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/734429#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/gerbing-xtreme-gt-heated-gloves-black.jpg",
      "colourCount": 1
     }
    ],
@@ -805,54 +805,54 @@
     {
      "name": "Merlin Bednell CE2 D3O Heated Gloves",
      "brand": "Merlin",
-     "price": "£269.99",
-     "priceNum": 269.99,
+     "price": "£249.99",
+     "priceNum": 249.99,
      "why": "Insulated Merlin gloves to keep your hands warm in the cold.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2500005#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2500005.jpg",
      "colourCount": 2
     },
     {
-     "name": "Alpinestars HT-5 Heat Tech Drystar Heated Gloves",
-     "brand": "Alpinestars",
-     "price": "£329.99",
-     "priceNum": 329.99,
-     "why": "Insulated Alpinestars gloves to keep your hands warm in the cold.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/533537#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/533537.jpg",
-     "colourCount": 1
+     "name": "Merlin Minworth II D3O Heated Gloves",
+     "brand": "Merlin",
+     "price": "£239.99",
+     "priceNum": 239.99,
+     "why": "Insulated Merlin gloves to keep your hands warm in the cold.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2364056#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/merlin_gloves_minworth-2-d3o-heated_black.jpg",
+     "colourCount": 2
     },
     {
-     "name": "Furygan Heat X Kevlar&reg; Heated Gloves",
-     "brand": "Furygan",
-     "price": "£299.99",
-     "priceNum": 299.99,
-     "why": "Insulated Furygan gloves to keep your hands warm in the cold.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/632002#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/632002.jpg",
+     "name": "Macna Progress 2.0 RTX DL Heated Glove kit",
+     "brand": "Macna",
+     "price": "£379.99",
+     "priceNum": 379.99,
+     "why": "Insulated Macna gloves to keep your hands warm in the cold.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2269355#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2269355.jpg",
      "colourCount": 1
     }
    ],
    "premium": [
     {
-     "name": "Held Titan RR Leather Gloves",
+     "name": "Held Titan XR2 Gloves",
      "brand": "Held",
-     "price": "£411.95",
-     "priceNum": 411.95,
+     "price": "£434.95",
+     "priceNum": 434.95,
      "why": "Insulated Held gloves to keep your hands warm in the cold. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/477863#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/477863.jpg",
-     "colourCount": 2
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/838934#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/838934.jpg",
+     "colourCount": 3
     },
     {
-     "name": "Dainese Full Metal 6 Replica Gloves",
-     "brand": "Dainese",
-     "price": "£549.95",
-     "priceNum": 549.95,
-     "why": "Insulated Dainese gloves to keep your hands warm in the cold. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/519556#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/519556.jpg",
-     "colourCount": 1
+     "name": "Five RFX Race Gloves",
+     "brand": "Five",
+     "price": "£449.99",
+     "priceNum": 449.99,
+     "why": "Insulated Five gloves to keep your hands warm in the cold. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2666175#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-upscale/2666175.png",
+     "colourCount": 2
     }
    ]
   }
@@ -861,98 +861,98 @@
   "touring": {
    "budget": [
     {
-     "name": "Eleveit X Legend Off-Road Boots",
-     "brand": "Eleveit",
-     "price": "£10.04",
-     "priceNum": 10.04,
-     "why": "Comfortable, weatherproof Eleveit boots built for the long haul. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/905786#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/905786.jpg",
-     "colourCount": 6
-    },
-    {
-     "name": "Eleveit X Privilege Off-Road Boots",
-     "brand": "Eleveit",
-     "price": "£80",
-     "priceNum": 80,
-     "why": "Comfortable, weatherproof Eleveit boots built for the long haul. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/904907#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/904907.jpg",
-     "colourCount": 4
-    },
-    {
-     "name": "Eleveit X Legend Evo Off-Road Boots",
-     "brand": "Eleveit",
-     "price": "£11.3",
-     "priceNum": 11.3,
-     "why": "Comfortable, weatherproof Eleveit boots built for the long haul. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/905819#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/905819.jpg",
-     "colourCount": 4
-    }
-   ],
-   "mid": [
-    {
      "name": "Alpinestars J-6 Waterproof Shoe",
      "brand": "Alpinestars",
-     "price": "£184.99",
-     "priceNum": 184.99,
-     "why": "Comfortable, weatherproof Alpinestars boots built for the long haul.",
+     "price": "£134.99",
+     "priceNum": 134.99,
+     "why": "Comfortable, weatherproof Alpinestars boots built for the long haul. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/231286#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/231286.jpg",
      "colourCount": 5
     },
     {
+     "name": "Alpinestars Sektor Waterproof Shoes",
+     "brand": "Alpinestars",
+     "price": "£118.73",
+     "priceNum": 118.73,
+     "why": "Comfortable, weatherproof Alpinestars boots built for the long haul. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/407709#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/407709.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Spada Strider S CE Waterproof Trainers",
+     "brand": "Spada",
+     "price": "£89.99",
+     "priceNum": 89.99,
+     "why": "Comfortable, weatherproof Spada boots built for the long haul. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2540400#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2540400.jpg",
+     "colourCount": 3
+    }
+   ],
+   "mid": [
+    {
+     "name": "Eleveit X Legend Off-Road Boots",
+     "brand": "Eleveit",
+     "price": "£399.99",
+     "priceNum": 399.99,
+     "why": "Comfortable, weatherproof Eleveit boots built for the long haul.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/905786#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/905786.jpg",
+     "colourCount": 6
+    },
+    {
+     "name": "Klim Outlander Gore-Tex Leather Boots",
+     "brand": "Klim",
+     "price": "£300",
+     "priceNum": 300,
+     "why": "Comfortable, weatherproof Klim boots built for the long haul.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/504619#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/504619.jpg",
+     "colourCount": 4
+    },
+    {
      "name": "Sidi Adventure 2 Gore-Tex Boots",
      "brand": "Sidi",
-     "price": "£359.99",
-     "priceNum": 359.99,
+     "price": "£277",
+     "priceNum": 277,
      "why": "Comfortable, weatherproof Sidi boots built for the long haul.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/923711#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/923711.jpg",
      "colourCount": 4
-    },
-    {
-     "name": "Sidi Mid Adventure 2 Gore-Tex Boots",
-     "brand": "Sidi",
-     "price": "£279.99",
-     "priceNum": 279.99,
-     "why": "Comfortable, weatherproof Sidi boots built for the long haul.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2387144#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2387144.jpg",
-     "colourCount": 3
     }
    ],
    "premium": [
     {
+     "name": "Eleveit X Legend Evo Off-Road Boots",
+     "brand": "Eleveit",
+     "price": "£449.99",
+     "priceNum": 449.99,
+     "why": "Comfortable, weatherproof Eleveit boots built for the long haul. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/905819#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/905819.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Klim Adventure Gore-Tex Boots",
+     "brand": "Klim",
+     "price": "£460",
+     "priceNum": 460,
+     "why": "Comfortable, weatherproof Klim boots built for the long haul. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/702503#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/klim-adventure-gtx-boots-stealth-black.jpg",
+     "colourCount": 3
+    },
+    {
      "name": "Sidi Taurus Gore-Tex CE Boots",
      "brand": "Sidi",
-     "price": "£489.99",
-     "priceNum": 489.99,
+     "price": "£440.99",
+     "priceNum": 440.99,
      "why": "Comfortable, weatherproof Sidi boots built for the long haul. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2561247#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2561247.jpg",
      "colourCount": 3
-    },
-    {
-     "name": "Rev'it Discovery Gore-Tex Boots",
-     "brand": "Rev'it",
-     "price": "£419.99",
-     "priceNum": 419.99,
-     "why": "Comfortable, weatherproof Rev'it boots built for the long haul. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/557244#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/557244.jpg",
-     "colourCount": 2
-    },
-    {
-     "name": "Rev'it Expedition Gore-Tex Boots",
-     "brand": "Rev'it",
-     "price": "£629.99",
-     "priceNum": 629.99,
-     "why": "Comfortable, weatherproof Rev'it boots built for the long haul. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/557277#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/557277.jpg",
-     "colourCount": 1
     }
    ]
   }
@@ -960,26 +960,6 @@
  "luggage": {
   "touring": {
    "budget": [
-    {
-     "name": "Oxford Atlas Inner Dry Bag",
-     "brand": "Oxford",
-     "price": "£7.99",
-     "priceNum": 7.99,
-     "why": "Practical Oxford luggage to carry kit securely on tour. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2446022#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2446022.jpg",
-     "colourCount": 7
-    },
-    {
-     "name": "Kriega Trail 18 Adventure Backpack",
-     "brand": "Kriega",
-     "price": "£69.67",
-     "priceNum": 69.67,
-     "why": "Practical Kriega luggage to carry kit securely on tour. Great value.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2337434#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2337434.jpg",
-     "colourCount": 5
-    },
     {
      "name": "Richa Niagara Backpack",
      "brand": "Richa",
@@ -989,56 +969,76 @@
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2540586#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2540586.jpg",
      "colourCount": 5
+    },
+    {
+     "name": "Kriega Drypack Tail Bag",
+     "brand": "Kriega",
+     "price": "£109",
+     "priceNum": 109,
+     "why": "Practical Kriega luggage to carry kit securely on tour. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/451965#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/451965.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "CamelBak Cloud Walker 18L Backpack",
+     "brand": "CamelBak",
+     "price": "£104.99",
+     "priceNum": 104.99,
+     "why": "Practical CamelBak luggage to carry kit securely on tour. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2582610#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2582610.jpg",
+     "colourCount": 4
     }
    ],
    "mid": [
     {
-     "name": "Alpinestars AT-15 Backpack",
-     "brand": "Alpinestars",
-     "price": "£189.99",
-     "priceNum": 189.99,
-     "why": "Practical Alpinestars luggage to carry kit securely on tour.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2552145#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2552145.jpg",
-     "colourCount": 3
+     "name": "Kriega Trail 18 Adventure Backpack",
+     "brand": "Kriega",
+     "price": "£219",
+     "priceNum": 219,
+     "why": "Practical Kriega luggage to carry kit securely on tour.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2337434#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2337434.jpg",
+     "colourCount": 5
     },
     {
-     "name": "SW Motech Trax Adv Aluminium Top Box",
-     "brand": "SW",
-     "price": "£362.99",
-     "priceNum": 362.99,
-     "why": "Practical SW luggage to carry kit securely on tour.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/352052#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/352052.jpg",
-     "colourCount": 2
+     "name": "Kriega Trail 9 Adventure Backpack",
+     "brand": "Kriega",
+     "price": "£159",
+     "priceNum": 159,
+     "why": "Practical Kriega luggage to carry kit securely on tour.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2337464#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2337464.jpg",
+     "colourCount": 5
     },
     {
-     "name": "Dainese D-Mach 2 Backpack",
-     "brand": "Dainese",
-     "price": "£229",
-     "priceNum": 229,
-     "why": "Practical Dainese luggage to carry kit securely on tour.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2439641#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2439641.jpg",
-     "colourCount": 2
+     "name": "Klim Nac Pak 3L Hydrapak&reg; Backpack",
+     "brand": "Klim",
+     "price": "£190",
+     "priceNum": 190,
+     "why": "Practical Klim luggage to carry kit securely on tour.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2390585#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/klim_luggage_nak-pak-3l-hydrapak_grey.jpg",
+     "colourCount": 4
     }
    ],
    "premium": [
     {
      "name": "Shad SH38X Expandable Panniers",
      "brand": "Shad",
-     "price": "£497.99",
-     "priceNum": 497.99,
+     "price": "£526.49",
+     "priceNum": 526.49,
      "why": "Practical Shad luggage to carry kit securely on tour. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2341607#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2341607.jpg",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/shad_hard-panniers_sh38x_aluminium_finish.jpg",
      "colourCount": 2
     },
     {
      "name": "Kappa KFR48BPACK2 K'Force Monokey Panniers (Pair)",
      "brand": "Kappa",
-     "price": "£829.81",
-     "priceNum": 829.81,
+     "price": "£746.83",
+     "priceNum": 746.83,
      "why": "Practical Kappa luggage to carry kit securely on tour. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2402948#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2402948.jpg",
@@ -1047,8 +1047,8 @@
     {
      "name": "Kappa KFR4837BPACK2 K'Force Monokey Panniers (Pair)",
      "brand": "Kappa",
-     "price": "£808.34",
-     "priceNum": 808.34,
+     "price": "£727.51",
+     "priceNum": 727.51,
      "why": "Practical Kappa luggage to carry kit securely on tour. Top-tier choice.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2402747#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2402747.jpg",
@@ -1063,96 +1063,96 @@
     {
      "name": "Cardo Spare Head Set",
      "brand": "Cardo",
-     "price": "£8.19",
-     "priceNum": 8.19,
+     "price": "£87",
+     "priceNum": 87,
      "why": "Popular Cardo tech to upgrade your ride. Great value.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/810365#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/810365.jpg",
      "colourCount": 5
     },
     {
+     "name": "Cardo 2nd Helmet JBL Kit",
+     "brand": "Cardo",
+     "price": "£104",
+     "priceNum": 104,
+     "why": "Popular Cardo tech to upgrade your ride. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/593161#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/593161.jpg",
+     "colourCount": 4
+    },
+    {
+     "name": "Interphone Mini LCD Motion Camera",
+     "brand": "Interphone",
+     "price": "£109.99",
+     "priceNum": 109.99,
+     "why": "Popular Interphone tech to upgrade your ride. Great value.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/773465#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/interphone_mini-motion-camera-lcd-grey.jpg",
+     "colourCount": 2
+    }
+   ],
+   "mid": [
+    {
      "name": "Starlane GPS Receiver",
      "brand": "Starlane",
-     "price": "£62.9",
-     "priceNum": 62.9,
-     "why": "Popular Starlane tech to upgrade your ride. Great value.",
+     "price": "£188.69",
+     "priceNum": 188.69,
+     "why": "Popular Starlane tech to upgrade your ride.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/66035#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/66035.jpg",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product-legacy/starlane_gps-receiver_ducati.jpg",
      "colourCount": 4
     },
     {
      "name": "Klim Arsenal Vest",
      "brand": "Klim",
-     "price": "£83.33",
-     "priceNum": 83.33,
-     "why": "Popular Klim tech to upgrade your ride. Great value.",
+     "price": "£220",
+     "priceNum": 220,
+     "why": "Popular Klim tech to upgrade your ride.",
      "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/547514#/28914,3714,0",
      "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/547514.jpg",
      "colourCount": 3
-    }
-   ],
-   "mid": [
-    {
-     "name": "Cardo Packtalk Edge Mesh Intercom",
-     "brand": "Cardo",
-     "price": "£356.95",
-     "priceNum": 356.95,
-     "why": "Popular Cardo tech to upgrade your ride.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/651412#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/651412.jpg",
-     "colourCount": 2
     },
     {
-     "name": "SENA 60S Bluetooth Intercom",
+     "name": "SENA 50R Bluetooth Headset & Intercom",
      "brand": "SENA",
-     "price": "£339",
-     "priceNum": 339,
+     "price": "£387.95",
+     "priceNum": 387.95,
      "why": "Popular SENA tech to upgrade your ride.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2431367#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2431367.jpg",
-     "colourCount": 2
-    },
-    {
-     "name": "Cardo Packtalk Neo Mesh Intercom",
-     "brand": "Cardo",
-     "price": "£295.95",
-     "priceNum": 295.95,
-     "why": "Popular Cardo tech to upgrade your ride.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/785855#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/785855.jpg",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/600139#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/600139.jpg",
      "colourCount": 2
     }
    ],
    "premium": [
     {
-     "name": "Cardo Packtalk Pro Mesh Intercom",
-     "brand": "Cardo",
-     "price": "£405",
-     "priceNum": 405,
-     "why": "Popular Cardo tech to upgrade your ride. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2696505#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2696505.jpg",
+     "name": "Insta360 X5 Action Camera",
+     "brand": "Insta360",
+     "price": "£549.99",
+     "priceNum": 549.99,
+     "why": "Popular Insta360 tech to upgrade your ride. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2581413#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2581413.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Sena Phantom Intercom Helmet",
+     "brand": "Sena",
+     "price": "£439",
+     "priceNum": 439,
+     "why": "Popular Sena tech to upgrade your ride. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2538195#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2538195.jpg",
+     "colourCount": 3
+    },
+    {
+     "name": "Sena 60S Evo Bluetooth Intercom",
+     "brand": "Sena",
+     "price": "£669",
+     "priceNum": 669,
+     "why": "Popular Sena tech to upgrade your ride. Top-tier choice.",
+     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/2715978#/28914,3714,0",
+     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/2715456_black_dual.jpg",
      "colourCount": 2
-    },
-    {
-     "name": "Garmin Zumo XT2 Motorcycle Sat Nav",
-     "brand": "Garmin",
-     "price": "£529.99",
-     "priceNum": 529.99,
-     "why": "Popular Garmin tech to upgrade your ride. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/830981#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/830981.jpg",
-     "colourCount": 1
-    },
-    {
-     "name": "SENA 50C Camera & Bluetooth Intercom",
-     "brand": "SENA",
-     "price": "£459",
-     "priceNum": 459,
-     "why": "Popular SENA tech to upgrade your ride. Top-tier choice.",
-     "url": "https://www.sportsbikeshop.co.uk/motorcycle_parts/content_prod/649486#/28914,3714,0",
-     "thumb": "https://cdn-iutgbvdd.sportsbikeshop.co.uk/image/upload/c_fill,h_200,w_200/product/649486.jpg",
-     "colourCount": 1
     }
    ]
   }

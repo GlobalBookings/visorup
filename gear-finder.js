@@ -522,7 +522,7 @@ const gearFinder = {
       var url = item.url ? item.url
         : 'https://www.sportsbikeshop.co.uk/search/?search=' + encodeURIComponent(item.search) + affiliate;
       var img = item.thumb
-        ? '<a href="' + url + '" target="_blank" rel="noopener sponsored" class="gf-product-img"><img src="' + item.thumb + '" alt="' + (item.name || '').replace(/"/g, '&quot;') + '" loading="lazy"></a>'
+        ? '<a href="' + url + '" target="_blank" rel="noopener sponsored" class="gf-product-img"><img src="' + item.thumb + '" alt="' + (item.name || '').replace(/"/g, '&quot;') + '" loading="lazy" onerror="var p=this.closest(\'.gf-product-img\'); if(p) p.style.display=\'none\';"></a>'
         : '';
       var brand = item.brand ? '<span class="gf-product-brand">' + item.brand + '</span>' : '';
       html += '<div class="gf-product-card">' + img +

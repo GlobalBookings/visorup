@@ -12,9 +12,15 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SHOP_DIR = path.join(__dirname, '..', 'public', 'data', 'shop');
 
+// Minimum sensible price per category so trivial accessories (a £9 strap, a £15 part)
+// never get recommended as if they were the real product.
+const FLOORS = { helmets: 55, jackets: 60, gloves: 25, boots: 60, luggage: 25, electronics: 30 };
+
 function load(cat) {
   const f = path.join(SHOP_DIR, cat + '.json');
-  return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : [];
+  const arr = fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : [];
+  const floor = FLOORS[cat] || 0;
+  return arr.filter((p) => typeof p.priceNum === 'number' && p.priceNum >= floor);
 }
 
 const TIERS = {

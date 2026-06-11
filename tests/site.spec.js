@@ -266,7 +266,7 @@ test.describe('Mobile Navigation', () => {
 });
 
 test.describe('Coming Soon Pages', () => {
-  const comingSoon = ['gear', 'reports'];
+  const comingSoon = ['reports'];
 
   for (const slug of comingSoon) {
     test(`${slug} shows coming soon`, async ({ page }) => {
@@ -274,6 +274,57 @@ test.describe('Coming Soon Pages', () => {
       await expect(page.locator('.coming-soon-title')).toBeVisible();
     });
   }
+});
+
+test.describe('Gear Finder', () => {
+  async function runQuiz(page, { experience, style, weather, budget, gear }) {
+    await page.goto('/gear');
+    await expect(page.locator('#gfStep1')).toBeVisible();
+    // Ensure the real catalogue picks have loaded (not the hardcoded fallback)
+    await page.waitForFunction(() => window.GEAR_PICKS !== null, null, { timeout: 15000 });
+    await page.locator('#gfStep1 .gf-option', { hasText: experience }).click();
+    await page.locator('#gfStep2 .gf-option', { hasText: style }).click();
+    await page.locator('#gfStep3 .gf-option', { hasText: weather }).click();
+    await page.locator('#gfStep4 .gf-option', { hasText: budget }).click();
+    await page.locator('#gfStep5 .gf-toggle[data-gear="' + gear + '"]').click();
+    await page.locator('.gf-submit').click();
+    return page.locator('#gfResults');
+  }
+  const priceNums = async (results) => {
+    const texts = await results.locator('.gf-product-price').allInnerTexts();
+    return texts.map((t) => parseFloat(t.replace(/[^0-9.]/g, '')));
+  };
+
+  test('budget quiz returns only in-budget picks (< £150) with valid images', async ({ page }) => {
+    const results = await runQuiz(page, { experience: 'Beginner', style: 'Touring', weather: 'All Weather', budget: 'Budget-Friendly', gear: 'helmet' });
+    await expect(results).toHaveClass(/active/);
+    await expect(results.locator('.gf-category')).toBeVisible();
+    const prices = await priceNums(results);
+    expect(prices.length).toBeGreaterThan(0);
+    for (const n of prices) expect(n).toBeLessThan(150);
+    const imgs = results.locator('.gf-product-img img');
+    const imgCount = await imgs.count();
+    expect(imgCount).toBeGreaterThanOrEqual(1);
+    for (let i = 0; i < imgCount; i++) {
+      expect(await imgs.nth(i).getAttribute('src')).toMatch(/^https?:\/\//);
+    }
+  });
+
+  test('premium quiz returns only premium picks (>= £400)', async ({ page }) => {
+    const results = await runQuiz(page, { experience: 'Advanced', style: 'Touring', weather: 'All Weather', budget: 'Premium', gear: 'helmet' });
+    await expect(results.locator('.gf-category')).toBeVisible();
+    const prices = await priceNums(results);
+    expect(prices.length).toBeGreaterThan(0);
+    for (const n of prices) expect(n).toBeGreaterThanOrEqual(400);
+  });
+
+  test('mid-range quiz returns mid-tier picks (£150–£400)', async ({ page }) => {
+    const results = await runQuiz(page, { experience: 'Intermediate', style: 'Adventure', weather: 'Fair Weather', budget: 'Mid-Range', gear: 'jacket' });
+    await expect(results.locator('.gf-category')).toBeVisible();
+    const prices = await priceNums(results);
+    expect(prices.length).toBeGreaterThan(0);
+    for (const n of prices) { expect(n).toBeGreaterThanOrEqual(150); expect(n).toBeLessThan(400); }
+  });
 });
 
 test.describe('Route Detail Pages', () => {
