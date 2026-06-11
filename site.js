@@ -1064,6 +1064,24 @@ class VisorUpSite {
       }).join('') + '</div>';
     }
 
+    var buyingGuideCards = '';
+    if (typeof ARTICLES !== 'undefined' && ARTICLES.length) {
+      var bgWant = ['best-motorcycle-helmets-uk-2026', 'best-motorcycle-jackets-uk-2026', 'best-motorcycle-boots-uk-2026'];
+      var bgFeatured = bgWant.map(function(s) { return ARTICLES.find(function(x) { return x.slug === s; }); }).filter(Boolean);
+      if (bgFeatured.length) {
+        buyingGuideCards = '<div class="home-guides-grid" style="margin-top:28px">' + bgFeatured.map(function(a) {
+          return '<a href="/guides/' + a.category + '/' + a.slug + '" class="home-guide-card">' +
+            '<div class="home-guide-card-img" style="background-image:url(' + a.heroImage + ')"></div>' +
+            '<div class="home-guide-card-body">' +
+              '<span class="home-guide-card-cat">Buying Guide</span>' +
+              '<h4>' + a.title + '</h4>' +
+              '<span class="home-guide-card-meta">' + a.readTime + '</span>' +
+            '</div>' +
+          '</a>';
+        }).join('') + '</div>';
+      }
+    }
+
     var destCards = DESTINATIONS.slice(0, 6).map(function(d) {
       return '<div class="dest-card-wrapper">' +
         '<a href="/destinations/' + d.slug + '" class="dest-card">' +
@@ -1105,7 +1123,8 @@ class VisorUpSite {
           '<div class="hero-stat"><span class="hero-stat-value">7</span><span class="hero-stat-label">Curated Routes</span></div>' +
           '<div class="hero-stat"><span class="hero-stat-value">9,900+</span><span class="hero-stat-label">Fuel Stations</span></div>' +
           '<div class="hero-stat"><span class="hero-stat-value">500+</span><span class="hero-stat-label">Points of Interest</span></div>' +
-          '<div class="hero-stat"><span class="hero-stat-value">250</span><span class="hero-stat-label">Riding Guides</span></div>' +
+          '<div class="hero-stat"><span class="hero-stat-value">274</span><span class="hero-stat-label">Riding Guides</span></div>' +
+          '<div class="hero-stat"><span class="hero-stat-value">16,000+</span><span class="hero-stat-label">Products</span></div>' +
         '</div>' +
       '</div>' +
       '<div class="hero-scroll"><i class="fas fa-chevron-down"></i></div>' +
@@ -1219,7 +1238,7 @@ class VisorUpSite {
     '<section class="home-section">' +
       '<div class="container">' +
         '<span class="section-eyebrow"><i class="fas fa-book-open"></i> Riding Guides</span>' +
-        '<h2 class="section-heading">250 Guides for Every Rider</h2>' +
+        '<h2 class="section-heading">274 Guides for Every Rider</h2>' +
         '<p class="section-desc">Gear reviews, bike comparisons, route breakdowns, and seasonal tips — written by riders, for riders.</p>' +
         '<div class="home-guides-cats">' +
           '<a href="/guides/gear" class="home-guide-cat"><i class="fas fa-hard-hat"></i><span>Gear</span></a>' +
@@ -1237,8 +1256,30 @@ class VisorUpSite {
       '</div>' +
     '</section>' +
 
-    '<!-- FREE TOOLS -->' +
+    '<!-- GEAR SHOP -->' +
     '<section class="home-section home-section-alt">' +
+      '<div class="container">' +
+        '<span class="section-eyebrow"><i class="fas fa-tags"></i> Gear Shop</span>' +
+        '<h2 class="section-heading">Shop 16,000+ Motorcycle Products</h2>' +
+        '<p class="section-desc">Helmets, clothing, luggage, parts and more from SportsBikeShop — plus our pick of the best gear at every budget. Free UK delivery and 365-day returns.</p>' +
+        '<div class="home-guides-cats">' +
+          '<a href="/shop/helmets" class="home-guide-cat"><i class="fas fa-helmet-safety"></i><span>Helmets</span></a>' +
+          '<a href="/shop/jackets" class="home-guide-cat"><i class="fas fa-vest"></i><span>Jackets</span></a>' +
+          '<a href="/shop/gloves" class="home-guide-cat"><i class="fas fa-mitten"></i><span>Gloves</span></a>' +
+          '<a href="/shop/boots" class="home-guide-cat"><i class="fas fa-shoe-prints"></i><span>Boots</span></a>' +
+          '<a href="/shop/luggage" class="home-guide-cat"><i class="fas fa-suitcase-rolling"></i><span>Luggage</span></a>' +
+          '<a href="/shop/electronics" class="home-guide-cat"><i class="fas fa-headset"></i><span>Electronics</span></a>' +
+          '<a href="/shop" class="home-guide-cat"><i class="fas fa-store"></i><span>All Gear</span></a>' +
+        '</div>' +
+        buyingGuideCards +
+        '<div style="text-align:center;margin-top:32px">' +
+          '<a href="/shop" class="hero-cta" style="font-size:14px">Browse the Shop <i class="fas fa-arrow-right"></i></a>' +
+        '</div>' +
+      '</div>' +
+    '</section>' +
+
+    '<!-- FREE TOOLS -->' +
+    '<section class="home-section">' +
       '<div class="container">' +
         '<span class="section-eyebrow"><i class="fas fa-tools"></i> Free Tools</span>' +
         '<h2 class="section-heading">Everything You Need to Plan a Tour</h2>' +
@@ -1279,7 +1320,7 @@ class VisorUpSite {
     '</section>' +
 
     '<!-- COMMUNITY -->' +
-    '<section class="home-section">' +
+    '<section class="home-section home-section-alt">' +
       '<div class="container">' +
         '<div class="home-split home-split-reverse">' +
           '<div class="home-split-text">' +
