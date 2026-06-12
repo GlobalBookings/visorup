@@ -377,3 +377,66 @@ test.describe('Interactive Planner', () => {
     await expect(page.locator('#siteView')).toBeVisible();
   });
 });
+
+test.describe('Museums Hub', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/museums');
+  });
+
+  test('renders hub hero and title', async ({ page }) => {
+    await expect(page.locator('.page-hero-title')).toContainText('Museums');
+    await expect(page).toHaveTitle(/Museums/);
+  });
+
+  test('renders 18 museum cards across country sections', async ({ page }) => {
+    await expect(page.locator('.museum-country-heading').first()).toBeVisible();
+    await expect(page.locator('.museum-card')).toHaveCount(18);
+  });
+
+  test('clicking a museum navigates to its detail page', async ({ page }) => {
+    await page.locator('.museum-card').filter({ hasText: 'National Motorcycle Museum' }).first().click();
+    await expect(page.locator('.detail-grid')).toBeVisible();
+    await expect(page).toHaveTitle(/National Motorcycle Museum/);
+  });
+});
+
+const MUSEUM_SLUGS = [
+  'national-motorcycle-museum', 'isle-of-man-motor-museum',
+  'riverside-museum', 'ulster-transport-museum'
+];
+
+test.describe('Museum Detail Pages', () => {
+  for (const slug of MUSEUM_SLUGS) {
+    test(`${slug} museum page loads`, async ({ page }) => {
+      await page.goto('/museums/' + slug);
+      await expect(page.locator('.page-hero-title')).toBeVisible();
+      await expect(page.locator('.detail-grid')).toBeVisible();
+      await expect(page.locator('.breadcrumb')).toBeVisible();
+      await expect(page.locator('.info-card h4').filter({ hasText: 'Admission' })).toBeVisible();
+      await expect(page.locator('.info-card h4').filter({ hasText: 'Opening' })).toBeVisible();
+      const ldBlocks = await page.locator('script[type="application/ld+json"]').allTextContents();
+      expect(ldBlocks.some(t => t.includes('"@type":"Museum"'))).toBe(true);
+    });
+  }
+});
+
+test.describe('Museums Map Integration', () => {
+  test('museum data and POI adapter are wired up', async ({ page }) => {
+    await page.goto('/');
+    const result = await page.evaluate(() => ({
+      count: (window.MOTORCYCLE_MUSEUMS || []).length,
+      poiCount: (window.MOTORCYCLE_MUSEUMS_POI || []).length,
+      allHaveUrl: (window.MOTORCYCLE_MUSEUMS_POI || []).every(p => typeof p.url === 'string' && p.url.indexOf('/museums/') === 0),
+      hasConfig: (typeof RouteBuilder !== 'undefined') && !!(RouteBuilder.POI_CONFIG && RouteBuilder.POI_CONFIG.museums)
+    }));
+    expect(result.count).toBe(18);
+    expect(result.poiCount).toBe(18);
+    expect(result.allHaveUrl).toBe(true);
+    expect(result.hasConfig).toBe(true);
+  });
+
+  test('Museums layer toggle appears in the Route Builder', async ({ page }) => {
+    await page.goto('/build-route');
+    await expect(page.locator('input[data-poi-type="museums"]')).toHaveCount(1);
+  });
+});

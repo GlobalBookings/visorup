@@ -28,6 +28,27 @@
   <url><loc>https://visorup.co.uk/regional-rides</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://visorup.co.uk/garage-finder</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
+  <!-- Museums -->
+  <url><loc>https://visorup.co.uk/museums</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/museums/national-motorcycle-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/sammy-miller-motorcycle-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/coventry-transport-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/national-motor-museum-beaulieu</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/haynes-international-motor-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/lakeland-motor-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/brooklands-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/atwell-wilson-motor-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/grampian-transport-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/riverside-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/myreton-motor-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/llangollen-motor-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/tacla-taid-anglesey-transport-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/isle-of-man-motor-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/manx-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/murrays-motorcycle-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/national-transport-museum-of-ireland</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://visorup.co.uk/museums/ulster-transport-museum</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
   <!-- Infographics -->
   <url><loc>https://visorup.co.uk/infographics</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://visorup.co.uk/infographics/uk-motorcycle-roads-ranked</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

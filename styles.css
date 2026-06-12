@@ -4813,3 +4813,24 @@ ul, ol { list-style: none; }
 [data-theme="dark"] .law-container [style*="font-family:monospace"] {
   color: var(--text) !important;
 }
+
+/* ── Museums ─────────────────────────────────────────────── */
+.museum-hero { background: linear-gradient(135deg, var(--green) 0%, var(--slate) 100%); }
+.museum-hero-badge { display: inline-block; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 14px; color: #fff; }
+.museum-country-heading { font-size: 1.5rem; margin: 34px 0 16px; color: var(--text); }
+.museum-country-heading span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
+.museum-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.museum-card { display: flex; flex-direction: column; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease; }
+.museum-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.18); background: var(--bg-card-hover); }
+.museum-card-body { padding: 18px; }
+.museum-card-region { font-size: 0.78rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+.museum-card-body h3 { margin: 8px 0; font-size: 1.15rem; color: var(--text); }
+.museum-card-body p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin: 0 0 12px; }
+.museum-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.museum-chip { font-size: 0.72rem; background: var(--accent-glow); color: var(--accent); padding: 3px 9px; border-radius: 20px; }
+.museum-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 18px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--text-secondary); }
+.museum-card-link { color: var(--accent); font-weight: 600; white-space: nowrap; }
+.museum-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+.museum-list li { display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; color: var(--text-secondary); }
+.museum-list li i { color: var(--accent); margin-top: 4px; }
+.museum-map { width: 100%; height: 320px; border: 0; border-radius: 12px; }

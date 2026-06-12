@@ -194,6 +194,7 @@ class RouteBuilder {
     beaches:      { dataKey: 'BEACHES',      color: '#e17055', faIcon: 'fa-umbrella-beach',  size: 28, label: 'Beaches' },
     distilleries: { dataKey: 'DISTILLERIES', color: '#d35400', faIcon: 'fa-flask',           size: 26, label: 'Distilleries' },
     landmarks:    { dataKey: 'LANDMARKS',    color: '#9b59b6', faIcon: 'fa-monument',        size: 28, label: 'Landmarks' },
+    museums:      { dataKey: 'MUSEUMS',      color: '#8e44ad', faIcon: 'fa-landmark',        size: 28, label: 'Museums' },
     fossils:      { dataKey: 'FOSSILS',      color: '#cd853f', faIcon: 'fa-bone',            size: 28, label: 'Fossils' },
     ferries:      { dataKey: 'FERRIES',      color: '#3498db', faIcon: 'fa-ship',            size: 32, label: 'Ferries' },
     motorcycle_parking: { dataKey: 'MOTORCYCLE_PARKING', color: '#2d98da', faIcon: 'fa-parking', size: 24, label: 'Bike Parking' },
@@ -208,6 +209,7 @@ class RouteBuilder {
   static BEACHES = [];
   static DISTILLERIES = [];
   static LANDMARKS = [];
+  static MUSEUMS = [];
   static FOSSILS = [];
   static FERRIES = [];
   static MOTORCYCLE_PARKING = [];
@@ -223,11 +225,12 @@ class RouteBuilder {
     if (typeof POI_SCOTLAND !== 'undefined') sources.push(POI_SCOTLAND);
     if (typeof POI_ENGLAND !== 'undefined') sources.push(POI_ENGLAND);
     if (typeof POI_WALES_ISLANDS !== 'undefined') sources.push(POI_WALES_ISLANDS);
+    if (typeof MOTORCYCLE_MUSEUMS_POI !== 'undefined') sources.push({ museums: MOTORCYCLE_MUSEUMS_POI });
     var keyMap = {
       campsites:'CAMPSITES', bridges:'BRIDGES', wildlife:'WILDLIFE', roads:'ROADS',
       fuel:'FUEL', viewpoints:'VIEWPOINTS', pubs:'PUBS', castles:'CASTLES',
       waterfalls:'WATERFALLS', beaches:'BEACHES', distilleries:'DISTILLERIES',
-      landmarks:'LANDMARKS', fossils:'FOSSILS', ferries:'FERRIES',
+      landmarks:'LANDMARKS', museums:'MUSEUMS', fossils:'FOSSILS', ferries:'FERRIES',
       motorcycle_parking:'MOTORCYCLE_PARKING',
       repair_shops:'REPAIR_SHOPS', hotels:'HOTELS', mountain_passes:'MOUNTAIN_PASSES'
     };
@@ -2268,7 +2271,7 @@ class RouteBuilder {
     var suggestTypes = {
       bridges:1, campsites:1, wildlife:1, roads:1, viewpoints:1,
       pubs:1, castles:1, waterfalls:1, beaches:1, landmarks:1,
-      distilleries:1, fossils:1, mountain_passes:1
+      distilleries:1, fossils:1, mountain_passes:1, museums:1
     };
     var types = Object.keys(suggestTypes);
 

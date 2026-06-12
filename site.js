@@ -531,6 +531,27 @@ class VisorUpSite {
         }
         break;
 
+      case 'museums':
+        this.showSiteView();
+        if (parts[1]) {
+          var museum = (typeof MOTORCYCLE_MUSEUMS !== 'undefined') && MOTORCYCLE_MUSEUMS.find(function(m) { return m.slug === parts[1]; });
+          if (museum) {
+            this.pageContent.innerHTML = this.renderMuseumDetail(parts[1]) + this.renderFooter();
+            this.setTitle(museum.name + ' — Visitor Guide for Riders');
+            this._setMeta({ description: museum.name + ', ' + museum.region + ', ' + museum.country + '. ' + museum.summary, type: 'article' });
+          } else {
+            this.pageContent.innerHTML = this.render404();
+            this.setTitle('Page Not Found');
+          }
+        } else {
+          this.pageContent.innerHTML = this.renderMuseumsHub() + this.renderFooter();
+          this.setTitle('Motorcycle Museums — UK, Isle of Man & Ireland');
+          this._setMeta({ description: 'Visitor guide to motorcycle and motor museums across the UK, Isle of Man and Ireland — collections, admission, opening hours and what each offers, plus an interactive map.' });
+        }
+        this.setActiveNav('museums');
+        this.scrollToTop();
+        break;
+
       case 'planning':
         this.showSiteView();
         this.pageContent.innerHTML = this.renderPlanning() + this.renderFooter();
@@ -1974,6 +1995,125 @@ class VisorUpSite {
             '<p>Always arrive at least 90 minutes before departure. Tie-down straps are usually provided but bring your own for peace of mind. Remove loose items from the bike. Leave panniers on but take valuables with you. Check weather conditions — rough crossings are common, especially in the Irish Sea and Minch. Book bike spaces as early as possible.</p>' +
           '</div>' +
         '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  renderMuseumsHub() {
+    var list = (typeof MOTORCYCLE_MUSEUMS !== 'undefined') ? MOTORCYCLE_MUSEUMS : [];
+    var order = ['England', 'Scotland', 'Wales', 'Isle of Man', 'Ireland', 'Northern Ireland'];
+    var byCountry = {};
+    list.forEach(function(m) { (byCountry[m.country] = byCountry[m.country] || []).push(m); });
+
+    var sections = order.filter(function(c) { return byCountry[c]; }).map(function(c) {
+      var cards = byCountry[c].map(function(m) {
+        var chips = m.offers.slice(0, 3).map(function(o) { return '<span class="museum-chip">' + o + '</span>'; }).join('');
+        var price = m.admission.indexOf('Free') === 0 ? 'Free entry' : m.admission.split(',')[0].split('(')[0].trim();
+        return '<a href="/museums/' + m.slug + '" class="museum-card">' +
+          '<div class="museum-card-body">' +
+            '<span class="museum-card-region"><i class="fas fa-location-dot"></i> ' + m.region + ', ' + m.country + '</span>' +
+            '<h3>' + m.name + '</h3>' +
+            '<p>' + m.summary + '</p>' +
+            '<div class="museum-chips">' + chips + '</div>' +
+          '</div>' +
+          '<div class="museum-card-foot">' +
+            '<span><i class="fas fa-ticket"></i> ' + price + '</span>' +
+            '<span class="museum-card-link">View guide <i class="fas fa-arrow-right"></i></span>' +
+          '</div>' +
+        '</a>';
+      }).join('');
+      return '<h2 class="museum-country-heading">' + c + ' <span>(' + byCountry[c].length + ')</span></h2>' +
+             '<div class="museum-grid">' + cards + '</div>';
+    }).join('');
+
+    return '' +
+    '<section class="page-hero museum-hero">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<h1 class="page-hero-title">Motorcycle Museums</h1>' +
+        '<p class="page-hero-sub">' + list.length + ' museums across the UK, Isle of Man &amp; Ireland — collections, admission, opening times and what to expect.</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<div class="ferry-intro">' +
+          '<p>From the world\'s largest British bike collection to TT shrines on the Isle of Man, these museums make brilliant ride-out destinations. Each guide covers what\'s on display, admission, opening hours and how to plan a visit — and every museum is pinned on the <a href="/build-route">interactive Route Builder map</a> (switch on the <strong>Museums</strong> layer).</p>' +
+        '</div>' +
+        sections +
+        '<div class="tips-callout" style="margin-top:32px">' +
+          '<div class="tips-callout-icon"><i class="fas fa-map-location-dot"></i></div>' +
+          '<div class="tips-callout-body">' +
+            '<h4>Plan a museum ride-out</h4>' +
+            '<p>Open the <a href="/build-route">Route Builder</a>, switch on the Museums layer, and build a scenic route that drops you right at the door. Admission and opening hours can change — always confirm on the museum\'s own website before setting off.</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  renderMuseumDetail(slug) {
+    var m = (typeof MOTORCYCLE_MUSEUMS !== 'undefined') && MOTORCYCLE_MUSEUMS.find(function(x) { return x.slug === slug; });
+    if (!m) return this.render404();
+
+    var offers = m.offers.map(function(o) { return '<li><i class="fas fa-check-circle"></i> ' + o + '</li>'; }).join('');
+    var highlights = m.highlights.map(function(h) { return '<li><i class="fas fa-star"></i> ' + h + '</li>'; }).join('');
+
+    var d = 0.06;
+    var bbox = (m.lng - d) + ',' + (m.lat - 0.035) + ',' + (m.lng + d) + ',' + (m.lat + 0.035);
+    var mapSrc = 'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox + '&layer=mapnik&marker=' + m.lat + ',' + m.lng;
+    var osmLink = 'https://www.openstreetmap.org/?mlat=' + m.lat + '&mlon=' + m.lng + '#map=14/' + m.lat + '/' + m.lng;
+
+    var jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Museum',
+      name: m.name,
+      description: m.summary,
+      url: 'https://visorup.co.uk/museums/' + m.slug,
+      address: { '@type': 'PostalAddress', streetAddress: m.address, addressCountry: m.country },
+      geo: { '@type': 'GeoCoordinates', latitude: m.lat, longitude: m.lng },
+      sameAs: m.website
+    };
+    if (m.phone) jsonLd.telephone = m.phone;
+
+    return '' +
+    '<section class="page-hero museum-hero">' +
+      '<div class="hero-overlay"></div>' +
+      '<div class="page-hero-content">' +
+        '<span class="museum-hero-badge"><i class="fas fa-landmark"></i> ' + m.region + ', ' + m.country + '</span>' +
+        '<h1 class="page-hero-title">' + m.name + '</h1>' +
+        '<p class="page-hero-sub">' + m.summary + '</p>' +
+      '</div>' +
+    '</section>' +
+    '<section class="page-section">' +
+      '<div class="container">' +
+        '<nav class="breadcrumb"><a href="/">Home</a> <i class="fas fa-chevron-right"></i> <a href="/museums">Museums</a> <i class="fas fa-chevron-right"></i> <span>' + m.name + '</span></nav>' +
+        '<div class="detail-grid">' +
+          '<div class="detail-main">' +
+            '<h2 class="detail-heading">What you\'ll find</h2>' +
+            '<ul class="museum-list">' + offers + '</ul>' +
+            '<h2 class="detail-heading" style="margin-top:28px">Highlights</h2>' +
+            '<ul class="museum-list">' + highlights + '</ul>' +
+            '<h2 class="detail-heading" style="margin-top:28px">Location</h2>' +
+            '<iframe class="museum-map" title="Map of ' + m.name + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="' + mapSrc + '"></iframe>' +
+            '<p class="detail-text" style="margin-top:10px"><a href="' + osmLink + '" target="_blank" rel="noopener">Open in OpenStreetMap</a> &middot; <a href="/build-route">Plan a route on the interactive map</a></p>' +
+          '</div>' +
+          '<div class="detail-sidebar">' +
+            '<div class="info-card"><h4><i class="fas fa-ticket"></i> Admission</h4><p>' + m.admission + '</p></div>' +
+            '<div class="info-card"><h4><i class="fas fa-clock"></i> Opening</h4><p>' + m.opening + '</p></div>' +
+            '<div class="info-card"><h4><i class="fas fa-hourglass-half"></i> Typical visit</h4><p>' + m.duration + '</p></div>' +
+            '<div class="info-card"><h4><i class="fas fa-location-dot"></i> Address</h4><p>' + m.address + '</p></div>' +
+            (m.phone ? '<div class="info-card"><h4><i class="fas fa-phone"></i> Phone</h4><p>' + m.phone + '</p></div>' : '') +
+            '<div class="info-card"><a href="' + m.website + '" target="_blank" rel="noopener" class="ferry-book-btn"><i class="fas fa-external-link-alt"></i> Official website</a></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="tips-callout">' +
+          '<div class="tips-callout-icon"><i class="fas fa-circle-info"></i></div>' +
+          '<div class="tips-callout-body">' +
+            '<h4>Before you ride out</h4>' +
+            '<p>' + (m.notes ? m.notes + ' ' : '') + 'Admission prices and opening hours change seasonally — always confirm on the <a href="' + m.website + '" target="_blank" rel="noopener">official website</a> before travelling.</p>' +
+          '</div>' +
+        '</div>' +
+        '<script type="application/ld+json">' + JSON.stringify(jsonLd) + '</script>' +
       '</div>' +
     '</section>';
   }
@@ -6299,7 +6439,7 @@ class VisorUpSite {
 
   setActiveNav(name) {
     // Mega trigger active states
-    var explorePages = ['routes','destinations','ferries','bikes'];
+    var explorePages = ['routes','destinations','ferries','bikes','museums'];
     var guidesPages = ['guides'];
     var toolsPages = ['planning','build-route','plan-trip'];
     document.querySelectorAll('.mega-trigger').forEach(function(t) {
