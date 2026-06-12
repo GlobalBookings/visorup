@@ -165,6 +165,7 @@ var Shop = {
       '<div class="shop-card-body">' +
         '<span class="shop-card-brand">' + p.brand + '</span>' +
         '<a href="' + p.affiliateUrl + '" target="_blank" rel="noopener sponsored" class="shop-card-name">' + p.name + '</a>' +
+        (p.desc ? '<p class="shop-card-desc">' + p.desc.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</p>' : '') +
         '<div class="shop-card-foot">' +
           '<span class="shop-card-price">' + p.price + '</span>' +
           '<a href="' + p.affiliateUrl + '" target="_blank" rel="noopener sponsored" class="shop-card-btn">View <i class="fas fa-arrow-right"></i></a>' +

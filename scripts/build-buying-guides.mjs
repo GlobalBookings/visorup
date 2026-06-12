@@ -181,7 +181,7 @@ function buildContent(cfg, products, allCount) {
 
   html += `<h2>The best ${cfg.shortLabel} at a glance</h2>`;
   html += '<div class="bg-products">';
-  for (const p of products) html += productCard(p, blurbFor(base, p));
+  for (const p of products) html += productCard(p, p.desc ? esc(p.desc) : blurbFor(base, p));
   html += '</div>';
 
   html += `<h2>What to look for in ${cfg.shortLabel}</h2><ul>`;

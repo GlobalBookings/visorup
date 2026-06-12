@@ -44,6 +44,18 @@ function parsePrice(s) {
   return m ? parseFloat(m[1]) : null;
 }
 
+// Strip HTML, decode entities, and truncate to a tidy card-length snippet.
+function cleanDesc(s, max = 240) {
+  if (!s) return '';
+  const t = decodeEntities(String(s).replace(/<[^>]*>/g, ' '));
+  if (!t) return '';
+  if (t.length <= max) return t;
+  let cut = t.slice(0, max);
+  const sp = cut.lastIndexOf(' ');
+  if (sp > max * 0.6) cut = cut.slice(0, sp);
+  return cut.replace(/[\s.,;:\u2013\u2014-]+$/, '') + '\u2026';
+}
+
 // Helmet model keywords only apply when the brand is a known lid maker —
 // otherwise generic words like "storm" or "header" wrongly grab jackets/exhausts.
 const HELMET_BRANDS = new Set([
@@ -202,6 +214,7 @@ function main() {
       id: p.id,
       name, brand, baseName, colour,
       colourFamily: colourFamily(colour),
+      desc: cleanDesc(p.description),
       price: priceNum != null ? '£' + priceNum : '',
       priceNum,
       priceFixed: !!fix,
@@ -226,6 +239,7 @@ function main() {
         name: p.baseName,
         brand: p.brand,
         category: p.category,
+        desc: p.desc,
         priceNum: p.priceNum,
         price: p.price,
         priceFixed: p.priceFixed,
@@ -237,6 +251,7 @@ function main() {
       });
     }
     const g = groups.get(key);
+    if (!g.desc && p.desc) g.desc = p.desc;
     g.colours.push({ colour: p.colour, family: p.colourFamily, image: p.image, affiliateUrl: p.affiliateUrl });
     // The re-scraped representative variant is authoritative for price + image.
     // (Old per-variant prices are unreliable finance figures, so never min across them.)
@@ -244,6 +259,7 @@ function main() {
       g.priceNum = p.priceNum; g.price = p.price; g.priceFixed = true;
       g.image = p.image; g.thumb = p.thumb;
       g.id = p.id; g.url = p.url; g.affiliateUrl = p.affiliateUrl;
+      if (p.desc) g.desc = p.desc;
     }
   }
 

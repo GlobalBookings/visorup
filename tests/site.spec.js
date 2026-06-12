@@ -440,3 +440,21 @@ test.describe('Museums Map Integration', () => {
     await expect(page.locator('input[data-poi-type="museums"]')).toHaveCount(1);
   });
 });
+
+test.describe('Shop product descriptions', () => {
+  test('category cards show product descriptions', async ({ page }) => {
+    await page.goto('/shop/helmets');
+    const firstDesc = page.locator('.shop-card-desc').first();
+    await expect(firstDesc).toBeVisible();
+    const text = await firstDesc.textContent();
+    expect((text || '').trim().length).toBeGreaterThan(10);
+  });
+
+  test('buying guide product cards use real descriptions', async ({ page }) => {
+    await page.goto('/guides/buying-guides/best-motorcycle-helmets-uk-2026');
+    const firstBlurb = page.locator('.bg-prod-blurb').first();
+    await expect(firstBlurb).toBeVisible();
+    const text = await firstBlurb.textContent();
+    expect((text || '').trim().length).toBeGreaterThan(10);
+  });
+});
