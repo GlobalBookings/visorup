@@ -18,18 +18,18 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <p>Wind protection is everything on British roads. When you're battling crosswinds on the A85 around Loch Lomond or grinding through horizontal rain on the A66 across the Pennines, that full fairing isn't just comfort – it's essential kit. My RT cuts through wind that would leave adventure bike <a href="/guides/leather-motorcycle-trousers">riders</a> fighting the handlebars.</p>
 
-<p>The riding position works for hours at a time. Yes, you're leaning forward, but it's a supported, aerodynamic position that puts your weight on your core, not your wrists. I've done 600-mile days to the Highlands without the usual back pain that comes with more upright positions.</p>
+<p>The riding position works for hours at a time. Yes, you're leaning forward, but it's a supported, aerodynamic position that puts <a href="/guides/motorcycle-photography-tips-touring">your</a> weight on your core, not your wrists. I've done 600-mile days to the Highlands without the usual back pain that comes with more upright positions.</p>
 
-<p>Luggage integration is typically superior. Purpose-built panniers and top boxes fit like they were designed together – because they were. The BMW's cases hold 49 litres each, easily swallowing a week's worth of gear. More importantly, the low centre of gravity means all that luggage doesn't affect handling as much as it would on a tall adventure bike.</p>
+<p>Luggage integration is typically superior. Purpose-built panniers and top boxes fit like they were designed <a href="/guides/group-riding-tips-uk-touring">together</a> – because they were. The BMW's cases hold 49 litres each, easily swallowing a week's worth of gear. More importantly, the low centre of gravity means all that luggage doesn't affect handling as much as it would on a tall adventure bike.</p>
 
 <h3>Where Sport Tourers Struggle</h3>
 
 <p>Ground clearance becomes an issue surprisingly quickly. Not just off-road – I'm talking about poorly maintained B-roads, car park entrances, and those concrete parking blocks that seem designed to catch bike bellypans. My RT has more battle scars than I care to admit from seemingly innocent encounters with British infrastructure.</p>
 
-<p>The low seat height and forward foot position can be genuinely uncomfortable for tall riders on long days. At 6'2", I find myself constantly shifting position after about three hours. It's manageable, but it's never quite natural.</p>
+<p>The low seat height and forward foot position can be genuinely uncomfortable for tall riders on long days. At 6'2", I find myself constantly shifting position after about three hours. It's manageable, but it's <a href="/guides/offline-maps-motorcycle-touring-uk">never</a> quite natural.</p>
 
 <blockquote>
-<p>Here's what nobody tells you about sport tourers: they're brilliant at what they do, but they're unforgiving if you venture outside their comfort zone. That comfort zone just happens to cover 95% of UK touring.</p>
+<p>Here's what nobody tells you about sport tourers: they're brilliant at what they do, but they're unforgiving if you venture outside their comfort zone. That comfort zone just happens to <a href="/guides/breakdown-cover-rac-aa-motorcycles">cover</a> 95% of UK touring.</p>
 </blockquote>
 
 <h2>Adventure Bikes: The Swiss Army Knives</h2>
@@ -38,7 +38,7 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <h3>What Adventure Bikes Excel At</h3>
 
-<p>Versatility is the obvious strength, but it goes deeper than just off-road capability. That upright riding position gives you commanding visibility, especially important on twisty single-track roads in the Highlands or when filtering through London traffic. The higher seat means you can see over hedgerows on narrow B-roads – a genuine safety advantage.</p>
+<p>Versatility is the obvious strength, but it goes deeper than just off-road capability. That upright riding position gives you commanding visibility, especially important on twisty single-track roads in the Highlands or when filtering through London traffic. The higher seat means you can see over hedgerows on narrow B-roads – a genuine <a href="/guides/solo-motorcycle-touring-safety-guide">safety</a> advantage.</p>
 
 <p>Rough road capability extends far beyond green lanes. British B-roads are getting worse every year, and adventure bikes simply absorb the punishment better. The A939 over the Lecht, the B4518 through mid-Wales – these roads feel smooth on a GS that would have a sport tourer skipping across the surface.</p>
 
