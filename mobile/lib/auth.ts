@@ -9,28 +9,6 @@ const redirectUri = AuthSession.makeRedirectUri({ scheme: 'visorup', path: 'auth
 
 export { redirectUri };
 
-export async function signInWithGoogle() {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: redirectUri,
-      skipBrowserRedirect: true,
-    },
-  });
-
-  if (error || !data.url) {
-    throw new Error(error?.message || 'Failed to get auth URL');
-  }
-
-  const result = await WebBrowser.openAuthSessionAsync(data.url, redirectUri);
-
-  if (result.type === 'success' && result.url) {
-    return extractSessionFromUrl(result.url);
-  }
-
-  return false;
-}
-
 export async function extractSessionFromUrl(url: string): Promise<boolean> {
   try {
     // Supabase returns tokens in the URL fragment (#access_token=...&refresh_token=...)

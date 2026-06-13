@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase, Profile, UserBike } from '../../lib/supabase';
-import { signInWithGoogle } from '../../lib/auth';
 import { colors, spacing } from '../../lib/theme';
 
 export default function ProfileScreen() {
@@ -86,6 +85,33 @@ export default function ProfileScreen() {
     setBikes([]);
   };
 
+  const handleDeleteAccount = () => {
+    Alert.alert(
+      'Delete Account',
+      'This permanently deletes your account, saved routes, garage, posts, and comments. This cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              const { error } = await supabase.functions.invoke('delete-account', { method: 'POST' });
+              if (error) throw error;
+              await supabase.auth.signOut();
+              setUser(null);
+              setProfile(null);
+              setBikes([]);
+              Alert.alert('Account deleted', 'Your account and data have been removed.');
+            } catch (e: any) {
+              Alert.alert('Could not delete account', e?.message || 'Please try again later.');
+            }
+          },
+        },
+      ]
+    );
+  };
+
   if (!user) {
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.authContainer}>
@@ -115,30 +141,6 @@ export default function ProfileScreen() {
           <Text style={styles.primaryBtnText}>
             {authLoading ? 'Loading...' : authMode === 'login' ? 'Sign In' : 'Create Account'}
           </Text>
-        </TouchableOpacity>
-
-        <View style={styles.dividerRow}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>or</Text>
-          <View style={styles.dividerLine} />
-        </View>
-
-        <TouchableOpacity
-          style={styles.googleBtn}
-          onPress={async () => {
-            setAuthLoading(true);
-            try {
-              const success = await signInWithGoogle();
-              if (success) await fetchProfile();
-            } catch (e: any) {
-              Alert.alert('Google Sign-In Error', e.message);
-            }
-            setAuthLoading(false);
-          }}
-          disabled={authLoading}
-        >
-          <Ionicons name="logo-google" size={18} color="#fff" />
-          <Text style={styles.googleBtnText}>Continue with Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}>
@@ -205,6 +207,11 @@ export default function ProfileScreen() {
       <TouchableOpacity style={styles.signOutBtn} onPress={handleSignOut}>
         <Ionicons name="log-out-outline" size={18} color={colors.danger} />
         <Text style={styles.signOutText}>Sign Out</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.deleteBtn} onPress={handleDeleteAccount}>
+        <Ionicons name="trash-outline" size={16} color={colors.textMuted} />
+        <Text style={styles.deleteText}>Delete Account</Text>
       </TouchableOpacity>
 
       <View style={{ height: 40 }} />
@@ -308,4 +315,14 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,68,68,0.2)',
   },
   signOutText: { color: colors.danger, fontSize: 14, fontWeight: '600' },
+  deleteBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    marginHorizontal: spacing.md,
+    marginTop: spacing.sm,
+    padding: spacing.md,
+  },
+  deleteText: { color: colors.textMuted, fontSize: 13, fontWeight: '600' },
 });
