@@ -1,3 +1,8 @@
+// Must run before supabase-js: Hermes ships an incomplete WHATWG URL, and
+// @supabase/supabase-js (auth-js/realtime-js) calls `new URL()` during session
+// init at launch. Without this polyfill that throws an unhandled error and the
+// app aborts on startup (App Store reject, build 4 / iPad15,3).
+import 'react-native-url-polyfill/auto';
 import { createClient } from '@supabase/supabase-js';
 import { ExpoSecureStoreAdapter } from './storage';
 
