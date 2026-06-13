@@ -5571,7 +5571,7 @@ class VisorUpSite {
   }
 
   renderPrivacy() {
-    var updated = '1 June 2026';
+    var updated = '13 June 2026';
     return '' +
     '<section class="page-hero" style="background:var(--bg-dark);min-height:200px;">' +
       '<div class="page-hero-content">' +
@@ -5608,6 +5608,14 @@ class VisorUpSite {
           '<li><b>Affiliate partners:</b> If you click an affiliate link and make a purchase, our partners may share transaction confirmation data (not payment details) with us for commission tracking</li>' +
           '<li><b>Analytics providers:</b> Aggregated and pseudonymised usage data from analytics services</li>' +
         '</ul>' +
+        '<h3>2.4 VisorUp Mobile App</h3>' +
+        '<p>The VisorUp iOS and Android app may additionally collect the following, only with your explicit permission and only when you use the relevant feature:</p>' +
+        '<ul>' +
+          '<li><b>Precise location (GPS):</b> Used while you are actively navigating or recording a ride to show your position and progress along the route. Collected only while the app is in use (foreground) &mdash; we do not track your location in the background. You can deny or revoke this at any time in your device settings.</li>' +
+          '<li><b>Photos:</b> Images you choose to attach to a ride or post are accessed only when you select them via your device&rsquo;s photo picker or camera.</li>' +
+          '<li><b>Push notification token:</b> If you enable notifications, we store a device token so we can send ride and platform updates. You can disable notifications at any time in device settings.</li>' +
+        '</ul>' +
+        '<p>You can delete your account and all associated data at any time from within the app (Profile &rarr; Delete Account) or by emailing <a href="mailto:privacy@visorup.co.uk" style="color:var(--accent)">privacy@visorup.co.uk</a>.</p>' +
 
         '<h2>3. How We Use Your Data</h2>' +
         '<p>We use your personal data for the following purposes and legal bases:</p>' +
