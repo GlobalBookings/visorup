@@ -116,7 +116,7 @@ async function getOverview(analytics, range) {
     ],
   });
 
-  // Get engaged users only (likely real humans)
+  // Get engaged sessions across ALL channels (not just Direct)
   const engagedData = await query(analytics, {
     dateRanges: [{ startDate: range.startDate, endDate: range.endDate }],
     metrics: [
@@ -126,12 +126,6 @@ async function getOverview(analytics, range) {
       { name: 'screenPageViews' },
       { name: 'userEngagementDuration' },
     ],
-    dimensionFilter: {
-      filter: {
-        fieldName: 'sessionDefaultChannelGroup',
-        stringFilter: { value: 'Direct', matchType: 'EXACT' },
-      },
-    },
   });
 
   const data = rawData;
@@ -140,7 +134,7 @@ async function getOverview(analytics, range) {
   const engRow = engagedData.rows?.[0]?.metricValues || [];
   const engagedSessions = Number(engRow[2]?.value || 0);
   const totalSessions = Number(row[1]?.value || 0);
-  const estimatedBots = totalSessions > 0 ? Math.max(0, totalSessions - engagedSessions * 3) : 0;
+  const estimatedBots = totalSessions > 0 ? Math.max(0, totalSessions - engagedSessions) : 0;
 
   return {
     users: Number(row[0]?.value || 0),
