@@ -243,7 +243,7 @@ Tasks:
 3. Add any missing practical detail a touring rider would want
 4. Naturally incorporate striking-distance keywords without stuffing
 5. Keep the direct, conversational voice — like one rider advising another over a brew at a biker café
-6. Include at least one affiliate mention: <a href="https://www.sportsbikeshop.co.uk" target="_blank" rel="noopener sponsored">SportsBikeShop</a>
+6. Include at least one affiliate mention: <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a>
 7. Add internal links where relevant:
    - Routes: /routes/island-to-highlands, /routes/nc500-complete
    - Tools: /build-route, /plan-trip, /packing-checklist

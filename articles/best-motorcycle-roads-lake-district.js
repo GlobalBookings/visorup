@@ -80,7 +80,7 @@ The Lake District rewards riders who take time to explore beyond the obvious rou
 
 <p>Let's be honest about Lake District weather – it's unpredictable at best and potentially dangerous at worst. I've started <a href="/guides/touring-motorcycle-boots">rides</a> in blazing sunshine and finished them in torrential rain. The key is being prepared for everything.</p>
 
-<p>Waterproofs are non-negotiable. I don't care if the forecast shows wall-to-wall sunshine – pack proper wet weather gear. I've been caught out too many times to risk it now. Quality kit from suppliers like <a href="https://www.sportsbikeshop.co.uk" target="_blank" rel="noopener sponsored">SportsBikeShop</a> makes all the difference when the weather turns.</p>
+<p>Waterproofs are non-negotiable. I don't care if the forecast shows wall-to-wall sunshine – pack proper wet weather gear. I've been caught out too many times to risk it now. Quality kit from suppliers like <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> makes all the difference when the weather turns.</p>
 
 <p>Road surfaces can change dramatically with conditions. That perfect piece of tarmac you enjoyed in the dry becomes treacherous when wet leaves mix with morning dew. The major passes can have ice patches well into spring – I've encountered frost on Kirkstone Pass in late April.</p>
 

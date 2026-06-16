@@ -18,7 +18,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 <ul>
 <li>Start early (before 9 AM) to avoid tourist traffic</li>
 <li>Check weather conditions – these roads close in severe weather</li>
-<li>Carry proper wet weather gear from <a href="https://www.sportsbikeshop.co.uk" target="_blank" rel="noopener sponsored">SportsBikeShop</a></li>
+<li>Carry proper wet weather gear from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a></li>
 <li>Fill up with fuel beforehand – there are no petrol stations on the passes</li>
 <li>Inform someone of your route and expected arrival time</li>
 </ul>
@@ -90,7 +90,7 @@ export const content = `<h2>Best Motorcycle Roads in the Lake District: A Rider'
 <li>Fully charged phone and portable battery pack</li>
 </ul>
 
-<p>You can find quality gear at <a href="https://www.sportsbikeshop.co.uk" target="_blank" rel="noopener sponsored">SportsBikeShop</a>, and they often have Lake District-specific advice on their blog.</p>
+<p>You can find quality gear at <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a>, and they often have Lake District-specific advice on their blog.</p>
 
 <h2>Planning Your Lake District Tour</h2>
 

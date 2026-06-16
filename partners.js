@@ -257,7 +257,7 @@ const PARTNER_HUBS = {
         blurb: 'Massive tyre stock with free next-day UK delivery \u2014 fit at home or take to a local fitter.',
         tags: ['Online', 'All brands', 'Fast delivery'], badge: 'Free UK delivery',
         features: ['Massive tyre stock', 'Free next-day UK delivery', 'All major brands'],
-        url: 'https://www.sportsbikeshop.co.uk/',
+        url: 'https://www.sportsbikeshop.co.uk/#/28914,3714,0',
       },
       {
         key: 'demon-tweeks', name: 'Demon Tweeks', bestFor: 'Performance & road',

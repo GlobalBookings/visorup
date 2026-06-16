@@ -52,7 +52,7 @@ export const content = `<h2>Motorcycle Touring Packing Tips for Beginners: Every
 <li>Easier to squeeze through tight spaces</li>
 </ul>
 
-<p>You can find excellent options at <a href="https://www.sportsbikeshop.co.uk" target="_blank" rel="noopener sponsored">SportsBikeShop</a> - I've bought several setups from them over the years.</p>
+<p>You can find excellent options at <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> - I've bought several setups from them over the years.</p>
 
 <blockquote>The best luggage system is the one you'll actually use consistently. Don't get seduced by features you don't need - focus on capacity, weather protection, and ease of use.</blockquote>
 

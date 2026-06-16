@@ -232,7 +232,7 @@ export const content = `<h2>Sport Touring vs Adventure Bikes: Which Is Better fo
 
 <p>For adventure touring, the BMW R1250GS is still the default choice, but the Triumph Tiger 1200 offers genuine alternatives. The Honda Africa Twin provides excellent value in this competitive segment.</p>
 
-<p>For quality gear and accessories for either choice, <a href="https://www.sportsbikeshop.co.uk" target="_blank" rel="noopener sponsored">SportsBikeShop</a> offers the widest selection of touring equipment with expert advice.</p>
+<p>For quality gear and accessories for either choice, <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> offers the widest selection of touring equipment with expert advice.</p>
 
 <h2>Plan Your Next Adventure</h2>
 

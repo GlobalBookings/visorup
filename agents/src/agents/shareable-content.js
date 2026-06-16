@@ -185,7 +185,7 @@ Requirements:
 4. Include practical, specific information that makes riders want to share this
 5. Reference real UK roads (A-roads, B-roads by number), real places, real conditions
 6. Include 1-2 affiliate mentions:
-   <a href="https://www.sportsbikeshop.co.uk" target="_blank" rel="noopener sponsored">SportsBikeShop</a>
+   <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a>
 7. Include 3-4 internal links:
    - Routes: /routes/island-to-highlands, /routes/nc500-complete
    - Tools: /build-route, /plan-trip, /packing-checklist
