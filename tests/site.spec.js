@@ -458,3 +458,44 @@ test.describe('Shop product descriptions', () => {
     expect((text || '').trim().length).toBeGreaterThan(10);
   });
 });
+
+test.describe('Insurance hub', () => {
+  test('renders hero, providers and affiliate quote links', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/insurance');
+    await expect(page.locator('h1')).toContainText('Motorbike Insurance');
+    await expect(page.getByText('The Bike Insurer').first()).toBeVisible();
+    const quoteLinks = page.locator('a[rel~="sponsored"]');
+    expect(await quoteLinks.count()).toBeGreaterThan(3);
+    await expect(quoteLinks.first()).toHaveAttribute('target', '_blank');
+    expect(errors).toEqual([]);
+  });
+
+  test('is linked from the site and renders on direct navigation', async ({ page }) => {
+    await page.goto('/');
+    expect(await page.locator('a[href="/insurance"]').count()).toBeGreaterThan(0);
+    await page.goto('/insurance');
+    await expect(page).toHaveURL(/\/insurance$/);
+    await expect(page.locator('h1')).toContainText('Motorbike Insurance');
+  });
+
+  test('premium estimator auto-fills, recalculates and is labelled an estimate', async ({ page }) => {
+    await page.goto('/insurance');
+    const headline = page.locator('#insEstHeadline');
+    await expect(headline).toContainText(/£\d/);
+    await expect(page.getByText('estimate, not a quote')).toBeVisible();
+
+    const card = page.locator('#ins-est-devitt');
+    await expect(card).toContainText('£');
+    const before = await card.textContent();
+
+    await page.selectOption('#insAge', '17-20');
+    await page.selectOption('#insEngine', 'over1200');
+    const after = await page.locator('#ins-est-devitt').textContent();
+    expect(after).not.toEqual(before);
+
+    const num = (s) => parseInt((s || '').replace(/[^0-9]/g, ''), 10);
+    expect(num(after)).toBeGreaterThan(num(before));
+  });
+});

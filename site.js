@@ -628,6 +628,17 @@ class VisorUpSite {
         this.scrollToTop();
         break;
 
+      case 'insurance':
+        this.showSiteView();
+        this.setActiveNav('insurance');
+        this.pageContent.innerHTML = renderInsuranceHub() + this.renderFooter();
+        this.setTitle('Motorbike Insurance Comparison for Tourers — VisorUp');
+        this._setMeta({ description: 'Compare specialist UK motorcycle insurance — multi-bike, ride-any-bike, classic and touring cover from FCA-authorised brokers. Find the right policy for how you ride.' });
+        if (typeof VisorUpAnalytics !== 'undefined') VisorUpAnalytics.trackToolUsage('insurance');
+        setTimeout(function() { if (typeof Insurance !== 'undefined') Insurance.calc(); }, 60);
+        this.scrollToTop();
+        break;
+
       case 'reports':
         this.showSiteView();
         this.pageContent.innerHTML = this.renderComingSoon('Ride Reports', 'Real trip reports from riders who\'ve completed our routes — photos, tips, and stories from the road.', 'fa-pen-fancy') + this.renderFooter();
@@ -6420,6 +6431,7 @@ class VisorUpSite {
             '<a href="/ferries">Ferries</a>' +
             '<a href="/bikes">Bike Guides</a>' +
             '<a href="/planning">Trip Planning</a>' +
+            '<a href="/insurance">Insurance</a>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Destinations</h4>' +
