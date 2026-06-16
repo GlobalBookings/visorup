@@ -639,6 +639,25 @@ class VisorUpSite {
         this.scrollToTop();
         break;
 
+      case 'breakdown-cover':
+      case 'travel-insurance':
+      case 'bike-security':
+      case 'tyres':
+        this.showSiteView();
+        this.setActiveNav(parts[0]);
+        if (typeof PARTNER_HUBS !== 'undefined' && PARTNER_HUBS[parts[0]]) {
+          var hubCfg = PARTNER_HUBS[parts[0]];
+          this.pageContent.innerHTML = renderPartnerHub(parts[0]) + this.renderFooter();
+          this.setTitle(hubCfg.title);
+          this._setMeta({ description: hubCfg.metaDesc });
+          if (typeof VisorUpAnalytics !== 'undefined') VisorUpAnalytics.trackToolUsage(parts[0]);
+        } else {
+          this.pageContent.innerHTML = this.render404() + this.renderFooter();
+          this.setTitle('Page Not Found');
+        }
+        this.scrollToTop();
+        break;
+
       case 'reports':
         this.showSiteView();
         this.pageContent.innerHTML = this.renderComingSoon('Ride Reports', 'Real trip reports from riders who\'ve completed our routes — photos, tips, and stories from the road.', 'fa-pen-fancy') + this.renderFooter();
@@ -1947,6 +1966,18 @@ class VisorUpSite {
         '<div class="ferry-intro">' +
           '<p>Ferry travel opens up Britain\'s most spectacular riding destinations — from the Channel Islands to the Isle of Skye, the Outer Hebrides to Orkney. Booking bike spaces early is essential, especially in summer, as motorcycle slots are limited on most services. Here are the key ferry routes for British motorcycle touring.</p>' +
         '</div>' +
+        '<div style="background:linear-gradient(135deg, rgba(255,107,53,0.10), var(--bg-card));border:1px solid var(--accent);border-radius:16px;padding:26px;margin-bottom:30px;display:flex;flex-wrap:wrap;align-items:center;gap:20px;justify-content:space-between">' +
+          '<div style="flex:1;min-width:260px">' +
+            '<div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Touring to Europe?</div>' +
+            '<h2 style="margin:0 0 8px 0;font-size:24px;color:var(--text)">Book your Channel crossing</h2>' +
+            '<p style="margin:0;font-size:15px;color:var(--text-muted);line-height:1.5">Compare every operator (DFDS, P&O, Brittany Ferries, Stena) in one place, or take the bike on Le Shuttle through the tunnel. Book bike spaces early — they sell out fast in summer.</p>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;gap:10px">' +
+            '<a href="https://www.directferries.co.uk/" target="_blank" rel="sponsored noopener nofollow" onclick="if(typeof VisorUpAnalytics!==\'undefined\')VisorUpAnalytics.trackToolUsage(\'ferries-compare-direct-ferries\')" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:13px 26px;border-radius:12px;text-decoration:none;white-space:nowrap;text-align:center">Compare ferries <i class="fas fa-arrow-right" style="font-size:12px"></i></a>' +
+            '<a href="https://www.eurotunnel.com/uk/" target="_blank" rel="sponsored noopener nofollow" onclick="if(typeof VisorUpAnalytics!==\'undefined\')VisorUpAnalytics.trackToolUsage(\'ferries-eurotunnel\')" style="display:inline-block;border:1px solid var(--accent);color:var(--accent);font-weight:700;padding:13px 26px;border-radius:12px;text-decoration:none;white-space:nowrap;text-align:center">Le Shuttle (tunnel) <i class="fas fa-arrow-right" style="font-size:12px"></i></a>' +
+          '</div>' +
+        '</div>' +
+        '<p style="font-size:12px;color:var(--text-muted);text-align:center;margin:0 0 26px 0"><i class="fas fa-circle-info"></i> Some booking links are affiliate links — we may earn a commission at no extra cost to you.</p>' +
         '<div class="ferry-grid">' + cards + '</div>' +
       '</div>' +
     '</section>';
@@ -1994,7 +2025,7 @@ class VisorUpSite {
               '<p>' + f.frequency + '</p>' +
             '</div>' +
             '<div class="info-card">' +
-              '<a href="' + f.url + '" target="_blank" rel="noopener" class="ferry-book-btn"><i class="fas fa-external-link-alt"></i> Book on ' + f.operator + '</a>' +
+              '<a href="' + f.url + '" target="_blank" rel="sponsored noopener nofollow" onclick="if(typeof VisorUpAnalytics!==\'undefined\')VisorUpAnalytics.trackToolUsage(\'ferries-book-' + f.slug + '\')" class="ferry-book-btn"><i class="fas fa-external-link-alt"></i> Book on ' + f.operator + '</a>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -6431,7 +6462,14 @@ class VisorUpSite {
             '<a href="/ferries">Ferries</a>' +
             '<a href="/bikes">Bike Guides</a>' +
             '<a href="/planning">Trip Planning</a>' +
+          '</div>' +
+          '<div class="footer-col">' +
+            '<h4>Rider Services</h4>' +
             '<a href="/insurance">Insurance</a>' +
+            '<a href="/breakdown-cover">Breakdown Cover</a>' +
+            '<a href="/travel-insurance">Travel Insurance</a>' +
+            '<a href="/bike-security">Security &amp; Trackers</a>' +
+            '<a href="/tyres">Tyres</a>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Destinations</h4>' +

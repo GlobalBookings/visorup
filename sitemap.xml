@@ -21,6 +21,10 @@
   <!-- Interactive Tools -->
   <url><loc>https://visorup.co.uk/gear</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://visorup.co.uk/insurance</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/breakdown-cover</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/travel-insurance</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bike-security</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/tyres</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://visorup.co.uk/fuel-range</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://visorup.co.uk/weather-window</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://visorup.co.uk/motorcycle-law</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

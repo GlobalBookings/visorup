@@ -499,3 +499,48 @@ test.describe('Insurance hub', () => {
     expect(num(after)).toBeGreaterThan(num(before));
   });
 });
+
+test.describe('Partner hubs', () => {
+  const hubs = [
+    { path: '/breakdown-cover', heading: 'Breakdown Cover', provider: 'Green Flag' },
+    { path: '/travel-insurance', heading: 'Travel Insurance', provider: 'Campbell Irvine' },
+    { path: '/bike-security', heading: 'Security', provider: 'Monimoto' },
+    { path: '/tyres', heading: 'Tyres', provider: 'SportsBikeShop' },
+  ];
+
+  for (const hub of hubs) {
+    test(`${hub.path} renders, links out and cross-links`, async ({ page }) => {
+      const errors = [];
+      page.on('pageerror', (e) => errors.push(e.message));
+      await page.goto(hub.path);
+      await expect(page).toHaveURL(new RegExp(hub.path.replace('/', '\\/') + '$'));
+      await expect(page.locator('h1')).toContainText(hub.heading);
+      await expect(page.getByText(hub.provider).first()).toBeVisible();
+
+      const sponsored = page.locator('a[rel~="sponsored"]');
+      expect(await sponsored.count()).toBeGreaterThan(3);
+      await expect(sponsored.first()).toHaveAttribute('target', '_blank');
+      await expect(sponsored.first()).toHaveAttribute('rel', /nofollow/);
+
+      await expect(page.getByText('More rider services')).toBeVisible();
+      expect(errors).toEqual([]);
+    });
+  }
+
+  test('hubs are linked from the footer on every page', async ({ page }) => {
+    await page.goto('/');
+    for (const p of ['/breakdown-cover', '/travel-insurance', '/bike-security', '/tyres']) {
+      expect(await page.locator(`a[href="${p}"]`).count()).toBeGreaterThan(0);
+    }
+  });
+});
+
+test.describe('Ferries booking', () => {
+  test('shows affiliate Europe crossing booking block', async ({ page }) => {
+    await page.goto('/ferries');
+    await expect(page.getByText('Book your Channel crossing')).toBeVisible();
+    const sponsored = page.locator('a[rel~="sponsored"]');
+    expect(await sponsored.count()).toBeGreaterThan(0);
+    await expect(page.locator('a[href="https://www.directferries.co.uk/"]')).toHaveAttribute('rel', /sponsored/);
+  });
+});
