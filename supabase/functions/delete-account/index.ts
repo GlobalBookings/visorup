@@ -51,6 +51,10 @@ Deno.serve(async (req) => {
 
     // Best-effort data cleanup (in case foreign keys aren't ON DELETE CASCADE).
     // Errors here are non-fatal; the auth-user delete below is the critical step.
+    await admin.from('content_reports').delete().eq('reporter_id', uid);
+    await admin.from('content_reports').delete().eq('reported_user_id', uid);
+    await admin.from('user_blocks').delete().eq('blocker_id', uid);
+    await admin.from('user_blocks').delete().eq('blocked_id', uid);
     await admin.from('community_comments').delete().eq('user_id', uid);
     await admin.from('community_likes').delete().eq('user_id', uid);
     await admin.from('community_posts').delete().eq('user_id', uid);

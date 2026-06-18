@@ -6,8 +6,12 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { supabase } from '../../lib/supabase';
-import { tapHaptic, successHaptic } from '../../lib/haptics';
+import { tapHaptic, successHaptic, warningHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
+import {
+  findObjectionable, reportContent, blockUser, getBlockedUserIds,
+  REPORT_REASONS, COMMUNITY_GUIDELINES,
+} from '../../lib/moderation';
 
 type FeedPost = {
   id: string;
@@ -57,9 +61,18 @@ export default function CommunityScreen() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentText, setCommentText] = useState('');
 
+  // Moderation state
+  const [blockedIds, setBlockedIds] = useState<string[]>([]);
+  const [reportTarget, setReportTarget] = useState<
+    { type: 'post' | 'comment'; id: string; postId?: string; userId: string } | null
+  >(null);
+
   const fetchFeed = useCallback(async () => {
     const { data: { user: u } } = await supabase.auth.getUser();
     setUser(u);
+
+    const blocked = u ? await getBlockedUserIds() : [];
+    setBlockedIds(blocked);
 
     const { data, error } = await supabase
       .from('community_posts')
@@ -68,11 +81,12 @@ export default function CommunityScreen() {
       .limit(50);
 
     if (!error && data && data.length > 0) {
-      setFeed(data);
+      const visible = (data as FeedPost[]).filter((p) => !blocked.includes(p.user_id));
+      setFeed(visible);
 
       // Fetch liked status
       if (u) {
-        const postIds = data.map((p: FeedPost) => p.id);
+        const postIds = visible.map((p: FeedPost) => p.id);
         const { data: likes } = await supabase
           .from('community_likes')
           .select('post_id')
@@ -143,6 +157,15 @@ export default function CommunityScreen() {
     if (!user) { Alert.alert('Sign In', 'Sign in to post.'); return; }
     if (!postBody.trim() && postPhotos.length === 0) { Alert.alert('Write something', 'Add text or photos.'); return; }
 
+    if (findObjectionable(postBody) || findObjectionable(postLocation)) {
+      warningHaptic();
+      Alert.alert(
+        'Content not allowed',
+        'Your post appears to contain objectionable language. VisorUp has zero tolerance for objectionable content — please revise and try again.'
+      );
+      return;
+    }
+
     setPosting(true);
     let photoUrls: string[] = [];
     if (postPhotos.length > 0) {
@@ -191,6 +214,15 @@ export default function CommunityScreen() {
     if (!user) { Alert.alert('Sign In', 'Sign in to comment.'); return; }
     if (!commentText.trim() || !showComments) return;
 
+    if (findObjectionable(commentText)) {
+      warningHaptic();
+      Alert.alert(
+        'Comment not allowed',
+        'Your comment appears to contain objectionable language. VisorUp has zero tolerance for objectionable content — please revise and try again.'
+      );
+      return;
+    }
+
     const { data } = await supabase
       .from('community_comments')
       .insert({ post_id: showComments, user_id: user.id, content: commentText.trim() })
@@ -205,6 +237,97 @@ export default function CommunityScreen() {
         p.id === showComments ? { ...p, comments_count: p.comments_count + 1 } : p
       ));
     }
+  };
+
+  const requireAuth = (): boolean => {
+    if (!user) { Alert.alert('Sign In', 'Sign in to report or block content.'); return false; }
+    return true;
+  };
+
+  const deletePost = async (postId: string) => {
+    if (!user) return;
+    await supabase.from('community_posts').delete().eq('id', postId).eq('user_id', user.id);
+    setFeed((prev) => prev.filter((p) => p.id !== postId));
+  };
+
+  const confirmBlock = (
+    blockedUserId: string,
+    ctx?: { contentType: 'post' | 'comment'; contentId: string }
+  ) => {
+    if (!requireAuth()) return;
+    Alert.alert(
+      'Block this rider?',
+      'You will no longer see their posts or comments, and our team will review their account. This is instant.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Block',
+          style: 'destructive',
+          onPress: async () => {
+            const { error } = await blockUser(blockedUserId, ctx);
+            if (error) { Alert.alert('Error', error); return; }
+            setBlockedIds((prev) => [...prev, blockedUserId]);
+            setFeed((prev) => prev.filter((p) => p.user_id !== blockedUserId));
+            setComments((prev) => prev.filter((c) => c.user_id !== blockedUserId));
+            successHaptic();
+            Alert.alert('Rider blocked', 'Their content is now hidden from you and has been reported for review.');
+          },
+        },
+      ]
+    );
+  };
+
+  const submitReport = async (reason: string) => {
+    if (!reportTarget) return;
+    const t = reportTarget;
+    setReportTarget(null);
+    const { error } = await reportContent({
+      contentType: t.type,
+      contentId: t.id,
+      postId: t.postId,
+      reportedUserId: t.userId,
+      reason,
+    });
+    if (error) { Alert.alert('Error', error); return; }
+    if (t.type === 'post') setFeed((prev) => prev.filter((p) => p.id !== t.id));
+    if (t.type === 'comment') setComments((prev) => prev.filter((c) => c.id !== t.id));
+    successHaptic();
+    Alert.alert('Report received', 'Thanks for flagging this. Our team reviews reports and acts within 24 hours.');
+  };
+
+  const handlePostMenu = (item: FeedPost) => {
+    if (!requireAuth()) return;
+    tapHaptic();
+    const isOwn = item.user_id === user.id;
+    const options: any[] = [
+      { text: 'Report post', onPress: () => setReportTarget({ type: 'post', id: item.id, userId: item.user_id }) },
+    ];
+    if (isOwn) {
+      options.push({ text: 'Delete post', style: 'destructive', onPress: () => deletePost(item.id) });
+    } else {
+      options.push({ text: 'Block rider', style: 'destructive', onPress: () => confirmBlock(item.user_id, { contentType: 'post', contentId: item.id }) });
+    }
+    options.push({ text: 'Cancel', style: 'cancel' });
+    Alert.alert('Post options', 'Help keep VisorUp safe for all riders.', options);
+  };
+
+  const handleCommentMenu = (item: Comment) => {
+    if (!requireAuth()) return;
+    tapHaptic();
+    const isOwn = item.user_id === user.id;
+    const options: any[] = [
+      { text: 'Report comment', onPress: () => setReportTarget({ type: 'comment', id: item.id, postId: showComments || undefined, userId: item.user_id }) },
+    ];
+    if (!isOwn) {
+      options.push({ text: 'Block rider', style: 'destructive', onPress: () => confirmBlock(item.user_id, { contentType: 'comment', contentId: item.id }) });
+    }
+    options.push({ text: 'Cancel', style: 'cancel' });
+    Alert.alert('Comment options', 'Help keep VisorUp safe for all riders.', options);
+  };
+
+  const showGuidelines = () => {
+    tapHaptic();
+    Alert.alert('Community Guidelines', COMMUNITY_GUIDELINES.map((g) => '\u2022 ' + g).join('\n\n'));
   };
 
   const fmtTime = (date: string) => {
@@ -249,6 +372,14 @@ export default function CommunityScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />
         }
         contentContainerStyle={styles.list}
+        ListHeaderComponent={
+          <TouchableOpacity style={styles.guidelinesBar} onPress={showGuidelines}>
+            <Ionicons name="shield-checkmark-outline" size={15} color={colors.accent} />
+            <Text style={styles.guidelinesText}>
+              Community Guidelines — zero tolerance for objectionable content. Tap to read.
+            </Text>
+          </TouchableOpacity>
+        }
         renderItem={({ item }) => (
           <View style={styles.card}>
             <View style={styles.cardHeader}>
@@ -271,6 +402,14 @@ export default function CommunityScreen() {
                   <Text style={styles.time}>{fmtTime(item.created_at)}</Text>
                 </View>
               </View>
+              <TouchableOpacity
+                style={styles.menuBtn}
+                onPress={() => handlePostMenu(item)}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                accessibilityLabel="Post options: report or block"
+              >
+                <Ionicons name="ellipsis-horizontal" size={18} color={colors.textMuted} />
+              </TouchableOpacity>
             </View>
 
             {item.title ? <Text style={styles.title}>{item.title}</Text> : null}
@@ -447,7 +586,16 @@ export default function CommunityScreen() {
             contentContainerStyle={{ padding: spacing.md }}
             renderItem={({ item }) => (
               <View style={styles.commentCard}>
-                <Text style={styles.commentUser}>{item.profiles?.display_name || 'Rider'}</Text>
+                <View style={styles.commentHeader}>
+                  <Text style={styles.commentUser}>{item.profiles?.display_name || 'Rider'}</Text>
+                  <TouchableOpacity
+                    onPress={() => handleCommentMenu(item)}
+                    hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                    accessibilityLabel="Comment options: report or block"
+                  >
+                    <Ionicons name="ellipsis-horizontal" size={16} color={colors.textMuted} />
+                  </TouchableOpacity>
+                </View>
                 <Text style={styles.commentBody}>{item.content}</Text>
                 <Text style={styles.commentTime}>{fmtTime(item.created_at)}</Text>
               </View>
@@ -473,6 +621,27 @@ export default function CommunityScreen() {
           )}
         </KeyboardAvoidingView>
       </Modal>
+
+      {/* Report Reason Modal */}
+      <Modal visible={!!reportTarget} animationType="slide" transparent onRequestClose={() => setReportTarget(null)}>
+        <View style={styles.reportOverlay}>
+          <View style={styles.reportSheet}>
+            <Text style={styles.reportTitle}>Report content</Text>
+            <Text style={styles.reportSub}>
+              Why are you reporting this? Our team reviews reports and removes violating content within 24 hours.
+            </Text>
+            {REPORT_REASONS.map((r) => (
+              <TouchableOpacity key={r.id} style={styles.reportReason} onPress={() => submitReport(r.id)}>
+                <Text style={styles.reportReasonText}>{r.label}</Text>
+                <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+              </TouchableOpacity>
+            ))}
+            <TouchableOpacity style={styles.reportCancel} onPress={() => setReportTarget(null)}>
+              <Text style={styles.reportCancelText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -489,6 +658,20 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   cardHeader: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  menuBtn: { padding: 4 },
+  guidelinesBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginBottom: spacing.sm,
+  },
+  guidelinesText: { color: colors.textMuted, fontSize: 12, flex: 1, lineHeight: 16 },
   avatar: { width: 36, height: 36, borderRadius: 18 },
   avatarPlaceholder: {
     width: 36,
@@ -606,9 +789,35 @@ const styles = StyleSheet.create({
     padding: spacing.sm,
     marginBottom: spacing.sm,
   },
+  commentHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   commentUser: { color: colors.text, fontSize: 13, fontWeight: '700' },
   commentBody: { color: colors.text, fontSize: 14, marginTop: 2 },
   commentTime: { color: colors.textMuted, fontSize: 11, marginTop: 4 },
+
+  // Report modal
+  reportOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.6)', justifyContent: 'flex-end' },
+  reportSheet: {
+    backgroundColor: colors.surface,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    padding: spacing.lg,
+    paddingBottom: Platform.OS === 'ios' ? 40 : spacing.lg,
+    borderTopWidth: 1,
+    borderColor: colors.border,
+  },
+  reportTitle: { color: colors.textBright, fontSize: 18, fontWeight: '800' },
+  reportSub: { color: colors.textMuted, fontSize: 13, lineHeight: 18, marginTop: 6, marginBottom: spacing.md },
+  reportReason: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  reportReasonText: { color: colors.text, fontSize: 15 },
+  reportCancel: { marginTop: spacing.md, alignItems: 'center', paddingVertical: 12 },
+  reportCancelText: { color: colors.accent, fontSize: 15, fontWeight: '700' },
   noComments: { color: colors.textMuted, fontSize: 14, textAlign: 'center', marginTop: 40 },
   commentInput: {
     flexDirection: 'row',

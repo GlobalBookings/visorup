@@ -5860,12 +5860,33 @@ class VisorUpSite {
         '</ul>' +
 
         '<h2>8. User-Generated Content</h2>' +
-        '<p>If you submit content to the Platform (routes, reviews, suggestions, photos), you:</p>' +
+        '<p>If you submit content to the Platform (routes, ride reports, comments, suggestions, photos), you:</p>' +
         '<ul>' +
           '<li>Retain ownership of your original content</li>' +
           '<li>Grant VisorUp a non-exclusive, worldwide, royalty-free licence to use, display, and distribute your content on the Platform</li>' +
           '<li>Warrant that your content does not infringe any third party\'s rights</li>' +
         '</ul>' +
+
+        '<h2>8a. Zero Tolerance for Objectionable Content &amp; Abusive Behaviour</h2>' +
+        '<p><b>VisorUp has zero tolerance for objectionable content and abusive users.</b> This is a binding end-user licence agreement (EULA) for the VisorUp app and community features. By creating an account or posting any content, you agree that you will not submit, upload, or share content, or behave, in any way that is:</p>' +
+        '<ul>' +
+          '<li>Hateful, discriminatory, or that promotes violence against any individual or group</li>' +
+          '<li>Harassing, bullying, threatening, or intended to intimidate other riders</li>' +
+          '<li>Sexually explicit, obscene, or pornographic</li>' +
+          '<li>Violent, graphic, or that depicts or encourages self-harm</li>' +
+          '<li>Illegal, or that promotes dangerous or illegal activity</li>' +
+          '<li>Spam, fraudulent, deceptive, or unsolicited advertising</li>' +
+          '<li>Infringing on the intellectual property or privacy rights of others</li>' +
+          '<li>Otherwise objectionable, as determined by VisorUp in its sole discretion</li>' +
+        '</ul>' +
+        '<p>To keep the community safe, VisorUp provides, and you agree to use responsibly:</p>' +
+        '<ul>' +
+          '<li><b>Content filtering:</b> submissions are screened and objectionable content may be blocked or removed automatically.</li>' +
+          '<li><b>Reporting:</b> every post and comment can be flagged for review using the in-app report tool.</li>' +
+          '<li><b>Blocking:</b> you can block any user, which instantly hides all of their content from you and notifies us for review.</li>' +
+        '</ul>' +
+        '<p>We review reported content and act on violations <b>within 24 hours</b>, removing offending content and ejecting (banning) users who post it. We may suspend or permanently terminate the account of any user who breaches these rules, without notice. There is no tolerance for abusive users.</p>' +
+        '<p>To report objectionable content or abusive behaviour outside the app, contact us at <a href="mailto:hello@visorup.co.uk" style="color:var(--accent)">hello@visorup.co.uk</a> and we will respond within 24 hours.</p>' +
 
         '<h2>9. Limitation of Liability</h2>' +
         '<p>To the maximum extent permitted by law:</p>' +
