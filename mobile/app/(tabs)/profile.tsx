@@ -32,8 +32,12 @@ export default function ProfileScreen() {
     setUser(u);
     if (!u) { setLoading(false); return; }
 
-    const { data: p } = await supabase.from('profiles').select('*').eq('id', u.id).single();
-    if (p) setProfile(p);
+    const { data: p } = await supabase
+      .from('profiles')
+      .select('id, display_name, avatar_url, bike_slug, created_at')
+      .eq('id', u.id)
+      .single();
+    if (p) setProfile({ ...p, email: u.email ?? '' } as Profile);
 
     const { data: b } = await supabase
       .from('user_bikes')

@@ -37,7 +37,9 @@ const VisorUpAuth = {
     const user = await this.getUser();
     if (!user) return null;
     const sb = getSupabase();
-    const { data } = await sb.from('profiles').select('*').eq('id', user.id).single();
+    const { data } = await sb.from('profiles')
+      .select('id, display_name, avatar_url, bike_slug, created_at, updated_at')
+      .eq('id', user.id).single();
     return data;
   },
 
@@ -87,7 +89,8 @@ const VisorUpAuth = {
     const user = await this.getUser();
     if (!user) throw new Error('Not logged in');
     const sb = getSupabase();
-    const { data, error } = await sb.from('profiles').update(updates).eq('id', user.id).select().single();
+    const { data, error } = await sb.from('profiles').update(updates).eq('id', user.id)
+      .select('id, display_name, avatar_url, bike_slug, created_at, updated_at').single();
     if (error) throw error;
     return data;
   },
