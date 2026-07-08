@@ -6,8 +6,10 @@ import {
 import MapView, { Marker, Polyline, PROVIDER_DEFAULT, MapPressEvent } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import * as Location from 'expo-location';
 import { supabase, UserBike } from '../../lib/supabase';
 import { fetchRoadRoute } from '../../lib/routing';
+import { buildRoundTrip, DIRECTION_BEARINGS, Direction } from '../../lib/roundtrip';
 import { pois, poiCategories, POI, POICategory } from '../../lib/pois';
 import { fuelStations } from '../../lib/fuel-data';
 import { searchPlaces } from '../../lib/geocode';
@@ -45,8 +47,14 @@ export default function BuildRouteScreen() {
   const [roadPref, setRoadPref] = useState<RoadPreference>('curvy');
 
   // UI state
-  const [showPanel, setShowPanel] = useState<'main' | 'pois' | 'days' | 'save' | null>('main');
+  const [showPanel, setShowPanel] = useState<'main' | 'pois' | 'days' | 'save' | 'loop' | null>('main');
   const [activePOICategories, setActivePOICategories] = useState<POICategory[]>([]);
+
+  // Round-trip (loop) generator
+  const [loopDist, setLoopDist] = useState('100');
+  const [loopDir, setLoopDir] = useState<Direction>('auto');
+  const [loopStart, setLoopStart] = useState<'location' | 'center'>('location');
+  const [loopLoading, setLoopLoading] = useState(false);
 
   // Undo/redo history
   const [history, setHistory] = useState<Waypoint[][]>([]);
@@ -391,6 +399,49 @@ export default function BuildRouteScreen() {
     );
   }, []);
 
+  const generateLoop = useCallback(async () => {
+    const targetMiles = Math.min(500, Math.max(20, parseInt(loopDist, 10) || 100));
+    setLoopLoading(true);
+    heavyHaptic();
+    try {
+      let start = { lat: mapRegion.latitude, lng: mapRegion.longitude };
+      if (loopStart === 'location') {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status === 'granted') {
+          const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+          start = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        }
+      }
+
+      const base = loopDir === 'auto' ? Math.random() * 360 : DIRECTION_BEARINGS[loopDir];
+      const result = await buildRoundTrip(start, targetMiles, base, roadPref);
+
+      if (!result || result.waypoints.length < 3) {
+        Alert.alert('Could Not Generate', 'No loop found for those settings. Try a different direction or distance.');
+        return;
+      }
+
+      const wps: Waypoint[] = result.waypoints.map((p, i) => ({
+        latitude: p.lat,
+        longitude: p.lng,
+        name: i === 0 || i === result.waypoints.length - 1 ? 'Start / Finish' : `Loop ${i}`,
+      }));
+      pushHistory(wps);
+      setWaypoints(wps);
+      await buildRoute(wps);
+      setRouteName(`${Math.round(result.distanceMiles)} mi loop`);
+      successHaptic();
+      setShowPanel('main');
+      mapRef.current?.animateToRegion({
+        latitude: start.lat, longitude: start.lng, latitudeDelta: 1.2, longitudeDelta: 1.2,
+      }, 500);
+    } catch (e: any) {
+      Alert.alert('Error', e?.message || 'Failed to generate loop.');
+    } finally {
+      setLoopLoading(false);
+    }
+  }, [loopDist, loopDir, loopStart, mapRegion, roadPref, buildRoute, pushHistory]);
+
   const saveRoute = useCallback(async () => {
     if (!routeName.trim()) { Alert.alert('Name Required', 'Give your route a name.'); return; }
     const { data: { user } } = await supabase.auth.getUser();
@@ -630,9 +681,15 @@ export default function BuildRouteScreen() {
 
       {/* Instructions */}
       {waypoints.length === 0 && (
-        <View style={styles.instructions}>
-          <Ionicons name="finger-print-outline" size={18} color={colors.accent} />
-          <Text style={styles.instructionText}>Tap the map to add waypoints</Text>
+        <View style={styles.emptyState}>
+          <View style={styles.instructions}>
+            <Ionicons name="finger-print-outline" size={18} color={colors.accent} />
+            <Text style={styles.instructionText}>Tap the map to add waypoints</Text>
+          </View>
+          <TouchableOpacity style={styles.loopCta} onPress={() => { tapHaptic(); setShowPanel('loop'); }}>
+            <Ionicons name="repeat-outline" size={16} color="#fff" />
+            <Text style={styles.loopCtaText}>Generate a round trip</Text>
+          </TouchableOpacity>
         </View>
       )}
 
@@ -690,6 +747,10 @@ export default function BuildRouteScreen() {
 
             {/* Action buttons */}
             <View style={styles.actionRow}>
+              <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('loop')}>
+                <Ionicons name="repeat-outline" size={16} color={colors.accent} />
+                <Text style={styles.actionLabel}>Loop</Text>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('pois')}>
                 <Ionicons name="layers-outline" size={16} color={colors.accent} />
                 <Text style={styles.actionLabel}>POIs</Text>
@@ -838,6 +899,80 @@ export default function BuildRouteScreen() {
           </View>
         )}
 
+        {showPanel === 'loop' && (
+          <View>
+            <View style={styles.panelHeader}>
+              <Text style={styles.panelTitle}>Round Trip</Text>
+              <TouchableOpacity onPress={() => setShowPanel('main')}>
+                <Ionicons name="close" size={20} color={colors.textMuted} />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.panelSubtitle}>Generate a scenic loop back to your start using {ROAD_PREFS.find((r) => r.id === roadPref)?.label} roads.</Text>
+
+            <Text style={styles.loopSectionLabel}>Distance</Text>
+            <View style={styles.loopChipRow}>
+              {['50', '100', '150', '200'].map((d) => (
+                <TouchableOpacity
+                  key={d}
+                  style={[styles.loopChip, loopDist === d && styles.loopChipActive]}
+                  onPress={() => { tapHaptic(); setLoopDist(d); }}
+                >
+                  <Text style={[styles.loopChipText, loopDist === d && { color: '#fff' }]}>{d} mi</Text>
+                </TouchableOpacity>
+              ))}
+              <TextInput
+                style={styles.loopCustomInput}
+                value={loopDist}
+                onChangeText={setLoopDist}
+                keyboardType="numeric"
+                placeholder="mi"
+                placeholderTextColor={colors.textMuted}
+              />
+            </View>
+
+            <Text style={styles.loopSectionLabel}>Direction</Text>
+            <View style={styles.loopChipRow}>
+              {(['auto', 'N', 'E', 'S', 'W'] as Direction[]).map((dir) => (
+                <TouchableOpacity
+                  key={dir}
+                  style={[styles.loopChip, loopDir === dir && styles.loopChipActive]}
+                  onPress={() => { tapHaptic(); setLoopDir(dir); }}
+                >
+                  <Text style={[styles.loopChipText, loopDir === dir && { color: '#fff' }]}>
+                    {dir === 'auto' ? 'Auto' : dir}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            <Text style={styles.loopSectionLabel}>Start from</Text>
+            <View style={styles.loopChipRow}>
+              <TouchableOpacity
+                style={[styles.loopChip, loopStart === 'location' && styles.loopChipActive]}
+                onPress={() => { tapHaptic(); setLoopStart('location'); }}
+              >
+                <Ionicons name="navigate-outline" size={12} color={loopStart === 'location' ? '#fff' : colors.textMuted} />
+                <Text style={[styles.loopChipText, loopStart === 'location' && { color: '#fff' }]}>My location</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.loopChip, loopStart === 'center' && styles.loopChipActive]}
+                onPress={() => { tapHaptic(); setLoopStart('center'); }}
+              >
+                <Ionicons name="locate-outline" size={12} color={loopStart === 'center' ? '#fff' : colors.textMuted} />
+                <Text style={[styles.loopChipText, loopStart === 'center' && { color: '#fff' }]}>Map centre</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={[styles.confirmSaveBtn, { backgroundColor: '#4285F4', marginTop: 14 }, loopLoading && { opacity: 0.5 }]}
+              onPress={generateLoop}
+              disabled={loopLoading}
+            >
+              <Text style={styles.confirmSaveText}>{loopLoading ? 'Generating…' : 'Generate Loop'}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
         {showPanel === 'save' && (
           <View>
             <View style={styles.panelHeader}>
@@ -907,12 +1042,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(32,33,36,0.85)', justifyContent: 'center', alignItems: 'center',
   },
 
+  emptyState: { position: 'absolute', top: 100, alignSelf: 'center', alignItems: 'center', gap: 8 },
   instructions: {
-    position: 'absolute', top: 100, alignSelf: 'center',
     flexDirection: 'row', alignItems: 'center', gap: 8,
     backgroundColor: 'rgba(32,33,36,0.9)', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
   },
   instructionText: { color: '#fff', fontSize: 13, fontWeight: '600' },
+  loopCta: {
+    flexDirection: 'row', alignItems: 'center', gap: 6,
+    backgroundColor: '#4285F4', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
+  },
+  loopCtaText: { color: '#fff', fontSize: 13, fontWeight: '700' },
 
   statsBar: {
     position: 'absolute', bottom: 280, right: 12,
@@ -1050,6 +1190,22 @@ const styles = StyleSheet.create({
     color: colors.text, fontSize: 14, fontWeight: '700', width: 60, textAlign: 'center',
   },
   dayResult: { color: colors.accent, fontSize: 12, fontWeight: '600', marginTop: 8 },
+
+  // Round trip
+  loopSectionLabel: { color: colors.text, fontSize: 12, fontWeight: '700', marginTop: 10, marginBottom: 6 },
+  loopChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, alignItems: 'center' },
+  loopChip: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    paddingHorizontal: 12, paddingVertical: 8, borderRadius: 8,
+    backgroundColor: colors.surfaceLight, borderWidth: 1, borderColor: colors.border,
+  },
+  loopChipActive: { backgroundColor: colors.accent, borderColor: colors.accent },
+  loopChipText: { color: colors.textMuted, fontSize: 12, fontWeight: '600' },
+  loopCustomInput: {
+    backgroundColor: colors.surfaceLight, borderRadius: 8, paddingHorizontal: 10, paddingVertical: 8,
+    color: colors.text, fontSize: 13, fontWeight: '700', width: 64, textAlign: 'center',
+    borderWidth: 1, borderColor: colors.border,
+  },
   fuelInfo: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 8 },
   fuelInfoText: { color: '#34A853', fontSize: 11, fontWeight: '600' },
 
