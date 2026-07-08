@@ -7,9 +7,12 @@ import MapView, { Marker, Polyline, PROVIDER_DEFAULT, MapPressEvent } from 'reac
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import * as Location from 'expo-location';
+import * as DocumentPicker from 'expo-document-picker';
+import { File } from 'expo-file-system';
 import { supabase, UserBike } from '../../lib/supabase';
 import { fetchRoadRoute } from '../../lib/routing';
 import { buildRoundTrip, DIRECTION_BEARINGS, Direction } from '../../lib/roundtrip';
+import { parseGpx } from '../../lib/gpx';
 import { pois, poiCategories, POI, POICategory } from '../../lib/pois';
 import { fuelStations } from '../../lib/fuel-data';
 import { searchPlaces } from '../../lib/geocode';
@@ -399,6 +402,42 @@ export default function BuildRouteScreen() {
     );
   }, []);
 
+  const importGpx = useCallback(async () => {
+    try {
+      tapHaptic();
+      const result = await DocumentPicker.getDocumentAsync({
+        type: ['application/gpx+xml', 'application/xml', 'text/xml', '*/*'],
+        copyToCacheDirectory: true,
+      });
+      if (result.canceled || !result.assets?.[0]) return;
+
+      const xml = await new File(result.assets[0].uri).text();
+      const parsed = parseGpx(xml);
+      if (parsed.waypoints.length < 2) {
+        Alert.alert('Import Failed', 'Could not find route points in that GPX file.');
+        return;
+      }
+
+      const wps: Waypoint[] = parsed.waypoints.map((p) => ({
+        latitude: p.latitude,
+        longitude: p.longitude,
+        name: p.name,
+      }));
+      pushHistory(wps);
+      setWaypoints(wps);
+      await buildRoute(wps);
+      setRouteName(parsed.name);
+      successHaptic();
+      setShowPanel('main');
+      mapRef.current?.fitToCoordinates(wps, {
+        edgePadding: { top: 100, right: 80, bottom: 340, left: 80 },
+        animated: true,
+      });
+    } catch (e: any) {
+      Alert.alert('Import Failed', e?.message || 'Could not read that file.');
+    }
+  }, [buildRoute, pushHistory]);
+
   const generateLoop = useCallback(async () => {
     const targetMiles = Math.min(500, Math.max(20, parseInt(loopDist, 10) || 100));
     setLoopLoading(true);
@@ -690,6 +729,10 @@ export default function BuildRouteScreen() {
             <Ionicons name="repeat-outline" size={16} color="#fff" />
             <Text style={styles.loopCtaText}>Generate a round trip</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.importCta} onPress={importGpx}>
+            <Ionicons name="cloud-upload-outline" size={16} color={colors.accent} />
+            <Text style={styles.importCtaText}>Import a GPX file</Text>
+          </TouchableOpacity>
         </View>
       )}
 
@@ -750,6 +793,10 @@ export default function BuildRouteScreen() {
               <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('loop')}>
                 <Ionicons name="repeat-outline" size={16} color={colors.accent} />
                 <Text style={styles.actionLabel}>Loop</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.actionBtn} onPress={importGpx}>
+                <Ionicons name="cloud-upload-outline" size={16} color={colors.accent} />
+                <Text style={styles.actionLabel}>Import</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('pois')}>
                 <Ionicons name="layers-outline" size={16} color={colors.accent} />
@@ -1053,6 +1100,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#4285F4', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
   },
   loopCtaText: { color: '#fff', fontSize: 13, fontWeight: '700' },
+  importCta: {
+    flexDirection: 'row', alignItems: 'center', gap: 6,
+    backgroundColor: 'rgba(32,33,36,0.9)', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
+    borderWidth: 1, borderColor: colors.border,
+  },
+  importCtaText: { color: colors.accent, fontSize: 13, fontWeight: '700' },
 
   statsBar: {
     position: 'absolute', bottom: 280, right: 12,
