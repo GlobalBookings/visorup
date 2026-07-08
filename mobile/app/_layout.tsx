@@ -127,6 +127,8 @@ export default function RootLayout() {
           name="route/[id]"
           options={{ title: 'Route', presentation: 'card' }}
         />
+        <Stack.Screen name="rides/index" options={{ title: 'My Rides', presentation: 'card' }} />
+        <Stack.Screen name="rides/[id]" options={{ title: 'Ride', presentation: 'card' }} />
         <Stack.Screen
           name="ride/[id]"
           options={{

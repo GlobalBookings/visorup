@@ -78,6 +78,11 @@ export default function RideMode() {
   const routeCoordsRef = useRef<Coord[]>([]);
   const waypointsRef = useRef<{ latitude: number; longitude: number; name: string }[]>([]);
 
+  // Ride recording (for ride history)
+  const trackRef = useRef<Coord[]>([]);
+  const maxSpeedRef = useRef(0);
+  const rideStartTime = useRef(0);
+
   // Load trip data
   useEffect(() => {
     if (id?.startsWith('demo-')) {
@@ -142,6 +147,9 @@ export default function RideMode() {
     setElapsed(0);
     setDistanceTravelled(0);
     setNextWaypointIdx(0);
+    trackRef.current = [];
+    maxSpeedRef.current = 0;
+    rideStartTime.current = Date.now();
 
     timerRef.current = setInterval(() => setElapsed((e) => e + 1), 1000);
 
@@ -154,7 +162,10 @@ export default function RideMode() {
       (loc) => {
         const pos: Coord = { latitude: loc.coords.latitude, longitude: loc.coords.longitude };
         setUserLocation(pos);
-        setSpeed(Math.max(0, (loc.coords.speed ?? 0) * 2.23694));
+        const mph = Math.max(0, (loc.coords.speed ?? 0) * 2.23694);
+        setSpeed(mph);
+        if (mph > maxSpeedRef.current) maxSpeedRef.current = mph;
+        trackRef.current.push(pos);
 
         if (lastPos.current) {
           const d = haversineDistance(lastPos.current, pos);
@@ -254,7 +265,7 @@ export default function RideMode() {
     );
   }, []);
 
-  const stopRide = useCallback(() => {
+  const stopRide = useCallback(async () => {
     heavyHaptic();
     speakRideEnd(distanceTravelled * 0.000621371, elapsed / 60);
     locationSub.current?.remove();
@@ -262,7 +273,37 @@ export default function RideMode() {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = null;
     setRideStarted(false);
-  }, [distanceTravelled, elapsed]);
+
+    const track = trackRef.current;
+    if (track.length < 2) return;
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return; // not signed in: nothing to persist
+
+    const avgSpeed = elapsed > 0 ? (distanceTravelled * 0.000621371) / (elapsed / 3600) : 0;
+    const { data, error } = await supabase
+      .from('rides')
+      .insert({
+        user_id: user.id,
+        trip_id: id && !id.startsWith('demo-') ? id : null,
+        name: trip?.name || 'Ride',
+        distance_m: Math.round(distanceTravelled),
+        duration_s: elapsed,
+        avg_speed: Math.round(avgSpeed * 10) / 10,
+        max_speed: Math.round(maxSpeedRef.current * 10) / 10,
+        track: track.map((p) => [p.latitude, p.longitude]),
+        started_at: new Date(rideStartTime.current).toISOString(),
+      })
+      .select('id')
+      .single();
+
+    if (!error && data) {
+      Alert.alert('Ride Saved', `${fmtMiles(distanceTravelled)} mi in ${fmtTime(elapsed)}`, [
+        { text: 'View', onPress: () => router.replace(`/rides/${data.id}`) },
+        { text: 'Done', style: 'cancel' },
+      ]);
+    }
+  }, [distanceTravelled, elapsed, id, trip, router]);
 
   useEffect(() => {
     return () => {

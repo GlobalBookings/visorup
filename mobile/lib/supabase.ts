@@ -50,6 +50,20 @@ export type SavedTrip = {
   updated_at: string;
 };
 
+export type Ride = {
+  id: string;
+  user_id: string;
+  trip_id: string | null;
+  name: string;
+  distance_m: number;
+  duration_s: number;
+  avg_speed: number;
+  max_speed: number;
+  track: number[][];
+  started_at: string | null;
+  created_at: string;
+};
+
 export type Profile = {
   id: string;
   email: string;
