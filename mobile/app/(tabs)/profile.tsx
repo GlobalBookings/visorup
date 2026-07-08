@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Alert, RefreshControl, Linking, Platform,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Alert, RefreshControl, Linking, Platform, Modal, Switch,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as AppleAuthentication from 'expo-apple-authentication';
@@ -35,6 +35,11 @@ export default function ProfileScreen() {
 
   // Blocked accounts
   const [blocked, setBlocked] = useState<BlockedProfile[]>([]);
+
+  // Bike add/edit form
+  type BikeForm = { id?: string; make: string; model: string; nickname: string; year: string; tank: string; mpg: string; primary: boolean };
+  const [bikeForm, setBikeForm] = useState<BikeForm | null>(null);
+  const [savingBike, setSavingBike] = useState(false);
 
   const fetchProfile = useCallback(async () => {
     const { data: { user: u } } = await supabase.auth.getUser();
@@ -166,6 +171,71 @@ export default function ProfileScreen() {
     }
   };
 
+  const openNewBike = () => setBikeForm({ make: '', model: '', nickname: '', year: '', tank: '', mpg: '', primary: bikes.length === 0 });
+
+  const openEditBike = (bike: UserBike) => setBikeForm({
+    id: bike.id,
+    make: bike.make,
+    model: bike.model,
+    nickname: bike.nickname ?? '',
+    year: bike.year ? String(bike.year) : '',
+    tank: bike.tank_litres ? String(bike.tank_litres) : '',
+    mpg: bike.mpg ? String(bike.mpg) : '',
+    primary: bike.is_primary,
+  });
+
+  const saveBike = async () => {
+    if (!bikeForm) return;
+    if (!bikeForm.make.trim() || !bikeForm.model.trim()) {
+      Alert.alert('Add details', 'Enter at least a make and model.');
+      return;
+    }
+    const { data: { user: u } } = await supabase.auth.getUser();
+    if (!u) return;
+    setSavingBike(true);
+    const payload = {
+      user_id: u.id,
+      make: bikeForm.make.trim(),
+      model: bikeForm.model.trim(),
+      nickname: bikeForm.nickname.trim() || null,
+      year: bikeForm.year ? (parseInt(bikeForm.year, 10) || null) : null,
+      tank_litres: bikeForm.tank ? (parseFloat(bikeForm.tank) || null) : null,
+      mpg: bikeForm.mpg ? (parseFloat(bikeForm.mpg) || null) : null,
+      is_primary: bikeForm.primary,
+    };
+    try {
+      if (bikeForm.primary) {
+        await supabase.from('user_bikes').update({ is_primary: false }).eq('user_id', u.id);
+      }
+      const { error } = bikeForm.id
+        ? await supabase.from('user_bikes').update(payload).eq('id', bikeForm.id)
+        : await supabase.from('user_bikes').insert(payload);
+      if (error) throw error;
+      setBikeForm(null);
+      await fetchProfile();
+    } catch (e: any) {
+      Alert.alert('Could not save bike', e?.message || 'Please try again.');
+    } finally {
+      setSavingBike(false);
+    }
+  };
+
+  const deleteBike = (bike: UserBike) => {
+    Alert.alert('Remove bike', `Remove ${bike.nickname || `${bike.make} ${bike.model}`} from your garage?`, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Remove',
+        style: 'destructive',
+        onPress: async () => {
+          const { error } = await supabase.from('user_bikes').delete().eq('id', bike.id);
+          if (error) { Alert.alert('Error', error.message); return; }
+          setBikeForm(null);
+          await fetchProfile();
+        },
+      },
+    ]);
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -291,6 +361,7 @@ export default function ProfileScreen() {
   }
 
   return (
+    <>
     <ScrollView
       style={styles.container}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />}
@@ -309,14 +380,20 @@ export default function ProfileScreen() {
         <Text style={styles.email}>{profile?.email}</Text>
       </View>
 
-      <Text style={styles.sectionTitle}>
-        <Ionicons name="bicycle-outline" size={14} color={colors.accent} /> Garage
-      </Text>
+      <View style={styles.sectionHeaderRow}>
+        <Text style={styles.sectionTitleInline}>
+          <Ionicons name="bicycle-outline" size={14} color={colors.accent} /> Garage
+        </Text>
+        <TouchableOpacity style={styles.addBikeBtn} onPress={openNewBike}>
+          <Ionicons name="add" size={16} color={colors.accent} />
+          <Text style={styles.addBikeText}>Add bike</Text>
+        </TouchableOpacity>
+      </View>
       {bikes.length === 0 ? (
-        <Text style={styles.emptyText}>No bikes in your garage. Add them on visorup.co.uk.</Text>
+        <Text style={styles.emptyText}>No bikes yet. Add one to unlock fuel-range planning on your routes.</Text>
       ) : (
         bikes.map((bike) => (
-          <View key={bike.id} style={styles.bikeCard}>
+          <TouchableOpacity key={bike.id} style={styles.bikeCard} activeOpacity={0.7} onPress={() => openEditBike(bike)}>
             {bike.photo_url && (
               <Image source={{ uri: bike.photo_url }} style={styles.bikePhoto} />
             )}
@@ -338,7 +415,8 @@ export default function ProfileScreen() {
                 </Text>
               )}
             </View>
-          </View>
+            <Ionicons name="create-outline" size={18} color={colors.textMuted} style={{ alignSelf: 'center', marginRight: 12 }} />
+          </TouchableOpacity>
         ))
       )}
 
@@ -389,6 +467,64 @@ export default function ProfileScreen() {
 
       <View style={{ height: 40 }} />
     </ScrollView>
+
+    <Modal visible={!!bikeForm} animationType="slide" transparent onRequestClose={() => setBikeForm(null)}>
+      <View style={styles.modalOverlay}>
+        <View style={styles.modalSheet}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>{bikeForm?.id ? 'Edit bike' : 'Add a bike'}</Text>
+            <TouchableOpacity onPress={() => setBikeForm(null)}>
+              <Ionicons name="close" size={22} color={colors.textMuted} />
+            </TouchableOpacity>
+          </View>
+          {bikeForm && (
+            <ScrollView keyboardShouldPersistTaps="handled">
+              <View style={styles.formRow2}>
+                <View style={styles.formCol}>
+                  <Text style={styles.formLabel}>Make *</Text>
+                  <TextInput style={styles.formInput} value={bikeForm.make} onChangeText={(t) => setBikeForm({ ...bikeForm, make: t })} placeholder="Triumph" placeholderTextColor={colors.textMuted} />
+                </View>
+                <View style={styles.formCol}>
+                  <Text style={styles.formLabel}>Model *</Text>
+                  <TextInput style={styles.formInput} value={bikeForm.model} onChangeText={(t) => setBikeForm({ ...bikeForm, model: t })} placeholder="Tiger 900" placeholderTextColor={colors.textMuted} />
+                </View>
+              </View>
+              <Text style={styles.formLabel}>Nickname</Text>
+              <TextInput style={styles.formInput} value={bikeForm.nickname} onChangeText={(t) => setBikeForm({ ...bikeForm, nickname: t })} placeholder="Optional" placeholderTextColor={colors.textMuted} />
+              <View style={styles.formRow2}>
+                <View style={styles.formCol}>
+                  <Text style={styles.formLabel}>Year</Text>
+                  <TextInput style={styles.formInput} value={bikeForm.year} onChangeText={(t) => setBikeForm({ ...bikeForm, year: t })} keyboardType="number-pad" placeholder="2023" placeholderTextColor={colors.textMuted} />
+                </View>
+                <View style={styles.formCol}>
+                  <Text style={styles.formLabel}>Tank (L)</Text>
+                  <TextInput style={styles.formInput} value={bikeForm.tank} onChangeText={(t) => setBikeForm({ ...bikeForm, tank: t })} keyboardType="decimal-pad" placeholder="20" placeholderTextColor={colors.textMuted} />
+                </View>
+                <View style={styles.formCol}>
+                  <Text style={styles.formLabel}>MPG</Text>
+                  <TextInput style={styles.formInput} value={bikeForm.mpg} onChangeText={(t) => setBikeForm({ ...bikeForm, mpg: t })} keyboardType="decimal-pad" placeholder="55" placeholderTextColor={colors.textMuted} />
+                </View>
+              </View>
+              <Text style={styles.formHint}>Tank size and MPG power fuel-range alerts when planning routes.</Text>
+              <View style={styles.switchRow}>
+                <Text style={styles.formLabel}>Set as primary bike</Text>
+                <Switch value={bikeForm.primary} onValueChange={(v) => setBikeForm({ ...bikeForm, primary: v })} trackColor={{ true: colors.accent, false: colors.border }} />
+              </View>
+              <TouchableOpacity style={[styles.primaryBtn, savingBike && styles.primaryBtnDisabled]} onPress={saveBike} disabled={savingBike}>
+                <Text style={styles.primaryBtnText}>{savingBike ? 'Saving...' : bikeForm.id ? 'Save changes' : 'Add bike'}</Text>
+              </TouchableOpacity>
+              {bikeForm.id && (
+                <TouchableOpacity style={styles.deleteBikeBtn} onPress={() => { const b = bikes.find((x) => x.id === bikeForm.id); if (b) deleteBike(b); }}>
+                  <Ionicons name="trash-outline" size={16} color={colors.danger} />
+                  <Text style={styles.deleteBikeText}>Remove bike</Text>
+                </TouchableOpacity>
+              )}
+            </ScrollView>
+          )}
+        </View>
+      </View>
+    </Modal>
+    </>
   );
 }
 
@@ -492,6 +628,36 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   emptyText: { color: colors.textMuted, fontSize: 13, paddingHorizontal: spacing.md },
+  sectionHeaderRow: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    paddingHorizontal: spacing.md, marginTop: spacing.lg, marginBottom: spacing.sm,
+  },
+  sectionTitleInline: { color: colors.accent, fontSize: 13, fontWeight: '700', letterSpacing: 0.5 },
+  addBikeBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    paddingHorizontal: 10, paddingVertical: 5, borderRadius: 14,
+    backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border,
+  },
+  addBikeText: { color: colors.accent, fontSize: 12, fontWeight: '700' },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
+  modalSheet: {
+    backgroundColor: colors.surface, borderTopLeftRadius: 16, borderTopRightRadius: 16,
+    padding: spacing.lg, paddingBottom: Platform.OS === 'ios' ? 34 : spacing.lg,
+    maxHeight: '85%', borderTopWidth: 1, borderColor: colors.border,
+  },
+  modalHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.md },
+  modalTitle: { color: colors.text, fontSize: 18, fontWeight: '800' },
+  formRow2: { flexDirection: 'row', gap: 10 },
+  formCol: { flex: 1 },
+  formLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '600', marginBottom: 4, marginTop: 8 },
+  formInput: {
+    backgroundColor: colors.surfaceLight, borderWidth: 1, borderColor: colors.border, borderRadius: 10,
+    paddingHorizontal: 12, paddingVertical: 10, color: colors.text, fontSize: 15,
+  },
+  formHint: { color: colors.textMuted, fontSize: 11, marginTop: 8, lineHeight: 16 },
+  switchRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: spacing.md },
+  deleteBikeBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: spacing.md, padding: spacing.sm },
+  deleteBikeText: { color: colors.danger, fontSize: 14, fontWeight: '600' },
   bikeCard: {
     flexDirection: 'row',
     backgroundColor: colors.surface,
