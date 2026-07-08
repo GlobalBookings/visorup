@@ -133,6 +133,14 @@ export default function RideDetail() {
           </TouchableOpacity>
         )}
 
+        <TouchableOpacity
+          style={styles.linkBtn}
+          onPress={() => { tapHaptic(); router.push('/rides'); }}
+        >
+          <Ionicons name="list-outline" size={18} color={colors.accent} />
+          <Text style={styles.linkText}>All my rides</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.deleteBtn} onPress={deleteRide}>
           <Ionicons name="trash-outline" size={18} color={colors.danger} />
           <Text style={styles.deleteText}>Delete ride</Text>

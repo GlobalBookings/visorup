@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase, SavedTrip } from '../../lib/supabase';
 import { tapHaptic } from '../../lib/haptics';
+import { AppStorage } from '../../lib/storage';
 import { colors, spacing } from '../../lib/theme';
 
 export default function HomeScreen() {
@@ -13,6 +14,16 @@ export default function HomeScreen() {
   const [user, setUser] = useState<any>(null);
   const [routes, setRoutes] = useState<SavedTrip[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [showCoach, setShowCoach] = useState(false);
+
+  useEffect(() => {
+    AppStorage.getItem('home_coach_done').then((v) => { if (!v) setShowCoach(true); });
+  }, []);
+
+  const dismissCoach = useCallback(() => {
+    setShowCoach(false);
+    AppStorage.setItem('home_coach_done', '1');
+  }, []);
 
   const fetchData = useCallback(async () => {
     const { data: { user: u } } = await supabase.auth.getUser();
@@ -60,6 +71,29 @@ export default function HomeScreen() {
         <Text style={styles.appName}>VisorUp</Text>
         <Text style={styles.tagline}>Plan. Ride. Explore.</Text>
       </View>
+
+      {/* First-run coach mark */}
+      {showCoach && routes.length === 0 && (
+        <View style={styles.coachCard}>
+          <View style={styles.coachIcon}>
+            <Ionicons name="map-outline" size={20} color="#fff" />
+          </View>
+          <View style={styles.coachText}>
+            <Text style={styles.coachTitle}>New here? Plan your first ride</Text>
+            <Text style={styles.coachDesc}>Tap the map to drop stops, or auto-generate a scenic loop.</Text>
+            <TouchableOpacity
+              style={styles.coachBtn}
+              onPress={() => { tapHaptic(); dismissCoach(); router.push('/(tabs)/build'); }}
+            >
+              <Text style={styles.coachBtnText}>Build a route</Text>
+              <Ionicons name="arrow-forward" size={14} color="#fff" />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.coachClose} onPress={dismissCoach}>
+            <Ionicons name="close" size={18} color={colors.textMuted} />
+          </TouchableOpacity>
+        </View>
+      )}
 
       {/* Quick actions grid */}
       <View style={styles.actionsGrid}>
@@ -141,6 +175,26 @@ const styles = StyleSheet.create({
   greeting: { color: colors.textMuted, fontSize: 14 },
   appName: { color: colors.accent, fontSize: 32, fontWeight: '900', letterSpacing: -1 },
   tagline: { color: colors.textMuted, fontSize: 13, marginTop: 2 },
+
+  coachCard: {
+    flexDirection: 'row', alignItems: 'flex-start', gap: 12,
+    marginHorizontal: spacing.lg, marginTop: spacing.md,
+    backgroundColor: colors.surface, borderRadius: 12, padding: spacing.md,
+    borderWidth: 1, borderColor: colors.accent,
+  },
+  coachIcon: {
+    width: 40, height: 40, borderRadius: 10, backgroundColor: '#4285F4',
+    justifyContent: 'center', alignItems: 'center',
+  },
+  coachText: { flex: 1 },
+  coachTitle: { color: colors.text, fontSize: 14, fontWeight: '800' },
+  coachDesc: { color: colors.textMuted, fontSize: 12, marginTop: 2, lineHeight: 17 },
+  coachBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start',
+    backgroundColor: '#4285F4', borderRadius: 8, paddingHorizontal: 12, paddingVertical: 7, marginTop: 10,
+  },
+  coachBtnText: { color: '#fff', fontSize: 13, fontWeight: '700' },
+  coachClose: { padding: 2 },
 
   actionsGrid: {
     flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm,
