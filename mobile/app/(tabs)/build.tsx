@@ -52,7 +52,7 @@ export default function BuildRouteScreen() {
   const [roadPref, setRoadPref] = useState<RoadPreference>('curvy');
 
   // UI state
-  const [showPanel, setShowPanel] = useState<'main' | 'pois' | 'days' | 'save' | 'loop' | null>('main');
+  const [showPanel, setShowPanel] = useState<'main' | 'pois' | 'days' | 'save' | 'loop' | 'more' | null>('main');
   const [activePOICategories, setActivePOICategories] = useState<POICategory[]>([]);
 
   // Round-trip (loop) generator
@@ -735,16 +735,8 @@ export default function BuildRouteScreen() {
         <View style={styles.emptyState}>
           <View style={styles.instructions}>
             <Ionicons name="finger-print-outline" size={18} color={colors.accent} />
-            <Text style={styles.instructionText}>Tap the map to add waypoints</Text>
+            <Text style={styles.instructionText}>Tap the map, or pick a start option below</Text>
           </View>
-          <TouchableOpacity style={styles.loopCta} onPress={() => { tapHaptic(); setShowPanel('loop'); }}>
-            <Ionicons name="repeat-outline" size={16} color="#fff" />
-            <Text style={styles.loopCtaText}>Generate a round trip</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.importCta} onPress={importGpx}>
-            <Ionicons name="cloud-upload-outline" size={16} color={colors.accent} />
-            <Text style={styles.importCtaText}>Import a GPX file</Text>
-          </TouchableOpacity>
         </View>
       )}
 
@@ -781,71 +773,113 @@ export default function BuildRouteScreen() {
               ))}
             </View>
 
-            {/* Bike selector */}
-            {bikes.length > 0 && (
-              <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.bikeRow}>
-                {bikes.map((bike) => (
-                  <TouchableOpacity
-                    key={bike.id}
-                    style={[styles.bikePill, selectedBike?.id === bike.id && styles.bikePillActive]}
-                    onPress={() => { tapHaptic(); setSelectedBike(bike); }}
-                  >
-                    <Ionicons name="bicycle-outline" size={12} color={selectedBike?.id === bike.id ? '#fff' : colors.textMuted} />
-                    <Text style={[styles.bikeLabel, selectedBike?.id === bike.id && { color: '#fff' }]}>
-                      {bike.nickname || `${bike.make} ${bike.model}`}
-                    </Text>
-                    {bike.mpg && <Text style={styles.bikeMpg}>{bike.mpg}mpg</Text>}
+            {waypoints.length === 0 ? (
+              /* Start options - progressive disclosure keeps first use simple */
+              <>
+                <Text style={styles.startHint}>How do you want to start?</Text>
+                <View style={styles.startRow}>
+                  <TouchableOpacity style={styles.startCard} onPress={() => { tapHaptic(); setShowSearch(true); }}>
+                    <Ionicons name="git-branch-outline" size={22} color={colors.accent} />
+                    <Text style={styles.startCardTitle}>Point to point</Text>
+                    <Text style={styles.startCardDesc}>Tap map or search</Text>
                   </TouchableOpacity>
-                ))}
-              </ScrollView>
-            )}
+                  <TouchableOpacity style={styles.startCard} onPress={() => { tapHaptic(); setShowPanel('loop'); }}>
+                    <Ionicons name="repeat-outline" size={22} color={colors.accent} />
+                    <Text style={styles.startCardTitle}>Round trip</Text>
+                    <Text style={styles.startCardDesc}>Auto loop back</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.startCard} onPress={importGpx}>
+                    <Ionicons name="cloud-upload-outline" size={22} color={colors.accent} />
+                    <Text style={styles.startCardTitle}>Import GPX</Text>
+                    <Text style={styles.startCardDesc}>Open a file</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+              <>
+                {/* Bike selector */}
+                {bikes.length > 0 && (
+                  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.bikeRow}>
+                    {bikes.map((bike) => (
+                      <TouchableOpacity
+                        key={bike.id}
+                        style={[styles.bikePill, selectedBike?.id === bike.id && styles.bikePillActive]}
+                        onPress={() => { tapHaptic(); setSelectedBike(bike); }}
+                      >
+                        <Ionicons name="bicycle-outline" size={12} color={selectedBike?.id === bike.id ? '#fff' : colors.textMuted} />
+                        <Text style={[styles.bikeLabel, selectedBike?.id === bike.id && { color: '#fff' }]}>
+                          {bike.nickname || `${bike.make} ${bike.model}`}
+                        </Text>
+                        {bike.mpg && <Text style={styles.bikeMpg}>{bike.mpg}mpg</Text>}
+                      </TouchableOpacity>
+                    ))}
+                  </ScrollView>
+                )}
 
-            {/* Action buttons */}
-            <View style={styles.actionRow}>
-              <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('loop')}>
-                <Ionicons name="repeat-outline" size={16} color={colors.accent} />
-                <Text style={styles.actionLabel}>Loop</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.actionBtn} onPress={importGpx}>
-                <Ionicons name="cloud-upload-outline" size={16} color={colors.accent} />
-                <Text style={styles.actionLabel}>Import</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('pois')}>
-                <Ionicons name="layers-outline" size={16} color={colors.accent} />
-                <Text style={styles.actionLabel}>POIs</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('days')}>
-                <Ionicons name="moon-outline" size={16} color={colors.accent} />
-                <Text style={styles.actionLabel}>Days</Text>
-              </TouchableOpacity>
-              {waypoints.length >= 2 && (
-                <TouchableOpacity style={styles.actionBtn} onPress={autoInsertFuelStops}>
-                  <Text style={{ fontSize: 14 }}>⛽</Text>
-                  <Text style={[styles.actionLabel, { color: '#FFC107' }]}>Fuel</Text>
-                </TouchableOpacity>
-              )}
-              {waypoints.length > 0 && (
-                <TouchableOpacity style={styles.actionBtn} onPress={() => { const rev = [...waypoints].reverse(); setWaypoints(rev); buildRoute(rev); tapHaptic(); }}>
-                  <Ionicons name="swap-horizontal-outline" size={16} color={colors.accent} />
-                  <Text style={styles.actionLabel}>Reverse</Text>
-                </TouchableOpacity>
-              )}
-              {waypoints.length > 0 && (
-                <TouchableOpacity style={styles.actionBtnDanger} onPress={clearRoute}>
-                  <Ionicons name="trash-outline" size={16} color={colors.danger} />
-                  <Text style={styles.actionLabelDanger}>Clear</Text>
-                </TouchableOpacity>
-              )}
-            </View>
+                {/* Compact actions - advanced tools live under More */}
+                <View style={styles.actionRow}>
+                  <TouchableOpacity style={styles.actionBtn} onPress={() => setShowPanel('pois')}>
+                    <Ionicons name="layers-outline" size={16} color={colors.accent} />
+                    <Text style={styles.actionLabel}>POIs</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.actionBtn} onPress={() => { tapHaptic(); setShowPanel('more'); }}>
+                    <Ionicons name="ellipsis-horizontal" size={16} color={colors.accent} />
+                    <Text style={styles.actionLabel}>More</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.actionBtnDanger} onPress={clearRoute}>
+                    <Ionicons name="trash-outline" size={16} color={colors.danger} />
+                    <Text style={styles.actionLabelDanger}>Clear</Text>
+                  </TouchableOpacity>
+                </View>
 
-            {/* Save button */}
-            {waypoints.length >= 2 && (
-              <TouchableOpacity style={styles.saveRow} onPress={() => setShowPanel('save')}>
-                <Ionicons name="checkmark-circle" size={18} color="#fff" />
-                <Text style={styles.saveLabel}>Save Route</Text>
-              </TouchableOpacity>
+                {/* Save button */}
+                {waypoints.length >= 2 && (
+                  <TouchableOpacity style={styles.saveRow} onPress={() => setShowPanel('save')}>
+                    <Ionicons name="checkmark-circle" size={18} color="#fff" />
+                    <Text style={styles.saveLabel}>Save Route</Text>
+                  </TouchableOpacity>
+                )}
+              </>
             )}
           </>
+        )}
+
+        {showPanel === 'more' && (
+          <View>
+            <View style={styles.panelHeader}>
+              <Text style={styles.panelTitle}>More tools</Text>
+              <TouchableOpacity onPress={() => setShowPanel('main')}>
+                <Ionicons name="close" size={20} color={colors.textMuted} />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.moreRow} onPress={() => setShowPanel('days')}>
+              <Ionicons name="moon-outline" size={18} color={colors.accent} />
+              <View style={styles.moreText}>
+                <Text style={styles.moreTitle}>Plan days</Text>
+                <Text style={styles.moreDesc}>Split a long tour into daily legs</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.moreRow} onPress={() => { setShowPanel('main'); autoInsertFuelStops(); }}>
+              <Text style={{ fontSize: 16 }}>⛽</Text>
+              <View style={styles.moreText}>
+                <Text style={styles.moreTitle}>Add fuel stops</Text>
+                <Text style={styles.moreDesc}>Insert a stop roughly every 100 miles</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.moreRow}
+              onPress={() => { const rev = [...waypoints].reverse(); setWaypoints(rev); buildRoute(rev); tapHaptic(); setShowPanel('main'); }}
+            >
+              <Ionicons name="swap-horizontal-outline" size={18} color={colors.accent} />
+              <View style={styles.moreText}>
+                <Text style={styles.moreTitle}>Reverse route</Text>
+                <Text style={styles.moreDesc}>Flip start and finish</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+            </TouchableOpacity>
+          </View>
         )}
 
         {showPanel === 'pois' && (
@@ -1128,17 +1162,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(32,33,36,0.9)', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
   },
   instructionText: { color: '#fff', fontSize: 13, fontWeight: '600' },
-  loopCta: {
-    flexDirection: 'row', alignItems: 'center', gap: 6,
-    backgroundColor: '#4285F4', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
+
+  // Start options (empty state)
+  startHint: { color: colors.text, fontSize: 13, fontWeight: '700', marginBottom: 8 },
+  startRow: { flexDirection: 'row', gap: 8 },
+  startCard: {
+    flex: 1, alignItems: 'center', gap: 4,
+    paddingVertical: 14, paddingHorizontal: 6, borderRadius: 10,
+    backgroundColor: colors.surfaceLight, borderWidth: 1, borderColor: colors.border,
   },
-  loopCtaText: { color: '#fff', fontSize: 13, fontWeight: '700' },
-  importCta: {
-    flexDirection: 'row', alignItems: 'center', gap: 6,
-    backgroundColor: 'rgba(32,33,36,0.9)', paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
-    borderWidth: 1, borderColor: colors.border,
+  startCardTitle: { color: colors.text, fontSize: 12, fontWeight: '700', textAlign: 'center' },
+  startCardDesc: { color: colors.textMuted, fontSize: 10, textAlign: 'center' },
+
+  // More tools list
+  moreRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 12,
+    paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: colors.border,
   },
-  importCtaText: { color: colors.accent, fontSize: 13, fontWeight: '700' },
+  moreText: { flex: 1 },
+  moreTitle: { color: colors.text, fontSize: 14, fontWeight: '600' },
+  moreDesc: { color: colors.textMuted, fontSize: 11, marginTop: 1 },
 
   statsBar: {
     position: 'absolute', bottom: 280, right: 12,
