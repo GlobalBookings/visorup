@@ -23,6 +23,23 @@ const categories: RouteCategory[] = [
   { id: 'mountain', label: 'Mountain', icon: 'triangle-outline' },
 ];
 
+const CATEGORY_KEYWORDS: Record<string, string[]> = {
+  scenic: ['scenic', 'coast', 'lake', 'loch', 'glen', 'moor', 'dale', 'valley', 'forest', 'view', 'national park', 'highland'],
+  twisty: ['twist', 'bend', 'pass', 'hairpin', 'snake', 'curv', 'switchback'],
+  coastal: ['coast', 'sea', 'bay', 'beach', 'cliff', 'harbour', 'harbor', 'shore', 'ness', 'promenade', 'island'],
+  mountain: ['mountain', 'peak', 'pass', 'summit', 'moor', 'fell', 'dale', 'hill', 'highland', 'mount', 'brecon', 'snowdon', 'cairngorm', 'pennine'],
+};
+
+function matchesCategory(r: SavedTrip, cat: string): boolean {
+  if (cat === 'popular') return true;
+  const hay = `${r.name} ${r.description ?? ''}`.toLowerCase();
+  const kws = CATEGORY_KEYWORDS[cat] ?? [];
+  if (kws.some((k) => hay.includes(k))) return true;
+  const pref = (r.settings as { road_preference?: string })?.road_preference;
+  if ((cat === 'twisty' || cat === 'scenic') && (pref === 'twisty' || pref === 'curvy')) return true;
+  return false;
+}
+
 export default function ExploreScreen() {
   const router = useRouter();
   const [routes, setRoutes] = useState<SavedTrip[]>([]);
@@ -55,9 +72,10 @@ export default function ExploreScreen() {
   }, [fetchPublicRoutes]);
 
   const filteredRoutes = routes.filter((r) => {
+    if (!matchesCategory(r, selectedCategory)) return false;
     if (search) {
-      return r.name.toLowerCase().includes(search.toLowerCase()) ||
-             r.description?.toLowerCase().includes(search.toLowerCase());
+      const q = search.toLowerCase();
+      return r.name.toLowerCase().includes(q) || (r.description?.toLowerCase().includes(q) ?? false);
     }
     return true;
   });
