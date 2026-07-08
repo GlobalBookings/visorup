@@ -11,9 +11,90 @@ export async function fetchRoadRoute(
     return fetchOSRM(waypoints);
   }
 
-  // For curvy/twisty: add gentle shaping points to nudge route off motorways
-  const shapedWaypoints = addShapingPoints(waypoints, preference);
-  return fetchOSRM(shapedWaypoints);
+  // For curvy/twisty: build several candidate routes and pick the one that
+  // genuinely maximises turning (per km), within a distance cap. Candidates:
+  //  - OSRM with perpendicular shaping points (nudges onto smaller roads)
+  //  - BRouter "car-eco" (avoids motorways, favours quieter/smaller roads)
+  const shaped = addShapingPoints(waypoints, preference);
+  const [shapedRoute, brouterRoute] = await Promise.all([
+    fetchOSRM(shaped),
+    fetchBRouter(waypoints, 'car-eco'),
+  ]);
+
+  const candidates = [shapedRoute, brouterRoute].filter((c) => c.length > 1);
+  if (candidates.length === 0) return fetchOSRM(waypoints);
+
+  const picked = pickCurviest(candidates, preference);
+  return picked.length > 1 ? picked : fetchOSRM(waypoints);
+}
+
+/** Sum of absolute heading changes along the polyline, in radians. */
+function totalTurning(coords: Coord[]): number {
+  if (coords.length < 3) return 0;
+  const bearing = (a: Coord, b: Coord) => {
+    const y = b.longitude - a.longitude;
+    const x = b.latitude - a.latitude;
+    return Math.atan2(y, x);
+  };
+  let sum = 0;
+  let prev = bearing(coords[0], coords[1]);
+  for (let i = 1; i < coords.length - 1; i++) {
+    const cur = bearing(coords[i], coords[i + 1]);
+    let d = Math.abs(cur - prev);
+    if (d > Math.PI) d = 2 * Math.PI - d;
+    sum += d;
+    prev = cur;
+  }
+  return sum;
+}
+
+function lengthKm(coords: Coord[]): number {
+  let dist = 0;
+  for (let i = 1; i < coords.length; i++) {
+    const a = coords[i - 1], b = coords[i];
+    const R = 6371;
+    const dLat = (b.latitude - a.latitude) * Math.PI / 180;
+    const dLon = (b.longitude - a.longitude) * Math.PI / 180;
+    const h = Math.sin(dLat / 2) ** 2 +
+      Math.cos(a.latitude * Math.PI / 180) * Math.cos(b.latitude * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+    dist += R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+  }
+  return dist;
+}
+
+function pickCurviest(candidates: Coord[][], preference: RoadPreference): Coord[] {
+  const scored = candidates.map((c) => ({ c, len: lengthKm(c), turn: totalTurning(c) }));
+  const shortest = Math.min(...scored.map((s) => s.len));
+  const maxFactor = preference === 'twisty' ? 2.0 : 1.4;
+  const eligible = scored.filter((s) => s.len <= shortest * maxFactor);
+  const pool = eligible.length > 0 ? eligible : scored;
+  // twisty: maximise absolute turning; curvy: maximise turning per km.
+  const key = (s: { len: number; turn: number }) =>
+    preference === 'twisty' ? s.turn : s.turn / Math.max(s.len, 0.1);
+  return pool.reduce((best, s) => (key(s) > key(best) ? s : best)).c;
+}
+
+async function fetchBRouter(
+  waypoints: { lat: number; lng: number }[],
+  profile: string
+): Promise<Coord[]> {
+  const lonlats = waypoints.map((w) => `${w.lng},${w.lat}`).join('|');
+  const url = `https://brouter.de/brouter?lonlats=${lonlats}&profile=${profile}&alternativeidx=0&format=geojson`;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 3500);
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    const data = await res.json();
+    const line = data?.features?.[0]?.geometry?.coordinates;
+    if (Array.isArray(line) && line.length > 1) {
+      return line.map((c: number[]) => ({ latitude: c[1], longitude: c[0] }));
+    }
+  } catch (e) {
+    console.warn('[Routing] BRouter request failed:', e);
+  } finally {
+    clearTimeout(timeout);
+  }
+  return [];
 }
 
 /**
