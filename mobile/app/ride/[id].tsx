@@ -12,8 +12,9 @@ import { fetchRoadRoute } from '../../lib/routing';
 import { getRouteWeather, getWeatherIcon, getWeatherColor, WeatherPoint } from '../../lib/weather';
 import { checkFuelRange, FuelStatus } from '../../lib/fuel';
 import { heavyHaptic, successHaptic, warningHaptic } from '../../lib/haptics';
-import { speak, speakWaypointArrival, speakOffRoute, speakRideStart, speakRideEnd, speakDirection, isVoiceEnabled, setVoiceEnabled } from '../../lib/voice-nav';
+import { speak, speakWaypointArrival, speakOffRoute, speakRideStart, speakRideEnd, speakDirection, speakHazard, isVoiceEnabled, setVoiceEnabled } from '../../lib/voice-nav';
 import { NavStep, fetchRouteWithSteps, fetchRerouteToRoute, getManeuverIcon } from '../../lib/navigation';
+import { Hazard, findSharpBends, fetchSpeedCameras, distanceM } from '../../lib/safety';
 
 type Coord = { latitude: number; longitude: number };
 
@@ -83,6 +84,12 @@ export default function RideMode() {
   const maxSpeedRef = useRef(0);
   const rideStartTime = useRef(0);
 
+  // Safety warnings (bends + speed cameras)
+  const [hazards, setHazards] = useState<Hazard[]>([]);
+  const hazardsRef = useRef<Hazard[]>([]);
+  const warnedHazards = useRef<Set<number>>(new Set());
+  const lastHazardTime = useRef(0);
+
   // Load trip data
   useEffect(() => {
     if (id?.startsWith('demo-')) {
@@ -109,6 +116,13 @@ export default function RideMode() {
       setRouteCoords(coords);
       setNavSteps(steps);
       setRouteLoading(false);
+
+      // Safety: detect sharp bends locally, fetch speed cameras (best-effort)
+      const bends = findSharpBends(coords);
+      const cams = await fetchSpeedCameras(coords);
+      const allHazards = [...bends, ...cams];
+      setHazards(allHazards);
+      hazardsRef.current = allHazards;
 
       // Fetch weather for route points
       const weatherData = await getRouteWeather(
@@ -150,6 +164,8 @@ export default function RideMode() {
     trackRef.current = [];
     maxSpeedRef.current = 0;
     rideStartTime.current = Date.now();
+    warnedHazards.current = new Set();
+    lastHazardTime.current = 0;
 
     timerRef.current = setInterval(() => setElapsed((e) => e + 1), 1000);
 
@@ -166,6 +182,24 @@ export default function RideMode() {
         setSpeed(mph);
         if (mph > maxSpeedRef.current) maxSpeedRef.current = mph;
         trackRef.current.push(pos);
+
+        // Safety warnings: announce the nearest un-warned hazard ahead
+        const now = Date.now();
+        if (now - lastHazardTime.current > 6000) {
+          const hz = hazardsRef.current;
+          for (let hi = 0; hi < hz.length; hi++) {
+            if (warnedHazards.current.has(hi)) continue;
+            const d = distanceM(pos, hz[hi]);
+            const range = hz[hi].type === 'camera' ? 300 : 180;
+            if (d < range) {
+              warnedHazards.current.add(hi);
+              lastHazardTime.current = now;
+              warningHaptic();
+              speakHazard(hz[hi].label);
+              break;
+            }
+          }
+        }
 
         if (lastPos.current) {
           const d = haversineDistance(lastPos.current, pos);
@@ -412,6 +446,20 @@ export default function RideMode() {
             </View>
           </Marker>
         ))}
+
+        {/* Speed camera markers */}
+        {hazards.filter((h) => h.type === 'camera').map((cam, i) => (
+          <Marker
+            key={`cam-${i}`}
+            coordinate={{ latitude: cam.latitude, longitude: cam.longitude }}
+            title="Speed camera"
+            anchor={{ x: 0.5, y: 0.5 }}
+          >
+            <View style={styles.cameraMarker}>
+              <Ionicons name="camera" size={12} color="#fff" />
+            </View>
+          </Marker>
+        ))}
       </MapView>
 
       {/* Top bar - route info */}
@@ -575,6 +623,10 @@ const styles = StyleSheet.create({
   markerStart: { backgroundColor: '#34A853' },
   markerEnd: { backgroundColor: '#EA4335' },
   markerText: { color: '#fff', fontSize: 10, fontWeight: '800' },
+  cameraMarker: {
+    width: 24, height: 24, borderRadius: 12, backgroundColor: '#EA4335',
+    justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: '#fff',
+  },
 
   // Top bar
   topBar: {

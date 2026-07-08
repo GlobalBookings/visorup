@@ -33,6 +33,10 @@ export function speakOffRoute() {
   speak('You are off route. Recalculating.', true);
 }
 
+export function speakHazard(text: string) {
+  speak(text, true);
+}
+
 export function speakRideStart() {
   speak('Ride started. Stay safe.');
 }
