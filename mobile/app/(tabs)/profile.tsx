@@ -1,8 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Alert, RefreshControl, Linking,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Alert, RefreshControl, Linking, Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import * as Crypto from 'expo-crypto';
 import { supabase, Profile, UserBike } from '../../lib/supabase';
 import { colors, spacing } from '../../lib/theme';
 import {
@@ -23,6 +25,13 @@ export default function ProfileScreen() {
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
   const [authLoading, setAuthLoading] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [appleAvailable, setAppleAvailable] = useState(false);
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      AppleAuthentication.isAvailableAsync().then(setAppleAvailable).catch(() => {});
+    }
+  }, []);
 
   // Blocked accounts
   const [blocked, setBlocked] = useState<BlockedProfile[]>([]);
@@ -119,6 +128,44 @@ export default function ProfileScreen() {
     setAuthLoading(false);
   };
 
+  const handleAppleSignIn = async () => {
+    if (!agreed) {
+      Alert.alert('Agreement required', 'Please agree to the Terms of Use (EULA) and Community Guidelines to continue.');
+      return;
+    }
+    try {
+      const rawNonce = Crypto.randomUUID();
+      const hashedNonce = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, rawNonce);
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+        nonce: hashedNonce,
+      });
+      if (!credential.identityToken) throw new Error('No identity token returned from Apple.');
+
+      const { data, error } = await supabase.auth.signInWithIdToken({
+        provider: 'apple',
+        token: credential.identityToken,
+        nonce: rawNonce,
+      });
+      if (error) throw error;
+
+      const name = [credential.fullName?.givenName, credential.fullName?.familyName]
+        .filter(Boolean).join(' ').trim();
+      if (name && data.user) {
+        try {
+          await supabase.from('profiles').update({ display_name: name }).eq('id', data.user.id).is('display_name', null);
+        } catch {}
+      }
+      await fetchProfile();
+    } catch (e: any) {
+      if (e?.code === 'ERR_REQUEST_CANCELED') return;
+      Alert.alert('Sign in failed', e?.message || 'Could not sign in with Apple.');
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -160,24 +207,6 @@ export default function ProfileScreen() {
         <Text style={styles.authTitle}>Welcome to VisorUp</Text>
         <Text style={styles.authSub}>Sign in to access your saved routes, garage, and profile.</Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor={colors.textMuted}
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          keyboardType="email-address"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor={colors.textMuted}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-
         <TouchableOpacity
           style={styles.agreeRow}
           onPress={() => setAgreed((v) => !v)}
@@ -196,6 +225,44 @@ export default function ProfileScreen() {
             . I understand VisorUp has zero tolerance for objectionable content or abusive behaviour.
           </Text>
         </TouchableOpacity>
+
+        {appleAvailable && (
+          <View style={[styles.appleWrap, !agreed && styles.primaryBtnDisabled]}>
+            <AppleAuthentication.AppleAuthenticationButton
+              buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+              buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+              cornerRadius={10}
+              style={styles.appleBtn}
+              onPress={handleAppleSignIn}
+            />
+          </View>
+        )}
+
+        {appleAvailable && (
+          <View style={styles.dividerRow}>
+            <View style={styles.dividerLine} />
+            <Text style={styles.dividerText}>or use email</Text>
+            <View style={styles.dividerLine} />
+          </View>
+        )}
+
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor={colors.textMuted}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor={colors.textMuted}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
 
         <TouchableOpacity
           style={[styles.primaryBtn, !agreed && styles.primaryBtnDisabled]}
@@ -355,6 +422,8 @@ const styles = StyleSheet.create({
     marginTop: spacing.sm,
   },
   primaryBtnDisabled: { opacity: 0.45 },
+  appleWrap: { width: '100%', marginTop: spacing.md },
+  appleBtn: { width: '100%', height: 48 },
   primaryBtnText: { color: colors.background, fontSize: 15, fontWeight: '700' },
   agreeRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 10, width: '100%', marginTop: spacing.md },
   agreeText: { flex: 1, color: colors.textMuted, fontSize: 12, lineHeight: 18 },
