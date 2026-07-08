@@ -43,6 +43,7 @@ export default function HomeScreen() {
     { icon: 'compass-outline' as const, label: 'Explore', color: '#34A853', onPress: () => router.push('/(tabs)/explore') },
     { icon: 'folder-outline' as const, label: 'My Routes', color: '#F4B400', onPress: () => router.push('/routes') },
     { icon: 'speedometer-outline' as const, label: 'My Rides', color: '#EA4335', onPress: () => router.push('/rides') },
+    { icon: 'people-circle-outline' as const, label: 'Group Ride', color: '#00BCD4', onPress: () => router.push('/group') },
     { icon: 'people-outline' as const, label: 'Community', color: '#9C27B0', onPress: () => router.push('/(tabs)/community') },
     { icon: 'person-outline' as const, label: 'Profile', color: colors.accent, onPress: () => router.push('/(tabs)/profile') },
   ];

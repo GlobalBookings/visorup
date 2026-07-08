@@ -130,6 +130,8 @@ export default function RootLayout() {
         <Stack.Screen name="rides/index" options={{ title: 'My Rides', presentation: 'card' }} />
         <Stack.Screen name="rides/[id]" options={{ title: 'Ride', presentation: 'card' }} />
         <Stack.Screen name="routes/index" options={{ title: 'My Routes', presentation: 'card' }} />
+        <Stack.Screen name="group/index" options={{ title: 'Group Ride', presentation: 'card' }} />
+        <Stack.Screen name="group/[code]" options={{ headerShown: false, presentation: 'fullScreenModal', animation: 'slide_from_bottom' }} />
         <Stack.Screen
           name="ride/[id]"
           options={{
