@@ -46,6 +46,7 @@ export type SavedTrip = {
   day_segments: any[];
   is_public: boolean;
   share_slug: string | null;
+  folder: string | null;
   created_at: string;
   updated_at: string;
 };

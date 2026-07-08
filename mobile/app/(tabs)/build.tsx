@@ -46,6 +46,8 @@ export default function BuildRouteScreen() {
   const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
   const [routeCoords, setRouteCoords] = useState<Coord[]>([]);
   const [routeName, setRouteName] = useState('');
+  const [routeFolder, setRouteFolder] = useState('');
+  const [folders, setFolders] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [roadPref, setRoadPref] = useState<RoadPreference>('curvy');
 
@@ -101,6 +103,14 @@ export default function BuildRouteScreen() {
         if (data && data.length > 0) {
           setBikes(data);
           setSelectedBike(data.find((b: UserBike) => b.is_primary) || data[0]);
+        }
+        const { data: trips } = await supabase
+          .from('saved_trips')
+          .select('folder')
+          .eq('user_id', user.id)
+          .not('folder', 'is', null);
+        if (trips) {
+          setFolders([...new Set(trips.map((t: { folder: string }) => t.folder).filter(Boolean))]);
         }
       }
     })();
@@ -384,6 +394,7 @@ export default function BuildRouteScreen() {
     setWaypoints([]);
     setRouteCoords([]);
     setRouteName('');
+    setRouteFolder('');
     setDayBreaks([]);
     setShowPanel('main');
   }, []);
@@ -503,6 +514,7 @@ export default function BuildRouteScreen() {
           }))
         : [],
       is_public: false,
+      folder: routeFolder.trim() || null,
     });
     setLoading(false);
 
@@ -513,7 +525,7 @@ export default function BuildRouteScreen() {
       Alert.alert('Route Saved!', `${routeName} saved to your routes.`);
       clearRoute();
     }
-  }, [routeName, waypoints, routeCoords, totalDistMiles, roadPref, selectedBike, dayBreaks, clearRoute]);
+  }, [routeName, routeFolder, waypoints, routeCoords, totalDistMiles, roadPref, selectedBike, dayBreaks, clearRoute]);
 
   // Only show POIs in the current map viewport (max 100 for performance)
   const visiblePOIs = pois.filter((p) => {
@@ -1036,6 +1048,27 @@ export default function BuildRouteScreen() {
               onChangeText={setRouteName}
               autoFocus
             />
+            <TextInput
+              style={styles.nameInput}
+              placeholder="Folder (optional)..."
+              placeholderTextColor={colors.textMuted}
+              value={routeFolder}
+              onChangeText={setRouteFolder}
+            />
+            {folders.length > 0 && (
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: 10 }}>
+                {folders.map((f) => (
+                  <TouchableOpacity
+                    key={f}
+                    style={[styles.loopChip, routeFolder === f && styles.loopChipActive, { marginRight: 6 }]}
+                    onPress={() => { tapHaptic(); setRouteFolder(routeFolder === f ? '' : f); }}
+                  >
+                    <Ionicons name="folder-outline" size={12} color={routeFolder === f ? '#fff' : colors.textMuted} />
+                    <Text style={[styles.loopChipText, routeFolder === f && { color: '#fff' }]}>{f}</Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+            )}
             <View style={styles.saveSummary}>
               <Text style={styles.saveSummaryText}>{waypoints.length} stops · {Math.round(totalDistMiles)} mi · {ROAD_PREFS.find((r) => r.id === roadPref)?.label} roads</Text>
               {dayBreaks.length > 0 && <Text style={styles.saveSummaryText}>{dayBreaks.length + 1} days planned</Text>}
