@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import MapView, { Marker, Polyline, PROVIDER_DEFAULT, MapPressEvent } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import * as Location from 'expo-location';
 import * as DocumentPicker from 'expo-document-picker';
 import { File } from 'expo-file-system';
@@ -41,6 +41,7 @@ const ROAD_PREFS: { id: RoadPreference; label: string; icon: string; color: stri
 export default function BuildRouteScreen() {
   const mapRef = useRef<MapView>(null);
   const router = useRouter();
+  const { editId } = useLocalSearchParams<{ editId?: string }>();
 
   // Route state
   const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
@@ -50,6 +51,8 @@ export default function BuildRouteScreen() {
   const [folders, setFolders] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [roadPref, setRoadPref] = useState<RoadPreference>('curvy');
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const loadedEditId = useRef<string | null>(null);
 
   // UI state
   const [showPanel, setShowPanel] = useState<'main' | 'pois' | 'days' | 'save' | 'loop' | 'more' | null>('main');
@@ -125,6 +128,36 @@ export default function BuildRouteScreen() {
       }
     })();
   }, []);
+
+  // Load an existing saved route for editing when an editId is passed in
+  useEffect(() => {
+    if (!editId) { loadedEditId.current = null; return; }
+    if (loadedEditId.current === editId) return;
+    loadedEditId.current = editId;
+    (async () => {
+      const { data, error } = await supabase.from('saved_trips').select('*').eq('id', editId).single();
+      if (error || !data) { Alert.alert('Could not load route', 'Please try again.'); return; }
+      const wps: Waypoint[] = (data.waypoints || []).map((wp: { lat: number; lng: number; name?: string }, i: number) => ({
+        latitude: wp.lat, longitude: wp.lng, name: wp.name || `Stop ${i + 1}`,
+      }));
+      setWaypoints(wps);
+      setRouteCoords((data.route_coords || []).map((c: number[]) => ({ latitude: c[0], longitude: c[1] })));
+      setRouteName(data.name || '');
+      setRouteFolder(data.folder || '');
+      const pref = data.settings?.road_preference as RoadPreference | undefined;
+      if (pref) { setRoadPref(pref); setRouteColor(ROAD_PREFS.find((r) => r.id === pref)?.color || '#D68A2D'); }
+      setEditingId(data.id);
+      setShowPanel('main');
+      if (wps.length > 0) {
+        setTimeout(() => {
+          mapRef.current?.fitToCoordinates(wps, {
+            edgePadding: { top: 100, right: 80, bottom: 340, left: 80 }, animated: true,
+          });
+        }, 300);
+      }
+      router.setParams({ editId: '' });
+    })();
+  }, [editId, router]);
 
   // Calculate total distance whenever routeCoords changes
   useEffect(() => {
@@ -407,6 +440,8 @@ export default function BuildRouteScreen() {
     setRouteFolder('');
     setDayBreaks([]);
     setShowPanel('main');
+    setEditingId(null);
+    loadedEditId.current = null;
   }, []);
 
   const changeRoadPref = useCallback((pref: RoadPreference) => {
@@ -526,10 +561,18 @@ export default function BuildRouteScreen() {
       is_public: false,
     };
     const folderValue = routeFolder.trim() || null;
-    let { error } = await supabase.from('saved_trips').insert({ ...basePayload, folder: folderValue });
-    // Databases without the optional `folder` column reject the insert — retry without it.
-    if (error && /folder/i.test(error.message)) {
-      ({ error } = await supabase.from('saved_trips').insert(basePayload));
+    let error: { message: string } | null = null;
+    if (editingId) {
+      ({ error } = await supabase.from('saved_trips').update({ ...basePayload, folder: folderValue }).eq('id', editingId));
+      // Databases without the optional `folder` column reject the write — retry without it.
+      if (error && /folder/i.test(error.message)) {
+        ({ error } = await supabase.from('saved_trips').update(basePayload).eq('id', editingId));
+      }
+    } else {
+      ({ error } = await supabase.from('saved_trips').insert({ ...basePayload, folder: folderValue }));
+      if (error && /folder/i.test(error.message)) {
+        ({ error } = await supabase.from('saved_trips').insert(basePayload));
+      }
     }
     setLoading(false);
 
@@ -537,10 +580,10 @@ export default function BuildRouteScreen() {
       Alert.alert('Error', error.message);
     } else {
       successHaptic();
-      Alert.alert('Route Saved!', `${routeName} saved to your routes.`);
+      Alert.alert(editingId ? 'Route Updated!' : 'Route Saved!', `${routeName} ${editingId ? 'has been updated.' : 'saved to your routes.'}`);
       clearRoute();
     }
-  }, [routeName, routeFolder, waypoints, routeCoords, totalDistMiles, roadPref, selectedBike, dayBreaks, clearRoute]);
+  }, [routeName, routeFolder, waypoints, routeCoords, totalDistMiles, roadPref, selectedBike, dayBreaks, clearRoute, editingId]);
 
   // Only show POIs in the current map viewport (max 100 for performance)
   const visiblePOIs = pois.filter((p) => {
@@ -1084,11 +1127,14 @@ export default function BuildRouteScreen() {
         {showPanel === 'save' && (
           <View>
             <View style={styles.panelHeader}>
-              <Text style={styles.panelTitle}>Save Route</Text>
+              <Text style={styles.panelTitle}>{editingId ? 'Update Route' : 'Save Route'}</Text>
               <TouchableOpacity onPress={() => setShowPanel('main')}>
                 <Ionicons name="close" size={20} color={colors.textMuted} />
               </TouchableOpacity>
             </View>
+            {editingId && (
+              <Text style={styles.editingHint}>You're editing a saved route. Changes will overwrite the original.</Text>
+            )}
             <TextInput
               style={styles.nameInput}
               placeholder="Route name..."
@@ -1124,7 +1170,7 @@ export default function BuildRouteScreen() {
               {selectedBike && <Text style={styles.saveSummaryText}>Bike: {selectedBike.nickname || `${selectedBike.make} ${selectedBike.model}`}</Text>}
             </View>
             <TouchableOpacity style={[styles.confirmSaveBtn, loading && { opacity: 0.5 }]} onPress={saveRoute} disabled={loading}>
-              <Text style={styles.confirmSaveText}>{loading ? 'Saving...' : 'Save Route'}</Text>
+              <Text style={styles.confirmSaveText}>{loading ? 'Saving...' : editingId ? 'Update Route' : 'Save Route'}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -1358,6 +1404,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceLight, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 12,
     color: colors.text, fontSize: 16, marginBottom: 10,
   },
+  editingHint: { color: colors.accent, fontSize: 11, marginBottom: 10 },
   saveSummary: { marginBottom: 10 },
   saveSummaryText: { color: colors.textMuted, fontSize: 12, marginBottom: 2 },
   confirmSaveBtn: { backgroundColor: '#34A853', borderRadius: 10, padding: 14, alignItems: 'center' },

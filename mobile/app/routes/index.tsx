@@ -169,6 +169,13 @@ export default function MyRoutes() {
                 <Text style={styles.newFolderBtnText}>Move</Text>
               </TouchableOpacity>
             </View>
+            <TouchableOpacity
+              style={styles.editRow}
+              onPress={() => { if (menuTarget) { const t = menuTarget; setMenuTarget(null); tapHaptic(); router.push({ pathname: '/(tabs)/build', params: { editId: t.id } }); } }}
+            >
+              <Ionicons name="create-outline" size={16} color={colors.accent} />
+              <Text style={styles.editRowText}>Edit route</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.deleteRow} onPress={() => menuTarget && deleteRoute(menuTarget)}>
               <Ionicons name="trash-outline" size={16} color={colors.danger} />
               <Text style={styles.deleteRowText}>Delete route</Text>
@@ -220,6 +227,8 @@ const styles = StyleSheet.create({
   },
   newFolderBtn: { backgroundColor: colors.accent, borderRadius: 8, paddingHorizontal: 18, justifyContent: 'center' },
   newFolderBtnText: { color: '#fff', fontSize: 14, fontWeight: '700' },
-  deleteRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 14, marginTop: 6 },
+  editRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 14, marginTop: 10, borderTopWidth: 1, borderTopColor: colors.border },
+  editRowText: { color: colors.accent, fontSize: 14, fontWeight: '700' },
+  deleteRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 14 },
   deleteRowText: { color: colors.danger, fontSize: 14, fontWeight: '700' },
 });

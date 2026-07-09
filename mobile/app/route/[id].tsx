@@ -209,6 +209,16 @@ ${gpxPoints}
           <Text style={styles.rideBtnText}>Start Ride</Text>
         </TouchableOpacity>
 
+        {!(demo === '1' || id?.startsWith('demo-')) && (
+          <TouchableOpacity
+            style={styles.editRouteBtn}
+            onPress={() => { tapHaptic(); router.push({ pathname: '/(tabs)/build', params: { editId: id } }); }}
+          >
+            <Ionicons name="create-outline" size={18} color={colors.accent} />
+            <Text style={styles.editRouteText}>Edit Route</Text>
+          </TouchableOpacity>
+        )}
+
         <View style={styles.actions}>
           <TouchableOpacity
             style={[styles.actionBtn, cached && styles.actionBtnActive]}
@@ -282,4 +292,17 @@ const styles = StyleSheet.create({
     marginTop: spacing.lg,
   },
   rideBtnText: { color: '#fff', fontSize: 16, fontWeight: '800' },
+  editRouteBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    backgroundColor: colors.surfaceLight,
+    borderRadius: 12,
+    padding: spacing.md,
+    marginTop: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  editRouteText: { color: colors.accent, fontSize: 15, fontWeight: '700' },
 });
