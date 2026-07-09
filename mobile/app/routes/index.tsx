@@ -1,11 +1,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
-  View, Text, StyleSheet, SectionList, TouchableOpacity, ActivityIndicator,
+  View, Text, StyleSheet, SectionList, TouchableOpacity,
   RefreshControl, Modal, TextInput, Alert, KeyboardAvoidingView, Platform, Share,
 } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase, SavedTrip } from '../../lib/supabase';
+import { RouteListSkeleton } from '../../components/Skeleton';
 import { tapHaptic, successHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
 
@@ -108,7 +109,12 @@ export default function MyRoutes() {
   const fmtDist = (m?: number) => (m ? `${Math.round(m * 0.000621371)} mi` : '');
 
   if (loading) {
-    return <View style={styles.center}><ActivityIndicator size="large" color={colors.accent} /></View>;
+    return (
+      <View style={styles.container}>
+        <Stack.Screen options={{ title: 'My Routes' }} />
+        <RouteListSkeleton />
+      </View>
+    );
   }
 
   return (

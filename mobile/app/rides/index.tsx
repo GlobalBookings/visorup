@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
-  View, Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, RefreshControl,
+  View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl,
 } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase, Ride } from '../../lib/supabase';
+import { RouteListSkeleton } from '../../components/Skeleton';
 import { tapHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
 
@@ -55,8 +56,9 @@ export default function RidesList() {
 
   if (loading) {
     return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color={colors.accent} />
+      <View style={styles.container}>
+        <Stack.Screen options={{ title: 'My Rides' }} />
+        <RouteListSkeleton />
       </View>
     );
   }

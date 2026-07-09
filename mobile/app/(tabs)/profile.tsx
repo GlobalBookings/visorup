@@ -7,9 +7,13 @@ import { useRouter } from 'expo-router';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as Crypto from 'expo-crypto';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase, Profile, UserBike } from '../../lib/supabase';
 import { computeBadges, Badge } from '../../lib/achievements';
+import { BadgeToast } from '../../components/BadgeToast';
 import { colors, spacing } from '../../lib/theme';
+
+const EARNED_BADGES_KEY = 'vu_earned_badges';
 import {
   TERMS_URL, PRIVACY_URL, EULA_SUMMARY, COMMUNITY_GUIDELINES,
   getBlockedProfiles, unblockUser, BlockedProfile,
@@ -43,6 +47,7 @@ export default function ProfileScreen() {
   // Riding stats
   const [stats, setStats] = useState<{ rides: number; miles: number; hours: number } | null>(null);
   const [badges, setBadges] = useState<Badge[]>([]);
+  const [toastBadge, setToastBadge] = useState<Badge | null>(null);
 
   // Bike add/edit form
   type BikeForm = { id?: string; make: string; model: string; nickname: string; year: string; tank: string; mpg: string; primary: boolean };
@@ -93,7 +98,7 @@ export default function ProfileScreen() {
       favCount = favs ? favs.length : 0;
     } catch {}
 
-    setBadges(computeBadges({
+    const computed = computeBadges({
       rides: ridesCount,
       miles,
       hours,
@@ -101,7 +106,19 @@ export default function ProfileScreen() {
       published: publishedCount,
       bikes: b ? b.length : 0,
       favourites: favCount,
-    }));
+    });
+    setBadges(computed);
+
+    try {
+      const earnedIds = computed.filter((x) => x.earned).map((x) => x.id);
+      const raw = await AsyncStorage.getItem(EARNED_BADGES_KEY);
+      if (raw !== null) {
+        const seen: string[] = JSON.parse(raw);
+        const fresh = computed.find((x) => x.earned && !seen.includes(x.id));
+        if (fresh) setToastBadge(fresh);
+      }
+      await AsyncStorage.setItem(EARNED_BADGES_KEY, JSON.stringify(earnedIds));
+    } catch {}
 
     try { setBlocked(await getBlockedProfiles()); } catch {}
 
@@ -465,6 +482,7 @@ export default function ProfileScreen() {
 
   return (
     <>
+    <BadgeToast badge={toastBadge} onHide={() => setToastBadge(null)} />
     <ScrollView
       style={styles.container}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />}

@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { supabase, SavedTrip } from '../../lib/supabase';
 import { sampleRoutes } from '../../lib/sample-routes';
 import { getFavouriteRouteIds, toggleFavourite, fetchFavouriteRoutes } from '../../lib/favourites';
+import { RouteListSkeleton } from '../../components/Skeleton';
 import { tapHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
 
@@ -217,15 +218,19 @@ export default function ExploreScreen() {
           </TouchableOpacity>
         )}
         ListEmptyComponent={
-          <View style={styles.empty}>
-            <Ionicons name={selectedCategory === 'saved' ? 'heart-outline' : 'compass-outline'} size={48} color={colors.textMuted} />
-            <Text style={styles.emptyText}>
-              {selectedCategory === 'saved' ? 'No saved routes yet' : 'No routes found'}
-            </Text>
-            {selectedCategory === 'saved' && (
-              <Text style={styles.emptySub}>Tap the heart on any route to save it here.</Text>
-            )}
-          </View>
+          loading ? (
+            <RouteListSkeleton />
+          ) : (
+            <View style={styles.empty}>
+              <Ionicons name={selectedCategory === 'saved' ? 'heart-outline' : 'compass-outline'} size={48} color={colors.textMuted} />
+              <Text style={styles.emptyText}>
+                {selectedCategory === 'saved' ? 'No saved routes yet' : 'No routes found'}
+              </Text>
+              {selectedCategory === 'saved' && (
+                <Text style={styles.emptySub}>Tap the heart on any route to save it here.</Text>
+              )}
+            </View>
+          )
         }
       />
     </View>
