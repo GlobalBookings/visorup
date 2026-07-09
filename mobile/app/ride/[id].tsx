@@ -5,6 +5,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import * as Location from 'expo-location';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase, SavedTrip } from '../../lib/supabase';
 import { sampleRoutes } from '../../lib/sample-routes';
@@ -66,6 +67,9 @@ export default function RideMode() {
   const [weather, setWeather] = useState<WeatherPoint[]>([]);
   const [fuel, setFuel] = useState<FuelStatus | null>(null);
   const [voiceOn, setVoiceOn] = useState(true);
+  const [following, setFollowing] = useState(true);
+  const followingRef = useRef(true);
+  useEffect(() => { followingRef.current = following; }, [following]);
 
   // Turn-by-turn navigation
   const [navSteps, setNavSteps] = useState<NavStep[]>([]);
@@ -157,7 +161,10 @@ export default function RideMode() {
 
     heavyHaptic();
     speakRideStart();
+    activateKeepAwakeAsync();
     setRideStarted(true);
+    setFollowing(true);
+    followingRef.current = true;
     setElapsed(0);
     setDistanceTravelled(0);
     setNextWaypointIdx(0);
@@ -289,12 +296,14 @@ export default function RideMode() {
           });
         }
 
-        mapRef.current?.animateCamera({
-          center: pos,
-          heading: loc.coords.heading ?? 0,
-          pitch: 60,
-          zoom: 17,
-        });
+        if (followingRef.current) {
+          mapRef.current?.animateCamera({
+            center: pos,
+            heading: loc.coords.heading ?? 0,
+            pitch: 60,
+            zoom: 17,
+          });
+        }
       },
     );
   }, []);
@@ -302,6 +311,7 @@ export default function RideMode() {
   const stopRide = useCallback(async () => {
     heavyHaptic();
     speakRideEnd(distanceTravelled * 0.000621371, elapsed / 60);
+    deactivateKeepAwake();
     locationSub.current?.remove();
     locationSub.current = null;
     if (timerRef.current) clearInterval(timerRef.current);
@@ -344,8 +354,17 @@ export default function RideMode() {
       locationSub.current?.remove();
       if (timerRef.current) clearInterval(timerRef.current);
       if (offRouteTimer.current) clearTimeout(offRouteTimer.current);
+      deactivateKeepAwake();
     };
   }, []);
+
+  const recenter = useCallback(() => {
+    const pos = lastPos.current || userLocation;
+    if (!pos) return;
+    setFollowing(true);
+    followingRef.current = true;
+    mapRef.current?.animateCamera({ center: pos, pitch: 60, zoom: 17 });
+  }, [userLocation]);
 
   const fmtTime = (s: number) => {
     const h = Math.floor(s / 3600);
@@ -406,6 +425,7 @@ export default function RideMode() {
         showsPointsOfInterests={false}
         pitchEnabled
         rotateEnabled
+        onPanDrag={() => { if (rideStarted && followingRef.current) { followingRef.current = false; setFollowing(false); } }}
       >
         {/* Route line - Google Maps blue */}
         {routeCoords.length > 1 && (
@@ -509,6 +529,14 @@ export default function RideMode() {
             </Text>
           </View>
         </View>
+      )}
+
+      {/* Recenter button (shown when the rider has panned away) */}
+      {rideStarted && !following && (
+        <TouchableOpacity style={styles.recenterBtn} onPress={recenter} activeOpacity={0.85}>
+          <Ionicons name="navigate" size={18} color="#fff" />
+          <Text style={styles.recenterText}>Recenter</Text>
+        </TouchableOpacity>
       )}
 
       {/* Weather strip */}
@@ -773,4 +801,19 @@ const styles = StyleSheet.create({
   weatherTemp: { color: '#fff', fontSize: 11, fontWeight: '600' },
   windWarning: { flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 2 },
   windText: { color: '#FFC107', fontSize: 10, fontWeight: '600' },
+  recenterBtn: {
+    position: 'absolute',
+    bottom: 170,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: 'rgba(32,33,36,0.95)',
+    borderColor: '#4285F4',
+    borderWidth: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 24,
+  },
+  recenterText: { color: '#fff', fontSize: 13, fontWeight: '700' },
 });
