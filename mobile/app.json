@@ -85,6 +85,12 @@
           }
         }
       ],
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/material_icons.ttf"]
+        }
+      ],
       "./plugins/withCarPlay"
     ],
     "experiments": {

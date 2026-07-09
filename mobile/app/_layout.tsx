@@ -89,6 +89,13 @@ export default function RootLayout() {
     return () => sub.remove();
   }, []);
 
+  // Register the CarPlay experience (guarded: no-op if the native module isn't in the build)
+  useEffect(() => {
+    import('../src/carplay/AutoPlay')
+      .then((m) => m.default())
+      .catch((e) => console.warn('[RootLayout] CarPlay unavailable:', e));
+  }, []);
+
   // Register push notifications when user is authenticated
   useEffect(() => {
     let subscription: { unsubscribe: () => void } | undefined;

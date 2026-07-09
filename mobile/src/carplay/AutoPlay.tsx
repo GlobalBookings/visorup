@@ -20,6 +20,7 @@ import {
 } from '@iternio/react-native-auto-play';
 import { supabase, SavedTrip } from '../../lib/supabase';
 import { sampleRoutes } from '../../lib/sample-routes';
+import { registerCarPlayIcons } from './icons';
 import { colors } from '../../lib/theme';
 
 type Coord = { latitude: number; longitude: number };
@@ -108,6 +109,7 @@ async function showRouteList() {
 }
 
 export default function registerAutoPlay() {
+  registerCarPlayIcons();
   HybridAutoPlay.addListener('didConnect', () => {
     showRouteList();
   });

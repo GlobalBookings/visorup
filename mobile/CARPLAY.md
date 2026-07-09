@@ -19,10 +19,22 @@ new-architecture library is **`@iternio/react-native-auto-play`** (Nitro-based).
   - the `UIApplicationSceneManifest` (window + CarPlay head-unit/dashboard/cluster scenes),
   - the `getRootViewForAutoplay` method in `AppDelegate.swift`.
 - `app.json` — registers `expo-build-properties` (`ios.buildReactNativeFromSource: true`,
-  required by @iternio) and `./plugins/withCarPlay`.
+  required by @iternio), `expo-font` (embeds the icon font), and `./plugins/withCarPlay`.
 - `src/carplay/AutoPlay.tsx` — the CarPlay experience (type-checks against the library):
   on connect it lists the rider's saved routes (+ sample routes); selecting one opens a
   MapTemplate showing the route. Type-checked with `tsc`.
+- **patch-package (done + verified):** `patch-package` + `postinstall-postinstall` added,
+  `postinstall: "patch-package"` script wired. `patches/react-native+0.85.3.patch` and
+  `patches/expo-splash-screen+56.0.10.patch` (adapted from the library's `0.83.5` / `57.0.2`
+  patches) **apply cleanly** to your installed versions — confirmed with `npx patch-package`.
+- **Icon font (done + verified):** reuses the MaterialIcons font already bundled with
+  `@expo/vector-icons`, copied to `assets/fonts/material_icons.ttf` and declared via
+  `expo-font` (`{"fonts": [...]}`). `src/carplay/icons.ts` registers it with
+  `setIconFont('material_icons', MaterialIcons.getRawGlyphMap())`. Clean `expo prebuild`
+  confirms the font lands in `UIAppFonts` + the Xcode project.
+- **registerAutoPlay wired:** `app/_layout.tsx` calls it via a guarded dynamic import
+  (`import('../src/carplay/AutoPlay').then(m => m.default())`), so it is a no-op on web /
+  Expo Go / any build without the native module, and registers icons + templates otherwise.
 
 ## What could NOT be verified in this environment (needs a Mac)
 Prebuild + type-checking pass, but the following require an actual iOS build and a
@@ -32,36 +44,41 @@ CarPlay head unit / Xcode CarPlay Simulator (macOS only):
   setup can break the normal phone app, which is the main risk — hence branch-only).
 - Whether CarPlay actually **renders** the list/map on a head unit.
 
-## Remaining steps (do these on a Mac, or via EAS + TestFlight)
-1. **Apple portal (done):** App ID → enable **CarPlay Navigation App** → Save. EAS will
-   regenerate the provisioning profile to include it on the next build.
-2. **Apply @iternio patches (required).** The library ships `patch-package` patches for
-   RN (timers on screen lock) and `expo-splash-screen` (scenes). Add `patch-package`,
-   copy the patches from the library's `patches/` dir into `mobile/patches/`, and add a
-   `postinstall: "patch-package"` script. Because `buildReactNativeFromSource` is on, the
-   RN patch can be applied.
-3. **Wire the headless task.** Add to the top of `app/_layout.tsx`:
-   ```ts
-   import registerAutoPlay from '../src/carplay/AutoPlay';
-   registerAutoPlay();
+## Remaining steps
+The prep (patches, icon font, `registerAutoPlay` wiring) is done and validated via
+`tsc` + clean `expo prebuild`. What's left is the actual native build/test loop.
+
+1. **Apple portal (done):** App ID → enable **CarPlay Navigation App** → Save. EAS/Xcode
+   regenerates the provisioning profile to include it on the next build.
+2. **Build & run locally on your Mac (fastest loop):**
+   ```bash
+   git checkout feature/carplay
+   cd mobile && npm install          # runs postinstall → patch-package
+   npx expo prebuild -p ios          # regenerates ios/ with the CarPlay plugin
+   npx expo run:ios                  # builds + launches in the iOS Simulator
    ```
-   (Only takes effect once the native module is in the build.)
-4. **Icons.** @iternio needs an icon font (e.g. Material Symbols) registered via
-   `expo-font` + `setIconFont(...)` before any glyph is used. See the library README.
-5. **Build & submit for testing:**
+   Needs CocoaPods (`sudo gem install cocoapods` or Homebrew). First build is slow
+   (`buildReactNativeFromSource`). You can also open `ios/visorup.xcworkspace` in Xcode
+   to read Swift/Nitro compile errors directly.
+3. **Test CarPlay:** with the app running in the iOS Simulator, open the **Simulator**
+   menu → **I/O → External Displays → CarPlay** to bring up the car screen and verify the
+   route list + map render. You cannot test CarPlay from the phone screen alone.
+4. **(Optional) Ship to TestFlight** once the local build is clean:
    ```bash
    eas build --platform ios --profile production
    eas submit --platform ios --latest
    ```
-6. **Test CarPlay:** install the TestFlight build on an iPhone and connect it to a real
-   CarPlay head unit (your car), or use the **Xcode CarPlay Simulator** on a Mac
-   (Simulator → I/O → External Displays → CarPlay). You cannot test CarPlay from the
-   phone screen alone.
 
 ## Notes / risks
 - `buildReactNativeFromSource: true` makes iOS builds significantly slower.
 - The library is early (v0.5.x). Template APIs may need small tweaks during on-device
   validation; `AutoPlay.tsx` is a starting point, not a finished feature.
+- **Icon font family name:** `setIconFont('material_icons', ...)` uses the font's
+  filename. If glyphs don't render on the car screen, try `'MaterialIcons'` or
+  `'Material Icons'` (the ttf's internal family name) in `src/carplay/icons.ts`.
+- **Patch versions:** the committed patches were adapted from the library's `0.83.5` /
+  `57.0.2` patches and currently apply cleanly to RN `0.85.3` / expo-splash-screen
+  `56.0.10`. If you bump those packages, regenerate with `npx patch-package <pkg>`.
 - Full turn-by-turn on the car screen (CPTrip / navigation session / maneuvers) is a
   follow-up; the guidance engine already exists in `lib/navigation.ts` + `lib/voice-nav.ts`.
 
