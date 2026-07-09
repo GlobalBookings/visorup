@@ -39,6 +39,9 @@ export default function ProfileScreen() {
   // Blocked accounts
   const [blocked, setBlocked] = useState<BlockedProfile[]>([]);
 
+  // Riding stats
+  const [stats, setStats] = useState<{ rides: number; miles: number; hours: number } | null>(null);
+
   // Bike add/edit form
   type BikeForm = { id?: string; make: string; model: string; nickname: string; year: string; tank: string; mpg: string; primary: boolean };
   const [bikeForm, setBikeForm] = useState<BikeForm | null>(null);
@@ -68,6 +71,16 @@ export default function ProfileScreen() {
       .eq('user_id', u.id)
       .order('is_primary', { ascending: false });
     if (b) setBikes(b);
+
+    const { data: r } = await supabase
+      .from('rides')
+      .select('distance_m, duration_s')
+      .eq('user_id', u.id);
+    if (r) {
+      const miles = r.reduce((s: number, x: { distance_m: number }) => s + (x.distance_m || 0), 0) * 0.000621371;
+      const hours = r.reduce((s: number, x: { duration_s: number }) => s + (x.duration_s || 0), 0) / 3600;
+      setStats({ rides: r.length, miles: Math.round(miles), hours: Math.round(hours * 10) / 10 });
+    }
 
     try { setBlocked(await getBlockedProfiles()); } catch {}
 
@@ -446,6 +459,25 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
 
+      {stats && stats.rides > 0 && (
+        <View style={styles.statsRow}>
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>{stats.rides}</Text>
+            <Text style={styles.statLabel}>{stats.rides === 1 ? 'Ride' : 'Rides'}</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>{stats.miles}</Text>
+            <Text style={styles.statLabel}>Miles</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statBox}>
+            <Text style={styles.statValue}>{stats.hours}</Text>
+            <Text style={styles.statLabel}>Hours</Text>
+          </View>
+        </View>
+      )}
+
       <Text style={styles.sectionTitle}>
         <Ionicons name="map-outline" size={14} color={colors.accent} /> Your Riding
       </Text>
@@ -757,6 +789,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border,
   },
   editProfileText: { color: colors.accent, fontSize: 13, fontWeight: '700' },
+  statsRow: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around',
+    marginHorizontal: spacing.md, marginBottom: spacing.sm,
+    paddingVertical: spacing.md,
+    backgroundColor: colors.surface, borderRadius: 12, borderWidth: 1, borderColor: colors.border,
+  },
+  statBox: { alignItems: 'center', flex: 1 },
+  statValue: { color: colors.text, fontSize: 20, fontWeight: '800' },
+  statLabel: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
+  statDivider: { width: 1, height: 28, backgroundColor: colors.border },
   avatarEditRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginBottom: spacing.md },
   avatarEdit: { width: 72, height: 72, borderRadius: 36, borderWidth: 2, borderColor: colors.accent },
   avatarEditPlaceholder: {

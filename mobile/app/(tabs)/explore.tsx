@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase, SavedTrip } from '../../lib/supabase';
 import { sampleRoutes } from '../../lib/sample-routes';
+import { getFavouriteRouteIds, toggleFavourite, fetchFavouriteRoutes } from '../../lib/favourites';
 import { tapHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
 
@@ -17,6 +18,7 @@ type RouteCategory = {
 
 const categories: RouteCategory[] = [
   { id: 'popular', label: 'Popular', icon: 'flame-outline' },
+  { id: 'saved', label: 'Saved', icon: 'heart-outline' },
   { id: 'scenic', label: 'Scenic', icon: 'leaf-outline' },
   { id: 'twisty', label: 'Twisty', icon: 'git-compare-outline' },
   { id: 'coastal', label: 'Coastal', icon: 'water-outline' },
@@ -47,6 +49,8 @@ export default function ExploreScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('popular');
+  const [favIds, setFavIds] = useState<Set<string>>(new Set());
+  const [favRoutes, setFavRoutes] = useState<SavedTrip[]>([]);
 
   const fetchPublicRoutes = useCallback(async () => {
     const { data, error } = await supabase
@@ -60,6 +64,10 @@ export default function ExploreScreen() {
     // Merge with sample routes for a richer experience
     const all = [...publicRoutes, ...sampleRoutes];
     setRoutes(all);
+    try {
+      setFavIds(await getFavouriteRouteIds());
+      setFavRoutes(await fetchFavouriteRoutes());
+    } catch {}
     setLoading(false);
   }, []);
 
@@ -71,8 +79,30 @@ export default function ExploreScreen() {
     setRefreshing(false);
   }, [fetchPublicRoutes]);
 
-  const filteredRoutes = routes.filter((r) => {
-    if (!matchesCategory(r, selectedCategory)) return false;
+  const onToggleFav = useCallback(async (routeId: string) => {
+    tapHaptic();
+    const currently = favIds.has(routeId);
+    setFavIds((prev) => {
+      const next = new Set(prev);
+      if (currently) next.delete(routeId); else next.add(routeId);
+      return next;
+    });
+    const { error } = await toggleFavourite(routeId, currently);
+    if (error) {
+      // revert on failure
+      setFavIds((prev) => {
+        const next = new Set(prev);
+        if (currently) next.add(routeId); else next.delete(routeId);
+        return next;
+      });
+      return;
+    }
+    try { setFavRoutes(await fetchFavouriteRoutes()); } catch {}
+  }, [favIds]);
+
+  const source = selectedCategory === 'saved' ? favRoutes : routes;
+  const filteredRoutes = source.filter((r) => {
+    if (selectedCategory !== 'saved' && !matchesCategory(r, selectedCategory)) return false;
     if (search) {
       const q = search.toLowerCase();
       return r.name.toLowerCase().includes(q) || (r.description?.toLowerCase().includes(q) ?? false);
@@ -150,9 +180,22 @@ export default function ExploreScreen() {
                 <Ionicons name="navigate-outline" size={18} color={colors.accent} />
                 <Text style={styles.cardTitle} numberOfLines={1}>{item.name}</Text>
               </View>
-              {item.route_stats?.distance && (
-                <Text style={styles.cardDist}>{fmtDist(item.route_stats.distance)}</Text>
-              )}
+              <View style={styles.cardTopRight}>
+                {item.route_stats?.distance ? (
+                  <Text style={styles.cardDist}>{fmtDist(item.route_stats.distance)}</Text>
+                ) : null}
+                <TouchableOpacity
+                  style={styles.heartBtn}
+                  onPress={() => onToggleFav(item.id)}
+                  hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                >
+                  <Ionicons
+                    name={favIds.has(item.id) ? 'heart' : 'heart-outline'}
+                    size={20}
+                    color={favIds.has(item.id) ? '#EA4335' : colors.textMuted}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
             {item.description ? (
               <Text style={styles.cardDesc} numberOfLines={2}>{item.description}</Text>
@@ -175,8 +218,13 @@ export default function ExploreScreen() {
         )}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Ionicons name="compass-outline" size={48} color={colors.textMuted} />
-            <Text style={styles.emptyText}>No routes found</Text>
+            <Ionicons name={selectedCategory === 'saved' ? 'heart-outline' : 'compass-outline'} size={48} color={colors.textMuted} />
+            <Text style={styles.emptyText}>
+              {selectedCategory === 'saved' ? 'No saved routes yet' : 'No routes found'}
+            </Text>
+            {selectedCategory === 'saved' && (
+              <Text style={styles.emptySub}>Tap the heart on any route to save it here.</Text>
+            )}
           </View>
         }
       />
@@ -225,7 +273,9 @@ const styles = StyleSheet.create({
   cardTop: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   cardHeader: { flexDirection: 'row', alignItems: 'center', gap: 8, flex: 1 },
   cardTitle: { color: colors.text, fontSize: 15, fontWeight: '700', flex: 1 },
+  cardTopRight: { flexDirection: 'row', alignItems: 'center', gap: 10, marginLeft: 8 },
   cardDist: { color: colors.accent, fontSize: 13, fontWeight: '700' },
+  heartBtn: { padding: 2 },
   cardDesc: { color: colors.textMuted, fontSize: 12, marginTop: 6, lineHeight: 18 },
   cardFooter: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 8 },
   cardStat: { flexDirection: 'row', alignItems: 'center', gap: 4 },
@@ -234,4 +284,5 @@ const styles = StyleSheet.create({
   publicText: { color: colors.accent, fontSize: 10, fontWeight: '600' },
   empty: { alignItems: 'center', paddingTop: 60 },
   emptyText: { color: colors.textMuted, fontSize: 15, marginTop: spacing.sm },
+  emptySub: { color: colors.textMuted, fontSize: 13, marginTop: 4, textAlign: 'center', paddingHorizontal: spacing.xl },
 });

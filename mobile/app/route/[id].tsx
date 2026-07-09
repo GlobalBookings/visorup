@@ -11,6 +11,7 @@ import { supabase, SavedTrip } from '../../lib/supabase';
 import { sampleRoutes } from '../../lib/sample-routes';
 import { fetchRoadRoute } from '../../lib/routing';
 import { cacheRoute, isCached } from '../../lib/offline';
+import { getFavouriteRouteIds, toggleFavourite } from '../../lib/favourites';
 import { tapHaptic, successHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
 
@@ -21,6 +22,7 @@ export default function RouteViewer() {
   const [loading, setLoading] = useState(true);
   const [roadCoords, setRoadCoords] = useState<{ latitude: number; longitude: number }[]>([]);
   const [cached, setCached] = useState(false);
+  const [fav, setFav] = useState(false);
 
   useEffect(() => {
     if (demo === '1' || id?.startsWith('demo-')) {
@@ -46,8 +48,18 @@ export default function RouteViewer() {
     }
     if (trip) {
       isCached(trip.id).then(setCached);
+      getFavouriteRouteIds().then((ids) => setFav(ids.has(trip.id))).catch(() => {});
     }
   }, [trip]);
+
+  const onToggleFav = async () => {
+    if (!trip) return;
+    tapHaptic();
+    const currently = fav;
+    setFav(!currently);
+    const { error } = await toggleFavourite(trip.id, currently);
+    if (error) { setFav(currently); Alert.alert('Sign in required', error); }
+  };
 
   if (loading) {
     return (
@@ -175,7 +187,12 @@ ${gpxPoints}
       </MapView>
 
       <ScrollView style={styles.panel} contentContainerStyle={styles.panelContent}>
-        <Text style={styles.routeName}>{trip.name}</Text>
+        <View style={styles.nameRow}>
+          <Text style={[styles.routeName, { flex: 1 }]}>{trip.name}</Text>
+          <TouchableOpacity onPress={onToggleFav} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+            <Ionicons name={fav ? 'heart' : 'heart-outline'} size={24} color={fav ? '#EA4335' : colors.textMuted} />
+          </TouchableOpacity>
+        </View>
         {trip.description ? (
           <Text style={styles.routeDesc}>{trip.description}</Text>
         ) : null}
@@ -255,6 +272,7 @@ const styles = StyleSheet.create({
   map: { height: '45%', width: '100%' },
   panel: { flex: 1, backgroundColor: colors.surface, borderTopLeftRadius: 20, borderTopRightRadius: 20, marginTop: -20 },
   panelContent: { padding: spacing.lg, paddingBottom: 40 },
+  nameRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   routeName: { color: colors.text, fontSize: 22, fontWeight: '800' },
   routeDesc: { color: colors.textMuted, fontSize: 13, marginTop: 4 },
   statsRow: { flexDirection: 'row', gap: spacing.lg, marginTop: spacing.md },

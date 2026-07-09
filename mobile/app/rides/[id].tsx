@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Alert,
+  View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Alert, Share,
 } from 'react-native';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
+import { File, Paths } from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 import { supabase, Ride } from '../../lib/supabase';
 import { tapHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
@@ -35,6 +37,47 @@ export default function RideDetail() {
       setLoading(false);
     })();
   }, [id]);
+
+  const shareRide = async () => {
+    if (!ride) return;
+    tapHaptic();
+    try {
+      await Share.share({
+        message: `I just rode ${fmtMiles(ride.distance_m)} miles in ${fmtTime(ride.duration_s)} on VisorUp (avg ${Math.round(ride.avg_speed)} mph). Plan your own ride at https://visorup.co.uk`,
+      });
+    } catch (_) {}
+  };
+
+  const exportGPX = async () => {
+    if (!ride) return;
+    tapHaptic();
+    const pts = (ride.track || []).map((c) => `      <trkpt lat="${c[0]}" lon="${c[1]}"></trkpt>`).join('\n');
+    const gpx = `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="VisorUp">
+  <metadata><name>${ride.name}</name></metadata>
+  <trk>
+    <name>${ride.name}</name>
+    <trkseg>
+${pts}
+    </trkseg>
+  </trk>
+</gpx>`;
+    try {
+      const fileName = `${ride.name.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'ride'}.gpx`;
+      const file = new File(Paths.document, fileName);
+      if (file.exists) file.delete();
+      file.create();
+      file.write(gpx);
+      const canShare = await Sharing.isAvailableAsync();
+      if (canShare) {
+        await Sharing.shareAsync(file.uri, { mimeType: 'application/gpx+xml', dialogTitle: 'Share GPX' });
+      } else {
+        Alert.alert('GPX Saved', `Saved as ${fileName}`);
+      }
+    } catch (e: any) {
+      Alert.alert('Export failed', e?.message || 'Could not export GPX.');
+    }
+  };
 
   const deleteRide = () => {
     Alert.alert('Delete Ride', 'Remove this ride from your history?', [
@@ -123,6 +166,17 @@ export default function RideDetail() {
           ))}
         </View>
 
+        <View style={styles.actionsRow}>
+          <TouchableOpacity style={styles.actionBtn} onPress={shareRide}>
+            <Ionicons name="share-outline" size={18} color={colors.accent} />
+            <Text style={styles.actionText}>Share</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionBtn} onPress={exportGPX}>
+            <Ionicons name="download-outline" size={18} color={colors.accent} />
+            <Text style={styles.actionText}>GPX</Text>
+          </TouchableOpacity>
+        </View>
+
         {ride.trip_id && (
           <TouchableOpacity
             style={styles.linkBtn}
@@ -166,9 +220,16 @@ const styles = StyleSheet.create({
   },
   statValue: { color: colors.text, fontSize: 20, fontWeight: '800', marginTop: 4 },
   statLabel: { color: colors.textMuted, fontSize: 12 },
+  actionsRow: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.lg },
+  actionBtn: {
+    flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
+    backgroundColor: colors.surfaceLight, borderRadius: 10, padding: spacing.md,
+    borderWidth: 1, borderColor: colors.border,
+  },
+  actionText: { color: colors.accent, fontSize: 13, fontWeight: '700' },
   linkBtn: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8,
-    backgroundColor: colors.surfaceLight, borderRadius: 10, padding: spacing.md, marginTop: spacing.lg,
+    backgroundColor: colors.surfaceLight, borderRadius: 10, padding: spacing.md, marginTop: spacing.sm,
     borderWidth: 1, borderColor: colors.border,
   },
   linkText: { color: colors.accent, fontSize: 14, fontWeight: '700' },
