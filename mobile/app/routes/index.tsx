@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
   View, Text, StyleSheet, SectionList, TouchableOpacity, ActivityIndicator,
-  RefreshControl, Modal, TextInput, Alert,
+  RefreshControl, Modal, TextInput, Alert, KeyboardAvoidingView, Platform,
 } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -130,6 +130,7 @@ export default function MyRoutes() {
       )}
 
       <Modal visible={!!menuTarget} transparent animationType="fade" onRequestClose={() => setMenuTarget(null)}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPress={() => setMenuTarget(null)}>
           <View style={styles.modalSheet}>
             <Text style={styles.modalTitle} numberOfLines={1}>{menuTarget?.name}</Text>
@@ -170,6 +171,7 @@ export default function MyRoutes() {
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
+        </KeyboardAvoidingView>
       </Modal>
     </View>
   );

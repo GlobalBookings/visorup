@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, ScrollView,
-  KeyboardAvoidingView, Platform, FlatList, Modal,
+  KeyboardAvoidingView, Platform, FlatList, Modal, Keyboard,
 } from 'react-native';
 import MapView, { Marker, Polyline, PROVIDER_DEFAULT, MapPressEvent } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
@@ -76,6 +76,16 @@ export default function BuildRouteScreen() {
 
   // Map region for POI filtering and zoom (performance)
   const [mapRegion, setMapRegion] = useState({ latitude: 54.0, longitude: -2.5, latitudeDelta: 8, longitudeDelta: 8 });
+
+  // Keyboard height so the bottom panel lifts above the keyboard
+  const [kbHeight, setKbHeight] = useState(0);
+  useEffect(() => {
+    const showEvt = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hideEvt = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const showSub = Keyboard.addListener(showEvt, (e) => setKbHeight(e.endCoordinates?.height ?? 0));
+    const hideSub = Keyboard.addListener(hideEvt, () => setKbHeight(0));
+    return () => { showSub.remove(); hideSub.remove(); };
+  }, []);
 
   // Bike selection
   const [bikes, setBikes] = useState<UserBike[]>([]);
@@ -756,7 +766,7 @@ export default function BuildRouteScreen() {
       )}
 
       {/* Bottom panel */}
-      <View style={styles.panel}>
+      <View style={[styles.panel, kbHeight > 0 && { bottom: kbHeight }]}>
         {showPanel === 'main' && (
           <>
             {/* Road preference selector */}

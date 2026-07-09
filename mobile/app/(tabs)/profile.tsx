@@ -1,10 +1,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Alert, RefreshControl, Linking, Platform, Modal, Switch,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Alert, RefreshControl, Linking, Platform, Modal, Switch, KeyboardAvoidingView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as Crypto from 'expo-crypto';
+import * as ImagePicker from 'expo-image-picker';
 import { supabase, Profile, UserBike } from '../../lib/supabase';
 import { colors, spacing } from '../../lib/theme';
 import {
@@ -13,6 +15,7 @@ import {
 } from '../../lib/moderation';
 
 export default function ProfileScreen() {
+  const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [bikes, setBikes] = useState<UserBike[]>([]);
@@ -40,6 +43,12 @@ export default function ProfileScreen() {
   type BikeForm = { id?: string; make: string; model: string; nickname: string; year: string; tank: string; mpg: string; primary: boolean };
   const [bikeForm, setBikeForm] = useState<BikeForm | null>(null);
   const [savingBike, setSavingBike] = useState(false);
+
+  // Edit profile form
+  const [editing, setEditing] = useState(false);
+  const [editName, setEditName] = useState('');
+  const [editAvatar, setEditAvatar] = useState<string | null>(null);
+  const [savingProfile, setSavingProfile] = useState(false);
 
   const fetchProfile = useCallback(async () => {
     const { data: { user: u } } = await supabase.auth.getUser();
@@ -236,6 +245,57 @@ export default function ProfileScreen() {
     ]);
   };
 
+  const openEditProfile = () => {
+    setEditName(profile?.display_name ?? '');
+    setEditAvatar(profile?.avatar_url ?? null);
+    setEditing(true);
+  };
+
+  const pickAvatar = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.6,
+    });
+    if (!result.canceled && result.assets[0]) setEditAvatar(result.assets[0].uri);
+  };
+
+  const saveProfile = async () => {
+    const name = editName.trim();
+    if (!name) { Alert.alert('Add a name', 'Enter a display name so other riders know who you are.'); return; }
+    const { data: { user: u } } = await supabase.auth.getUser();
+    if (!u) return;
+    setSavingProfile(true);
+    try {
+      let avatarUrl = profile?.avatar_url ?? null;
+      if (editAvatar && !editAvatar.startsWith('http')) {
+        const fileName = `${u.id}/${Date.now()}.jpg`;
+        const response = await fetch(editAvatar);
+        const blob = await response.blob();
+        const { error: upErr } = await supabase.storage
+          .from('avatars')
+          .upload(fileName, blob, { contentType: 'image/jpeg', upsert: true });
+        if (upErr) throw upErr;
+        const { data } = supabase.storage.from('avatars').getPublicUrl(fileName);
+        avatarUrl = data.publicUrl;
+      } else if (editAvatar === null) {
+        avatarUrl = null;
+      }
+      const { error } = await supabase
+        .from('profiles')
+        .update({ display_name: name, avatar_url: avatarUrl })
+        .eq('id', u.id);
+      if (error) throw error;
+      setEditing(false);
+      await fetchProfile();
+    } catch (e: any) {
+      Alert.alert('Could not save profile', e?.message || 'Please try again.');
+    } finally {
+      setSavingProfile(false);
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -272,7 +332,8 @@ export default function ProfileScreen() {
 
   if (!user) {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.authContainer}>
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.authContainer} keyboardShouldPersistTaps="handled">
         <Ionicons name="bicycle-outline" size={48} color={colors.accent} />
         <Text style={styles.authTitle}>Welcome to VisorUp</Text>
         <Text style={styles.authSub}>Sign in to access your saved routes, garage, and profile.</Text>
@@ -357,6 +418,7 @@ export default function ProfileScreen() {
           <Text style={styles.agreeLink} onPress={() => openUrl(PRIVACY_URL)}>Privacy Policy</Text>.
         </Text>
       </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 
@@ -378,7 +440,25 @@ export default function ProfileScreen() {
         )}
         <Text style={styles.displayName}>{profile?.display_name || 'Rider'}</Text>
         <Text style={styles.email}>{profile?.email}</Text>
+        <TouchableOpacity style={styles.editProfileBtn} onPress={openEditProfile}>
+          <Ionicons name="create-outline" size={14} color={colors.accent} />
+          <Text style={styles.editProfileText}>Edit profile</Text>
+        </TouchableOpacity>
       </View>
+
+      <Text style={styles.sectionTitle}>
+        <Ionicons name="map-outline" size={14} color={colors.accent} /> Your Riding
+      </Text>
+      <TouchableOpacity style={styles.linkRow} onPress={() => router.push('/routes')}>
+        <Ionicons name="bookmark-outline" size={18} color={colors.textMuted} />
+        <Text style={styles.linkRowText}>Saved Routes</Text>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.linkRow} onPress={() => router.push('/rides')}>
+        <Ionicons name="time-outline" size={18} color={colors.textMuted} />
+        <Text style={styles.linkRowText}>Ride History</Text>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
 
       <View style={styles.sectionHeaderRow}>
         <Text style={styles.sectionTitleInline}>
@@ -469,7 +549,7 @@ export default function ProfileScreen() {
     </ScrollView>
 
     <Modal visible={!!bikeForm} animationType="slide" transparent onRequestClose={() => setBikeForm(null)}>
-      <View style={styles.modalOverlay}>
+      <KeyboardAvoidingView style={styles.modalOverlay} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={styles.modalSheet}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>{bikeForm?.id ? 'Edit bike' : 'Add a bike'}</Text>
@@ -522,7 +602,60 @@ export default function ProfileScreen() {
             </ScrollView>
           )}
         </View>
-      </View>
+      </KeyboardAvoidingView>
+    </Modal>
+
+    <Modal visible={editing} animationType="slide" transparent onRequestClose={() => setEditing(false)}>
+      <KeyboardAvoidingView style={styles.modalOverlay} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <View style={styles.modalSheet}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Edit profile</Text>
+            <TouchableOpacity onPress={() => setEditing(false)}>
+              <Ionicons name="close" size={22} color={colors.textMuted} />
+            </TouchableOpacity>
+          </View>
+          <ScrollView keyboardShouldPersistTaps="handled">
+            <View style={styles.avatarEditRow}>
+              <TouchableOpacity onPress={pickAvatar} activeOpacity={0.8}>
+                {editAvatar ? (
+                  <Image source={{ uri: editAvatar }} style={styles.avatarEdit} />
+                ) : (
+                  <View style={styles.avatarEditPlaceholder}>
+                    <Text style={styles.avatarLetter}>{(editName || 'R').charAt(0).toUpperCase()}</Text>
+                  </View>
+                )}
+                <View style={styles.avatarEditBadge}>
+                  <Ionicons name="camera" size={14} color={colors.background} />
+                </View>
+              </TouchableOpacity>
+              <View style={styles.avatarEditActions}>
+                <TouchableOpacity onPress={pickAvatar}>
+                  <Text style={styles.avatarEditLink}>Change photo</Text>
+                </TouchableOpacity>
+                {editAvatar && (
+                  <TouchableOpacity onPress={() => setEditAvatar(null)}>
+                    <Text style={styles.avatarRemoveLink}>Remove</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+            <Text style={styles.formLabel}>Display name *</Text>
+            <TextInput
+              style={styles.formInput}
+              value={editName}
+              onChangeText={setEditName}
+              placeholder="Your rider name"
+              placeholderTextColor={colors.textMuted}
+              autoCapitalize="words"
+              maxLength={40}
+            />
+            <Text style={styles.formHint}>This is how you appear to other riders in the community and on shared routes.</Text>
+            <TouchableOpacity style={[styles.primaryBtn, savingProfile && styles.primaryBtnDisabled]} onPress={saveProfile} disabled={savingProfile}>
+              <Text style={styles.primaryBtnText}>{savingProfile ? 'Saving...' : 'Save profile'}</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+      </KeyboardAvoidingView>
     </Modal>
     </>
   );
@@ -531,7 +664,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   authContainer: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: spacing.xl,
@@ -618,6 +751,27 @@ const styles = StyleSheet.create({
   avatarLetter: { color: colors.accent, fontSize: 32, fontWeight: '800' },
   displayName: { color: colors.text, fontSize: 20, fontWeight: '700', marginTop: spacing.sm },
   email: { color: colors.textMuted, fontSize: 13, marginTop: 2 },
+  editProfileBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: spacing.sm,
+    paddingHorizontal: 14, paddingVertical: 6, borderRadius: 16,
+    backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border,
+  },
+  editProfileText: { color: colors.accent, fontSize: 13, fontWeight: '700' },
+  avatarEditRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginBottom: spacing.md },
+  avatarEdit: { width: 72, height: 72, borderRadius: 36, borderWidth: 2, borderColor: colors.accent },
+  avatarEditPlaceholder: {
+    width: 72, height: 72, borderRadius: 36,
+    backgroundColor: colors.surfaceLight, justifyContent: 'center', alignItems: 'center',
+    borderWidth: 2, borderColor: colors.accent,
+  },
+  avatarEditBadge: {
+    position: 'absolute', bottom: 0, right: 0,
+    width: 26, height: 26, borderRadius: 13, backgroundColor: colors.accent,
+    justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: colors.surface,
+  },
+  avatarEditActions: { gap: 6 },
+  avatarEditLink: { color: colors.accent, fontSize: 14, fontWeight: '700' },
+  avatarRemoveLink: { color: colors.textMuted, fontSize: 13, fontWeight: '600' },
   sectionTitle: {
     color: colors.accent,
     fontSize: 13,
