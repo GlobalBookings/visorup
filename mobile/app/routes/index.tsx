@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
   View, Text, StyleSheet, SectionList, TouchableOpacity, ActivityIndicator,
-  RefreshControl, Modal, TextInput, Alert, KeyboardAvoidingView, Platform,
+  RefreshControl, Modal, TextInput, Alert, KeyboardAvoidingView, Platform, Share,
 } from 'react-native';
 import { useRouter, Stack } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -60,6 +60,34 @@ export default function MyRoutes() {
     }
     successHaptic();
     fetchRoutes();
+  };
+
+  const shareRouteLink = async (slug: string, name: string) => {
+    try {
+      await Share.share({ message: `Check out my motorcycle route "${name}" on VisorUp: https://visorup.co.uk/shared/${slug}` });
+    } catch (_) {}
+  };
+
+  const togglePublic = async (trip: SavedTrip) => {
+    const newPublic = !trip.is_public;
+    let shareSlug = trip.share_slug;
+    if (newPublic && !shareSlug) {
+      shareSlug = trip.id.substring(0, 8) + '-' + Date.now().toString(36);
+    }
+    const { error } = await supabase
+      .from('saved_trips')
+      .update({ is_public: newPublic, share_slug: newPublic ? shareSlug : trip.share_slug })
+      .eq('id', trip.id);
+    if (error) { Alert.alert('Error', error.message); return; }
+    setRoutes((prev) => prev.map((r) => (r.id === trip.id ? { ...r, is_public: newPublic, share_slug: shareSlug } : r)));
+    setMenuTarget((m) => (m && m.id === trip.id ? { ...m, is_public: newPublic, share_slug: shareSlug } : m));
+    successHaptic();
+    if (newPublic && shareSlug) {
+      Alert.alert('Route published', 'Your route is now public and appears in Explore. Share the link with friends?', [
+        { text: 'Not now', style: 'cancel' },
+        { text: 'Share link', onPress: () => shareRouteLink(shareSlug as string, trip.name) },
+      ]);
+    }
   };
 
   const deleteRoute = (trip: SavedTrip) => {
@@ -169,13 +197,31 @@ export default function MyRoutes() {
                 <Text style={styles.newFolderBtnText}>Move</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={styles.editRow}
-              onPress={() => { if (menuTarget) { const t = menuTarget; setMenuTarget(null); tapHaptic(); router.push({ pathname: '/(tabs)/build', params: { editId: t.id } }); } }}
-            >
-              <Ionicons name="create-outline" size={16} color={colors.accent} />
-              <Text style={styles.editRowText}>Edit route</Text>
-            </TouchableOpacity>
+            <View style={styles.menuActions}>
+              <TouchableOpacity
+                style={styles.menuActionBtn}
+                onPress={() => { if (menuTarget) { const t = menuTarget; setMenuTarget(null); tapHaptic(); router.push({ pathname: '/(tabs)/build', params: { editId: t.id } }); } }}
+              >
+                <Ionicons name="create-outline" size={18} color={colors.accent} />
+                <Text style={styles.menuActionText}>Edit</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.menuActionBtn}
+                onPress={() => menuTarget && togglePublic(menuTarget)}
+              >
+                <Ionicons name={menuTarget?.is_public ? 'lock-open-outline' : 'lock-closed-outline'} size={18} color={colors.accent} />
+                <Text style={styles.menuActionText}>{menuTarget?.is_public ? 'Public' : 'Make public'}</Text>
+              </TouchableOpacity>
+              {menuTarget?.is_public && menuTarget?.share_slug && (
+                <TouchableOpacity
+                  style={styles.menuActionBtn}
+                  onPress={() => menuTarget?.share_slug && shareRouteLink(menuTarget.share_slug, menuTarget.name)}
+                >
+                  <Ionicons name="share-outline" size={18} color={colors.accent} />
+                  <Text style={styles.menuActionText}>Share</Text>
+                </TouchableOpacity>
+              )}
+            </View>
             <TouchableOpacity style={styles.deleteRow} onPress={() => menuTarget && deleteRoute(menuTarget)}>
               <Ionicons name="trash-outline" size={16} color={colors.danger} />
               <Text style={styles.deleteRowText}>Delete route</Text>
@@ -227,8 +273,15 @@ const styles = StyleSheet.create({
   },
   newFolderBtn: { backgroundColor: colors.accent, borderRadius: 8, paddingHorizontal: 18, justifyContent: 'center' },
   newFolderBtnText: { color: '#fff', fontSize: 14, fontWeight: '700' },
-  editRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 14, marginTop: 10, borderTopWidth: 1, borderTopColor: colors.border },
-  editRowText: { color: colors.accent, fontSize: 14, fontWeight: '700' },
-  deleteRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 14 },
+  menuActions: {
+    flexDirection: 'row', gap: 8, marginTop: 12, paddingTop: 12,
+    borderTopWidth: 1, borderTopColor: colors.border,
+  },
+  menuActionBtn: {
+    flex: 1, alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 10,
+    backgroundColor: colors.surfaceLight, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
+  },
+  menuActionText: { color: colors.accent, fontSize: 12, fontWeight: '700' },
+  deleteRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, paddingVertical: 14, marginTop: 4 },
   deleteRowText: { color: colors.danger, fontSize: 14, fontWeight: '700' },
 });

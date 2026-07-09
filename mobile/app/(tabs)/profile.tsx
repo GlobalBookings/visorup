@@ -8,6 +8,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import * as Crypto from 'expo-crypto';
 import * as ImagePicker from 'expo-image-picker';
 import { supabase, Profile, UserBike } from '../../lib/supabase';
+import { computeBadges, Badge } from '../../lib/achievements';
 import { colors, spacing } from '../../lib/theme';
 import {
   TERMS_URL, PRIVACY_URL, EULA_SUMMARY, COMMUNITY_GUIDELINES,
@@ -41,6 +42,7 @@ export default function ProfileScreen() {
 
   // Riding stats
   const [stats, setStats] = useState<{ rides: number; miles: number; hours: number } | null>(null);
+  const [badges, setBadges] = useState<Badge[]>([]);
 
   // Bike add/edit form
   type BikeForm = { id?: string; make: string; model: string; nickname: string; year: string; tank: string; mpg: string; primary: boolean };
@@ -76,11 +78,30 @@ export default function ProfileScreen() {
       .from('rides')
       .select('distance_m, duration_s')
       .eq('user_id', u.id);
-    if (r) {
-      const miles = r.reduce((s: number, x: { distance_m: number }) => s + (x.distance_m || 0), 0) * 0.000621371;
-      const hours = r.reduce((s: number, x: { duration_s: number }) => s + (x.duration_s || 0), 0) / 3600;
-      setStats({ rides: r.length, miles: Math.round(miles), hours: Math.round(hours * 10) / 10 });
-    }
+    const ridesCount = r ? r.length : 0;
+    const miles = r ? Math.round(r.reduce((s: number, x: { distance_m: number }) => s + (x.distance_m || 0), 0) * 0.000621371) : 0;
+    const hours = r ? Math.round(r.reduce((s: number, x: { duration_s: number }) => s + (x.duration_s || 0), 0) / 3600 * 10) / 10 : 0;
+    if (r) setStats({ rides: ridesCount, miles, hours });
+
+    const { data: trips } = await supabase.from('saved_trips').select('is_public').eq('user_id', u.id);
+    const routesCount = trips ? trips.length : 0;
+    const publishedCount = trips ? trips.filter((t: { is_public: boolean }) => t.is_public).length : 0;
+
+    let favCount = 0;
+    try {
+      const { data: favs } = await supabase.from('favourites').select('id').eq('user_id', u.id).eq('item_type', 'route');
+      favCount = favs ? favs.length : 0;
+    } catch {}
+
+    setBadges(computeBadges({
+      rides: ridesCount,
+      miles,
+      hours,
+      routes: routesCount,
+      published: publishedCount,
+      bikes: b ? b.length : 0,
+      favourites: favCount,
+    }));
 
     try { setBlocked(await getBlockedProfiles()); } catch {}
 
@@ -262,6 +283,13 @@ export default function ProfileScreen() {
     setEditName(profile?.display_name ?? '');
     setEditAvatar(profile?.avatar_url ?? null);
     setEditing(true);
+  };
+
+  const showBadge = (b: Badge) => {
+    Alert.alert(
+      b.earned ? `${b.title} — Unlocked` : b.title,
+      b.earned ? b.desc : `${b.desc}\n\nProgress: ${Math.min(b.current, b.target)} / ${b.target}`
+    );
   };
 
   const pickAvatar = async () => {
@@ -491,6 +519,24 @@ export default function ProfileScreen() {
         <Text style={styles.linkRowText}>Ride History</Text>
         <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
       </TouchableOpacity>
+
+      {badges.length > 0 && (
+        <>
+          <Text style={styles.sectionTitle}>
+            <Ionicons name="ribbon-outline" size={14} color={colors.accent} /> Achievements ({badges.filter((b) => b.earned).length}/{badges.length})
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.badgeRow}>
+            {badges.map((b) => (
+              <TouchableOpacity key={b.id} style={styles.badgeItem} onPress={() => showBadge(b)} activeOpacity={0.7}>
+                <View style={[styles.badgeCircle, b.earned ? styles.badgeEarned : styles.badgeLocked]}>
+                  <Ionicons name={b.icon as any} size={24} color={b.earned ? colors.background : colors.textMuted} />
+                </View>
+                <Text style={[styles.badgeLabel, !b.earned && { color: colors.textMuted }]} numberOfLines={1}>{b.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </>
+      )}
 
       <View style={styles.sectionHeaderRow}>
         <Text style={styles.sectionTitleInline}>
@@ -799,6 +845,15 @@ const styles = StyleSheet.create({
   statValue: { color: colors.text, fontSize: 20, fontWeight: '800' },
   statLabel: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
   statDivider: { width: 1, height: 28, backgroundColor: colors.border },
+  badgeRow: { paddingHorizontal: spacing.md, gap: 12, paddingVertical: 4 },
+  badgeItem: { alignItems: 'center', width: 68 },
+  badgeCircle: {
+    width: 56, height: 56, borderRadius: 28, justifyContent: 'center', alignItems: 'center',
+    borderWidth: 1,
+  },
+  badgeEarned: { backgroundColor: colors.accent, borderColor: colors.accent },
+  badgeLocked: { backgroundColor: colors.surface, borderColor: colors.border },
+  badgeLabel: { color: colors.text, fontSize: 10, fontWeight: '600', marginTop: 6, textAlign: 'center' },
   avatarEditRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginBottom: spacing.md },
   avatarEdit: { width: 72, height: 72, borderRadius: 36, borderWidth: 2, borderColor: colors.accent },
   avatarEditPlaceholder: {
