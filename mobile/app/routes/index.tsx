@@ -51,9 +51,13 @@ export default function MyRoutes() {
     .filter((s) => s.data.length > 0);
 
   const moveToFolder = async (trip: SavedTrip, folder: string | null) => {
-    await supabase.from('saved_trips').update({ folder }).eq('id', trip.id);
+    const { error } = await supabase.from('saved_trips').update({ folder }).eq('id', trip.id);
     setMenuTarget(null);
     setNewFolder('');
+    if (error) {
+      Alert.alert('Folders not available yet', 'Your route is still saved, but folders need to be enabled first. Nothing else to do — your routes are safe.');
+      return;
+    }
     successHaptic();
     fetchRoutes();
   };

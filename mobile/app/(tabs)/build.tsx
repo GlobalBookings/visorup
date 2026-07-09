@@ -508,7 +508,7 @@ export default function BuildRouteScreen() {
     if (!user) { Alert.alert('Sign In', 'Sign in to save routes.'); return; }
 
     setLoading(true);
-    const { error } = await supabase.from('saved_trips').insert({
+    const basePayload = {
       user_id: user.id,
       name: routeName.trim(),
       description: '',
@@ -524,8 +524,13 @@ export default function BuildRouteScreen() {
           }))
         : [],
       is_public: false,
-      folder: routeFolder.trim() || null,
-    });
+    };
+    const folderValue = routeFolder.trim() || null;
+    let { error } = await supabase.from('saved_trips').insert({ ...basePayload, folder: folderValue });
+    // Databases without the optional `folder` column reject the insert — retry without it.
+    if (error && /folder/i.test(error.message)) {
+      ({ error } = await supabase.from('saved_trips').insert(basePayload));
+    }
     setLoading(false);
 
     if (error) {
