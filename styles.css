@@ -4835,3 +4835,37 @@ ul, ol { list-style: none; }
 .museum-list li { display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; color: var(--text-secondary); }
 .museum-list li i { color: var(--accent); margin-top: 4px; }
 .museum-map { width: 100%; height: 320px; border: 0; border-radius: 12px; }
+
+/* ── App Store badge + mobile app promo ──────────────────── */
+.appstore-badge { display: inline-flex; align-items: center; gap: 10px; background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.28); border-radius: 11px; padding: 9px 16px; text-decoration: none; line-height: 1; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.appstore-badge:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,0.35); color: #fff; }
+.appstore-badge i { font-size: 28px; }
+.appstore-badge-text { display: flex; flex-direction: column; align-items: flex-start; }
+.appstore-badge-text small { font-size: 10px; opacity: 0.85; font-weight: 500; letter-spacing: 0.02em; }
+.appstore-badge-text strong { font-size: 18px; font-weight: 700; letter-spacing: 0.2px; }
+.appstore-badge-sm { padding: 7px 13px; margin-top: 14px; }
+.appstore-badge-sm i { font-size: 23px; }
+.appstore-badge-sm .appstore-badge-text strong { font-size: 15px; }
+
+.hero-app-cta { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 22px; }
+.hero-app-cta-label { font-size: 0.85rem; font-weight: 600; color: #fff; opacity: 0.92; }
+.hero-app-cta-label i { color: var(--accent); margin-right: 5px; }
+
+.app-promo-section .home-split { align-items: center; }
+.app-promo-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+.app-phone { width: 230px; max-width: 78%; margin: 0 auto; aspect-ratio: 9 / 19; background: #0b0f0e; border: 6px solid #1b2622; border-radius: 34px; box-shadow: 0 24px 60px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
+.app-phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 42%; height: 20px; background: #1b2622; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+.app-phone-screen { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: radial-gradient(circle at 50% 30%, #123024 0%, #080c0b 70%); padding: 20px; text-align: center; }
+.app-phone-logo { font-size: 46px; color: var(--accent); }
+.app-phone-name { font-size: 1.5rem; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+.app-phone-name strong { color: var(--accent); }
+.app-phone-tag { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+.app-phone-pills { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 14px; }
+.app-phone-pills span { font-size: 0.68rem; font-weight: 600; color: #fff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); padding: 4px 9px; border-radius: 14px; }
+.app-phone-pills i { color: var(--accent); margin-right: 4px; }
+
+@media (max-width: 720px) {
+  .app-phone { margin-top: 30px; }
+  .hero-app-cta { margin-top: 18px; }
+}

@@ -1170,6 +1170,10 @@ class VisorUpSite {
           '<a href="/routes/island-to-highlands" class="hero-cta">Explore Our Flagship Route <i class="fas fa-arrow-right"></i></a>' +
           '<a href="/build-route" class="hero-cta hero-cta-secondary">Build Your Own Route <i class="fas fa-pencil-ruler"></i></a>' +
         '</div>' +
+        '<div class="hero-app-cta">' +
+          '<span class="hero-app-cta-label"><i class="fas fa-circle-check"></i> Free iPhone app — now live</span>' +
+          '<a href="https://apps.apple.com/app/id6778106869" target="_blank" rel="noopener" class="appstore-badge" aria-label="Download VisorUp on the App Store"><i class="fab fa-apple"></i><span class="appstore-badge-text"><small>Download on the</small><strong>App Store</strong></span></a>' +
+        '</div>' +
         '<div class="hero-stats">' +
           '<div class="hero-stat"><span class="hero-stat-value">7</span><span class="hero-stat-label">Curated Routes</span></div>' +
           '<div class="hero-stat"><span class="hero-stat-value">9,900+</span><span class="hero-stat-label">Fuel Stations</span></div>' +
@@ -1395,6 +1399,40 @@ class VisorUpSite {
                 '<div class="garage-preview-bike"><div class="garage-preview-img"><i class="fas fa-motorcycle"></i></div><div class="garage-preview-name">Triumph Tiger 900<br><small>Rally Pro</small></div></div>' +
               '</div>' +
               '<div class="garage-preview-stats"><span><i class="fas fa-route"></i> 12 routes</span><span><i class="fas fa-heart"></i> 8 favs</span><span><i class="fas fa-share-alt"></i> 3 shared</span></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>' +
+
+    '<!-- MOBILE APP -->' +
+    '<section class="home-section app-promo-section">' +
+      '<div class="container">' +
+        '<div class="home-split">' +
+          '<div class="home-split-text">' +
+            '<span class="section-eyebrow"><i class="fab fa-apple"></i> Free iOS App</span>' +
+            '<h2 class="section-heading">Take VisorUp On The Road</h2>' +
+            '<p class="section-desc" style="text-align:left">Everything you plan on the web, in your pocket. Turn-by-turn ride mode, offline routes, live hazard alerts and your whole garage — all free on iPhone.</p>' +
+            '<ul class="home-feature-list">' +
+              '<li><i class="fas fa-check"></i> GPS ride mode with voice navigation</li>' +
+              '<li><i class="fas fa-check"></i> Round-trip generator and GPX import</li>' +
+              '<li><i class="fas fa-check"></i> Speed-camera and sharp-bend warnings</li>' +
+              '<li><i class="fas fa-check"></i> Group ride live location sharing</li>' +
+              '<li><i class="fas fa-check"></i> Offline routes and full ride history</li>' +
+            '</ul>' +
+            '<div class="app-promo-badges">' +
+              '<a href="https://apps.apple.com/app/id6778106869" target="_blank" rel="noopener" class="appstore-badge" aria-label="Download VisorUp on the App Store"><i class="fab fa-apple"></i><span class="appstore-badge-text"><small>Download on the</small><strong>App Store</strong></span></a>' +
+            '</div>' +
+          '</div>' +
+          '<div class="home-split-visual">' +
+            '<div class="app-phone">' +
+              '<div class="app-phone-notch"></div>' +
+              '<div class="app-phone-screen">' +
+                '<i class="fas fa-motorcycle app-phone-logo"></i>' +
+                '<span class="app-phone-name">VISOR<strong>UP</strong></span>' +
+                '<span class="app-phone-tag">Plan. Ride. Explore.</span>' +
+                '<div class="app-phone-pills"><span><i class="fas fa-route"></i> Ride</span><span><i class="fas fa-users"></i> Group</span><span><i class="fas fa-gas-pump"></i> Fuel</span></div>' +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -6475,6 +6513,7 @@ class VisorUpSite {
             '<div class="footer-logo"><i class="fas fa-motorcycle"></i> VISOR<strong>UP</strong></div>' +
             '<p>Motorcycle Adventures Across Britain</p>' +
             '<p class="footer-tagline">From Island Roads To Highland Horizons</p>' +
+            '<a href="https://apps.apple.com/app/id6778106869" target="_blank" rel="noopener" class="appstore-badge appstore-badge-sm" aria-label="Download VisorUp on the App Store"><i class="fab fa-apple"></i><span class="appstore-badge-text"><small>Download on the</small><strong>App Store</strong></span></a>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Explore</h4>' +
