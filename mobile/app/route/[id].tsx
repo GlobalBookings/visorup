@@ -12,6 +12,7 @@ import { sampleRoutes } from '../../lib/sample-routes';
 import { fetchRoadRoute } from '../../lib/routing';
 import { cacheRoute, isCached } from '../../lib/offline';
 import { getFavouriteRouteIds, toggleFavourite } from '../../lib/favourites';
+import { getRouteWeather, getWeatherIcon, getWeatherColor, WeatherPoint } from '../../lib/weather';
 import { tapHaptic, successHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
 
@@ -23,6 +24,7 @@ export default function RouteViewer() {
   const [roadCoords, setRoadCoords] = useState<{ latitude: number; longitude: number }[]>([]);
   const [cached, setCached] = useState(false);
   const [fav, setFav] = useState(false);
+  const [weather, setWeather] = useState<WeatherPoint[]>([]);
 
   useEffect(() => {
     if (demo === '1' || id?.startsWith('demo-')) {
@@ -49,6 +51,11 @@ export default function RouteViewer() {
     if (trip) {
       isCached(trip.id).then(setCached);
       getFavouriteRouteIds().then((ids) => setFav(ids.has(trip.id))).catch(() => {});
+    }
+    if (trip?.waypoints && trip.waypoints.length > 0) {
+      getRouteWeather(trip.waypoints.map((w) => ({ latitude: w.lat, longitude: w.lng })))
+        .then(setWeather)
+        .catch(() => {});
     }
   }, [trip]);
 
@@ -210,6 +217,31 @@ ${gpxPoints}
           </View>
         </View>
 
+        {weather.length > 0 && (
+          <>
+            <Text style={styles.sectionTitle}>Weather along route</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.weatherRow}>
+              {weather.map((w, i) => (
+                <View key={i} style={styles.weatherCard}>
+                  <Ionicons name={getWeatherIcon(w.condition) as any} size={22} color={getWeatherColor(w.condition)} />
+                  <Text style={styles.weatherTemp}>{w.temperature}°C</Text>
+                  <Text style={styles.weatherDesc} numberOfLines={1}>{w.description}</Text>
+                  <View style={styles.weatherWind}>
+                    <Ionicons name="flag-outline" size={10} color={colors.textMuted} />
+                    <Text style={styles.weatherWindText}>{w.windSpeed} mph</Text>
+                  </View>
+                </View>
+              ))}
+            </ScrollView>
+            {weather.some((w) => w.windSpeed > 30) && (
+              <View style={styles.windAlert}>
+                <Ionicons name="warning-outline" size={14} color="#FFC107" />
+                <Text style={styles.windAlertText}>High winds on this route, ride with caution.</Text>
+              </View>
+            )}
+          </>
+        )}
+
         <Text style={styles.sectionTitle}>Waypoints</Text>
         {waypoints.map((wp, i) => (
           <View key={i} style={styles.waypointRow}>
@@ -284,6 +316,20 @@ const styles = StyleSheet.create({
   dotStart: { backgroundColor: '#34A853' },
   dotEnd: { backgroundColor: '#EA4335' },
   waypointName: { color: colors.text, fontSize: 14 },
+  weatherRow: { gap: spacing.sm, paddingVertical: 4, paddingRight: spacing.md },
+  weatherCard: {
+    alignItems: 'center', backgroundColor: colors.surfaceLight, borderRadius: 12,
+    borderWidth: 1, borderColor: colors.border, paddingVertical: 10, paddingHorizontal: 14, minWidth: 84, gap: 2,
+  },
+  weatherTemp: { color: colors.text, fontSize: 16, fontWeight: '800' },
+  weatherDesc: { color: colors.textMuted, fontSize: 10 },
+  weatherWind: { flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 2 },
+  weatherWindText: { color: colors.textMuted, fontSize: 10 },
+  windAlert: {
+    flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: spacing.sm,
+    backgroundColor: 'rgba(255,193,7,0.12)', borderRadius: 10, padding: spacing.sm,
+  },
+  windAlertText: { color: '#FFC107', fontSize: 12, fontWeight: '600', flex: 1 },
   actions: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.md },
   actionBtn: {
     flex: 1,
