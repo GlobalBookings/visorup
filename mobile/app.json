@@ -76,7 +76,22 @@
         }
       ],
       "expo-sharing",
-      "expo-apple-authentication"
+      "expo-apple-authentication",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "buildReactNativeFromSource": true
+          }
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/material_icons.ttf"]
+        }
+      ],
+      "./plugins/withCarPlay"
     ],
     "experiments": {
       "typedRoutes": true
