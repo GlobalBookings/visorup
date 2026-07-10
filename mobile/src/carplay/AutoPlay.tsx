@@ -36,6 +36,7 @@ import {
   MapTemplate,
   AutoPlayModules,
   ManeuverType,
+  ManeuverState,
   TurnType,
   TrafficSide,
   ForkType,
@@ -593,6 +594,14 @@ function speedMpsOf(ride: ActiveRide): number {
   return Math.max(3, ride.speedMph * 0.44704);
 }
 
+// Progress within the current maneuver, used by the instrument cluster / HUD.
+function maneuverStateFor(distanceMeters: number): ManeuverState {
+  if (distanceMeters < 60) return ManeuverState.Execute;
+  if (distanceMeters < 250) return ManeuverState.Prepare;
+  if (distanceMeters < 800) return ManeuverState.Initial;
+  return ManeuverState.Continue;
+}
+
 function buildManeuver(step: RideStep, id: string, distanceMeters: number, speedMps: number): RoutingManeuver {
   const kind = maneuverKind(step.maneuverType, step.modifier);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -683,6 +692,8 @@ function pushNativeManeuvers(ride: ActiveRide) {
       navStarted = true;
     }
     liveMap.updateManeuvers(maneuversFor(ride));
+    const dist = ride.maneuver?.distanceMeters ?? ride.steps[ride.currentStepIdx]?.distance ?? 0;
+    liveMap.setManeuverState(maneuverStateFor(dist));
   } catch (_) {}
 }
 
