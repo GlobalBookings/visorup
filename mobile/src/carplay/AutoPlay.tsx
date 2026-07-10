@@ -463,6 +463,10 @@ function showMainMenu() {
 let carplayConnected = false;
 let showingLive = false;
 let liveInfo: InformationTemplate | null = null;
+let lastLiveUpdate = 0;
+// CarPlay templates must not be updated many times per second; the phone streams
+// location several times a second, so throttle the car-side refresh.
+const LIVE_UPDATE_MS = 1000;
 
 function liveItems(ride: ActiveRide) {
   return [
@@ -479,6 +483,7 @@ function liveItems(ride: ActiveRide) {
 
 function showLiveRide(ride: ActiveRide) {
   showingLive = true;
+  lastLiveUpdate = Date.now();
   if (MAP_ENABLED) {
     liveInfo = null;
     const map = new MapTemplate({
@@ -499,9 +504,20 @@ function showLiveRide(ride: ActiveRide) {
 function syncLiveRide(ride: ActiveRide | null) {
   if (!carplayConnected) return;
   if (ride) {
-    if (!showingLive) showLiveRide(ride);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    else if (liveInfo) liveInfo.updateItems(liveItems(ride) as any);
+    if (!showingLive) {
+      showLiveRide(ride);
+      return;
+    }
+    // On real hardware LiveRideMap self-updates via its own subscription; the
+    // info-card fallback is refreshed here, throttled to avoid flooding CarPlay.
+    if (!liveInfo) return;
+    const now = Date.now();
+    if (now - lastLiveUpdate < LIVE_UPDATE_MS) return;
+    lastLiveUpdate = now;
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      liveInfo.updateItems(liveItems(ride) as any);
+    } catch (_) {}
   } else if (showingLive) {
     showingLive = false;
     liveInfo = null;
