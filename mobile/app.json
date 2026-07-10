@@ -20,6 +20,8 @@
       "buildNumber": "2",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "VisorUp needs your location to track your ride and show progress along your route.",
+        "NSSpeechRecognitionUsageDescription": "VisorUp uses speech recognition for hands-free voice search and navigation control while riding, including on CarPlay.",
+        "NSMicrophoneUsageDescription": "VisorUp uses the microphone for hands-free voice commands while riding, including on CarPlay.",
         "ITSAppUsesNonExemptEncryption": false
       },
       "config": {
