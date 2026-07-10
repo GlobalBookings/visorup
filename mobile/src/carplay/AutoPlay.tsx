@@ -9,16 +9,19 @@
  *     - Looped Ride : pick a distance -> generate a round trip from current location
  *     - Search      : geocode search (Nominatim) -> pick a destination
  *     - POIs        : category -> nearest points of interest -> pick a destination
- *   Destinations first ask for a route type (Fastest / Curvy) then build the route.
+ *   The route preview shows distance/stops, a Fastest/Curvy toggle (rebuilds in
+ *   place) and a Start ride action.
+ *
+ * DEPTH LIMIT: CarPlay allows at most 5 templates on the navigation stack, so the
+ * preview keeps route-type and Start as in-place updates / a root reset rather
+ * than pushing more templates.
  *
  * MAP LIMITATION: the iOS 26.5 CarPlay *Simulator* crashes inside Apple's own
  * CarPlayTemplateUIHost process when a CPMapTemplate loads
  * (-[CPSTemplateInstance vehicleSupportsDestinationSharing]: unrecognized
  * selector). That is an Apple simulator bug we cannot patch from the app. So the
  * native map is only rendered on real hardware (Device.isDevice); on the
- * simulator we show a route summary (InformationTemplate) instead, keeping the
- * whole flow demoable. Turn-by-turn (CPTrip / navigation session) is a follow-up
- * that can reuse lib/navigation.ts once validated on a real head unit.
+ * simulator Start updates the summary instead, keeping the whole flow demoable.
  */
 import React from 'react';
 import { View, StyleSheet, AppRegistry } from 'react-native';
@@ -44,14 +47,8 @@ import { colors } from '../../lib/theme';
 
 type Coord = { latitude: number; longitude: number };
 type Pref = 'fast' | 'curvy';
-type RoutePreview = {
-  name: string;
-  coords: Coord[];
-  markers: Coord[];
-  distanceMiles?: number;
-  stops?: number;
-  prefLabel?: string;
-};
+type BuildResult = { coords: Coord[]; markers: Coord[]; distanceMiles?: number; stops?: number };
+type Builder = (pref: Pref) => Promise<BuildResult>;
 
 // See MAP LIMITATION above: only draw the native map on real hardware.
 const MAP_ENABLED = Device.isDevice;
@@ -132,74 +129,86 @@ function RouteMap({ coords, markers }: { coords: Coord[]; markers: Coord[] }) {
   );
 }
 
-// --- route preview ---------------------------------------------------------
+// --- route preview (single template; route-type + start in place) ----------
 
-function startRide(opts: RoutePreview) {
-  if (MAP_ENABLED && opts.coords.length > 1) {
-    const map = new MapTemplate({
-      component: () => <RouteMap coords={opts.coords} markers={opts.markers} />,
-      onStopNavigation: () => {},
-    });
-    map.push();
-    return;
-  }
-  showMessage('Live map & navigation open on your car display when connected to CarPlay.');
-}
+async function openRoute(name: string, builder: Builder, allowRouteType: boolean) {
+  const state: { pref: Pref } & BuildResult = { pref: 'fast', coords: [], markers: [] };
+  Object.assign(state, await builder('fast'));
 
-function showRoutePreview(opts: RoutePreview) {
-  const miles = opts.distanceMiles ?? routeMiles(opts.coords);
-  const items = [
-    { type: 'text', title: { text: 'Distance' }, detailedText: { text: miles ? `${Math.round(miles)} mi` : 'n/a' } },
-    { type: 'text', title: { text: 'Stops' }, detailedText: { text: String(opts.stops ?? opts.markers.length) } },
-    { type: 'text', title: { text: 'Route' }, detailedText: { text: opts.prefLabel ?? 'Saved' } },
+  let info: InformationTemplate | null = null;
+
+  const items = () => {
+    const miles = state.distanceMiles ?? routeMiles(state.coords);
+    return [
+      { type: 'text', title: { text: 'Distance' }, detailedText: { text: miles ? `${Math.round(miles)} mi` : 'n/a' } },
+      { type: 'text', title: { text: 'Stops' }, detailedText: { text: String(state.stops ?? state.markers.length) } },
+      {
+        type: 'text',
+        title: { text: 'Route' },
+        detailedText: { text: allowRouteType ? (state.pref === 'curvy' ? 'Curvy' : 'Fastest') : 'Saved' },
+      },
+    ];
+  };
+
+  const setPref = async (pref: Pref) => {
+    if (pref === state.pref) return;
+    Object.assign(state, { pref }, await builder(pref));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    info?.updateItems(items() as any);
+  };
+
+  const start = () => {
+    if (MAP_ENABLED && state.coords.length > 1) {
+      const map = new MapTemplate({
+        component: () => <RouteMap coords={state.coords} markers={state.markers} />,
+        onStopNavigation: () => {},
+      });
+      map.setRootTemplate();
+      return;
+    }
+    const withNote = [
+      ...items(),
+      { type: 'text', title: { text: 'Navigation' }, detailedText: { text: 'Opens on your car display' } },
+    ];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    info?.updateItems(withNote as any);
+  };
+
+  const actions: Array<{ type: 'text'; title: string; style?: 'confirm'; onPress: () => void }> = [
+    { type: 'text', title: 'Start ride', style: 'confirm', onPress: () => start() },
   ];
-  const info = new InformationTemplate({
-    title: { text: opts.name },
+  if (allowRouteType) {
+    actions.push({ type: 'text', title: 'Fastest', onPress: () => setPref('fast') });
+    actions.push({ type: 'text', title: 'Curvy', onPress: () => setPref('curvy') });
+  }
+
+  info = new InformationTemplate({
+    title: { text: name },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    items: items as any,
-    actions: {
-      ios: [{ type: 'text', title: 'Start ride', style: 'confirm', onPress: () => startRide(opts) }],
-    },
+    items: items() as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    actions: { ios: actions as any },
   });
   info.push();
-}
-
-function showMessage(text: string) {
-  const info = new InformationTemplate({
-    title: { text: 'VisorUp' },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    items: [{ type: 'text', title: { text } }] as any,
-  });
-  info.push();
-}
-
-function chooseRouteType(onPick: (pref: Pref, label: string) => void) {
-  const list = new ListTemplate({
-    title: { text: 'Route Type' },
-    sections: {
-      type: 'default',
-      items: [
-        { type: 'default' as const, title: { text: 'Fastest' }, onPress: () => onPick('fast', 'Fastest') },
-        { type: 'default' as const, title: { text: 'Curvy' }, onPress: () => onPick('curvy', 'Curvy') },
-      ],
-    },
-  });
-  list.push();
 }
 
 // dest is a single destination reached from the rider's current location.
-function chooseDestination(name: string, dest: Coord) {
-  chooseRouteType(async (pref, label) => {
-    const from = await currentLocation();
-    const coords = await fetchRoadRoute(
-      [
-        { lat: from.latitude, lng: from.longitude },
-        { lat: dest.latitude, lng: dest.longitude },
-      ],
-      pref
-    );
-    showRoutePreview({ name, coords, markers: [from, dest], stops: 2, prefLabel: label });
-  });
+function openDestination(name: string, dest: Coord) {
+  openRoute(
+    name,
+    async (pref) => {
+      const from = await currentLocation();
+      const coords = await fetchRoadRoute(
+        [
+          { lat: from.latitude, lng: from.longitude },
+          { lat: dest.latitude, lng: dest.longitude },
+        ],
+        pref
+      );
+      return { coords, markers: [from, dest], stops: 2 };
+    },
+    true
+  );
 }
 
 // --- saved routes ----------------------------------------------------------
@@ -229,14 +238,14 @@ async function fetchRoutes(): Promise<SavedTrip[]> {
 }
 
 function showSavedRoute(trip: SavedTrip) {
-  showRoutePreview({
-    name: trip.name,
-    coords: toCoords(trip),
-    markers: (trip.waypoints || []).map((w) => ({ latitude: w.lat, longitude: w.lng })),
-    distanceMiles: trip.route_stats?.distance ? trip.route_stats.distance * 0.000621371 : undefined,
-    stops: trip.waypoints?.length,
-    prefLabel: 'Saved',
-  });
+  const coords = toCoords(trip);
+  const markers = (trip.waypoints || []).map((w) => ({ latitude: w.lat, longitude: w.lng }));
+  const distanceMiles = trip.route_stats?.distance ? trip.route_stats.distance * 0.000621371 : undefined;
+  openRoute(
+    trip.name,
+    async () => ({ coords, markers, distanceMiles, stops: trip.waypoints?.length }),
+    false
+  );
 }
 
 async function showRouteList() {
@@ -263,33 +272,26 @@ async function showRouteList() {
 
 // --- looped ride -----------------------------------------------------------
 
-function buildLoop(miles: number) {
-  chooseRouteType(async (pref, label) => {
-    const from = await currentLocation();
-    const bearing = Math.floor(Math.random() * 360);
-    const loop = await buildRoundTrip(
-      { lat: from.latitude, lng: from.longitude },
-      miles,
-      bearing,
-      pref
-    );
-    if (!loop) {
-      showMessage('Could not build a loop from here. Try a different distance.');
-      return;
-    }
-    const coords = await fetchRoadRoute(
-      loop.waypoints.map((w) => ({ lat: w.lat, lng: w.lng })),
-      pref
-    );
-    showRoutePreview({
-      name: `${Math.round(loop.distanceMiles)} mi loop`,
-      coords,
-      markers: [from],
-      distanceMiles: loop.distanceMiles,
-      stops: loop.waypoints.length,
-      prefLabel: label,
-    });
-  });
+function openLoop(miles: number) {
+  openRoute(
+    `${miles} mile loop`,
+    async (pref) => {
+      const from = await currentLocation();
+      const loop = await buildRoundTrip(
+        { lat: from.latitude, lng: from.longitude },
+        miles,
+        Math.floor(Math.random() * 360),
+        pref
+      );
+      if (!loop) return { coords: [], markers: [from], stops: 0 };
+      const coords = await fetchRoadRoute(
+        loop.waypoints.map((w) => ({ lat: w.lat, lng: w.lng })),
+        pref
+      );
+      return { coords, markers: [from], distanceMiles: loop.distanceMiles, stops: loop.waypoints.length };
+    },
+    true
+  );
 }
 
 function showLoopMenu() {
@@ -302,7 +304,7 @@ function showLoopMenu() {
         title: { text: `${mi} mile loop` },
         detailedText: { text: 'Round trip from here' },
         browsable: true,
-        onPress: () => buildLoop(mi),
+        onPress: () => openLoop(mi),
       })),
     },
   });
@@ -327,7 +329,7 @@ function showSearch() {
             type: 'default' as const,
             title: { text: r.name },
             detailedText: { text: r.displayName },
-            onPress: () => chooseDestination(r.name, { latitude: r.lat, longitude: r.lng }),
+            onPress: () => openDestination(r.name, { latitude: r.lat, longitude: r.lng }),
           })),
         });
       }, 400);
@@ -356,7 +358,7 @@ async function showPoiList(cat: POICategory, label: string) {
         title: { text: p.name },
         detailedText: { text: `${Math.round(d)} mi` },
         browsable: true,
-        onPress: () => chooseDestination(p.name, { latitude: p.lat, longitude: p.lng }),
+        onPress: () => openDestination(p.name, { latitude: p.lat, longitude: p.lng }),
       })),
     },
   });
