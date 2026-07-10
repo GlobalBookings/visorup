@@ -16,9 +16,18 @@ import { heavyHaptic, successHaptic, warningHaptic } from '../../lib/haptics';
 import { speak, speakWaypointArrival, speakOffRoute, speakRideStart, speakRideEnd, speakDirection, speakHazard, isVoiceEnabled, setVoiceEnabled } from '../../lib/voice-nav';
 import { NavStep, fetchRouteWithSteps, fetchRerouteToRoute, getManeuverIcon } from '../../lib/navigation';
 import { Hazard, findSharpBends, fetchSpeedCameras, distanceM } from '../../lib/safety';
-import { startActiveRide, updateActiveRide, endActiveRide } from '../../lib/active-ride';
+import { startActiveRide, updateActiveRide, endActiveRide, RideStep } from '../../lib/active-ride';
 
 type Coord = { latitude: number; longitude: number };
+
+const toRideStep = (s: NavStep): RideStep => ({
+  instruction: s.instruction,
+  maneuverType: s.maneuverType,
+  modifier: s.modifier,
+  roadName: s.roadName,
+  distance: s.distance,
+  location: s.location,
+});
 
 function haversineDistance(a: Coord, b: Coord): number {
   const R = 6371000;
@@ -159,10 +168,13 @@ export default function RideMode() {
   useEffect(() => { navStepsRef.current = navSteps; }, [navSteps]);
   useEffect(() => { currentStepIdxRef.current = currentStepIdx; }, [currentStepIdx]);
   useEffect(() => { nextWaypointIdxRef.current = nextWaypointIdx; }, [nextWaypointIdx]);
-  // Mirror the active route to CarPlay while a ride is running.
+  // Mirror the active route + turn-by-turn steps to CarPlay while riding.
   useEffect(() => {
     if (rideStarted) updateActiveRide({ coords: routeCoords });
   }, [routeCoords, rideStarted]);
+  useEffect(() => {
+    if (rideStarted) updateActiveRide({ steps: navSteps.map(toRideStep) });
+  }, [navSteps, rideStarted]);
 
   const startRide = useCallback(async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -186,6 +198,8 @@ export default function RideMode() {
       coords: routeCoordsRef.current,
       waypoints: waypointsRef.current.map((w) => ({ latitude: w.latitude, longitude: w.longitude })),
       position: userLocation,
+      steps: navStepsRef.current.map(toRideStep),
+      currentStepIdx: 0,
     });
     trackRef.current = [];
     maxSpeedRef.current = 0;
@@ -342,6 +356,7 @@ export default function RideMode() {
           distanceTravelledMi: distanceTravelledRef.current * 0.000621371,
           maneuver,
           nextWaypointName: wps[nextWaypointIdxRef.current]?.name ?? null,
+          currentStepIdx: currentStepIdxRef.current,
         });
       },
     );

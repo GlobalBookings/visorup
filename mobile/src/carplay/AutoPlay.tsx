@@ -35,6 +35,19 @@ import {
   InformationTemplate,
   MapTemplate,
   AutoPlayModules,
+  ManeuverType,
+  TurnType,
+  TrafficSide,
+  ForkType,
+  OffRampType,
+  OnRampType,
+} from '@iternio/react-native-auto-play';
+import type {
+  AutoManeuver,
+  RoutingManeuver,
+  TripConfig,
+  TripPoint,
+  Distance,
 } from '@iternio/react-native-auto-play';
 import { supabase, SavedTrip } from '../../lib/supabase';
 import { sampleRoutes } from '../../lib/sample-routes';
@@ -44,6 +57,7 @@ import { buildRoundTrip } from '../../lib/roundtrip';
 import { pois, poiCategories, POICategory } from '../../lib/pois';
 import {
   ActiveRide,
+  RideStep,
   getActiveRide,
   subscribeActiveRide,
 } from '../../lib/active-ride';
@@ -463,10 +477,20 @@ function showMainMenu() {
 let carplayConnected = false;
 let showingLive = false;
 let liveInfo: InformationTemplate | null = null;
+let liveMap: MapTemplate | null = null;
+let navStarted = false;
 let lastLiveUpdate = 0;
 // CarPlay templates must not be updated many times per second; the phone streams
 // location several times a second, so throttle the car-side refresh.
 const LIVE_UPDATE_MS = 1000;
+
+const LOCAL_TZ = (() => {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/London';
+  } catch (_) {
+    return 'Europe/London';
+  }
+})();
 
 function liveItems(ride: ActiveRide) {
   return [
@@ -481,18 +505,203 @@ function liveItems(ride: ActiveRide) {
   ];
 }
 
+// --- native turn-by-turn maneuver mapping (real hardware only) --------------
+
+function metersDistance(meters: number): Distance {
+  return { value: Math.max(0, Math.round(meters)), unit: 'meters' };
+}
+
+function maneuverKind(type: string, modifier: string): ManeuverType {
+  switch (type) {
+    case 'depart':
+      return ManeuverType.Depart;
+    case 'arrive':
+      if (modifier === 'left') return ManeuverType.ArriveLeft;
+      if (modifier === 'right') return ManeuverType.ArriveRight;
+      return ManeuverType.Arrive;
+    case 'turn':
+    case 'end of road':
+      return modifier && modifier !== 'straight' ? ManeuverType.Turn : ManeuverType.Straight;
+    case 'fork':
+      return ManeuverType.Fork;
+    case 'roundabout':
+    case 'rotary':
+      return ManeuverType.Roundabout;
+    case 'on ramp':
+      return ManeuverType.OnRamp;
+    case 'off ramp':
+      return ManeuverType.OffRamp;
+    default:
+      return ManeuverType.Straight;
+  }
+}
+
+function turnKind(modifier: string): TurnType {
+  switch (modifier) {
+    case 'left':
+      return TurnType.NormalLeft;
+    case 'right':
+      return TurnType.NormalRight;
+    case 'slight left':
+      return TurnType.SlightLeft;
+    case 'slight right':
+      return TurnType.SlightRight;
+    case 'sharp left':
+      return TurnType.SharpLeft;
+    case 'sharp right':
+      return TurnType.SharpRight;
+    case 'uturn':
+      return TurnType.UTurnLeft; // UK drives on the left
+    default:
+      return TurnType.NormalRight;
+  }
+}
+
+function maneuverGlyph(type: string, modifier: string): string {
+  switch (type) {
+    case 'turn':
+    case 'end of road':
+      if (modifier === 'left') return 'turn-left';
+      if (modifier === 'right') return 'turn-right';
+      if (modifier === 'slight left') return 'turn-slight-left';
+      if (modifier === 'slight right') return 'turn-slight-right';
+      if (modifier === 'sharp left') return 'turn-sharp-left';
+      if (modifier === 'sharp right') return 'turn-sharp-right';
+      if (modifier === 'uturn') return 'u-turn-left';
+      return 'straight';
+    case 'fork':
+      return modifier.includes('right') ? 'fork-right' : 'fork-left';
+    case 'roundabout':
+    case 'rotary':
+      return 'roundabout-left';
+    case 'merge':
+    case 'on ramp':
+      return 'merge';
+    case 'off ramp':
+      return modifier.includes('right') ? 'ramp-right' : 'ramp-left';
+    case 'arrive':
+      return 'place';
+    case 'depart':
+      return 'navigation';
+    default:
+      return 'straight';
+  }
+}
+
+function speedMpsOf(ride: ActiveRide): number {
+  return Math.max(3, ride.speedMph * 0.44704);
+}
+
+function buildManeuver(step: RideStep, id: string, distanceMeters: number, speedMps: number): RoutingManeuver {
+  const kind = maneuverKind(step.maneuverType, step.modifier);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const m: any = {
+    id,
+    travelEstimates: {
+      distanceRemaining: metersDistance(distanceMeters),
+      timeRemaining: { timezone: LOCAL_TZ, seconds: Math.round(distanceMeters / speedMps) },
+    },
+    trafficSide: TrafficSide.Left,
+    maneuverType: kind,
+    attributedInstructionVariants: [{ text: step.instruction }],
+    symbolImage: { type: 'glyph', name: maneuverGlyph(step.maneuverType, step.modifier) },
+    cardBackgroundColor: '#141414',
+    type: 'routing',
+  };
+  if (step.roadName) m.roadName = [step.roadName];
+  if (kind === ManeuverType.Turn) m.turnType = turnKind(step.modifier);
+  if (kind === ManeuverType.Fork) m.forkType = step.modifier.includes('right') ? ForkType.Right : ForkType.Left;
+  if (kind === ManeuverType.OffRamp) {
+    m.offRampType = step.modifier.includes('right') ? OffRampType.NormalRight : OffRampType.NormalLeft;
+  }
+  if (kind === ManeuverType.OnRamp) {
+    m.onRampType = step.modifier.includes('right') ? OnRampType.NormalRight : OnRampType.NormalLeft;
+  }
+  return m as RoutingManeuver;
+}
+
+function maneuversFor(ride: ActiveRide): AutoManeuver {
+  const { steps, currentStepIdx } = ride;
+  const cur = steps[currentStepIdx];
+  if (!cur) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return { type: 'loading', cardBackgroundColor: '#141414' } as any;
+  }
+  const speedMps = speedMpsOf(ride);
+  const distToCur = ride.maneuver?.distanceMeters ?? cur.distance;
+  const list: RoutingManeuver[] = [buildManeuver(cur, `s${currentStepIdx}`, distToCur, speedMps)];
+  const nxt = steps[currentStepIdx + 1];
+  if (nxt) list.push(buildManeuver(nxt, `s${currentStepIdx + 1}`, nxt.distance, speedMps));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return list as any;
+}
+
+function tripFor(ride: ActiveRide): TripConfig {
+  const speedMps = speedMpsOf(ride);
+  const steps = ride.steps;
+  let points: TripPoint[] = steps.map((s, i) => {
+    const remaining = steps.slice(i).reduce((sum, st) => sum + st.distance, 0);
+    return {
+      latitude: s.location.latitude,
+      longitude: s.location.longitude,
+      name: s.roadName || s.instruction,
+      travelEstimates: {
+        distanceRemaining: metersDistance(remaining),
+        timeRemaining: { timezone: LOCAL_TZ, seconds: Math.round(remaining / speedMps) },
+      },
+    };
+  });
+  if (points.length === 0 && ride.coords.length) {
+    const dest = ride.coords[ride.coords.length - 1];
+    points = [
+      {
+        latitude: dest.latitude,
+        longitude: dest.longitude,
+        name: ride.name,
+        travelEstimates: { distanceRemaining: metersDistance(0), timeRemaining: { timezone: LOCAL_TZ, seconds: 0 } },
+      },
+    ];
+  }
+  return {
+    id: 'visorup-trip',
+    routeChoice: {
+      id: 'route-0',
+      summaryVariants: [ride.name],
+      additionalInformationVariants: [ride.name],
+      selectionSummaryVariants: [ride.name],
+      steps: points,
+    },
+  };
+}
+
+function pushNativeManeuvers(ride: ActiveRide) {
+  if (!liveMap) return;
+  try {
+    if (!navStarted) {
+      liveMap.startNavigation(tripFor(ride));
+      navStarted = true;
+    }
+    liveMap.updateManeuvers(maneuversFor(ride));
+  } catch (_) {}
+}
+
 function showLiveRide(ride: ActiveRide) {
   showingLive = true;
   lastLiveUpdate = Date.now();
   if (MAP_ENABLED) {
     liveInfo = null;
-    const map = new MapTemplate({
+    navStarted = false;
+    liveMap = new MapTemplate({
       component: () => <LiveRideMap />,
-      onStopNavigation: () => {},
+      onStopNavigation: () => {
+        navStarted = false;
+      },
     });
-    map.setRootTemplate();
+    liveMap.setRootTemplate();
+    pushNativeManeuvers(ride);
     return;
   }
+  liveMap = null;
   liveInfo = new InformationTemplate({
     title: { text: ride.name },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -508,19 +717,29 @@ function syncLiveRide(ride: ActiveRide | null) {
       showLiveRide(ride);
       return;
     }
-    // On real hardware LiveRideMap self-updates via its own subscription; the
-    // info-card fallback is refreshed here, throttled to avoid flooding CarPlay.
-    if (!liveInfo) return;
     const now = Date.now();
     if (now - lastLiveUpdate < LIVE_UPDATE_MS) return;
     lastLiveUpdate = now;
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      liveInfo.updateItems(liveItems(ride) as any);
-    } catch (_) {}
+    if (MAP_ENABLED && liveMap) {
+      // LiveRideMap follows position via its own subscription; here we drive the
+      // native CarPlay maneuver cards (turn-by-turn).
+      pushNativeManeuvers(ride);
+    } else if (liveInfo) {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        liveInfo.updateItems(liveItems(ride) as any);
+      } catch (_) {}
+    }
   } else if (showingLive) {
+    if (liveMap && navStarted) {
+      try {
+        liveMap.stopNavigation();
+      } catch (_) {}
+    }
     showingLive = false;
     liveInfo = null;
+    liveMap = null;
+    navStarted = false;
     showMainMenu();
   }
 }
@@ -529,6 +748,18 @@ export default function registerAutoPlay() {
   registerCarPlayIcons();
   AppRegistry.registerComponent(AutoPlayModules.AutoPlayRoot, () => AutoPlayRoot);
   subscribeActiveRide(syncLiveRide);
+  // If CarPlay is already attached when the app (re)loads, didConnect will not
+  // fire again, so pick up the current connection state directly.
+  try {
+    carplayConnected = HybridAutoPlay.isConnected();
+  } catch (_) {
+    carplayConnected = false;
+  }
+  if (carplayConnected) {
+    const ride = getActiveRide();
+    if (ride) showLiveRide(ride);
+    else showMainMenu();
+  }
   HybridAutoPlay.addListener('didConnect', () => {
     carplayConnected = true;
     const ride = getActiveRide();
@@ -539,6 +770,8 @@ export default function registerAutoPlay() {
     carplayConnected = false;
     showingLive = false;
     liveInfo = null;
+    liveMap = null;
+    navStarted = false;
   });
 }
 

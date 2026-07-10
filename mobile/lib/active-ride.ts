@@ -10,6 +10,16 @@ export type RideCoord = { latitude: number; longitude: number };
 
 export type ActiveManeuver = { instruction: string; distanceMeters: number } | null;
 
+// A turn-by-turn step, used to drive CarPlay's native maneuver cards.
+export type RideStep = {
+  instruction: string;
+  maneuverType: string; // OSRM maneuver type e.g. 'turn', 'roundabout'
+  modifier: string; // OSRM modifier e.g. 'left', 'slight right'
+  roadName: string;
+  distance: number; // segment length in meters
+  location: RideCoord;
+};
+
 export type ActiveRide = {
   name: string;
   coords: RideCoord[];
@@ -20,6 +30,8 @@ export type ActiveRide = {
   distanceTravelledMi: number;
   maneuver: ActiveManeuver;
   nextWaypointName: string | null;
+  steps: RideStep[];
+  currentStepIdx: number;
 };
 
 type Listener = (ride: ActiveRide | null) => void;
@@ -52,6 +64,8 @@ export function startActiveRide(
     distanceTravelledMi: init.distanceTravelledMi ?? 0,
     maneuver: init.maneuver ?? null,
     nextWaypointName: init.nextWaypointName ?? null,
+    steps: init.steps ?? [],
+    currentStepIdx: init.currentStepIdx ?? 0,
   };
   emit();
 }
