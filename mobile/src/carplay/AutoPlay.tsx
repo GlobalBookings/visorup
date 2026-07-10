@@ -21,7 +21,7 @@
  * that can reuse lib/navigation.ts once validated on a real head unit.
  */
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AppRegistry } from 'react-native';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
@@ -31,6 +31,7 @@ import {
   SearchTemplate,
   InformationTemplate,
   MapTemplate,
+  AutoPlayModules,
 } from '@iternio/react-native-auto-play';
 import { supabase, SavedTrip } from '../../lib/supabase';
 import { sampleRoutes } from '../../lib/sample-routes';
@@ -43,6 +44,14 @@ import { colors } from '../../lib/theme';
 
 type Coord = { latitude: number; longitude: number };
 type Pref = 'fast' | 'curvy';
+type RoutePreview = {
+  name: string;
+  coords: Coord[];
+  markers: Coord[];
+  distanceMiles?: number;
+  stops?: number;
+  prefLabel?: string;
+};
 
 // See MAP LIMITATION above: only draw the native map on real hardware.
 const MAP_ENABLED = Device.isDevice;
@@ -96,6 +105,14 @@ async function currentLocation(): Promise<Coord> {
 
 // --- native map (real hardware only) --------------------------------------
 
+// The head-unit CarPlay scene always mounts an RN root component named
+// `AutoPlayRoot` when it connects (via getRootViewForAutoplay). MapTemplate
+// re-registers it with the map content on real hardware; we register a default
+// so the scene can always mount, even when the map is guarded off.
+function AutoPlayRoot() {
+  return <View style={styles.fill} />;
+}
+
 function RouteMap({ coords, markers }: { coords: Coord[]; markers: Coord[] }) {
   return (
     <View style={styles.fill}>
@@ -117,14 +134,7 @@ function RouteMap({ coords, markers }: { coords: Coord[]; markers: Coord[] }) {
 
 // --- route preview ---------------------------------------------------------
 
-function showRoutePreview(opts: {
-  name: string;
-  coords: Coord[];
-  markers: Coord[];
-  distanceMiles?: number;
-  stops?: number;
-  prefLabel?: string;
-}) {
+function startRide(opts: RoutePreview) {
   if (MAP_ENABLED && opts.coords.length > 1) {
     const map = new MapTemplate({
       component: () => <RouteMap coords={opts.coords} markers={opts.markers} />,
@@ -133,18 +143,23 @@ function showRoutePreview(opts: {
     map.push();
     return;
   }
+  showMessage('Live map & navigation open on your car display when connected to CarPlay.');
+}
 
+function showRoutePreview(opts: RoutePreview) {
   const miles = opts.distanceMiles ?? routeMiles(opts.coords);
   const items = [
     { type: 'text', title: { text: 'Distance' }, detailedText: { text: miles ? `${Math.round(miles)} mi` : 'n/a' } },
     { type: 'text', title: { text: 'Stops' }, detailedText: { text: String(opts.stops ?? opts.markers.length) } },
     { type: 'text', title: { text: 'Route' }, detailedText: { text: opts.prefLabel ?? 'Saved' } },
-    { type: 'text', title: { text: 'Map' }, detailedText: { text: 'Opens on your car display' } },
   ];
   const info = new InformationTemplate({
     title: { text: opts.name },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     items: items as any,
+    actions: {
+      ios: [{ type: 'text', title: 'Start ride', style: 'confirm', onPress: () => startRide(opts) }],
+    },
   });
   info.push();
 }
@@ -384,6 +399,7 @@ function showMainMenu() {
 
 export default function registerAutoPlay() {
   registerCarPlayIcons();
+  AppRegistry.registerComponent(AutoPlayModules.AutoPlayRoot, () => AutoPlayRoot);
   HybridAutoPlay.addListener('didConnect', () => {
     showMainMenu();
   });
