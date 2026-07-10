@@ -65,12 +65,17 @@ const AUTOPLAY_METHOD = `
         return factory.superView(
           withModuleName: moduleName,
           initialProperties: initialProperties,
-          launchOptions: nil
+          launchOptions: nil,
+          bundleConfiguration: RCTBundleConfiguration.default(),
+          devMenuConfiguration: nil
         )
       }
       return reactNativeFactory?.rootViewFactory.view(
         withModuleName: moduleName,
-        initialProperties: initialProperties
+        initialProperties: initialProperties,
+        launchOptions: nil,
+        bundleConfiguration: RCTBundleConfiguration.default(),
+        devMenuConfiguration: RCTDevMenuConfiguration.default()
       )
     }
     return nil
@@ -96,10 +101,14 @@ function withAutoplayAppDelegate(config) {
     let contents = cfg.modResults.contents;
     if (contents.includes('getRootViewForAutoplay')) return cfg;
 
-    // Insert the method just before the final closing brace of the file.
-    const lastBrace = contents.lastIndexOf('}');
-    if (lastBrace !== -1) {
-      contents = contents.slice(0, lastBrace) + AUTOPLAY_METHOD + '\n}' + contents.slice(lastBrace + 1);
+    // Insert the method INSIDE the AppDelegate class (where `reactNativeFactory`
+    // is a stored property), right after didFinishLaunchingWithOptions. The final
+    // brace of the file belongs to ReactNativeDelegate, where reactNativeFactory
+    // is out of scope, so we must not anchor on it.
+    const anchor =
+      'return super.application(application, didFinishLaunchingWithOptions: launchOptions)\n  }';
+    if (contents.includes(anchor)) {
+      contents = contents.replace(anchor, anchor + '\n' + AUTOPLAY_METHOD);
       cfg.modResults.contents = contents;
     }
     return cfg;
