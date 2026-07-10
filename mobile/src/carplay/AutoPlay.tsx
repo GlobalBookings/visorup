@@ -479,6 +479,7 @@ let showingLive = false;
 let liveInfo: InformationTemplate | null = null;
 let liveMap: MapTemplate | null = null;
 let navStarted = false;
+let warnedNotConnected = false;
 let lastLiveUpdate = 0;
 // CarPlay templates must not be updated many times per second; the phone streams
 // location several times a second, so throttle the car-side refresh.
@@ -711,9 +712,17 @@ function showLiveRide(ride: ActiveRide) {
 }
 
 function syncLiveRide(ride: ActiveRide | null) {
-  if (!carplayConnected) return;
+  if (!carplayConnected) {
+    if (ride && !warnedNotConnected) {
+      warnedNotConnected = true;
+      console.log('[CarPlay] ride active but CarPlay app is not the foreground scene — cannot switch to live view');
+    }
+    return;
+  }
+  warnedNotConnected = false;
   if (ride) {
     if (!showingLive) {
+      console.log('[CarPlay] switching to live ride view, MAP_ENABLED=', MAP_ENABLED);
       showLiveRide(ride);
       return;
     }
@@ -755,6 +764,7 @@ export default function registerAutoPlay() {
   } catch (_) {
     carplayConnected = false;
   }
+  console.log('[CarPlay] registerAutoPlay, isConnected=', carplayConnected);
   if (carplayConnected) {
     const ride = getActiveRide();
     if (ride) showLiveRide(ride);
@@ -762,12 +772,14 @@ export default function registerAutoPlay() {
   }
   HybridAutoPlay.addListener('didConnect', () => {
     carplayConnected = true;
+    console.log('[CarPlay] didConnect');
     const ride = getActiveRide();
     if (ride) showLiveRide(ride);
     else showMainMenu();
   });
   HybridAutoPlay.addListener('didDisconnect', () => {
     carplayConnected = false;
+    console.log('[CarPlay] didDisconnect');
     showingLive = false;
     liveInfo = null;
     liveMap = null;
