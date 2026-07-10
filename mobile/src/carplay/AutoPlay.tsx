@@ -715,14 +715,14 @@ function syncLiveRide(ride: ActiveRide | null) {
   if (!carplayConnected) {
     if (ride && !warnedNotConnected) {
       warnedNotConnected = true;
-      console.log('[CarPlay] ride active but CarPlay app is not the foreground scene — cannot switch to live view');
+      if (__DEV__) console.log('[CarPlay] ride active but CarPlay app is not the foreground scene — cannot switch to live view');
     }
     return;
   }
   warnedNotConnected = false;
   if (ride) {
     if (!showingLive) {
-      console.log('[CarPlay] switching to live ride view, MAP_ENABLED=', MAP_ENABLED);
+      if (__DEV__) console.log('[CarPlay] switching to live ride view, MAP_ENABLED=', MAP_ENABLED);
       showLiveRide(ride);
       return;
     }
@@ -764,7 +764,7 @@ export default function registerAutoPlay() {
   } catch (_) {
     carplayConnected = false;
   }
-  console.log('[CarPlay] registerAutoPlay, isConnected=', carplayConnected);
+  if (__DEV__) console.log('[CarPlay] registerAutoPlay, isConnected=', carplayConnected);
   if (carplayConnected) {
     const ride = getActiveRide();
     if (ride) showLiveRide(ride);
@@ -772,14 +772,14 @@ export default function registerAutoPlay() {
   }
   HybridAutoPlay.addListener('didConnect', () => {
     carplayConnected = true;
-    console.log('[CarPlay] didConnect');
+    if (__DEV__) console.log('[CarPlay] didConnect');
     const ride = getActiveRide();
     if (ride) showLiveRide(ride);
     else showMainMenu();
   });
   HybridAutoPlay.addListener('didDisconnect', () => {
     carplayConnected = false;
-    console.log('[CarPlay] didDisconnect');
+    if (__DEV__) console.log('[CarPlay] didDisconnect');
     showingLive = false;
     liveInfo = null;
     liveMap = null;
