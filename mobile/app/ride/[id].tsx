@@ -16,6 +16,7 @@ import { heavyHaptic, successHaptic, warningHaptic } from '../../lib/haptics';
 import { speak, speakWaypointArrival, speakOffRoute, speakRideStart, speakRideEnd, speakDirection, speakHazard, isVoiceEnabled, setVoiceEnabled } from '../../lib/voice-nav';
 import { NavStep, fetchRouteWithSteps, fetchRerouteToRoute, getManeuverIcon } from '../../lib/navigation';
 import { Hazard, findSharpBends, fetchSpeedCameras, distanceM } from '../../lib/safety';
+import { startActiveRide, updateActiveRide, endActiveRide } from '../../lib/active-ride';
 
 type Coord = { latitude: number; longitude: number };
 
@@ -82,6 +83,10 @@ export default function RideMode() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const routeCoordsRef = useRef<Coord[]>([]);
   const waypointsRef = useRef<{ latitude: number; longitude: number; name: string }[]>([]);
+  const navStepsRef = useRef<NavStep[]>([]);
+  const currentStepIdxRef = useRef(0);
+  const nextWaypointIdxRef = useRef(0);
+  const distanceTravelledRef = useRef(0);
 
   // Ride recording (for ride history)
   const trackRef = useRef<Coord[]>([]);
@@ -151,6 +156,13 @@ export default function RideMode() {
   // Keep refs in sync for use inside location callback
   useEffect(() => { routeCoordsRef.current = routeCoords; }, [routeCoords]);
   useEffect(() => { waypointsRef.current = waypoints; });
+  useEffect(() => { navStepsRef.current = navSteps; }, [navSteps]);
+  useEffect(() => { currentStepIdxRef.current = currentStepIdx; }, [currentStepIdx]);
+  useEffect(() => { nextWaypointIdxRef.current = nextWaypointIdx; }, [nextWaypointIdx]);
+  // Mirror the active route to CarPlay while a ride is running.
+  useEffect(() => {
+    if (rideStarted) updateActiveRide({ coords: routeCoords });
+  }, [routeCoords, rideStarted]);
 
   const startRide = useCallback(async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -168,6 +180,13 @@ export default function RideMode() {
     setElapsed(0);
     setDistanceTravelled(0);
     setNextWaypointIdx(0);
+    distanceTravelledRef.current = 0;
+    startActiveRide({
+      name: trip?.name || 'Ride',
+      coords: routeCoordsRef.current,
+      waypoints: waypointsRef.current.map((w) => ({ latitude: w.latitude, longitude: w.longitude })),
+      position: userLocation,
+    });
     trackRef.current = [];
     maxSpeedRef.current = 0;
     rideStartTime.current = Date.now();
@@ -211,7 +230,11 @@ export default function RideMode() {
         if (lastPos.current) {
           const d = haversineDistance(lastPos.current, pos);
           if (d > 2 && d < 500) {
-            setDistanceTravelled((prev) => prev + d);
+            setDistanceTravelled((prev) => {
+              const total = prev + d;
+              distanceTravelledRef.current = total;
+              return total;
+            });
           }
         }
         lastPos.current = pos;
@@ -304,6 +327,22 @@ export default function RideMode() {
             zoom: 17,
           });
         }
+
+        // Mirror live progress to CarPlay.
+        const steps = navStepsRef.current;
+        const step = steps[currentStepIdxRef.current];
+        const maneuver = step
+          ? { instruction: step.instruction, distanceMeters: Math.round(haversineDistance(pos, step.location)) }
+          : null;
+        const wps = waypointsRef.current;
+        updateActiveRide({
+          position: pos,
+          heading: loc.coords.heading ?? 0,
+          speedMph: mph,
+          distanceTravelledMi: distanceTravelledRef.current * 0.000621371,
+          maneuver,
+          nextWaypointName: wps[nextWaypointIdxRef.current]?.name ?? null,
+        });
       },
     );
   }, []);
@@ -317,6 +356,7 @@ export default function RideMode() {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = null;
     setRideStarted(false);
+    endActiveRide();
 
     const track = trackRef.current;
     if (track.length < 2) return;
@@ -355,6 +395,7 @@ export default function RideMode() {
       if (timerRef.current) clearInterval(timerRef.current);
       if (offRouteTimer.current) clearTimeout(offRouteTimer.current);
       deactivateKeepAwake();
+      endActiveRide();
     };
   }, []);
 

@@ -24,7 +24,7 @@
  * simulator Start updates the summary instead, keeping the whole flow demoable.
  */
 import React from 'react';
-import { View, StyleSheet, AppRegistry } from 'react-native';
+import { View, Text, StyleSheet, AppRegistry } from 'react-native';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
@@ -42,6 +42,11 @@ import { searchPlaces } from '../../lib/geocode';
 import { fetchRoadRoute } from '../../lib/routing';
 import { buildRoundTrip } from '../../lib/roundtrip';
 import { pois, poiCategories, POICategory } from '../../lib/pois';
+import {
+  ActiveRide,
+  getActiveRide,
+  subscribeActiveRide,
+} from '../../lib/active-ride';
 import { registerCarPlayIcons } from './icons';
 import { colors } from '../../lib/theme';
 
@@ -125,6 +130,60 @@ function RouteMap({ coords, markers }: { coords: Coord[]; markers: Coord[] }) {
           <Marker key={i} coordinate={m} />
         ))}
       </MapView>
+    </View>
+  );
+}
+
+// Live map rendered on the car surface while a ride is running on the phone.
+// It subscribes to the shared store and follows the rider's position.
+function LiveRideMap() {
+  const [ride, setRide] = React.useState<ActiveRide | null>(getActiveRide());
+  const mapRef = React.useRef<MapView>(null);
+
+  React.useEffect(() => {
+    const unsub = subscribeActiveRide((r) => {
+      setRide(r);
+      if (r?.position) {
+        mapRef.current?.animateCamera({
+          center: r.position,
+          heading: r.heading,
+          pitch: 60,
+          zoom: 16,
+        });
+      }
+    });
+    return unsub;
+  }, []);
+
+  if (!ride) return <View style={styles.fill} />;
+  const focus = ride.coords.length ? ride.coords : ride.position ? [ride.position] : [];
+
+  return (
+    <View style={styles.fill}>
+      <MapView
+        ref={mapRef}
+        style={styles.fill}
+        provider={PROVIDER_DEFAULT}
+        initialRegion={regionFor(focus)}
+        mapType="mutedStandard"
+        userInterfaceStyle="dark"
+      >
+        {ride.coords.length > 1 && (
+          <Polyline coordinates={ride.coords} strokeColor={ACCENT} strokeWidth={6} />
+        )}
+        {ride.waypoints.map((w, i) => (
+          <Marker key={i} coordinate={w} />
+        ))}
+        {ride.position && <Marker coordinate={ride.position} pinColor={ACCENT} />}
+      </MapView>
+      {ride.maneuver && (
+        <View style={styles.banner}>
+          <Text style={styles.bannerText} numberOfLines={2}>
+            {ride.maneuver.instruction}
+          </Text>
+          <Text style={styles.bannerSub}>{ride.maneuver.distanceMeters} m</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -399,15 +458,86 @@ function showMainMenu() {
   list.setRootTemplate();
 }
 
+// --- phone -> CarPlay live ride sync ---------------------------------------
+
+let carplayConnected = false;
+let showingLive = false;
+let liveInfo: InformationTemplate | null = null;
+
+function liveItems(ride: ActiveRide) {
+  return [
+    {
+      type: 'text',
+      title: { text: 'Next' },
+      detailedText: { text: ride.maneuver?.instruction ?? ride.nextWaypointName ?? '—' },
+    },
+    { type: 'text', title: { text: 'In' }, detailedText: { text: ride.maneuver ? `${ride.maneuver.distanceMeters} m` : '—' } },
+    { type: 'text', title: { text: 'Speed' }, detailedText: { text: `${Math.round(ride.speedMph)} mph` } },
+    { type: 'text', title: { text: 'Travelled' }, detailedText: { text: `${ride.distanceTravelledMi.toFixed(1)} mi` } },
+  ];
+}
+
+function showLiveRide(ride: ActiveRide) {
+  showingLive = true;
+  if (MAP_ENABLED) {
+    liveInfo = null;
+    const map = new MapTemplate({
+      component: () => <LiveRideMap />,
+      onStopNavigation: () => {},
+    });
+    map.setRootTemplate();
+    return;
+  }
+  liveInfo = new InformationTemplate({
+    title: { text: ride.name },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    items: liveItems(ride) as any,
+  });
+  liveInfo.setRootTemplate();
+}
+
+function syncLiveRide(ride: ActiveRide | null) {
+  if (!carplayConnected) return;
+  if (ride) {
+    if (!showingLive) showLiveRide(ride);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    else if (liveInfo) liveInfo.updateItems(liveItems(ride) as any);
+  } else if (showingLive) {
+    showingLive = false;
+    liveInfo = null;
+    showMainMenu();
+  }
+}
+
 export default function registerAutoPlay() {
   registerCarPlayIcons();
   AppRegistry.registerComponent(AutoPlayModules.AutoPlayRoot, () => AutoPlayRoot);
+  subscribeActiveRide(syncLiveRide);
   HybridAutoPlay.addListener('didConnect', () => {
-    showMainMenu();
+    carplayConnected = true;
+    const ride = getActiveRide();
+    if (ride) showLiveRide(ride);
+    else showMainMenu();
   });
-  HybridAutoPlay.addListener('didDisconnect', () => {});
+  HybridAutoPlay.addListener('didDisconnect', () => {
+    carplayConnected = false;
+    showingLive = false;
+    liveInfo = null;
+  });
 }
 
 const styles = StyleSheet.create({
   fill: { flex: 1, backgroundColor: colors.background },
+  banner: {
+    position: 'absolute',
+    top: 12,
+    left: 12,
+    right: 12,
+    backgroundColor: 'rgba(0,0,0,0.75)',
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+  },
+  bannerText: { color: '#fff', fontSize: 20, fontWeight: '700' },
+  bannerSub: { color: ACCENT, fontSize: 16, fontWeight: '600', marginTop: 2 },
 });
