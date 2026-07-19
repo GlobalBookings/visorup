@@ -17,6 +17,7 @@ if (!agentName) {
   console.log('  infographic-generator');
   console.log('  app-report');
   console.log('  affiliate-revenue');
+  console.log('  weekly-digest');
   process.exit(1);
 }
 
@@ -31,6 +32,7 @@ const agents = {
   'infographic-generator': () => import('./agents/infographic-generator.js'),
   'app-report': () => import('./agents/app-reporting.js'),
   'affiliate-revenue': () => import('./agents/affiliate-revenue.js'),
+  'weekly-digest': () => import('./agents/weekly-digest.js'),
 };
 
 if (!agents[agentName]) {

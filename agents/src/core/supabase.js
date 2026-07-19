@@ -17,11 +17,11 @@ export function supabaseConfigured() {
  * @param {object} filters PostgREST filter params, e.g. { created_at: 'gte.2026-01-01' }
  * @returns {Promise<number|null>} the count, or null if the table/column is missing.
  */
-export async function countRows(table, filters = {}) {
+async function countWithParams(table, params) {
   if (!supabaseConfigured()) return null;
 
-  const params = new URLSearchParams({ select: 'id', limit: '1' });
-  for (const [key, value] of Object.entries(filters)) params.set(key, value);
+  params.set('select', 'id');
+  params.set('limit', '1');
 
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${params.toString()}`, {
@@ -49,6 +49,23 @@ export async function countRows(table, filters = {}) {
     log.warn(`count ${table} failed: ${err.message}`);
     return null;
   }
+}
+
+export async function countRows(table, filters = {}) {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(filters)) params.set(key, value);
+  return countWithParams(table, params);
+}
+
+/**
+ * Count rows where `column` falls in [gteIso, ltIso). Used for
+ * week-over-week windows (this week vs last week).
+ */
+export async function countBetween(table, column, gteIso, ltIso) {
+  const params = new URLSearchParams();
+  params.append(column, `gte.${gteIso}`);
+  params.append(column, `lt.${ltIso}`);
+  return countWithParams(table, params);
 }
 
 function isoDaysAgo(days) {

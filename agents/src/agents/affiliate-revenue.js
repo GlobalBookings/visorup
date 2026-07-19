@@ -36,6 +36,7 @@ import { findRecentEmail } from '../core/email.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 const DEBUG_FILE = path.join(DATA_DIR, 'affiliate-last.txt');
+const RESULT_FILE = path.join(DATA_DIR, 'affiliate-last.json');
 
 const log = createLogger('affiliate-revenue');
 
@@ -178,6 +179,14 @@ export async function run() {
 
     metrics = scrapeMetrics(bodyText);
     const found = Object.values(metrics).filter(Boolean).length;
+    if (found > 0) {
+      // Persist so the Weekly Executive Digest can surface the latest figures.
+      try {
+        fs.writeFileSync(RESULT_FILE, JSON.stringify({ date: new Date().toISOString(), ...metrics }, null, 2));
+      } catch (e) {
+        log.warn(`Could not save affiliate result: ${e.message}`);
+      }
+    }
     if (found === 0) {
       note = 'Logged in, but could not parse any figures. Dashboard text saved to data/affiliate-last.txt — share it and I will tune the selectors.';
       log.warn(note);

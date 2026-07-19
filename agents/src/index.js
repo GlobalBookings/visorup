@@ -12,6 +12,7 @@ import { run as runShareableContent } from './agents/shareable-content.js';
 import { run as runInfographicGen } from './agents/infographic-generator.js';
 import { run as runAppReport } from './agents/app-reporting.js';
 import { run as runAffiliateRevenue } from './agents/affiliate-revenue.js';
+import { run as runWeeklyDigest } from './agents/weekly-digest.js';
 import express from 'express';
 import {
   handleIncomingEmail, verifyWebhook,
@@ -62,6 +63,7 @@ const triggerHandlers = {
   'infographic-generator': runInfographicGen,
   'app-report': runAppReport,
   'affiliate-revenue': runAffiliateRevenue,
+  'weekly-digest': runWeeklyDigest,
 };
 
 app.post('/trigger/:agent', async (req, res) => {
@@ -127,6 +129,7 @@ app.listen(PORT, () => { log.info(`Server listening on port ${PORT}`); });
 // ── Schedule agents (UK timezone) ─────────────────────────
 schedule('App Report',          '30 9 * * *',   runAppReport);        // 9:30 AM daily
 schedule('Affiliate Revenue',   '0 8 * * 1',    runAffiliateRevenue); // 8 AM Monday
+schedule('Weekly Digest',       '15 9 * * 1',   runWeeklyDigest);     // 9:15 AM Monday (after affiliate)
 schedule('GA4 Briefing',        '0 9 * * *',    runGA4);              // 9 AM daily
 schedule('Keyword Miner',       '0 10 * * 1',   runKeywords);         // 10 AM Monday
 schedule('Rank Tracker',        '0 9 * * 1',    runRankTracker);      // 9 AM Monday
