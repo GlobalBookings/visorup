@@ -1,31 +1,77 @@
 type Coord = { latitude: number; longitude: number };
 type RoadPreference = 'fast' | 'curvy' | 'twisty';
 
+export type RoutingAvoidance = {
+  avoidMotorways?: boolean;
+  avoidAroads?: boolean;
+  avoidTollRoads?: boolean;
+  avoidUnpaved?: boolean;
+  avoidNarrowLanes?: boolean;
+  avoidFerries?: boolean;
+};
+
+/** Build OSRM exclude query param from avoidance toggles. */
+function buildOSRMExclude(avoidance?: RoutingAvoidance): string {
+  if (!avoidance) return '';
+  const excludes: string[] = [];
+  if (avoidance.avoidMotorways) excludes.push('motorway');
+  if (avoidance.avoidTollRoads) excludes.push('toll');
+  if (avoidance.avoidFerries) excludes.push('ferry');
+  return excludes.length > 0 ? `&exclude=${excludes.join(',')}` : '';
+}
+
+/** Select BRouter profile based on avoidance preferences. */
+function selectBRouterProfile(avoidance?: RoutingAvoidance): string {
+  if (!avoidance) return 'car-eco';
+  if (avoidance.avoidMotorways && avoidance.avoidAroads) return 'safety';
+  if (avoidance.avoidMotorways) return 'car-eco';
+  return 'car-eco';
+}
+
+/** Maps the road preference to a default curviness intensity (0 = efficient, 100 = max twisties). */
+export function defaultIntensity(preference: RoadPreference): number {
+  if (preference === 'fast') return 0;
+  if (preference === 'twisty') return 100;
+  return 55;
+}
+
 export async function fetchRoadRoute(
   waypoints: { lat: number; lng: number }[],
-  preference: RoadPreference = 'curvy'
+  preference: RoadPreference = 'curvy',
+  avoidance?: RoutingAvoidance,
+  intensity?: number
 ): Promise<Coord[]> {
   if (waypoints.length < 2) return [];
 
-  if (preference === 'fast') {
-    return fetchOSRM(waypoints);
+  const exclude = buildOSRMExclude(avoidance);
+  const level = Math.max(0, Math.min(100, intensity ?? defaultIntensity(preference)));
+
+  // Efficient routing: shortest sensible line (respecting avoidance excludes).
+  if (preference === 'fast' || level <= 5) {
+    return fetchOSRM(waypoints, exclude);
   }
 
-  // For curvy/twisty: build several candidate routes and pick the one that
-  // genuinely maximises turning (per km), within a distance cap. Candidates:
-  //  - OSRM with perpendicular shaping points (nudges onto smaller roads)
-  //  - BRouter "car-eco" (avoids motorways, favours quieter/smaller roads)
-  const shaped = addShapingPoints(waypoints, preference);
-  const [shapedRoute, brouterRoute] = await Promise.all([
-    fetchOSRM(shaped),
-    fetchBRouter(waypoints, 'car-eco'),
-  ]);
+  // Curvy/twisty: build several candidate routes and pick the one that genuinely
+  // maximises turning within a distance cap that grows with the chosen intensity.
+  // Candidates: the direct line, shaping variants nudged onto smaller roads, and
+  // (when motorways are allowed) a BRouter back-roads profile.
+  const variants = buildShapingVariants(waypoints, level);
+  const fetches: Promise<Coord[]>[] = [
+    fetchOSRM(waypoints, exclude),
+    ...variants.map((v) => fetchOSRM(v, exclude)),
+  ];
+  // BRouter can route onto motorways, so skip it when the rider excludes them
+  // to keep motorway avoidance reliable.
+  if (!avoidance?.avoidMotorways) {
+    fetches.push(fetchBRouter(waypoints, selectBRouterProfile(avoidance)));
+  }
 
-  const candidates = [shapedRoute, brouterRoute].filter((c) => c.length > 1);
-  if (candidates.length === 0) return fetchOSRM(waypoints);
+  const results = await Promise.all(fetches);
+  const candidates = results.filter((c) => c.length > 1);
+  if (candidates.length === 0) return fetchOSRM(waypoints, exclude);
 
-  const picked = pickCurviest(candidates, preference);
-  return picked.length > 1 ? picked : fetchOSRM(waypoints);
+  const picked = pickCurviest(candidates, level);
+  return picked.length > 1 ? picked : fetchOSRM(waypoints, exclude);
 }
 
 /** Sum of absolute heading changes along the polyline, in radians. */
@@ -62,15 +108,18 @@ function lengthKm(coords: Coord[]): number {
   return dist;
 }
 
-function pickCurviest(candidates: Coord[][], preference: RoadPreference): Coord[] {
+function pickCurviest(candidates: Coord[][], level: number): Coord[] {
   const scored = candidates.map((c) => ({ c, len: lengthKm(c), turn: totalTurning(c) }));
   const shortest = Math.min(...scored.map((s) => s.len));
-  const maxFactor = preference === 'twisty' ? 2.0 : 1.4;
+  // Higher intensity tolerates longer detours: 1.2x (light) up to 2.2x (max).
+  const maxFactor = 1.2 + (level / 100) * 1.0;
   const eligible = scored.filter((s) => s.len <= shortest * maxFactor);
   const pool = eligible.length > 0 ? eligible : scored;
-  // twisty: maximise absolute turning; curvy: maximise turning per km.
+  // High intensity maximises absolute turning; lower intensity favours turning per km
+  // so the ride stays efficient. Blend the two by intensity.
+  const w = level / 100;
   const key = (s: { len: number; turn: number }) =>
-    preference === 'twisty' ? s.turn : s.turn / Math.max(s.len, 0.1);
+    w * s.turn + (1 - w) * (s.turn / Math.max(s.len, 0.1));
   return pool.reduce((best, s) => (key(s) > key(best) ? s : best)).c;
 }
 
@@ -98,81 +147,77 @@ async function fetchBRouter(
 }
 
 /**
- * Adds small perpendicular offsets between waypoints to nudge the route
- * onto smaller roads. Offsets are capped to prevent going off-road/sea.
- * - curvy: 1 midpoint, offset ~3-5km sideways
- * - twisty: 2 midpoints, offset ~5-8km sideways in alternating directions
+ * Builds several shaped-waypoint variants that nudge the route onto smaller
+ * roads via perpendicular offsets. The offset magnitude and number of midpoints
+ * scale with intensity (0-100). Returns multiple candidates (offset to each side,
+ * plus an alternating double at higher intensity) so the picker can choose the
+ * one that actually turns the most. Offsets are capped to avoid going off-road.
  */
-function addShapingPoints(
+function buildShapingVariants(
   waypoints: { lat: number; lng: number }[],
-  preference: RoadPreference
-): { lat: number; lng: number }[] {
-  const result: { lat: number; lng: number }[] = [waypoints[0]];
+  level: number
+): { lat: number; lng: number }[][] {
+  const w = level / 100;
+  const maxOffset = 0.02 + w * 0.06; // ~2km (light) up to ~8km (max)
+  const useDouble = level >= 70;
 
-  for (let i = 0; i < waypoints.length - 1; i++) {
-    const from = waypoints[i];
-    const to = waypoints[i + 1];
-
-    const dx = to.lng - from.lng;
-    const dy = to.lat - from.lat;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    // Only shape legs longer than ~10km (0.09 degrees)
-    if (dist > 0.09) {
-      const perpX = -dy / dist;
-      const perpY = dx / dist;
-
-      // Cap offset: curvy ~0.03deg (~3km), twisty ~0.05deg (~5km)
-      const maxOffset = preference === 'twisty' ? 0.05 : 0.03;
-      const offset = Math.min(dist * 0.08, maxOffset);
-
-      if (preference === 'twisty') {
-        // Two shaping points in alternating directions
-        const t1 = 0.33, t2 = 0.66;
-        result.push({
-          lat: from.lat + dy * t1 + perpX * offset,
-          lng: from.lng + dx * t1 + perpY * offset,
-        });
-        result.push({
-          lat: from.lat + dy * t2 - perpX * offset,
-          lng: from.lng + dx * t2 - perpY * offset,
-        });
-      } else {
-        // One shaping point offset to one side
-        result.push({
-          lat: from.lat + dy * 0.5 + perpX * offset,
-          lng: from.lng + dx * 0.5 + perpY * offset,
-        });
+  const shape = (sign: 1 | -1, alternate: boolean) => {
+    const result: { lat: number; lng: number }[] = [waypoints[0]];
+    for (let i = 0; i < waypoints.length - 1; i++) {
+      const from = waypoints[i];
+      const to = waypoints[i + 1];
+      const dx = to.lng - from.lng;
+      const dy = to.lat - from.lat;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > 0.09) {
+        const perpX = -dy / dist;
+        const perpY = dx / dist;
+        const offset = Math.min(dist * 0.1, maxOffset);
+        if (alternate) {
+          const t1 = 0.33, t2 = 0.66;
+          result.push({ lat: from.lat + dy * t1 + perpX * offset * sign, lng: from.lng + dx * t1 + perpY * offset * sign });
+          result.push({ lat: from.lat + dy * t2 - perpX * offset * sign, lng: from.lng + dx * t2 - perpY * offset * sign });
+        } else {
+          result.push({ lat: from.lat + dy * 0.5 + perpX * offset * sign, lng: from.lng + dx * 0.5 + perpY * offset * sign });
+        }
       }
+      result.push(to);
     }
+    return result;
+  };
 
-    result.push(to);
-  }
-
-  return result;
+  const variants = [shape(1, false), shape(-1, false)];
+  if (useDouble) variants.push(shape(1, true));
+  return variants;
 }
 
-async function fetchOSRM(waypoints: { lat: number; lng: number }[]): Promise<Coord[]> {
+async function fetchOSRM(
+  waypoints: { lat: number; lng: number }[],
+  exclude: string = ''
+): Promise<Coord[]> {
   const maxWaypoints = 25;
   if (waypoints.length <= maxWaypoints) {
-    return fetchOSRMBatch(waypoints);
+    return fetchOSRMBatch(waypoints, exclude);
   }
 
   const allCoords: Coord[] = [];
   for (let i = 0; i < waypoints.length - 1; i += maxWaypoints - 1) {
     const chunk = waypoints.slice(i, Math.min(i + maxWaypoints, waypoints.length));
-    const coords = await fetchOSRMBatch(chunk);
+    const coords = await fetchOSRMBatch(chunk, exclude);
     if (allCoords.length > 0 && coords.length > 0) coords.shift();
     allCoords.push(...coords);
   }
   return allCoords;
 }
 
-async function fetchOSRMBatch(waypoints: { lat: number; lng: number }[]): Promise<Coord[]> {
+async function fetchOSRMBatch(
+  waypoints: { lat: number; lng: number }[],
+  exclude: string = ''
+): Promise<Coord[]> {
   if (waypoints.length < 2) return [];
 
   const coords = waypoints.map((w) => `${w.lng},${w.lat}`).join(';');
-  const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`;
+  const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson${exclude}`;
 
   try {
     const res = await fetch(url);

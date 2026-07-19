@@ -1,6 +1,60 @@
 export type GpxWaypoint = { latitude: number; longitude: number; name: string };
 export type ParsedGpx = { name: string; waypoints: GpxWaypoint[] };
 
+function escapeXml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+export type LatLng = { latitude: number; longitude: number };
+
+/**
+ * Builds a GPX 1.1 document from named waypoints and/or a track line.
+ * Waypoints become <wpt> + <rtept> (so other apps keep the stops), and the
+ * full geometry becomes a <trk> so the exact road line is preserved.
+ */
+export function buildGpx(opts: {
+  name: string;
+  waypoints?: GpxWaypoint[];
+  track?: LatLng[];
+}): string {
+  const name = escapeXml(opts.name || 'VisorUp route');
+  const wpts = opts.waypoints ?? [];
+  const track = opts.track ?? [];
+
+  const wptXml = wpts
+    .map((w) => `  <wpt lat="${w.latitude}" lon="${w.longitude}"><name>${escapeXml(w.name)}</name></wpt>`)
+    .join('\n');
+
+  const rteXml = wpts.length >= 2
+    ? `  <rte>\n    <name>${name}</name>\n${wpts
+        .map((w) => `    <rtept lat="${w.latitude}" lon="${w.longitude}"><name>${escapeXml(w.name)}</name></rtept>`)
+        .join('\n')}\n  </rte>`
+    : '';
+
+  const trkXml = track.length >= 2
+    ? `  <trk>\n    <name>${name}</name>\n    <trkseg>\n${track
+        .map((c) => `      <trkpt lat="${c.latitude}" lon="${c.longitude}"></trkpt>`)
+        .join('\n')}\n    </trkseg>\n  </trk>`
+    : '';
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="VisorUp" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>${name}</name></metadata>
+${[wptXml, rteXml, trkXml].filter(Boolean).join('\n')}
+</gpx>`;
+}
+
+/** Slugifies a route name into a safe .gpx filename. */
+export function gpxFileName(name: string): string {
+  const base = name.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+  return `${base || 'route'}.gpx`;
+}
+
 function decodeEntities(s: string): string {
   return s
     .replace(/&amp;/g, '&')

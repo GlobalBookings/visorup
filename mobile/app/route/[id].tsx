@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
-  View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Alert, Share,
+  View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, Alert,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
-import { File, Paths } from 'expo-file-system';
-import * as Sharing from 'expo-sharing';
 import { supabase, SavedTrip } from '../../lib/supabase';
+import { exportGpx, shareRouteCard } from '../../lib/share';
+import { publishRoute, unpublishRoute, cloneRouteToMine } from '../../lib/library';
 import { sampleRoutes } from '../../lib/sample-routes';
 import { fetchRoadRoute } from '../../lib/routing';
 import { cacheRoute, isCached } from '../../lib/offline';
@@ -19,12 +19,17 @@ import { colors, spacing } from '../../lib/theme';
 export default function RouteViewer() {
   const { id, demo } = useLocalSearchParams<{ id: string; demo?: string }>();
   const router = useRouter();
+  const mapRef = useRef<MapView>(null);
   const [trip, setTrip] = useState<SavedTrip | null>(null);
   const [loading, setLoading] = useState(true);
   const [roadCoords, setRoadCoords] = useState<{ latitude: number; longitude: number }[]>([]);
   const [cached, setCached] = useState(false);
   const [fav, setFav] = useState(false);
   const [weather, setWeather] = useState<WeatherPoint[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [isPublic, setIsPublic] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [cloning, setCloning] = useState(false);
 
   useEffect(() => {
     if (demo === '1' || id?.startsWith('demo-')) {
@@ -51,6 +56,7 @@ export default function RouteViewer() {
     if (trip) {
       isCached(trip.id).then(setCached);
       getFavouriteRouteIds().then((ids) => setFav(ids.has(trip.id))).catch(() => {});
+      setIsPublic(!!trip.is_public);
     }
     if (trip?.waypoints && trip.waypoints.length > 0) {
       getRouteWeather(trip.waypoints.map((w) => ({ latitude: w.lat, longitude: w.lng })))
@@ -58,6 +64,40 @@ export default function RouteViewer() {
         .catch(() => {});
     }
   }, [trip]);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null)).catch(() => {});
+  }, []);
+
+  const isDemo = demo === '1' || id?.startsWith('demo-');
+  const isOwner = !isDemo && !!trip && !!userId && trip.user_id === userId;
+  const canClone = !!trip && !isOwner;
+
+  const onTogglePublish = async () => {
+    if (!trip) return;
+    tapHaptic();
+    setPublishing(true);
+    if (isPublic) {
+      const { error } = await unpublishRoute(trip.id);
+      if (error) Alert.alert('Error', error); else { setIsPublic(false); }
+    } else {
+      const { error } = await publishRoute(trip);
+      if (error) Alert.alert('Error', error);
+      else { setIsPublic(true); successHaptic(); Alert.alert('Published', 'Your route is now discoverable by the community in Explore.'); }
+    }
+    setPublishing(false);
+  };
+
+  const onClone = async () => {
+    if (!trip) return;
+    tapHaptic();
+    setCloning(true);
+    const { error } = await cloneRouteToMine(trip);
+    setCloning(false);
+    if (error) { Alert.alert('Sign in required', error); return; }
+    successHaptic();
+    Alert.alert('Saved', 'This route has been copied to your saved routes.');
+  };
 
   const onToggleFav = async () => {
     if (!trip) return;
@@ -121,48 +161,20 @@ export default function RouteViewer() {
 
   const exportGPX = async () => {
     tapHaptic();
-    // Generate GPX from route coords
-    const gpxPoints = coords.map((c) => `      <trkpt lat="${c.latitude}" lon="${c.longitude}"></trkpt>`).join('\n');
-    const gpxWaypoints = waypoints.map((w) => `  <wpt lat="${w.latitude}" lon="${w.longitude}"><name>${w.name}</name></wpt>`).join('\n');
-    const gpx = `<?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.1" creator="VisorUp">
-  <metadata><name>${trip.name}</name></metadata>
-${gpxWaypoints}
-  <trk>
-    <name>${trip.name}</name>
-    <trkseg>
-${gpxPoints}
-    </trkseg>
-  </trk>
-</gpx>`;
-
-    const fileName = `${trip.name.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.gpx`;
-    const file = new File(Paths.document, fileName);
-    file.create();
-    file.write(gpx);
-
-    const canShare = await Sharing.isAvailableAsync();
-    if (canShare) {
-      await Sharing.shareAsync(file.uri, { mimeType: 'application/gpx+xml', dialogTitle: 'Share GPX' });
-    } else {
-      Alert.alert('GPX Saved', `Saved as ${fileName}`);
-    }
+    await exportGpx({ name: trip.name, waypoints, track: coords });
   };
 
   const shareRoute = async () => {
     tapHaptic();
-    try {
-      const message = `Check out my motorcycle route "${trip.name}" on VisorUp! ${waypoints.length} stops, ${trip.route_stats?.distance ? Math.round(trip.route_stats.distance * 0.000621371) + ' miles' : ''}`;
-      await Share.share({
-        message,
-        url: trip.share_slug ? `https://visorup.co.uk/shared/${trip.share_slug}` : 'https://visorup.co.uk',
-      });
-    } catch (_) {}
+    const miles = trip.route_stats?.distance ? `${Math.round(trip.route_stats.distance * 0.000621371)} miles` : '';
+    const message = `Check out my motorcycle route "${trip.name}" on VisorUp! ${waypoints.length} stops${miles ? `, ${miles}` : ''}. Plan yours at https://visorup.co.uk`;
+    await shareRouteCard(mapRef.current, message);
   };
 
   return (
     <View style={styles.container}>
       <MapView
+        ref={mapRef}
         style={styles.map}
         provider={PROVIDER_DEFAULT}
         initialRegion={region}
@@ -258,14 +270,33 @@ ${gpxPoints}
           <Text style={styles.rideBtnText}>Start Ride</Text>
         </TouchableOpacity>
 
-        {!(demo === '1' || id?.startsWith('demo-')) && (
-          <TouchableOpacity
-            style={styles.editRouteBtn}
-            onPress={() => { tapHaptic(); router.push({ pathname: '/(tabs)/build', params: { editId: id } }); }}
-          >
-            <Ionicons name="create-outline" size={18} color={colors.accent} />
-            <Text style={styles.editRouteText}>Edit Route</Text>
+        {canClone && (
+          <TouchableOpacity style={styles.editRouteBtn} onPress={onClone} disabled={cloning}>
+            <Ionicons name="bookmark-outline" size={18} color={colors.accent} />
+            <Text style={styles.editRouteText}>{cloning ? 'Saving…' : 'Save to my routes'}</Text>
           </TouchableOpacity>
+        )}
+
+        {isOwner && (
+          <>
+            <TouchableOpacity
+              style={styles.editRouteBtn}
+              onPress={() => { tapHaptic(); router.push({ pathname: '/(tabs)/build', params: { editId: id } }); }}
+            >
+              <Ionicons name="create-outline" size={18} color={colors.accent} />
+              <Text style={styles.editRouteText}>Edit Route</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.editRouteBtn, isPublic && { borderColor: colors.success, backgroundColor: 'rgba(39,174,96,0.1)' }]}
+              onPress={onTogglePublish}
+              disabled={publishing}
+            >
+              <Ionicons name={isPublic ? 'globe' : 'globe-outline'} size={18} color={isPublic ? colors.success : colors.accent} />
+              <Text style={[styles.editRouteText, isPublic && { color: colors.success }]}>
+                {publishing ? 'Working…' : isPublic ? 'Published (tap to unpublish)' : 'Publish to community'}
+              </Text>
+            </TouchableOpacity>
+          </>
         )}
 
         <View style={styles.actions}>

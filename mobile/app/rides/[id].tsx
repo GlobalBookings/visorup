@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Alert, Share,
+  View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Alert,
 } from 'react-native';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
-import { File, Paths } from 'expo-file-system';
-import * as Sharing from 'expo-sharing';
-import { supabase, Ride } from '../../lib/supabase';
+import { supabase, Ride, SavedTrip } from '../../lib/supabase';
+import { exportGpx, shareRouteCard } from '../../lib/share';
 import { tapHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
 
@@ -27,7 +26,9 @@ function fmtTime(s: number) {
 export default function RideDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const mapRef = useRef<MapView>(null);
   const [ride, setRide] = useState<Ride | null>(null);
+  const [planned, setPlanned] = useState<SavedTrip | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -38,45 +39,28 @@ export default function RideDetail() {
     })();
   }, [id]);
 
+  useEffect(() => {
+    if (!ride?.trip_id) { setPlanned(null); return; }
+    (async () => {
+      const { data } = await supabase.from('saved_trips').select('*').eq('id', ride.trip_id).single();
+      if (data) setPlanned(data);
+    })();
+  }, [ride?.trip_id]);
+
   const shareRide = async () => {
     if (!ride) return;
     tapHaptic();
-    try {
-      await Share.share({
-        message: `I just rode ${fmtMiles(ride.distance_m)} miles in ${fmtTime(ride.duration_s)} on VisorUp (avg ${Math.round(ride.avg_speed)} mph). Plan your own ride at https://visorup.co.uk`,
-      });
-    } catch (_) {}
+    const message = `I just rode ${fmtMiles(ride.distance_m)} miles in ${fmtTime(ride.duration_s)} on VisorUp (avg ${Math.round(ride.avg_speed)} mph). Plan your own ride at https://visorup.co.uk`;
+    await shareRouteCard(mapRef.current, message);
   };
 
   const exportGPX = async () => {
     if (!ride) return;
     tapHaptic();
-    const pts = (ride.track || []).map((c) => `      <trkpt lat="${c[0]}" lon="${c[1]}"></trkpt>`).join('\n');
-    const gpx = `<?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.1" creator="VisorUp">
-  <metadata><name>${ride.name}</name></metadata>
-  <trk>
-    <name>${ride.name}</name>
-    <trkseg>
-${pts}
-    </trkseg>
-  </trk>
-</gpx>`;
-    try {
-      const fileName = `${ride.name.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'ride'}.gpx`;
-      const file = new File(Paths.document, fileName);
-      if (file.exists) file.delete();
-      file.create();
-      file.write(gpx);
-      const canShare = await Sharing.isAvailableAsync();
-      if (canShare) {
-        await Sharing.shareAsync(file.uri, { mimeType: 'application/gpx+xml', dialogTitle: 'Share GPX' });
-      } else {
-        Alert.alert('GPX Saved', `Saved as ${fileName}`);
-      }
-    } catch (e: any) {
-      Alert.alert('Export failed', e?.message || 'Could not export GPX.');
-    }
+    await exportGpx({
+      name: ride.name,
+      track: (ride.track || []).map((c) => ({ latitude: c[0], longitude: c[1] })),
+    });
   };
 
   const deleteRide = () => {
@@ -111,6 +95,10 @@ ${pts}
   }
 
   const track: Coord[] = (ride.track || []).map((c) => ({ latitude: c[0], longitude: c[1] }));
+  const plannedCoords: Coord[] = (planned?.route_coords || []).map((c) => ({ latitude: c[0], longitude: c[1] }));
+  const plannedMiles = planned?.route_stats?.distance ? planned.route_stats.distance * 0.000621371 : null;
+  const actualMiles = ride.distance_m * 0.000621371;
+  const diffMiles = plannedMiles != null ? actualMiles - plannedMiles : null;
 
   const region = track.length > 0
     ? {
@@ -132,12 +120,16 @@ ${pts}
     <View style={styles.container}>
       <Stack.Screen options={{ title: ride.name }} />
       <MapView
+        ref={mapRef}
         style={styles.map}
         provider={PROVIDER_DEFAULT}
         initialRegion={region}
         mapType="mutedStandard"
         userInterfaceStyle="dark"
       >
+        {plannedCoords.length > 1 && (
+          <Polyline coordinates={plannedCoords} strokeColor="rgba(66,133,244,0.7)" strokeWidth={3} lineDashPattern={[6, 6]} />
+        )}
         {track.length > 1 && (
           <>
             <Polyline coordinates={track} strokeColor="rgba(214,138,45,0.3)" strokeWidth={8} />
@@ -165,6 +157,35 @@ ${pts}
             </View>
           ))}
         </View>
+
+        {planned && (
+          <View style={styles.compareCard}>
+            <View style={styles.compareHeader}>
+              <View style={styles.legendRow}>
+                <View style={[styles.legendLine, { backgroundColor: '#4285F4' }]} />
+                <Text style={styles.legendLabel}>Planned</Text>
+                <View style={[styles.legendLine, { backgroundColor: colors.accent, marginLeft: 12 }]} />
+                <Text style={styles.legendLabel}>Actual</Text>
+              </View>
+            </View>
+            <View style={styles.compareRow}>
+              <View style={styles.compareCol}>
+                <Text style={styles.compareValue}>{plannedMiles != null ? plannedMiles.toFixed(1) : '—'}</Text>
+                <Text style={styles.compareLabel}>Planned mi</Text>
+              </View>
+              <View style={styles.compareCol}>
+                <Text style={styles.compareValue}>{actualMiles.toFixed(1)}</Text>
+                <Text style={styles.compareLabel}>Actual mi</Text>
+              </View>
+              <View style={styles.compareCol}>
+                <Text style={[styles.compareValue, diffMiles != null && diffMiles > 0 ? { color: '#EA4335' } : { color: '#34A853' }]}>
+                  {diffMiles != null ? `${diffMiles > 0 ? '+' : ''}${diffMiles.toFixed(1)}` : '—'}
+                </Text>
+                <Text style={styles.compareLabel}>Difference</Text>
+              </View>
+            </View>
+          </View>
+        )}
 
         <View style={styles.actionsRow}>
           <TouchableOpacity style={styles.actionBtn} onPress={shareRide}>
@@ -220,6 +241,18 @@ const styles = StyleSheet.create({
   },
   statValue: { color: colors.text, fontSize: 20, fontWeight: '800', marginTop: 4 },
   statLabel: { color: colors.textMuted, fontSize: 12 },
+  compareCard: {
+    backgroundColor: colors.surfaceLight, borderRadius: 12, padding: spacing.md, marginTop: spacing.lg,
+    borderWidth: 1, borderColor: colors.border,
+  },
+  compareHeader: { marginBottom: spacing.sm },
+  legendRow: { flexDirection: 'row', alignItems: 'center' },
+  legendLine: { width: 16, height: 3, borderRadius: 2, marginRight: 5 },
+  legendLabel: { color: colors.textMuted, fontSize: 11, fontWeight: '600' },
+  compareRow: { flexDirection: 'row', justifyContent: 'space-between' },
+  compareCol: { alignItems: 'center', flex: 1 },
+  compareValue: { color: colors.text, fontSize: 18, fontWeight: '800' },
+  compareLabel: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
   actionsRow: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.lg },
   actionBtn: {
     flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,

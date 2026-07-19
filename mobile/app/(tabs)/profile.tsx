@@ -11,6 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase, Profile, UserBike } from '../../lib/supabase';
 import { computeBadges, Badge } from '../../lib/achievements';
 import { BadgeToast } from '../../components/BadgeToast';
+import { EmergencyContactsSheet } from '../../components/EmergencyContactsSheet';
+import { OfflineDownloadSheet } from '../../components/OfflineDownloadSheet';
 import { colors, spacing } from '../../lib/theme';
 
 const EARNED_BADGES_KEY = 'vu_earned_badges';
@@ -59,6 +61,9 @@ export default function ProfileScreen() {
   const [editName, setEditName] = useState('');
   const [editAvatar, setEditAvatar] = useState<string | null>(null);
   const [savingProfile, setSavingProfile] = useState(false);
+
+  const [showEmergencyContacts, setShowEmergencyContacts] = useState(false);
+  const [showOfflineRoutes, setShowOfflineRoutes] = useState(false);
 
   const fetchProfile = useCallback(async () => {
     const { data: { user: u } } = await supabase.auth.getUser();
@@ -537,6 +542,30 @@ export default function ProfileScreen() {
         <Text style={styles.linkRowText}>Ride History</Text>
         <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
       </TouchableOpacity>
+      <TouchableOpacity style={styles.linkRow} onPress={() => router.push('/challenges')}>
+        <Ionicons name="flag-outline" size={18} color={colors.textMuted} />
+        <View style={styles.linkRowTextWrap}>
+          <Text style={styles.linkRowText}>Challenges</Text>
+          <Text style={styles.linkRowSub}>Tick off Britain's iconic roads</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.linkRow} onPress={() => router.push('/leaderboard')}>
+        <Ionicons name="trophy-outline" size={18} color={colors.textMuted} />
+        <View style={styles.linkRowTextWrap}>
+          <Text style={styles.linkRowText}>Leaderboards</Text>
+          <Text style={styles.linkRowSub}>See how your miles stack up</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.linkRow} onPress={() => setShowOfflineRoutes(true)}>
+        <Ionicons name="cloud-download-outline" size={18} color={colors.textMuted} />
+        <View style={styles.linkRowTextWrap}>
+          <Text style={styles.linkRowText}>Offline Maps</Text>
+          <Text style={styles.linkRowSub}>Manage routes saved for offline use</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
 
       {badges.length > 0 && (
         <>
@@ -597,8 +626,36 @@ export default function ProfileScreen() {
       )}
 
       <Text style={styles.sectionTitle}>
+        <Ionicons name="build-outline" size={14} color={colors.accent} /> Bike Care
+      </Text>
+      <TouchableOpacity style={styles.linkRow} onPress={() => router.push('/maintenance')}>
+        <Ionicons name="construct-outline" size={18} color={colors.textMuted} />
+        <View style={styles.linkRowTextWrap}>
+          <Text style={styles.linkRowText}>Maintenance</Text>
+          <Text style={styles.linkRowSub}>Service log, due reminders & pre-ride check</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.linkRow} onPress={() => router.push('/expenses')}>
+        <Ionicons name="wallet-outline" size={18} color={colors.textMuted} />
+        <View style={styles.linkRowTextWrap}>
+          <Text style={styles.linkRowText}>Expenses & Fuel</Text>
+          <Text style={styles.linkRowSub}>Track fuel, costs & economy</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
+
+      <Text style={styles.sectionTitle}>
         <Ionicons name="shield-checkmark-outline" size={14} color={colors.accent} /> Safety & Legal
       </Text>
+      <TouchableOpacity style={styles.linkRow} onPress={() => setShowEmergencyContacts(true)}>
+        <Ionicons name="medkit-outline" size={18} color={colors.textMuted} />
+        <View style={styles.linkRowTextWrap}>
+          <Text style={styles.linkRowText}>Emergency Contacts</Text>
+          <Text style={styles.linkRowSub}>For crash detection SOS alerts</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+      </TouchableOpacity>
       <TouchableOpacity style={styles.linkRow} onPress={showGuidelines}>
         <Ionicons name="people-outline" size={18} color={colors.textMuted} />
         <Text style={styles.linkRowText}>Community Guidelines</Text>
@@ -753,6 +810,9 @@ export default function ProfileScreen() {
         </View>
       </KeyboardAvoidingView>
     </Modal>
+
+    <EmergencyContactsSheet visible={showEmergencyContacts} onClose={() => setShowEmergencyContacts(false)} />
+    <OfflineDownloadSheet visible={showOfflineRoutes} onClose={() => setShowOfflineRoutes(false)} />
     </>
   );
 }
@@ -807,6 +867,8 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   linkRowText: { flex: 1, color: colors.text, fontSize: 14, fontWeight: '600' },
+  linkRowTextWrap: { flex: 1 },
+  linkRowSub: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
   blockedRow: {
     flexDirection: 'row',
     alignItems: 'center',

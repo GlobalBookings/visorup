@@ -38,7 +38,7 @@ export type SavedTrip = {
   user_id: string;
   name: string;
   description: string;
-  waypoints: Array<{ lat: number; lng: number; name?: string }>;
+  waypoints: Array<{ lat: number; lng: number; name?: string; kind?: string }>;
   settings: Record<string, any>;
   route_stats: { distance?: number; duration?: number; waypoints?: number };
   route_coords: number[][];

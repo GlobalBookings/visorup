@@ -15,8 +15,12 @@ import { checkFuelRange, FuelStatus } from '../../lib/fuel';
 import { heavyHaptic, successHaptic, warningHaptic } from '../../lib/haptics';
 import { speak, speakWaypointArrival, speakOffRoute, speakRideStart, speakRideEnd, speakDirection, speakHazard, isVoiceEnabled, setVoiceEnabled } from '../../lib/voice-nav';
 import { NavStep, fetchRouteWithSteps, fetchRerouteToRoute, getManeuverIcon } from '../../lib/navigation';
+import { getOfflineRoute } from '../../lib/offline-maps';
 import { Hazard, findSharpBends, fetchSpeedCameras, distanceM } from '../../lib/safety';
 import { startActiveRide, updateActiveRide, endActiveRide, RideStep } from '../../lib/active-ride';
+import { startCrashMonitoring, stopCrashMonitoring, onCrashDetected, getCrashContacts } from '../../lib/crash-detection';
+import { triggerSOS, resetSOS } from '../../lib/emergency-sos';
+import { SOSOverlay } from '../../components/SOSOverlay';
 
 type Coord = { latitude: number; longitude: number };
 
@@ -81,6 +85,15 @@ export default function RideMode() {
   const followingRef = useRef(true);
   useEffect(() => { followingRef.current = following; }, [following]);
 
+  // Crash detection + emergency SOS
+  const [crashDetectionOn, setCrashDetectionOn] = useState(true);
+  const crashDetectionOnRef = useRef(true);
+  useEffect(() => { crashDetectionOnRef.current = crashDetectionOn; }, [crashDetectionOn]);
+  const crashUnsub = useRef<(() => void) | null>(null);
+  const userLocationRef = useRef<Coord | null>(null);
+  useEffect(() => { userLocationRef.current = userLocation; }, [userLocation]);
+  const [showCrashHint, setShowCrashHint] = useState(false);
+
   // Turn-by-turn navigation
   const [navSteps, setNavSteps] = useState<NavStep[]>([]);
   const [currentStepIdx, setCurrentStepIdx] = useState(0);
@@ -130,7 +143,25 @@ export default function RideMode() {
     if (!trip) return;
     (async () => {
       setRouteLoading(true);
-      const { coords, steps } = await fetchRouteWithSteps(trip.waypoints);
+
+      // Prefer the offline cache so turn-by-turn + voice work without signal.
+      // Fall back to it if the live routing request returns nothing (no signal).
+      let coords: Coord[] = [];
+      let steps: NavStep[] = [];
+      const cached = await getOfflineRoute(trip.id).catch(() => null);
+      if (cached && cached.coords.length > 1) {
+        coords = cached.coords;
+        steps = cached.steps || [];
+      } else {
+        const online = await fetchRouteWithSteps(trip.waypoints);
+        if (online.coords.length > 1) {
+          coords = online.coords;
+          steps = online.steps;
+        } else if (cached && cached.coords.length > 1) {
+          coords = cached.coords;
+          steps = cached.steps || [];
+        }
+      }
       setRouteCoords(coords);
       setNavSteps(steps);
       setRouteLoading(false);
@@ -176,6 +207,30 @@ export default function RideMode() {
     if (rideStarted) updateActiveRide({ steps: navSteps.map(toRideStep) });
   }, [navSteps, rideStarted]);
 
+  const registerCrashHandler = useCallback(() => {
+    crashUnsub.current?.();
+    crashUnsub.current = onCrashDetected((event) => {
+      triggerSOS(event.location ?? userLocationRef.current);
+    });
+  }, []);
+
+  const toggleCrashDetection = useCallback(() => {
+    setCrashDetectionOn((on) => {
+      const next = !on;
+      if (next) {
+        startCrashMonitoring();
+        registerCrashHandler();
+        successHaptic();
+      } else {
+        stopCrashMonitoring();
+        crashUnsub.current?.();
+        crashUnsub.current = null;
+        warningHaptic();
+      }
+      return next;
+    });
+  }, [registerCrashHandler]);
+
   const startRide = useCallback(async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
@@ -208,6 +263,17 @@ export default function RideMode() {
     lastHazardTime.current = 0;
 
     timerRef.current = setInterval(() => setElapsed((e) => e + 1), 1000);
+
+    if (crashDetectionOnRef.current) {
+      startCrashMonitoring();
+      registerCrashHandler();
+      getCrashContacts().then((contacts) => {
+        if (contacts.length === 0) {
+          setShowCrashHint(true);
+          setTimeout(() => setShowCrashHint(false), 6000);
+        }
+      });
+    }
 
     locationSub.current = await Location.watchPositionAsync(
       {
@@ -370,6 +436,10 @@ export default function RideMode() {
     locationSub.current = null;
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = null;
+    stopCrashMonitoring();
+    crashUnsub.current?.();
+    crashUnsub.current = null;
+    resetSOS();
     setRideStarted(false);
     endActiveRide();
 
@@ -409,6 +479,10 @@ export default function RideMode() {
       locationSub.current?.remove();
       if (timerRef.current) clearInterval(timerRef.current);
       if (offRouteTimer.current) clearTimeout(offRouteTimer.current);
+      stopCrashMonitoring();
+      crashUnsub.current?.();
+      crashUnsub.current = null;
+      resetSOS();
       deactivateKeepAwake();
       endActiveRide();
     };
@@ -551,6 +625,18 @@ export default function RideMode() {
             </Text>
           )}
         </View>
+        {rideStarted && (
+          <TouchableOpacity
+            style={[styles.crashBtn, !crashDetectionOn && styles.crashBtnOff]}
+            onPress={toggleCrashDetection}
+          >
+            <Ionicons
+              name={crashDetectionOn ? 'shield-checkmark-outline' : 'shield-outline'}
+              size={18}
+              color={crashDetectionOn ? '#fff' : '#666'}
+            />
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={[styles.voiceBtn, !voiceOn && styles.voiceBtnOff]}
           onPress={() => { const next = !voiceOn; setVoiceOn(next); setVoiceEnabled(next); }}
@@ -558,6 +644,14 @@ export default function RideMode() {
           <Ionicons name={voiceOn ? 'volume-high' : 'volume-mute'} size={18} color={voiceOn ? '#fff' : '#666'} />
         </TouchableOpacity>
       </View>
+
+      {/* One-time hint when no emergency contacts are configured */}
+      {showCrashHint && rideStarted && (
+        <View style={styles.crashHint}>
+          <Ionicons name="shield-checkmark-outline" size={14} color="#fff" />
+          <Text style={styles.crashHintText}>Crash detection on · add emergency contacts in Settings</Text>
+        </View>
+      )}
 
       {/* Off-route warning */}
       {offRoute && rideStarted && (
@@ -677,6 +771,8 @@ export default function RideMode() {
           </View>
         )}
       </View>
+
+      <SOSOverlay />
     </View>
   );
 }
@@ -741,6 +837,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(66,133,244,0.3)', justifyContent: 'center', alignItems: 'center',
   },
   voiceBtnOff: { backgroundColor: 'rgba(255,255,255,0.1)' },
+  crashBtn: {
+    width: 36, height: 36, borderRadius: 18, marginRight: 8,
+    backgroundColor: 'rgba(52,168,83,0.3)', justifyContent: 'center', alignItems: 'center',
+  },
+  crashBtnOff: { backgroundColor: 'rgba(255,255,255,0.1)' },
+  crashHint: {
+    position: 'absolute',
+    top: 100,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: 'rgba(52,168,83,0.95)',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    ...Platform.select({ ios: {
+      shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4,
+    }}),
+  },
+  crashHintText: { color: '#fff', fontSize: 12, fontWeight: '600' },
 
   // Off route
   // Turn-by-turn card

@@ -24,7 +24,7 @@
  * simulator Start updates the summary instead, keeping the whole flow demoable.
  */
 import React from 'react';
-import { View, Text, StyleSheet, AppRegistry } from 'react-native';
+import { View, Text, StyleSheet, AppRegistry, Dimensions, Linking } from 'react-native';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
@@ -62,6 +62,8 @@ import {
   getActiveRide,
   subscribeActiveRide,
 } from '../../lib/active-ride';
+import { curatedRoutes } from '../../lib/curated-routes';
+import { EMERGENCY_NUMBERS, BREAKDOWN_PROVIDERS } from '../../lib/emergency-info';
 import { registerCarPlayIcons } from './icons';
 import { colors } from '../../lib/theme';
 
@@ -130,22 +132,54 @@ function AutoPlayRoot() {
   return <View style={styles.fill} />;
 }
 
-function RouteMap({ coords, markers }: { coords: Coord[]; markers: Coord[] }) {
+function CarPlayMapContainer({ children }: { children: React.ReactNode }) {
+  const [ready, setReady] = React.useState(false);
+  const [dims, setDims] = React.useState(() => {
+    const { width, height } = Dimensions.get('screen');
+    return { width, height };
+  });
+
+  React.useEffect(() => {
+    const sub = Dimensions.addEventListener('change', ({ screen }) => {
+      setDims({ width: screen.width, height: screen.height });
+    });
+    const timer = setTimeout(() => setReady(true), 150);
+    return () => { sub.remove(); clearTimeout(timer); };
+  }, []);
+
+  if (!ready) return <View style={[styles.fill, { backgroundColor: '#1a1a1a' }]} />;
   return (
-    <View style={styles.fill}>
+    <View style={{ width: dims.width, height: dims.height, backgroundColor: '#1a1a1a' }}>
+      {children}
+    </View>
+  );
+}
+
+function RouteMap({ coords, markers }: { coords: Coord[]; markers: Coord[] }) {
+  const mapRef = React.useRef<MapView>(null);
+
+  const onMapReady = React.useCallback(() => {
+    const region = regionFor(coords.length ? coords : markers);
+    mapRef.current?.animateToRegion(region, 300);
+  }, [coords, markers]);
+
+  return (
+    <CarPlayMapContainer>
       <MapView
-        style={styles.fill}
+        ref={mapRef}
+        style={StyleSheet.absoluteFill}
         provider={PROVIDER_DEFAULT}
         initialRegion={regionFor(coords.length ? coords : markers)}
-        mapType="mutedStandard"
+        mapType="standard"
         userInterfaceStyle="dark"
+        onMapReady={onMapReady}
       >
         {coords.length > 1 && <Polyline coordinates={coords} strokeColor={ACCENT} strokeWidth={5} />}
         {markers.map((m, i) => (
           <Marker key={i} coordinate={m} />
         ))}
       </MapView>
-    </View>
+    </CarPlayMapContainer>
   );
 }
 
@@ -154,11 +188,12 @@ function RouteMap({ coords, markers }: { coords: Coord[]; markers: Coord[] }) {
 function LiveRideMap() {
   const [ride, setRide] = React.useState<ActiveRide | null>(getActiveRide());
   const mapRef = React.useRef<MapView>(null);
+  const mapReady = React.useRef(false);
 
   React.useEffect(() => {
     const unsub = subscribeActiveRide((r) => {
       setRide(r);
-      if (r?.position) {
+      if (r?.position && mapReady.current) {
         mapRef.current?.animateCamera({
           center: r.position,
           heading: r.heading,
@@ -170,18 +205,32 @@ function LiveRideMap() {
     return unsub;
   }, []);
 
+  const onMapReady = React.useCallback(() => {
+    mapReady.current = true;
+    const r = getActiveRide();
+    if (r?.position) {
+      mapRef.current?.animateCamera({
+        center: r.position,
+        heading: r.heading,
+        pitch: 60,
+        zoom: 16,
+      });
+    }
+  }, []);
+
   if (!ride) return <View style={styles.fill} />;
   const focus = ride.coords.length ? ride.coords : ride.position ? [ride.position] : [];
 
   return (
-    <View style={styles.fill}>
+    <CarPlayMapContainer>
       <MapView
         ref={mapRef}
-        style={styles.fill}
+        style={StyleSheet.absoluteFill}
         provider={PROVIDER_DEFAULT}
         initialRegion={regionFor(focus)}
-        mapType="mutedStandard"
+        mapType="standard"
         userInterfaceStyle="dark"
+        onMapReady={onMapReady}
       >
         {ride.coords.length > 1 && (
           <Polyline coordinates={ride.coords} strokeColor={ACCENT} strokeWidth={6} />
@@ -199,7 +248,7 @@ function LiveRideMap() {
           <Text style={styles.bannerSub}>{ride.maneuver.distanceMeters} m</Text>
         </View>
       )}
-    </View>
+    </CarPlayMapContainer>
   );
 }
 
@@ -455,6 +504,64 @@ function showPoiCategories() {
   list.push();
 }
 
+// --- iconic curated roads --------------------------------------------------
+
+function showCuratedRoute(route: (typeof curatedRoutes)[number]) {
+  const markers = route.waypoints.map((w) => ({ latitude: w.lat, longitude: w.lng }));
+  openRoute(
+    route.name,
+    async (pref) => {
+      const coords = await fetchRoadRoute(
+        route.waypoints.map((w) => ({ lat: w.lat, lng: w.lng })),
+        pref
+      );
+      return { coords, markers, distanceMiles: route.distance_miles, stops: route.waypoints.length };
+    },
+    true
+  );
+}
+
+function showCuratedList() {
+  const top = [...curatedRoutes].sort((a, b) => b.curviness_score - a.curviness_score).slice(0, 25);
+  const list = new ListTemplate({
+    title: { text: 'Iconic UK Roads' },
+    sections: {
+      type: 'default',
+      items: top.map((r) => ({
+        type: 'default' as const,
+        title: { text: r.name },
+        detailedText: { text: `${r.distance_miles} mi · curviness ${r.curviness_score}/10` },
+        browsable: true,
+        onPress: () => showCuratedRoute(r),
+      })),
+    },
+  });
+  list.push();
+}
+
+// --- roadside help (call breakdown / 999 from the car) ---------------------
+
+function showRoadsideHelp() {
+  const call = (phone: string) => {
+    const clean = phone.replace(/[^0-9+]/g, '');
+    Linking.openURL(`tel:${clean}`).catch(() => {});
+  };
+  const numbers = [...EMERGENCY_NUMBERS, ...BREAKDOWN_PROVIDERS];
+  const list = new ListTemplate({
+    title: { text: 'Roadside Help' },
+    sections: {
+      type: 'default',
+      items: numbers.map((n) => ({
+        type: 'default' as const,
+        title: { text: n.name },
+        detailedText: { text: `${n.phone}${n.note ? ` · ${n.note}` : ''}` },
+        onPress: () => call(n.phone),
+      })),
+    },
+  });
+  list.push();
+}
+
 // --- main menu -------------------------------------------------------------
 
 function showMainMenu() {
@@ -464,9 +571,11 @@ function showMainMenu() {
       type: 'default',
       items: [
         { type: 'default' as const, title: { text: 'My Routes' }, browsable: true, onPress: () => showRouteList() },
+        { type: 'default' as const, title: { text: 'Iconic UK Roads' }, browsable: true, onPress: () => showCuratedList() },
         { type: 'default' as const, title: { text: 'Looped Ride' }, browsable: true, onPress: () => showLoopMenu() },
         { type: 'default' as const, title: { text: 'Search Location' }, browsable: true, onPress: () => showSearch() },
         { type: 'default' as const, title: { text: 'Points of Interest' }, browsable: true, onPress: () => showPoiCategories() },
+        { type: 'default' as const, title: { text: 'Roadside Help' }, browsable: true, onPress: () => showRoadsideHelp() },
       ],
     },
   });

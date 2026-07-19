@@ -8,6 +8,7 @@ import { supabase, SavedTrip } from '../../lib/supabase';
 import { tapHaptic } from '../../lib/haptics';
 import { AppStorage } from '../../lib/storage';
 import { colors, spacing } from '../../lib/theme';
+import RoadsideEssentials from '../../components/RoadsideEssentials';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -111,6 +112,9 @@ export default function HomeScreen() {
           </TouchableOpacity>
         ))}
       </View>
+
+      {/* On-road safety essentials */}
+      <RoadsideEssentials />
 
       {/* Recent routes */}
       {routes.length > 0 && (

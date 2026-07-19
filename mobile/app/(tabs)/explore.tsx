@@ -10,6 +10,9 @@ import { getFavouriteRouteIds, toggleFavourite, fetchFavouriteRoutes } from '../
 import { RouteListSkeleton } from '../../components/Skeleton';
 import { tapHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
+import { curatedRoutes, searchCurated, CuratedRoute } from '../../lib/curated-routes';
+import CurvinessIndicator from '../../components/CurvinessIndicator';
+import { setPendingRoute } from '../../lib/pending-route';
 
 type RouteCategory = {
   id: string;
@@ -41,6 +44,29 @@ function matchesCategory(r: SavedTrip, cat: string): boolean {
   const pref = (r.settings as { road_preference?: string })?.road_preference;
   if ((cat === 'twisty' || cat === 'scenic') && (pref === 'twisty' || pref === 'curvy')) return true;
   return false;
+}
+
+const REGION_LABELS: Record<CuratedRoute['region'], string> = {
+  scotland: 'Scotland',
+  wales: 'Wales',
+  'england-north': 'North England',
+  'england-midlands': 'Midlands',
+  'england-south': 'South England',
+  'isle-of-man': 'Isle of Man',
+};
+
+const DIFFICULTY_COLORS: Record<CuratedRoute['difficulty'], string> = {
+  easy: '#27ae60',
+  moderate: '#D68A2D',
+  challenging: '#ff4444',
+};
+
+function matchesCuratedCategory(r: CuratedRoute, cat: string): boolean {
+  if (cat === 'popular') return true;
+  const kws = CATEGORY_KEYWORDS[cat] ?? [];
+  if (r.tags.some((t) => kws.some((k) => t.includes(k)))) return true;
+  const hay = `${r.name} ${r.description}`.toLowerCase();
+  return kws.some((k) => hay.includes(k));
 }
 
 export default function ExploreScreen() {
@@ -116,6 +142,91 @@ export default function ExploreScreen() {
     return miles > 0 ? `${miles} mi` : '--';
   };
 
+  const curatedToShow: CuratedRoute[] = (() => {
+    if (selectedCategory === 'saved') return [];
+    if (search) return searchCurated(search);
+    if (selectedCategory === 'popular') {
+      return [...curatedRoutes].sort((a, b) => b.curviness_score - a.curviness_score).slice(0, 15);
+    }
+    return curatedRoutes.filter((r) => matchesCuratedCategory(r, selectedCategory));
+  })();
+
+  const openCurated = useCallback((route: CuratedRoute) => {
+    tapHaptic();
+    setPendingRoute({
+      name: route.name,
+      waypoints: route.waypoints,
+      roadPreference: route.settings.road_preference,
+    });
+    router.push('/(tabs)/build');
+  }, [router]);
+
+  const renderHeader = () => (
+    <View>
+      <View style={styles.discoverRow}>
+        <TouchableOpacity style={styles.discoverCard} activeOpacity={0.8} onPress={() => { tapHaptic(); router.push('/challenges'); }}>
+          <Ionicons name="flag" size={20} color={colors.accent} />
+          <Text style={styles.discoverTitle}>Challenges</Text>
+          <Text style={styles.discoverSub}>Iconic UK roads</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.discoverCard} activeOpacity={0.8} onPress={() => { tapHaptic(); router.push('/leaderboard'); }}>
+          <Ionicons name="trophy" size={20} color={colors.accent} />
+          <Text style={styles.discoverTitle}>Leaderboards</Text>
+          <Text style={styles.discoverSub}>Top riders</Text>
+        </TouchableOpacity>
+      </View>
+      {renderCurated()}
+    </View>
+  );
+
+  const renderCurated = () => {
+    if (curatedToShow.length === 0) return null;
+    return (
+      <View style={styles.curatedSection}>
+        <View style={styles.sectionHeader}>
+          <View style={styles.sectionTitleRow}>
+            <Ionicons name="flag" size={18} color={colors.accent} />
+            <Text style={styles.sectionTitle}>Iconic UK Roads</Text>
+          </View>
+          <Text style={styles.sectionSub}>Britain's greatest motorcycle roads</Text>
+        </View>
+        {curatedToShow.map((route) => {
+          const diffColor = DIFFICULTY_COLORS[route.difficulty];
+          return (
+            <TouchableOpacity
+              key={route.id}
+              style={styles.curatedCard}
+              activeOpacity={0.7}
+              onPress={() => openCurated(route)}
+            >
+              <View style={styles.cardTop}>
+                <View style={styles.cardHeader}>
+                  <Ionicons name="star" size={15} color={colors.accent} />
+                  <Text style={styles.cardTitle} numberOfLines={1}>{route.name}</Text>
+                </View>
+                <Text style={styles.cardDist}>{route.distance_miles} mi</Text>
+              </View>
+              <View style={styles.curatedMeta}>
+                <View style={[styles.diffBadge, { backgroundColor: `${diffColor}22`, borderColor: diffColor }]}>
+                  <Text style={[styles.diffText, { color: diffColor }]}>{route.difficulty}</Text>
+                </View>
+                <View style={styles.regionPill}>
+                  <Ionicons name="location-outline" size={11} color={colors.textMuted} />
+                  <Text style={styles.regionText}>{REGION_LABELS[route.region]}</Text>
+                </View>
+              </View>
+              <Text style={styles.cardDesc} numberOfLines={2}>{route.description}</Text>
+              <CurvinessIndicator score={route.curviness_score} />
+            </TouchableOpacity>
+          );
+        })}
+        {filteredRoutes.length > 0 && (
+          <Text style={styles.moreRoutesLabel}>More routes</Text>
+        )}
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       {/* Search bar */}
@@ -167,6 +278,7 @@ export default function ExploreScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />
         }
         contentContainerStyle={styles.list}
+        ListHeaderComponent={renderHeader()}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.card}
@@ -220,7 +332,7 @@ export default function ExploreScreen() {
         ListEmptyComponent={
           loading ? (
             <RouteListSkeleton />
-          ) : (
+          ) : curatedToShow.length > 0 ? null : (
             <View style={styles.empty}>
               <Ionicons name={selectedCategory === 'saved' ? 'heart-outline' : 'compass-outline'} size={48} color={colors.textMuted} />
               <Text style={styles.emptyText}>
@@ -287,6 +399,42 @@ const styles = StyleSheet.create({
   cardStatText: { color: colors.textMuted, fontSize: 11 },
   publicBadge: { flexDirection: 'row', alignItems: 'center', gap: 3 },
   publicText: { color: colors.accent, fontSize: 10, fontWeight: '600' },
+  discoverRow: { flexDirection: 'row', gap: spacing.sm, marginBottom: spacing.md, marginTop: spacing.xs },
+  discoverCard: {
+    flex: 1, backgroundColor: colors.surface, borderRadius: 12, padding: spacing.md,
+    borderWidth: 1, borderColor: colors.border, gap: 4,
+  },
+  discoverTitle: { color: colors.text, fontSize: 15, fontWeight: '800', marginTop: 4 },
+  discoverSub: { color: colors.textMuted, fontSize: 11 },
+  curatedSection: { marginBottom: spacing.sm },
+  sectionHeader: { marginBottom: spacing.sm, marginTop: spacing.xs },
+  sectionTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  sectionTitle: { color: colors.textBright, fontSize: 18, fontWeight: '800' },
+  sectionSub: { color: colors.textMuted, fontSize: 12, marginTop: 2, marginLeft: 26 },
+  curatedCard: {
+    backgroundColor: colors.surface,
+    borderRadius: 12,
+    padding: spacing.md,
+    marginBottom: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderLeftWidth: 3,
+    borderLeftColor: colors.accent,
+  },
+  curatedMeta: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8 },
+  diffBadge: { borderRadius: 8, borderWidth: 1, paddingHorizontal: 8, paddingVertical: 2 },
+  diffText: { fontSize: 10, fontWeight: '700', textTransform: 'capitalize' },
+  regionPill: { flexDirection: 'row', alignItems: 'center', gap: 3 },
+  regionText: { color: colors.textMuted, fontSize: 11, fontWeight: '600' },
+  moreRoutesLabel: {
+    color: colors.textMuted,
+    fontSize: 13,
+    fontWeight: '700',
+    marginTop: spacing.sm,
+    marginBottom: spacing.xs,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
   empty: { alignItems: 'center', paddingTop: 60 },
   emptyText: { color: colors.textMuted, fontSize: 15, marginTop: spacing.sm },
   emptySub: { color: colors.textMuted, fontSize: 13, marginTop: 4, textAlign: 'center', paddingHorizontal: spacing.xl },

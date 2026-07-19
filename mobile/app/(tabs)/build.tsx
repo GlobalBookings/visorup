@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, ScrollView,
   KeyboardAvoidingView, Platform, FlatList, Modal, Keyboard,
@@ -9,17 +9,46 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import * as Location from 'expo-location';
 import * as DocumentPicker from 'expo-document-picker';
 import { File } from 'expo-file-system';
-import { supabase, UserBike } from '../../lib/supabase';
-import { fetchRoadRoute } from '../../lib/routing';
+import { supabase, UserBike, SavedTrip } from '../../lib/supabase';
+import { fetchRoadRoute, defaultIntensity } from '../../lib/routing';
 import { buildRoundTrip, DIRECTION_BEARINGS, Direction } from '../../lib/roundtrip';
 import { parseGpx } from '../../lib/gpx';
+import { exportGpx } from '../../lib/share';
 import { pois, poiCategories, POI, POICategory } from '../../lib/pois';
 import { fuelStations } from '../../lib/fuel-data';
 import { searchPlaces } from '../../lib/geocode';
 import { tapHaptic, heavyHaptic, successHaptic } from '../../lib/haptics';
 import { colors, spacing } from '../../lib/theme';
+import AvoidanceToggles, { RoutingAvoidance } from '../../components/AvoidanceToggles';
+import CurvinessIndicator from '../../components/CurvinessIndicator';
+import { OfflineDownloadSheet } from '../../components/OfflineDownloadSheet';
+import { calculateCurvinessScore } from '../../lib/curviness';
+import { takePendingRoute } from '../../lib/pending-route';
 
-type Waypoint = { latitude: number; longitude: number; name: string };
+type WaypointKind = 'stop' | 'fuel' | 'food' | 'scenic' | 'rest' | 'accommodation';
+type Waypoint = { latitude: number; longitude: number; name: string; kind?: WaypointKind };
+
+const WAYPOINT_KINDS: { kind: WaypointKind; label: string; icon: string; dwellMin: number; color: string }[] = [
+  { kind: 'stop', label: 'Stop', icon: 'location', dwellMin: 0, color: '#4285F4' },
+  { kind: 'fuel', label: 'Fuel', icon: 'water', dwellMin: 10, color: '#e67e22' },
+  { kind: 'food', label: 'Food', icon: 'restaurant', dwellMin: 45, color: '#e74c3c' },
+  { kind: 'scenic', label: 'Scenic', icon: 'camera', dwellMin: 20, color: '#27ae60' },
+  { kind: 'rest', label: 'Rest', icon: 'cafe', dwellMin: 15, color: '#9b59b6' },
+  { kind: 'accommodation', label: 'Stay', icon: 'bed', dwellMin: 720, color: '#2c3e50' },
+];
+
+const kindMeta = (k?: WaypointKind) => WAYPOINT_KINDS.find((w) => w.kind === (k || 'stop')) || WAYPOINT_KINDS[0];
+
+function fmtDuration(minutes: number): string {
+  if (minutes <= 0) return '0m';
+  const total = Math.round(minutes);
+  const days = Math.floor(total / 1440);
+  const h = Math.floor((total % 1440) / 60);
+  const m = total % 60;
+  if (days > 0) return `${days}d ${h}h`;
+  if (h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
 type Coord = { latitude: number; longitude: number };
 type RoadPreference = 'fast' | 'curvy' | 'twisty';
 
@@ -38,6 +67,13 @@ const ROAD_PREFS: { id: RoadPreference; label: string; icon: string; color: stri
   { id: 'twisty', label: 'Twisty', icon: 'infinite-outline', color: '#e74c3c', desc: 'Maximum bends, avoid main roads' },
 ];
 
+const TWIST_LEVELS: { label: string; value: number }[] = [
+  { label: 'Chill', value: 25 },
+  { label: 'Balanced', value: 55 },
+  { label: 'Spirited', value: 80 },
+  { label: 'Max', value: 100 },
+];
+
 export default function BuildRouteScreen() {
   const mapRef = useRef<MapView>(null);
   const router = useRouter();
@@ -51,11 +87,14 @@ export default function BuildRouteScreen() {
   const [folders, setFolders] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [roadPref, setRoadPref] = useState<RoadPreference>('curvy');
+  const [intensity, setIntensity] = useState<number | null>(null);
+  const [avoidance, setAvoidance] = useState<RoutingAvoidance>({});
+  const [showOffline, setShowOffline] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const loadedEditId = useRef<string | null>(null);
 
   // UI state
-  const [showPanel, setShowPanel] = useState<'main' | 'pois' | 'days' | 'save' | 'loop' | 'more' | null>('main');
+  const [showPanel, setShowPanel] = useState<'main' | 'pois' | 'days' | 'save' | 'loop' | 'more' | 'planner' | null>('main');
   const [activePOICategories, setActivePOICategories] = useState<POICategory[]>([]);
 
   // Round-trip (loop) generator
@@ -137,8 +176,8 @@ export default function BuildRouteScreen() {
     (async () => {
       const { data, error } = await supabase.from('saved_trips').select('*').eq('id', editId).single();
       if (error || !data) { Alert.alert('Could not load route', 'Please try again.'); return; }
-      const wps: Waypoint[] = (data.waypoints || []).map((wp: { lat: number; lng: number; name?: string }, i: number) => ({
-        latitude: wp.lat, longitude: wp.lng, name: wp.name || `Stop ${i + 1}`,
+      const wps: Waypoint[] = (data.waypoints || []).map((wp: { lat: number; lng: number; name?: string; kind?: WaypointKind }, i: number) => ({
+        latitude: wp.lat, longitude: wp.lng, name: wp.name || `Stop ${i + 1}`, kind: wp.kind,
       }));
       setWaypoints(wps);
       setRouteCoords((data.route_coords || []).map((c: number[]) => ({ latitude: c[0], longitude: c[1] })));
@@ -158,6 +197,27 @@ export default function BuildRouteScreen() {
       router.setParams({ editId: '' });
     })();
   }, [editId, router]);
+
+  // Load a curated/shared route handed off from Explore into the builder.
+  useEffect(() => {
+    const pending = takePendingRoute();
+    if (!pending || pending.waypoints.length < 2) return;
+    const wps: Waypoint[] = pending.waypoints.map((wp, i) => ({
+      latitude: wp.lat, longitude: wp.lng, name: wp.name || `Stop ${i + 1}`,
+    }));
+    setWaypoints(wps);
+    setRouteName(pending.name);
+    const pref = pending.roadPreference;
+    if (pref) { setRoadPref(pref); setRouteColor(ROAD_PREFS.find((r) => r.id === pref)?.color || '#D68A2D'); }
+    setShowPanel('main');
+    buildRoute(wps, pref, true);
+    setTimeout(() => {
+      mapRef.current?.fitToCoordinates(wps, {
+        edgePadding: { top: 100, right: 80, bottom: 340, left: 80 }, animated: true,
+      });
+    }, 300);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Calculate total distance whenever routeCoords changes
   useEffect(() => {
@@ -212,12 +272,12 @@ export default function BuildRouteScreen() {
     setWaypoints(prevWps);
     if (prevWps.length >= 2) {
       const wpForRoute = prevWps.map((w) => ({ lat: w.latitude, lng: w.longitude }));
-      const coords = await fetchRoadRoute(wpForRoute, roadPref);
+      const coords = await fetchRoadRoute(wpForRoute, roadPref, avoidance);
       setRouteCoords(coords);
     } else {
       setRouteCoords([]);
     }
-  }, [historyIdx, history, roadPref]);
+  }, [historyIdx, history, roadPref, avoidance]);
 
   const redo = useCallback(async () => {
     if (historyIdx >= history.length - 1) return;
@@ -227,12 +287,12 @@ export default function BuildRouteScreen() {
     setWaypoints(nextWps);
     if (nextWps.length >= 2) {
       const wpForRoute = nextWps.map((w) => ({ lat: w.latitude, lng: w.longitude }));
-      const coords = await fetchRoadRoute(wpForRoute, roadPref);
+      const coords = await fetchRoadRoute(wpForRoute, roadPref, avoidance);
       setRouteCoords(coords);
     } else {
       setRouteCoords([]);
     }
-  }, [historyIdx, history, roadPref]);
+  }, [historyIdx, history, roadPref, avoidance]);
 
   const onSearchChange = useCallback((text: string) => {
     setSearchQuery(text);
@@ -244,10 +304,12 @@ export default function BuildRouteScreen() {
     }, 400);
   }, []);
 
-  const buildRoute = useCallback(async (wps: Waypoint[], pref?: RoadPreference, skipFuel?: boolean) => {
+  const buildRoute = useCallback(async (wps: Waypoint[], pref?: RoadPreference, skipFuel?: boolean, avoid?: RoutingAvoidance, lvl?: number) => {
     if (wps.length < 2) { setRouteCoords([]); return; }
+    const avoidNow = avoid ?? avoidance;
+    const levelNow = lvl ?? intensity ?? undefined;
     const wpForRoute = wps.map((w) => ({ lat: w.latitude, lng: w.longitude }));
-    const coords = await fetchRoadRoute(wpForRoute, pref || roadPref);
+    const coords = await fetchRoadRoute(wpForRoute, pref || roadPref, avoidNow, levelNow);
     setRouteCoords(coords);
 
     // Auto-insert fuel stops every 100 miles (only on first build, not recursive)
@@ -304,13 +366,19 @@ export default function BuildRouteScreen() {
             }
             setWaypoints(updated);
             const newWpForRoute = updated.map((w) => ({ lat: w.latitude, lng: w.longitude }));
-            const newCoords = await fetchRoadRoute(newWpForRoute, pref || roadPref);
+            const newCoords = await fetchRoadRoute(newWpForRoute, pref || roadPref, avoidNow, levelNow);
             setRouteCoords(newCoords);
           }
         }
       }
     }
-  }, [roadPref, fuelRange]);
+  }, [roadPref, fuelRange, avoidance, intensity]);
+
+  const changeIntensity = useCallback((value: number) => {
+    tapHaptic();
+    setIntensity(value);
+    if (waypoints.length >= 2) buildRoute(waypoints, roadPref, true, undefined, value);
+  }, [waypoints, roadPref, buildRoute]);
 
   const addSearchResult = useCallback(async (result: { name: string; lat: number; lng: number }) => {
     tapHaptic();
@@ -432,6 +500,37 @@ export default function BuildRouteScreen() {
     await buildRoute(updated);
   }, [waypoints, buildRoute, pushHistory]);
 
+  const cycleWaypointKind = useCallback((idx: number) => {
+    tapHaptic();
+    setWaypoints((prev) => prev.map((w, i) => {
+      if (i !== idx) return w;
+      const curIdx = WAYPOINT_KINDS.findIndex((k) => k.kind === (w.kind || 'stop'));
+      const next = WAYPOINT_KINDS[(curIdx + 1) % WAYPOINT_KINDS.length].kind;
+      return { ...w, kind: next };
+    }));
+  }, []);
+
+  const moveWaypoint = useCallback(async (idx: number, dir: -1 | 1) => {
+    const to = idx + dir;
+    if (to < 0 || to >= waypoints.length) return;
+    tapHaptic();
+    const updated = [...waypoints];
+    const [moved] = updated.splice(idx, 1);
+    updated.splice(to, 0, moved);
+    pushHistory(updated);
+    setWaypoints(updated);
+    await buildRoute(updated);
+  }, [waypoints, buildRoute, pushHistory]);
+
+  // Estimated total trip time = riding time (distance / typical back-road speed)
+  // plus the dwell time for each typed waypoint.
+  const tripEstimate = useMemo(() => {
+    const avgMph = roadPref === 'fast' ? 50 : roadPref === 'twisty' ? 32 : 40;
+    const ridingMin = totalDistMiles > 0 ? (totalDistMiles / avgMph) * 60 : 0;
+    const dwellMin = waypoints.reduce((sum, w) => sum + kindMeta(w.kind).dwellMin, 0);
+    return { ridingMin, dwellMin, totalMin: ridingMin + dwellMin };
+  }, [totalDistMiles, roadPref, waypoints]);
+
   const clearRoute = useCallback(() => {
     heavyHaptic();
     setWaypoints([]);
@@ -450,6 +549,27 @@ export default function BuildRouteScreen() {
     setRouteColor(ROAD_PREFS.find((r) => r.id === pref)?.color || '#D68A2D');
     if (waypoints.length >= 2) buildRoute(waypoints, pref);
   }, [waypoints, buildRoute]);
+
+  const changeAvoidance = useCallback((next: RoutingAvoidance) => {
+    tapHaptic();
+    setAvoidance(next);
+    if (waypoints.length >= 2) buildRoute(waypoints, roadPref, true, next);
+  }, [waypoints, roadPref, buildRoute]);
+
+  const curvinessScore = useMemo(
+    () => (routeCoords.length > 1 ? calculateCurvinessScore(routeCoords) : 0),
+    [routeCoords]
+  );
+
+  const offlineTrip = useMemo<SavedTrip | null>(() => {
+    if (waypoints.length < 2) return null;
+    return {
+      id: editingId || `draft-${(routeName || 'route').replace(/[^a-z0-9]/gi, '-').toLowerCase()}`,
+      name: routeName || 'Current route',
+      waypoints: waypoints.map((w) => ({ lat: w.latitude, lng: w.longitude, name: w.name, kind: w.kind })),
+      settings: { road_preference: roadPref },
+    } as unknown as SavedTrip;
+  }, [waypoints, editingId, routeName, roadPref]);
 
   const togglePOICategory = useCallback((cat: POICategory) => {
     tapHaptic();
@@ -547,7 +667,7 @@ export default function BuildRouteScreen() {
       user_id: user.id,
       name: routeName.trim(),
       description: '',
-      waypoints: waypoints.map((w) => ({ lat: w.latitude, lng: w.longitude, name: w.name })),
+      waypoints: waypoints.map((w) => ({ lat: w.latitude, lng: w.longitude, name: w.name, kind: w.kind })),
       route_coords: routeCoords.map((c) => [c.latitude, c.longitude]),
       route_stats: { waypoints: waypoints.length, distance: totalDistMiles / 0.000621371 },
       settings: { road_preference: roadPref, bike_id: selectedBike?.id },
@@ -618,6 +738,8 @@ export default function BuildRouteScreen() {
           const isFuel = wp.name.startsWith('⛽');
           const isStart = i === 0;
           const isEnd = i === waypoints.length - 1;
+          const typed = !isStart && !isEnd && !isFuel && wp.kind && wp.kind !== 'stop';
+          const meta = kindMeta(wp.kind);
           return (
             <Marker
               key={`wp-${i}`}
@@ -632,6 +754,7 @@ export default function BuildRouteScreen() {
                 isStart && styles.wpMarkerStart,
                 isEnd && styles.wpMarkerEnd,
                 isFuel && styles.wpMarkerFuel,
+                typed && { backgroundColor: meta.color },
               ]}>
                 {isFuel ? (
                   <Text style={{ fontSize: 14 }}>⛽</Text>
@@ -639,6 +762,8 @@ export default function BuildRouteScreen() {
                   <Ionicons name="radio-button-on" size={10} color="#fff" />
                 ) : isEnd ? (
                   <Ionicons name="flag" size={10} color="#fff" />
+                ) : typed ? (
+                  <Ionicons name={meta.icon as any} size={11} color="#fff" />
                 ) : (
                   <Text style={styles.wpMarkerText}>{i}</Text>
                 )}
@@ -813,6 +938,13 @@ export default function BuildRouteScreen() {
         </View>
       )}
 
+      {/* Curviness score */}
+      {curvinessScore > 0 && (
+        <View style={styles.curvinessBar}>
+          <CurvinessIndicator score={curvinessScore} />
+        </View>
+      )}
+
       {/* Bottom panel */}
       <View style={[styles.panel, kbHeight > 0 && { bottom: kbHeight }]}>
         {showPanel === 'main' && (
@@ -830,6 +962,27 @@ export default function BuildRouteScreen() {
                 </TouchableOpacity>
               ))}
             </View>
+
+            {roadPref !== 'fast' && (
+              <View style={styles.twistRow}>
+                <Text style={styles.twistLabel}>Twistiness</Text>
+                <View style={styles.twistSegments}>
+                  {TWIST_LEVELS.map((lvl) => {
+                    const active = (intensity ?? defaultIntensity(roadPref)) === lvl.value;
+                    return (
+                      <TouchableOpacity
+                        key={lvl.value}
+                        style={[styles.twistSeg, active && styles.twistSegActive]}
+                        onPress={() => changeIntensity(lvl.value)}
+                        disabled={waypoints.length < 2}
+                      >
+                        <Text style={[styles.twistSegText, active && styles.twistSegTextActive]}>{lvl.label}</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </View>
+            )}
 
             {waypoints.length === 0 ? (
               /* Start options - progressive disclosure keeps first use simple */
@@ -910,6 +1063,14 @@ export default function BuildRouteScreen() {
                 <Ionicons name="close" size={20} color={colors.textMuted} />
               </TouchableOpacity>
             </View>
+            <TouchableOpacity style={styles.moreRow} onPress={() => setShowPanel('planner')} disabled={waypoints.length < 1}>
+              <Ionicons name="list-outline" size={18} color={waypoints.length < 1 ? colors.textMuted : colors.accent} />
+              <View style={styles.moreText}>
+                <Text style={[styles.moreTitle, waypoints.length < 1 && { color: colors.textMuted }]}>Trip planner</Text>
+                <Text style={styles.moreDesc}>Type & reorder stops, estimate trip time</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+            </TouchableOpacity>
             <TouchableOpacity style={styles.moreRow} onPress={() => setShowPanel('days')}>
               <Ionicons name="moon-outline" size={18} color={colors.accent} />
               <View style={styles.moreText}>
@@ -937,6 +1098,41 @@ export default function BuildRouteScreen() {
               </View>
               <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.moreRow}
+              onPress={() => { tapHaptic(); setShowPanel('main'); setShowOffline(true); }}
+              disabled={waypoints.length < 2}
+            >
+              <Ionicons name="cloud-download-outline" size={18} color={waypoints.length < 2 ? colors.textMuted : colors.accent} />
+              <View style={styles.moreText}>
+                <Text style={[styles.moreTitle, waypoints.length < 2 && { color: colors.textMuted }]}>Save offline</Text>
+                <Text style={styles.moreDesc}>Download for use without signal</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.moreRow}
+              onPress={() => {
+                tapHaptic();
+                setShowPanel('main');
+                exportGpx({
+                  name: routeName.trim() || 'VisorUp route',
+                  waypoints: waypoints.map((w) => ({ latitude: w.latitude, longitude: w.longitude, name: w.name })),
+                  track: routeCoords,
+                });
+              }}
+              disabled={waypoints.length < 2}
+            >
+              <Ionicons name="download-outline" size={18} color={waypoints.length < 2 ? colors.textMuted : colors.accent} />
+              <View style={styles.moreText}>
+                <Text style={[styles.moreTitle, waypoints.length < 2 && { color: colors.textMuted }]}>Export GPX</Text>
+                <Text style={styles.moreDesc}>Share to Calimoto, Garmin, komoot and more</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+            </TouchableOpacity>
+            <View style={styles.avoidWrap}>
+              <AvoidanceToggles avoidance={avoidance} onChange={changeAvoidance} />
+            </View>
           </View>
         )}
 
@@ -999,6 +1195,63 @@ export default function BuildRouteScreen() {
                 </ScrollView>
               </View>
             )}
+          </View>
+        )}
+
+        {showPanel === 'planner' && (
+          <View>
+            <View style={styles.panelHeader}>
+              <Text style={styles.panelTitle}>Trip Planner</Text>
+              <TouchableOpacity onPress={() => setShowPanel('main')}>
+                <Ionicons name="close" size={20} color={colors.textMuted} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.tripTimeRow}>
+              <View style={styles.tripTimeItem}>
+                <Text style={styles.tripTimeValue}>{Math.round(totalDistMiles)}</Text>
+                <Text style={styles.tripTimeLabel}>miles</Text>
+              </View>
+              <View style={styles.tripTimeItem}>
+                <Text style={styles.tripTimeValue}>{fmtDuration(tripEstimate.ridingMin)}</Text>
+                <Text style={styles.tripTimeLabel}>riding</Text>
+              </View>
+              <View style={styles.tripTimeItem}>
+                <Text style={styles.tripTimeValue}>{fmtDuration(tripEstimate.dwellMin)}</Text>
+                <Text style={styles.tripTimeLabel}>at stops</Text>
+              </View>
+              <View style={styles.tripTimeItem}>
+                <Text style={[styles.tripTimeValue, { color: colors.accent }]}>{fmtDuration(tripEstimate.totalMin)}</Text>
+                <Text style={styles.tripTimeLabel}>total</Text>
+              </View>
+            </View>
+
+            <ScrollView style={styles.plannerList} keyboardShouldPersistTaps="handled">
+              {waypoints.length === 0 ? (
+                <Text style={styles.moreDesc}>Add stops on the map to plan your trip.</Text>
+              ) : waypoints.map((w, i) => {
+                const meta = kindMeta(w.kind);
+                return (
+                  <View key={`${w.latitude}-${w.longitude}-${i}`} style={styles.plannerRow}>
+                    <TouchableOpacity style={[styles.plannerKind, { backgroundColor: `${meta.color}22`, borderColor: meta.color }]} onPress={() => cycleWaypointKind(i)}>
+                      <Ionicons name={meta.icon as any} size={14} color={meta.color} />
+                      <Text style={[styles.plannerKindText, { color: meta.color }]}>{meta.label}</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.plannerName} numberOfLines={1}>{w.name}</Text>
+                    <TouchableOpacity style={styles.plannerBtn} onPress={() => moveWaypoint(i, -1)} disabled={i === 0}>
+                      <Ionicons name="chevron-up" size={16} color={i === 0 ? colors.border : colors.textMuted} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.plannerBtn} onPress={() => moveWaypoint(i, 1)} disabled={i === waypoints.length - 1}>
+                      <Ionicons name="chevron-down" size={16} color={i === waypoints.length - 1 ? colors.border : colors.textMuted} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.plannerBtn} onPress={() => removeWaypoint(i)}>
+                      <Ionicons name="trash-outline" size={16} color={colors.danger} />
+                    </TouchableOpacity>
+                  </View>
+                );
+              })}
+              <Text style={styles.plannerHint}>Tap a stop's type to cycle Stop → Fuel → Food → Scenic → Rest → Stay. Time estimate updates automatically.</Text>
+            </ScrollView>
           </View>
         )}
 
@@ -1175,6 +1428,12 @@ export default function BuildRouteScreen() {
           </View>
         )}
       </View>
+
+      <OfflineDownloadSheet
+        visible={showOffline}
+        onClose={() => setShowOffline(false)}
+        trip={offlineTrip}
+      />
     </View>
   );
 }
@@ -1182,6 +1441,11 @@ export default function BuildRouteScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   map: { flex: 1 },
+  curvinessBar: {
+    position: 'absolute', bottom: 280, left: 12, width: 150, zIndex: 5,
+    backgroundColor: 'rgba(15,22,20,0.92)', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 6,
+  },
+  avoidWrap: { paddingHorizontal: 4, marginTop: spacing.xs },
 
   searchContainer: {
     position: 'absolute', top: 52, left: 12, right: 12, zIndex: 10,
@@ -1315,6 +1579,37 @@ const styles = StyleSheet.create({
     paddingVertical: 8, borderRadius: 8, backgroundColor: colors.surfaceLight, borderWidth: 1, borderColor: colors.border,
   },
   prefLabel: { color: colors.textMuted, fontSize: 12, fontWeight: '600' },
+  twistRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 },
+  twistLabel: { color: colors.textMuted, fontSize: 11, fontWeight: '700', width: 66 },
+  twistSegments: { flex: 1, flexDirection: 'row', gap: 4 },
+  twistSeg: {
+    flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: 6,
+    borderRadius: 7, backgroundColor: colors.surfaceLight, borderWidth: 1, borderColor: colors.border,
+  },
+  twistSegActive: { backgroundColor: colors.accent, borderColor: colors.accent },
+  twistSegText: { color: colors.textMuted, fontSize: 11, fontWeight: '700' },
+  twistSegTextActive: { color: '#fff' },
+  tripTimeRow: {
+    flexDirection: 'row', justifyContent: 'space-between',
+    backgroundColor: colors.surfaceLight, borderRadius: 10, padding: 12, marginBottom: 12,
+    borderWidth: 1, borderColor: colors.border,
+  },
+  tripTimeItem: { alignItems: 'center', flex: 1 },
+  tripTimeValue: { color: colors.text, fontSize: 16, fontWeight: '800' },
+  tripTimeLabel: { color: colors.textMuted, fontSize: 10, marginTop: 2 },
+  plannerList: { maxHeight: 260 },
+  plannerRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 6,
+    borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.border,
+  },
+  plannerKind: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8, borderWidth: 1,
+  },
+  plannerKindText: { fontSize: 11, fontWeight: '700' },
+  plannerName: { flex: 1, color: colors.text, fontSize: 13 },
+  plannerBtn: { padding: 6 },
+  plannerHint: { color: colors.textMuted, fontSize: 11, lineHeight: 16, marginTop: 10 },
 
   // Bike selector
   bikeRow: { marginBottom: 10 },
