@@ -16,6 +16,7 @@ if (!agentName) {
   console.log('  shareable-content');
   console.log('  infographic-generator');
   console.log('  app-report');
+  console.log('  affiliate-revenue');
   process.exit(1);
 }
 
@@ -29,6 +30,7 @@ const agents = {
   'shareable-content': () => import('./agents/shareable-content.js'),
   'infographic-generator': () => import('./agents/infographic-generator.js'),
   'app-report': () => import('./agents/app-reporting.js'),
+  'affiliate-revenue': () => import('./agents/affiliate-revenue.js'),
 };
 
 if (!agents[agentName]) {

@@ -134,6 +134,32 @@ export function getInbox(page = 1, limit = 20) {
   };
 }
 
+/**
+ * Find the most recent stored email matching a sender/subject, received after
+ * a given time. Used by the affiliate scraper to pick up a 2FA code that was
+ * forwarded into the Resend inbox.
+ *
+ * @param {object} opts
+ * @param {string} [opts.fromIncludes]    case-insensitive substring of the sender
+ * @param {string} [opts.subjectIncludes] case-insensitive substring of the subject
+ * @param {number} [opts.sinceMs]         only consider emails newer than this epoch ms
+ * @returns {object|null} the matching email, or null
+ */
+export function findRecentEmail({ fromIncludes = '', subjectIncludes = '', sinceMs = 0 } = {}) {
+  const inbox = loadInbox(); // newest first
+  const from = fromIncludes.toLowerCase();
+  const subj = subjectIncludes.toLowerCase();
+
+  for (const email of inbox) {
+    const ts = new Date(email.date).getTime();
+    if (sinceMs && (isNaN(ts) || ts < sinceMs)) continue;
+    if (from && !String(email.from).toLowerCase().includes(from)) continue;
+    if (subj && !String(email.subject).toLowerCase().includes(subj)) continue;
+    return email;
+  }
+  return null;
+}
+
 export function getEmail(id) {
   const inbox = loadInbox();
   const email = inbox.find(e => e.id === id);
