@@ -39,8 +39,8 @@ const log = createLogger('affiliate-revenue');
 const URL = process.env.AFFILIATE_URL || 'https://www.sportsbikeshop.co.uk/affiliates';
 const EMAIL = process.env.AFFILIATE_EMAIL;
 const PASSWORD = process.env.AFFILIATE_PASSWORD;
-const TWOFA_FROM = process.env.AFFILIATE_2FA_FROM || 'sportsbikeshop';
-const TWOFA_SUBJECT = process.env.AFFILIATE_2FA_SUBJECT || '';
+const TWOFA_FROM = (process.env.AFFILIATE_2FA_FROM || 'sportsbikeshop').trim();
+const TWOFA_SUBJECT = (process.env.AFFILIATE_2FA_SUBJECT || '').trim();
 
 const SEL = {
   email: process.env.AFFILIATE_SEL_EMAIL || 'input[type="email"], input[name="email"], input[name="username"]',
@@ -132,7 +132,17 @@ export async function run() {
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 900 });
-    await page.goto(URL, { waitUntil: 'networkidle2', timeout: 45000 });
+    await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
+    await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
+
+    // The login form may be gated behind a Cloudflare challenge; give it a moment.
+    const emailReady = await page.waitForSelector(SEL.email, { timeout: 12000 }).then(() => true).catch(() => false);
+    if (!emailReady) {
+      const challenged = await page.$('[name="cf-turnstile-response"], #challenge-form, iframe[src*="challenges.cloudflare"]');
+      if (challenged) {
+        throw new Error('Blocked by Cloudflare bot challenge (Turnstile) — the login form never rendered. Headless automation is being blocked; see options in the runbook.');
+      }
+    }
 
     // ── login ──
     const gotEmail = await typeInto(page, SEL.email, EMAIL);

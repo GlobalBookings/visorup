@@ -18,8 +18,17 @@ const KEY_ID = process.env.ASC_KEY_ID;
 
 function normalisePrivateKey(raw) {
   if (!raw) return null;
-  // Allow the key to be stored on a single line with escaped newlines.
-  return raw.includes('\\n') ? raw.replace(/\\n/g, '\n') : raw;
+  let k = raw.trim();
+  // Allow escaped newlines when the key is stored on one line.
+  if (k.includes('\\n')) k = k.replace(/\\n/g, '\n');
+  // A well-formed multi-line PEM can be used as-is.
+  if (k.includes('-----BEGIN') && k.includes('\n')) return k;
+  // Otherwise reconstruct a valid PKCS#8 PEM from whatever we were given
+  // (single-line with headers glued on, or raw base64 with no headers).
+  const body = k.replace(/-----[^-]+-----/g, '').replace(/\s+/g, '');
+  if (!body) return k;
+  const wrapped = body.match(/.{1,64}/g).join('\n');
+  return `-----BEGIN PRIVATE KEY-----\n${wrapped}\n-----END PRIVATE KEY-----\n`;
 }
 
 function base64url(input) {

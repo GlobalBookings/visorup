@@ -41,7 +41,6 @@ async function fetchSalesForDate(reportDate) {
     'filter[reportSubType]': 'SUMMARY',
     'filter[reportType]': 'SALES',
     'filter[vendorNumber]': VENDOR_NUMBER,
-    version: '1_0',
   });
 
   const { ok, status, buffer } = await ascFetch(`/v1/salesReports?${params.toString()}`, { responseType: 'buffer' });
@@ -85,10 +84,23 @@ async function fetchSalesForDate(reportDate) {
   return { date: reportDate, downloads, updates, redownloads, proceeds };
 }
 
+function sumSales(rows) {
+  return rows.reduce(
+    (acc, r) => ({
+      downloads: acc.downloads + r.downloads,
+      updates: acc.updates + r.updates,
+      redownloads: acc.redownloads + r.redownloads,
+      proceeds: acc.proceeds + r.proceeds,
+    }),
+    { downloads: 0, updates: 0, redownloads: 0, proceeds: 0 },
+  );
+}
+
 async function getAppStoreSales() {
-  // Sales data lands ~1-2 days late, so scan the last 8 days and aggregate what exists.
+  // Sales data lands ~1-2 days late. A 404 for a date means zero sales that day.
+  // Scan the last 30 days so we can show today / 7-day / 30-day totals.
   const days = [];
-  for (let i = 1; i <= 8; i++) {
+  for (let i = 1; i <= 30; i++) {
     const d = new Date();
     d.setDate(d.getDate() - i);
     days.push(ymd(d));
@@ -103,17 +115,12 @@ async function getAppStoreSales() {
 
   results.sort((a, b) => (a.date < b.date ? 1 : -1)); // newest first
   const latest = results[0];
-  const sum = results.reduce(
-    (acc, r) => ({
-      downloads: acc.downloads + r.downloads,
-      updates: acc.updates + r.updates,
-      redownloads: acc.redownloads + r.redownloads,
-      proceeds: acc.proceeds + r.proceeds,
-    }),
-    { downloads: 0, updates: 0, redownloads: 0, proceeds: 0 },
-  );
 
-  return { latest, sum, daysWithData: results.length };
+  const cutoff7 = ymd(new Date(Date.now() - 7 * 86400000));
+  const sum7 = sumSales(results.filter((r) => r.date >= cutoff7));
+  const sum30 = sumSales(results);
+
+  return { latest, sum7, sum30, daysWithData: results.length };
 }
 
 // ── App Store Connect: ratings & reviews ──────────────────
@@ -167,11 +174,11 @@ function buildReport(sales, reviews, community) {
   if (sales) {
     blocks.push(slackFields([
       [`Downloads (${sales.latest.date})`, fmtNum(sales.latest.downloads)],
-      ['Downloads (last 7d)', fmtNum(sales.sum.downloads)],
-      ['Updates (7d)', fmtNum(sales.sum.updates)],
-      ['Redownloads (7d)', fmtNum(sales.sum.redownloads)],
-      ['Proceeds (7d)', `£${sales.sum.proceeds.toFixed(2)}`],
-      ['Days with data', fmtNum(sales.daysWithData)],
+      ['Downloads (7d)', fmtNum(sales.sum7.downloads)],
+      ['Downloads (30d)', fmtNum(sales.sum30.downloads)],
+      ['Updates (30d)', fmtNum(sales.sum30.updates)],
+      ['Redownloads (30d)', fmtNum(sales.sum30.redownloads)],
+      ['Proceeds (30d)', `£${sales.sum30.proceeds.toFixed(2)}`],
     ]));
   } else {
     blocks.push(slackSection('_No App Store sales data yet (reports lag 1-2 days, or ASC not configured)._'));
@@ -192,10 +199,11 @@ function buildReport(sales, reviews, community) {
     blocks.push(slackFields([
       ['Total riders', fmtNum(community.totalRiders)],
       ['New riders (7d)', fmtNum(community.newRiders7d)],
-      ['Rides logged (total)', fmtNum(community.totalRides)],
-      ['Rides (7d)', fmtNum(community.newRides7d)],
-      ['Rides (24h)', fmtNum(community.activeRides1d)],
+      ['Routes saved (total)', fmtNum(community.totalRoutes)],
       ['Routes saved (7d)', fmtNum(community.newRoutes7d)],
+      ['Public routes', fmtNum(community.publicRoutes)],
+      ['Community posts (7d)', fmtNum(community.posts7d)],
+      ['Bikes in garages', fmtNum(community.bikes)],
     ]));
   } else {
     blocks.push(slackSection('_Supabase not configured — set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY._'));

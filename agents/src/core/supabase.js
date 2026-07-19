@@ -61,25 +61,24 @@ function isoDaysAgo(days) {
  */
 export async function getCommunityMetrics() {
   const since7 = isoDaysAgo(7);
-  const since1 = isoDaysAgo(1);
 
   const [
     totalRiders, newRiders7d,
-    totalRides, newRides7d, activeRides1d,
-    totalRoutes, newRoutes7d,
+    totalRoutes, newRoutes7d, publicRoutes,
+    posts7d, bikes,
   ] = await Promise.all([
     countRows('profiles'),
     countRows('profiles', { created_at: `gte.${since7}` }),
-    countRows('rides'),
-    countRows('rides', { created_at: `gte.${since7}` }),
-    countRows('rides', { created_at: `gte.${since1}` }),
     countRows('saved_trips'),
     countRows('saved_trips', { created_at: `gte.${since7}` }),
+    countRows('saved_trips', { is_public: 'eq.true' }),
+    countRows('community_posts', { created_at: `gte.${since7}` }),
+    countRows('user_bikes'),
   ]);
 
   return {
     totalRiders, newRiders7d,
-    totalRides, newRides7d, activeRides1d,
-    totalRoutes, newRoutes7d,
+    totalRoutes, newRoutes7d, publicRoutes,
+    posts7d, bikes,
   };
 }
