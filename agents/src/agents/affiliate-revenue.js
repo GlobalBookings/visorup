@@ -23,8 +23,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { createLogger } from '../core/logger.js';
+
+puppeteer.use(StealthPlugin());
 import {
   sendSlack, slackHeader, slackSection, slackDivider, slackFields,
 } from '../core/slack.js';
@@ -43,8 +46,8 @@ const TWOFA_FROM = (process.env.AFFILIATE_2FA_FROM || 'sportsbikeshop').trim();
 const TWOFA_SUBJECT = (process.env.AFFILIATE_2FA_SUBJECT || '').trim();
 
 const SEL = {
-  email: process.env.AFFILIATE_SEL_EMAIL || 'input[type="email"], input[name="email"], input[name="username"]',
-  password: process.env.AFFILIATE_SEL_PASSWORD || 'input[type="password"], input[name="password"]',
+  email: process.env.AFFILIATE_SEL_EMAIL || 'input[name="user"], input[name="username"], input[type="email"], input[name="email"]',
+  password: process.env.AFFILIATE_SEL_PASSWORD || 'input[name="password"], input[type="password"]',
   submit: process.env.AFFILIATE_SEL_SUBMIT || 'button[type="submit"], input[type="submit"]',
   twofa: process.env.AFFILIATE_SEL_2FA || 'input[name*="code" i], input[name*="otp" i], input[name*="token" i], input[autocomplete="one-time-code"]',
   twofaSubmit: process.env.AFFILIATE_SEL_2FA_SUBMIT || 'button[type="submit"], input[type="submit"]',
@@ -63,7 +66,7 @@ function extractCode(email) {
   return m ? m[1] : null;
 }
 
-async function waitForCode(sinceMs, { tries = 20, intervalMs = 3000 } = {}) {
+async function waitForCode(sinceMs, { tries = 24, intervalMs = 5000 } = {}) {
   for (let i = 0; i < tries; i++) {
     const email = findRecentEmail({ fromIncludes: TWOFA_FROM, subjectIncludes: TWOFA_SUBJECT, sinceMs });
     if (email) {
@@ -135,8 +138,9 @@ export async function run() {
     await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
     await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
 
-    // The login form may be gated behind a Cloudflare challenge; give it a moment.
-    const emailReady = await page.waitForSelector(SEL.email, { timeout: 12000 }).then(() => true).catch(() => false);
+    // The login form sits behind a Cloudflare Turnstile challenge that the
+    // stealth plugin clears in ~10-14s, so allow generous time for it to render.
+    const emailReady = await page.waitForSelector(SEL.email, { timeout: 25000 }).then(() => true).catch(() => false);
     if (!emailReady) {
       const challenged = await page.$('[name="cf-turnstile-response"], #challenge-form, iframe[src*="challenges.cloudflare"]');
       if (challenged) {
