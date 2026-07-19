@@ -5956,7 +5956,7 @@ class VisorUpSite {
   // ── Bikes Section ───────────────────────────────────────────
 
   renderBikes() {
-    var categories = ['All', 'Adventure', 'Sport Touring', 'Touring', 'Naked', 'Sport', 'Versatile'];
+    var categories = ['All', 'Adventure', 'Sport Touring', 'Touring', 'Naked', 'Sport', 'Versatile', 'Classic', 'Cruiser', 'Electric', 'Maxi-Scooter'];
     var pills = categories.map(function(c) {
       var active = c === 'All' ? 'filter-pill-active' : '';
       return '<button class="filter-pill ' + active + '" data-filter="' + c + '">' + c + '</button>';

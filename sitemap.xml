@@ -121,6 +121,23 @@
 
   <!-- Bike Guides -->
   <url><loc>https://visorup.co.uk/bikes/bmw-r-1250-gs</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/honda-transalp-xl750</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/ktm-890-adventure</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/aprilia-tuareg-660</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/bmw-f-900-gs</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/suzuki-gsx-s1000gt</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/kawasaki-versys-1000-se</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/bmw-r-1250-rt</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/triumph-tiger-sport-660</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/honda-nc750x</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/royal-enfield-interceptor-650</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/moto-guzzi-v85-tt</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/triumph-scrambler-1200</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/harley-davidson-road-glide</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/triumph-rocket-3-gt</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/benelli-trk-502</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/zero-dsr-x</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://visorup.co.uk/bikes/honda-forza-750</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://visorup.co.uk/bikes/triumph-tiger-900</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://visorup.co.uk/bikes/honda-africa-twin</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://visorup.co.uk/bikes/yamaha-tenere-700</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -190,6 +207,14 @@
   <url><loc>https://visorup.co.uk/guides/gear/motorcycle-camping-cooking</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <!-- Bikes Guides (36) -->
   <url><loc>https://visorup.co.uk/guides/bikes/best-touring-bikes-uk-2026</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-a-sportsbike</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-a-naked-bike</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-a-cruiser</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-a-maxi-scooter</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-a-small-bike</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-an-adventure-bike</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-a-sport-tourer</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://visorup.co.uk/guides/bikes/how-to-tour-on-a-classic-retro-bike</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://visorup.co.uk/guides/bikes/best-touring-bikes-under-5000</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://visorup.co.uk/guides/bikes/best-beginner-touring-bikes</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://visorup.co.uk/guides/bikes/best-used-touring-bikes-2026</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>

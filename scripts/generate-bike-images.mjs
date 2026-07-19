@@ -148,6 +148,108 @@ const BIKES = [
     name: "Honda CB500X",
     cardPrompt: "A Honda CB500X adventure motorcycle parked on a quiet lane on Guernsey, Channel Islands, three-quarter front view, silver and black colorway, the harbour and sea visible below, granite walls and wildflowers, warm summer day. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
     heroPrompt: "A Honda CB500X riding along a narrow lane on Jersey, Channel Islands, granite walls on one side, the sea and Elizabeth Castle visible in the distance, the compact adventure bike perfect for island touring, warm golden light, relaxed island atmosphere. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "honda-transalp-xl750",
+    name: "Honda XL750 Transalp",
+    cardPrompt: "A Honda XL750 Transalp adventure motorcycle parked at a viewpoint in Snowdonia, Wales, three-quarter front view, red and white Transalp livery, soft luggage fitted, slate mountains and a lake behind, warm afternoon light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Honda XL750 Transalp riding a flowing Welsh mountain pass on the A44, green hillsides and dry stone walls, the mid-weight adventure bike in motion with rider, bright overcast light breaking through clouds. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "ktm-890-adventure",
+    name: "KTM 890 Adventure",
+    cardPrompt: "A KTM 890 Adventure motorcycle parked on a remote Scottish Highland moorland road, three-quarter front view, orange and black KTM livery, rally-style tank and luggage, heather moorland and distant peaks behind, atmospheric light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A KTM 890 Adventure riding a single-track Highland road with passing places, mountains rising on both sides, the agile adventure bike leaning into a bend, moody Scottish weather with shafts of sunlight. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "aprilia-tuareg-660",
+    name: "Aprilia Tuareg 660",
+    cardPrompt: "An Aprilia Tuareg 660 adventure motorcycle parked beside a tarn in the Lake District, three-quarter front view, rally-inspired yellow, blue and white livery with spoked wheels, fells reflected in still water behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "An Aprilia Tuareg 660 riding over a Lake District mountain pass, dramatic fell scenery and a winding road, the mid-weight adventure bike with rider in full gear, bright overcast Cumbrian light. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "bmw-f-900-gs",
+    name: "BMW F 900 GS",
+    cardPrompt: "A BMW F 900 GS adventure motorcycle parked on a moorland track in the Peak District, three-quarter front view, GS rallye white, red and blue livery, soft luggage fitted, misty gritstone edges behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A BMW F 900 GS riding the Snake Pass in the Peak District, sweeping moorland road with dramatic hills, the lightweight GS in motion with rider, atmospheric clouds and patches of sun. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "suzuki-gsx-s1000gt",
+    name: "Suzuki GSX-S1000GT",
+    cardPrompt: "A Suzuki GSX-S1000GT sport touring motorcycle parked at a scenic A-road viewpoint in the Yorkshire Dales, three-quarter front view, metallic blue colorway, colour-matched panniers fitted, dry stone walls and rolling hills behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Suzuki GSX-S1000GT sport tourer riding a fast flowing A-road through the Yorkshire Dales, green hills and dramatic clouds, the bike with panniers leaning through a sweeping bend, warm afternoon light. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "kawasaki-versys-1000-se",
+    name: "Kawasaki Versys 1000 SE",
+    cardPrompt: "A Kawasaki Versys 1000 SE sport touring motorcycle parked at a Highland loch viewpoint, three-quarter front view, green and black Kawasaki colorway, full touring panniers and top box, mountains reflected in the loch behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Kawasaki Versys 1000 SE touring the A82 through Glencoe, the Three Sisters mountains towering above, the loaded sport-touring bike with rider threading the valley, moody dramatic light. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "bmw-r-1250-rt",
+    name: "BMW R 1250 RT",
+    cardPrompt: "A BMW R 1250 RT luxury sport touring motorcycle parked outside an elegant hotel in the Scottish Borders, three-quarter front view, dark blue metallic colorway, integrated panniers and top case, grand building and rolling countryside behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A BMW R 1250 RT grand tourer cruising a sweeping A-road through the River Tweed valley in the Scottish Borders, effortless long-distance comfort, rolling green hills, warm settled light. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "triumph-tiger-sport-660",
+    name: "Triumph Tiger Sport 660",
+    cardPrompt: "A Triumph Tiger Sport 660 motorcycle parked at a Welsh mountain viewpoint, three-quarter front view, grey and red Triumph colorway, colour-matched panniers, green valleys and mountain road behind, warm light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Triumph Tiger Sport 660 riding a winding Welsh mountain pass on the A5, rock faces and green hillsides, the accessible sport-tourer in motion with rider, bright overcast Welsh light. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "honda-nc750x",
+    name: "Honda NC750X",
+    cardPrompt: "A Honda NC750X motorcycle parked on a quiet British B-road through rolling countryside, three-quarter front view, grey and black colorway, top box fitted, hedgerows and green fields behind, warm afternoon light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Honda NC750X touring a flowing A-road through the English countryside, the practical commuter-tourer in motion with rider, rolling fields and big skies, relaxed accessible touring atmosphere, warm light. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "royal-enfield-interceptor-650",
+    name: "Royal Enfield Interceptor 650",
+    cardPrompt: "A Royal Enfield Interceptor 650 classic motorcycle parked outside a traditional Cotswold pub, three-quarter front view, chrome tank and retro styling, leather panniers, honey-coloured stone building with hanging baskets, warm summer light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Royal Enfield Interceptor 650 riding a narrow Cotswold lane lined with honey-coloured stone walls, classic British countryside, the retro roadster with rider in relaxed gear, golden afternoon light. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "moto-guzzi-v85-tt",
+    name: "Moto Guzzi V85 TT",
+    cardPrompt: "A Moto Guzzi V85 TT retro adventure motorcycle parked on a moorland road in the Peak District, three-quarter front view, classic yellow, red and white heritage livery with spoked wheels, misty gritstone hills behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Moto Guzzi V85 TT riding a moorland road through the Peak District, distinctive retro-adventure styling, the bike with rider on a flowing route, atmospheric clouds and patches of sun over gritstone edges. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "triumph-scrambler-1200",
+    name: "Triumph Scrambler 1200 XE",
+    cardPrompt: "A Triumph Scrambler 1200 XE motorcycle parked on a rugged moorland track in Northumberland, three-quarter front view, matte green and brushed metal scrambler styling with high exhaust, wild open landscape behind, atmospheric light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Triumph Scrambler 1200 XE riding a remote moorland road in Northumberland, Hadrian's Wall country, the muscular retro scrambler with rider in heritage gear, wild landscape and dramatic clouds. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "harley-davidson-road-glide",
+    name: "Harley-Davidson Road Glide",
+    cardPrompt: "A Harley-Davidson Road Glide bagger touring motorcycle parked on a coastal road overlooking the Northumberland coast, three-quarter front view, dark colorway with frame-mounted fairing and hard bags, wide sandy beach and castle on the headland behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Harley-Davidson Road Glide cruising the Northumberland coast road, Bamburgh Castle on the headland ahead, the big bagger with rider in relaxed touring style, wide beach and golden hour light on wet sand. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "triumph-rocket-3-gt",
+    name: "Triumph Rocket 3 GT",
+    cardPrompt: "A Triumph Rocket 3 GT muscle cruiser motorcycle parked at a sweeping A-road viewpoint in the Scottish Borders, three-quarter front view, black and chrome with its huge triple engine prominent, rolling green hills behind, warm afternoon light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Triumph Rocket 3 GT cruising a sweeping A-road through the Scottish Borders, the enormous power cruiser with rider in relaxed touring position, rolling hills and big skies, effortless muscle-touring atmosphere. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "benelli-trk-502",
+    name: "Benelli TRK 502",
+    cardPrompt: "A Benelli TRK 502 adventure motorcycle parked at a viewpoint in the Brecon Beacons, Wales, three-quarter front view, grey and red colorway with aluminium-look panniers, green mountains and open moorland behind. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Benelli TRK 502 riding a flowing road through the Brecon Beacons, Wales, the value adventure bike loaded for touring with rider, green rolling mountains and dramatic Welsh skies. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "zero-dsr-x",
+    name: "Zero DSR/X",
+    cardPrompt: "A Zero DSR/X electric adventure motorcycle parked beside a Highland loch charging point, three-quarter front view, matte grey modern electric adventure styling with no exhaust, mountains and still water behind, clean atmospheric light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Zero DSR/X electric adventure motorcycle riding a quiet Highland single-track road, the silent modern electric bike with rider gliding through wild Scottish scenery, mountains and dramatic light, sense of clean future touring. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
+  },
+  {
+    slug: "honda-forza-750",
+    name: "Honda Forza 750",
+    cardPrompt: "A Honda Forza 750 maxi-scooter parked on a coastal road in Cornwall, three-quarter front view, dark metallic colorway with large touring screen and integrated storage, blue sea and rugged clifftop behind, bright summer light. Landscape orientation, 4:3 aspect ratio. Photorealistic motorcycle photography. No text, watermarks, or logos.",
+    heroPrompt: "A Honda Forza 750 maxi-scooter riding the Atlantic Highway along the Cornish coast, dramatic cliffs and turquoise sea, the comfortable twist-and-go tourer with rider on a coastal bend, bright sunny day. Landscape orientation, 21:9 ultrawide aspect ratio. Cinematic motorcycle photography. No text, watermarks, or logos."
   }
 ];
 
