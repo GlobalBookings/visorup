@@ -15,6 +15,7 @@ if (!agentName) {
   console.log('  content-publisher');
   console.log('  shareable-content');
   console.log('  infographic-generator');
+  console.log('  app-report');
   process.exit(1);
 }
 
@@ -27,6 +28,7 @@ const agents = {
   'content-publisher': () => import('./agents/content-publisher.js'),
   'shareable-content': () => import('./agents/shareable-content.js'),
   'infographic-generator': () => import('./agents/infographic-generator.js'),
+  'app-report': () => import('./agents/app-reporting.js'),
 };
 
 if (!agents[agentName]) {

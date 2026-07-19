@@ -10,6 +10,7 @@ import { run as runInternalLinker } from './agents/internal-linker.js';
 import { run as runContentPublisher } from './agents/content-publisher.js';
 import { run as runShareableContent } from './agents/shareable-content.js';
 import { run as runInfographicGen } from './agents/infographic-generator.js';
+import { run as runAppReport } from './agents/app-reporting.js';
 import express from 'express';
 import {
   handleIncomingEmail, verifyWebhook,
@@ -58,6 +59,7 @@ const triggerHandlers = {
   'content-publisher': runContentPublisher,
   'shareable-content': runShareableContent,
   'infographic-generator': runInfographicGen,
+  'app-report': runAppReport,
 };
 
 app.post('/trigger/:agent', async (req, res) => {
@@ -121,6 +123,7 @@ app.post('/api/emails/send', requireAdmin, async (req, res) => {
 app.listen(PORT, () => { log.info(`Server listening on port ${PORT}`); });
 
 // ── Schedule agents (UK timezone) ─────────────────────────
+schedule('App Report',          '30 9 * * *',   runAppReport);        // 9:30 AM daily
 schedule('GA4 Briefing',        '0 9 * * *',    runGA4);              // 9 AM daily
 schedule('Keyword Miner',       '0 10 * * 1',   runKeywords);         // 10 AM Monday
 schedule('Rank Tracker',        '0 9 * * 1',    runRankTracker);      // 9 AM Monday
