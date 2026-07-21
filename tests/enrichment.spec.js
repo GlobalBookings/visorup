@@ -31,6 +31,23 @@ test.describe('Article enrichment (Phase 1)', () => {
     expect(article.dateModified).toBe('2026-07-21');
   });
 
+  const BUYING = ['best-motorcycle-helmets-uk-2026', 'best-motorcycle-intercoms-uk-2026', 'best-motorcycle-boots-uk-2026'];
+  for (const slug of BUYING) {
+    test(`buying-guide ${slug} shows enrichment + FAQPage schema`, async ({ page }) => {
+      const errors = [];
+      page.on('pageerror', (e) => errors.push(e.message));
+      await page.goto('/guides/buying-guides/' + slug);
+      await expect(page.locator('.article-takeaways')).toBeVisible();
+      await expect(page.locator('.article-table')).toBeVisible();
+      await expect(page.locator('.article-faq .faq-item').first()).toBeVisible();
+      const ld = await page.locator('#visorup-jsonld').textContent();
+      const types = JSON.parse(ld)['@graph'].map((n) => n['@type']);
+      expect(types).toContain('FAQPage');
+      expect(types).toContain('BreadcrumbList');
+      expect(errors).toEqual([]);
+    });
+  }
+
   test('plain article without enrichment still renders and emits breadcrumb schema', async ({ page }) => {
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
