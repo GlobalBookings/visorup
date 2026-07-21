@@ -130,6 +130,29 @@ function categorizePageUrl(url) {
   }
 }
 
+// Generic/hub pages: if a query's best-ranking page is one of these, it means
+// no dedicated article is targeting that query — a "write new" content gap.
+const GENERIC_PATHS = new Set([
+  '/', '/guides', '/routes', '/bikes', '/destinations', '/scenic',
+  '/planning', '/gear', '/shop', '/infographics', '/ferries', '/museums',
+]);
+
+function pageDepth(path) {
+  return path.split('/').filter(Boolean).length;
+}
+
+export function isGenericPage(url) {
+  try {
+    const path = new URL(url).pathname.replace(/\/$/, '') || '/';
+    if (GENERIC_PATHS.has(path)) return true;
+    // A category root like /guides/gear (depth 2) is still a hub, not an article
+    if (path.startsWith('/guides/') && pageDepth(path) <= 2) return true;
+    return false;
+  } catch {
+    return false;
+  }
+}
+
 // ── Search Console data ───────────────────────────────────
 
 async function fetchQueries(webmasters, range) {
@@ -157,13 +180,14 @@ async function fetchQueries(webmasters, range) {
 
 // ── analysis ──────────────────────────────────────────────
 
-function analyseQueries(rows) {
+export function analyseQueries(rows) {
   // score and sort
   const scored = rows.map((r) => ({
     ...r,
     score: scoreQuery(r.query, r.clicks, r.impressions, r.position),
     theme: assignTheme(r.query),
     pageType: categorizePageUrl(r.page),
+    generic: isGenericPage(r.page),
   }));
   scored.sort((a, b) => b.score - a.score);
 
@@ -176,9 +200,10 @@ function analyseQueries(rows) {
     themes[r.theme].impressions += r.impressions;
   }
 
-  // quick-wins: high impressions, low clicks, position 8–20
+  // quick-wins: high impressions, low clicks, position 8–20, ranking on a
+  // dedicated article (not a generic hub) — i.e. improve the existing page
   const quickWins = scored.filter(
-    (r) => r.impressions >= 20 && r.position >= 8 && r.position <= 20 && r.clicks < 5
+    (r) => r.impressions >= 20 && r.position >= 8 && r.position <= 20 && r.clicks < 5 && !r.generic
   );
   quickWins.sort((a, b) => b.impressions - a.impressions);
 
@@ -194,13 +219,26 @@ function analyseQueries(rows) {
   );
   commercial.sort((a, b) => b.score - a.score);
 
-  return { scored, themes, quickWins, strikeDistance, commercial };
+  // content gaps (WRITE NEW): meaningful demand but the only page ranking is a
+  // generic hub/home page, or nothing ranks well (position > 20). No dedicated
+  // article is targeting the query — a candidate for a new piece.
+  const dedup = new Map();
+  for (const r of scored) {
+    if (r.impressions < 25) continue;
+    const isGap = r.generic || r.position > 20;
+    if (!isGap) continue;
+    const prev = dedup.get(r.query);
+    if (!prev || r.impressions > prev.impressions) dedup.set(r.query, r);
+  }
+  const contentGaps = [...dedup.values()].sort((a, b) => b.impressions - a.impressions);
+
+  return { scored, themes, quickWins, strikeDistance, commercial, contentGaps };
 }
 
 // ── report builder ────────────────────────────────────────
 
 function buildReport(analysis, range) {
-  const { scored, themes, quickWins, strikeDistance, commercial } = analysis;
+  const { scored, themes, quickWins, strikeDistance, commercial, contentGaps } = analysis;
   const blocks = [];
 
   blocks.push(slackHeader('🔍 VisorUp — Keyword Miner'));
@@ -242,17 +280,32 @@ function buildReport(analysis, range) {
   );
   blocks.push(slackDivider());
 
-  // quick-wins
-  blocks.push(slackSection('*🎯 Quick-Win Opportunities*'));
+  // quick-wins (IMPROVE EXISTING)
+  blocks.push(slackSection('*🎯 Quick-Wins — IMPROVE existing page*'));
   blocks.push(
     slackSection(
       quickWins
         .slice(0, 8)
         .map(
           (r) =>
-            `• \`${r.query}\` — pos ${r.position.toFixed(1)}, ${fmtNum(r.impressions)} impr, ${r.clicks} clicks`
+            `• \`${r.query}\` — pos ${r.position.toFixed(1)}, ${fmtNum(r.impressions)} impr, ${r.clicks} clicks → \`${new URL(r.page).pathname}\``
         )
         .join('\n') || '_No quick-wins found_'
+    )
+  );
+  blocks.push(slackDivider());
+
+  // content gaps (WRITE NEW)
+  blocks.push(slackSection('*📝 Content Gaps — WRITE new article*'));
+  blocks.push(
+    slackSection(
+      contentGaps
+        .slice(0, 8)
+        .map(
+          (r) =>
+            `• \`${r.query}\` — pos ${r.position.toFixed(1)}, ${fmtNum(r.impressions)} impr (only \`${new URL(r.page).pathname}\` ranks)`
+        )
+        .join('\n') || '_No obvious content gaps_'
     )
   );
   blocks.push(slackDivider());
