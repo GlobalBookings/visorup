@@ -6252,7 +6252,8 @@ class VisorUpSite {
       var items = a.affiliateLinks.map(function(link) {
         return '<a href="' + link.url + '" target="_blank" rel="noopener sponsored" class="article-affiliate">' +
           '<span class="article-affiliate-name">' + link.name + '</span>' +
-          '<span class="article-affiliate-price">' + link.price + ' <i class="fas fa-external-link-alt" style="font-size:9px;opacity:0.5;"></i></span>' +
+          '<span class="article-affiliate-price">' + link.price + '</span>' +
+          '<span class="article-affiliate-cta">Check latest price <i class="fas fa-external-link-alt"></i></span>' +
         '</a>';
       }).join('');
       affiliates = '<div class="article-affiliate-box"><h4><i class="fas fa-shopping-bag" style="color:var(--accent);margin-right:6px;"></i>Products Mentioned</h4>' + items + '<p class="article-affiliate-disclosure">Prices are indicative and correct at the time of writing. VisorUp may earn a commission on purchases made through these links, at no extra cost to you.</p></div>';
@@ -6291,6 +6292,8 @@ class VisorUpSite {
       }).join('');
       faq = '<div class="article-faq"><h2>Frequently Asked Questions</h2>' + qas + '</div>';
     }
+
+    var authorBio = this._authorBio();
 
     var catLabel = a.category === 'buying-guides' ? 'Buying Guides' : a.category.charAt(0).toUpperCase() + a.category.slice(1);
 
@@ -6334,10 +6337,21 @@ class VisorUpSite {
             '<div class="article-tags"><h4>Tags</h4>' + tags + '</div>' +
           '</aside>' +
         '</div>' +
+        authorBio +
         related +
         shareBar +
       '</div>' +
     '</section>';
+  }
+
+  _authorBio() {
+    return '<div class="article-author-bio">' +
+      '<div class="author-bio-avatar"><i class="fas fa-motorcycle"></i></div>' +
+      '<div class="author-bio-body">' +
+        '<h4>The VisorUp Team</h4>' +
+        '<p>VisorUp is a UK motorcycle touring resource run by riders. Our team road-tests routes, gear and bikes across Britain, from the North Coast 500 to the South Downs, and cross-checks every guide against manufacturer specs, current UK regulations and real-world riding before we publish. We update our guides regularly to keep prices, standards and recommendations accurate.</p>' +
+      '</div>' +
+    '</div>';
   }
 
   renderInfographic(a) {
@@ -6395,7 +6409,7 @@ class VisorUpSite {
         '<p style="color:var(--text-muted);margin:0 0 24px;font-size:15px">' + a.metaDescription + '</p>' +
         shareBar +
         '<div class="ig-image-wrap" style="margin:24px 0;text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg, 12px);padding:24px;overflow:hidden">' +
-          '<img src="' + a.heroImage + '" alt="' + a.title + '" style="max-width:100%;height:auto;border-radius:8px" loading="lazy" />' +
+          '<img src="' + a.heroImage + '" alt="' + (a.metaDescription || a.title) + '" style="max-width:100%;height:auto;border-radius:8px" loading="lazy" decoding="async" />' +
         '</div>' +
         '<div style="display:flex;gap:12px;justify-content:center;margin:0 0 32px;flex-wrap:wrap">' +
           '<a href="' + a.heroImage + '" download class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--accent);color:#080c0b;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none"><i class="fas fa-download"></i> Download Full Size</a>' +
@@ -6410,12 +6424,13 @@ class VisorUpSite {
           '<div style="margin-top:16px;padding:16px;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px">' +
             '<h4 style="margin:0 0 8px;font-size:14px;color:var(--text)"><i class="fas fa-eye" style="color:var(--accent);margin-right:6px"></i>Preview</h4>' +
             '<div style="border:1px dashed var(--border);border-radius:6px;padding:12px;text-align:center">' +
-              '<img src="' + a.heroImage + '" alt="' + a.title + '" style="max-width:300px;height:auto;border-radius:4px" />' +
+              '<img src="' + a.heroImage + '" alt="' + a.title + ' preview" style="max-width:300px;height:auto;border-radius:4px" loading="lazy" decoding="async" />' +
               '<p style="font-size:12px;color:var(--text-muted);margin:8px 0 0">Source: <a href="https://visorup.co.uk" style="color:var(--accent)">VisorUp.co.uk</a> — UK Motorcycle Touring</p>' +
             '</div>' +
           '</div>' +
         '</div>' +
         '<div class="article-body" style="margin:0 0 32px">' + igTakeaways + (a.content || '') + igComparison + igFaq + '</div>' +
+        this._authorBio() +
         shareBar +
         moreSection +
       '</div>' +
@@ -6558,7 +6573,7 @@ class VisorUpSite {
       'headline': article.title,
       'description': article.metaDescription,
       'image': img,
-      'author': { '@type': 'Organization', 'name': 'VisorUp', 'url': 'https://visorup.co.uk' },
+      'author': { '@type': 'Organization', 'name': 'The VisorUp Team', 'url': 'https://visorup.co.uk', 'description': 'UK motorcycle touring specialists who road-test routes, gear and bikes across Britain.' },
       'publisher': { '@type': 'Organization', 'name': 'VisorUp', 'url': 'https://visorup.co.uk', 'logo': { '@type': 'ImageObject', 'url': 'https://visorup.co.uk/public/images/heroes/homepage.jpg' } },
       'datePublished': article.publishDate,
       'dateModified': article.updatedDate || article.publishDate,

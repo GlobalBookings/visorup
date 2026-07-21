@@ -3402,11 +3402,14 @@ ul, ol { list-style: none; }
 .article-sidebar { position:sticky; top:80px; align-self:start; }
 .article-affiliate-box { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin-bottom:16px; }
 .article-affiliate-box h4 { font-size:13px; font-weight:700; margin-bottom:12px; }
-.article-affiliate { display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); text-decoration:none; color:inherit; transition:opacity var(--transition); }
+.article-affiliate { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); text-decoration:none; color:inherit; transition:opacity var(--transition); }
 .article-affiliate:last-child { border-bottom:none; }
-.article-affiliate:hover { opacity:0.8; }
-.article-affiliate-name { font-size:13px; font-weight:600; }
+.article-affiliate:hover { opacity:0.85; }
+.article-affiliate:hover .article-affiliate-cta { background:var(--accent); color:#080c0b; }
+.article-affiliate-name { font-size:13px; font-weight:600; flex:1; }
 .article-affiliate-price { font-size:12px; color:var(--accent); font-weight:700; white-space:nowrap; }
+.article-affiliate-cta { font-size:11px; font-weight:700; white-space:nowrap; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:4px 10px; transition:background var(--transition), color var(--transition); }
+.article-affiliate-cta i { font-size:9px; margin-left:3px; }
 
 .article-tags { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; }
 .article-tags h4 { font-size:13px; font-weight:700; margin-bottom:10px; }
@@ -3475,8 +3478,14 @@ ul, ol { list-style: none; }
 
 .article-affiliate-disclosure { font-size:11px; line-height:1.5; color:var(--text-muted); margin-top:12px; padding-top:10px; border-top:1px solid var(--border); font-style:italic; }
 
+.article-author-bio { display:flex; gap:16px; align-items:flex-start; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin:32px 0; }
+.author-bio-avatar { flex-shrink:0; width:52px; height:52px; border-radius:50%; background:var(--accent); color:#080c0b; display:flex; align-items:center; justify-content:center; font-size:22px; }
+.author-bio-body h4 { font-size:15px; font-weight:700; margin:0 0 6px; color:var(--text); }
+.author-bio-body p { font-size:13px; line-height:1.6; color:var(--text-muted); margin:0; }
+
 @media (max-width:768px) {
   .article-proscons { grid-template-columns:1fr; }
+  .article-author-bio { flex-direction:column; gap:12px; }
 }
 
 /* ── BREADCRUMB ── */
