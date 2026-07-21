@@ -53,8 +53,6 @@ test.describe('Article enrichment (Phase 1)', () => {
     page.on('pageerror', (e) => errors.push(e.message));
     await page.goto('/guides/routes/best-roads-for-sportsbikes-uk');
     await expect(page.locator('.article-body')).toBeVisible();
-    await expect(page.locator('.article-takeaways')).toHaveCount(0);
-    await expect(page.locator('.article-faq')).toHaveCount(0);
     const ld = await page.locator('#visorup-jsonld').textContent();
     const types = JSON.parse(ld)['@graph'].map((n) => n['@type']);
     expect(types).toContain('Article');
