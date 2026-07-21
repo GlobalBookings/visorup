@@ -6254,7 +6254,41 @@ class VisorUpSite {
           '<span class="article-affiliate-price">' + link.price + ' <i class="fas fa-external-link-alt" style="font-size:9px;opacity:0.5;"></i></span>' +
         '</a>';
       }).join('');
-      affiliates = '<div class="article-affiliate-box"><h4><i class="fas fa-shopping-bag" style="color:var(--accent);margin-right:6px;"></i>Products Mentioned</h4>' + items + '</div>';
+      affiliates = '<div class="article-affiliate-box"><h4><i class="fas fa-shopping-bag" style="color:var(--accent);margin-right:6px;"></i>Products Mentioned</h4>' + items + '<p class="article-affiliate-disclosure">Prices are indicative and correct at the time of writing. VisorUp may earn a commission on purchases made through these links, at no extra cost to you.</p></div>';
+    }
+
+    var takeaways = '';
+    if (a.keyTakeaways && a.keyTakeaways.length > 0) {
+      takeaways = '<div class="article-takeaways"><h4><i class="fas fa-bolt"></i>Key Takeaways</h4><ul>' +
+        a.keyTakeaways.map(function(t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>';
+    }
+
+    var comparison = '';
+    if (a.comparisonTable && a.comparisonTable.headers && a.comparisonTable.rows) {
+      var thead = '<tr>' + a.comparisonTable.headers.map(function(h) { return '<th>' + h + '</th>'; }).join('') + '</tr>';
+      var tbody = a.comparisonTable.rows.map(function(row) {
+        return '<tr>' + row.map(function(cell) { return '<td>' + cell + '</td>'; }).join('') + '</tr>';
+      }).join('');
+      var cap = a.comparisonTable.caption ? '<h2>' + a.comparisonTable.caption + '</h2>' : '';
+      comparison = cap + '<div class="article-table-wrap"><table class="article-table"><thead>' + thead + '</thead><tbody>' + tbody + '</tbody></table></div>';
+    }
+
+    var prosCons = '';
+    if (a.prosCons && (a.prosCons.pros || a.prosCons.cons)) {
+      var prosItems = (a.prosCons.pros || []).map(function(p) { return '<li>' + p + '</li>'; }).join('');
+      var consItems = (a.prosCons.cons || []).map(function(c) { return '<li>' + c + '</li>'; }).join('');
+      prosCons = '<div class="article-proscons">' +
+        '<div class="proscons-col proscons-pros"><h4><i class="fas fa-circle-check"></i>Pros</h4><ul>' + prosItems + '</ul></div>' +
+        '<div class="proscons-col proscons-cons"><h4><i class="fas fa-circle-xmark"></i>Cons</h4><ul>' + consItems + '</ul></div>' +
+      '</div>';
+    }
+
+    var faq = '';
+    if (a.faq && a.faq.length > 0) {
+      var qas = a.faq.map(function(item) {
+        return '<details class="faq-item"><summary>' + item.q + '</summary><div class="faq-answer">' + item.a + '</div></details>';
+      }).join('');
+      faq = '<div class="article-faq"><h2>Frequently Asked Questions</h2>' + qas + '</div>';
     }
 
     var catLabel = a.category === 'buying-guides' ? 'Buying Guides' : a.category.charAt(0).toUpperCase() + a.category.slice(1);
@@ -6279,7 +6313,7 @@ class VisorUpSite {
       '<div class="page-hero-content">' +
         '<span class="article-hero-cat">' + catLabel + '</span>' +
         '<h1 class="page-hero-title">' + a.title + '</h1>' +
-        '<div class="article-hero-meta"><span><i class="fas fa-user"></i> ' + a.author + '</span><span><i class="fas fa-calendar"></i> ' + a.publishDate + '</span><span><i class="fas fa-clock"></i> ' + a.readTime + '</span></div>' +
+        '<div class="article-hero-meta"><span><i class="fas fa-user"></i> ' + a.author + '</span><span><i class="fas fa-calendar"></i> ' + a.publishDate + '</span>' + (a.updatedDate ? '<span><i class="fas fa-rotate"></i> Updated ' + a.updatedDate + '</span>' : '') + '<span><i class="fas fa-clock"></i> ' + a.readTime + '</span></div>' +
       '</div>' +
     '</section>' +
     '<section class="page-section">' +
@@ -6288,7 +6322,11 @@ class VisorUpSite {
         shareBar +
         '<div class="article-layout">' +
           '<article class="article-body">' +
+            takeaways +
             a.content +
+            comparison +
+            prosCons +
+            faq +
           '</article>' +
           '<aside class="article-sidebar">' +
             affiliates +
@@ -6485,22 +6523,63 @@ class VisorUpSite {
   _injectJsonLd(article) {
     var existing = document.getElementById('visorup-jsonld');
     if (existing) existing.remove();
-    var script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.id = 'visorup-jsonld';
-    script.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
+    var base = window.location.origin;
+    var pageUrl = base + '/guides/' + article.category + '/' + article.slug;
+    var img = article.heroImage ? (article.heroImage.indexOf('http') === 0 ? article.heroImage : base + '/' + article.heroImage) : undefined;
+    var catLabel = article.category === 'buying-guides' ? 'Buying Guides' : article.category.charAt(0).toUpperCase() + article.category.slice(1);
+    var strip = function(html) { return (html || '').replace(/<[^>]+>/g, '').trim(); };
+    var graph = [];
+    graph.push({
       '@type': 'Article',
       'headline': article.title,
       'description': article.metaDescription,
-      'image': window.location.origin + '/' + article.heroImage,
+      'image': img,
       'author': { '@type': 'Organization', 'name': 'VisorUp', 'url': 'https://visorup.co.uk' },
       'publisher': { '@type': 'Organization', 'name': 'VisorUp', 'url': 'https://visorup.co.uk', 'logo': { '@type': 'ImageObject', 'url': 'https://visorup.co.uk/public/images/heroes/homepage.jpg' } },
       'datePublished': article.publishDate,
-      'dateModified': article.publishDate,
-      'mainEntityOfPage': { '@type': 'WebPage', '@id': window.location.origin + '/guides/' + article.category + '/' + article.slug },
-      'keywords': article.tags.join(', ')
+      'dateModified': article.updatedDate || article.publishDate,
+      'mainEntityOfPage': { '@type': 'WebPage', '@id': pageUrl },
+      'keywords': (article.tags || []).join(', ')
     });
+    graph.push({
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': base + '/' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Guides', 'item': base + '/guides' },
+        { '@type': 'ListItem', 'position': 3, 'name': catLabel, 'item': base + '/guides/' + article.category },
+        { '@type': 'ListItem', 'position': 4, 'name': article.title, 'item': pageUrl }
+      ]
+    });
+    if (article.faq && article.faq.length > 0) {
+      graph.push({
+        '@type': 'FAQPage',
+        'mainEntity': article.faq.map(function(item) {
+          return { '@type': 'Question', 'name': strip(item.q), 'acceptedAnswer': { '@type': 'Answer', 'text': strip(item.a) } };
+        })
+      });
+    }
+    if (article.howTo && article.howTo.length > 0) {
+      graph.push({
+        '@type': 'HowTo',
+        'name': article.title,
+        'step': article.howTo.map(function(s, i) {
+          return { '@type': 'HowToStep', 'position': i + 1, 'name': strip(s.name) || ('Step ' + (i + 1)), 'text': strip(s.text) };
+        })
+      });
+    }
+    if (article.affiliateLinks && article.affiliateLinks.length > 0 && (article.category === 'buying-guides' || article.category === 'gear')) {
+      graph.push({
+        '@type': 'ItemList',
+        'name': article.title,
+        'itemListElement': article.affiliateLinks.map(function(l, i) {
+          return { '@type': 'ListItem', 'position': i + 1, 'name': l.name, 'url': l.url };
+        })
+      });
+    }
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'visorup-jsonld';
+    script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
     document.head.appendChild(script);
   }
 
