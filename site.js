@@ -902,6 +902,7 @@ class VisorUpSite {
             this.setActiveNav('explore');
             this.setTitle(infographic.title);
             this._setMeta({ description: infographic.metaDescription, image: infographic.heroImage, type: 'article' });
+            this._injectJsonLd(infographic);
             this._bindShareCopyBtns();
             VisorUpAnalytics.trackGuideView(infographic.slug, 'infographic');
             this.scrollToTop();
@@ -6364,6 +6365,28 @@ class VisorUpSite {
     }).join('');
     var moreSection = moreCards ? '<div class="ig-more"><h3><i class="fas fa-images" style="color:var(--accent);margin-right:8px"></i>More Infographics</h3><div class="ig-more-grid">' + moreCards + '</div></div>' : '';
 
+    var igTakeaways = '';
+    if (a.keyTakeaways && a.keyTakeaways.length > 0) {
+      igTakeaways = '<div class="article-takeaways"><h4><i class="fas fa-bolt"></i>Key Takeaways</h4><ul>' +
+        a.keyTakeaways.map(function(t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>';
+    }
+    var igComparison = '';
+    if (a.comparisonTable && a.comparisonTable.headers && a.comparisonTable.rows) {
+      var igThead = '<tr>' + a.comparisonTable.headers.map(function(h) { return '<th>' + h + '</th>'; }).join('') + '</tr>';
+      var igTbody = a.comparisonTable.rows.map(function(row) {
+        return '<tr>' + row.map(function(cell) { return '<td>' + cell + '</td>'; }).join('') + '</tr>';
+      }).join('');
+      var igCap = a.comparisonTable.caption ? '<h2>' + a.comparisonTable.caption + '</h2>' : '';
+      igComparison = igCap + '<div class="article-table-wrap"><table class="article-table"><thead>' + igThead + '</thead><tbody>' + igTbody + '</tbody></table></div>';
+    }
+    var igFaq = '';
+    if (a.faq && a.faq.length > 0) {
+      var igQas = a.faq.map(function(item) {
+        return '<details class="faq-item"><summary>' + item.q + '</summary><div class="faq-answer">' + item.a + '</div></details>';
+      }).join('');
+      igFaq = '<div class="article-faq"><h2>Frequently Asked Questions</h2>' + igQas + '</div>';
+    }
+
     return '' +
     '<section class="page-section" style="padding-top:calc(var(--nav-h, 60px) + 32px)">' +
       '<div class="container" style="max-width:900px">' +
@@ -6392,7 +6415,7 @@ class VisorUpSite {
             '</div>' +
           '</div>' +
         '</div>' +
-        (a.content ? '<div class="article-body" style="margin:0 0 32px">' + a.content + '</div>' : '') +
+        '<div class="article-body" style="margin:0 0 32px">' + igTakeaways + (a.content || '') + igComparison + igFaq + '</div>' +
         shareBar +
         moreSection +
       '</div>' +
@@ -6524,7 +6547,8 @@ class VisorUpSite {
     var existing = document.getElementById('visorup-jsonld');
     if (existing) existing.remove();
     var base = window.location.origin;
-    var pageUrl = base + '/guides/' + article.category + '/' + article.slug;
+    var isInfographic = article.tags && article.tags.indexOf('infographic') >= 0;
+    var pageUrl = isInfographic ? base + '/infographics/' + article.slug : base + '/guides/' + article.category + '/' + article.slug;
     var img = article.heroImage ? (article.heroImage.indexOf('http') === 0 ? article.heroImage : base + '/' + article.heroImage) : undefined;
     var catLabel = article.category === 'buying-guides' ? 'Buying Guides' : article.category.charAt(0).toUpperCase() + article.category.slice(1);
     var strip = function(html) { return (html || '').replace(/<[^>]+>/g, '').trim(); };
@@ -6545,8 +6569,8 @@ class VisorUpSite {
       '@type': 'BreadcrumbList',
       'itemListElement': [
         { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': base + '/' },
-        { '@type': 'ListItem', 'position': 2, 'name': 'Guides', 'item': base + '/guides' },
-        { '@type': 'ListItem', 'position': 3, 'name': catLabel, 'item': base + '/guides/' + article.category },
+        { '@type': 'ListItem', 'position': 2, 'name': isInfographic ? 'Infographics' : 'Guides', 'item': isInfographic ? base + '/infographics' : base + '/guides' },
+        { '@type': 'ListItem', 'position': 3, 'name': isInfographic ? article.title : catLabel, 'item': isInfographic ? pageUrl : base + '/guides/' + article.category },
         { '@type': 'ListItem', 'position': 4, 'name': article.title, 'item': pageUrl }
       ]
     });
