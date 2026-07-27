@@ -365,7 +365,7 @@ for (const cfg of GUIDES) {
     slug: cfg.slug,
     category: 'buying-guides',
     title: cfg.title,
-    metaDescription: cfg.intro.length > 158 ? cfg.intro.slice(0, 155) + '…' : cfg.intro,
+    metaDescription: cfg.intro.length > 158 ? cfg.intro.slice(0, 155).replace(/\s+\S*$/, '') + '…' : cfg.intro,
     heroImage: 'public/images/guides/gear/' + cfg.hero + '.jpg',
     author: 'VisorUp Team',
     publishDate: TODAY,
