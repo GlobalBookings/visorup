@@ -24,13 +24,14 @@ const log = createLogger('content-publisher');
 
 /* ── Config ─────────────────────────────────────────────────────────── */
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-4-5-20250929';
 const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SC_SITE = process.env.SEARCH_CONSOLE_SITE_URL || 'https://visorup.co.uk';
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const GA4_PROPERTY = process.env.GA4_PROPERTY_ID;
 const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
-const POSTS_PER_RUN = 2;
+const POSTS_PER_RUN = Number(process.env.POSTS_PER_RUN) || 2;
 
 const CATEGORIES = [
   'Routes',
@@ -100,7 +101,8 @@ function appendToArticlesIndex(indexPath, metadata) {
 }
 
 /* ── Search Console — find content gaps ─────────────────────────────── */
-async function findContentGaps(existingSlugs) {
+async function findContentGaps(existingSlugs, existingTitles = []) {
+  const titleBlob = existingTitles.map(t => t.toLowerCase());
   try {
     const auth = getOAuth2Client();
     const sc = google.searchconsole({ version: 'v1', auth });
@@ -132,7 +134,11 @@ async function findContentGaps(existingSlugs) {
         // No existing article covers this query well
         const query = r.keys[0].toLowerCase();
         const slug = query.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-        return !existingSlugs.has(slug);
+        if (existingSlugs.has(slug)) return false;
+        // Guard against near-duplicates whose slug differs by suffixes (e.g. -uk-2026):
+        // skip if an existing title already contains the full query phrase.
+        if (titleBlob.some(t => t.includes(query))) return false;
+        return true;
       })
       .sort((a, b) => b.impressions - a.impressions)
       .slice(0, 10)
@@ -194,23 +200,48 @@ Requirements:
 9. End with a practical summary or action step
 10. Cover British weather, gear, and riding conditions where relevant
 
-Also provide these as separate lines at the very end, each on its own line prefixed with META::
+Also provide these as separate lines after the article, each on its own line prefixed with META::
 META::TITLE: (SEO title, max 60 chars, include year if relevant)
 META::DESCRIPTION: (Meta description, max 155 chars)
 META::SLUG: (URL slug, lowercase-kebab-case)
 META::TAGS: (comma-separated tags)
-META::READ_TIME: (e.g. "8 min read")`;
+META::READ_TIME: (e.g. "8 min read")
+
+Finally, after the META lines, output a single line containing exactly ===ENRICHMENT=== followed by a JSON object (and nothing after it) with this exact shape:
+{
+  "keyTakeaways": ["4-6 short, scannable takeaway sentences"],
+  "faq": [{"q": "question", "a": "<p>HTML answer, 1-3 sentences</p>"}],
+  "comparisonTable": {"caption": "string", "headers": ["col1","col2","col3"], "rows": [["...","...","..."]]},
+  "prosCons": {"pros": ["..."], "cons": ["..."]},
+  "relatedSlugs": ["2-3 suggested kebab-case slugs of related VisorUp articles"]
+}
+Rules for the enrichment block: keyTakeaways (4-6 items) and faq (4-6 items) are required. Set comparisonTable to null if a comparison table does not suit the topic, and prosCons to null if pros/cons are not relevant. Output valid JSON only, with no code fences.`;
 
   const response = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 5000,
+    model: CLAUDE_MODEL,
+    max_tokens: 8000,
     messages: [{ role: 'user', content: prompt }],
   });
 
   const text = response.content[0].text.trim();
 
-  // Parse META lines
-  const metaLines = text.split('\n').filter(l => l.startsWith('META::'));
+  // Split off the enrichment JSON block (after ===ENRICHMENT===)
+  const ENRICH_MARKER = '===ENRICHMENT===';
+  const enrichIdx = text.indexOf(ENRICH_MARKER);
+  const headText = enrichIdx > -1 ? text.slice(0, enrichIdx) : text;
+
+  let enrichment = {};
+  if (enrichIdx > -1) {
+    const jsonStr = text.slice(enrichIdx + ENRICH_MARKER.length).trim();
+    try {
+      enrichment = JSON.parse(jsonStr);
+    } catch (e) {
+      log.warn(`Failed to parse enrichment JSON: ${e.message}`);
+    }
+  }
+
+  // Parse META lines (only from the head, before the enrichment block)
+  const metaLines = headText.split('\n').filter(l => l.startsWith('META::'));
   const meta = {};
   for (const line of metaLines) {
     const [key, ...rest] = line.replace('META::', '').split(':');
@@ -218,8 +249,8 @@ META::READ_TIME: (e.g. "8 min read")`;
   }
 
   // Extract HTML content (everything before META lines)
-  const contentEnd = text.indexOf('META::');
-  const htmlContent = contentEnd > -1 ? text.slice(0, contentEnd).trim() : text;
+  const contentEnd = headText.indexOf('META::');
+  const htmlContent = contentEnd > -1 ? headText.slice(0, contentEnd).trim() : headText.trim();
 
   return {
     content: htmlContent,
@@ -229,6 +260,11 @@ META::READ_TIME: (e.g. "8 min read")`;
     tags: meta.tags ? meta.tags.split(',').map(t => t.trim()) : [],
     readTime: meta.read_time || '7 min read',
     category: category.toLowerCase(),
+    keyTakeaways: Array.isArray(enrichment.keyTakeaways) ? enrichment.keyTakeaways : [],
+    faq: Array.isArray(enrichment.faq) ? enrichment.faq : [],
+    comparisonTable: enrichment.comparisonTable || null,
+    prosCons: enrichment.prosCons || null,
+    relatedSlugsSuggested: Array.isArray(enrichment.relatedSlugs) ? enrichment.relatedSlugs : [],
   };
 }
 
@@ -317,7 +353,8 @@ export async function run() {
   log.info(`Found ${articles.length} existing articles`);
 
   // Find content gaps via Search Console
-  const gaps = await findContentGaps(existingSlugs);
+  const existingTitles = articles.map(a => a.title || '');
+  const gaps = await findContentGaps(existingSlugs, existingTitles);
   log.info(`Found ${gaps.length} content gap opportunities`);
 
   // Select topics to write about
@@ -378,6 +415,13 @@ export async function run() {
         changedFiles.push(heroImage);
       }
 
+      // Validate suggested related slugs against existing articles
+      const relatedSlugs = (article.relatedSlugsSuggested || [])
+        .filter(s => existingSlugs.has(s) && s !== article.slug)
+        .slice(0, 3);
+
+      const today = new Date().toISOString().split('T')[0];
+
       // Build metadata
       const metadata = {
         slug: article.slug,
@@ -386,13 +430,19 @@ export async function run() {
         metaDescription: article.metaDescription,
         heroImage: heroImage || `public/images/guides/${article.category}/${article.slug}.jpg`,
         author: 'VisorUp Team',
-        publishDate: new Date().toISOString().split('T')[0],
+        publishDate: today,
+        updatedDate: today,
         readTime: article.readTime,
         tags: article.tags,
-        relatedSlugs: [],
+        relatedSlugs,
         affiliateLinks: [],
+        keyTakeaways: article.keyTakeaways,
+        faq: article.faq,
         content: article.content,
       };
+
+      if (article.comparisonTable) metadata.comparisonTable = article.comparisonTable;
+      if (article.prosCons) metadata.prosCons = article.prosCons;
 
       // Append to articles.js
       appendToArticlesIndex(paths.articlesIndex, metadata);

@@ -200,7 +200,7 @@ META::TAGS: (comma-separated tags)
 META::READ_TIME: (e.g. "12 min read")`;
 
   const response = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-5-20250929',
     max_tokens: 6000,
     messages: [{ role: 'user', content: prompt }],
   });
