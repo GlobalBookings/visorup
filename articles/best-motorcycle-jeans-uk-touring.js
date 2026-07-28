@@ -2,7 +2,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>I've spent years testing motorcycle jeans across every corner of Britain, from filtering through Manchester traffic to carving through the Highlands on the <a href="/routes/nc500-complete">NC500</a>. Let me tell you straight: finding the right pair of motorcycle jeans has been one of the best gear decisions I've made for everyday riding and touring alike.</p>
 
-<p>When I first started touring, I wore full leathers or textile trousers every single time. Brilliant for protection, absolutely. But stopping for a coffee at a village café on the A591 through the Lake District? I looked like I'd just stepped off a MotoGP grid. Motorcycle jeans changed everything for me – proper protection that doesn't make you look or feel like a Power Ranger when you're off the bike.</p>
+<p>When I first started touring, I wore full leathers or textile trousers every single time. Brilliant for protection, absolutely. But stopping for a coffee at a village café on the A591 through the Lake District? I looked like I'd just stepped off a MotoGP grid. <a href="/guides/motorcycle-touring-packing-tips-beginners">Motorcycle</a> jeans changed everything for me – proper protection that doesn't make you look or feel like a Power Ranger when you're off the bike.</p>
 
 <h2>Why I Switched to Motorcycle Jeans for Most Rides</h2>
 
@@ -26,7 +26,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <h2>My Top Picks After Years of Testing</h2>
 
-<p>I've gone through more pairs of motorcycle jeans than I'd like to admit, and I've settled on a few that genuinely deliver for British touring conditions. Here's what's currently in my rotation:</p>
+<p>I've gone through more pairs of motorcycle jeans than I'd like to admit, and I've settled on a few that genuinely deliver for British <a href="/guides/best-adventure-helmet">touring</a> conditions. Here's what's currently in my rotation:</p>
 
 <h3>Single-Layer Aramid Jeans: For Warm Days</h3>
 
@@ -66,7 +66,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>Let's be real about British weather: it rains. A lot. No motorcycle jeans are truly waterproof without a membrane, and even then, they're not as waterproof as proper textile trousers.</p>
 
-<p>What I look for is water-resistant treatment that'll buy me time. Riding the A82 alongside Loch Lomond, I've been caught in sudden downpours more times than I can count. Good water-resistant jeans will keep you dry for 30-45 minutes in light to moderate rain. That's usually enough to get to shelter or your accommodation.</p>
+<p>What I look for is water-resistant treatment that'll buy me time. Riding the A82 alongside Loch Lomond, I've been caught in sudden downpours more times than I can count. Good water-resistant jeans will keep you dry for 30-45 minutes in light to moderate rain. That's usually enough to get to shelter or your <a href="/guides/best-bb-accommodation-motorcycle-touring">accommodation</a>.</p>
 
 <p>For touring, I always pack lightweight overtrousers. They weigh nothing, pack small, and they're a lifesaver when the heavens open somewhere between Fort William and Skye.</p>
 
@@ -80,7 +80,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>Sounds basic, but you'd be surprised how many motorcycle jeans have useless pockets. I need pockets that I can actually access while wearing gloves, that are deep enough to keep my phone secure, and that don't have awkward armour pockets that make sitting down weird.</p>
 
-<p>The best pairs I own have secure zip pockets for valuables, normal pockets positioned where you'd expect them, and armour pockets that don't interfere with the regular pocket layout.</p>
+<p>The <a href="/guides/best-motorcycle-roads-scotland">best</a> pairs I own have secure zip pockets for valuables, normal pockets positioned where you'd expect them, and armour pockets that don't interfere with the regular pocket layout.</p>
 
 <h2>Getting the Fit Right</h2>
 
@@ -161,4 +161,4 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>The roads are waiting – whether it's the sweeping curves of the A537 Cat and Fiddle, the coastal beauty of the North Coast 500, or just your daily commute through town. Having the right gear means you'll enjoy every mile more, and arrive ready to walk into that café without looking like you're about to enter a race paddock.</p>
 
-<p>Start with one good pair, wear them, learn what works for you, and build from there. Your knees and hips will thank you if you ever need the protection, and your comfort on every ride will improve immediately.</p>`;
+<p>Start with one good pair, wear them, learn what works for you, and build from there. Your knees and hips will thank you if you ever need the protection, and your comfort on every ride will improve immediately. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more.</p>`;
