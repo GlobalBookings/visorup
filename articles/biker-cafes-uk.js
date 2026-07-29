@@ -1,8 +1,8 @@
 export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
-<p>There's something properly special about pulling into a good biker café after a few hours on the road. The smell of bacon, the sound of engines ticking as they cool, and the chat with other riders about the road you've just smashed or the one you're about to tackle. I've been riding across Britain for years now, and I can tell you that knowing where the decent biker cafés are will absolutely transform your touring experience.</p>
+<p>There's something properly special about pulling into a good <a href="/guides/best-biker-cafes-uk">biker</a> café after a few hours on the road. The smell of bacon, the sound of engines ticking as they cool, and the chat with other riders about the road you've just smashed or the one you're about to tackle. I've been riding across Britain for years now, and I can tell you that knowing where the decent biker cafés are will absolutely transform your touring experience.</p>
 
-<p>Biker cafés aren't just about the food—though a proper fry-up goes a long way when you've been battling wind and rain since dawn. They're meeting points, information exchanges, and sometimes the only warm place to sort your route out when the weather turns. I've planned some of my best rides sitting at a café table with a brew, studying maps and getting tips from locals who know every switchback and scenic viewpoint within fifty miles.</p>
+<p>Biker cafés aren't just about the food—though a proper fry-up goes a long way when you've been battling wind and rain since dawn. They're meeting points, information exchanges, and sometimes the only warm place to sort your route out when the weather turns. I've planned some of my <a href="/guides/best-motorcycle-roads-scotland">best</a> rides sitting at a café table with a brew, studying maps and getting tips from locals who know every switchback and scenic viewpoint within fifty miles.</p>
 
 <h2>What Makes a Proper Biker Café</h2>
 
@@ -36,7 +36,7 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <h3>Lyn's Café (Cumbria)</h3>
 
-<p>Lyn's Café at Hawkshead in the Lake District is compact but perfect. Right in the heart of some of the best biking roads in England—the A591, Kirkstone Pass, Hardknott Pass all within striking distance. The café itself is small, gets rammed on weekends, but the welcome is genuine and the portions are generous. I always stop here when I'm touring the Lakes.</p>
+<p>Lyn's Café at Hawkshead in the Lake District is compact but perfect. Right in the heart of some of the best biking roads in England—the A591, Kirkstone Pass, Hardknott Pass all within striking distance. The café itself is small, gets rammed on weekends, but the welcome is genuine and the portions are generous. I always stop here when I'm <a href="/guides/best-touring-helmets-uk">touring</a> the Lakes.</p>
 
 <h2>Regional Gems and Hidden Spots</h2>
 
@@ -46,7 +46,7 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <p>The Evo Stick Café near Llangollen has become a proper biker haven. It's positioned brilliantly for tackling the A5, A542 Horseshoe Pass, and A543 routes. The Welsh roads are some of my favourites in the UK—sweeping, scenic, and usually less busy than comparable English routes. Having good cafés along these routes makes multi-day Welsh tours much more practical.</p>
 
-<p>The Chain and Mug near Llanidloes is another Welsh gem. Smaller, family-run, and genuinely interested in bikes and riders. The roads around here—the A470, the mountain passes—can be challenging in typical Welsh weather, so having a warm, welcoming stop is crucial.</p>
+<p>The Chain and Mug near Llanidloes is another Welsh gem. Smaller, family-run, and genuinely interested in bikes and riders. The roads around here—the A470, the mountain passes—can be challenging in typical Welsh <a href="/guides/textile-touring-jackets">weather</a>, so having a warm, welcoming stop is crucial.</p>
 
 <h3>South West England</h3>
 
@@ -72,7 +72,7 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <p>British weather makes café stops essential rather than optional. I've been caught out too many times—setting off in sunshine, hitting rain two hours later, and desperately needing somewhere to warm up and dry out. Knowing where your nearest proper café is can literally save a ride.</p>
 
-<p>In winter, I won't plan routes longer than two hours between café stops. Your hands get cold, your concentration drops, and you need that warm-up break. Summer gives you more flexibility, but even then, a stop every three hours keeps you sharp and makes the riding more enjoyable.</p>
+<p>In winter, I won't plan routes longer than two hours between café stops. Your hands get cold, your concentration drops, and you need that warm-up break. <a href="/guides/summer-motorcycle-gloves">Summer</a> gives you more flexibility, but even then, a stop every three hours keeps you sharp and makes the riding more enjoyable.</p>
 
 <p>Always check if cafés are open before you ride—smaller ones close midweek in winter, and even established places occasionally shut for holidays. Nothing worse than building a route around a specific stop and finding it closed when you arrive frozen and hungry.</p>
 

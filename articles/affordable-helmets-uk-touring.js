@@ -4,13 +4,13 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>But here's the thing I've learned after years of riding across Britain in everything from Scottish mist to proper Welsh downpours: you don't need to spend a fortune to get a helmet that'll keep you safe, comfortable, and focused on the road ahead. You just need to know what actually matters and where you can save without compromising.</p>
 
-<p>I've tested my fair share of budget lids over the years, and I'm going to walk you through what works, what doesn't, and how to find a helmet that'll see you through thousands of miles without breaking the bank.</p>
+<p>I've tested my fair share of budget <a href="/guides/adventure-helmets-review">lids</a> over the years, and I'm going to walk you through what works, what doesn't, and how to find a helmet that'll see you through thousands of miles without breaking the bank.</p>
 
 <h2>What Makes a Helmet "Affordable" in 2026?</h2>
 
-<p>When I talk about affordable helmets, I'm generally looking at the £100-250 price bracket. That's where you'll find proper ECE 22.06 certified protection without the premium brand markup or the fancy extras you probably don't need for touring anyway.</p>
+<p>When I talk about affordable helmets, I'm generally looking at the £100-250 price bracket. That's where you'll find proper ECE 22.06 certified protection without the premium brand markup or the fancy extras you probably don't need for <a href="/guides/best-touring-helmets-uk">touring</a> anyway.</p>
 
-<p>The helmet market's shifted quite a bit recently. What cost £300 five years ago is now hitting that £200 mark thanks to better manufacturing processes and more competition. Brands like Caberg, AGV, and Scorpion are putting out proper touring helmets at prices that actually make sense.</p>
+<p>The helmet market's shifted quite a bit recently. What cost £300 five years ago is now hitting that £200 mark thanks to better manufacturing processes and more competition. Brands like Caberg, AGV, and Scorpion are putting out proper touring <a href="/guides/modular-helmets-guide">helmets</a> at prices that actually make sense.</p>
 
 <p>I'm not talking about those £60 lids you see at dodgy online retailers. Those are fine for scooting to Tesco, maybe, but for proper touring? Forget it. You need something that'll handle hours on the bike, British weather, and still meet current safety standards.</p>
 
@@ -74,7 +74,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h2>Where to Actually Buy Your Helmet</h2>
 
-<p>I always recommend trying helmets on in person first if you can. Pop into a proper motorcycle shop – not Halfords – and try different brands. Head shapes vary, and what fits your mate perfectly might be torture for you.</p>
+<p>I always recommend trying helmets on in person first if you can. Pop into a proper <a href="/guides/best-motorcycle-jeans-uk-touring">motorcycle</a> shop – not Halfords – and try different brands. Head shapes vary, and what fits your mate perfectly might be torture for you.</p>
 
 <p>Once you know your size and preferred brand, you can look for deals online. <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> usually has decent prices and proper return policies if the fit isn't right. They also run regular sales, especially at season changes.</p>
 
@@ -94,7 +94,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 <p>A £150 helmet with a Pinlock and spare visor is really a £220 investment. But spread over three to five years of use, that's under £50 a year for something that's literally protecting your head every time you ride.</p>
 
 <blockquote>
-<p>The best affordable helmet is the one that fits properly, meets current safety standards, and has a Pinlock-ready visor. Everything else is secondary to those three factors.</p>
+<p>The <a href="/guides/best-motorcycle-roads-scotland">best</a> affordable helmet is the one that fits properly, meets current safety standards, and has a Pinlock-ready visor. Everything else is secondary to those three factors.</p>
 </blockquote>
 
 <h2>British Weather Considerations</h2>

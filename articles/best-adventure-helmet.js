@@ -8,7 +8,7 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <p>Before we dive in, let's talk about what makes an adventure helmet special. I see plenty of riders trying to make do with sports helmets or basic road lids, and honestly, they're missing out. Adventure helmets are designed for versatility—they need to work on motorways, B-<a href="/guides/best-motorcycle-roads-lake-district">roads</a>, and the occasional green lane if you're feeling adventurous.</p>
 
-<p>The key features are a peak (or sun visor), usually a more upright riding position-friendly design, excellent ventilation, and often a wider field of view. That peak isn't just for show—I've learned to love mine for deflecting low sun, rain, and the occasional bit of gravel kicked up by a Land Rover on Scottish single-track roads.</p>
+<p>The key features are a <a href="/guides/peak-district-best-motorcycle-roads">peak</a> (or sun visor), usually a more upright riding position-friendly design, excellent ventilation, and often a wider field of view. That peak isn't just for show—I've learned to love mine for deflecting low sun, rain, and the occasional bit of gravel kicked up by a Land Rover on Scottish single-track roads.</p>
 
 <h3>What I Look For in an Adventure Helmet</h3>
 
@@ -55,7 +55,7 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <p>All helmets sold in the UK must meet British Standard BS 6658:1985 and carry the BSI Kitemark, or ECE 22.06 (the latest European standard). Most quality <a href="/guides/sport-touring-vs-adventure-bikes-which-is-better-for-uk-touring">adventure</a> helmets now come with ECE 22.06 certification, which includes more rigorous testing than the older 22.05 standard.</p>
 
-<p>I'll be straight with you—any helmet from a reputable manufacturer meeting these standards will protect you well in a crash. The differences between premium and budget helmets are more about comfort, features, and durability than basic safety. Don't feel pressured into spending beyond your means for safety's sake.</p>
+<p>I'll be straight with you—any helmet from a reputable manufacturer meeting these standards will protect you well in a crash. The differences between premium and budget <a href="/guides/best-touring-helmets-uk">helmets</a> are more about comfort, features, and durability than basic safety. Don't feel pressured into spending beyond your means for safety's sake.</p>
 
 <h2>British Weather Considerations</h2>
 
@@ -63,7 +63,7 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <h3>Dealing with Rain and Fog</h3>
 
-<p>I've ridden through absolute deluge on the A82 past Glencoe, where the rain comes at you sideways. A quality Pinlock anti-fog insert is absolutely essential—I won't ride without one anymore. Make sure whatever helmet you choose has this option.</p>
+<p>I've ridden through absolute deluge on the A82 past Glencoe, where the rain comes at you sideways. A quality Pinlock anti-fog insert is absolutely <a href="/guides/biker-cafes-uk">essential</a>—I won't ride without one anymore. Make sure whatever helmet you choose has this option.</p>
 
 <p>The peak design matters too. A properly angled peak channels water away from your visor. I've found peaks that are too aggressive actually create more turbulence in heavy rain, while too shallow and they're useless. The Schuberth and Shoei both get this balance right.</p>
 
@@ -121,7 +121,7 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <h2>What About Modular Helmets?</h2>
 
-<p>I'm often asked whether modular (flip-up) helmets work for adventure touring. I've tried them, and here's my take: they're brilliant for convenience—stopping for fuel or a quick chat without removing your helmet is genuinely useful—but they're typically heavier and noisier than a traditional adventure helmet.</p>
+<p>I'm often asked whether <a href="/guides/modular-helmets-guide">modular</a> (flip-up) helmets work for adventure touring. I've tried them, and here's my take: they're brilliant for convenience—stopping for fuel or a quick chat without removing your helmet is genuinely useful—but they're typically heavier and noisier than a traditional adventure helmet.</p>
 
 <p>If you wear glasses or have mobility issues that make getting a helmet on tricky, a modular makes sense. The Schuberth C5 is excellent if you go this route. But for pure adventure touring performance, I prefer the traditional style.</p>
 
@@ -146,4 +146,4 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <p>And here's my final piece of advice: buy the best helmet you can reasonably afford. You'll be wearing it for hundreds or thousands of miles. The difference between adequate and excellent becomes very apparent by hour three of a long ride through the Welsh mountains or the Scottish Highlands. Your neck, your comfort, and your enjoyment will thank you for investing properly.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and with the right lid on your head, you'll be ready for whatever British weather throws at you. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and with the right lid on your head, you'll be ready for whatever British weather throws at you. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more.</p>`;

@@ -30,9 +30,9 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <h3>Single-Layer Aramid Jeans: For Warm Days</h3>
 
-<p>These are my summer go-to. The aramid fibres are woven directly into the denim, so there's no separate lining. They're cooler to wear, more comfortable in warm weather, and they look and feel more like regular jeans.</p>
+<p>These are my <a href="/guides/summer-motorcycle-gloves">summer</a> go-to. The aramid fibres are woven directly into the denim, so there's no separate lining. They're cooler to wear, more comfortable in warm weather, and they look and feel more like regular jeans.</p>
 
-<p>I've been wearing a pair of single-layer Kevlar jeans for the past two seasons. On a hot day riding the A44 through the Cotswolds, they're infinitely more bearable than my textile trousers. The downside? They offer less abrasion resistance than lined jeans, and they're typically not great in the rain without overtrousers.</p>
+<p>I've been wearing a pair of single-layer Kevlar jeans for the past two seasons. On a hot day riding the A44 through the Cotswolds, they're infinitely more bearable than my <a href="/guides/textile-touring-jackets">textile</a> trousers. The downside? They offer less abrasion resistance than lined jeans, and they're typically not great in the rain without overtrousers.</p>
 
 <p>For British conditions, I'll be honest – they're brilliant from May through September on dry days. Outside that window, I want something more substantial.</p>
 
@@ -46,7 +46,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <h3>Stretch vs. Traditional Fit</h3>
 
-<p>This is personal preference, but I've become a convert to stretch denim for riding. Modern stretch motorcycle jeans use elastane blended with aramid-reinforced denim, and the difference in comfort over a full day's riding is significant.</p>
+<p>This is personal preference, but I've become a convert to stretch denim for <a href="/guides/motorcycle-riding-jeans">riding</a>. Modern stretch motorcycle jeans use elastane blended with aramid-reinforced denim, and the difference in comfort over a full day's riding is significant.</p>
 
 <p>I rode the NC500 in traditional rigid motorcycle jeans a few years back. By day three, I was ready to bin them. The lack of give meant constant adjustment, pressure points, and general discomfort. Last year, I did the same route in stretch jeans. Night and day difference. You move more freely, they're more comfortable in the riding position, and they don't feel restrictive when you stop to take photos at Applecross.</p>
 
@@ -145,7 +145,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>Don't skip the armour. Some jeans come without armour to reduce cost, expecting you to buy it separately. Factor that into your budget – jeans without armour aren't motorcycle jeans, they're just expensive denim.</p>
 
-<p>Don't ignore the length. Too short and your boots and lower leg are exposed when riding. Too long and you're tripping over excess fabric when you dismount. Get it right.</p>
+<p>Don't ignore the length. Too short and your <a href="/guides/touring-motorcycle-boots">boots</a> and lower leg are exposed when riding. Too long and you're tripping over excess fabric when you dismount. Get it right.</p>
 
 <h2>My Current Rotation</h2>
 
@@ -161,4 +161,4 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>The roads are waiting – whether it's the sweeping curves of the A537 Cat and Fiddle, the coastal beauty of the North Coast 500, or just your daily commute through town. Having the right gear means you'll enjoy every mile more, and arrive ready to walk into that café without looking like you're about to enter a race paddock.</p>
 
-<p>Start with one good pair, wear them, learn what works for you, and build from there. Your knees and hips will thank you if you ever need the protection, and your comfort on every ride will improve immediately. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more.</p>`;
+<p>Start with one good pair, wear them, learn what works for you, and build from there. Your knees and hips will thank you if you ever need the protection, and your comfort on every ride will improve immediately. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more.</p>`;
