@@ -6,9 +6,9 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <h2>What Makes a Proper Biker Café</h2>
 
-<p>Not every café with a car park counts as a biker café, mate. A proper one needs a few essentials. First, decent bike parking—preferably gravel or tarmac where you won't sink your sidestand into mud. Second, they need to actually welcome bikers. You'd be surprised how many places get funny about wet gear draped over chairs or groups of riders taking up space.</p>
+<p>Not every café with a car park counts as a biker café, mate. A proper one needs a few essentials. First, decent bike parking—preferably gravel or tarmac where you won't sink your sidestand into mud. Second, they need to actually welcome bikers. You'd be surprised how many <a href="/guides/scottish-highlands-hidden-gems">places</a> get funny about wet gear draped over chairs or groups of riders taking up space.</p>
 
-<p>The best ones have covered areas where you can sort your kit out, check your chain, or have a proper look at your route without standing in the rain. They'll have staff who ride or at least understand why you need your helmet on the table where you can see it. And ideally, they'll have other riders passing through—that's where you get the real gold: current road conditions, police activity, and which roads are actually worth the detour.</p>
+<p>The best ones have covered areas <a href="/guides/best-biker-pubs-uk">where</a> you can sort your kit out, check your chain, or have a proper look at your route without standing in the rain. They'll have staff who ride or at least understand why you need your helmet on the table where you can see it. And ideally, they'll have other riders passing through—that's where you get the real gold: current road conditions, police activity, and which roads are actually worth the detour.</p>
 
 <h3>The Food Situation</h3>
 
@@ -18,7 +18,7 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <h2>Classic Biker Cafés Worth the Ride</h2>
 
-<p>I've stopped at dozens of cafés across the UK, and some have become regular fixtures in my route planning. These aren't just convenient stops—they're destinations in themselves.</p>
+<p>I've stopped at dozens of cafés across the UK, and some have become regular fixtures in my route planning. These aren't just convenient <a href="/guides/peak-district-villages-guide">stops</a>—they're destinations in themselves.</p>
 
 <h3>The Squires Café Bar (Yorkshire)</h3>
 
@@ -116,4 +116,4 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <p>Check your <a href="/packing-checklist">packing checklist</a> before you go—make sure you've got wet weather gear even if the forecast looks good, and pack layers because café temperatures vary wildly. Some are tropical inside, others barely warmer than outside.</p>
 
-<p>Most importantly, actually do it. Biker cafés are there to be used, roads are there to be ridden, and the best stories come from actually getting out rather than just planning. I'll likely see you at one of these stops—I'm usually the one with maps spread across the table, planning the next adventure over a brew and a bacon sandwich.</p>`;
+<p>Most importantly, actually do it. Biker cafés are there to be used, roads are there to be ridden, and the best stories come from actually getting out rather than just planning. I'll likely see you at one of these stops—I'm usually the one with maps spread across the table, planning the next adventure over a brew and a bacon sandwich. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/best-viewpoints-motorcyclists-uk">Best Viewpoints for Motorcyclists in the UK: 20 Jaw-Dropping Stops</a> guide for more.</p>`;

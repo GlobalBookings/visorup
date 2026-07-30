@@ -35,7 +35,7 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <h3>Shoei Hornet ADV (The Reliable Workhorse)</h3>
 
-<p>Before the Schuberth, I put serious miles on a Shoei Hornet ADV, and I still recommend it to mates who ask. It's slightly heavier at 1,700 grams, but the build quality is exceptional. I've had mine for three years now, and it's survived countless Scottish weather battering without issues.</p>
+<p>Before the Schuberth, I put serious miles on a Shoei Hornet ADV, and I still recommend it to mates who ask. It's slightly heavier at 1,700 grams, but the build quality is exceptional. I've had mine for three years now, and it's survived countless Scottish <a href="/guides/textile-touring-jackets">weather</a> battering without issues.</p>
 
 <p>The Shoei fits a bit differently—more intermediate oval compared to the Schuberth's round shape. If you've got a rounder head like me, you might need to try it on carefully. The ventilation isn't quite as aggressive, which actually works well for winter <a href="/guides/best-motorcycle-jeans-uk-touring">touring</a> through the Pennines when you don't want Arctic air freezing your brain.</p>
 
@@ -95,13 +95,13 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <h3>Internal Sun Visors</h3>
 
-<p>I resisted these for years, thinking they were a gimmick. I was wrong. On long summer evening rides—like heading back from the North Yorkshire Moors with the sun low on the horizon—an internal sun visor is brilliant. No fumbling with tinted visor changes, just flip it down.</p>
+<p>I resisted these for years, thinking they were a gimmick. I was wrong. On long <a href="/guides/summer-motorcycle-gloves">summer</a> evening rides—like heading back from the North Yorkshire Moors with the sun low on the horizon—an internal sun visor is brilliant. No fumbling with tinted visor changes, just flip it down.</p>
 
 <p>The quality varies though. Cheap ones can distort your vision or rattle annoyingly. The Schuberth's is superb, the Shoei's is good, and budget options can be hit or miss.</p>
 
 <h3>Communication System Integration</h3>
 
-<p>Most modern adventure helmets have cutouts for Bluetooth comms systems. If you're planning trips where you'll want sat-nav instructions or you ride with mates, check that your preferred system (Cardo, Sena, etc.) fits properly. Some helmets have deeper ear pockets than others, which makes a huge difference to speaker comfort.</p>
+<p>Most modern adventure helmets have cutouts for Bluetooth comms <a href="/guides/motorcycle-intercom-systems">systems</a>. If you're planning trips where you'll want sat-nav instructions or you ride with mates, check that your preferred system (Cardo, Sena, etc.) fits properly. Some helmets have deeper ear pockets than others, which makes a huge difference to speaker comfort.</p>
 
 <p>I run a Cardo Packtalk in my Schuberth, and it fits perfectly with no pressure on my ears, even after a full day riding. Before you can check out the <a href="/packing-checklist">packing checklist</a> for what else you'll need on tour.</p>
 
@@ -146,4 +146,4 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <p>And here's my final piece of advice: buy the best helmet you can reasonably afford. You'll be wearing it for hundreds or thousands of miles. The difference between adequate and excellent becomes very apparent by hour three of a long ride through the Welsh mountains or the Scottish Highlands. Your neck, your comfort, and your enjoyment will thank you for investing properly.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and with the right lid on your head, you'll be ready for whatever British weather throws at you. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and with the right lid on your head, you'll be ready for whatever British weather throws at you. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-wales">Best Motorcycle Roads in Wales: Passes, Coast and Valleys</a> guide for more.</p>`;

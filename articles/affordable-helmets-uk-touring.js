@@ -38,7 +38,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>A decent chin vent and a top vent will handle most British conditions. The key is testing them before you buy. Pop the helmet on, close the visor, and check if you can feel air movement. If the vents feel like they're just for show, walk away.</p>
 
-<p>On those rare British summer days when it actually gets warm, proper ventilation stops you arriving at your B&B looking like you've just come out of a sauna. More importantly, it helps prevent visor fog when you're crawling through town traffic.</p>
+<p>On those rare British <a href="/guides/summer-motorcycle-gloves">summer</a> days when it actually gets warm, proper ventilation stops you arriving at your B&B looking like you've just come out of a sauna. More importantly, it helps prevent visor fog when you're crawling through town traffic.</p>
 
 <h3>Weight and Comfort for Long Days</h3>
 
@@ -56,7 +56,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>The visor mechanism is solid – I've had mine two years without any wobble or leaking. It's a bit on the heavier side at around 1620g, but the padding's good enough that I don't notice it after the first hour.</p>
 
-<p>Where it really shines is in typical British conditions. The seal's tight enough to keep rain out at motorway speeds, but the vents work well enough for those unexpectedly warm afternoons in the Peak District.</p>
+<p>Where it really shines is in typical British conditions. The seal's tight enough to keep rain out at motorway speeds, but the vents work well enough for those unexpectedly warm afternoons in the Peak <a href="/guides/best-motorcycle-roads-lake-district">District</a>.</p>
 
 <h3>The Budget Champion: AGV K1 S</h3>
 
@@ -111,7 +111,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>If you're planning to add comms later, check if the helmet has speaker pockets built in. Most modern helmets do, but some budget options skip them to save costs.</p>
 
-<p>You don't need to spend a fortune on comms either. Brands like Lexin and FreedConn offer Bluetooth systems for £50-80 that'll handle music and navigation instructions perfectly well. Save your money for the important bit – the helmet itself.</p>
+<p>You don't need to spend a fortune on comms either. Brands like Lexin and FreedConn offer Bluetooth <a href="/guides/motorcycle-intercom-systems">systems</a> for £50-80 that'll handle music and navigation instructions perfectly well. Save your money for the important bit – the helmet itself.</p>
 
 <p>I ran a cheap Chinese comms system for two years before upgrading to a Cardo, and honestly, for solo touring with occasional GPS instructions, the budget option was fine. The sound quality wasn't incredible, but it did the job.</p>
 
@@ -145,4 +145,4 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>Before your next tour, check out the <a href="/packing-checklist">packing checklist</a> to make sure you've got everything sorted beyond just the helmet. And if you're still planning your route, the tools at <a href="/build-route">/build-route</a> will help you map out something brilliant.</p>
 
-<p>Now get out there and put some miles on that new lid. The roads are waiting, and you don't need to be skint to ride them safely.</p>`;
+<p>Now get out there and put some miles on that new lid. The roads are waiting, and you don't need to be skint to ride them safely. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more.</p>`;

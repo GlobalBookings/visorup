@@ -6,7 +6,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <h2>Why I Switched to Motorcycle Jeans for Most Rides</h2>
 
-<p>Here's the thing: I still wear my textiles for long-distance slogs in proper rain or multi-day tours where weather's unpredictable. But for day rides, weekend trips, and anything where I'll be walking around towns or stopping at pubs, motorcycle jeans are now my go-to.</p>
+<p>Here's the thing: I still wear my textiles for long-distance slogs in proper rain or multi-day tours where weather's unpredictable. But for day rides, weekend trips, and anything where I'll be walking around towns or stopping at pubs, motorcycle <a href="/guides/best-jeans-for-motorcycle">jeans</a> are now my go-to.</p>
 
 <p>The technology's come on massively in the past few years. We're not talking about regular jeans with foam pads anymore. Modern motorcycle jeans use aramid fibres like Kevlar or Dyneema woven into denim, proper CE-rated armour, and construction that'll actually hold together in a slide. I've seen the test footage, and I've unfortunately met riders who've gone down in them – they work.</p>
 
@@ -131,7 +131,7 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>Motorcycle jeans range from about £80 to £400+. I've worn both ends of the spectrum. Here's my honest take:</p>
 
-<p>Budget jeans (£80-150) will have basic aramid lining and CE Level 1 armour. They'll protect you better than regular jeans, but they often compromise on comfort, fit, and durability. I've had cheap pairs last one season before the stitching failed or the waterproofing gave up entirely.</p>
+<p><a href="/guides/affordable-helmets-uk-touring">Budget</a> jeans (£80-150) will have basic aramid lining and CE Level 1 armour. They'll protect you better than regular jeans, but they often compromise on comfort, fit, and durability. I've had cheap pairs last one season before the stitching failed or the waterproofing gave up entirely.</p>
 
 <p>Mid-range jeans (£150-250) are where I find the best value. Good aramid coverage, decent armour (often upgradeable), better fit, and they'll last several seasons with proper care. This is where I spend my money now.</p>
 
@@ -161,4 +161,4 @@ export const content = `<h2>Best Motorcycle Jeans for UK Touring in 2026</h2>
 
 <p>The roads are waiting – whether it's the sweeping curves of the A537 Cat and Fiddle, the coastal beauty of the North Coast 500, or just your daily commute through town. Having the right gear means you'll enjoy every mile more, and arrive ready to walk into that café without looking like you're about to enter a race paddock.</p>
 
-<p>Start with one good pair, wear them, learn what works for you, and build from there. Your knees and hips will thank you if you ever need the protection, and your comfort on every ride will improve immediately. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more.</p>`;
+<p>Start with one good pair, wear them, learn what works for you, and build from there. Your knees and hips will thank you if you ever need the protection, and your comfort on every ride will improve immediately. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more.</p>`;

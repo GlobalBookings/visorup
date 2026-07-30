@@ -2,15 +2,15 @@ export const content = `<h2>Why I Stopped Wearing Regular Jeans on the Bike</h2>
 
 <p>I'll be honest with you – I spent my first year of touring in regular Levi's. Rode the A82 up to Fort William in them, did a full lap of the <a href="/routes/nc500-complete">NC500</a> in them, and even tackled the Hardknott Pass in the Lake District wearing nothing but cotton denim. Then I came off on a greasy roundabout near Kendal doing about 30mph, and those jeans lasted about half a second before turning into confetti.</p>
 
-<p>That was my wake-up call. If you're serious about motorcycle touring in Britain – where the weather changes every twenty minutes and the tarmac can go from bone-dry to oil-slick in seconds – you need proper motorcycle jeans. Not fashion jeans. Not "casual riding jeans." Proper protective gear that'll actually keep your skin attached when things go wrong.</p>
+<p>That was my wake-up call. If you're serious about <a href="/guides/best-motorcycle-jeans-uk-touring">motorcycle</a> touring in Britain – where the weather changes every twenty minutes and the tarmac can go from bone-dry to oil-slick in seconds – you need proper motorcycle jeans. Not fashion jeans. Not "casual riding jeans." Proper protective gear that'll actually keep your skin attached when things go wrong.</p>
 
-<p>I've now tested more motorcycle jeans than I care to admit, from budget pairs to fancy Italian numbers that cost more than my first bike. Here's what actually works for British touring.</p>
+<p>I've now tested more motorcycle jeans than I care to admit, from budget pairs to fancy Italian numbers that cost more than my first bike. Here's what actually works for British <a href="/guides/best-touring-helmets-uk">touring</a>.</p>
 
 <h2>What Makes Motorcycle Jeans Different</h2>
 
 <p>Regular denim is woven cotton. It's comfortable, it breathes, and it'll disintegrate instantly if you slide down the road. Motorcycle jeans use either aramid fibres (like Kevlar or Dyneema) woven into the denim or have protective panels in high-risk zones. The difference is massive – proper motorcycle jeans can give you anywhere from 2 to 5 seconds of slide time before they wear through. Regular jeans? Less than a second.</p>
 
-<p>I've ridden through Scottish Highlands in February and across the Brecon Beacons in August, and here's what I've learned: the best motorcycle jeans need to tick several boxes.</p>
+<p>I've ridden through Scottish Highlands in February and across the Brecon Beacons in August, and here's what I've learned: the <a href="/guides/best-motorcycle-roads-scotland">best</a> motorcycle jeans need to tick several boxes.</p>
 
 <h3>Protection Where It Counts</h3>
 
@@ -76,7 +76,7 @@ The best motorcycle jeans are the ones you'll actually wear. Protection only wor
 
 <h3>Long-Distance Touring</h3>
 
-<p>My most comfortable pair, even if they're not the most protective. When you're doing 300-400 miles a day, comfort wins. I make sure these have excellent armour placement and deep pockets. These are the jeans I wore for the full NC500 loop – eleven days, 3,000 miles, every type of weather Scotland could throw at me.</p>
+<p>My most comfortable pair, even if they're not the most protective. When you're doing 300-400 miles a day, comfort wins. I make sure these have excellent armour placement and deep pockets. These are the jeans I wore for the full NC500 loop – eleven days, 3,000 miles, every type of <a href="/guides/textile-touring-jackets">weather</a> Scotland could throw at me.</p>
 
 <h3>Winter and Sketchy Conditions</h3>
 
@@ -130,7 +130,7 @@ The best motorcycle jeans are the ones you'll actually wear. Protection only wor
 
 <h2>My Current Setup</h2>
 
-<p>Right now, for 2026, I'm running Bull-it SR6 Sidewinder jeans for most of my touring. They're single-layer, fully armoured, and built like tanks. Not the most stylish, but I've ridden them through everything from freezing Scottish winters to baking hot days in the South West, and they've never let me down.</p>
+<p>Right now, for <a href="/guides/best-adventure-helmet">2026</a>, I'm running Bull-it SR6 Sidewinder jeans for most of my touring. They're single-layer, fully armoured, and built like tanks. Not the most stylish, but I've ridden them through everything from freezing Scottish winters to baking hot days in the South West, and they've never let me down.</p>
 
 <p>For shorter summer rides, I switch to Rev'it Memphis jeans – lighter, cooler, still properly protective. And I keep a cheaper pair of Richa jeans as spares in case one pair is in the wash or drying out after a wet ride.</p>
 
