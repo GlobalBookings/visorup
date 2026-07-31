@@ -22,13 +22,13 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <h3>The Squires Café Bar (Yorkshire)</h3>
 
-<p>If you haven't been to Squires, you're missing out. Just off the A64 near Sherburn-in-Elmet, it's essentially the Mecca of UK biker cafés. The place is massive, with parking for hundreds of bikes, a shop full of kit, and a café that serves thousands of riders every weekend. I've rolled in here on countless trips heading north, and it never disappoints.</p>
+<p>If you haven't been to Squires, you're missing out. Just off the A64 near Sherburn-in-Elmet, it's essentially the Mecca of UK biker cafés. The place is massive, with parking for hundreds of bikes, a shop full of kit, and a café that serves thousands of <a href="/guides/biker-friendly-campsites-uk">riders</a> every weekend. I've rolled in here on countless trips heading north, and it never disappoints.</p>
 
 <p>The atmosphere on a Sunday morning is brilliant—bikes of every type, riders of every age, all sharing space and stories. It's open year-round, and I've been here in February when the car park was still rammed with hardy souls who don't pack their bikes away for winter. If you need any gear adjustments, the <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> website has saved me more than once when I've realised mid-trip that my kit needs upgrading.</p>
 
 <h3>The Ringlestone Inn (Kent)</h3>
 
-<p>Down in Kent, the Ringlestone near Harrietsham has been serving bikers for decades. It's an actual pub rather than a café, but it's got that proper biker-friendly vibe. The roads around here—the A20, the lanes through the North Downs—make for cracking riding, and the Ringlestone sits perfectly for a midday stop. Real ales, decent food, and a beer garden where you can keep an eye on your bike.</p>
+<p>Down in Kent, the Ringlestone near Harrietsham has been serving bikers for decades. It's an actual pub rather than a café, but it's got that proper biker-friendly vibe. The <a href="/guides/best-adventure-motorbike-boots">roads</a> around here—the A20, the lanes through the North Downs—make for cracking riding, and the Ringlestone sits perfectly for a midday stop. Real ales, decent food, and a beer garden where you can keep an eye on your bike.</p>
 
 <h3>The Crossroads Café (Highlands)</h3>
 
@@ -116,4 +116,4 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <p>Check your <a href="/packing-checklist">packing checklist</a> before you go—make sure you've got wet weather gear even if the forecast looks good, and pack layers because café temperatures vary wildly. Some are tropical inside, others barely warmer than outside.</p>
 
-<p>Most importantly, actually do it. Biker cafés are there to be used, roads are there to be ridden, and the best stories come from actually getting out rather than just planning. I'll likely see you at one of these stops—I'm usually the one with maps spread across the table, planning the next adventure over a brew and a bacon sandwich. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/best-viewpoints-motorcyclists-uk">Best Viewpoints for Motorcyclists in the UK: 20 Jaw-Dropping Stops</a> guide for more.</p>`;
+<p>Most importantly, actually do it. Biker cafés are there to be used, roads are there to be ridden, and the best stories come from actually getting out rather than just planning. I'll likely see you at one of these stops—I'm usually the one with maps spread across the table, planning the next adventure over a brew and a bacon sandwich. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/best-viewpoints-motorcyclists-uk">Best Viewpoints for Motorcyclists in the UK: 20 Jaw-Dropping Stops</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more. Read our <a href="/guides/best-adventure-helmet">Best Adventure Helmet UK 2026 | VisorUp Touring Guide</a> guide for more. Read our <a href="/guides/best-jeans-for-motorcycle">Best Motorcycle Jeans for UK Touring (2026) | VisorUp</a> guide for more.</p>`;

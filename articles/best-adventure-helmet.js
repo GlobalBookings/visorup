@@ -31,7 +31,7 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <p>What really sold me was the quietness. I've ridden the A9 from Perth to Inverness countless times, and this helmet makes those long stretches far less tiring. The ventilation is brilliant too—I've worn it through a heat wave in the South Downs and a rainy week in Snowdonia, and it performed admirably in both.</p>
 
-<p>The peak is removable and adjustable, which I appreciate. Sometimes I take it off for pure motorway days when the buffeting gets annoying above 80mph (not that any of us ever exceed the speed limit, of course).</p>
+<p>The peak is removable and adjustable, <a href="/guides/nc500-clockwise-vs-anticlockwise">which</a> I appreciate. Sometimes I take it off for pure motorway days when the buffeting gets annoying above 80mph (not that any of us ever exceed the speed limit, of course).</p>
 
 <h3>Shoei Hornet ADV (The Reliable Workhorse)</h3>
 
@@ -69,7 +69,7 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <h3>Cold Weather Touring</h3>
 
-<p>Scottish winter touring teaches you quickly about breath deflectors and chin curtains. Most adventure helmets come with removable breath guards—use them. On a freezing morning riding through the Cairngorms, they're the difference between a clear visor and constant fogging.</p>
+<p><a href="/guides/scottish-borders-motorcycle-roads">Scottish</a> winter touring teaches you quickly about breath deflectors and chin curtains. Most adventure helmets come with removable breath guards—use them. On a freezing morning riding through the Cairngorms, they're the difference between a clear visor and constant fogging.</p>
 
 <p>I also invest in a good thermal neck warmer that seals properly with the helmet's chin bar. This stops cold air rushing up and actually improves helmet performance in winter.</p>
 
@@ -144,6 +144,6 @@ export const content = `<h2>Best Adventure Helmet for UK Touring in 2026</h2>
 
 <p>Once you know your size and preferred model, you can shop around for deals online. Check <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> and compare prices, but remember the cheapest option isn't always best if returns are complicated or customer service is poor.</p>
 
-<p>And here's my final piece of advice: buy the best helmet you can reasonably afford. You'll be wearing it for hundreds or thousands of miles. The difference between adequate and excellent becomes very apparent by hour three of a long ride through the Welsh mountains or the Scottish Highlands. Your neck, your comfort, and your enjoyment will thank you for investing properly.</p>
+<p>And here's my final piece of advice: buy the best helmet you can reasonably afford. You'll be wearing it for hundreds or thousands of miles. The difference between adequate and excellent becomes very apparent by hour three of a long ride through the <a href="/guides/welsh-passes-motorcycle-guide">Welsh</a> mountains or the Scottish Highlands. Your neck, your comfort, and your enjoyment will thank you for investing properly.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and with the right lid on your head, you'll be ready for whatever British weather throws at you. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-wales">Best Motorcycle Roads in Wales: Passes, Coast and Valleys</a> guide for more.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and with the right lid on your head, you'll be ready for whatever British weather throws at you. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-wales">Best Motorcycle Roads in Wales: Passes, Coast and Valleys</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more.</p>`;

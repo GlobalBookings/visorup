@@ -28,17 +28,17 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <h3>Sidi Adventure 2 Gore-Tex</h3>
 
-<p>I've been wearing these for the past two years, and they're the best all-rounders I've owned. The Gore-Tex membrane has kept my feet dry through Scottish summers (which is saying something), and the build quality is exceptional. They're not cheap at around £350, but I reckon they'll last me another three years minimum.</p>
+<p>I've been wearing these for the past two years, and they're the <a href="/guides/best-motorcycle-roads-scotland">best</a> all-rounders I've owned. The Gore-Tex membrane has kept my feet dry through Scottish summers (which is saying something), and the build quality is exceptional. They're not cheap at around £350, but I reckon they'll last me another three years minimum.</p>
 
 <p>The gear shifter is replaceable, which is brilliant because I've worn through two already. The Velcro straps and zip system make them easy to get on and off, and the sole has enough flex for walking but proper protection for riding. I've walked miles around Edinburgh and Fort William in these without any complaints.</p>
 
-<p>The ankle protection is proper CE-rated, and I can feel the difference in stability when I'm standing on the pegs on rough B-roads. They run slightly narrow, so if you've got wide feet, try them on first or size up.</p>
+<p>The ankle protection is proper CE-rated, and I can feel the difference in stability when I'm standing on the pegs on rough B-<a href="/guides/best-motorcycle-roads-wales">roads</a>. They run slightly narrow, so if you've got wide feet, try them on first or size up.</p>
 
 <h3>TCX Drifter Waterproof</h3>
 
-<p>These are my recommendation for riders who want something a bit more casual-looking but still properly protective. At around £220, they're more affordable than the Sidis, and they've served me well on shorter tours through Wales and the Peak District.</p>
+<p>These are my recommendation for riders who want something a bit more casual-looking but still properly protective. At around £220, they're more affordable than the Sidis, and they've served me well on shorter tours through Wales and the Peak <a href="/guides/best-motorcycle-roads-lake-district-2026">District</a>.</p>
 
-<p>The waterproofing is solid—I've tested it thoroughly in the Lake District—and they're comfortable enough for a full day's riding. The walking comfort is better than the Sidis, actually, which makes them brilliant for urban exploring. I wore these around York for an entire afternoon and my feet were fine.</p>
+<p>The waterproofing is solid—I've tested it thoroughly in the <a href="/guides/best-motorcycle-roads-lake-district">Lake</a> District—and they're comfortable enough for a full day's riding. The walking comfort is better than the Sidis, actually, which makes them brilliant for urban exploring. I wore these around York for an entire afternoon and my feet were fine.</p>
 
 <p>The trade-off is durability. After eighteen months of regular use, the leather's showing more wear than my Sidis did at the same age. They're still perfectly functional, but they're not going to last five years of hard touring.</p>
 
@@ -54,7 +54,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>These are the boots I recommend to riders who are just getting into adventure touring. At around £200, they're affordable without being cheap, and the Drystar waterproofing actually works. I've tested them in proper British weather conditions, and they keep your feet dry.</p>
 
-<p>The comfort is decent straight out of the box, which isn't always the case with motorcycle boots. I've worn them on day trips through the Yorkshire Dales without any break-in period needed. The protection is solid for the price point, with CE certification and good coverage.</p>
+<p>The comfort is decent straight out of the box, which isn't always the case with <a href="/guides/best-motorcycle-roads-england">motorcycle</a> boots. I've worn them on day trips through the Yorkshire Dales without any break-in period needed. The protection is solid for the price point, with CE certification and good coverage.</p>
 
 <p>They're not going to last as long as boots twice the price, and the leather quality is noticeably lower than premium options. But for weekend warriors or riders building their first proper touring setup, they're a smart choice. You can always upgrade in a few years when you know exactly what you want.</p>
 

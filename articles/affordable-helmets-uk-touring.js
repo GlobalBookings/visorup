@@ -12,11 +12,11 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>The helmet market's shifted quite a bit recently. What cost £300 five years ago is now hitting that £200 mark thanks to better manufacturing processes and more competition. Brands like Caberg, AGV, and Scorpion are putting out proper touring <a href="/guides/modular-helmets-guide">helmets</a> at prices that actually make sense.</p>
 
-<p>I'm not talking about those £60 lids you see at dodgy online retailers. Those are fine for scooting to Tesco, maybe, but for proper touring? Forget it. You need something that'll handle hours on the bike, British weather, and still meet current safety standards.</p>
+<p>I'm not talking about those £60 lids you see at dodgy online retailers. Those are fine for scooting to Tesco, maybe, but for proper touring? Forget it. You need something that'll handle hours on the bike, British <a href="/guides/textile-touring-jackets">weather</a>, and still meet current safety standards.</p>
 
 <h2>Safety Standards: The Non-Negotiable Bits</h2>
 
-<p>Every helmet I recommend needs to have ECE 22.06 certification minimum. That's the current European standard, and it's tougher than the old 22.05 we used to have. If you're buying new in 2026, don't settle for anything less.</p>
+<p>Every helmet I recommend needs to have ECE 22.06 certification minimum. That's the current European standard, and it's tougher than the old 22.05 we used to have. If you're buying new in <a href="/guides/best-motorcycle-roads-lake-district-2026">2026</a>, don't settle for anything less.</p>
 
 <p>Sharp ratings are worth checking too, though I'll be honest – a 3-star Sharp-rated helmet from a known brand is still going to do the job. I've ridden with 3-star lids for years without issue. The difference between a 3-star and 5-star rating often comes down to specific impact scenarios rather than overall protection quality.</p>
 
@@ -26,7 +26,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Visor Quality and Anti-Fog</h3>
 
-<p>This is where budget helmets used to fall apart, but things have improved massively. Most decent affordable helmets now come with Pinlock-ready visors as standard. If yours doesn't, factor in £30-40 for a Pinlock insert – it's non-negotiable for British riding.</p>
+<p>This is where budget helmets used to fall apart, but things have improved massively. Most decent <a href="/guides/affordable-motorcycle-helmets-uk">affordable</a> helmets now come with Pinlock-ready visors as standard. If yours doesn't, factor in £30-40 for a Pinlock insert – it's non-negotiable for British riding.</p>
 
 <p>I've ridden through the Cairngorms in October with condensation streaming down my visor because I tried to save fifteen quid on a Pinlock. Never again. The number of times you'll crack the visor open at 60mph in driving rain, trying to clear fog, makes that investment worth every penny.</p>
 
@@ -42,7 +42,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Weight and Comfort for Long Days</h3>
 
-<p>Affordable doesn't have to mean heavy, but you'll rarely find sub-1400g helmets at budget prices. Most sit around 1500-1650g, which is fine for touring if the weight's well distributed.</p>
+<p>Affordable doesn't have to mean heavy, but you'll rarely find sub-1400g helmets at budget prices. Most sit around 1500-1650g, <a href="/guides/sport-touring-vs-adventure-bikes-which-is-better-for-uk-touring">which</a> is fine for touring if the weight's well distributed.</p>
 
 <p>I've done full days in helmets at both ends of that range. The difference isn't the weight itself – it's how the helmet sits on your head. A well-fitted 1600g helmet beats a loose 1400g one every time.</p>
 
@@ -145,4 +145,4 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>Before your next tour, check out the <a href="/packing-checklist">packing checklist</a> to make sure you've got everything sorted beyond just the helmet. And if you're still planning your route, the tools at <a href="/build-route">/build-route</a> will help you map out something brilliant.</p>
 
-<p>Now get out there and put some miles on that new lid. The roads are waiting, and you don't need to be skint to ride them safely. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more.</p>`;
+<p>Now get out there and put some miles on that new lid. The roads are waiting, and you don't need to be skint to ride them safely. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more.</p>`;

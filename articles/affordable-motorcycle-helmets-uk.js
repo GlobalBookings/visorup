@@ -1,12 +1,12 @@
 export const content = `<h2>Affordable Motorcycle Helmets: Quality Protection Without Breaking the Bank</h2>
 
-<p>Look, I get it. You've just dropped a chunk of change on bike maintenance, insurance has gone up again, and now you're staring at helmet prices wondering if they're having a laugh. But here's the thing—I've been touring British roads for years, from the A82 through Glencoe to the rain-soaked lanes of the Lake District, and I can tell you with absolute certainty: you don't need to spend £500 to get a helmet that'll keep you safe and comfortable.</p>
+<p>Look, I get it. You've just dropped a chunk of change on bike maintenance, insurance has gone up again, and now you're staring at helmet prices wondering if they're having a laugh. But here's the thing—I've been touring British <a href="/guides/best-motorcycle-roads-scotland">roads</a> for years, from the A82 through Glencoe to the rain-soaked lanes of the Lake District, and I can tell you with absolute certainty: you don't need to spend £500 to get a helmet that'll keep you safe and comfortable.</p>
 
-<p>In 2026, the affordable helmet market has genuinely matured. I've worn budget lids that have seen me through Scottish downpours, Isle of Man summer rides, and everything in between. Let me share what I've learned about finding quality head protection that won't leave your wallet crying.</p>
+<p>In 2026, the <a href="/guides/affordable-helmets-uk-touring">affordable</a> helmet market has genuinely matured. I've worn budget lids that have seen me through Scottish downpours, Isle of Man summer rides, and everything in between. Let me share what I've learned about finding quality head protection that won't leave your wallet crying.</p>
 
 <h2>What "Affordable" Actually Means</h2>
 
-<p>First off, let's define our terms. When I say affordable, I'm talking £80 to £200. That's the sweet spot where you get proper safety certifications, decent build quality, and features that actually matter for British touring. Anything below £80 and I start getting nervous about quality control. Anything above £200 and you're into mid-range territory where different rules apply.</p>
+<p>First off, let's define our terms. When I say affordable, I'm talking £80 to £200. That's the sweet spot where you get proper safety certifications, decent build quality, and features that actually matter for British <a href="/guides/best-touring-helmets-uk">touring</a>. Anything below £80 and I start getting nervous about quality control. Anything above £200 and you're into mid-range territory where different rules apply.</p>
 
 <p>I've tested helmets across this price range on some proper rides—including my <a href="/routes/nc500-complete">NC500 loop</a> last summer and countless runs through Welsh mountain passes. The results might surprise you.</p>
 
@@ -14,7 +14,7 @@ export const content = `<h2>Affordable Motorcycle Helmets: Quality Protection Wi
 
 <p>Every helmet sold legally in the UK must meet ECE 22.06 standards as of 2026. That's your baseline, your minimum requirement, your absolute must-have. I don't care if a helmet costs £50 or £500—if it doesn't have that ECE sticker, it's not going on my head.</p>
 
-<p>Here's what matters: affordable helmets pass the exact same safety tests as expensive ones. A £120 AGV K1 has to meet the same impact standards as a £600 Arai. The difference isn't safety—it's comfort, features, and refinement.</p>
+<p>Here's what matters: affordable <a href="/guides/modular-helmets-guide">helmets</a> pass the exact same safety tests as expensive ones. A £120 AGV K1 has to meet the same impact standards as a £600 Arai. The difference isn't safety—it's comfort, features, and refinement.</p>
 
 <blockquote>
 The best affordable helmet is the one that fits your head shape properly, meets ECE 22.06 standards, and has the features you'll actually use on British roads. Price doesn't equal safety when everything's certified to the same standard.
@@ -160,4 +160,4 @@ The best affordable helmet is the one that fits your head shape properly, meets 
 
 <p>Check current prices at reputable retailers, read recent reviews (helmets get updated every 2-3 years), and try before you buy if at all possible. Once you've found a helmet that fits well and meets your needs, get out there and ride. The best helmet is the one that keeps you protected while you're actually on the road.</p>
 
-<p>And if you're looking for somewhere brilliant to test that new lid, our <a href="/guides/best-bike-routes-uk">guide to the best UK bike routes</a> has dozens of options. See you out there.</p>`;
+<p>And if you're looking for somewhere brilliant to test that new lid, our <a href="/guides/best-bike-routes-uk">guide to the best UK bike routes</a> has dozens of options. See you out there. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more.</p>`;

@@ -20,11 +20,11 @@ export const content = `<h2>Why I Stopped Wearing Regular Jeans on the Bike</h2>
 
 <p>You can have the most protective jeans in the world, but if they're cutting off circulation to your legs after two hours, you won't wear them. I've found that a slightly relaxed fit works best for touring – gives you room for the armour to sit properly and doesn't restrict movement when you're stopped at services stretching your legs.</p>
 
-<p>The waistband matters more than you'd think. I've had jeans that were perfect standing up but dug into my stomach when hunched over the tank for hours heading up the M6. Look for jeans designed with a slightly higher back rise – some manufacturers call this a "riding cut."</p>
+<p>The waistband matters more than you'd think. I've had jeans that were perfect standing up but dug into my stomach when hunched over the tank for hours heading up the M6. Look for jeans designed with a slightly higher back rise – some manufacturers call this a "<a href="/guides/motorcycle-riding-jeans">riding</a> cut."</p>
 
 <h2>Single-Layer vs. Lined Jeans</h2>
 
-<p>This is where things get interesting. Single-layer jeans have the aramid fibres woven directly into the denim throughout the entire jean. They look normal, feel relatively normal, and you can wear them off the bike without looking like you're wrapped in body armour. The downside? They're often stiffer and can be warm in summer.</p>
+<p>This is where things get interesting. Single-layer jeans have the aramid fibres woven directly into the denim throughout the entire jean. They look normal, feel relatively normal, and you can wear them off the bike without looking like you're wrapped in body armour. The downside? They're often stiffer and can be warm in <a href="/guides/summer-motorcycle-gloves">summer</a>.</p>
 
 <p>Lined jeans have regular denim on the outside with aramid panels stitched in as a separate layer on the inside. They're usually more comfortable and cooler, but less protective overall because the aramid only covers specific zones. For touring around Britain where temperatures rarely get extreme, I actually prefer good-quality lined jeans – they're more versatile and comfortable for 8-hour riding days.</p>
 
@@ -60,7 +60,7 @@ export const content = `<h2>Why I Stopped Wearing Regular Jeans on the Bike</h2>
 
 <p>My advice? Don't buy online unless you've tried that exact model before. I know it's tempting – <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> often has better prices than physical stores – but at least try them on in person first, even if you end up ordering online later. Returns are a pain when you've got a tour planned and the jeans don't fit.</p>
 
-<p>When trying them on, do it properly: wear the boots you ride in, get in a riding position (crouch like you're on your bike), check the armour placement. If the shop assistant looks at you funny, find a better shop.</p>
+<p>When trying them on, do it properly: wear the <a href="/guides/touring-motorcycle-boots">boots</a> you ride in, get in a riding position (crouch like you're on your bike), check the armour placement. If the shop assistant looks at you funny, find a better shop.</p>
 
 <blockquote>
 The best motorcycle jeans are the ones you'll actually wear. Protection only works if you're wearing it, so comfort and practicality matter just as much as CE ratings.
@@ -142,4 +142,4 @@ The best motorcycle jeans are the ones you'll actually wear. Protection only wor
 
 <p>And once you've got proper jeans, actually wear them. Every ride. Not just long tours or "dangerous" roads. The worst accident I've seen was someone pulling out of a car park at 15mph who went down on diesel spill. Regular jeans, t-shirt, no gloves. Don't be that rider.</p>
 
-<p>Your future self – the one who hasn't left half their leg skin on the A66 – will thank you for investing in proper motorcycle jeans. Trust me on this one.</p>`;
+<p>Your future self – the one who hasn't left half their leg skin on the A66 – will thank you for investing in proper motorcycle jeans. Trust me on this one. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;
