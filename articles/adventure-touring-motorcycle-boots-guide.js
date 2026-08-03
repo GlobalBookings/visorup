@@ -1,12 +1,12 @@
 export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actually Need on British Roads</h2>
 
-<p>I've been through more pairs of motorcycle boots than I care to admit. Some leaked on the A82 in a Scottish downpour. Others left my feet numb on the NC500 in February. A few fell apart after just one season of proper touring. But after years of riding Britain's roads in every condition imaginable, I've learned what separates adventure touring boots that actually work from expensive paperweights.</p>
+<p>I've been through more pairs of <a href="/guides/best-motorcycle-jeans-uk-touring">motorcycle</a> boots than I care to admit. Some leaked on the A82 in a Scottish downpour. Others left my feet numb on the NC500 in February. A few fell apart after just one season of proper touring. But after years of riding Britain's roads in every condition imaginable, I've learned what separates adventure touring boots that actually work from expensive paperweights.</p>
 
-<p>Adventure touring boots need to handle everything Britain throws at them. One minute you're filtering through Manchester traffic in 28-degree heat. The next, you're slogging through standing water on the A470 in Wales. Then you're walking half a mile across gravel to photograph Eilean Donan Castle. Your boots need to do all of it without complaint, and they need to do it for years.</p>
+<p><a href="/guides/best-adventure-motorcycle-boots">Adventure</a> touring boots need to handle everything Britain throws at them. One minute you're filtering through Manchester traffic in 28-degree heat. The next, you're slogging through standing water on the A470 in Wales. Then you're walking half a mile across gravel to photograph Eilean Donan Castle. Your boots need to do all of it without complaint, and they need to do it for years.</p>
 
 <h2>What Makes Adventure Touring Boots Different</h2>
 
-<p>I'll be straight with you: adventure touring boots are the Swiss Army knife of motorcycle footwear. They're not as protective as full race boots, not as light as summer shoes, and not as warm as dedicated winter boots. But they're the single best option for riders who actually tour Britain rather than just talk about it.</p>
+<p>I'll be straight with you: adventure touring boots are the Swiss Army knife of motorcycle footwear. They're not as protective as full race boots, not as light as summer shoes, and not as warm as dedicated winter boots. But they're the single <a href="/guides/best-motorcycle-roads-scotland">best</a> option for riders who actually tour Britain rather than just talk about it.</p>
 
 <p>The key difference is versatility. A proper adventure boot gives you ankle protection for the motorway, waterproofing for the Lakes, grip for when you need to push your bike out of mud at a viewpoint, and enough comfort to walk around town when you stop for lunch. I've ridden from <a href="/routes/island-to-highlands">the Isle of Wight to the Highlands</a> in the same pair of boots, and that's exactly what they're designed for.</p>
 
@@ -40,7 +40,7 @@ export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actuall
 
 <p>Pay attention to the footbed. Most stock insoles are rubbish. I replace them immediately with proper aftermarket insoles that offer arch support. Your feet will thank you somewhere around hour four on the motorway.</p>
 
-<p>The ankle height matters more than most riders realize. Too low and you lose protection. Too high and you can't walk properly, which becomes torture when you're exploring a town. I prefer boots that hit about mid-ankle – enough protection without restricting movement when you're off the bike.</p>
+<p>The ankle height matters more than most riders realize. Too low and you lose protection. Too high and you can't walk properly, <a href="/guides/sport-touring-vs-adventure-bikes-which-is-better-for-uk-touring">which</a> becomes torture when you're exploring a town. I prefer boots that hit about mid-ankle – enough protection without restricting movement when you're off the bike.</p>
 
 <blockquote>The best adventure touring boot is the one you'll actually wear on every ride, not the most protective one that stays in your garage because it's uncomfortable.</blockquote>
 
@@ -56,7 +56,7 @@ export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actuall
 
 <h3>Winter Reality</h3>
 
-<p>Winter touring in Britain isn't about extreme cold – it's about damp cold that seeps into your bones. I've ridden in -5°C in Scotland and been fine. I've also been miserable at 5°C in the Lake District when moisture got in.</p>
+<p>Winter touring in Britain isn't about extreme cold – it's about damp cold that seeps into your bones. I've ridden in -5°C in Scotland and been fine. I've also been miserable at 5°C in the <a href="/guides/best-motorcycle-roads-lake-district">Lake</a> District when moisture got in.</p>
 
 <p>For winter, I add thermal socks and sometimes use waterproof socks as an extra layer. But the boots themselves need to have room for this without becoming tight. When trying boots, always test them with the socks you'll actually wear.</p>
 

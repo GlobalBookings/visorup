@@ -28,13 +28,13 @@ The best affordable helmet is the one that fits your head shape properly, meets 
 
 <p>For touring, full-face is my default recommendation. Better weather protection, lower noise, and maximum safety coverage. The HJC i71 sits around £150 and it's become my go-to recommendation for newer riders. I wore one for an entire summer season including a trip up to the Highlands via the <a href="/routes/island-to-highlands">Island to Highlands route</a>, and it held up brilliantly.</p>
 
-<p>The visor mechanism is solid, the internal sun visor actually works (unlike some budget efforts I've tried), and the liner's washable—which matters after a few sweaty days in August traffic. Is it as refined as my mate's Shoei? No. Does it do the job for 90% of riders? Absolutely.</p>
+<p>The visor mechanism is solid, the internal sun visor actually works (unlike some <a href="/guides/affordable-motorcycle-helmets-uk-guide">budget</a> efforts I've tried), and the liner's washable—which matters after a few sweaty days in August traffic. Is it as refined as my mate's Shoei? No. Does it do the job for 90% of riders? Absolutely.</p>
 
 <p>AGV's K1 and K3 models hover around £120-£180 and offer excellent value. AGV knows racing, and that knowledge filters down even to their affordable range. The K3's wider eye port makes it brilliant for long days—less claustrophobic when you're hour six into a ride to Scotland.</p>
 
 <h3>What About Flip-Front Helmets?</h3>
 
-<p>Flip-fronts under £200 are tricky. The mechanism adds complexity and cost, so budget options can feel agricultural. That said, the Caberg Duke II at around £180 has impressed me. I borrowed one for a week riding around North Wales, and while it's heavier than I'd like, the convenience of flipping up at petrol stations without removing the helmet entirely is gold for touring.</p>
+<p>Flip-fronts under £200 are tricky. The mechanism adds complexity and cost, so budget options can feel agricultural. That said, the Caberg Duke II at around £180 has impressed me. I borrowed one for a week riding around North <a href="/guides/best-motorcycle-roads-wales">Wales</a>, and while it's heavier than I'd like, the convenience of flipping up at petrol stations without removing the helmet entirely is gold for touring.</p>
 
 <p>The downside? Wind noise. Budget flip-fronts rarely seal as well as full-faces, and on fast A-roads, you'll notice it. Earplugs become essential, but then again, I wear earplugs anyway because I actually like my hearing.</p>
 
@@ -66,7 +66,7 @@ The best affordable helmet is the one that fits your head shape properly, meets 
 
 <h3>Noise Levels</h3>
 
-<p>I'll be straight with you: affordable helmets are noisier. The aerodynamics aren't as refined, the seals aren't as precise, and at motorway speeds, you'll hear it. But here's my solution: quality earplugs cost £15 and they're essential anyway for hearing protection.</p>
+<p>I'll be straight with you: affordable helmets are noisier. The aerodynamics aren't as refined, the seals aren't as precise, and at motorway speeds, you'll hear it. But here's my solution: quality earplugs cost £15 and they're essential anyway for hearing <a href="/guides/knee-armour-guide">protection</a>.</p>
 
 <p>I wear earplugs on every ride over 30 minutes, regardless of helmet price. They cut wind noise, reduce fatigue, and protect your hearing for the long term. A £120 helmet with earplugs is quieter and safer than a £400 helmet without them.</p>
 
@@ -160,4 +160,4 @@ The best affordable helmet is the one that fits your head shape properly, meets 
 
 <p>Check current prices at reputable retailers, read recent reviews (helmets get updated every 2-3 years), and try before you buy if at all possible. Once you've found a helmet that fits well and meets your needs, get out there and ride. The best helmet is the one that keeps you protected while you're actually on the road.</p>
 
-<p>And if you're looking for somewhere brilliant to test that new lid, our <a href="/guides/best-bike-routes-uk">guide to the best UK bike routes</a> has dozens of options. See you out there. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more.</p>`;
+<p>And if you're looking for somewhere brilliant to test that new lid, our <a href="/guides/best-bike-routes-uk">guide to the best UK bike routes</a> has dozens of options. See you out there. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more.</p>`;

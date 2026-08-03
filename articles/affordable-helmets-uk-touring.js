@@ -2,7 +2,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>Look, I get it. When you're planning a tour up to the Highlands or sorting your kit for the <a href="/routes/nc500-complete">NC500</a>, dropping £400-500 on a helmet can feel like overkill. Especially when you're also budgeting for decent boots, waterproofs, and enough fuel to actually get somewhere.</p>
 
-<p>But here's the thing I've learned after years of riding across Britain in everything from Scottish mist to proper Welsh downpours: you don't need to spend a fortune to get a helmet that'll keep you safe, comfortable, and focused on the road ahead. You just need to know what actually matters and where you can save without compromising.</p>
+<p>But here's the thing I've learned after years of <a href="/guides/motorcycle-riding-jeans">riding</a> across Britain in everything from Scottish mist to proper Welsh downpours: you don't need to spend a fortune to get a helmet that'll keep you safe, comfortable, and focused on the road ahead. You just need to know what actually matters and where you can save without compromising.</p>
 
 <p>I've tested my fair share of budget <a href="/guides/adventure-helmets-review">lids</a> over the years, and I'm going to walk you through what works, what doesn't, and how to find a helmet that'll see you through thousands of miles without breaking the bank.</p>
 
@@ -34,7 +34,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Ventilation That Actually Works</h3>
 
-<p>Budget helmets often skimp on vents, and you'll feel it on warmer days. But here's what I've learned: you don't need twelve adjustable vents. You need two or three well-positioned ones that actually move air.</p>
+<p><a href="/guides/affordable-motorcycle-helmets-uk-guide">Budget</a> helmets often skimp on vents, and you'll feel it on warmer days. But here's what I've learned: you don't need twelve adjustable vents. You need two or three well-positioned ones that actually move air.</p>
 
 <p>A decent chin vent and a top vent will handle most British conditions. The key is testing them before you buy. Pop the helmet on, close the visor, and check if you can feel air movement. If the vents feel like they're just for show, walk away.</p>
 
@@ -137,7 +137,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>You don't need to spend a fortune to get a helmet that'll see you safely through thousands of touring miles across Britain. What you need is to be smart about what actually matters and where you can compromise.</p>
 
-<p>Safety certification, proper fit, and Pinlock anti-fog are non-negotiable. Everything else – fancy graphics, carbon fibre construction, premium brand names – is nice to have but not essential for most touring riders.</p>
+<p>Safety certification, proper fit, and Pinlock anti-fog are non-negotiable. Everything else – fancy graphics, carbon fibre construction, premium brand names – is nice to have but not essential for most touring <a href="/guides/leather-motorcycle-trousers">riders</a>.</p>
 
 <p>Take your time choosing. Try multiple brands and sizes. Read reviews from actual touring riders, not just track-day heroes who've never dealt with Scottish rain. And when you find the right one, look after it properly.</p>
 
@@ -145,4 +145,4 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>Before your next tour, check out the <a href="/packing-checklist">packing checklist</a> to make sure you've got everything sorted beyond just the helmet. And if you're still planning your route, the tools at <a href="/build-route">/build-route</a> will help you map out something brilliant.</p>
 
-<p>Now get out there and put some miles on that new lid. The roads are waiting, and you don't need to be skint to ride them safely. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more.</p>`;
+<p>Now get out there and put some miles on that new lid. The roads are waiting, and you don't need to be skint to ride them safely. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/summer-motorcycle-jackets">Lightweight Summer Motorcycle Jackets for UK Touring</a> guide for more.</p>`;

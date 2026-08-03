@@ -1,6 +1,6 @@
 export const content = `<h2>Affordable Helmets That Won't Let You Down on British Roads</h2>
 
-<p>Look, I get it. You're scrolling through helmet prices and wondering if you need to remortgage just to protect your head. I've been there, staring at £500 lids and thinking there must be a better way. Here's the truth I've learned after years of touring across Britain in every kind of weather: you don't need to spend a fortune to get a helmet that'll keep you safe and comfortable from the Scottish Highlands to the Cornish coast.</p>
+<p>Look, I get it. You're scrolling through helmet prices and wondering if you need to remortgage just to protect your head. I've been there, staring at £500 lids and thinking there must be a better way. Here's the truth I've learned after years of <a href="/guides/cotswolds-motorcycle-touring-routes">touring</a> across Britain in every kind of weather: you don't need to spend a fortune to get a helmet that'll keep you safe and comfortable from the Scottish Highlands to the Cornish coast.</p>
 
 <p>I've tested budget helmets on everything from the relentless rain of the <a href="/routes/nc500-complete">NC500</a> to the grinding motorway miles of the M6. Some have been brilliant. Others? Well, let's just say I learned expensive lessons so you don't have to. This isn't about finding the cheapest helmet on the shelf—it's about finding genuinely good helmets that happen to be affordable.</p>
 
@@ -22,7 +22,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h2>Features That Matter for British Touring</h2>
 
-<p>Right, let's talk about what you actually need when you're riding British roads. I've learned this the hard way, getting drenched on the A82, fogging up in Welsh valleys, and dealing with the buffeting winds along the Northumberland coast.</p>
+<p>Right, let's talk about what you actually need when you're riding British <a href="/guides/best-motorcycle-roads-lake-district">roads</a>. I've learned this the hard way, getting drenched on the A82, fogging up in Welsh valleys, and dealing with the buffeting winds along the Northumberland coast.</p>
 
 <h3>Waterproofing and Seals</h3>
 
@@ -100,7 +100,7 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <h3>Visor Care</h3>
 
-<p>Replace your visor when it gets scratched. I know it's tempting to live with minor scratches, but they catch light at night and reduce visibility. Replacement visors for affordable helmets typically cost £20-40—a worthwhile investment for safety. Keep a spare in your luggage if you're doing a long tour. I've had to complete the final leg of the NC500 squinting through a heavily scratched visor after a stone strike. Could have been avoided with a spare.</p>
+<p>Replace your visor when it gets scratched. I know it's tempting to live with minor scratches, but they catch light at night and reduce visibility. Replacement visors for affordable helmets typically cost £20-40—a worthwhile investment for safety. Keep a spare in your luggage if you're doing a long tour. I've had to <a href="/guides/best-motorcycle-roads-lake-district-2026">complete</a> the final leg of the NC500 squinting through a heavily scratched visor after a stone strike. Could have been avoided with a spare.</p>
 
 <h2>When to Replace Your Helmet</h2>
 
@@ -124,8 +124,8 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <h2>Final Thoughts: Buy Smart, Ride Safe</h2>
 
-<p>I've owned helmets ranging from £120 to well over £400, and here's what I've learned: the most expensive helmet isn't always the best helmet, and affordable doesn't mean compromising on safety or fundamental quality. The key is knowing what features matter for your riding, understanding what you're actually paying for at different price points, and being honest about your needs versus wants.</p>
+<p>I've owned helmets ranging from £120 to well over £400, and here's what I've learned: the most expensive helmet isn't always the <a href="/guides/best-motorcycle-roads-scotland">best</a> helmet, and affordable doesn't mean compromising on safety or fundamental quality. The key is knowing what features matter for your riding, understanding what you're actually paying for at different price points, and being honest about your needs versus wants.</p>
 
 <p>A well-chosen affordable helmet from a reputable manufacturer, properly fitted and maintained, will keep you safe and comfortable on British roads for years. I'd rather see you invest £180 in a good helmet and £70 in decent gloves than blow £500 on a premium lid while riding with cheap gloves that won't protect your hands.</p>
 
-<p>Your next step? Identify your budget, check SHARP ratings for helmets in your price range, find a shop where you can try multiple options, and make your decision based on fit first, features second. Then get out there and ride—whether it's exploring new territory or tackling routes you've had your eye on. The helmet on your head matters less than the adventures you're having while wearing it.</p>`;
+<p>Your next step? Identify your budget, check SHARP ratings for helmets in your price range, find a shop where you can try multiple options, and make your decision based on fit first, features second. Then get out there and ride—whether it's exploring new territory or tackling routes you've had your eye on. The helmet on your head matters less than the adventures you're having while wearing it. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;

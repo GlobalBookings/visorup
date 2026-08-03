@@ -1,12 +1,12 @@
 export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works on British Roads</h2>
 
-<p>I've spent the last fifteen years riding everything from the rain-soaked A82 through Glencoe to the gravel tracks of the Scottish Highlands, and I can tell you this: your boots will make or break your touring experience. I've learned this the hard way, soaked to the skin on the NC500, and limping around Skye after a full day in boots that felt like medieval torture devices.</p>
+<p>I've spent the last fifteen years riding everything from the rain-soaked A82 through Glencoe to the gravel tracks of the <a href="/guides/scottish-borders-motorcycle-roads">Scottish</a> Highlands, and I can tell you this: your boots will make or break your touring experience. I've learned this the hard way, soaked to the skin on the NC500, and limping around Skye after a full day in boots that felt like medieval torture devices.</p>
 
-<p>Adventure motorbike boots need to do it all. They need to keep your feet dry when you're crossing Scotland in April (which I've done more times than I care to remember), protect you if things go sideways on a wet Welsh B-road, and still be comfortable enough to walk around a town when you stop for lunch. Let me share what I've learned about choosing the right pair.</p>
+<p><a href="/guides/adventure-touring-motorcycle-boots-guide">Adventure</a> motorbike boots need to do it all. They need to keep your feet dry when you're crossing Scotland in April (which I've done more times than I care to remember), protect you if things go sideways on a wet Welsh B-road, and still be comfortable enough to walk around a town when you stop for lunch. Let me share what I've learned about choosing the right pair.</p>
 
 <h2>What Makes a Proper Adventure Boot</h2>
 
-<p>Before we dive into specific boots, let's talk about what actually matters. I've ridden in everything from cheap touring boots to full-on enduro gear, and there are certain features that separate the brilliant from the barely adequate.</p>
+<p>Before we dive into specific boots, let's talk about what actually matters. I've ridden in everything from cheap <a href="/guides/a-roads-vs-b-roads-touring">touring</a> boots to full-on enduro gear, and there are certain features that separate the brilliant from the barely adequate.</p>
 
 <h3>Waterproofing That Actually Works</h3>
 
@@ -118,7 +118,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>Before you commit to expensive boots for a big tour, test them properly. Use the <a href="/build-route">route builder</a> to plan a tough day ride—say, 200 miles with plenty of stops. Wear your new boots for the entire day. Walk around at each stop. If your feet are killing you by the end, they're not the right boots for touring.</p>
 
-<p>I did this with my current Sidis before committing to a three-week Scottish tour. Rode from my home in the Midlands up to the Peak District, stopped at Castleton for a walk, rode over to Buxton, walked around there, then home via the long route. My feet felt fine at the end of the day, so I knew they'd work for longer tours. That test ride has saved me from miserable tours more than once.</p>
+<p>I did this with my current Sidis before committing to a three-week Scottish tour. Rode from my home in the Midlands up to the <a href="/guides/peak-district-best-motorcycle-roads">Peak</a> District, stopped at Castleton for a walk, rode over to Buxton, walked around there, then home via the long route. My feet felt fine at the end of the day, so I knew they'd work for longer tours. That test ride has saved me from miserable tours more than once.</p>
 
 <h2>Final Thoughts and Getting Started</h2>
 
@@ -128,4 +128,4 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>My current recommendation for most riders is the Sidi Adventure 2 if budget allows, or the TCX Drifter if you want something more affordable. Both have proven themselves on British roads in British weather. Both will keep your feet protected and dry. Both will last if you look after them.</p>
 
-<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them.</p>`;
+<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;

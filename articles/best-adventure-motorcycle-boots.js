@@ -1,10 +1,10 @@
 export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 2026</h2>
 
-<p>I've learned the hard way that your boots are the most important bit of kit you'll buy for adventure touring. Helmets get the glory, jackets get the attention, but it's your boots that'll make or break a long day in the saddle—especially on British roads where you're dealing with everything from Scottish sleet to Welsh mud to surprise flooding on the A9.</p>
+<p>I've learned the hard way that your boots are the most important bit of kit you'll buy for <a href="/guides/adventure-touring-motorcycle-boots-guide">adventure</a> touring. Helmets get the glory, jackets get the attention, but it's your boots that'll make or break a long day in the saddle—especially on British roads where you're dealing with everything from Scottish sleet to Welsh mud to surprise flooding on the A9.</p>
 
 <p>After years of touring across Britain, from <a href="/routes/island-to-highlands">the Isle of Wight to the Highlands</a> and around <a href="/routes/nc500-complete">the NC500</a> more times than I care to count, I've tested enough adventure boots to fill a garage. Some have left me with blisters on the Cairngorm Pass, others have kept my feet bone-dry through Lake District downpours that would make Noah nervous.</p>
 
-<p>Let me walk you through what actually matters when choosing adventure motorcycle boots for British touring, and which boots I'd trust for a two-week trip through Scotland in April—which, if you've done it, you'll know is the ultimate test.</p>
+<p>Let me walk you through what actually matters when choosing adventure <a href="/guides/best-motorcycle-jeans-uk-touring">motorcycle</a> boots for British touring, and which boots I'd trust for a two-week trip through Scotland in April—which, if you've done it, you'll know is the ultimate test.</p>
 
 <h2>What Makes a Proper Adventure Boot?</h2>
 
@@ -20,7 +20,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>This is the eternal compromise. Full motocross boots offer brilliant protection but you'll walk like a robot. Road boots are comfy for walking but offer sod all ankle support when you're standing on the pegs through rutted tracks or farm roads.</p>
 
-<p>The best adventure boots I've used have a slightly recessed sole that lets you walk almost normally, proper ankle protection with reinforced areas, and enough flex that you can actually feel the gear lever and rear brake. You want CE-rated protection at the ankles, shin, and toe at minimum.</p>
+<p>The <a href="/guides/best-motorcycle-roads-scotland">best</a> adventure boots I've used have a slightly recessed sole that lets you walk almost normally, proper ankle protection with reinforced areas, and enough flex that you can actually feel the gear lever and rear brake. You want CE-rated protection at the ankles, shin, and toe at minimum.</p>
 
 <h3>Sole Design and Grip</h3>
 
@@ -46,7 +46,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>They're not quite as refined as the Formas—the waterproofing isn't Gore-Tex level and you'll notice your feet getting a bit damp after several hours in heavy rain. But for British spring and summer touring, with decent waterproof socks as backup, they're brilliant value.</p>
 
-<p>The protection is CE-rated and feels solid. I've borrowed them for a day's riding through the Peak District and found them comfortable enough, with good feel for the controls. The sole pattern works well on mixed surfaces, and they breathe better than fully waterproof boots on hot days.</p>
+<p>The protection is CE-rated and feels solid. I've borrowed them for a day's riding through the Peak <a href="/guides/best-motorcycle-roads-lake-district-2026">District</a> and found them comfortable enough, with good feel for the controls. The sole pattern works well on mixed surfaces, and they breathe better than fully waterproof boots on hot days.</p>
 
 <h3>The Premium Pick: Sidi Adventure 2</h3>
 
@@ -84,7 +84,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <h3>Seasonal Considerations for British Weather</h3>
 
-<p>Britain doesn't really do predictable seasons anymore, does it? I've had snow in April on the NC500 and 28-degree heat in October in the Lake District. This means your boots need to handle a proper range.</p>
+<p>Britain doesn't really do predictable seasons anymore, does it? I've had snow in April on the NC500 and 28-degree heat in October in the <a href="/guides/best-motorcycle-roads-lake-district">Lake</a> District. This means your boots need to handle a proper range.</p>
 
 <p>For spring and autumn touring, I want full waterproofing and reasonable breathability. Summer touring, I prefer slightly lighter boots that won't turn my feet into sweat baths. Winter touring—which I mostly avoid in the Highlands but do plenty of in the south—needs maximum waterproofing and some insulation.</p>
 

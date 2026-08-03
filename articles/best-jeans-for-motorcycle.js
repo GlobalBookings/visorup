@@ -72,7 +72,7 @@ The best motorcycle jeans are the ones you'll actually wear. Protection only wor
 
 <h3>Summer Weekend Rides</h3>
 
-<p>Lined jeans with good ventilation. Usually a darker wash that doesn't show road grime as badly. I wore these for a week exploring the Welsh borders last July, and they were spot-on – cool enough for 25°C days, protective enough for the technical roads around Snowdonia.</p>
+<p>Lined jeans with good ventilation. Usually a darker wash that doesn't show road grime as badly. I wore these for a week exploring the Welsh borders last July, and they were spot-on – cool enough for 25°C days, protective enough for the technical <a href="/guides/best-motorcycle-roads-lake-district">roads</a> around Snowdonia.</p>
 
 <h3>Long-Distance Touring</h3>
 
@@ -142,4 +142,4 @@ The best motorcycle jeans are the ones you'll actually wear. Protection only wor
 
 <p>And once you've got proper jeans, actually wear them. Every ride. Not just long tours or "dangerous" roads. The worst accident I've seen was someone pulling out of a car park at 15mph who went down on diesel spill. Regular jeans, t-shirt, no gloves. Don't be that rider.</p>
 
-<p>Your future self – the one who hasn't left half their leg skin on the A66 – will thank you for investing in proper motorcycle jeans. Trust me on this one. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;
+<p>Your future self – the one who hasn't left half their leg skin on the A66 – will thank you for investing in proper motorcycle jeans. Trust me on this one. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/best-adventure-motorcycle-boots">Best Adventure Motorcycle Boots UK 2026 | VisorUp</a> guide for more. Read our <a href="/guides/adventure-touring-motorcycle-boots-guide">Adventure Touring Motorcycle Boots Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/motorcycle-touring-packing-tips-beginners">Motorcycle Touring Packing Tips for Beginners 2026 | VisorUp</a> guide for more.</p>`;

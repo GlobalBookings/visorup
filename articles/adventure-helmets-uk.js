@@ -1,14 +1,14 @@
 export const content = `<h2>Adventure Helmets in the UK: What You Actually Need to Know</h2>
 
-<p>I've been touring Britain on adventure bikes for over a decade now, and I've learned that choosing the right adventure helmet isn't about what looks cool in the showroom – it's about what keeps you comfortable when you're battling crosswinds on the A82 or getting pelted by rain somewhere between Fort William and Skye.</p>
+<p>I've been touring Britain on <a href="/guides/best-adventure-motorcycle-boots">adventure</a> bikes for over a decade now, and I've learned that choosing the right adventure helmet isn't about what looks cool in the showroom – it's about what keeps you comfortable when you're battling crosswinds on the A82 or getting pelted by rain somewhere between Fort William and Skye.</p>
 
-<p>Adventure helmets have become the Swiss Army knife of motorcycle lids. They're designed for riders who might start their day on the M6, spend lunch navigating green lanes in the Peak District, and finish with a blast up the A537 Cat and Fiddle. But here's the thing: not all adventure helmets are created equal, and what works brilliantly for someone touring Spain in August might leave you steamed up and miserable on a wet February ride through the Lake District.</p>
+<p>Adventure helmets have become the Swiss Army knife of motorcycle lids. They're designed for riders who might start their day on the M6, spend lunch navigating green lanes in the Peak District, and finish with a blast up the A537 Cat and Fiddle. But here's the thing: not all adventure helmets are created equal, and what works brilliantly for someone touring Spain in August might leave you steamed up and miserable on a wet February ride through the <a href="/guides/best-motorcycle-roads-lake-district">Lake</a> District.</p>
 
 <h2>What Makes an Adventure Helmet Different</h2>
 
 <p>Let me start with the basics, because I've had more than a few mates ask me why they can't just stick with their sports helmet or buy a cheap flip-front and call it done.</p>
 
-<p>Adventure helmets combine features from dual-sport and touring lids. You get that distinctive peak (which I'll come back to), a larger eye port for better peripheral vision, and typically more ventilation than a standard road helmet. The shell shapes are designed to work with or without goggles, though most of us in the UK stick with the visor.</p>
+<p>Adventure helmets combine features from dual-sport and <a href="/guides/sport-touring-vs-adventure-bikes-which-is-better-for-uk-touring">touring</a> lids. You get that distinctive peak (which I'll come back to), a larger eye port for better peripheral vision, and typically more ventilation than a standard road helmet. The shell shapes are designed to work with or without goggles, though most of us in the UK stick with the visor.</p>
 
 <p>The real genius is versatility. I've used mine on everything from motorway slogs down to London to proper off-road green laning in Wales. The same helmet that protects you at 70mph on the M5 works equally well when you're dodging potholes on a muddy Byway Open to All Traffic.</p>
 
@@ -26,7 +26,7 @@ export const content = `<h2>Adventure Helmets in the UK: What You Actually Need 
 
 <p>In 2026, most decent adventure helmets have sophisticated ventilation systems, but you need to understand how they work in British conditions. Those top vents that feel brilliant in summer can become waterfalls when you're caught in a downpour on the <a href="/routes/nc500-complete">NC500</a>.</p>
 
-<p>I've found the best systems have closable vents with proper seals. Brands like Schuberth and Shoei have nailed this – you can completely shut down airflow when the heavens open, then crack everything open when the sun makes a rare appearance.</p>
+<p>I've found the <a href="/guides/best-motorcycle-roads-scotland">best</a> systems have closable vents with proper seals. Brands like Schuberth and Shoei have nailed this – you can completely shut down airflow when the heavens open, then crack everything open when the sun makes a rare appearance.</p>
 
 <p>The chin vents are your friend in British conditions. They typically let in less rain than top vents and help reduce visor fogging, which is absolutely critical when you're riding through mist on Dartmoor or dealing with our seemingly endless drizzle.</p>
 
@@ -154,7 +154,7 @@ The best adventure helmet for British touring is the one that fits your head sha
 
 <p>When I'm planning longer tours using the <a href="/plan-trip">trip planning tool</a>, helmet storage is always a consideration. Adventure helmets are bulky, and leaving a £400 helmet on your bike while you explore a town isn't ideal.</p>
 
-<p>I use a helmet lock for quick stops and bring a helmet bag for overnight stops. Some hotels look at you funny when you walk in with a motorcycle helmet, but I'm not leaving it on the bike. A simple drawstring bag makes it less conspicuous and protects it from scratches.</p>
+<p>I use a helmet lock for quick stops and bring a helmet bag for overnight stops. Some hotels look at you funny when you walk in with a <a href="/guides/best-motorcycle-roads-lake-district-2026">motorcycle</a> helmet, but I'm not leaving it on the bike. A simple drawstring bag makes it less conspicuous and protects it from scratches.</p>
 
 <p>If you're flying to start a tour, adventure helmets can be challenging to pack. I've had success with purpose-made helmet cases, but they're bulky. Some riders ship their helmet ahead or rent bikes with helmets included. It's worth considering when you're working through your <a href="/packing-checklist">packing checklist</a>.</p>
 
