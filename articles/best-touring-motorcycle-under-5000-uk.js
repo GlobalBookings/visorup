@@ -6,9 +6,9 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <h2>What Makes a Good Touring Bike Under £5K?</h2>
 
-<p>Before I get into specific models, let me share what I've learned matters most when you're spending full days in the saddle across British roads. Comfort's obviously top of the list – if your backside's numb by Scotch Corner, you're on the wrong bike. But there's more to it than just a plush seat.</p>
+<p>Before I get into specific models, let me share what I've learned matters most when you're spending full days in the saddle across British <a href="/guides/best-motorcycle-roads-lake-district-2026">roads</a>. Comfort's obviously top of the list – if your backside's numb by Scotch Corner, you're on the wrong bike. But there's more to it than just a plush seat.</p>
 
-<p>You want something reliable. Properly reliable. Breaking down in the Highlands when it's chucking it down isn't romantic, it's miserable. I look for bikes with proven engines, good parts availability, and reasonable service intervals. The best touring bike is the one that actually gets you there.</p>
+<p>You want something reliable. Properly reliable. Breaking down in the Highlands when it's chucking it down isn't romantic, it's miserable. I look for bikes with proven engines, good parts availability, and reasonable service intervals. The <a href="/guides/best-motorcycle-roads-scotland">best</a> touring bike is the one that actually gets you there.</p>
 
 <p>Weather protection matters more than you'd think. Yeah, we've all got decent gear now, but a bike with good wind protection means you arrive less knackered. I've ridden naked bikes on tours and while it's doable, a proper screen makes motorway slogs infinitely more pleasant.</p>
 
@@ -42,11 +42,11 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>Honda reliability in a lightweight, easy-to-ride package. I rode a 2015 model for a whole summer, and while it's not the fastest thing on the road, it's one of the most pleasant. The parallel-twin is smooth, economical (I regularly saw 70+ mpg), and utterly dependable.</p>
 
-<p>It's properly light compared to the bigger adventure bikes, which makes it brilliant for newer tourers or anyone who doesn't fancy wrestling a 250kg monster around petrol station forecourts. The low seat height means shorter riders can get both feet flat down, which makes a real difference when you're tired at the end of a long day.</p>
+<p>It's properly light compared to the bigger adventure bikes, which makes it brilliant for newer tourers or anyone who doesn't fancy wrestling a 250kg monster around petrol station forecourts. The low seat height means shorter <a href="/guides/best-motorcycle-roads-england">riders</a> can get both feet flat down, which makes a real difference when you're tired at the end of a long day.</p>
 
 <p>The standard screen's a bit short for my liking – I'm 6'1" and got more wind blast than I'd prefer. But aftermarket screens are cheap and effective. Luggage mounts are solid, and you'll find loads of touring accessories available.</p>
 
-<p>Watch for: Not much, honestly. These are Honda-reliable. Check service history is complete, as some were used by schools and rode hard by learners. Expect to pay £3,500-£4,800.</p>
+<p>Watch for: Not much, honestly. These are Honda-reliable. Check service history is <a href="/guides/best-motorcycle-roads-lake-district">complete</a>, as some were used by schools and rode hard by learners. Expect to pay £3,500-£4,800.</p>
 
 <h3>Yamaha Tracer 700 (2016-2019)</h3>
 
@@ -154,4 +154,4 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>Then get out there and actually use it. The best touring bike is the one you actually tour on. Start with weekend trips, build up to longer adventures, and use our route planning tools at <a href="/build-route">Build a Route</a> to discover brilliant roads across Britain.</p>
 
-<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod.</p>`;
+<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more.</p>`;

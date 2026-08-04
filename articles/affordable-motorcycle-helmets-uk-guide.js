@@ -6,7 +6,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h2>What 'Affordable' Actually Means in 2026</h2>
 
-<p>When I talk about affordable helmets, I'm looking at the £100-£250 bracket. That's the sweet spot where you're getting proper safety standards, decent features, and build quality that'll last more than one season. Anything under £100 and you're typically sacrificing something important—usually comfort or ventilation. Go over £250 and you're starting to pay for premium features that, honestly, most touring riders don't need.</p>
+<p>When I talk about <a href="/guides/affordable-motorcycle-helmets-uk">affordable</a> helmets, I'm looking at the £100-£250 bracket. That's the sweet spot where you're getting proper safety standards, decent features, and build quality that'll last more than one season. Anything under £100 and you're typically sacrificing something important—usually comfort or ventilation. Go over £250 and you're starting to pay for premium features that, honestly, most touring riders don't need.</p>
 
 <p>I've ridden with helmets at both ends of this range, and the difference between a £120 lid and a £220 one isn't always massive. You're often paying for weight savings, graphics, or brand prestige rather than fundamental safety or usability improvements.</p>
 
@@ -80,7 +80,7 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <h3>Initial Fit Should Be Snug</h3>
 
-<p>When you first put on a new helmet, it should feel almost too tight. Not painful, but definitely snug all around your head. The lining will compress over time—I've had helmets that felt perfect in the shop become loose and unsafe after a few months because I didn't account for this break-in period.</p>
+<p>When you first put on a new helmet, it should feel almost too tight. Not painful, but definitely snug all around your head. The lining will compress over time—I've had helmets that felt <a href="/guides/nc500-5-day-itinerary">perfect</a> in the shop become loose and unsafe after a few months because I didn't account for this break-in period.</p>
 
 <p>Try the helmet on for at least ten minutes in the shop. Walk around. Move your head. If it's causing pain or pressure points in that time, it's not right. But if it's just snug? That's probably perfect.</p>
 
@@ -110,7 +110,7 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <h2>What You Don't Need to Pay For</h2>
 
-<p>Premium helmets often include features that sound great but don't really matter for British touring. Carbon fibre shells save weight, but unless you're doing track days or particularly long distance touring, a few hundred grams isn't life-changing. I've done 400-mile days in both budget and premium helmets, and weight was never the determining factor in comfort—fit was.</p>
+<p>Premium helmets often include features that sound great but don't really matter for British touring. Carbon fibre shells save weight, but unless you're doing track <a href="/guides/nc500-3-day-itinerary">days</a> or particularly long distance touring, a few hundred grams isn't life-changing. I've done 400-mile days in both budget and premium helmets, and weight was never the determining factor in comfort—fit was.</p>
 
 <p>Bluetooth integration is another one. Some premium helmets have built-in Bluetooth, but you can add a Cardo or Sena unit to any helmet for less than the price difference between budget and premium options. I use a clip-on system that I can move between helmets as needed.</p>
 
@@ -120,7 +120,7 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <p>Before you buy, use our <a href="/packing-checklist">packing checklist</a> tool to think about your riding style and needs. Are you mostly commuting with occasional weekend tours? A mid-range affordable helmet with good waterproofing is perfect. Planning serious long-distance touring? Consider spending toward the upper end of the affordable bracket for better comfort features.</p>
 
-<p>Think about the conditions you'll actually ride in. If you're mostly fair-weather riding in southern England, you can prioritise ventilation over waterproofing. If you're touring Scotland regularly like I do, weather protection moves to the top of the priority list.</p>
+<p>Think about the conditions you'll actually ride in. If you're mostly fair-weather riding in southern <a href="/guides/best-motorcycle-roads-england">England</a>, you can prioritise ventilation over waterproofing. If you're touring Scotland regularly like I do, weather protection moves to the top of the priority list.</p>
 
 <h2>Final Thoughts: Buy Smart, Ride Safe</h2>
 
@@ -128,4 +128,4 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <p>A well-chosen affordable helmet from a reputable manufacturer, properly fitted and maintained, will keep you safe and comfortable on British roads for years. I'd rather see you invest £180 in a good helmet and £70 in decent gloves than blow £500 on a premium lid while riding with cheap gloves that won't protect your hands.</p>
 
-<p>Your next step? Identify your budget, check SHARP ratings for helmets in your price range, find a shop where you can try multiple options, and make your decision based on fit first, features second. Then get out there and ride—whether it's exploring new territory or tackling routes you've had your eye on. The helmet on your head matters less than the adventures you're having while wearing it. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;
+<p>Your next step? Identify your budget, check SHARP ratings for helmets in your price range, find a shop where you can try multiple options, and make your decision based on fit first, features second. Then get out there and ride—whether it's exploring new territory or tackling routes you've had your eye on. The helmet on your head matters less than the adventures you're having while wearing it. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/nc500-7-day-itinerary">NC500 in 7 Days: The Complete Motorcycle Experience</a> guide for more.</p>`;

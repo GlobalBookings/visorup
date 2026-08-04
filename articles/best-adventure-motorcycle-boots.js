@@ -18,7 +18,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <h3>Walking Comfort vs. Riding Protection</h3>
 
-<p>This is the eternal compromise. Full motocross boots offer brilliant protection but you'll walk like a robot. Road boots are comfy for walking but offer sod all ankle support when you're standing on the pegs through rutted tracks or farm roads.</p>
+<p>This is the eternal compromise. Full motocross boots offer brilliant protection but you'll walk like a robot. Road boots are comfy for walking but offer sod all ankle support when you're standing on the pegs through rutted tracks or farm <a href="/guides/best-motorcycle-roads-england">roads</a>.</p>
 
 <p>The <a href="/guides/best-motorcycle-roads-scotland">best</a> adventure boots I've used have a slightly recessed sole that lets you walk almost normally, proper ankle protection with reinforced areas, and enough flex that you can actually feel the gear lever and rear brake. You want CE-rated protection at the ankles, shin, and toe at minimum.</p>
 
@@ -36,7 +36,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>They're properly waterproof with a full Gore-Tex lining that's never let me down. The ankle protection is excellent—I've had a couple of small offs on green lanes and they've done their job without complaint. What I really rate is the balance between protection and walkability. You can actually walk around a town without looking like you've got industrial equipment strapped to your feet.</p>
 
-<p>The heel and toe have proper reinforcement, there's a gear lever pad that's held up well, and the Vibram sole gives good grip on everything from wet Scottish rock to slippery Welsh slate. They took about 200 miles to break in properly, but after that they've been spot on.</p>
+<p>The heel and toe have proper reinforcement, there's a gear lever pad that's held up well, and the Vibram sole gives good grip on everything from wet <a href="/guides/scottish-borders-motorcycle-roads">Scottish</a> rock to slippery Welsh slate. They took about 200 miles to break in properly, but after that they've been spot on.</p>
 
 <p>You can pick these up at <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> and they're worth every penny for serious touring.</p>
 
@@ -60,7 +60,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>For summer touring when you know you're not going to be dealing with serious off-road work, the Alpinestars Corozal is a brilliant lighter-weight option. They're still properly protective with CE certification, but they're noticeably less bulky than full adventure boots.</p>
 
-<p>I use these for trips where I'm mostly on tarmac but want the security of proper adventure boot protection—think touring Wales or the Cotswolds in good weather. They're excellent for walking, breathe really well, and pack smaller in luggage if you're bringing a spare pair.</p>
+<p>I use these for trips where I'm mostly on tarmac but want the security of proper adventure boot protection—think touring <a href="/guides/best-motorcycle-roads-wales">Wales</a> or the Cotswolds in good weather. They're excellent for walking, breathe really well, and pack smaller in luggage if you're bringing a spare pair.</p>
 
 <p>The waterproofing is good but not exceptional. They'll handle a rain shower fine, but I wouldn't fancy them for an all-day Scottish monsoon. The sole is less aggressive than full adventure boots, which makes them quieter and more comfortable on tarmac but less confident on loose surfaces.</p>
 
@@ -116,10 +116,10 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <h2>Final Thoughts: What I'd Buy Today</h2>
 
-<p>If I was buying adventure boots right now for serious British touring, I'd go with the Forma Adventure Low for most riders. They hit the sweet spot of protection, comfort, and price. They're properly waterproof for our weather, comfortable enough for full days in the saddle, and tough enough to last thousands of miles.</p>
+<p>If I was buying adventure boots right now for serious British touring, I'd go with the Forma Adventure Low for most <a href="/guides/peak-district-best-motorcycle-roads">riders</a>. They hit the sweet spot of protection, comfort, and price. They're properly waterproof for our weather, comfortable enough for full days in the saddle, and tough enough to last thousands of miles.</p>
 
 <p>For riders on a tighter budget, the TCX Baja Mid will do the job brilliantly with a pair of decent waterproof socks as backup. And if money's no object and you're planning serious mileage, the Sidi Adventure 2 boots are genuinely worth the investment—they'll probably outlast your bike.</p>
 
 <p>Whatever you choose, get boots that fit properly, break them in before your big tour, and maintain them well. Your feet carry you through every adventure, on and off the bike. Look after them, and they'll look after you through every mile of British roads, tracks, and footpaths ahead.</p>
 
-<p>Now get out there and put some miles on those boots. The roads are waiting.</p>`;
+<p>Now get out there and put some miles on those boots. The roads are waiting. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more.</p>`;

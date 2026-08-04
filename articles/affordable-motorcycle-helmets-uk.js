@@ -12,7 +12,7 @@ export const content = `<h2>Affordable Motorcycle Helmets: Quality Protection Wi
 
 <h3>Safety Standards: The Non-Negotiable Baseline</h3>
 
-<p>Every helmet sold legally in the UK must meet ECE 22.06 standards as of 2026. That's your baseline, your minimum requirement, your absolute must-have. I don't care if a helmet costs £50 or £500—if it doesn't have that ECE sticker, it's not going on my head.</p>
+<p>Every helmet sold legally in the UK must meet ECE 22.06 standards as of <a href="/guides/affordable-motorcycle-helmets-uk-touring">2026</a>. That's your baseline, your minimum requirement, your absolute must-have. I don't care if a helmet costs £50 or £500—if it doesn't have that ECE sticker, it's not going on my head.</p>
 
 <p>Here's what matters: affordable <a href="/guides/modular-helmets-guide">helmets</a> pass the exact same safety tests as expensive ones. A £120 AGV K1 has to meet the same impact standards as a £600 Arai. The difference isn't safety—it's comfort, features, and refinement.</p>
 
@@ -30,7 +30,7 @@ The best affordable helmet is the one that fits your head shape properly, meets 
 
 <p>The visor mechanism is solid, the internal sun visor actually works (unlike some <a href="/guides/affordable-motorcycle-helmets-uk-guide">budget</a> efforts I've tried), and the liner's washable—which matters after a few sweaty days in August traffic. Is it as refined as my mate's Shoei? No. Does it do the job for 90% of riders? Absolutely.</p>
 
-<p>AGV's K1 and K3 models hover around £120-£180 and offer excellent value. AGV knows racing, and that knowledge filters down even to their affordable range. The K3's wider eye port makes it brilliant for long days—less claustrophobic when you're hour six into a ride to Scotland.</p>
+<p>AGV's K1 and K3 models hover around £120-£180 and offer excellent value. AGV knows racing, and that knowledge filters down even to their affordable range. The K3's wider eye port makes it brilliant for long <a href="/guides/nc500-3-day-itinerary">days</a>—less claustrophobic when you're hour six into a ride to Scotland.</p>
 
 <h3>What About Flip-Front Helmets?</h3>
 
@@ -44,7 +44,7 @@ The best affordable helmet is the one that fits your head shape properly, meets 
 
 <h2>Features That Actually Matter for British Touring</h2>
 
-<p>Let me save you some grief by focusing on what genuinely improves your riding experience versus marketing fluff.</p>
+<p>Let me save you some grief by focusing on what genuinely improves your riding <a href="/guides/nc500-7-day-itinerary">experience</a> versus marketing fluff.</p>
 
 <h3>Visor Quality and Anti-Fog</h3>
 
@@ -160,4 +160,4 @@ The best affordable helmet is the one that fits your head shape properly, meets 
 
 <p>Check current prices at reputable retailers, read recent reviews (helmets get updated every 2-3 years), and try before you buy if at all possible. Once you've found a helmet that fits well and meets your needs, get out there and ride. The best helmet is the one that keeps you protected while you're actually on the road.</p>
 
-<p>And if you're looking for somewhere brilliant to test that new lid, our <a href="/guides/best-bike-routes-uk">guide to the best UK bike routes</a> has dozens of options. See you out there. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more.</p>`;
+<p>And if you're looking for somewhere brilliant to test that new lid, our <a href="/guides/best-bike-routes-uk">guide to the best UK bike routes</a> has dozens of options. See you out there. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-england">Best Motorcycle Roads in England: A Rider's Guide</a> guide for more. Read our <a href="/guides/top-20-motorcycle-roads-uk">Top 20 Motorcycle Roads in the UK: The Definitive List</a> guide for more. Read our <a href="/guides/nc500-5-day-itinerary">NC500 in 5 Days: The Perfect Balance Motorcycle Itinerary</a> guide for more.</p>`;

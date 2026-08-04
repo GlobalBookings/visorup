@@ -24,11 +24,11 @@ export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actuall
 
 <h2>My Current Recommendations for 2026</h2>
 
-<p>The adventure boot market has matured significantly. In 2026, we've got options that would have seemed impossible five years ago. I'm currently rotating between a few pairs depending on the trip, and I've tested most of the popular models on proper British touring routes.</p>
+<p>The adventure boot market has matured significantly. In <a href="/guides/best-adventure-helmet">2026</a>, we've got options that would have seemed impossible five years ago. I'm currently rotating between a few pairs depending on the trip, and I've tested most of the popular models on proper British touring routes.</p>
 
 <h3>The Wet Weather Warriors</h3>
 
-<p>If you ride year-round in Britain, waterproofing isn't optional. I've tested boots on the M6 in November, through the Brecon Beacons in spring showers, and along the A9 in every season. The boots that keep my feet dry share certain characteristics.</p>
+<p>If you ride year-round in Britain, waterproofing isn't optional. I've tested <a href="/guides/best-adventure-motorbike-boots">boots</a> on the M6 in November, through the Brecon Beacons in spring showers, and along the A9 in every season. The boots that keep my feet dry share certain characteristics.</p>
 
 <p>Look for Gore-Tex or equivalent membranes, but pay attention to the construction. The membrane needs to be properly integrated, not just an afterthought. Sealed seams matter enormously. I've had expensive boots with Gore-Tex that still leaked because the construction was sloppy.</p>
 
@@ -76,7 +76,7 @@ export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actuall
 
 <p>Here's the crucial bit: try them on at the end of the day when your feet are slightly swollen. Walk around for at least fifteen minutes. If they're uncomfortable in the shop, they'll be torture on a touring day.</p>
 
-<p>Different manufacturers fit differently. Some run narrow, others wide. I wear a UK 10 in most shoes but range from 9.5 to 10.5 in motorcycle boots depending on the brand. Always check the specific manufacturer's sizing guide and read reviews from other riders.</p>
+<p>Different manufacturers fit differently. Some run narrow, others wide. I wear a UK 10 in most shoes but range from 9.5 to 10.5 in motorcycle boots depending on the brand. Always check the specific manufacturer's sizing guide and read reviews from other <a href="/guides/best-motorcycle-roads-england">riders</a>.</p>
 
 <h3>Break-In Period</h3>
 
@@ -138,4 +138,4 @@ export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actuall
 
 <p>If you're new to touring, start with a solid mid-range option and learn what you like and dislike. As you gain experience, you'll know exactly what features matter for your riding style. Check out our <a href="/guides/essential-motorcycle-touring-gear">essential touring gear guide</a> for how boots fit into your overall kit.</p>
 
-<p>And most importantly: get out and ride. The best boots in the world are worthless if they're sitting in your garage. Britain's roads are waiting, rain or shine.</p>`;
+<p>And most importantly: get out and ride. The best boots in the world are worthless if they're sitting in your garage. Britain's <a href="/guides/best-motorcycle-roads-lake-district-2026">roads</a> are waiting, rain or shine. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more.</p>`;

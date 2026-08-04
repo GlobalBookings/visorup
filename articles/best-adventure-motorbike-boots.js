@@ -12,7 +12,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>This is Britain. It's going to rain. Accept it now and save yourself the misery I experienced riding the <a href="/routes/nc500-complete">NC500</a> in boots that claimed to be waterproof but gave up after three hours of Highland drizzle.</p>
 
-<p>You want Gore-Tex or an equivalent membrane that's properly bonded into the boot construction. Not a liner that shifts around. Not a coating that wears off. A proper, sealed membrane. I've found that boots with gusseted tongues and sealed seams keep the water out longer, especially when you're standing on the pegs in heavy rain.</p>
+<p>You want Gore-Tex or an equivalent membrane that's properly bonded into the boot construction. Not a liner that shifts around. Not a coating that wears off. A proper, sealed membrane. I've found that <a href="/guides/best-adventure-motorcycle-boots">boots</a> with gusseted tongues and sealed seams keep the water out longer, especially when you're standing on the pegs in heavy rain.</p>
 
 <h3>Protection Where It Counts</h3>
 
@@ -30,7 +30,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>I've been wearing these for the past two years, and they're the <a href="/guides/best-motorcycle-roads-scotland">best</a> all-rounders I've owned. The Gore-Tex membrane has kept my feet dry through Scottish summers (which is saying something), and the build quality is exceptional. They're not cheap at around £350, but I reckon they'll last me another three years minimum.</p>
 
-<p>The gear shifter is replaceable, which is brilliant because I've worn through two already. The Velcro straps and zip system make them easy to get on and off, and the sole has enough flex for walking but proper protection for riding. I've walked miles around Edinburgh and Fort William in these without any complaints.</p>
+<p>The gear shifter is replaceable, <a href="/guides/nc500-clockwise-vs-anticlockwise">which</a> is brilliant because I've worn through two already. The Velcro straps and zip system make them easy to get on and off, and the sole has enough flex for walking but proper protection for riding. I've walked miles around Edinburgh and Fort William in these without any complaints.</p>
 
 <p>The ankle protection is proper CE-rated, and I can feel the difference in stability when I'm standing on the pegs on rough B-<a href="/guides/best-motorcycle-roads-wales">roads</a>. They run slightly narrow, so if you've got wide feet, try them on first or size up.</p>
 
@@ -46,7 +46,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>If you want something between a touring boot and a proper off-road boot, these are worth considering. I borrowed a mate's pair for a week-long trip through the Highlands that included some gravel tracks and forest roads, and they handled everything brilliantly.</p>
 
-<p>The sole is stiffer than road-focused boots, which gives you better control on loose surfaces. The protection is excellent—proper shin plates and ankle armour. They're about £280, which feels fair for what you get. The waterproofing held up through everything Scotland threw at me, including a stream crossing I hadn't planned on.</p>
+<p>The sole is stiffer than road-focused boots, which gives you <a href="/guides/sport-touring-vs-adventure-bikes-which-is-better-for-uk-touring">better</a> control on loose surfaces. The protection is excellent—proper shin plates and ankle armour. They're about £280, which feels fair for what you get. The waterproofing held up through everything Scotland threw at me, including a stream crossing I hadn't planned on.</p>
 
 <p>The downside is walking comfort. They're stiff. Really stiff. Fine for short walks, but if you're planning to spend hours on your feet, they'll remind you they're enduro boots, not hiking boots.</p>
 
@@ -98,7 +98,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <h3>Welsh Mountain Roads</h3>
 
-<p>The A470 and similar routes demand boots with good feel and control. The roads are technical, often wet, and you need confident gear changes. I prefer boots with a slightly softer sole here—the TCX Drifter works well. The weather can turn quickly, so waterproofing is still essential.</p>
+<p>The A470 and similar routes demand boots with good feel and control. The roads are technical, often wet, and you need confident gear changes. I prefer boots with a slightly softer sole here—the TCX Drifter works well. The weather can turn quickly, so waterproofing is still <a href="/guides/biker-cafes-uk">essential</a>.</p>
 
 <h3>Lake District Touring</h3>
 
@@ -128,4 +128,4 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>My current recommendation for most riders is the Sidi Adventure 2 if budget allows, or the TCX Drifter if you want something more affordable. Both have proven themselves on British roads in British weather. Both will keep your feet protected and dry. Both will last if you look after them.</p>
 
-<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;
+<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/top-20-motorcycle-roads-uk">Top 20 Motorcycle Roads in the UK: The Definitive List</a> guide for more.</p>`;

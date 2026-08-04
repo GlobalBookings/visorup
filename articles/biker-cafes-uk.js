@@ -50,9 +50,9 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <h3>South West England</h3>
 
-<p>The Gorge Café near Cheddar is ideally positioned for the Somerset levels and Mendips riding. Cheddar Gorge itself is touristy but the road is still brilliant. The café gets loads of bikers, especially on sunny weekends, and they're set up for it with plenty of parking and quick service.</p>
+<p>The Gorge Café near Cheddar is ideally positioned for the Somerset levels and Mendips riding. Cheddar Gorge itself is touristy but the road is still brilliant. The café gets loads of <a href="/guides/yorkshire-villages-pubs-bikers">bikers</a>, especially on sunny weekends, and they're set up for it with plenty of parking and quick service.</p>
 
-<p>Down in Devon, the Northmore Arms at Wonson serves a similar purpose—classic Devon lanes, cream teas, and a proper welcome. If you're touring the South West, places like this break up long days perfectly.</p>
+<p>Down in Devon, the Northmore Arms at Wonson serves a similar purpose—classic Devon <a href="/guides/guernsey-motorcycle-guide">lanes</a>, cream teas, and a proper welcome. If you're touring the South West, places like this break up long days perfectly.</p>
 
 <h3>Scotland Beyond the NC500</h3>
 
@@ -70,7 +70,7 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <h3>Weather Considerations</h3>
 
-<p>British weather makes café stops essential rather than optional. I've been caught out too many times—setting off in sunshine, hitting rain two hours later, and desperately needing somewhere to warm up and dry out. Knowing where your nearest proper café is can literally save a ride.</p>
+<p>British weather makes café stops <a href="/guides/touring-motorcycle-toolkit">essential</a> rather than optional. I've been caught out too many times—setting off in sunshine, hitting rain two hours later, and desperately needing somewhere to warm up and dry out. Knowing where your nearest proper café is can literally save a ride.</p>
 
 <p>In winter, I won't plan routes longer than two hours between café stops. Your hands get cold, your concentration drops, and you need that warm-up break. <a href="/guides/summer-motorcycle-gloves">Summer</a> gives you more flexibility, but even then, a stop every three hours keeps you sharp and makes the riding more enjoyable.</p>
 
@@ -104,7 +104,7 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <p>I've developed a routine for café stops that maximises the break without wasting too much time. First, I do a quick bike check—chain tension, tyre pressures if I've got a gauge, general look around for anything loose or leaking. Takes five minutes and has caught problems before they became serious.</p>
 
-<p>Then I sort my kit. If anything's wet, I'll try to dry it or at least reorganise so it's not soaking other gear. Check my route for the next section, make sure my phone's charged, and confirm fuel stops if needed.</p>
+<p>Then I sort my kit. If anything's wet, I'll try to dry it or at least reorganise so it's not soaking other <a href="/guides/motorcycle-camping-gear">gear</a>. Check my route for the next section, make sure my phone's charged, and confirm fuel stops if needed.</p>
 
 <p>Only then do I properly relax with food. By doing the practical stuff first, I can actually enjoy the break without worrying about getting back to a cold bike with dead phone battery and no clear plan for the next hundred miles.</p>
 
@@ -116,4 +116,4 @@ export const content = `<h2>The Ultimate Guide to Biker Cafés in the UK</h2>
 
 <p>Check your <a href="/packing-checklist">packing checklist</a> before you go—make sure you've got wet weather gear even if the forecast looks good, and pack layers because café temperatures vary wildly. Some are tropical inside, others barely warmer than outside.</p>
 
-<p>Most importantly, actually do it. Biker cafés are there to be used, roads are there to be ridden, and the best stories come from actually getting out rather than just planning. I'll likely see you at one of these stops—I'm usually the one with maps spread across the table, planning the next adventure over a brew and a bacon sandwich. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/best-viewpoints-motorcyclists-uk">Best Viewpoints for Motorcyclists in the UK: 20 Jaw-Dropping Stops</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more. Read our <a href="/guides/best-adventure-helmet">Best Adventure Helmet UK 2026 | VisorUp Touring Guide</a> guide for more. Read our <a href="/guides/best-jeans-for-motorcycle">Best Motorcycle Jeans for UK Touring (2026) | VisorUp</a> guide for more. Read our <a href="/guides/best-adventure-motorcycle-boots">Best Adventure Motorcycle Boots UK 2026 | VisorUp</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/touring-motorcycle-boots">Best Touring Motorcycle Boots for Long-Distance Rides</a> guide for more. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more.</p>`;
+<p>Most importantly, actually do it. Biker cafés are there to be used, roads are there to be ridden, and the best stories come from actually getting out rather than just planning. I'll likely see you at one of these stops—I'm usually the one with maps spread across the table, planning the next adventure over a brew and a bacon sandwich. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/best-viewpoints-motorcyclists-uk">Best Viewpoints for Motorcyclists in the UK: 20 Jaw-Dropping Stops</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more. Read our <a href="/guides/best-adventure-helmet">Best Adventure Helmet UK 2026 | VisorUp Touring Guide</a> guide for more. Read our <a href="/guides/best-jeans-for-motorcycle">Best Motorcycle Jeans for UK Touring (2026) | VisorUp</a> guide for more. Read our <a href="/guides/best-adventure-motorcycle-boots">Best Adventure Motorcycle Boots UK 2026 | VisorUp</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/touring-motorcycle-boots">Best Touring Motorcycle Boots for Long-Distance Rides</a> guide for more. Read our <a href="/guides/tank-bags-touring">Best Tank Bags for Motorcycle Touring in the UK</a> guide for more. Read our <a href="/guides/best-touring-motorcycle-under-5000-uk">Best Touring Motorcycle Under £5000 UK (2026 Guide)</a> guide for more.</p>`;

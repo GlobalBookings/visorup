@@ -1,8 +1,8 @@
 export const content = `<h2>Affordable Helmets That Won't Let You Down: A Touring Rider's Guide</h2>
 
-<p>I'll be straight with you—there's a lot of bollocks talked about motorcycle helmets. Either you've got gear snobs telling you that anything under £400 is a death trap, or budget riders insisting a £50 lid is just as good as a top-end Arai. The truth, as usual, sits somewhere in the middle, and after fifteen years touring British roads in everything from Scottish downpours to Yorkshire heatwaves, I've learned what actually matters when you're shopping for an affordable helmet.</p>
+<p>I'll be straight with you—there's a lot of bollocks talked about motorcycle helmets. Either you've got gear snobs telling you that anything under £400 is a death trap, or budget riders insisting a £50 lid is just as good as a top-end Arai. The truth, as usual, sits somewhere in the middle, and after fifteen years touring British roads in everything from Scottish downpours to Yorkshire heatwaves, I've learned what actually matters when you're shopping for an <a href="/guides/affordable-helmets-uk-touring">affordable</a> helmet.</p>
 
-<p>Let me start with the most important bit: affordable doesn't mean cheap, and it certainly doesn't mean unsafe. Every helmet sold legally in the UK must meet ECE 22.06 standards (the newest regulation as of 2024), which means even budget lids offer serious protection. What you're paying extra for in premium helmets is usually comfort features, noise reduction, better ventilation, and yes, sometimes just the badge on the side.</p>
+<p>Let me start with the most important bit: affordable doesn't mean cheap, and it certainly doesn't mean unsafe. Every helmet sold legally in the UK must meet ECE 22.06 standards (the newest regulation as of 2024), which means even budget lids offer serious protection. What you're paying extra for in premium <a href="/guides/affordable-motorcycle-helmets-uk">helmets</a> is usually comfort features, noise reduction, better ventilation, and yes, sometimes just the badge on the side.</p>
 
 <h2>What I Mean by "Affordable"</h2>
 
@@ -38,7 +38,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <h3>Interior Comfort and Removability</h3>
 
-<p>The lining needs to be removable and washable. Trust me on this. After a week touring in summer, your helmet will need a wash. I've owned helmets where the lining wasn't removable, and eventually they just became unpleasant to wear.</p>
+<p>The lining needs to be removable and washable. Trust me on this. After a week <a href="/guides/best-touring-helmets-uk">touring</a> in summer, your helmet will need a wash. I've owned helmets where the lining wasn't removable, and eventually they just became unpleasant to wear.</p>
 
 <p>The interior should feel snug without pressure points. Too loose and the helmet shifts around; too tight and you'll get headaches within an hour. Affordable helmets usually come with standard padding, but some offer different cheek pad thicknesses.</p>
 
@@ -52,7 +52,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <h3>Full-Face Helmets</h3>
 
-<p>These are your standard enclosed helmets, and they're what I wear most often. They offer the best aerodynamics and usually the quietest ride. For touring, they're brilliant—proven, simple, and effective. The downside is you need to take them off completely to have a drink or chat at a services stop.</p>
+<p>These are your standard enclosed helmets, and they're what I wear most often. They offer the <a href="/guides/best-motorcycle-roads-scotland">best</a> aerodynamics and usually the quietest ride. For touring, they're brilliant—proven, simple, and effective. The downside is you need to take them off completely to have a drink or chat at a services stop.</p>
 
 <h3>Flip-Front Helmets</h3>
 
@@ -184,4 +184,4 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <p>Before you head out on your next adventure—whether it's a quick blast through the Brecon Beacons or a proper touring week—make sure your helmet is up to the job. Check that SHARP rating, ensure your Pinlock is clean, and remember that the best helmet is the one you'll actually wear properly, every single ride.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and they don't care how much your helmet cost—only that you're wearing one that works.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and they don't care how much your helmet cost—only that you're wearing one that works. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;

@@ -32,11 +32,11 @@ export const content = `<h2>Adventure Helmets in the UK: What You Actually Need 
 
 <h3>The Anti-Fog Battle</h3>
 
-<p>Visor fogging is probably the single biggest issue I deal with in UK riding. Even the best adventure helmets can struggle when you're crawling through town in the rain with your breath going everywhere.</p>
+<p>Visor fogging is probably the single biggest issue I deal with in UK riding. Even the best adventure <a href="/guides/affordable-helmets-uk-touring">helmets</a> can struggle when you're crawling through town in the rain with your breath going everywhere.</p>
 
 <p>Look for helmets with Pinlock-ready visors as standard. I won't buy a helmet without this anymore. The dual-pane system works like double glazing for your face, and it's genuinely transformative on cold, wet rides. I've tested helmets on misty morning rides through the Yorkshire Dales, and the difference between Pinlock-equipped and standard visors is night and day.</p>
 
-<p>Some 2026 models now come with electrically heated visors, and while they're pricey, they're worth considering if you're a year-round rider. I've tried a couple, and they work brilliantly, though you need to factor in the battery pack.</p>
+<p>Some <a href="/guides/best-motorcycle-jeans-uk-touring">2026</a> models now come with electrically heated visors, and while they're pricey, they're worth considering if you're a year-round rider. I've tried a couple, and they work brilliantly, though you need to factor in the battery pack.</p>
 
 <h2>Key Features to Actually Care About</h2>
 
@@ -174,4 +174,4 @@ The best adventure helmet for British touring is the one that fits your head sha
 
 <p>If possible, test ride with your top choice before committing. Some shops offer trial periods. If yours doesn't, it's worth asking – the worst they can say is no.</p>
 
-<p>And remember: the best adventure helmet in the world is the one you'll actually want to wear for eight hours straight in changeable British weather. Find that helmet, and your tours across this brilliant island of ours will be all the better for it.</p>`;
+<p>And remember: the best adventure helmet in the world is the one you'll actually want to wear for eight hours straight in changeable British weather. Find that helmet, and your tours across this brilliant island of ours will be all the better for it. Read our <a href="/guides/adventure-touring-motorcycle-boots-guide">Adventure Touring Motorcycle Boots Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/affordable-motorcycle-helmets-uk-touring">Affordable Motorcycle Helmets for UK Touring 2026</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more.</p>`;
