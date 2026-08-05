@@ -16,7 +16,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <h2>Features That Matter for Touring (And Ones That Don't)</h2>
 
-<p>I've done overnight trips to the Highlands in January and week-long tours around Wales in summer. Here's what actually makes a difference when you're covering miles:</p>
+<p>I've done overnight trips to the Highlands in January and week-long tours around Wales in <a href="/guides/summer-motorcycle-gloves">summer</a>. Here's what actually makes a difference when you're covering miles:</p>
 
 <h3>Visor Quality and Anti-Fog</h3>
 
@@ -26,7 +26,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <h3>Ventilation</h3>
 
-<p>You might think ventilation doesn't matter in Britain. You'd be wrong. I've sweltered in a poorly ventilated helmet riding through the Cotswolds in July, and I've been grateful for closeable vents crossing the Pennines in February. Look for helmets with adjustable chin and crown vents. You don't need the elaborate systems on £500 lids, but you do need airflow you can control.</p>
+<p>You might think ventilation doesn't matter in Britain. You'd be wrong. I've sweltered in a poorly ventilated helmet riding through the Cotswolds in July, and I've been grateful for closeable vents crossing the Pennines in February. Look for helmets with adjustable chin and crown vents. You don't need the elaborate <a href="/guides/motorcycle-intercom-systems">systems</a> on £500 lids, but you do need airflow you can control.</p>
 
 <h3>Noise Levels</h3>
 
@@ -48,7 +48,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <h2>Helmet Types: What Works for Touring</h2>
 
-<p>You've got three main choices at this price point: full-face, flip-front (modular), and touring-specific designs.</p>
+<p>You've got three main choices at this price point: full-face, flip-front (<a href="/guides/modular-helmets-guide">modular</a>), and touring-specific designs.</p>
 
 <h3>Full-Face Helmets</h3>
 
@@ -178,10 +178,10 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <h2>Final Thoughts</h2>
 
-<p>The best affordable helmet is the one that fits properly, meets safety standards, and suits your touring style. I've ridden tens of thousands of miles in helmets costing under £200, and I'm still here with all my faculties intact. Modern helmet technology means you don't need to spend a fortune for excellent protection.</p>
+<p>The best affordable helmet is the one that fits properly, meets safety standards, and suits your touring style. I've ridden tens of thousands of miles in helmets costing under £200, and I'm still here with all my faculties intact. Modern helmet technology means you don't need to spend a fortune for excellent <a href="/guides/knee-armour-guide">protection</a>.</p>
 
 <p>Your budget is better spent on a helmet that fits perfectly than a premium model that doesn't. And whatever you save compared to a £500 lid can go toward better protective gear, or fuel for your next tour, or a night in a proper B&B instead of a Premier Inn.</p>
 
 <p>Before you head out on your next adventure—whether it's a quick blast through the Brecon Beacons or a proper touring week—make sure your helmet is up to the job. Check that SHARP rating, ensure your Pinlock is clean, and remember that the best helmet is the one you'll actually wear properly, every single ride.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and they don't care how much your helmet cost—only that you're wearing one that works. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and they don't care how much your helmet cost—only that you're wearing one that works. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more.</p>`;

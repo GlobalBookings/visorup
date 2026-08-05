@@ -52,7 +52,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <h3>Alpinestars Corozal Adventure Drystar</h3>
 
-<p>These are the boots I recommend to riders who are just getting into adventure touring. At around £200, they're affordable without being cheap, and the Drystar waterproofing actually works. I've tested them in proper British weather conditions, and they keep your feet dry.</p>
+<p>These are the boots I recommend to <a href="/guides/aa-breakdown-motorcycle-cover">riders</a> who are just getting into adventure touring. At around £200, they're affordable without being cheap, and the Drystar waterproofing actually works. I've tested them in proper British weather conditions, and they keep your feet dry.</p>
 
 <p>The comfort is decent straight out of the box, which isn't always the case with <a href="/guides/best-motorcycle-roads-england">motorcycle</a> boots. I've worn them on day trips through the Yorkshire Dales without any break-in period needed. The protection is solid for the price point, with CE certification and good coverage.</p>
 
@@ -128,4 +128,4 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>My current recommendation for most riders is the Sidi Adventure 2 if budget allows, or the TCX Drifter if you want something more affordable. Both have proven themselves on British roads in British weather. Both will keep your feet protected and dry. Both will last if you look after them.</p>
 
-<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/top-20-motorcycle-roads-uk">Top 20 Motorcycle Roads in the UK: The Definitive List</a> guide for more.</p>`;
+<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/top-20-motorcycle-roads-uk">Top 20 Motorcycle Roads in the UK: The Definitive List</a> guide for more. Read our <a href="/guides/best-adventure-helmet">Best Adventure Helmet UK 2026 | VisorUp Touring Guide</a> guide for more. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more.</p>`;

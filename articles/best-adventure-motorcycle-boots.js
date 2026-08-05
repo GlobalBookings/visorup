@@ -8,11 +8,11 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <h2>What Makes a Proper Adventure Boot?</h2>
 
-<p>Adventure boots sit in that sweet spot between full motocross kit and road racing boots. They need to handle the bike, handle the walk to the pub, and handle whatever British weather throws at them. Here's what I've found actually matters on the road:</p>
+<p>Adventure <a href="/guides/best-adventure-motorbike-boots">boots</a> sit in that sweet spot between full motocross kit and road racing boots. They need to handle the bike, handle the walk to the pub, and handle whatever British weather throws at them. Here's what I've found actually matters on the road:</p>
 
 <h3>Waterproofing That Actually Works</h3>
 
-<p>I don't care what the marketing says—if a boot isn't properly waterproof with a Gore-Tex or similar membrane, it's not an adventure boot for UK touring. I've been caught in rain on the A470 through Snowdonia that came down sideways, and I've ridden through fords in the Yorkshire Dales that were deeper than expected. Your feet need to stay dry for hours, not minutes.</p>
+<p>I don't care what the marketing says—if a boot isn't properly waterproof with a Gore-Tex or similar membrane, it's not an adventure boot for UK <a href="/guides/best-adventure-helmet">touring</a>. I've been caught in rain on the A470 through Snowdonia that came down sideways, and I've ridden through fords in the Yorkshire Dales that were deeper than expected. Your feet need to stay dry for hours, not minutes.</p>
 
 <p>The membrane needs to be sealed properly at the seams and, crucially, high enough up the boot. I've had boots that were waterproof up to about mid-shin, which is useless when you're riding through a proper downpour and water's running down your legs.</p>
 
@@ -122,4 +122,4 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>Whatever you choose, get boots that fit properly, break them in before your big tour, and maintain them well. Your feet carry you through every adventure, on and off the bike. Look after them, and they'll look after you through every mile of British roads, tracks, and footpaths ahead.</p>
 
-<p>Now get out there and put some miles on those boots. The roads are waiting. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more.</p>`;
+<p>Now get out there and put some miles on those boots. The roads are waiting. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/biker-cafes-uk">Best Biker Cafés UK 2026: Essential Stops & Hidden Gems</a> guide for more. Read our <a href="/guides/best-jeans-for-motorcycle">Best Motorcycle Jeans for UK Touring (2026) | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more.</p>`;

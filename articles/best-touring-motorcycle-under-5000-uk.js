@@ -14,7 +14,7 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <blockquote>"In the UK touring market, the bikes that depreciated hardest often make the best value buys – they were brilliant when new, and they're still brilliant now, just cheaper."</blockquote>
 
-<p>Luggage capability is essential. Either the bike needs a good rack system, or pannier mounts that don't cost a fortune. I've bodged luggage onto sports bikes before, and trust me, it's not worth the aggravation when you can buy something designed for it.</p>
+<p>Luggage capability is <a href="/guides/biker-cafes-uk">essential</a>. Either the bike needs a good rack system, or pannier mounts that don't cost a fortune. I've bodged luggage onto sports bikes before, and trust me, it's not worth the aggravation when you can buy something designed for it.</p>
 
 <h2>My Top Picks for Touring Under £5000</h2>
 
@@ -50,7 +50,7 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <h3>Yamaha Tracer 700 (2016-2019)</h3>
 
-<p>If you want something with a bit more character, the Tracer's where it's at. That CP2 engine (from the MT-07) has proper personality – it's a crossplane twin that feels engaging every time you crack the throttle. I've ridden these through the Yorkshire Dales and along the North Coast 500, and they never get boring.</p>
+<p>If you want something with a bit more character, the Tracer's where it's at. That CP2 engine (from the MT-07) has proper personality – it's a crossplane twin that feels engaging every time you crack the throttle. I've ridden these through the Yorkshire Dales and along the North <a href="/guides/best-motorcycle-roads-wales">Coast</a> 500, and they never get boring.</p>
 
 <p>The handling's brilliant for a touring bike. It's based on the MT-07, so it's got that lightweight, flickable chassis that makes B-road blasts an absolute joy. Weather protection is good, though like most in this class, an aftermarket screen helps on longer motorway stints.</p>
 
@@ -76,7 +76,7 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>The VFR's a proper do-it-all bike. V4 engine that's smooth as silk, gear-driven cams that sound glorious, and build quality that justifies Honda's reputation. Older VTEC models (2002-2013) are well within budget, and they're still brilliant bikes.</p>
 
-<p>The downside for pure touring is the riding position's more aggressive than adventure bikes. You're leaned further forward, which some people love and others find tiring on full days. I'm fine with it, but I've got mates who prefer the upright stance of ADV bikes.</p>
+<p>The downside for pure touring is the riding position's more aggressive than <a href="/guides/sport-touring-vs-adventure-bikes-which-is-better-for-uk-touring">adventure</a> bikes. You're leaned further forward, which some people love and others find tiring on full days. I'm fine with it, but I've got mates who prefer the upright stance of ADV bikes.</p>
 
 <p>Weather protection's good, and factory panniers are available secondhand fairly easily. These bikes look after you in British weather – heated grips were standard on many models, and the fairing keeps the worst off you.</p>
 
@@ -154,4 +154,4 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>Then get out there and actually use it. The best touring bike is the one you actually tour on. Start with weekend trips, build up to longer adventures, and use our route planning tools at <a href="/build-route">Build a Route</a> to discover brilliant roads across Britain.</p>
 
-<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more.</p>`;
+<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more.</p>`;

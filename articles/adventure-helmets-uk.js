@@ -14,9 +14,9 @@ export const content = `<h2>Adventure Helmets in the UK: What You Actually Need 
 
 <h3>The Peak Debate</h3>
 
-<p>That peak isn't just for show, though plenty of riders remove it for pure road use. I keep mine on about 80% of the time because it actually helps with the low winter sun we get in Britain – brilliant when you're heading west on the A66 late afternoon. At motorway speeds, though, it can catch the wind and create some neck strain on long hauls.</p>
+<p>That peak isn't just for show, though plenty of <a href="/guides/aa-breakdown-motorcycle-cover">riders</a> remove it for pure road use. I keep mine on about 80% of the time because it actually helps with the low winter sun we get in Britain – brilliant when you're heading west on the A66 late afternoon. At motorway speeds, though, it can catch the wind and create some neck strain on long hauls.</p>
 
-<p>Here's my honest take: if you're doing proper adventure touring that includes any off-road sections, keep the peak. If you're 95% tarmac and rarely venture off the beaten track, consider removing it or buying a helmet with a smaller, more road-focused peak.</p>
+<p>Here's my honest take: if you're doing proper adventure touring that includes any off-road sections, keep the <a href="/guides/peak-district-best-motorcycle-roads">peak</a>. If you're 95% tarmac and rarely venture off the beaten track, consider removing it or buying a helmet with a smaller, more road-focused peak.</p>
 
 <h2>British Weather and Adventure Helmets</h2>
 
@@ -98,7 +98,7 @@ The best adventure helmet for British touring is the one that fits your head sha
 
 <h2>Top Considerations for UK Touring</h2>
 
-<p>Based on years of riding British roads in British weather, here's what I prioritise:</p>
+<p>Based on years of riding British <a href="/guides/best-motorcycle-roads-england">roads</a> in British weather, here's what I prioritise:</p>
 
 <ul>
 <li><strong>Waterproofing around vents:</strong> Essential for our climate. Check reviews specifically mentioning rain performance.</li>
@@ -174,4 +174,4 @@ The best adventure helmet for British touring is the one that fits your head sha
 
 <p>If possible, test ride with your top choice before committing. Some shops offer trial periods. If yours doesn't, it's worth asking – the worst they can say is no.</p>
 
-<p>And remember: the best adventure helmet in the world is the one you'll actually want to wear for eight hours straight in changeable British weather. Find that helmet, and your tours across this brilliant island of ours will be all the better for it. Read our <a href="/guides/adventure-touring-motorcycle-boots-guide">Adventure Touring Motorcycle Boots Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/affordable-motorcycle-helmets-uk-touring">Affordable Motorcycle Helmets for UK Touring 2026</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more.</p>`;
+<p>And remember: the best adventure helmet in the world is the one you'll actually want to wear for eight hours straight in changeable British weather. Find that helmet, and your tours across this brilliant island of ours will be all the better for it. Read our <a href="/guides/adventure-touring-motorcycle-boots-guide">Adventure Touring Motorcycle Boots Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/affordable-motorcycle-helmets-uk-touring">Affordable Motorcycle Helmets for UK Touring 2026</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/welsh-passes-motorcycle-guide">Welsh Mountain Passes: The Complete Motorcycle Guide</a> guide for more.</p>`;

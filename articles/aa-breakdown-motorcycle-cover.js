@@ -1,8 +1,8 @@
 export const content = `<h2>AA Breakdown Motorcycle Cover: What You Actually Need to Know</h2>
 
-<p>I've been relying on breakdown cover for the better part of fifteen years touring Britain, and I'll tell you straight – there's nothing quite like the sinking feeling of your bike refusing to start in a lay-by somewhere on the A82, rain hammering down, with the nearest town twenty miles away. I've been there. That's when you realise breakdown cover isn't just paperwork – it's the difference between a minor hiccup and a properly ruined tour.</p>
+<p>I've been relying on <a href="/guides/breakdown-cover-rac-aa-motorcycles">breakdown</a> cover for the better part of fifteen years touring Britain, and I'll tell you straight – there's nothing quite like the sinking feeling of your bike refusing to start in a lay-by somewhere on the A82, rain hammering down, with the nearest town twenty miles away. I've been there. That's when you realise breakdown cover isn't just paperwork – it's the difference between a minor hiccup and a properly ruined tour.</p>
 
-<p>The AA's been around forever, and their motorcycle breakdown cover is one of the most comprehensive options available in 2026. But here's the thing – not all breakdown policies are created equal, especially when it comes to bikes. I've done my homework on this after a mate got caught out with cover that didn't include his trailer, and I'm going to walk you through everything you need to know before you hand over your money.</p>
+<p>The AA's been around forever, and their <a href="/guides/best-motorcycle-roads-scotland">motorcycle</a> breakdown cover is one of the most comprehensive options available in 2026. But here's the thing – not all breakdown policies are created equal, especially when it comes to bikes. I've done my homework on this after a mate got caught out with cover that didn't include his trailer, and I'm going to walk you through everything you need to know before you hand over your money.</p>
 
 <h2>Why Motorcycle-Specific Cover Actually Matters</h2>
 
@@ -14,7 +14,7 @@ export const content = `<h2>AA Breakdown Motorcycle Cover: What You Actually Nee
 
 <h3>What's Actually Included in AA Motorcycle Cover</h3>
 
-<p>The AA offers several tiers of motorcycle breakdown cover in 2026, and understanding what you're getting is crucial. I've used their services multiple times, so let me break down what's actually in the package versus what's marketing fluff.</p>
+<p>The AA offers several tiers of motorcycle breakdown cover in <a href="/guides/best-touring-helmets-uk">2026</a>, and understanding what you're getting is crucial. I've used their services multiple times, so let me break down what's actually in the package versus what's marketing fluff.</p>
 
 <p>At the basic level, you get roadside assistance. That means if your bike packs in, they'll come out and try to fix it there and then. I've had them sort a snapped clutch cable on the M6, replace a blown fuse near Keswick, and even help diagnose a fuel system issue in a Tesco car park in Fort William. Their patrols carry a surprising amount of kit for bikes – cables, fuses, spark plugs, even chain links.</p>
 
@@ -152,4 +152,4 @@ export const content = `<h2>AA Breakdown Motorcycle Cover: What You Actually Nee
 
 <p>For 2026, with fuel prices what they are and more of us doing staycation tours around the UK, breakdown cover makes even more sense. We're riding further, exploring more remote roads, and pushing our bikes harder. The AA's network, their motorcycle-specific training, and their comprehensive coverage options make them a solid choice for serious tourers.</p>
 
-<p>Get the full package with relay and home start if you can afford it. Save the breakdown number in your phone. Then get out there and ride Britain properly, knowing that if your bike lets you down, you're not stuck. That's what breakdown cover is really about – freedom to explore without the fear of being stranded. And that's worth every penny.</p>`;
+<p>Get the full package with relay and home start if you can afford it. Save the breakdown number in your phone. Then get out there and ride Britain properly, knowing that if your bike lets you down, you're not stuck. That's what breakdown cover is really about – freedom to explore without the fear of being stranded. And that's worth every penny. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;

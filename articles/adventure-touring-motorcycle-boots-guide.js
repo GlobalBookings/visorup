@@ -64,7 +64,7 @@ export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actuall
 
 <h2>Protection Standards and Certification</h2>
 
-<p>In 2026, most quality boots meet CE certification standards. Look for CE Level 2 protection where possible – it's been tested and proven. The certification should cover ankle protection, toe box reinforcement, and crush resistance.</p>
+<p>In 2026, most quality boots meet CE certification standards. Look for CE Level 2 protection where possible – it's been tested and proven. The certification should <a href="/guides/aa-breakdown-motorcycle-cover">cover</a> ankle protection, toe box reinforcement, and crush resistance.</p>
 
 <p>But here's what the certifications don't tell you: real-world protection also comes from how well the boot stays on your foot in a crash. I've seen boots fly off in accidents because the closure system failed. A properly secured boot with slightly less armor is safer than a heavily armored boot that comes off.</p>
 
@@ -138,4 +138,4 @@ export const content = `<h2>Adventure Touring Motorcycle Boots: What You Actuall
 
 <p>If you're new to touring, start with a solid mid-range option and learn what you like and dislike. As you gain experience, you'll know exactly what features matter for your riding style. Check out our <a href="/guides/essential-motorcycle-touring-gear">essential touring gear guide</a> for how boots fit into your overall kit.</p>
 
-<p>And most importantly: get out and ride. The best boots in the world are worthless if they're sitting in your garage. Britain's <a href="/guides/best-motorcycle-roads-lake-district-2026">roads</a> are waiting, rain or shine. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more.</p>`;
+<p>And most importantly: get out and ride. The best boots in the world are worthless if they're sitting in your garage. Britain's <a href="/guides/best-motorcycle-roads-lake-district-2026">roads</a> are waiting, rain or shine. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/welsh-passes-motorcycle-guide">Welsh Mountain Passes: The Complete Motorcycle Guide</a> guide for more. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more. Read our <a href="/guides/cat-and-fiddle-road-guide">Cat and Fiddle Road (A537): The Complete Motorcycle Guide</a> guide for more.</p>`;

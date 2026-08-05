@@ -14,7 +14,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>Before we talk about specific helmets, let's get this straight: every helmet you consider must meet current safety standards. In the UK, that means ECE 22.06 certification at minimum. I won't recommend anything that doesn't tick this box, regardless of price.</p>
 
-<p>I've seen riders try to save money with uncertified helmets from online marketplaces. Don't. Just don't. Your head is worth more than the fifty quid you might save. I once met a rider in Fort William who'd bought a cheap uncertified helmet online—it literally fell apart during a minor spill in the Highlands. He was lucky. Very lucky.</p>
+<p>I've seen <a href="/guides/aa-breakdown-motorcycle-cover">riders</a> try to save money with uncertified helmets from online marketplaces. Don't. Just don't. Your head is worth more than the fifty quid you might save. I once met a rider in Fort William who'd bought a cheap uncertified helmet online—it literally fell apart during a minor spill in the Highlands. He was lucky. Very lucky.</p>
 
 <h3>What About SHARP Ratings?</h3>
 
@@ -54,7 +54,7 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <p>I used a Caberg Drift Evo for an entire season, including a full run of the <a href="/routes/island-to-highlands">Island to Highlands route</a>. Priced around £150-170, it's Italian-made and carries a four-star SHARP rating. The sun visor is brilliant for those rare British sunny days, and the ventilation is surprisingly good.</p>
 
-<p>The visor seal held up through Welsh rain and Scottish drizzle. My only complaint was the weight—it's not the lightest helmet, and I felt it on my neck after a full day's ride. But for the price, it's hard to fault.</p>
+<p>The visor seal held up through <a href="/guides/welsh-passes-motorcycle-guide">Welsh</a> rain and Scottish drizzle. My only complaint was the weight—it's not the lightest helmet, and I felt it on my neck after a full day's ride. But for the price, it's hard to fault.</p>
 
 <h3>HJC i70</h3>
 
@@ -128,4 +128,4 @@ The best affordable helmet isn't the cheapest one you can find—it's the one th
 
 <p>A well-chosen affordable helmet from a reputable manufacturer, properly fitted and maintained, will keep you safe and comfortable on British roads for years. I'd rather see you invest £180 in a good helmet and £70 in decent gloves than blow £500 on a premium lid while riding with cheap gloves that won't protect your hands.</p>
 
-<p>Your next step? Identify your budget, check SHARP ratings for helmets in your price range, find a shop where you can try multiple options, and make your decision based on fit first, features second. Then get out there and ride—whether it's exploring new territory or tackling routes you've had your eye on. The helmet on your head matters less than the adventures you're having while wearing it. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/nc500-7-day-itinerary">NC500 in 7 Days: The Complete Motorcycle Experience</a> guide for more.</p>`;
+<p>Your next step? Identify your budget, check SHARP ratings for helmets in your price range, find a shop where you can try multiple options, and make your decision based on fit first, features second. Then get out there and ride—whether it's exploring new territory or tackling routes you've had your eye on. The helmet on your head matters less than the adventures you're having while wearing it. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/nc500-7-day-itinerary">NC500 in 7 Days: The Complete Motorcycle Experience</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more. Read our <a href="/guides/cornwall-coastal-motorcycle-route">Cornwall Coastal Motorcycle Route: Land's End to the Tamar</a> guide for more.</p>`;
