@@ -44,12 +44,12 @@ export const content = `<h2>AA Breakdown Motorcycle Cover: What You Actually Nee
 
 <h3>What's Not Covered (and It's Important)</h3>
 
-<p>The AA won't recover you if you've run out of fuel on a motorway – that's illegal and you'll get done by traffic police, not helped by the AA. They also won't help if you've been riding off-road and got stuck, unless you've got specific off-road cover. Track day breakdowns? Not covered. Mechanical failures due to lack of maintenance? They can refuse if it's obvious.</p>
+<p>The AA won't recover you if you've run out of fuel on a motorway – that's illegal and you'll get done by traffic police, not helped by the AA. They also won't help if you've been <a href="/guides/solo-motorcycle-touring-safety-guide">riding</a> off-road and got stuck, unless you've got specific off-road cover. Track day breakdowns? Not covered. Mechanical failures due to lack of maintenance? They can refuse if it's obvious.</p>
 
 <p>I've also seen them turn away riders who've modified their bikes significantly without declaring it. If you're running a custom setup or serious performance modifications, ring them first and make sure it's noted on your policy.</p>
 
 <blockquote>
-<p>Breakdown cover isn't just insurance against mechanical failure – it's peace of mind that lets you ride confidently to the far corners of Britain, knowing you can get home even if your bike can't.</p>
+<p>Breakdown cover isn't just <a href="/guides/motorcycle-touring-insurance-guide">insurance</a> against mechanical failure – it's peace of mind that lets you ride confidently to the far corners of Britain, knowing you can get home even if your bike can't.</p>
 </blockquote>
 
 <h2>Real-World Breakdown Scenarios on British Roads</h2>
@@ -152,4 +152,4 @@ export const content = `<h2>AA Breakdown Motorcycle Cover: What You Actually Nee
 
 <p>For 2026, with fuel prices what they are and more of us doing staycation tours around the UK, breakdown cover makes even more sense. We're riding further, exploring more remote roads, and pushing our bikes harder. The AA's network, their motorcycle-specific training, and their comprehensive coverage options make them a solid choice for serious tourers.</p>
 
-<p>Get the full package with relay and home start if you can afford it. Save the breakdown number in your phone. Then get out there and ride Britain properly, knowing that if your bike lets you down, you're not stuck. That's what breakdown cover is really about – freedom to explore without the fear of being stranded. And that's worth every penny. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;
+<p>Get the full package with relay and home start if you can afford it. Save the breakdown number in your phone. Then get out there and ride Britain properly, knowing that if your bike lets you down, you're not stuck. That's what breakdown cover is really about – freedom to explore without the fear of being stranded. And that's worth every penny. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/how-to-use-gpx-files-motorcycle">How to Use GPX Files for Motorcycle Touring: Complete Guide</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more.</p>`;

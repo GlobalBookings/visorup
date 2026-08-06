@@ -44,7 +44,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>Not everyone wants to drop £300+ on boots, and the TCX Baja Mid proves you don't have to. I bought these for a mate who was doing his first longer tour, and he's still wearing them two years later.</p>
 
-<p>They're not quite as refined as the Formas—the waterproofing isn't Gore-Tex level and you'll notice your feet getting a bit damp after several hours in heavy rain. But for British spring and summer touring, with decent waterproof socks as backup, they're brilliant value.</p>
+<p>They're not quite as refined as the Formas—the waterproofing isn't Gore-Tex level and you'll notice your feet getting a bit damp after several hours in heavy rain. But for British spring and <a href="/guides/summer-motorcycle-gloves">summer</a> touring, with decent waterproof socks as backup, they're brilliant value.</p>
 
 <p>The protection is CE-rated and feels solid. I've borrowed them for a day's riding through the Peak <a href="/guides/best-motorcycle-roads-lake-district-2026">District</a> and found them comfortable enough, with good feel for the controls. The sole pattern works well on mixed surfaces, and they breathe better than fully waterproof boots on hot days.</p>
 
@@ -54,7 +54,7 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>The Gore-Tex liner is bomber-proof. I've ridden through Scottish rain that would sink lesser boots and my feet stayed completely dry. The ankle protection includes proper armor that can be adjusted for fit, and there's a reinforced shin plate that's saved me from luggage-related injuries more than once.</p>
 
-<p>What justifies the price for me is the build quality and comfort. These boots have done over 15,000 miles and they're showing barely any wear. The buckle system is better than cheaper alternatives—easier to adjust with gloves on, and more secure in a slide. They're also genuinely comfortable for walking, which matters when you're exploring towns or doing the tourist bits between rides.</p>
+<p>What justifies the price for me is the build quality and comfort. These boots have done over 15,000 miles and they're showing barely any wear. The buckle system is better than cheaper alternatives—easier to adjust with gloves on, and more secure in a slide. They're also genuinely comfortable for walking, which matters when you're exploring towns or doing the tourist bits between <a href="/guides/touring-motorcycle-boots">rides</a>.</p>
 
 <h3>The Lightweight Option: Alpinestars Corozal</h3>
 
@@ -122,4 +122,4 @@ export const content = `<h2>Best Adventure Motorcycle Boots for UK Touring in 20
 
 <p>Whatever you choose, get boots that fit properly, break them in before your big tour, and maintain them well. Your feet carry you through every adventure, on and off the bike. Look after them, and they'll look after you through every mile of British roads, tracks, and footpaths ahead.</p>
 
-<p>Now get out there and put some miles on those boots. The roads are waiting. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/biker-cafes-uk">Best Biker Cafés UK 2026: Essential Stops & Hidden Gems</a> guide for more. Read our <a href="/guides/best-jeans-for-motorcycle">Best Motorcycle Jeans for UK Touring (2026) | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more.</p>`;
+<p>Now get out there and put some miles on those boots. The roads are waiting. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/biker-cafes-uk">Best Biker Cafés UK 2026: Essential Stops & Hidden Gems</a> guide for more. Read our <a href="/guides/best-jeans-for-motorcycle">Best Motorcycle Jeans for UK Touring (2026) | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/adventure-motorcycle-boots">Adventure Motorcycle Boots for On and Off-Road UK Touring</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;

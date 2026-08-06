@@ -1,16 +1,16 @@
 export const content = `<h2>Why I Switched to a Flip-Up Helmet for UK Touring</h2>
 
-<p>I'll be honest with you – I resisted flip-up helmets for years. Thought they were just for commuters and Sunday riders who couldn't be bothered with a proper full-face. Then I spent a miserable week touring Scotland in November 2025, stopping every hour to wrestle my full-face off in service stations just to grab a coffee or check my map properly. That trip converted me.</p>
+<p>I'll be honest with you – I resisted flip-up helmets for years. Thought they were just for commuters and Sunday riders who couldn't be bothered with a proper full-face. Then I spent a miserable week <a href="/guides/best-motorcycle-jeans-uk-touring">touring</a> Scotland in November 2025, stopping every hour to wrestle my full-face off in service stations just to grab a coffee or check my map properly. That trip converted me.</p>
 
 <p>These days, I won't tour Britain without a decent flip-up. The convenience factor is massive when you're stopping frequently to check routes, deal with our unpredictable weather, or just have a proper conversation at a viewpoint without shouting through your lid. But here's the thing – not all flip-ups are created equal, and choosing the wrong one can leave you with a noisy, leaky helmet that'll make you regret every mile of the <a href="/routes/nc500-complete">NC500</a>.</p>
 
-<p>I've tested seven different flip-up helmets over the past eighteen months across everything from commuting around Manchester to multi-day tours through Wales and the Highlands. Let me walk you through what actually matters when you're choosing one for British touring conditions.</p>
+<p>I've tested seven different flip-up <a href="/guides/affordable-motorcycle-helmets-uk-guide">helmets</a> over the past eighteen months across everything from commuting around Manchester to multi-day tours through Wales and the Highlands. Let me walk you through what actually matters when you're choosing one for British touring conditions.</p>
 
 <h2>What Makes a Flip-Up Different (And Why That Matters)</h2>
 
 <p>The fundamental difference is obvious – the chin bar flips up. But the engineering challenges that creates are significant. You've got moving parts, additional weight, potential weak points, and more opportunities for wind noise and water ingress. A cheap flip-up can be worse than a basic full-face in every measurable way except convenience.</p>
 
-<p>The mechanism itself needs to be robust. I've ridden helmets where the flip-up action became stiff and awkward after six months of British weather. Salt spray from winter roads, rain getting into the pivot points, general wear – it all takes a toll. The better helmets use sealed mechanisms with proper weather protection.</p>
+<p>The mechanism itself needs to be robust. I've ridden helmets where the flip-up action became stiff and awkward after six months of British weather. Salt spray from winter <a href="/guides/best-motorcycle-roads-lake-district">roads</a>, rain getting into the pivot points, general wear – it all takes a toll. The better helmets use sealed mechanisms with proper weather protection.</p>
 
 <p>Weight distribution is another factor. That chin bar adds bulk up top, which can create neck fatigue on longer rides. I really noticed this on my ride up to the <a href="/routes/island-to-highlands">Island to Highlands route</a> – eight hours in a poorly balanced flip-up left me properly knackered. The best designs keep the weight centered and use lightweight materials where they can.</p>
 
@@ -26,7 +26,7 @@ export const content = `<h2>Why I Switched to a Flip-Up Helmet for UK Touring</h
 
 <h3>Ventilation You Can Actually Use</h3>
 
-<p>British weather means you need a ventilation system that works across a massive temperature range. I've worn the same helmet in 2°C Highland rain and 28°C summer heat in the South Downs. The best systems let you dial it in precisely.</p>
+<p>British weather means you need a ventilation system that works across a massive temperature range. I've worn the same helmet in 2°C Highland rain and 28°C summer heat in the South Downs. The <a href="/guides/best-motorcycle-roads-scotland">best</a> systems let you dial it in precisely.</p>
 
 <p>Look for multiple adjustable vents – chin, crown, and exhaust ports at minimum. I particularly value chin vents that actually direct air onto the visor to help with demisting. Too many helmets have decorative vents that don't actually move much air.</p>
 
@@ -158,4 +158,4 @@ export const content = `<h2>Why I Switched to a Flip-Up Helmet for UK Touring</h
 
 <p>Before your next tour, whether you're heading to Wales, Scotland, or tackling the full <a href="/routes/nc500-complete">NC500</a>, make sure your helmet suits the job. Use our <a href="/packing-checklist">packing checklist</a> to make sure you've got spare visors and cleaning supplies sorted as well.</p>
 
-<p>Get the right flip-up sorted now, break it in with some shorter rides, and you'll be properly set for whatever British weather throws at you this season. See you out there.</p>`;
+<p>Get the right flip-up sorted now, break it in with some shorter rides, and you'll be properly set for whatever British weather throws at you this season. See you out there. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more.</p>`;

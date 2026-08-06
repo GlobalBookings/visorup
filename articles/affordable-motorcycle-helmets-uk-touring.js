@@ -154,7 +154,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <h2>My Current Affordable Helmet Setup</h2>
 
-<p>For transparency, I currently tour with a Caberg Jackal I bought for £189 in 2024. It's a flip-front with a four-star SHARP rating, integrated sun visor, and Pinlock as standard. I've done thousands of miles in it, including a complete NC500 loop and multiple trips through the Lakes and Peak District.</p>
+<p>For transparency, I currently tour with a Caberg Jackal I bought for £189 in 2024. It's a flip-front with a four-star SHARP rating, integrated sun visor, and Pinlock as standard. I've done thousands of miles in it, including a complete NC500 loop and multiple trips through the Lakes and Peak <a href="/guides/best-motorcycle-roads-lake-district">District</a>.</p>
 
 <p>Is it perfect? No. It's noisier than my mate's £400 Shoei, and the visor mechanism feels less refined. But it's comfortable for full-day rides, the ventilation works well, and I trust it completely. That's what matters for touring.</p>
 
@@ -182,6 +182,6 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down: A Tourin
 
 <p>Your budget is better spent on a helmet that fits perfectly than a premium model that doesn't. And whatever you save compared to a £500 lid can go toward better protective gear, or fuel for your next tour, or a night in a proper B&B instead of a Premier Inn.</p>
 
-<p>Before you head out on your next adventure—whether it's a quick blast through the Brecon Beacons or a proper touring week—make sure your helmet is up to the job. Check that SHARP rating, ensure your Pinlock is clean, and remember that the best helmet is the one you'll actually wear properly, every single ride.</p>
+<p>Before you head out on your next <a href="/guides/sport-touring-vs-adventure-bikes-which-is-better-for-uk-touring">adventure</a>—whether it's a quick blast through the Brecon Beacons or a proper touring week—make sure your helmet is up to the job. Check that SHARP rating, ensure your Pinlock is clean, and remember that the best helmet is the one you'll actually wear properly, every single ride.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and they don't care how much your helmet cost—only that you're wearing one that works. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and they don't care how much your helmet cost—only that you're wearing one that works. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/cotswolds-motorcycle-touring-routes">Cotswolds Motorcycle Touring Routes: Honey-Stone Villages and Rolling Hills</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more.</p>`;

@@ -70,7 +70,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>This is crucial, and nobody talks about it enough. New boots need breaking in before you attempt a long tour. I learned this the painful way on a trip to the Scottish Borders in brand-new boots. By day two, I had blisters on both heels and could barely walk.</p>
 
-<p>Wear them around the house for a week. Take short rides to the shops. Walk to the pub and back. Let the leather soften and mould to your feet before you commit to eight hours in the saddle. Use leather conditioner if needed, but check the manufacturer's guidance first—some treatments can affect waterproof membranes.</p>
+<p>Wear them around the house for a week. Take short <a href="/guides/touring-motorcycle-boots">rides</a> to the shops. Walk to the pub and back. Let the leather soften and mould to your feet before you commit to eight hours in the saddle. Use leather conditioner if needed, but check the manufacturer's guidance first—some treatments can affect waterproof membranes.</p>
 
 <blockquote>The best adventure boot is the one you'll actually wear all day, every day of your tour. Comfort and waterproofing trump everything else when you're riding British roads.</blockquote>
 
@@ -94,7 +94,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <h3>Scottish Highlands and Islands</h3>
 
-<p>You need maximum waterproofing and good ankle support. The roads up there can be rough, the weather is unpredictable, and you might end up pushing your bike through gravel. I wouldn't attempt the NC500 in anything less than fully waterproof boots with proper protection. The Sidi Adventure 2 or Forma Adventure Low are my picks for Highland touring.</p>
+<p>You need maximum waterproofing and good ankle support. The roads up there can be rough, the <a href="/guides/textile-touring-jackets">weather</a> is unpredictable, and you might end up pushing your bike through gravel. I wouldn't attempt the NC500 in anything less than fully waterproof boots with proper protection. The Sidi Adventure 2 or Forma Adventure Low are my picks for Highland touring.</p>
 
 <h3>Welsh Mountain Roads</h3>
 
@@ -106,7 +106,7 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <h3>Summer Touring</h3>
 
-<p>Even in summer, I wear waterproof boots. British summer rain is still rain, and I've been soaked in July more times than I can count. Some boots offer better ventilation than others—the Alpinestars have decent airflow—but waterproofing remains my priority. If it's genuinely hot and dry (rare, but it happens), I'll open the vents and accept slightly warm feet rather than risk wet ones later.</p>
+<p>Even in <a href="/guides/summer-motorcycle-gloves">summer</a>, I wear waterproof boots. British summer rain is still rain, and I've been soaked in July more times than I can count. Some boots offer better ventilation than others—the Alpinestars have decent airflow—but waterproofing remains my priority. If it's genuinely hot and dry (rare, but it happens), I'll open the vents and accept slightly warm feet rather than risk wet ones later.</p>
 
 <h2>Common Mistakes I've Made (So You Don't Have To)</h2>
 
@@ -128,4 +128,4 @@ export const content = `<h2>Best Adventure Motorbike Boots: What Actually Works 
 
 <p>My current recommendation for most riders is the Sidi Adventure 2 if budget allows, or the TCX Drifter if you want something more affordable. Both have proven themselves on British roads in British weather. Both will keep your feet protected and dry. Both will last if you look after them.</p>
 
-<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/top-20-motorcycle-roads-uk">Top 20 Motorcycle Roads in the UK: The Definitive List</a> guide for more. Read our <a href="/guides/best-adventure-helmet">Best Adventure Helmet UK 2026 | VisorUp Touring Guide</a> guide for more. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more.</p>`;
+<p>Now get out there and ride. The roads are waiting, and with the right boots, you'll actually enjoy every mile of them. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/top-20-motorcycle-roads-uk">Top 20 Motorcycle Roads in the UK: The Definitive List</a> guide for more. Read our <a href="/guides/best-adventure-helmet">Best Adventure Helmet UK 2026 | VisorUp Touring Guide</a> guide for more. Read our <a href="/guides/adventure-helmets-uk">Adventure Helmets UK: Tourer's Guide 2026 | VisorUp</a> guide for more. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/adventure-helmets-review">Adventure Helmets Review: Best Dual-Sport Lids for UK Touring</a> guide for more. Read our <a href="/guides/adventure-motorcycle-boots">Adventure Motorcycle Boots for On and Off-Road UK Touring</a> guide for more. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;

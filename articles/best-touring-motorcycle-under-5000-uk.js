@@ -22,7 +22,7 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>I'm putting this first because it's probably the most sensible choice, and I've covered serious miles on these. You'll find 2012-2015 models comfortably within budget, often with luggage already fitted. The V-twin engine is bulletproof – I've known V-Stroms with over 80,000 miles still running sweet.</p>
 
-<p>The weather protection is brilliant, the seat's good for 300-mile days, and the upright position means you can actually see over hedgerows on B-roads. I've taken one through Welsh valleys in torrential rain and up to the Highlands in August (which also meant rain, let's be honest), and it just gets on with the job.</p>
+<p>The weather protection is brilliant, the seat's good for 300-mile days, and the upright position means you can actually see over hedgerows on B-roads. I've taken one through <a href="/guides/welsh-passes-motorcycle-guide">Welsh</a> valleys in torrential rain and up to the Highlands in August (which also meant rain, let's be honest), and it just gets on with the job.</p>
 
 <p>The adjustable screen works well, panniers are cheap and plentiful, and every small-town garage can work on it. It's not exciting, but excitement at 3pm on day four of a tour when you're tired and wet isn't what you want. You want to arrive. The V-Strom does that.</p>
 
@@ -142,9 +142,9 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>I've done the NC500 on a V-Strom. Brilliant. I've done Welsh loops on a VFR. Also brilliant. I've crossed to Scotland on a CB500X in February (less brilliant, but the bike was fine, the weather was horrific).</p>
 
-<p>What matters more is sorting your gear properly, planning routes that match your riding style, and maintaining the bike well. A £3,000 V-Strom that's properly serviced and set up will give you better tours than a £5,000 bike you've neglected.</p>
+<p>What matters more is sorting your gear properly, planning <a href="/guides/cotswolds-motorcycle-touring-routes">routes</a> that match your riding style, and maintaining the bike well. A £3,000 V-Strom that's properly serviced and set up will give you better tours than a £5,000 bike you've neglected.</p>
 
-<p>British weather means waterproofs that actually work, gear that layers properly, and accepting that some days will be wet. Scottish summer tours mean midges – seriously, pack repellent. English bank holiday tours mean traffic – plan routes that avoid motorways when possible.</p>
+<p>British weather means waterproofs that actually work, gear that layers properly, and accepting that some days will be wet. <a href="/guides/scottish-borders-motorcycle-roads">Scottish</a> summer tours mean midges – seriously, pack repellent. English bank holiday tours mean traffic – plan routes that avoid motorways when possible.</p>
 
 <h2>Final Thoughts and Next Steps</h2>
 
@@ -154,4 +154,4 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>Then get out there and actually use it. The best touring bike is the one you actually tour on. Start with weekend trips, build up to longer adventures, and use our route planning tools at <a href="/build-route">Build a Route</a> to discover brilliant roads across Britain.</p>
 
-<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more.</p>`;
+<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/cat-and-fiddle-road-guide">Cat and Fiddle Road (A537): The Complete Motorcycle Guide</a> guide for more.</p>`;
