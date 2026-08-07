@@ -1,6 +1,6 @@
 export const content = `<h2>Why I Switched to a Flip-Up Helmet (And You Might Too)</h2>
 
-<p>I'll be honest—I resisted flip-up helmets for years. Thought they were just for commuters who couldn't be bothered with a proper full-face. Then I spent a week touring Scotland in February, stopping every hour to check the map, grabbing fuel in sideways rain, and generally wrestling my full-face on and off until my ears felt like they'd been through a cheese grater. That's when I caved and bought my first flip-up.</p>
+<p>I'll be honest—I resisted flip-up <a href="/guides/best-flip-up-helmet">helmets</a> for years. Thought they were just for commuters who couldn't be bothered with a proper full-face. Then I spent a week touring Scotland in February, stopping every hour to check the map, grabbing fuel in sideways rain, and generally wrestling my full-face on and off until my ears felt like they'd been through a cheese grater. That's when I caved and bought my first flip-up.</p>
 
 <p>Fast forward to 2026, and I wouldn't tour Britain without one. Whether I'm navigating the hairpins on the <a href="/routes/nc500-complete">NC500</a> or just popping into a services on the M6, being able to flip up the chin bar without removing my helmet has genuinely changed how I ride. Let me walk you through what actually matters when choosing one.</p>
 
@@ -24,7 +24,7 @@ export const content = `<h2>Why I Switched to a Flip-Up Helmet (And You Might To
 
 <p>British weather is basically designed to fog up your visor. You'll be warm and breathing hard inside the helmet while it's 4°C and chucking it down outside—perfect conditions for turning your view into frosted glass.</p>
 
-<p>I won't ride without a Pinlock anti-fog insert anymore. It's not optional for UK touring, it's essential. Most decent flip-ups come with Pinlock-ready visors, but check before buying. I've been caught out before with helmets that claimed "anti-fog coating" which lasted about three Welsh drizzles.</p>
+<p>I won't ride without a Pinlock anti-fog insert anymore. It's not optional for UK <a href="/guides/best-motorcycle-jeans-uk-touring">touring</a>, it's essential. Most decent flip-ups come with Pinlock-ready visors, but check before buying. I've been caught out before with helmets that claimed "anti-fog coating" which lasted about three Welsh drizzles.</p>
 
 <p>Also worth checking: can you change the visor easily? I've stood in Tebay services car park in horizontal rain trying to swap a cracked visor while my hands went numb. Quick-release mechanisms are your friend.</p>
 
@@ -32,11 +32,11 @@ export const content = `<h2>Why I Switched to a Flip-Up Helmet (And You Might To
 
 <p>Flip-up helmets are heavier than traditional full-face lids—that's just physics. The mechanism adds weight, and it's often concentrated at the front of the helmet. A poorly balanced flip-up will have your neck aching after a few hours of riding.</p>
 
-<p>I've found the sweet spot is between 1,600g and 1,800g for a medium-sized helmet. Anything much over 1,900g starts to feel like you're balancing a bowling ball on your head during a full day's ride. The best manufacturers use carbon fibre or fibreglass composites to keep weight down without sacrificing protection.</p>
+<p>I've found the sweet spot is between 1,600g and 1,800g for a medium-sized helmet. Anything much over 1,900g starts to feel like you're balancing a bowling ball on your head during a full day's ride. The <a href="/guides/best-motorcycle-roads-scotland">best</a> manufacturers use carbon fibre or fibreglass composites to keep weight down without sacrificing protection.</p>
 
 <h3>Ventilation That Actually Works</h3>
 
-<p>Riding through the Lake District on a summer afternoon, you need airflow. Climbing over the Cairngorms in March, you need to shut that airflow down completely. British riding conditions demand versatility.</p>
+<p>Riding through the Lake <a href="/guides/peak-district-best-motorcycle-roads">District</a> on a summer afternoon, you need airflow. Climbing over the Cairngorms in March, you need to shut that airflow down completely. British riding conditions demand versatility.</p>
 
 <p>Look for helmets with multiple adjustable vents—at least one on the chin bar, one or two on top, and rear exhaust vents. I prefer vents I can operate with gloves on, because I'm not stopping every time the weather changes (which in Britain can be every twenty minutes).</p>
 
@@ -134,7 +134,7 @@ The best flip-up helmet is the one that fits your head perfectly, meets P/J cert
 
 <h3>Regular Cleaning</h3>
 
-<p>British roads are filthy—diesel spills, salt in winter, dead insects in summer. I clean my visor after every long ride and the helmet interior monthly. Use proper helmet cleaner, not household products that can degrade the shell materials.</p>
+<p>British <a href="/guides/best-motorcycle-roads-england">roads</a> are filthy—diesel spills, salt in winter, dead insects in summer. I clean my visor after every long ride and the helmet interior monthly. Use proper helmet cleaner, not household products that can degrade the shell materials.</p>
 
 <p>The flip mechanism needs occasional attention too. I use a damp cloth to clean around the pivot points and occasionally apply a tiny amount of PTFE lubricant to keep it operating smoothly. Don't use WD-40 or similar—it can damage the helmet materials.</p>
 

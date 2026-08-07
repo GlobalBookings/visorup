@@ -2,13 +2,13 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>I'll be straight with you – I've spent more on a Friday night curry than I have on some of the helmets I've toured Britain in. And you know what? I'm still here, riding strong, with my brain intact and my wallet not completely emptied.</p>
 
-<p>The helmet market in 2026 is brilliant for us budget-conscious tourers. You don't need to spend £500 to get a lid that'll protect you on the A82 through Glencoe or keep the rain off your face during a downpour on the North Coast 500. I've tested dozens of affordable helmets across thousands of miles, from the Scottish Highlands to the Welsh valleys, and I'm going to share what actually matters when you're shopping on a budget.</p>
+<p>The helmet market in 2026 is brilliant for us budget-conscious tourers. You don't need to spend £500 to get a lid that'll protect you on the A82 through Glencoe or keep the rain off your face during a downpour on the North Coast 500. I've tested dozens of <a href="/guides/affordable-helmets-uk-touring">affordable</a> helmets across thousands of miles, from the Scottish Highlands to the Welsh valleys, and I'm going to share what actually matters when you're shopping on a budget.</p>
 
 <h2>What "Affordable" Actually Means</h2>
 
 <p>Let's get this sorted first. When I talk about affordable helmets, I'm looking at the £80-£200 range. Anything under £80 makes me nervous – you're usually sacrificing something important. Above £200, you're starting to pay for premium features that, while nice, aren't essential for most of us doing weekend tours and summer trips.</p>
 
-<p>I've ridden with £100 helmets and £400 helmets on the same day, swapping at service stations, and honestly? On a wet Tuesday riding through the Lake District, both kept my head dry and protected. The expensive one was quieter and lighter, sure, but the affordable one did the job it needed to do.</p>
+<p>I've ridden with £100 helmets and £400 helmets on the same day, swapping at service stations, and honestly? On a wet Tuesday riding through the <a href="/guides/best-motorcycle-roads-lake-district">Lake</a> District, both kept my head dry and protected. The expensive one was quieter and lighter, sure, but the affordable one did the job it needed to do.</p>
 
 <h2>Safety Standards You Can't Compromise On</h2>
 
@@ -60,7 +60,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Full-Face Helmets</h3>
 
-<p>These are my go-to for most touring. Better aerodynamics, maximum protection, and usually the best value in the affordable range. If you're doing motorway miles or anything spirited through the Welsh mountain roads, this is what you want.</p>
+<p>These are my go-to for most touring. Better aerodynamics, maximum protection, and usually the <a href="/guides/best-motorcycle-roads-scotland">best</a> value in the affordable range. If you're doing motorway miles or anything spirited through the Welsh mountain roads, this is what you want.</p>
 
 <p>Budget picks I've personally used: LS2 FF320 Stream (£120), Caberg Jackal (£140), HJC i70 (£180). All have served me well across thousands of miles. The HJC i70 is particularly good if you stretch to £180 – it's got an internal sun visor, excellent ventilation, and it's surprisingly quiet for the price.</p>
 
@@ -103,7 +103,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 <p>My rule: buy the best helmet you can afford, but don't feel pressured to spend more than £200 unless you're doing serious mileage or have specific needs. The returns diminish quickly above that price point for occasional tourers.</p>
 
 <blockquote>
-<p>A well-chosen £150 helmet with proper certification, good fit, and a Pinlock visor will serve you better on British roads than an ill-fitting £400 premium lid. Spend your money on the right features, not just the highest price tag.</p>
+<p>A well-chosen £150 helmet with proper certification, good fit, and a Pinlock visor will serve you better on British <a href="/guides/best-motorcycle-roads-lake-district-2026">roads</a> than an ill-fitting £400 premium lid. Spend your money on the right features, not just the highest price tag.</p>
 </blockquote>
 
 <h2>My Top Affordable Helmets for 2026</h2>
@@ -130,7 +130,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>I buy most of my gear from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> these days. They've got a good range of affordable helmets, clear sizing information, and their return policy is solid if the fit isn't right. Plus, they often have sales that can knock 20-30% off already reasonable prices.</p>
 
-<p>Physical shops are worth visiting too, especially for your first helmet or if you're trying a new brand. Sportsbike Shop has a physical location, but also check out local motorcycle gear shops. The staff usually ride themselves and can offer practical advice.</p>
+<p>Physical shops are worth visiting too, especially for your first helmet or if you're trying a new brand. Sportsbike Shop has a physical location, but also check out local <a href="/guides/best-motorcycle-jeans-uk-touring">motorcycle</a> gear shops. The staff usually ride themselves and can offer practical advice.</p>
 
 <p>End-of-season sales (September-October and February-March) are when I hunt for bargains. Last year's graphics on this year's helmet? I couldn't care less if it saves me £50.</p>
 
