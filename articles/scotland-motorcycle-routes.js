@@ -1,12 +1,12 @@
 export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best Roads North of the Border</h2>
 
-<p>I'll be straight with you – Scotland is the best place to ride a motorcycle in Britain. I've spent years exploring these roads, and every time I cross that border heading north, I get the same buzz. The scenery, the roads, the sheer variety of riding experiences you can pack into a week (or a weekend if you're keen) is unmatched.</p>
+<p>I'll be straight with you – Scotland is the <a href="/guides/best-motorcycle-roads-scotland">best</a> place to ride a motorcycle in Britain. I've spent years exploring these roads, and every time I cross that border heading north, I get the same buzz. The scenery, the roads, the sheer variety of riding experiences you can pack into a week (or a weekend if you're keen) is unmatched.</p>
 
-<p>In 2026, Scotland's motorcycle routes are as brilliant as ever, though you'll notice a few changes – more electric charging points at scenic spots, improved road surfaces on some Highland sections, and thankfully, better mobile coverage in previously blank areas. But the core experience? That's timeless.</p>
+<p>In 2026, <a href="/guides/best-campsites-scotland-bikers">Scotland</a>'s motorcycle routes are as brilliant as ever, though you'll notice a few changes – more electric charging points at scenic spots, improved road surfaces on some Highland sections, and thankfully, better mobile coverage in previously blank areas. But the core experience? That's timeless.</p>
 
 <h2>Why Scotland's Different for Motorcycle Touring</h2>
 
-<p>Scotland isn't just "more countryside" – it's a completely different riding experience. The roads are quieter, the corners are longer and more flowing, and you'll go stretches where you won't see another vehicle for twenty minutes. That's proper touring territory.</p>
+<p>Scotland isn't just "more countryside" – it's a completely different riding experience. The roads are quieter, the corners are longer and more flowing, and you'll go stretches where you won't see another vehicle for twenty minutes. That's proper <a href="/guides/best-touring-helmets-uk">touring</a> territory.</p>
 
 <p>I've ridden across most of Britain, and Scotland consistently delivers three things: dramatic scenery that actually makes you stop and stare, roads that reward smooth, flowing riding rather than aggressive pace, and a genuine sense of adventure. You're not just ticking off miles – you're exploring.</p>
 
@@ -22,7 +22,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <h3>The North Coast 500</h3>
 
-<p>Everyone knows the NC500 now – it's become the poster child for Scottish motorcycle touring. Yes, it's busier than it was five years ago, but there's a reason it's popular. The route delivers everything: coastal roads, mountain passes, proper remote sections, and varied terrain.</p>
+<p>Everyone knows the NC500 now – it's become the poster child for Scottish <a href="/guides/motorcycle-routes-scotland">motorcycle</a> touring. Yes, it's busier than it was five years ago, but there's a reason it's popular. The route delivers everything: coastal roads, mountain passes, proper remote sections, and varied terrain.</p>
 
 <p>I've covered this in detail in my <a href="/routes/nc500-complete">complete NC500 guide</a>, but here's the quick version: 516 miles starting and finishing in Inverness, taking you around the north coast of Scotland. The west coast section from Durness down to Ullapool is the highlight for me – dramatic, flowing roads with the sea on one side and mountains on the other.</p>
 
@@ -88,7 +88,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <h3>The Grand Scottish Loop (7-10 Days)</h3>
 
-<p>If you've got a week or more, do the full Scottish experience. Start in Edinburgh or Glasgow, head up the A82 through Glen Coe to Fort William, across to the Isle of Skye for a day or two, back to the mainland and up to Ullapool, round the NC500, then back down through the Cairngorms and the A9 to Edinburgh. That's 1,000-1,500 miles depending on detours, and it covers most of Scotland's highlights.</p>
+<p>If you've got a week or more, do the full Scottish experience. Start in Edinburgh or Glasgow, head up the A82 through Glen Coe to Fort William, across to the <a href="/guides/isle-of-skye-motorcycle-guide">Isle</a> of Skye for a day or two, back to the mainland and up to Ullapool, round the NC500, then back down through the Cairngorms and the A9 to Edinburgh. That's 1,000-1,500 miles depending on detours, and it covers most of Scotland's highlights.</p>
 
 <h3>The West Coast Weekend (2-3 Days)</h3>
 

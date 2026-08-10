@@ -6,13 +6,13 @@ export const content = `<h2>Why I Switched to a Flip-Up Helmet (And You Might To
 
 <h2>What Makes a Flip-Up Helmet Different</h2>
 
-<p>A flip-up helmet—sometimes called a modular helmet—has a chin bar that lifts up, converting it from a full-face into something resembling an open-face helmet. The mechanism varies between models, but they all give you quick access to your face without removing the entire lid.</p>
+<p>A <a href="/guides/best-flip-front-helmet">flip</a>-up helmet—sometimes called a modular helmet—has a chin bar that lifts up, converting it from a full-face into something resembling an open-face helmet. The mechanism varies between models, but they all give you quick access to your face without removing the entire lid.</p>
 
 <p>Here's the thing though: not all flip-ups are created equal, and some of the differences only become obvious after you've ridden a few thousand miles in British weather. I've tested enough of these now to know what separates a decent lid from one that'll have you cursing at fuel stops.</p>
 
 <h3>P/J Rating vs J Rating: What You Actually Need to Know</h3>
 
-<p>Every flip-up helmet sold in the UK must meet ECE 22.06 certification (as of 2024, and still current in 2026). But here's where it gets interesting: some helmets are P/J rated, meaning they're certified for use both with the chin bar down (P for protective) and up (J for jet-style). Others are only J-rated, which means you're technically only supposed to ride with the chin bar down.</p>
+<p>Every flip-up helmet sold in the UK must meet ECE 22.06 certification (as of 2024, and still current in <a href="/guides/best-motorcycle-roads-lake-district">2026</a>). But here's where it gets interesting: some helmets are P/J rated, meaning they're certified for use both with the chin bar down (P for protective) and up (J for jet-style). Others are only J-rated, which means you're technically only supposed to ride with the chin bar down.</p>
 
 <p>In practice? I always ride with it down anyway—the wind pressure at motorway speeds makes riding chin-up uncomfortable and dangerous. But that P/J rating matters for one key reason: it means the helmet's been tested to ensure the flip mechanism won't accidentally release in a crash. That's worth having.</p>
 
@@ -64,7 +64,7 @@ export const content = `<h2>Why I Switched to a Flip-Up Helmet (And You Might To
 
 <h3>Sun Visor</h3>
 
-<p>An internal drop-down sun visor is genuinely useful for British riding. Our weather's unpredictable—you'll ride out of cloud cover into bright sunshine, then back into gloom five miles later. Being able to drop a sun visor without changing visors or fumbling with clip-on sunglasses makes life much easier.</p>
+<p>An internal drop-down sun visor is genuinely useful for British riding. Our weather's unpredictable—you'll ride out of cloud <a href="/guides/aa-breakdown-motorcycle-cover">cover</a> into bright sunshine, then back into gloom five miles later. Being able to drop a sun visor without changing visors or fumbling with clip-on sunglasses makes life much easier.</p>
 
 <p>Check that it drops down far enough to actually block low sun. Some are too shallow and leave you squinting anyway. Also make sure the mechanism is smooth—I've had visors that stuck halfway, which is worse than useless.</p>
 
@@ -110,7 +110,7 @@ The best flip-up helmet is the one that fits your head perfectly, meets P/J cert
 
 <p>If you're planning green lanes or proper off-road sections, consider whether a flip-up is actually the right choice. The mechanisms can get clogged with mud, and the extra weight affects handling when standing on the pegs. That said, the convenience at fuel stops in remote areas is brilliant—I've used mine extensively on the rougher sections of the NC500.</p>
 
-<p>If you do go flip-up for adventure riding, prioritise simple mechanisms and good weather sealing. Complicated latches and exposed mechanisms don't mix well with Scottish mud.</p>
+<p>If you do go flip-up for <a href="/guides/adventure-helmets-uk">adventure</a> riding, prioritise simple mechanisms and good weather sealing. Complicated latches and exposed mechanisms don't mix well with Scottish mud.</p>
 
 <h2>Fitting: Getting It Right Matters More Than Brand</h2>
 
@@ -185,4 +185,4 @@ The best flip-up helmet is the one that fits your head perfectly, meets P/J cert
 
 <p>The best helmet is the one you'll wear every time you ride, that fits properly, keeps you safe, and doesn't make you miserable after a few hours. For me, that's a mid-range flip-up with Pinlock, decent ventilation, and a comfortable fit. Yours might be different—and that's fine. Just make sure you're making an informed choice based on real-world needs, not marketing hype.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and with the right helmet, they're going to be a lot more comfortable.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and with the right helmet, they're going to be a lot more comfortable. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more.</p>`;

@@ -22,9 +22,9 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <h3>The A82: Glen Coe and Loch Lomond</h3>
 
-<p>The A82 from Glasgow to Fort William is probably the most ridden motorcycle route in Scotland, and it earns that popularity. The section through Glen Coe is properly spectacular—mountains rising on both sides, the road flowing through the valley with enough bends to keep things interesting.</p>
+<p>The A82 from Glasgow to <a href="/guides/glencoe-fort-william-guide">Fort</a> William is probably the most ridden motorcycle route in Scotland, and it earns that popularity. The section through Glen Coe is properly spectacular—mountains rising on both sides, the road flowing through the valley with enough bends to keep things interesting.</p>
 
-<p>I won't pretend it's perfect. The surface can be patchy, especially after winter freeze-thaw cycles. There are average speed cameras through some sections. And yes, you'll encounter tourist traffic, particularly around Loch Lomond in summer.</p>
+<p>I won't pretend it's perfect. The surface can be patchy, especially after winter freeze-thaw cycles. There are average speed <a href="/guides/action-cameras-motorcycle">cameras</a> through some sections. And yes, you'll encounter tourist traffic, particularly around Loch Lomond in summer.</p>
 
 <p>But ride it early morning or on a clear evening, and you'll understand why this is essential Scotland. The drama of the landscape makes every other consideration worthwhile. Stop at the Green Welly Stop in Tyndrum—proper biker-friendly café with decent food and always interesting bikes in the car park.</p>
 
@@ -40,7 +40,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>The A719 and A77 down the Ayrshire coast offer brilliant sea views and flowing corners, but for me, the real magic happens when you take ferries to the islands. The routes from Ardrossan to Arran, or from Oban to Mull, open up riding that feels genuinely remote.</p>
 
-<p>On Mull, the road from Craignure to Fionnphort is single-track with passing places. It's slow riding, but the landscape is incredible and you'll see more wildlife than vehicles. Skye has become busier since the bridge opened, but the roads around the north of the island—particularly up to the Old Man of Storr—are still fantastic.</p>
+<p>On Mull, the road from Craignure to Fionnphort is single-track with passing places. It's slow riding, but the landscape is incredible and you'll see more wildlife than vehicles. <a href="/guides/isle-of-skye-motorcycle-guide">Skye</a> has become busier since the bridge opened, but the roads around the north of the island—particularly up to the Old Man of Storr—are still fantastic.</p>
 
 <p>For a proper adventure, consider my <a href="/routes/island-to-highlands">island to highlands route</a>, which links island hopping with mainland mountain passes.</p>
 
@@ -58,7 +58,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>Let's address this head-on: Scottish weather is unpredictable, and you will get wet. I've had glorious sunshine in October and horizontal rain in July. The key is not trying to avoid bad weather—it's being properly equipped to ride through it.</p>
 
-<p>May and September are my favourite months. Longer days than you'd think (especially in May when it barely gets dark), fewer midges, and lighter traffic. June through August offers the best weather odds but expect traffic and higher accommodation prices. October can be brilliant but days are short and many facilities close for winter.</p>
+<p>May and September are my favourite months. Longer days than you'd think (especially in May when it barely gets dark), fewer midges, and lighter traffic. June through August offers the <a href="/guides/best-motorcycle-roads-scotland">best</a> weather odds but expect traffic and higher accommodation prices. October can be brilliant but days are short and many facilities close for winter.</p>
 
 <p>I never ride Scotland without quality waterproofs. Not "good enough for a shower" gear—proper, tested, will-keep-you-dry-in-a-deluge kit. After too many miserable days in failed waterproofs, I invested in decent gear from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a>, and it's transformed my Scottish tours. Being dry makes the difference between epic adventure and endurance test.</p>
 
@@ -72,7 +72,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <h3>Accommodation Strategies</h3>
 
-<p>Wild camping is legal in Scotland under the access rights, and I've had some brilliant nights pitched up in lay-bys or quiet spots with million-pound views. But realistically, after a full day's riding, I usually prefer a proper bed.</p>
+<p><a href="/guides/torridon-wester-ross-guide">Wild</a> camping is legal in Scotland under the access rights, and I've had some brilliant nights pitched up in lay-bys or quiet spots with million-pound views. But realistically, after a full day's riding, I usually prefer a proper bed.</p>
 
 <p>Book ahead in summer, especially around the NC500 and popular areas. Small hotels and B&Bs often have secure parking and are brilliant for drying gear. Bunkhouses and hostels work well for budget tours and you'll meet other riders.</p>
 

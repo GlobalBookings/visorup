@@ -40,7 +40,7 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <h3>Honda CB500X (2013-2018)</h3>
 
-<p>Honda reliability in a lightweight, easy-to-ride package. I rode a 2015 model for a whole summer, and while it's not the fastest thing on the road, it's one of the most pleasant. The parallel-twin is smooth, economical (I regularly saw 70+ mpg), and utterly dependable.</p>
+<p>Honda reliability in a lightweight, easy-to-ride package. I rode a 2015 model for a whole <a href="/guides/summer-motorcycle-gloves">summer</a>, and while it's not the fastest thing on the road, it's one of the most pleasant. The parallel-twin is smooth, economical (I regularly saw 70+ mpg), and utterly dependable.</p>
 
 <p>It's properly light compared to the bigger adventure bikes, which makes it brilliant for newer tourers or anyone who doesn't fancy wrestling a 250kg monster around petrol station forecourts. The low seat height means shorter <a href="/guides/best-motorcycle-roads-england">riders</a> can get both feet flat down, which makes a real difference when you're tired at the end of a long day.</p>
 
@@ -62,7 +62,7 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>Stretching the budget a bit here, but if you can find a well-maintained early 800, they're fantastic bikes. The triple engine is an absolute peach – smooth, powerful enough for two-up touring, and that Triumph sound is properly addictive.</p>
 
-<p>I borrowed a mate's 2012 XC for a week in Scotland, and it was brilliant. Comfortable, planted on everything from motorways to muddy forest tracks, and the build quality felt genuinely premium. The shaft drive on some models is lovely for touring – no chain maintenance on multi-day trips.</p>
+<p>I borrowed a mate's 2012 XC for a week in <a href="/guides/motorcycle-routes-scotland">Scotland</a>, and it was brilliant. Comfortable, planted on everything from motorways to muddy forest tracks, and the build quality felt genuinely premium. The shaft drive on some models is lovely for touring – no chain maintenance on multi-day trips.</p>
 
 <p>Weather protection is excellent, the screen adjusts easily (even with gloves on), and the riding position is spot-on for long days. These were £10k+ bikes new, so getting one for half that feels like proper value.</p>
 
@@ -122,7 +122,7 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>Second, get the suspension set up for your weight and typical load. Most bikes come with suspension set for an average 75kg rider, and very few of us match that when we're in full gear with luggage. Proper suspension setup transformed my last tour – the bike handled better and was way more comfortable.</p>
 
-<p>Third, consider a tank bag. Having your phone, snacks, and camera easily accessible makes a huge difference on tour. I use mine constantly – maps, taking photos at viewpoints, grabbing a cereal bar without stopping.</p>
+<p>Third, consider a <a href="/guides/tank-bags-touring">tank</a> bag. Having your phone, snacks, and camera easily accessible makes a huge difference on tour. I use mine constantly – maps, taking photos at viewpoints, grabbing a cereal bar without stopping.</p>
 
 <p>Use our <a href="/packing-checklist">touring packing checklist</a> to make sure you've got everything covered before your first big trip.</p>
 
@@ -154,4 +154,4 @@ export const content = `# Best Touring Motorcycle Under £5000 UK: My Top Picks 
 
 <p>Then get out there and actually use it. The best touring bike is the one you actually tour on. Start with weekend trips, build up to longer adventures, and use our route planning tools at <a href="/build-route">Build a Route</a> to discover brilliant roads across Britain.</p>
 
-<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/cat-and-fiddle-road-guide">Cat and Fiddle Road (A537): The Complete Motorcycle Guide</a> guide for more. Read our <a href="/guides/snake-pass-motorcycle-guide">Snake Pass (A57) Motorcycle Guide: The Pennine Classic</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more.</p>`;
+<p>See you out there. And if you spot me on my V-Strom somewhere in the Highlands, give us a nod. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/cat-and-fiddle-road-guide">Cat and Fiddle Road (A537): The Complete Motorcycle Guide</a> guide for more. Read our <a href="/guides/snake-pass-motorcycle-guide">Snake Pass (A57) Motorcycle Guide: The Pennine Classic</a> guide for more. Read our <a href="/guides/a-roads-vs-b-roads-touring">A-Roads vs B-Roads: UK Motorcycle Touring Strategy</a> guide for more. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/scotland-motorcycle-routes">Scotland Motorcycle Routes: Best Roads & Tours 2026</a> guide for more. Read our <a href="/guides/touring-motorcycle-boots">Best Touring Motorcycle Boots for Long-Distance Rides</a> guide for more.</p>`;

@@ -1,6 +1,6 @@
 export const content = `<h2>Affordable Helmets That Won't Let You Down on British Roads</h2>
 
-<p>I'll be straight with you – I've spent more on a Friday night curry than I have on some of the helmets I've toured Britain in. And you know what? I'm still here, riding strong, with my brain intact and my wallet not completely emptied.</p>
+<p>I'll be straight with you – I've spent more on a Friday night curry than I have on some of the <a href="/guides/affordable-motorcycle-helmets-uk">helmets</a> I've toured Britain in. And you know what? I'm still here, riding strong, with my brain intact and my wallet not completely emptied.</p>
 
 <p>The helmet market in 2026 is brilliant for us budget-conscious tourers. You don't need to spend £500 to get a lid that'll protect you on the A82 through Glencoe or keep the rain off your face during a downpour on the North Coast 500. I've tested dozens of <a href="/guides/affordable-helmets-uk-touring">affordable</a> helmets across thousands of miles, from the Scottish Highlands to the Welsh valleys, and I'm going to share what actually matters when you're shopping on a budget.</p>
 
@@ -12,7 +12,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h2>Safety Standards You Can't Compromise On</h2>
 
-<p>This is non-negotiable, mate. Every helmet you consider must have current ECE 22.06 certification as of 2026. This is the European standard that replaced ECE 22.05, and it's significantly more rigorous. I don't care if a helmet costs £50 or £500 – if it hasn't got that sticker, it doesn't go on my head.</p>
+<p>This is non-negotiable, mate. Every helmet you consider must have current ECE 22.06 certification as of <a href="/guides/affordable-motorcycle-helmets-uk-touring">2026</a>. This is the European standard that replaced ECE 22.05, and it's significantly more rigorous. I don't care if a helmet costs £50 or £500 – if it hasn't got that sticker, it doesn't go on my head.</p>
 
 <p>Some affordable helmets also carry the British Standard BS 6658, which is reassuring but less common these days. The key thing to understand is that ECE 22.06 tests helmets for rotational impacts, not just straight-on crashes, which is closer to what actually happens when you come off.</p>
 
@@ -26,7 +26,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h2>Features That Matter on British Roads</h2>
 
-<p>Right, let's talk about what you actually need when you're touring Britain. I've learned this through experience – often uncomfortable, soggy experience.</p>
+<p>Right, let's talk about what you actually need when you're <a href="/guides/adventure-touring-motorcycle-boots-guide">touring</a> Britain. I've learned this through experience – often uncomfortable, soggy experience.</p>
 
 <h3>Visor Quality and Anti-Fog Systems</h3>
 
@@ -74,7 +74,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Adventure/Dual-Sport Helmets</h3>
 
-<p>If you're mixing tarmac with green lanes or you just like the adventure aesthetic, these are worth considering. The peak is controversial – some love it, some find it catches the wind on motorways. I'm in the latter camp, but on a calm day riding through the Cairngorms, there's nothing quite like it.</p>
+<p>If you're mixing tarmac with green lanes or you just like the <a href="/guides/adventure-helmets-uk">adventure</a> aesthetic, these are worth considering. The peak is controversial – some love it, some find it catches the wind on motorways. I'm in the latter camp, but on a calm day riding through the Cairngorms, there's nothing quite like it.</p>
 
 <p>Affordable adventure helmets are a tough market. Most decent ones start around £180. The LS2 MX436 Pioneer is the budget king here at about £160, though you might need to budget for a proper adventure visor with Pinlock capability.</p>
 
@@ -98,7 +98,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Falling for False Economies</h3>
 
-<p>I've seen riders buy the cheapest helmet they can find, then replace it every year because the lining compresses, the visor scratches, or it falls apart. Over three years, they spend more than if they'd bought a decent £150 helmet once.</p>
+<p>I've seen <a href="/guides/aa-breakdown-motorcycle-cover">riders</a> buy the cheapest helmet they can find, then replace it every year because the lining compresses, the visor scratches, or it falls apart. Over three years, they spend more than if they'd bought a decent £150 helmet once.</p>
 
 <p>My rule: buy the best helmet you can afford, but don't feel pressured to spend more than £200 unless you're doing serious mileage or have specific needs. The returns diminish quickly above that price point for occasional tourers.</p>
 

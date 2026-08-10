@@ -2,17 +2,17 @@ export const content = `<h2>Why I Switched to a Flip-Front Helmet for Touring</h
 
 <p>I'll be straight with you: after years of wrestling with full-face helmets at petrol stations and ferry terminals, I made the switch to a flip-front helmet in 2024, and I'm not going back. If you're doing any serious touring in the UK—whether that's the <a href="/routes/nc500-complete">NC500</a> or just regular runs through Wales—a good flip-front (or modular, if you want to be technical) changes everything.</p>
 
-<p>The thing is, British touring isn't like continental riding where you might go hours between stops. We're dealing with changeable weather, frequent fuel stops, ferry crossings to Scottish islands, and let's be honest—we like our brew stops. Being able to flip up your helmet to chat with a fellow rider, sort out your navigation, or grab a quick drink without removing the whole lid is genuinely brilliant.</p>
+<p>The thing is, British <a href="/guides/best-motorcycle-jeans-uk-touring">touring</a> isn't like continental riding where you might go hours between stops. We're dealing with changeable weather, frequent fuel stops, ferry crossings to Scottish islands, and let's be honest—we like our brew stops. Being able to flip up your helmet to chat with a fellow rider, sort out your navigation, or grab a quick drink without removing the whole lid is genuinely brilliant.</p>
 
 <p>But here's where it gets tricky: not all flip-fronts are created equal. I've tested quite a few over the past couple of years, and there's a massive difference between a proper touring flip-front and the budget options that'll have you wishing you'd spent more after your first motorway run in the rain.</p>
 
 <h2>What Makes a Flip-Front Helmet Right for UK Touring</h2>
 
-<p>Before we get into specific helmets, let me share what I've learned matters most when you're actually out on British roads. This isn't showroom theory—this is what makes a difference when you're heading up the A82 through Glencoe in April drizzle or battling crosswinds on the A66.</p>
+<p>Before we get into specific <a href="/guides/best-flip-up-helmet">helmets</a>, let me share what I've learned matters most when you're actually out on British roads. This isn't showroom theory—this is what makes a difference when you're heading up the A82 through Glencoe in April drizzle or battling crosswinds on the A66.</p>
 
 <h3>The Seal Matters More Than You Think</h3>
 
-<p>I've ridden through some absolute howlers in my flip-front, and the quality of the chinbar seal is everything. A poor seal means wind noise that'll drive you mad by Birmingham, and worse, rain ingress that'll have you soaked from the neck up. The best helmets use a double seal system that keeps weather out even when you're doing 70mph in horizontal rain on the M6.</p>
+<p>I've ridden through some absolute howlers in my flip-front, and the quality of the chinbar seal is everything. A poor seal means wind noise that'll drive you mad by Birmingham, and worse, rain ingress that'll have you soaked from the neck up. The <a href="/guides/best-motorcycle-roads-scotland">best</a> helmets use a double seal system that keeps weather out even when you're doing 70mph in horizontal rain on the M6.</p>
 
 <h3>Weight Distribution Changes Everything</h3>
 
@@ -40,7 +40,7 @@ export const content = `<h2>Why I Switched to a Flip-Front Helmet for Touring</h
 
 <p>The Neotec 3 landed in late 2024 and it's a proper step up from the previous model. Shoei listened to feedback about the Neotec 2's weight and shaved off about 50 grams while improving the ventilation. At around £500-580, it's in similar territory to the Schuberth price-wise.</p>
 
-<p>What I like about the Neotec 3 is the field of vision—it's expansive, which matters when you're navigating tight Scottish single-track roads or dealing with unpredictable British traffic. The chin vent actually works (not all do), and I've found the ventilation system generally more effective than the Schuberth in summer riding.</p>
+<p>What I like about the Neotec 3 is the field of vision—it's expansive, which matters when you're navigating tight Scottish single-track <a href="/guides/best-motorcycle-roads-england">roads</a> or dealing with unpredictable British traffic. The chin vent actually works (not all do), and I've found the ventilation system generally more effective than the Schuberth in summer riding.</p>
 
 <p>The Pinlock system is excellent, and the visor mechanism has a lovely positive click to it. My only gripe is that the flip mechanism requires slightly more effort than the Schuberth, which you notice when you're flipping it up and down frequently during town riding.</p>
 
@@ -110,7 +110,7 @@ export const content = `<h2>Why I Switched to a Flip-Front Helmet for Touring</h
 
 <h2>My Actual Recommendation</h2>
 
-<p>If I'm being completely honest about what I'd buy with my own money today in 2026, it comes down to your riding style and budget.</p>
+<p>If I'm being completely honest about what I'd buy with my own money today in <a href="/guides/best-flip-up-motorcycle-helmet">2026</a>, it comes down to your riding style and budget.</p>
 
 <p>For serious touring—10,000+ miles a year, multi-day trips, Scottish highlands in questionable weather—I'd choose the Schuberth C5. The comfort over long distances and the noise reduction justify the cost. It's what I wear, and after a full year of hard use, I'd buy another.</p>
 
