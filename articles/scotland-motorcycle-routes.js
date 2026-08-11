@@ -16,7 +16,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <p>I always pack proper waterproofs – not those emergency packaway things, but actual touring-grade kit. I sorted myself out with decent gear from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> after one particularly soggy trip through Glen Coe taught me the value of staying dry. Your riding improves massively when you're comfortable.</p>
 
-<p>The wind's another factor. Coastal routes and high passes can be properly blustery, especially on the west coast and up north. Keep your speed sensible on exposed sections, and if you're on a tall adventure bike, expect to get pushed around a bit.</p>
+<p>The wind's another factor. Coastal routes and high passes can be properly blustery, especially on the <a href="/guides/torridon-wester-ross-guide">west</a> coast and up north. Keep your speed sensible on exposed sections, and if you're on a tall adventure bike, expect to get pushed around a bit.</p>
 
 <h2>The Essential Routes You Can't Miss</h2>
 
@@ -30,11 +30,11 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <h3>The A82 Through Glen Coe and Along Loch Loness</h3>
 
-<p>The A82 is Scotland's backbone route, and the section from Glasgow up through Glen Coe to Fort William and beyond to Inverness is properly special. I've ridden this road dozens of times, and it never gets boring.</p>
+<p>The A82 is Scotland's backbone route, and the section from Glasgow up through Glen Coe to <a href="/guides/glencoe-fort-william-guide">Fort</a> William and beyond to Inverness is properly special. I've ridden this road dozens of times, and it never gets boring.</p>
 
 <p>Glen Coe itself is dramatic – steep mountains either side, the road flowing through the valley floor. It's not particularly twisty, but it's atmospheric, especially early morning or late evening when the light's doing interesting things with the peaks.</p>
 
-<p>Watch out for tourists stopping randomly for photos, especially in summer. The road surface is generally good, though there are some rough patches after winter – councils have been improving these, but Scotland's freeze-thaw cycle is harsh on tarmac.</p>
+<p>Watch out for tourists stopping randomly for photos, especially in <a href="/guides/summer-motorcycle-gloves">summer</a>. The road surface is generally good, though there are some rough patches after winter – councils have been improving these, but Scotland's freeze-thaw cycle is harsh on tarmac.</p>
 
 <h3>The Applecross Peninsula and Bealach na Bà</h3>
 
@@ -132,4 +132,4 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <p>And when you're up there, riding through Glen Coe in perfect light, or cresting the Bealach na Bà with the Atlantic spread out below you, or having the road to yourself along some remote Highland single-track, remember this: you're experiencing Britain's finest motorcycle touring. Make the most of it.</p>
 
-<p><strong>Action step:</strong> Pick one route from this guide, block out the dates in your calendar right now, and start planning properly. Scotland's waiting, and 2026's the perfect year to finally do it properly.</p>`;
+<p><strong>Action step:</strong> Pick one route from this guide, block out the dates in your calendar right now, and start planning properly. Scotland's waiting, and 2026's the perfect year to finally do it properly. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more.</p>`;

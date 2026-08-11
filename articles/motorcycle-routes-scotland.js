@@ -1,12 +1,12 @@
 export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Riding North of the Border</h2>
 
-<p>I'll be straight with you—Scotland has ruined me for riding anywhere else in Britain. I've spent the last few seasons exploring every corner of this magnificent country on two wheels, and I keep coming back. The roads are quieter, the scenery is more dramatic, and there's a raw quality to the riding that you just don't get down south.</p>
+<p>I'll be straight with you—<a href="/guides/scotland-motorcycle-routes">Scotland</a> has ruined me for riding anywhere else in Britain. I've spent the last few seasons exploring every corner of this magnificent country on two wheels, and I keep coming back. The roads are quieter, the scenery is more dramatic, and there's a raw quality to the riding that you just don't get down south.</p>
 
 <p>Whether you're planning your first Scottish tour or you're a seasoned rider looking for fresh tarmac, I've put together everything I've learned from countless miles in the saddle up here. This isn't just a list of roads—it's the practical stuff you actually need to know before you point your bike north.</p>
 
 <h2>Why Scotland is Britain's Best Motorcycle Touring Destination</h2>
 
-<p>Look, I love Wales. The Lake District has its moments. But Scotland operates on a different scale entirely. You've got over 790 islands, mountain passes that'll make your heart race, coastal roads where you're riding between sea and sky, and enough variety to fill a lifetime of tours.</p>
+<p>Look, I love Wales. The Lake District has its moments. But Scotland operates on a different scale entirely. You've got over 790 islands, mountain passes that'll make your heart race, coastal roads where you're riding between sea and sky, and enough variety to fill a lifetime of <a href="/guides/motorcycle-luggage-systems">tours</a>.</p>
 
 <p>The traffic is lighter than England—significantly so once you're past Glasgow and Edinburgh. The roads are generally well-maintained, though you need to watch for surface changes and the occasional rogue pothole after winter. And the riding culture here is brilliant. Other bikers actually wave. Cafés understand that we need somewhere to dry our gear. It feels like home.</p>
 
@@ -30,7 +30,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <h3>The B Roads of Argyll and Bute</h3>
 
-<p>This is where Scotland gets really interesting for motorcyclists. The B-roads around Argyll—routes like the B8024 around Loch Awe, the B840 on the Cowal Peninsula, or the coastal B842 to Crinan—these are the roads that have you grinning inside your helmet.</p>
+<p>This is where Scotland gets really interesting for motorcyclists. The B-roads around Argyll—routes like the B8024 around Loch Awe, the B840 on the Cowal <a href="/guides/kintyre-peninsula-motorcycle-guide">Peninsula</a>, or the coastal B842 to Crinan—these are the roads that have you grinning inside your helmet.</p>
 
 <p>Narrow, technical, barely any traffic, and scenery that makes you want to stop every few miles for photos. The surface quality varies more than A-roads, so keep your wits about you, but these routes reward committed riding.</p>
 
@@ -136,4 +136,4 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>Then plan the bigger trip. The NC500, a island-hopping tour, or a complete circuit of Scotland. Use what you learned on the shorter trip to plan better. The roads will still be there, and they'll be just as good.</p>
 
-<p>Scotland has made me a better rider. The conditions demand attention, the distances teach patience, and the scenery reminds you why we do this in the first place. I'll see you up there—I'll be the one grinning despite the rain.</p>`;
+<p>Scotland has made me a better rider. The conditions demand attention, the distances teach patience, and the scenery reminds you why we do this in the first place. I'll see you up there—I'll be the one grinning despite the rain. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/motorcycle-panniers-guide">Motorcycle Panniers Guide: Hard vs Soft Luggage Systems</a> guide for more.</p>`;

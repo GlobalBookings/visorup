@@ -96,7 +96,7 @@ The best flip-up helmet is the one that fits your head perfectly, meets P/J cert
 
 <h3>For Long-Distance Touring</h3>
 
-<p>Weight and comfort matter most here. Look for helmets under 1,700g with excellent ventilation. I've toured Scotland in summer and you absolutely need good airflow when you're fully geared up on a hot day. Premium padding that doesn't pack down after 8 hours in the saddle is worth paying for.</p>
+<p>Weight and comfort matter most here. Look for helmets under 1,700g with excellent ventilation. I've toured <a href="/guides/motorcycle-routes-scotland">Scotland</a> in summer and you absolutely need good airflow when you're fully geared up on a hot day. Premium padding that doesn't pack down after 8 hours in the saddle is worth paying for.</p>
 
 <p>Features I wouldn't compromise on: Pinlock system, emergency release, speaker pockets, and a wide field of vision. When you're riding all day, these details make the difference between arriving fresh and arriving knackered.</p>
 
@@ -114,7 +114,7 @@ The best flip-up helmet is the one that fits your head perfectly, meets P/J cert
 
 <h2>Fitting: Getting It Right Matters More Than Brand</h2>
 
-<p>I've learned this the hard way: an expensive helmet that doesn't fit properly is worse than a budget helmet that fits perfectly. Everyone's head shape is different—some people suit Shoei's internal shape, others fit Schuberth or AGV better.</p>
+<p>I've learned this the hard way: an expensive helmet that doesn't fit properly is worse than a <a href="/guides/affordable-helmets-uk-touring-guide">budget</a> helmet that fits perfectly. Everyone's head shape is different—some people suit Shoei's internal shape, others fit Schuberth or AGV better.</p>
 
 <p>Here's how I fit a helmet properly:</p>
 
@@ -185,4 +185,4 @@ The best flip-up helmet is the one that fits your head perfectly, meets P/J cert
 
 <p>The best helmet is the one you'll wear every time you ride, that fits properly, keeps you safe, and doesn't make you miserable after a few hours. For me, that's a mid-range flip-up with Pinlock, decent ventilation, and a comfortable fit. Yours might be different—and that's fine. Just make sure you're making an informed choice based on real-world needs, not marketing hype.</p>
 
-<p>Now get out there and put some miles on. The roads are waiting, and with the right helmet, they're going to be a lot more comfortable. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more.</p>`;
+<p>Now get out there and put some miles on. The roads are waiting, and with the right helmet, they're going to be a lot more comfortable. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more. Read our <a href="/guides/scotland-motorcycle-routes">Scotland Motorcycle Routes: Best Roads & Tours 2026</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-wales">Best Motorcycle Roads in Wales: Passes, Coast and Valleys</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more.</p>`;

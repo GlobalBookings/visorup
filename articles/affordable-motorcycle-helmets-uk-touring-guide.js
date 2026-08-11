@@ -1,18 +1,18 @@
 export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
-<p>I'll be straight with you—helmet shopping can feel like navigating a minefield. You've got premium lids pushing £600, and then there are budget options for under £100 that make you wonder if you're compromising on the one bit of kit that actually matters. I've tested dozens of helmets over the years, from expensive Arais to budget-friendly options, and here's what I've learned: you don't need to spend a fortune to get a safe, comfortable helmet that'll see you through thousands of miles across Britain.</p>
+<p>I'll be straight with you—helmet shopping can feel like navigating a minefield. You've got premium lids pushing £600, and then there are budget options for under £100 that make you wonder if you're compromising on the one bit of kit that actually matters. I've tested dozens of <a href="/guides/affordable-helmets-uk-touring">helmets</a> over the years, from expensive Arais to budget-friendly options, and here's what I've learned: you don't need to spend a fortune to get a safe, comfortable helmet that'll see you through thousands of miles across Britain.</p>
 
-<p>After riding everything from the twisting A470 through Snowdonia to the brutal weather of the NC500, I've come to appreciate that affordable doesn't mean inadequate. It just means being smarter about what you're buying and what compromises you're willing to make.</p>
+<p>After riding everything from the twisting A470 through Snowdonia to the brutal weather of the NC500, I've come to appreciate that <a href="/guides/affordable-motorcycle-helmets-uk">affordable</a> doesn't mean inadequate. It just means being smarter about what you're buying and what compromises you're willing to make.</p>
 
 <h2>What "Affordable" Actually Means in 2026</h2>
 
-<p>Let's set some boundaries. When I talk about affordable helmets, I'm looking at the £100-£250 bracket. Below £100, you're often dealing with helmets that meet minimum standards but little else. Above £250, you're starting to pay for premium features that, whilst nice, aren't strictly necessary for most touring riders.</p>
+<p>Let's set some boundaries. When I talk about affordable helmets, I'm looking at the £100-£250 bracket. Below £100, you're often dealing with helmets that meet minimum standards but little else. Above £250, you're starting to pay for premium features that, whilst nice, aren't strictly necessary for most <a href="/guides/affordable-motorcycle-helmets-uk-touring">touring</a> riders.</p>
 
 <p>In this sweet spot, you'll find helmets from reputable manufacturers that offer solid safety ratings, decent comfort, and features that matter for UK riding. I'm talking about proper ventilation for those rare scorching days on the A38, adequate sealing for our reliably wet weather, and enough quality to last more than a single season.</p>
 
 <h3>Safety Standards You Can't Compromise On</h3>
 
-<p>Every helmet sold in the UK must meet ECE 22.06 standards as of 2026—that's non-negotiable. Some affordable helmets also carry SHARP ratings, which is the UK's own independent testing system. I always check SHARP ratings before buying, and I'd recommend you do the same. A four or five-star SHARP rating in an affordable helmet is absolutely achievable.</p>
+<p>Every helmet sold in the UK must meet ECE 22.06 standards as of <a href="/guides/best-touring-helmets-uk">2026</a>—that's non-negotiable. Some affordable helmets also carry SHARP ratings, which is the UK's own independent testing system. I always check SHARP ratings before buying, and I'd recommend you do the same. A four or five-star SHARP rating in an affordable helmet is absolutely achievable.</p>
 
 <p>Here's the thing: the shell and liner technology in budget helmets often comes from the same research as premium models, just implemented with cheaper materials or last generation's tech. That doesn't make them unsafe—it makes them sensible purchases for riders who aren't racing or who need to balance budget across all their gear.</p>
 
@@ -36,7 +36,7 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <p>AGV's entry-level offering sits around £150-170, and it's a solid choice if you're after something from a brand with racing heritage but don't want to pay racing prices. I borrowed a mate's K3 for a Scotland trip and was impressed by the build quality. It feels more expensive than it is.</p>
 
-<p>The field of vision is excellent—important when you're checking for sheep on Highland single-track roads or navigating London traffic. The comfort is decent for most head shapes, though as with any helmet, you need to try before you buy.</p>
+<p>The field of vision is excellent—important when you're checking for sheep on Highland single-track <a href="/guides/best-motorcycle-roads-scotland">roads</a> or navigating London traffic. The comfort is decent for most head shapes, though as with any helmet, you need to try before you buy.</p>
 
 <h2>What You're Actually Paying For</h2>
 

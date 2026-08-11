@@ -30,7 +30,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Visor Quality and Anti-Fog Systems</h3>
 
-<p>You know that moment when you're riding through fog on the A591 near Windermere and your visor suddenly mirrors the weather outside? That's a cheap visor without proper anti-fog coating. Even affordable helmets in 2026 should come with a Pinlock-ready visor as standard. If they don't include the Pinlock insert, budget another £25-30 for one.</p>
+<p>You know that moment when you're riding through fog on the A591 near Windermere and your visor suddenly mirrors the weather outside? That's a cheap visor without proper anti-fog coating. Even affordable helmets in 2026 should come with a Pinlock-ready visor as standard. If they don't include the Pinlock insert, <a href="/guides/affordable-motorcycle-helmets-uk-touring-guide">budget</a> another £25-30 for one.</p>
 
 <p>I've ridden without Pinlock in Scottish winter and with it in the same conditions. The difference is night and day. One has you lifting your visor every two minutes (brilliant for hypothermia), the other lets you actually see where you're going. For touring, this isn't a luxury – it's essential.</p>
 
@@ -112,7 +112,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Best Overall Value: HJC i70 (£180)</h3>
 
-<p>This has been my daily rider for the past year. It's technically at the top of the "affordable" range, but it punches well above its weight. Internal sun visor, excellent Pinlock system, good ventilation, and it's relatively quiet. I've worn it from Scotland to Cornwall and it's never let me down. Four-star SHARP rating seals the deal.</p>
+<p>This has been my daily rider for the past year. It's technically at the top of the "affordable" range, but it punches well above its weight. Internal sun visor, excellent Pinlock system, good ventilation, and it's relatively quiet. I've worn it from <a href="/guides/motorcycle-routes-scotland">Scotland</a> to Cornwall and it's never let me down. Four-star SHARP rating seals the deal.</p>
 
 <h3>Best Budget Option: LS2 FF320 Stream (£120)</h3>
 
@@ -120,7 +120,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Best for Glasses Wearers: Caberg Duke II (£170)</h3>
 
-<p>The flip-front design makes life so much easier if you wear specs. Proper certification with the chin bar down, decent comfort, and the internal sun visor means you're not juggling prescription sunglasses. Heavier than full-face options, but the convenience factor is massive on tour.</p>
+<p>The flip-<a href="/guides/best-flip-front-helmet">front</a> design makes life so much easier if you wear specs. Proper certification with the chin bar down, decent comfort, and the internal sun visor means you're not juggling prescription sunglasses. Heavier than full-face options, but the convenience factor is massive on tour.</p>
 
 <h3>Best for Hot Weather: Caberg Jackal (£140)</h3>
 
@@ -158,4 +158,4 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <p>You don't need to spend a fortune to protect your head and stay comfortable on British roads. You need to spend wisely. Get the right safety certifications, ensure proper fit, add a Pinlock insert, and buy from a brand with good parts availability. Do that, and you'll have a helmet that serves you brilliantly whether you're commuting or touring the length of Britain.</p>
 
-<p>Your next step? Measure your head properly (around the widest part, just above your eyebrows), check the SHARP ratings for helmets in your budget, and get yourself to a shop or order from somewhere with a good returns policy. Try it on, wear it for 15 minutes, and if it fits right and meets the safety standards, you're good to go. See you out there.</p>`;
+<p>Your next step? Measure your head properly (around the widest part, just above your eyebrows), check the SHARP ratings for helmets in your budget, and get yourself to a shop or order from somewhere with a good returns policy. Try it on, wear it for 15 minutes, and if it fits right and meets the safety standards, you're good to go. See you out there. Read our <a href="/guides/best-flip-up-motorcycle-helmet">Best Flip-Up Motorcycle Helmets UK 2026 | Touring Guide</a> guide for more. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more.</p>`;

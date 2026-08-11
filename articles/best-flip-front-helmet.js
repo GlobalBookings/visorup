@@ -4,7 +4,7 @@ export const content = `<h2>Why I Switched to a Flip-Front Helmet for Touring</h
 
 <p>The thing is, British <a href="/guides/best-motorcycle-jeans-uk-touring">touring</a> isn't like continental riding where you might go hours between stops. We're dealing with changeable weather, frequent fuel stops, ferry crossings to Scottish islands, and let's be honest—we like our brew stops. Being able to flip up your helmet to chat with a fellow rider, sort out your navigation, or grab a quick drink without removing the whole lid is genuinely brilliant.</p>
 
-<p>But here's where it gets tricky: not all flip-fronts are created equal. I've tested quite a few over the past couple of years, and there's a massive difference between a proper touring flip-front and the budget options that'll have you wishing you'd spent more after your first motorway run in the rain.</p>
+<p>But here's where it gets tricky: not all flip-fronts are created equal. I've tested quite a few over the past couple of years, and there's a massive difference between a proper touring flip-front and the <a href="/guides/affordable-motorcycle-helmets-uk-guide">budget</a> options that'll have you wishing you'd spent more after your first motorway run in the rain.</p>
 
 <h2>What Makes a Flip-Front Helmet Right for UK Touring</h2>
 
@@ -46,9 +46,9 @@ export const content = `<h2>Why I Switched to a Flip-Front Helmet for Touring</h
 
 <h3>AGV Sportmodular – For Sport-Touring Riders</h3>
 
-<p>If you're more sport-touring than pure touring—perhaps you're riding something like a Tracer or a Multistrada and you enjoy spirited riding through the Peak District—the AGV Sportmodular is worth considering. It's more aggressive in shape, lighter than most flip-fronts (around 1,450 grams), and the aerodynamics are optimised for head-down riding.</p>
+<p>If you're more sport-touring than pure touring—perhaps you're riding something like a Tracer or a Multistrada and you enjoy spirited riding through the <a href="/guides/peak-district-best-motorcycle-roads">Peak</a> District—the AGV Sportmodular is worth considering. It's more aggressive in shape, lighter than most flip-fronts (around 1,450 grams), and the aerodynamics are optimised for head-down riding.</p>
 
-<p>The trade-off is noise. It's noticeably louder than the Schuberth or Shoei at motorway speeds. For shorter rides or riders who always use earplugs anyway (which you should), that's fine. But for all-day touring comfort, the quieter options win out. Prices hover around £450-550 depending on the graphic.</p>
+<p>The trade-off is noise. It's noticeably louder than the Schuberth or Shoei at motorway speeds. For shorter rides or <a href="/guides/aa-breakdown-motorcycle-cover">riders</a> who always use earplugs anyway (which you should), that's fine. But for all-day touring comfort, the quieter options win out. Prices hover around £450-550 depending on the graphic.</p>
 
 <h3>Caberg Levo – The Budget Champion</h3>
 
@@ -128,4 +128,4 @@ export const content = `<h2>Why I Switched to a Flip-Front Helmet for Touring</h
 
 <p>My advice? Set your budget, try on several models properly, and choose based on fit first, features second. A perfectly fitting Caberg will serve you better than an ill-fitting Schuberth. And once you've made your choice, get out there and use it. These helmets are designed for touring—they come alive when you're actually covering miles, not sitting in a garage looking pretty.</p>
 
-<p>Before your next tour, spend some time with the <a href="/build-route">route builder</a> to plan something special. A great helmet makes every journey better, but it's the roads you choose that make the memories.</p>`;
+<p>Before your next tour, spend some time with the <a href="/build-route">route builder</a> to plan something special. A great helmet makes every journey better, but it's the roads you choose that make the memories. Read our <a href="/guides/best-motorcycle-roads-lake-district">Best Lake District Motorcycle Roads 2026 - Complete Guide</a> guide for more. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more.</p>`;
