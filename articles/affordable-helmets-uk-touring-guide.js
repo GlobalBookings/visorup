@@ -50,7 +50,7 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h3>Noise Levels</h3>
 
-<p>Let's be honest – no affordable helmet is truly quiet. Wind noise is where budget lids show their price point. But some are definitely better than others. I've found modular helmets tend to be noisier because of the additional seals and moving parts.</p>
+<p>Let's be honest – no affordable helmet is truly quiet. Wind noise is where budget lids show their price point. But some are definitely better than others. I've found <a href="/guides/modular-helmets-guide">modular</a> helmets tend to be noisier because of the additional seals and moving parts.</p>
 
 <p>My solution? Always wear earplugs when touring. Proper musician's earplugs cost about £15 and they're reusable. Even with a quiet expensive helmet, you should wear plugs above 60mph to protect your hearing. With an affordable helmet, they're absolutely essential. This way, you save money on the helmet and protect your hearing – win-win.</p>
 
@@ -154,8 +154,8 @@ export const content = `<h2>Affordable Helmets That Won't Let You Down on Britis
 
 <h2>The Bottom Line</h2>
 
-<p>I've ridden thousands of miles in helmets costing less than £200. I've toured Scotland in January, crossed England in August heatwaves, and spent full days in Welsh rain. The affordable helmets I've chosen – with proper certification, good fit, and the right features – have never let me down.</p>
+<p>I've ridden thousands of miles in helmets costing less than £200. I've toured Scotland in January, crossed <a href="/guides/best-motorcycle-roads-england">England</a> in August heatwaves, and spent full days in Welsh rain. The affordable helmets I've chosen – with proper certification, good fit, and the right features – have never let me down.</p>
 
 <p>You don't need to spend a fortune to protect your head and stay comfortable on British roads. You need to spend wisely. Get the right safety certifications, ensure proper fit, add a Pinlock insert, and buy from a brand with good parts availability. Do that, and you'll have a helmet that serves you brilliantly whether you're commuting or touring the length of Britain.</p>
 
-<p>Your next step? Measure your head properly (around the widest part, just above your eyebrows), check the SHARP ratings for helmets in your budget, and get yourself to a shop or order from somewhere with a good returns policy. Try it on, wear it for 15 minutes, and if it fits right and meets the safety standards, you're good to go. See you out there. Read our <a href="/guides/best-flip-up-motorcycle-helmet">Best Flip-Up Motorcycle Helmets UK 2026 | Touring Guide</a> guide for more. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more.</p>`;
+<p>Your next step? Measure your head properly (around the widest part, just above your eyebrows), check the SHARP ratings for helmets in your budget, and get yourself to a shop or order from somewhere with a good returns policy. Try it on, wear it for 15 minutes, and if it fits right and meets the safety standards, you're good to go. See you out there. Read our <a href="/guides/best-flip-up-motorcycle-helmet">Best Flip-Up Motorcycle Helmets UK 2026 | Touring Guide</a> guide for more. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/lake-district-mountain-passes">Lake District Mountain Passes by Motorcycle: Complete Guide</a> guide for more. Read our <a href="/guides/welsh-passes-motorcycle-guide">Welsh Mountain Passes: The Complete Motorcycle Guide</a> guide for more. Read our <a href="/guides/peak-district-best-motorcycle-roads">Peak District Best Motorcycle Roads: A Rider's Guide</a> guide for more.</p>`;

@@ -12,7 +12,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <h3>Weather Reality Check</h3>
 
-<p>Let's talk about the elephant in the room: Scottish weather. I've been caught out more times than I care to admit. You can leave Glasgow in sunshine and hit rain, mist, and wind all within an hour. The key is accepting this and preparing properly.</p>
+<p>Let's talk about the elephant in the room: <a href="/guides/scottish-borders-destination-guide">Scottish</a> weather. I've been caught out more times than I care to admit. You can leave Glasgow in sunshine and hit rain, mist, and wind all within an hour. The key is accepting this and preparing properly.</p>
 
 <p>I always pack proper waterproofs – not those emergency packaway things, but actual touring-grade kit. I sorted myself out with decent gear from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> after one particularly soggy trip through Glen Coe taught me the value of staying dry. Your riding improves massively when you're comfortable.</p>
 
@@ -118,7 +118,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <h2>Common Mistakes I've Made (So You Don't Have To)</h2>
 
-<p>Underestimating journey times: Single-track roads, photo stops, fuel breaks, and the sheer temptation to stop and stare means your average speed drops massively. What Google Maps says is three hours usually takes me four or five. Plan accordingly.</p>
+<p>Underestimating journey times: Single-track roads, photo stops, fuel breaks, and the sheer temptation to stop and stare means your average speed drops massively. <a href="/guides/wild-camping-laws-scotland">What</a> Google Maps says is three hours usually takes me four or five. Plan accordingly.</p>
 
 <p>Riding too fast: Scottish roads reward smooth, flowing riding. The guy trying to set lap records is missing the point and risking coming unstuck on surprise gravel, sheep, or diesel spills. Trust me, I learned this.</p>
 
@@ -132,4 +132,4 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <p>And when you're up there, riding through Glen Coe in perfect light, or cresting the Bealach na Bà with the Atlantic spread out below you, or having the road to yourself along some remote Highland single-track, remember this: you're experiencing Britain's finest motorcycle touring. Make the most of it.</p>
 
-<p><strong>Action step:</strong> Pick one route from this guide, block out the dates in your calendar right now, and start planning properly. Scotland's waiting, and 2026's the perfect year to finally do it properly. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more.</p>`;
+<p><strong>Action step:</strong> Pick one route from this guide, block out the dates in your calendar right now, and start planning properly. Scotland's waiting, and 2026's the perfect year to finally do it properly. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more. Read our <a href="/guides/scotland-vs-wales-best-motorcycle-touring-destination">Scotland vs Wales: Best Motorcycle Touring Destination?</a> guide for more. Read our <a href="/guides/bothies-wild-shelters-motorcycle-touring">Bothies and Wild Shelters for Motorcycle Tourers in Scotland</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more.</p>`;

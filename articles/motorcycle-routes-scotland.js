@@ -2,7 +2,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>I'll be straight with you—<a href="/guides/scotland-motorcycle-routes">Scotland</a> has ruined me for riding anywhere else in Britain. I've spent the last few seasons exploring every corner of this magnificent country on two wheels, and I keep coming back. The roads are quieter, the scenery is more dramatic, and there's a raw quality to the riding that you just don't get down south.</p>
 
-<p>Whether you're planning your first Scottish tour or you're a seasoned rider looking for fresh tarmac, I've put together everything I've learned from countless miles in the saddle up here. This isn't just a list of roads—it's the practical stuff you actually need to know before you point your bike north.</p>
+<p>Whether you're planning your first <a href="/guides/scottish-borders-destination-guide">Scottish</a> tour or you're a seasoned rider looking for fresh tarmac, I've put together everything I've learned from countless miles in the saddle up here. This isn't just a list of roads—it's the practical stuff you actually need to know before you point your bike north.</p>
 
 <h2>Why Scotland is Britain's Best Motorcycle Touring Destination</h2>
 
@@ -38,7 +38,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <h3>The Coastal Routes: Ayrshire to the Western Isles</h3>
 
-<p>The A719 and A77 down the Ayrshire coast offer brilliant sea views and flowing corners, but for me, the real magic happens when you take ferries to the islands. The routes from Ardrossan to Arran, or from Oban to Mull, open up riding that feels genuinely remote.</p>
+<p>The A719 and A77 down the Ayrshire coast offer brilliant sea views and flowing corners, but for me, the real magic happens when you take ferries to the <a href="/guides/orkney-islands-motorcycle-guide">islands</a>. The routes from Ardrossan to Arran, or from Oban to Mull, open up riding that feels genuinely remote.</p>
 
 <p>On Mull, the road from Craignure to Fionnphort is single-track with passing places. It's slow riding, but the landscape is incredible and you'll see more wildlife than vehicles. <a href="/guides/isle-of-skye-motorcycle-guide">Skye</a> has become busier since the bridge opened, but the roads around the north of the island—particularly up to the Old Man of Storr—are still fantastic.</p>
 
@@ -120,7 +120,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>I've learned that the best Scottish tours balance ambition with flexibility. A rigid itinerary covering 300 miles a day sounds great until you hit rain, wind, or find a road so good you want to ride it twice.</p>
 
-<p>My approach now is to identify must-see sections and book accommodation around those, but leave entire days flexible. If the weather's brilliant, I'll ride further. If it's grim, I'll find a café with WiFi and plan the next day properly.</p>
+<p>My approach now is to identify must-see sections and book accommodation around those, but leave entire <a href="/guides/nc500-7-day-itinerary">days</a> flexible. If the weather's brilliant, I'll ride further. If it's grim, I'll find a café with WiFi and plan the next day properly.</p>
 
 <p>Think about loops rather than point-to-point routes when possible. It means you can base yourself somewhere for a couple of nights and ride different routes each day without packing and unpacking your bike constantly.</p>
 
@@ -128,7 +128,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <h2>Final Thoughts: Just Go Ride Scotland</h2>
 
-<p>I could write another 2,000 words about Scottish motorcycle routes and still not cover everything. The Applecross Peninsula, the Road to the Isles, the Borders region, Orkney, the Hebrides—each deserves its own guide.</p>
+<p>I could write another 2,000 words about Scottish motorcycle routes and still not cover everything. The Applecross Peninsula, the Road to the Isles, the Borders region, Orkney, the <a href="/guides/outer-hebrides-motorcycle-guide">Hebrides</a>—each deserves its own guide.</p>
 
 <p>But here's what matters: Scotland is rideable right now, and every season you delay is a season of brilliant riding you're missing. You don't need the perfect bike, the perfect weather window, or weeks of free time. A long weekend is enough to scratch the surface.</p>
 
@@ -136,4 +136,4 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>Then plan the bigger trip. The NC500, a island-hopping tour, or a complete circuit of Scotland. Use what you learned on the shorter trip to plan better. The roads will still be there, and they'll be just as good.</p>
 
-<p>Scotland has made me a better rider. The conditions demand attention, the distances teach patience, and the scenery reminds you why we do this in the first place. I'll see you up there—I'll be the one grinning despite the rain. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/motorcycle-panniers-guide">Motorcycle Panniers Guide: Hard vs Soft Luggage Systems</a> guide for more.</p>`;
+<p>Scotland has made me a better rider. The conditions demand attention, the distances teach patience, and the scenery reminds you why we do this in the first place. I'll see you up there—I'll be the one grinning despite the rain. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/motorcycle-panniers-guide">Motorcycle Panniers Guide: Hard vs Soft Luggage Systems</a> guide for more. Read our <a href="/guides/shetland-islands-motorcycle-guide">Shetland Islands Motorcycle Guide: Britain's Viking Frontier</a> guide for more.</p>`;

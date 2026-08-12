@@ -14,7 +14,7 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <p>Every helmet sold in the UK must meet ECE 22.06 standards as of <a href="/guides/best-touring-helmets-uk">2026</a>—that's non-negotiable. Some affordable helmets also carry SHARP ratings, which is the UK's own independent testing system. I always check SHARP ratings before buying, and I'd recommend you do the same. A four or five-star SHARP rating in an affordable helmet is absolutely achievable.</p>
 
-<p>Here's the thing: the shell and liner technology in budget helmets often comes from the same research as premium models, just implemented with cheaper materials or last generation's tech. That doesn't make them unsafe—it makes them sensible purchases for riders who aren't racing or who need to balance budget across all their gear.</p>
+<p>Here's the thing: the shell and liner technology in <a href="/guides/affordable-motorcycle-helmets-uk-guide">budget</a> helmets often comes from the same research as premium models, just implemented with cheaper materials or last generation's tech. That doesn't make them unsafe—it makes them sensible purchases for riders who aren't racing or who need to balance budget across all their gear.</p>
 
 <h2>My Top Picks for Affordable Touring Helmets</h2>
 
@@ -30,7 +30,7 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <p>HJC has been making affordable helmets forever, and the i71 is one of their better recent efforts. At around £180-220 depending on the graphics, it's at the upper end of affordable but worth considering. The shell is lighter than older budget helmets, which you'll appreciate on long days. I wore one for a week-long tour from Cornwall to the Scottish Borders, and my neck wasn't complaining by the end.</p>
 
-<p>The pin-lock visor system works brilliantly—crucial for British weather. I've ridden through the Lake District in November fog with clear vision throughout. The interior is removable and washable, which after a sweaty summer ride through the Cotswolds is absolutely necessary.</p>
+<p>The pin-lock visor system works brilliantly—crucial for British weather. I've ridden through the <a href="/guides/best-motorcycle-roads-lake-district">Lake</a> District in November fog with clear vision throughout. The interior is removable and washable, which after a sweaty summer ride through the Cotswolds is absolutely necessary.</p>
 
 <h3>AGV K3</h3>
 
@@ -156,6 +156,6 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <p>Don't be afraid of the affordable market—manufacturers like Caberg, HJC, and AGV offer genuinely good helmets in the £100-£250 range. You're sacrificing some comfort and convenience compared to premium options, but you're not compromising on safety if you choose wisely.</p>
 
-<p>Use the money you save to invest in other crucial gear—good gloves, a quality jacket, or putting it toward your next tour. A complete set of decent gear beats one premium item and compromises elsewhere.</p>
+<p>Use the money you save to invest in other crucial gear—good gloves, a quality jacket, or putting it toward your next tour. A <a href="/guides/best-motorcycle-roads-lake-district-2026">complete</a> set of decent gear beats one premium item and compromises elsewhere.</p>
 
-<p>Try before you buy whenever possible, check SHARP ratings, wait for sales if you're not in a hurry, and maintain your helmet properly. Do these things, and your affordable helmet will see you through years of reliable British touring. Now get out there and use it—there are miles waiting to be ridden.</p>`;
+<p>Try before you buy whenever possible, check SHARP ratings, wait for sales if you're not in a hurry, and maintain your helmet properly. Do these things, and your affordable helmet will see you through years of reliable British touring. Now get out there and use it—there are miles waiting to be ridden. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;
