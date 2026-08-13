@@ -34,7 +34,7 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <h3>AGV K3</h3>
 
-<p>AGV's entry-level offering sits around £150-170, and it's a solid choice if you're after something from a brand with racing heritage but don't want to pay racing prices. I borrowed a mate's K3 for a Scotland trip and was impressed by the build quality. It feels more expensive than it is.</p>
+<p>AGV's entry-level offering sits around £150-170, and it's a solid choice if you're after something from a brand with racing heritage but don't want to pay racing prices. I borrowed a mate's K3 for a <a href="/guides/motorcycle-routes-scotland">Scotland</a> trip and was impressed by the build quality. It feels more expensive than it is.</p>
 
 <p>The field of vision is excellent—important when you're checking for sheep on Highland single-track <a href="/guides/best-motorcycle-roads-scotland">roads</a> or navigating London traffic. The comfort is decent for most head shapes, though as with any helmet, you need to try before you buy.</p>
 
@@ -146,7 +146,7 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <p>Once you've got your affordable helmet sorted, it's time to actually use it properly. I recommend planning a weekend tour to test everything before committing to longer trips. Use our <a href="/build-route">route builder</a> to plan something manageable—maybe 200-300 miles over a weekend—that includes varied riding conditions.</p>
 
-<p>This shakedown tour lets you discover any fit issues with your new helmet before you're three days into a week-long Highland adventure. You'll learn how it performs in real conditions, whether the ventilation works for you, and if you need any adjustments.</p>
+<p>This shakedown tour lets you discover any fit issues with your new helmet before you're three days into a week-long Highland <a href="/guides/adventure-helmets-review">adventure</a>. You'll learn how it performs in real conditions, whether the ventilation works for you, and if you need any adjustments.</p>
 
 <p>Bring basic tools and any spare parts you might need—I once had a visor mechanism loosen on day two of a tour and needed a small screwdriver to tighten it. Also pack a microfibre cloth for visor cleaning and a spare pin-lock if you're touring in changeable weather.</p>
 
@@ -158,4 +158,4 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <p>Use the money you save to invest in other crucial gear—good gloves, a quality jacket, or putting it toward your next tour. A <a href="/guides/best-motorcycle-roads-lake-district-2026">complete</a> set of decent gear beats one premium item and compromises elsewhere.</p>
 
-<p>Try before you buy whenever possible, check SHARP ratings, wait for sales if you're not in a hurry, and maintain your helmet properly. Do these things, and your affordable helmet will see you through years of reliable British touring. Now get out there and use it—there are miles waiting to be ridden. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more.</p>`;
+<p>Try before you buy whenever possible, check SHARP ratings, wait for sales if you're not in a hurry, and maintain your helmet properly. Do these things, and your affordable helmet will see you through years of reliable British touring. Now get out there and use it—there are miles waiting to be ridden. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/affordable-helmets-uk-touring-guide">Affordable Motorcycle Helmets UK: Budget Touring Guide 2026</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more.</p>`;

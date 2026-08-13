@@ -1,6 +1,6 @@
 export const content = `<h2>Why I Swear by Mesh Jackets for British Summer Touring</h2>
 
-<p>I've spent the last few summers carving through the Yorkshire Dales and sweating my way along the A9 in full textile jackets, and I can tell you this: nothing beats a proper mesh motorcycle jacket when the temperature climbs above 20°C. I know what you're thinking—Britain and hot weather don't exactly go hand in hand—but those scorching July days stuck in traffic on the M25 or crawling through the Lake District villages will have you boiling in a standard jacket.</p>
+<p>I've spent the last few summers carving through the Yorkshire Dales and sweating my way along the A9 in full textile jackets, and I can tell you this: nothing beats a proper mesh <a href="/guides/best-motorcycle-jeans-uk-touring">motorcycle</a> jacket when the temperature climbs above 20°C. I know what you're thinking—Britain and hot weather don't exactly go hand in hand—but those scorching July days stuck in traffic on the M25 or crawling through the Lake District villages will have you boiling in a standard jacket.</p>
 
 <p>Here's the thing about mesh jackets that took me a while to properly understand: they're not just summer jackets. They're ventilation systems you wear. The airflow through a quality mesh jacket transforms those humid British summer days from an endurance test into actually enjoyable riding. I've tested half a dozen different mesh jackets over the past three years, from budget options that fell apart after one season to premium pieces that've become my go-to gear from May through September.</p>
 
@@ -25,7 +25,7 @@ export const content = `<h2>Why I Swear by Mesh Jackets for British Summer Touri
 
 <h2>How Mesh Jackets Actually Perform on British Roads</h2>
 
-<p>I properly tested my current mesh jacket during a week-long tour from the Cotswolds up through the Peak District and across to North Wales. Temperature swings from 14°C morning starts to 28°C afternoon riding gave me the full spectrum of British summer conditions. Here's what I learned.</p>
+<p>I properly tested my current mesh jacket during a week-long tour from the Cotswolds up through the <a href="/guides/peak-district-best-motorcycle-roads">Peak</a> District and across to North Wales. Temperature swings from 14°C morning starts to 28°C afternoon riding gave me the full spectrum of British summer conditions. Here's what I learned.</p>
 
 <p>At motorway speeds—let's say 70mph on the M6—the airflow is frankly intense. You'll feel every bit of wind cutting through, which is exactly what you want when you're stuck in that hellish stretch past Birmingham in afternoon heat. But drop below 40mph in town centres or slow-moving tourist traffic (looking at you, Windermere), and the ventilation becomes less effective. You're relying more on passive airflow than forced ventilation.</p>
 
@@ -33,9 +33,9 @@ export const content = `<h2>Why I Swear by Mesh Jackets for British Summer Touri
 
 <h3>The Rain Reality Check</h3>
 
-<p>Let's address the elephant in the room: British weather is unpredictable at best, absolutely mental at worst. I've been caught in torrential downpours in mesh jackets more times than I can count, and here's the brutal truth—you will get wet. Very wet.</p>
+<p>Let's address the elephant in the room: British weather is unpredictable at <a href="/guides/best-motorcycle-roads-scotland">best</a>, absolutely mental at worst. I've been caught in torrential downpours in mesh jackets more times than I can count, and here's the brutal truth—you will get wet. Very wet.</p>
 
-<p>Most mesh jackets claim to have water-resistant properties. What this actually means is they'll handle light drizzle for about 20 minutes before you start feeling damp. A proper summer thunderstorm? You're soaked within five minutes. This is why I never tour without a packable rain layer in my pannier. Some riders carry a waterproof oversuit; I prefer a lightweight rain jacket that fits over my mesh jacket. It's not elegant, but neither is arriving at your destination looking like you've jumped in a lake.</p>
+<p>Most mesh jackets claim to have water-resistant properties. What this actually means is they'll handle light drizzle for about 20 minutes before you start feeling damp. A proper summer thunderstorm? You're soaked within five minutes. This is why I never tour without a packable rain layer in my pannier. Some riders carry a waterproof oversuit; I prefer a lightweight rain jacket that fits over my mesh jacket. It's not elegant, but neither is arriving at your destination looking like you've jumped in a <a href="/guides/best-motorcycle-roads-lake-district">lake</a>.</p>
 
 <blockquote>
 A mesh jacket excels in one specific job: keeping you cool in warm weather. Ask it to do anything else, and you'll need backup solutions. Plan accordingly.
@@ -96,7 +96,7 @@ A mesh jacket excels in one specific job: keeping you cool in warm weather. Ask 
 
 <p>Quality manufacturers handle this by strategically placing mesh panels on areas less likely to contact the road in a slide—inner arms, sides of the torso, upper back away from the spine. The impact zones—outer shoulders, outer elbows, lower back—remain solid textile with proper abrasion resistance.</p>
 
-<p>I've seen test data showing good mesh jackets provide about 70-80% of the abrasion resistance of equivalent solid textile jackets. That's the trade-off you're making for staying cool. For me, on British summer roads where I'm riding at sane speeds on familiar routes, that's acceptable. For track days or aggressive mountain pass riding? I want the full protection of solid textile or leather.</p>
+<p>I've seen test data showing good mesh jackets provide about 70-80% of the abrasion resistance of equivalent solid textile jackets. That's the trade-off you're making for staying cool. For me, on British summer <a href="/guides/best-motorcycle-roads-england">roads</a> where I'm riding at sane speeds on familiar routes, that's acceptable. For track days or aggressive mountain pass riding? I want the full protection of solid textile or leather.</p>
 
 <h2>Accessorizing Your Mesh Jacket Setup</h2>
 

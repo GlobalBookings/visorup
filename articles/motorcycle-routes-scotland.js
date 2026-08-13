@@ -14,7 +14,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <h3>The NC500: Scotland's Answer to Route 66</h3>
 
-<p>Everyone talks about the North Coast 500, and for good reason. I've ridden it four times now, and each trip has been different. This 516-mile loop starting from Inverness takes you around the northern Highlands, and it's genuinely world-class riding.</p>
+<p>Everyone talks about the North Coast 500, and for good reason. I've ridden it four times now, and each trip has been different. This 516-mile loop starting from Inverness takes you <a href="/guides/planning-motorcycle-ferry-crossings-uk">around</a> the northern Highlands, and it's genuinely world-class riding.</p>
 
 <p>The reality is that the NC500 has become victim of its own success. In summer, you'll encounter motorhomes, coaches, and traffic you wouldn't expect on these remote roads. My advice? Ride it in May or September. The weather's more unpredictable, but you'll actually enjoy the roads rather than sitting behind a campervan on single-track sections.</p>
 
@@ -74,7 +74,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p><a href="/guides/torridon-wester-ross-guide">Wild</a> camping is legal in Scotland under the access rights, and I've had some brilliant nights pitched up in lay-bys or quiet spots with million-pound views. But realistically, after a full day's riding, I usually prefer a proper bed.</p>
 
-<p>Book ahead in summer, especially around the NC500 and popular areas. Small hotels and B&Bs often have secure parking and are brilliant for drying gear. Bunkhouses and hostels work well for budget tours and you'll meet other riders.</p>
+<p>Book ahead in summer, especially around the NC500 and popular areas. Small hotels and B&Bs often have secure parking and are brilliant for drying gear. Bunkhouses and hostels work well for <a href="/guides/budget-touring-guide-500-pounds">budget</a> tours and you'll meet other riders.</p>
 
 <p>I use a mix of pre-booked and spontaneous accommodation. First and last nights booked, middle section flexible depending on weather and how I'm feeling. The <a href="/plan-trip">trip planning tool</a> helps me identify backup options so I'm never completely stuck.</p>
 
@@ -110,7 +110,7 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>Down in southwest Scotland, the roads through Galloway Forest Park get overlooked by riders heading north. The A712 from New Galloway to Newton Stewart is called the Queen's Way and runs through stunning forest scenery with surprisingly few other vehicles.</p>
 
-<p>This area also has Britain's first Dark Sky Park, so if you're camping, the night skies are incredible. The riding isn't as dramatic as the Highlands, but it's excellent practice for single-track technique and the roads are often completely empty.</p>
+<p>This area also has Britain's first Dark Sky Park, so if you're <a href="/guides/wild-camping-laws-scotland">camping</a>, the night skies are incredible. The riding isn't as dramatic as the Highlands, but it's excellent practice for single-track technique and the roads are often completely empty.</p>
 
 <h3>The North East Coast</h3>
 
@@ -136,4 +136,4 @@ export const content = `<h2>Motorcycle Routes Scotland: The Ultimate Guide to Ri
 
 <p>Then plan the bigger trip. The NC500, a island-hopping tour, or a complete circuit of Scotland. Use what you learned on the shorter trip to plan better. The roads will still be there, and they'll be just as good.</p>
 
-<p>Scotland has made me a better rider. The conditions demand attention, the distances teach patience, and the scenery reminds you why we do this in the first place. I'll see you up there—I'll be the one grinning despite the rain. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/motorcycle-panniers-guide">Motorcycle Panniers Guide: Hard vs Soft Luggage Systems</a> guide for more. Read our <a href="/guides/shetland-islands-motorcycle-guide">Shetland Islands Motorcycle Guide: Britain's Viking Frontier</a> guide for more.</p>`;
+<p>Scotland has made me a better rider. The conditions demand attention, the distances teach patience, and the scenery reminds you why we do this in the first place. I'll see you up there—I'll be the one grinning despite the rain. Read our <a href="/guides/best-touring-helmets-uk">Best Touring Helmets for UK Motorcycle Adventures 2026</a> guide for more. Read our <a href="/guides/motorcycle-panniers-guide">Motorcycle Panniers Guide: Hard vs Soft Luggage Systems</a> guide for more. Read our <a href="/guides/shetland-islands-motorcycle-guide">Shetland Islands Motorcycle Guide: Britain's Viking Frontier</a> guide for more. Read our <a href="/guides/bothies-wild-shelters-motorcycle-touring">Bothies and Wild Shelters for Motorcycle Tourers in Scotland</a> guide for more. Read our <a href="/guides/how-to-use-gpx-files-motorcycle">How to Use GPX Files for Motorcycle Touring: Complete Guide</a> guide for more.</p>`;

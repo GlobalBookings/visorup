@@ -8,7 +8,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <p>Scotland isn't just "more countryside" – it's a completely different riding experience. The roads are quieter, the corners are longer and more flowing, and you'll go stretches where you won't see another vehicle for twenty minutes. That's proper <a href="/guides/best-touring-helmets-uk">touring</a> territory.</p>
 
-<p>I've ridden across most of Britain, and Scotland consistently delivers three things: dramatic scenery that actually makes you stop and stare, roads that reward smooth, flowing riding rather than aggressive pace, and a genuine sense of adventure. You're not just ticking off miles – you're exploring.</p>
+<p>I've ridden across most of Britain, and Scotland consistently delivers three things: dramatic scenery that actually makes you stop and stare, roads that reward smooth, flowing riding rather than aggressive pace, and a genuine sense of <a href="/guides/best-adventure-motorbike-boots">adventure</a>. You're not just ticking off miles – you're exploring.</p>
 
 <h3>Weather Reality Check</h3>
 
@@ -26,7 +26,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <p>I've covered this in detail in my <a href="/routes/nc500-complete">complete NC500 guide</a>, but here's the quick version: 516 miles starting and finishing in Inverness, taking you around the north coast of Scotland. The west coast section from Durness down to Ullapool is the highlight for me – dramatic, flowing roads with the sea on one side and mountains on the other.</p>
 
-<p>Top tip: ride it anti-clockwise. You'll have better views on your side of the road, and the climbing sections work better this way. Budget at least three days, but four or five is better if you want to actually enjoy it rather than just tick it off.</p>
+<p>Top tip: ride it anti-clockwise. You'll have better views on your side of the road, and the climbing sections work better this way. <a href="/guides/affordable-motorcycle-helmets-uk-guide">Budget</a> at least three days, but four or five is better if you want to actually enjoy it rather than just tick it off.</p>
 
 <h3>The A82 Through Glen Coe and Along Loch Loness</h3>
 
@@ -52,7 +52,7 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <h3>Isle of Skye and Beyond</h3>
 
-<p>Skye's been on every Scotland touring list for decades, and rightly so. The bridge from Kyle of Lochalsh makes access easy, but don't just blast over and back – Skye deserves time. The loop north through Portree to the Trotternish Peninsula, past the Old Man of Storr and the Quiraing, is spectacular.</p>
+<p>Skye's been on every Scotland touring list for decades, and rightly so. The bridge from Kyle of Lochalsh makes access easy, but don't just blast over and back – Skye deserves time. The loop north through Portree to the Trotternish <a href="/guides/kintyre-peninsula-motorcycle-guide">Peninsula</a>, past the Old Man of Storr and the Quiraing, is spectacular.</p>
 
 <p>For proper adventure, continue beyond Skye to the Outer Hebrides. I've documented this route in my <a href="/routes/island-to-highlands">island to highlands guide</a>, but the short version: ferries from Skye to Harris and Lewis open up even more remote riding. The single-track roads through Harris are challenging but rewarding.</p>
 
@@ -132,4 +132,4 @@ export const content = `<h2>Scotland Motorcycle Routes: Your Guide to the Best R
 
 <p>And when you're up there, riding through Glen Coe in perfect light, or cresting the Bealach na Bà with the Atlantic spread out below you, or having the road to yourself along some remote Highland single-track, remember this: you're experiencing Britain's finest motorcycle touring. Make the most of it.</p>
 
-<p><strong>Action step:</strong> Pick one route from this guide, block out the dates in your calendar right now, and start planning properly. Scotland's waiting, and 2026's the perfect year to finally do it properly. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more. Read our <a href="/guides/scotland-vs-wales-best-motorcycle-touring-destination">Scotland vs Wales: Best Motorcycle Touring Destination?</a> guide for more. Read our <a href="/guides/bothies-wild-shelters-motorcycle-touring">Bothies and Wild Shelters for Motorcycle Tourers in Scotland</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more.</p>`;
+<p><strong>Action step:</strong> Pick one route from this guide, block out the dates in your calendar right now, and start planning properly. Scotland's waiting, and 2026's the perfect year to finally do it properly. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more. Read our <a href="/guides/orkney-islands-motorcycle-guide">Orkney Islands Motorcycle Guide: Ancient Wonders and Wild Seas</a> guide for more. Read our <a href="/guides/scotland-vs-wales-best-motorcycle-touring-destination">Scotland vs Wales: Best Motorcycle Touring Destination?</a> guide for more. Read our <a href="/guides/bothies-wild-shelters-motorcycle-touring">Bothies and Wild Shelters for Motorcycle Tourers in Scotland</a> guide for more. Read our <a href="/guides/uk-motorcycle-touring-apps-guide">Best Apps for UK Motorcycle Touring in 2026</a> guide for more. Read our <a href="/guides/motorcycle-touring-packing-tips-beginners">Motorcycle Touring Packing Tips for Beginners 2026 | VisorUp</a> guide for more. Read our <a href="/guides/best-jeans-for-motorcycle">Best Motorcycle Jeans for UK Touring (2026) | VisorUp</a> guide for more.</p>`;
