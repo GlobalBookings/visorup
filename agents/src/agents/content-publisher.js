@@ -340,6 +340,18 @@ function writeArticleFile(articlesDir, slug, content) {
 }
 
 /* ── Git operations ─────────────────────────────────────────────────── */
+// Rebuild the edge SEO manifest (seo-manifest.json) so newly published guides
+// get correct crawler/social metadata. Returns true if the file was written.
+function rebuildSeoManifest(repoRoot) {
+  try {
+    execSync('node scripts/build-seo-manifest.mjs', { cwd: repoRoot, stdio: 'pipe' });
+    return true;
+  } catch (err) {
+    log.warn(`SEO manifest rebuild failed: ${err.message.split('\n')[0]}`);
+    return false;
+  }
+}
+
 function gitCommitAndPush(repoRoot, files, message) {
   if (!GH_TOKEN) {
     log.warn('No GITHUB_TOKEN — skipping git push');
@@ -497,6 +509,9 @@ export async function run() {
     log.info('No articles published');
     return;
   }
+
+  // Rebuild the edge SEO manifest so new guides get correct social/crawler metadata
+  if (rebuildSeoManifest(paths.root)) changedFiles.push('seo-manifest.json');
 
   // Commit and push
   const sha = gitCommitAndPush(

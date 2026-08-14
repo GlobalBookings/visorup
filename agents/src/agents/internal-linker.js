@@ -26,8 +26,11 @@ const GH_REPO = process.env.GITHUB_REPO || 'GlobalBookings/visorup';
 const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
-const MAX_LINKS_PER_ARTICLE = 5;
+const MAX_LINKS_PER_ARTICLE = 3;
 const MIN_CONTENT_LENGTH = 500;
+// Hard ceiling on total internal /guides links per article (existing + newly
+// injected) so repeated runs can't over-link a page.
+const MAX_TOTAL_INTERNAL_LINKS = 8;
 // When set, analyse and validate but do not write or commit (LINKER_DRY_RUN=1)
 const DRY_RUN = process.env.LINKER_DRY_RUN === '1';
 
@@ -243,7 +246,9 @@ export async function run() {
     if (typeof content !== 'string' || content.length < MIN_CONTENT_LENGTH) continue;
 
     const existingLinks = getExistingInternalLinks(content);
-    const opportunities = findLinkOpportunities(article, content, articles);
+    const budget = Math.min(MAX_LINKS_PER_ARTICLE, MAX_TOTAL_INTERNAL_LINKS - existingLinks.size);
+    if (budget <= 0) continue; // already sufficiently linked
+    const opportunities = findLinkOpportunities(article, content, articles).slice(0, budget);
     if (!opportunities.length) continue;
 
     const { content: linked, injected } = injectLinks(content, opportunities);

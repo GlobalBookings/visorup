@@ -134,7 +134,7 @@ schedule('GA4 Briefing',        '0 9 * * *',    runGA4);              // 9 AM da
 schedule('Keyword Miner',       '0 10 * * 1',   runKeywords);         // 10 AM Monday
 schedule('Rank Tracker',        '0 9 * * 1',    runRankTracker);      // 9 AM Monday
 schedule('Content Refresher',   '0 11 * * 2',   runContentRefresher); // 11 AM Tuesday
-schedule('Internal Linker',     '0 13 * * 1-5', runInternalLinker);   // 1 PM Mon-Fri
+schedule('Internal Linker',     '0 13 * * 1',   runInternalLinker);   // 1 PM Monday (weekly)
 schedule('Content Publisher',   '0 12 * * *',   runContentPublisher); // 12 PM daily
 schedule('Shareable Content',   '0 12 * * 3',   runShareableContent); // 12 PM Wednesday
 schedule('Infographic Gen',     '0 10 * * 3',   runInfographicGen);   // 10 AM Wednesday

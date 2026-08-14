@@ -6561,6 +6561,9 @@ class VisorUpSite {
   _injectJsonLd(article) {
     var existing = document.getElementById('visorup-jsonld');
     if (existing) existing.remove();
+    // Drop the edge-prerendered Article JSON-LD; the richer client graph below replaces it.
+    var pre = document.querySelector('script[data-ld="prerender"]');
+    if (pre) pre.remove();
     var base = window.location.origin;
     var isInfographic = article.tags && article.tags.indexOf('infographic') >= 0;
     var pageUrl = isInfographic ? base + '/infographics/' + article.slug : base + '/guides/' + article.category + '/' + article.slug;
