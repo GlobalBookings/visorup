@@ -382,6 +382,14 @@ class VisorUpSite {
   }
 
   init() {
+    // Remove consolidated duplicate guides from listings/search/related — they
+    // 301 (edge) and client-redirect to their canonical page.
+    if (typeof ARTICLES !== 'undefined' && typeof GUIDE_REDIRECTS !== 'undefined') {
+      for (var gi = ARTICLES.length - 1; gi >= 0; gi--) {
+        if (GUIDE_REDIRECTS[ARTICLES[gi].slug]) ARTICLES.splice(gi, 1);
+      }
+    }
+
     this.siteView = document.getElementById('siteView');
     this.plannerView = document.getElementById('plannerView');
     this.pageContent = document.getElementById('pageContent');
@@ -924,6 +932,12 @@ class VisorUpSite {
       case 'guides':
         this.showSiteView();
         if (parts[1] && parts[2]) {
+          // Consolidated duplicate → redirect to canonical URL
+          if (typeof GUIDE_REDIRECTS !== 'undefined' && GUIDE_REDIRECTS[parts[2]]) {
+            history.replaceState(null, '', GUIDE_REDIRECTS[parts[2]]);
+            this.route(GUIDE_REDIRECTS[parts[2]]);
+            return;
+          }
           var article = typeof ARTICLES !== 'undefined' && ARTICLES.find(function(a) { return a.category === parts[1] && a.slug === parts[2]; });
           if (article) {
             this.pageContent.innerHTML = this.renderArticle(article) + this.renderFooter();

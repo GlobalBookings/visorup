@@ -46,13 +46,24 @@ function urlPathFor(article) {
     : `/guides/${article.category}/${article.slug}`;
 }
 
+function loadRedirected() {
+  try {
+    const p = path.join(ROOT, 'guide-redirects.js');
+    if (!fs.existsSync(p)) return new Set();
+    const m = fs.readFileSync(p, 'utf-8').match(/\{[\s\S]*\}/);
+    return m ? new Set(Object.keys(JSON.parse(m[0]))) : new Set();
+  } catch { return new Set(); }
+}
+
 function main() {
   const articles = parseArticles(ARTICLES_PATH);
+  const REDIRECTED = loadRedirected(); // consolidated dupes must stay out of the sitemap
   let xml = fs.readFileSync(SITEMAP_PATH, 'utf-8');
 
   const missing = [];
   for (const a of articles) {
     if (!a.slug || !a.category) continue;
+    if (REDIRECTED.has(a.slug)) continue;
     const loc = `${SITE_URL}${urlPathFor(a)}`;
     if (!xml.includes(`<loc>${loc}</loc>`)) missing.push({ loc, category: a.category });
   }

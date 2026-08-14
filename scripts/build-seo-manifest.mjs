@@ -70,6 +70,16 @@ const ROUTES = extractArray(siteSrc, 'ROUTES');
 const DESTINATIONS = extractArray(siteSrc, 'DESTINATIONS');
 const FERRIES = extractArray(siteSrc, 'FERRIES');
 
+// Slugs consolidated into a canonical page (see guide-redirects.js) are
+// excluded from the manifest and sitemap — they 301 to their canonical.
+let REDIRECTED = new Set();
+if (exists('guide-redirects.js')) {
+  try {
+    const m = read('guide-redirects.js').match(/\{[\s\S]*\}/);
+    if (m) REDIRECTED = new Set(Object.keys(JSON.parse(m[0])));
+  } catch (e) { console.warn(`guide-redirects.js parse failed: ${e.message.split('\n')[0]}`); }
+}
+
 /* ── build manifest ──────────────────────────────────────────────────── */
 const manifest = {};
 const put = (p, t, d, i, ty, extra = {}) => { manifest[p] = { t, d, i: i || '', ty, ...extra }; };
@@ -89,6 +99,7 @@ put('/shop', 'Motorcycle Gear Shop — VisorUp', 'Shop hand-picked motorcycle to
 let nGuides = 0, nInfo = 0;
 for (const a of ARTICLES) {
   if (!a || !a.slug) continue;
+  if (REDIRECTED.has(a.slug)) continue; // consolidated duplicate
   const isInfo = a.category === 'infographics' || (Array.isArray(a.tags) && a.tags.includes('infographic'));
   const p = isInfo ? `/infographics/${a.slug}` : `/guides/${a.category}/${a.slug}`;
   const extra = {};

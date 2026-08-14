@@ -65,6 +65,17 @@ function getRepoPaths(workDir) {
   };
 }
 
+// Slugs consolidated into a canonical page (guide-redirects.js) must not be
+// used as link sources or targets — they 301/redirect to their canonical.
+function loadRedirected(wd) {
+  try {
+    const p = path.join(wd, 'guide-redirects.js');
+    if (!fs.existsSync(p)) return new Set();
+    const m = fs.readFileSync(p, 'utf-8').match(/\{[\s\S]*\}/);
+    return m ? new Set(Object.keys(JSON.parse(m[0]))) : new Set();
+  } catch { return new Set(); }
+}
+
 /* ── Article helpers ────────────────────────────────────────────────── */
 // Parse the ARTICLES array out of the raw articles.js source. The file is
 // valid JSON inside the array literal, so JSON.parse round-trips exactly —
@@ -97,7 +108,7 @@ function getExistingInternalLinks(html) {
   return links;
 }
 
-function findLinkOpportunities(article, content, allArticles) {
+function findLinkOpportunities(article, content, allArticles, redirected = new Set()) {
   const existingLinks = getExistingInternalLinks(content);
   const opportunities = [];
 
@@ -111,6 +122,7 @@ function findLinkOpportunities(article, content, allArticles) {
 
   for (const target of allArticles) {
     if (target.slug === article.slug) continue;
+    if (redirected.has(target.slug)) continue;
     if (existingLinks.has(target.slug)) continue;
 
     let score = 0;
@@ -228,6 +240,7 @@ export async function run() {
   log.info('Internal Linker starting');
 
   const paths = getRepoPaths();
+  const redirected = loadRedirected(paths.root);
   let src = fs.readFileSync(paths.articlesIndex, 'utf-8');
   const articles = parseArticles(src);
 
@@ -242,13 +255,14 @@ export async function run() {
   let skippedUnlocatable = 0;
 
   for (const article of articles) {
+    if (redirected.has(article.slug)) continue; // consolidated dupe — leave untouched
     const content = article.content;
     if (typeof content !== 'string' || content.length < MIN_CONTENT_LENGTH) continue;
 
     const existingLinks = getExistingInternalLinks(content);
     const budget = Math.min(MAX_LINKS_PER_ARTICLE, MAX_TOTAL_INTERNAL_LINKS - existingLinks.size);
     if (budget <= 0) continue; // already sufficiently linked
-    const opportunities = findLinkOpportunities(article, content, articles).slice(0, budget);
+    const opportunities = findLinkOpportunities(article, content, articles, redirected).slice(0, budget);
     if (!opportunities.length) continue;
 
     const { content: linked, injected } = injectLinks(content, opportunities);
