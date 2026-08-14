@@ -579,6 +579,18 @@ function rebuildSeoManifest(repoRoot) {
   }
 }
 
+// Rebuild the split content (content-index.js + content/<slug>.json) so new
+// infographic pages appear in the eager metadata index and have a fetchable body.
+function rebuildContentSplit(repoRoot) {
+  try {
+    execSync('node scripts/build-content-split.mjs', { cwd: repoRoot, stdio: 'pipe' });
+    return true;
+  } catch (err) {
+    log.warn(`Content split rebuild failed: ${err.message.split('\n')[0]}`);
+    return false;
+  }
+}
+
 function gitCommitAndPush(repoRoot, files, message) {
   if (!GH_TOKEN) {
     log.warn('No GITHUB_TOKEN — skipping git push');
@@ -763,6 +775,8 @@ export async function run() {
 
   // Rebuild the edge SEO manifest so new infographic pages get correct metadata
   if (rebuildSeoManifest(WORK_DIR)) changedFiles.push('seo-manifest.json');
+  // Rebuild the split content so new infographics appear in the eager index + have a body
+  if (rebuildContentSplit(WORK_DIR)) { changedFiles.push('content-index.js'); changedFiles.push('content'); }
 
   // Commit and push
   const sha = gitCommitAndPush(

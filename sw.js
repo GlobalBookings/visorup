@@ -1,4 +1,4 @@
-const CACHE_NAME = 'visorup-v1';
+const CACHE_NAME = 'visorup-v2';
 const TILE_CACHE = 'visorup-tiles-v1';
 const OFFLINE_PAGE = '/offline.html';
 
@@ -19,7 +19,7 @@ const APP_SHELL = [
   '/supabase-config.js',
   '/bikes.js',
   '/bike-catalogue.js',
-  '/articles.js',
+  '/content-index.js',
   '/fuel-stations-uk.js',
   '/poi-england.js',
   '/poi-scotland.js',

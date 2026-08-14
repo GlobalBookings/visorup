@@ -906,14 +906,18 @@ class VisorUpSite {
         if (parts[1]) {
           var infographic = typeof ARTICLES !== 'undefined' && ARTICLES.find(function(a) { return a.slug === parts[1] && a.tags && a.tags.indexOf('infographic') >= 0; });
           if (infographic) {
-            this.pageContent.innerHTML = this.renderInfographic(infographic) + this.renderFooter();
+            var selfIg = this;
             this.setActiveNav('explore');
             this.setTitle(infographic.title);
             this._setMeta({ description: infographic.metaDescription, image: infographic.heroImage, type: 'article' });
-            this._injectJsonLd(infographic);
-            this._bindShareCopyBtns();
-            VisorUpAnalytics.trackGuideView(infographic.slug, 'infographic');
-            this.scrollToTop();
+            this.pageContent.innerHTML = this._articleLoading();
+            this._loadArticleBody(infographic).then(function(full) {
+              selfIg.pageContent.innerHTML = selfIg.renderInfographic(full) + selfIg.renderFooter();
+              selfIg._injectJsonLd(full);
+              selfIg._bindShareCopyBtns();
+              VisorUpAnalytics.trackGuideView(full.slug, 'infographic');
+              selfIg.scrollToTop();
+            });
           } else {
             this.pageContent.innerHTML = this.render404();
             this.setTitle('Page Not Found');
@@ -940,14 +944,18 @@ class VisorUpSite {
           }
           var article = typeof ARTICLES !== 'undefined' && ARTICLES.find(function(a) { return a.category === parts[1] && a.slug === parts[2]; });
           if (article) {
-            this.pageContent.innerHTML = this.renderArticle(article) + this.renderFooter();
+            var self = this;
             this.setActiveNav('guides');
             this.setTitle(article.title);
             this._setMeta({ description: article.metaDescription, image: article.heroImage, type: 'article' });
-            this._injectJsonLd(article);
-            this._bindShareCopyBtns();
-            VisorUpAnalytics.trackGuideView(article.slug, article.category);
-            this.scrollToTop();
+            this.pageContent.innerHTML = this._articleLoading();
+            this._loadArticleBody(article).then(function(full) {
+              self.pageContent.innerHTML = self.renderArticle(full) + self.renderFooter();
+              self._injectJsonLd(full);
+              self._bindShareCopyBtns();
+              VisorUpAnalytics.trackGuideView(full.slug, full.category);
+              self.scrollToTop();
+            });
           } else {
             this.pageContent.innerHTML = this.render404();
             this.setTitle('Page Not Found');
@@ -6367,6 +6375,31 @@ class VisorUpSite {
         '<p>VisorUp is a UK motorcycle touring resource run by riders. Our team road-tests routes, gear and bikes across Britain, from the North Coast 500 to the South Downs, and cross-checks every guide against manufacturer specs, current UK regulations and real-world riding before we publish. We update our guides regularly to keep prices, standards and recommendations accurate.</p>' +
       '</div>' +
     '</div>';
+  }
+
+  // Article bodies (content, faq, tables, etc.) are not in the eager metadata
+  // index — they load on demand from /content/<slug>.json and are then cached
+  // onto the article object so re-visits are instant. Resolves to the (merged)
+  // article; on failure it still resolves with a friendly fallback body.
+  _loadArticleBody(article) {
+    if (!article) return Promise.resolve(article);
+    if (typeof article.content === 'string') return Promise.resolve(article); // already loaded
+    return fetch('/content/' + encodeURIComponent(article.slug) + '.json', { credentials: 'same-origin' })
+      .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(body) {
+        Object.assign(article, body);
+        if (typeof article.content !== 'string') article.content = '';
+        return article;
+      })
+      .catch(function() {
+        article.content = '<div class="container" style="padding:24px 0"><p>Sorry, this guide could not be loaded. Please <a href="#" onclick="location.reload();return false;">refresh the page</a>.</p></div>';
+        return article;
+      });
+  }
+
+  _articleLoading() {
+    return '<section class="page-section"><div class="container" style="padding:120px 0;text-align:center">' +
+      '<i class="fas fa-spinner fa-spin" style="font-size:32px;color:var(--accent)"></i></div></section>';
   }
 
   // Contextual monetisation: a "Ride prepared" box linking to the relevant
