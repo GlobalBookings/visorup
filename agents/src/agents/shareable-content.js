@@ -66,7 +66,30 @@ function getRepoPaths(workDir) {
     articlesIndex: path.join(wd, 'articles.js'),
     articlesDir: path.join(wd, 'articles'),
     imagesDir: path.join(wd, 'public', 'images', 'guides'),
+    sitemap: path.join(wd, 'sitemap.xml'),
   };
+}
+
+/* ── Sitemap helpers ────────────────────────────────────────────────── */
+// Articles are only reachable at /guides/{category}/{slug}; add each new
+// article to sitemap.xml so search engines can actually discover it.
+function addUrlToSitemap(sitemapPath, urlPath, { changefreq = 'monthly', priority = '0.6' } = {}) {
+  if (!fs.existsSync(sitemapPath)) {
+    log.warn(`sitemap.xml not found at ${sitemapPath} — skipping sitemap update`);
+    return false;
+  }
+  let xml = fs.readFileSync(sitemapPath, 'utf-8');
+  const loc = `${SITE_URL}${urlPath}`;
+  if (xml.includes(`<loc>${loc}</loc>`)) return false; // already present
+  const entry = `  <url><loc>${loc}</loc><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
+  const closeIdx = xml.lastIndexOf('</urlset>');
+  if (closeIdx === -1) {
+    log.error('Could not find </urlset> in sitemap.xml');
+    return false;
+  }
+  xml = xml.slice(0, closeIdx) + entry + xml.slice(closeIdx);
+  fs.writeFileSync(sitemapPath, xml, 'utf-8');
+  return true;
 }
 
 /* ── Article index helpers ──────────────────────────────────────────── */
@@ -352,6 +375,11 @@ export async function run() {
     ];
     if (heroImage) changedFiles.push(heroImage);
 
+    // Add to sitemap.xml so search engines can discover the new guide
+    if (addUrlToSitemap(paths.sitemap, `/guides/${category}/${topic.slug}`)) {
+      changedFiles.push('sitemap.xml');
+    }
+
     // Commit and push
     const sha = gitCommitAndPush(
       paths.root,
@@ -366,7 +394,7 @@ export async function run() {
         `Published *${topic.type}* article${sha ? ` • commit \`${sha}\`` : ''}\n` +
         `*${topic.title}*\n` +
         `Category: ${category}\n` +
-        `${SITE_URL}/guides/${topic.slug}`,
+        `${SITE_URL}/guides/${category}/${topic.slug}`,
       ),
     ];
 

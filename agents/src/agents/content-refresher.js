@@ -349,7 +349,7 @@ export async function run() {
       if (written) {
         const filePath = path.join('articles', `${article.slug}.js`);
         changedFiles.push(filePath);
-        results.push({ slug: article.slug, title: article.title, score, reasons });
+        results.push({ slug: article.slug, category: article.category, title: article.title, score, reasons });
         log.info(`Refreshed: ${article.slug}`);
       }
     } catch (err) {
@@ -373,7 +373,7 @@ export async function run() {
       ...results.map(r => slackSection(
         `*${r.title}*\n` +
         `Score: ${r.score} — ${r.reasons.join(', ')}\n` +
-        `${SITE_URL}/guides/${r.slug}`,
+        `${SITE_URL}/guides/${r.category}/${r.slug}`,
       )),
     ];
 

@@ -36,6 +36,7 @@ const POSTS_PER_RUN = Number(process.env.POSTS_PER_RUN) || 2;
 const CATEGORIES = [
   'Routes',
   'Destinations',
+  'Bikes',
   'Gear',
   'Maintenance',
   'Planning',
@@ -51,7 +52,30 @@ function getRepoPaths(workDir) {
     articlesIndex: path.join(wd, 'articles.js'),
     articlesDir: path.join(wd, 'articles'),
     imagesDir: path.join(wd, 'public', 'images', 'guides'),
+    sitemap: path.join(wd, 'sitemap.xml'),
   };
+}
+
+/* ── Sitemap helpers ────────────────────────────────────────────────── */
+// Articles are only reachable at /guides/{category}/{slug}; add each new
+// article to sitemap.xml so search engines can actually discover it.
+function addUrlToSitemap(sitemapPath, urlPath, { changefreq = 'monthly', priority = '0.6' } = {}) {
+  if (!fs.existsSync(sitemapPath)) {
+    log.warn(`sitemap.xml not found at ${sitemapPath} — skipping sitemap update`);
+    return false;
+  }
+  let xml = fs.readFileSync(sitemapPath, 'utf-8');
+  const loc = `${SITE_URL}${urlPath}`;
+  if (xml.includes(`<loc>${loc}</loc>`)) return false; // already present
+  const entry = `  <url><loc>${loc}</loc><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
+  const closeIdx = xml.lastIndexOf('</urlset>');
+  if (closeIdx === -1) {
+    log.error('Could not find </urlset> in sitemap.xml');
+    return false;
+  }
+  xml = xml.slice(0, closeIdx) + entry + xml.slice(closeIdx);
+  fs.writeFileSync(sitemapPath, xml, 'utf-8');
+  return true;
 }
 
 /* ── Article index helpers ──────────────────────────────────────────── */
@@ -159,14 +183,22 @@ async function findContentGaps(existingSlugs, existingTitles = []) {
 /* ── Assign category ────────────────────────────────────────────────── */
 function assignCategory(query) {
   const q = query.toLowerCase();
+  // Bikes: model / licence tier / engine recommendations that mention a bike.
+  // Checked first so "best A2 bikes for touring" lands in 'bikes', not a random category.
+  if (/\bbikes?\b/i.test(q) &&
+      /\b(best|top|a1|a2|125|learner|beginner|first|adventure|naked|sport|touring|cruiser|scrambler|retro|cheap|budget|which|licence|license|cc|bhp)\b/i.test(q)) return 'Bikes';
+  if (/\b(a1|a2)[- ]?(licence|license|restricted)\b/i.test(q)) return 'Bikes';
+  // Buying guides: product round-ups / "best ... to buy" accessory guides.
+  if (/\b(best|top|budget|cheap|cheapest|affordable)\b.*\b(pannier|luggage|top ?box|tank bag|intercom|sat ?nav|gps|cover|lock|battery|charger|heated grip)s?\b/i.test(q)
+      || /\bbuying guide\b/i.test(q)) return 'buying-guides';
   if (/route|road|a-road|b-road|pass|nc500|coast/i.test(q)) return 'Routes';
   if (/scotland|wales|england|highlands|lake district|isle of/i.test(q)) return 'Destinations';
-  if (/helmet|jacket|glove|boot|gear|luggage|pannier|tank bag/i.test(q)) return 'Gear';
-  if (/oil|chain|tyre|brake|service|maintenance|clean/i.test(q)) return 'Maintenance';
-  if (/plan|pack|budget|checklist|prepare|itinerary/i.test(q)) return 'Planning';
+  if (/helmet|jacket|glove|boot|gear|jeans|trousers|base layer|luggage|pannier|tank bag/i.test(q)) return 'Gear';
+  if (/oil|chain|tyre|brake|service|maintenance|clean|storage/i.test(q)) return 'Maintenance';
+  if (/plan|pack|checklist|prepare|itinerary|budget/i.test(q)) return 'Planning';
   if (/safe|hazard|rain|ice|visibility|first aid/i.test(q)) return 'Safety';
   if (/camp|b&b|hotel|hostel|accommodation|bothy|stay/i.test(q)) return 'Accommodation';
-  return CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+  return 'Planning';
 }
 
 /* ── Generate article with Claude ───────────────────────────────────── */
@@ -448,6 +480,11 @@ export async function run() {
       appendToArticlesIndex(paths.articlesIndex, metadata);
       changedFiles.push('articles.js');
 
+      // Add to sitemap.xml so search engines can discover the new guide
+      if (addUrlToSitemap(paths.sitemap, `/guides/${article.category}/${article.slug}`)) {
+        changedFiles.push('sitemap.xml');
+      }
+
       existingSlugs.add(article.slug);
       results.push({ slug: article.slug, title: article.title, category: article.category });
       log.info(`Published: ${article.title}`);
@@ -479,7 +516,7 @@ export async function run() {
     ...results.map(r => slackSection(
       `*${r.title}*\n` +
       `Category: ${r.category}\n` +
-      `${SITE_URL}/guides/${r.slug}`,
+      `${SITE_URL}/guides/${r.category}/${r.slug}`,
     )),
   ];
 

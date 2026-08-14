@@ -576,7 +576,7 @@ function gitCommitAndPush(repoRoot, files, message) {
 
 /* ── Publish as guide page ───────────────────────────────────────────── */
 function buildArticleContent(info, pngPublicPath) {
-  const embedCode = `<a href="${SITE_URL}/guides/${info.id}"><img src="${SITE_URL}/${pngPublicPath}" alt="${info.title}" style="max-width:100%;height:auto;" /></a>\n<p>Source: <a href="${SITE_URL}" rel="follow">VisorUp.co.uk</a> — UK Motorcycle Touring</p>`;
+  const embedCode = `<a href="${SITE_URL}/infographics/${info.id}"><img src="${SITE_URL}/${pngPublicPath}" alt="${info.title}" style="max-width:100%;height:auto;" /></a>\n<p>Source: <a href="${SITE_URL}" rel="follow">VisorUp.co.uk</a> — UK Motorcycle Touring</p>`;
   const escapedEmbed = embedCode.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
   return `<div style="text-align:center;margin-bottom:32px">
@@ -596,7 +596,7 @@ function buildArticleContent(info, pngPublicPath) {
 
 <div style="background:#1A1F1E;border:1px solid #2a302e;border-radius:12px;padding:20px;margin:24px 0">
   <h4 style="color:#D68A2D;margin:0 0 8px;font-size:14px">Preview of embed:</h4>
-  <a href="${SITE_URL}/guides/${info.id}"><img src="/${pngPublicPath}" alt="${info.title}" style="max-width:100%;height:auto;border-radius:8px" /></a>
+  <a href="${SITE_URL}/infographics/${info.id}"><img src="/${pngPublicPath}" alt="${info.title}" style="max-width:100%;height:auto;border-radius:8px" /></a>
   <p style="font-size:12px;color:#7a8a85;margin:8px 0 0">Source: <a href="${SITE_URL}" style="color:#D68A2D">VisorUp.co.uk</a> — UK Motorcycle Touring</p>
 </div>`;
 }
@@ -709,8 +709,8 @@ export async function run() {
         pngPublicPath,
       );
 
-      results.push({ id: info.id, title: info.title, url: `${SITE_URL}/guides/${info.id}` });
-      log.info(`Published: ${info.title} -> /guides/${info.id}`);
+      results.push({ id: info.id, title: info.title, url: `${SITE_URL}/infographics/${info.id}` });
+      log.info(`Published: ${info.title} -> /infographics/${info.id}`);
     } catch (err) {
       log.error(`Failed to generate ${info.id}: ${err.message}`);
     }
