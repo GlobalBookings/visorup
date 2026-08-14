@@ -1,6 +1,6 @@
 export const content = `<h2>Best A2 Bikes for UK Touring in 2026</h2>
 
-<p>Right, let's talk about A2 bikes. If you're reading this, chances are you're either on your restricted licence or you're helping someone choose their first proper touring mount. I've been there, and I've watched mates make both brilliant and questionable choices when it comes to A2-compliant machines.</p>
+<p>Right, let's talk about A2 bikes. If you're reading this, chances are you're either on your restricted licence or you're helping someone choose their first proper <a href="/guides/modular-helmets-guide">touring</a> mount. I've been there, and I've watched mates make both brilliant and questionable choices when it comes to A2-compliant machines.</p>
 
 <p>The thing about A2 bikes is they've come a long way. We're not talking about underpowered learner machines anymore. With the 47bhp restriction, modern A2 bikes are genuinely capable touring companions, especially on British roads where you're rarely screaming along at motorway speeds for hours on end. I've taken A2 bikes up to Scotland, around Wales, and across the Pennines, and they've never left me wanting.</p>
 
@@ -24,7 +24,7 @@ export const content = `<h2>Best A2 Bikes for UK Touring in 2026</h2>
 
 <p>I'll start with these because they're bloody brilliant all-rounders. The parallel twin engine is smooth, reliable, and makes proper torque low down where you actually use it. I've ridden the Ninja 650 from London to Edinburgh and back, and it never missed a beat.</p>
 
-<p>The Ninja gives you weather protection with its half fairing, while the Z650 is the naked version for those who prefer the upright position. Both handle British roads brilliantly – stable enough for motorways, nimble enough for the Scottish borders.</p>
+<p>The Ninja gives you <a href="/guides/textile-touring-jackets">weather</a> protection with its half fairing, while the Z650 is the naked version for those who prefer the upright position. Both handle British roads brilliantly – stable enough for motorways, nimble enough for the Scottish borders.</p>
 
 <p>What I love: The fuel economy. I've seen 65mpg on a steady run, which means you can cover serious distance between fill-ups. The seat's comfortable for a few hours, and there are loads of aftermarket options for racks and panniers. Check out <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> for luggage options that fit these models perfectly.</p>
 
@@ -74,7 +74,7 @@ export const content = `<h2>Best A2 Bikes for UK Touring in 2026</h2>
 
 <h3>Luggage and Carrying Capacity</h3>
 
-<p>Right, this is crucial. You can have the best bike in the world, but if you can't carry your gear, you're stuck with day trips. I always fit proper hard luggage – panniers and a top box if possible. Soft luggage works, but it's a faff in British weather and doesn't offer the same security.</p>
+<p>Right, this is crucial. You can have the <a href="/guides/best-touring-helmets-uk">best</a> bike in the world, but if you can't carry your gear, you're stuck with day trips. I always fit proper hard luggage – panniers and a top box if possible. Soft luggage works, but it's a faff in British weather and doesn't offer the same security.</p>
 
 <p>Most A2 bikes have decent aftermarket luggage options. The CB500X probably has the most comprehensive factory options, but you can kit out any of these bikes properly. Budget £300-£600 for a decent luggage system. Trust me, it's worth it.</p>
 
@@ -114,7 +114,7 @@ The best A2 touring bike isn't the one with the flashiest spec sheet – it's th
 
 <h2>Buying Advice</h2>
 
-<p>If you're buying new, most of these bikes will be A2-compliant from the factory in 2026. Make sure you get the restricted version rather than planning to restrict a full-power bike yourself – insurance and legality get complicated otherwise.</p>
+<p>If you're buying new, most of these bikes will be A2-compliant from the factory in <a href="/guides/summer-motorcycle-gloves">2026</a>. Make sure you get the restricted version rather than planning to restrict a full-power bike yourself – insurance and legality get complicated otherwise.</p>
 
 <p>If you're buying used, there's a strong market for all these models. The Japanese bikes hold their value well but are easy to find. The Interceptor is newer to the market so there's less choice second-hand, but prices are reasonable.</p>
 
@@ -128,4 +128,4 @@ The best A2 touring bike isn't the one with the flashiest spec sheet – it's th
 
 <p>Whichever you choose, fit proper luggage, wear decent gear, and get out there. Britain's got brilliant roads waiting for you, and an A2 bike is more than enough machine to enjoy them properly. The restrictions are temporary, but the touring bug is permanent – trust me on that one.</p>
 
-<p>Now get yourself sorted with some proper kit from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a>, pick your bike, and I'll see you out there. Probably at a rainy service station somewhere in Scotland, both of us grinning despite the weather.</p>`;
+<p>Now get yourself sorted with some proper kit from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a>, pick your bike, and I'll see you out there. Probably at a rainy service station somewhere in Scotland, both of us grinning despite the weather. Read our <a href="/guides/motorcycle-intercom-systems">Best Motorcycle Intercom Systems for Touring 2026</a> guide for more.</p>`;

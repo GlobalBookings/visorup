@@ -55,13 +55,13 @@ A mesh jacket excels in one specific job: keeping you cool in warm weather. Ask 
 
 <p>The £180-£280 bracket is where I think most riders should focus their attention. You're getting proper CE Level 2 armour, solid construction, and enough features to handle varied conditions. The materials might not be quite as refined as the premium options, but they'll still last you several seasons of regular use.</p>
 
-<p>I've found jackets in this range work brilliantly for weekend touring and summer commuting. They're good enough that you don't feel compromised on safety, but not so expensive that you're paranoid about leaving the bike in a pub car park while you grab lunch.</p>
+<p>I've found jackets in this range work brilliantly for weekend <a href="/guides/aa-breakdown-motorcycle-cover">touring</a> and summer commuting. They're good enough that you don't feel compromised on safety, but not so expensive that you're paranoid about leaving the bike in a pub car park while you grab lunch.</p>
 
 <h3>Budget Conscious: What You Can Get Away With</h3>
 
 <p>Below £150, you're making compromises. That's not necessarily a deal-breaker if you understand what you're sacrificing. Budget mesh jackets typically use lighter materials, cheaper zippers, and Level 1 armour. The fit is usually more generic, which means more flapping at speed and less comfort over long distances.</p>
 
-<p>That said, I've seen budget jackets perform admirably for occasional summer use. If you're only planning a couple of week-long tours per year and primarily ride in cooler conditions, a budget mesh jacket as a supplementary piece makes sense. Just don't expect it to last beyond two seasons of regular use.</p>
+<p>That said, I've seen budget jackets perform admirably for occasional summer use. If you're only planning a couple of week-long <a href="/guides/scotland-motorcycle-routes">tours</a> per year and primarily ride in cooler conditions, a budget mesh jacket as a supplementary piece makes sense. Just don't expect it to last beyond two seasons of regular use.</p>
 
 <h2>Fit, Sizing, and the Layering Challenge</h2>
 
@@ -130,7 +130,7 @@ A mesh jacket excels in one specific job: keeping you cool in warm weather. Ask 
 
 <p>Right, enough theory. Here's what you actually need to do:</p>
 
-<p>First, check last year's riding patterns. Look at when you rode, what temperatures you encountered, and whether you remember being uncomfortably hot. That'll tell you whether a mesh jacket solves a real problem for you or whether you're buying gear you don't actually need.</p>
+<p>First, check last year's riding patterns. Look at when you rode, what temperatures you encountered, and whether you remember being uncomfortably hot. That'll tell you whether a mesh jacket solves a <a href="/guides/best-a2-bikes-uk-touring-2026">real</a> problem for you or whether you're buying gear you don't actually need.</p>
 
 <p>Second, set a realistic budget. Factor in the cost of upgraded armour, a proper base layer, and a rain solution. A £200 jacket might actually cost £280 once you've got it properly sorted.</p>
 
@@ -138,4 +138,4 @@ A mesh jacket excels in one specific job: keeping you cool in warm weather. Ask 
 
 <p>Finally, remember that gear is only valuable if you actually use it. A mesh jacket sitting in your wardrobe because it's "too nice" to risk is money wasted. Buy something you'll actually wear, maintain it properly, and it'll serve you brilliantly for years of summer touring across Britain's best roads.</p>
 
-<p>Now get out there and enjoy those warm days we get about three weeks per year. Make them count.</p>`;
+<p>Now get out there and enjoy those warm days we get about three weeks per year. Make them count. Read our <a href="/guides/best-motorcycle-roads-lake-district-2026">Best Lake District Motorcycle Roads: Complete 2026 Guide</a> guide for more. Read our <a href="/guides/motorcycle-routes-scotland">Motorcycle Routes Scotland: Complete Guide 2026 | VisorUp</a> guide for more.</p>`;

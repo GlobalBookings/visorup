@@ -18,7 +18,7 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <h2>My Top Picks for Affordable Touring Helmets</h2>
 
-<p>I've put serious miles on several budget-friendly helmets, and these are the ones I'd actually recommend to mates. I'm focusing on full-face helmets here because that's what I wear for touring—better weather protection and safety for those long days in the saddle.</p>
+<p>I've put serious miles on several budget-friendly helmets, and these are the ones I'd actually recommend to mates. I'm focusing on full-face helmets here because that's what I wear for touring—better weather <a href="/guides/knee-armour-guide">protection</a> and safety for those long days in the saddle.</p>
 
 <h3>Caberg Jackal</h3>
 
@@ -52,7 +52,7 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <h3>Comfort Features</h3>
 
-<p>This is where you'll notice the difference most. Premium helmets have better ventilation systems, softer interior padding, more adjustment options, and quieter designs. Affordable helmets are noisier (wear earplugs anyway—you should regardless of helmet price), have simpler ventilation, and the padding might not be as plush.</p>
+<p>This is where you'll notice the difference most. Premium helmets have better ventilation <a href="/guides/motorcycle-intercom-systems">systems</a>, softer interior padding, more adjustment options, and quieter designs. Affordable helmets are noisier (wear earplugs anyway—you should regardless of helmet price), have simpler ventilation, and the padding might not be as plush.</p>
 
 <p>But here's the thing: comfort is subjective and often about fit rather than price. I've worn £500 helmets that gave me pressure headaches and £150 helmets that felt perfect. Don't assume expensive equals comfortable for your head.</p>
 
@@ -158,4 +158,4 @@ export const content = `<h2>Finding Quality Lids Without Breaking the Bank</h2>
 
 <p>Use the money you save to invest in other crucial gear—good gloves, a quality jacket, or putting it toward your next tour. A <a href="/guides/best-motorcycle-roads-lake-district-2026">complete</a> set of decent gear beats one premium item and compromises elsewhere.</p>
 
-<p>Try before you buy whenever possible, check SHARP ratings, wait for sales if you're not in a hurry, and maintain your helmet properly. Do these things, and your affordable helmet will see you through years of reliable British touring. Now get out there and use it—there are miles waiting to be ridden. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/affordable-helmets-uk-touring-guide">Affordable Motorcycle Helmets UK: Budget Touring Guide 2026</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more.</p>`;
+<p>Try before you buy whenever possible, check SHARP ratings, wait for sales if you're not in a hurry, and maintain your helmet properly. Do these things, and your affordable helmet will see you through years of reliable British touring. Now get out there and use it—there are miles waiting to be ridden. Read our <a href="/guides/modular-helmets-guide">Modular Helmets Guide: Best Flip-Front Helmets for Touring</a> guide for more. Read our <a href="/guides/best-motorcycle-jeans-uk-touring">Best Motorcycle Jeans for UK Touring 2026 | VisorUp</a> guide for more. Read our <a href="/guides/aa-breakdown-motorcycle-cover">AA Breakdown Motorcycle Cover 2026: Touring Rider's Guide</a> guide for more. Read our <a href="/guides/affordable-helmets-uk-touring-guide">Affordable Motorcycle Helmets UK: Budget Touring Guide 2026</a> guide for more. Read our <a href="/guides/full-face-helmets-touring">Full-Face Helmets for Long-Distance Touring in the UK</a> guide for more. Read our <a href="/guides/best-a2-bikes-uk-touring-2026">Best A2 Bikes for UK Touring 2026 | Real Rider Guide</a> guide for more. Read our <a href="/guides/summer-motorcycle-gloves">Best Summer Motorcycle Gloves for UK Touring 2026</a> guide for more. Read our <a href="/guides/action-cameras-motorcycle">Action Cameras for Motorcycle Touring: Complete Guide</a> guide for more.</p>`;
