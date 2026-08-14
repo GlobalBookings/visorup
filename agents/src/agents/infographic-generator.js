@@ -26,6 +26,28 @@ const GH_TOKEN = process.env.GITHUB_TOKEN;
 const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
 
+/* ── Sitemap helper ─────────────────────────────────────────────────── */
+// Infographics are reachable at /infographics/{id}; add each to sitemap.xml
+// so search engines can discover it.
+function addUrlToSitemap(sitemapPath, urlPath, { changefreq = 'monthly', priority = '0.6' } = {}) {
+  if (!fs.existsSync(sitemapPath)) {
+    log.warn(`sitemap.xml not found at ${sitemapPath} — skipping sitemap update`);
+    return false;
+  }
+  let xml = fs.readFileSync(sitemapPath, 'utf-8');
+  const loc = `${SITE_URL}${urlPath}`;
+  if (xml.includes(`<loc>${loc}</loc>`)) return false; // already present
+  const entry = `  <url><loc>${loc}</loc><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
+  const closeIdx = xml.lastIndexOf('</urlset>');
+  if (closeIdx === -1) {
+    log.error('Could not find </urlset> in sitemap.xml');
+    return false;
+  }
+  xml = xml.slice(0, closeIdx) + entry + xml.slice(closeIdx);
+  fs.writeFileSync(sitemapPath, xml, 'utf-8');
+  return true;
+}
+
 /* ── Brand colours ──────────────────────────────────────────────────── */
 const BRAND = {
   accent: '#D68A2D',
@@ -639,6 +661,7 @@ export async function run() {
   const publicImgDir = path.join(WORK_DIR, 'public', 'images', 'infographics');
   const articlesDir = path.join(WORK_DIR, 'articles');
   const articlesIndex = path.join(WORK_DIR, 'articles.js');
+  const sitemapPath = path.join(WORK_DIR, 'sitemap.xml');
 
   fs.mkdirSync(outputDir, { recursive: true });
   fs.mkdirSync(publicImgDir, { recursive: true });
@@ -708,6 +731,11 @@ export async function run() {
         'articles.js',
         pngPublicPath,
       );
+
+      // Add to sitemap.xml so search engines can discover the infographic
+      if (addUrlToSitemap(sitemapPath, `/infographics/${info.id}`)) {
+        changedFiles.push('sitemap.xml');
+      }
 
       results.push({ id: info.id, title: info.title, url: `${SITE_URL}/infographics/${info.id}` });
       log.info(`Published: ${info.title} -> /infographics/${info.id}`);

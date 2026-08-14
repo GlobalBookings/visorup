@@ -4,7 +4,10 @@
  * Scans every article for internal-linking opportunities, injecting contextual
  * links to related guides and money pages to strengthen site architecture.
  *
- * Articles live in articles/{slug}.js with metadata in articles.js.
+ * Article content lives inline in the `content` field of each entry in
+ * articles.js — this is the file the site actually loads and renders, so the
+ * linker reads and writes it directly (the per-file articles/{slug}.js copies
+ * are not served and are intentionally left untouched).
  */
 
 import fs from 'node:fs';
@@ -25,6 +28,8 @@ const SITE_URL = process.env.SITE_URL || 'https://visorup.co.uk';
 const LOCAL_FALLBACK = path.join(__dirname, '..', '..', '..');
 const MAX_LINKS_PER_ARTICLE = 5;
 const MIN_CONTENT_LENGTH = 500;
+// When set, analyse and validate but do not write or commit (LINKER_DRY_RUN=1)
+const DRY_RUN = process.env.LINKER_DRY_RUN === '1';
 
 /* ── Money slugs — pages to prioritise linking TO ───────────────────── */
 const MONEY_SLUGS = [
@@ -58,53 +63,29 @@ function getRepoPaths(workDir) {
 }
 
 /* ── Article helpers ────────────────────────────────────────────────── */
-function parseArticlesIndex(indexPath) {
-  const src = fs.readFileSync(indexPath, 'utf-8');
+// Parse the ARTICLES array out of the raw articles.js source. The file is
+// valid JSON inside the array literal, so JSON.parse round-trips exactly —
+// which lets us locate and replace individual `content` values by their
+// canonical JSON serialisation without reformatting the rest of the file.
+function parseArticles(src) {
   const match = src.match(/const\s+ARTICLES\s*=\s*\[([\s\S]*)\];?\s*$/m);
   if (!match) {
     log.warn('Could not parse ARTICLES array from articles.js');
-    return [];
+    return null;
   }
   try {
     return JSON.parse(`[${match[1]}]`);
-  } catch {
-    try {
-      const fn = new Function(`return [${match[1]}]`);
-      return fn();
-    } catch (e) {
-      log.error(`Failed to parse articles.js: ${e.message}`);
-      return [];
-    }
+  } catch (e) {
+    log.error(`Failed to parse articles.js: ${e.message}`);
+    return null;
   }
-}
-
-function readArticleContent(articlesDir, slug) {
-  const filePath = path.join(articlesDir, `${slug}.js`);
-  if (!fs.existsSync(filePath)) return null;
-
-  const src = fs.readFileSync(filePath, 'utf-8');
-  const tmplMatch = src.match(/`([\s\S]*?)`/);
-  if (tmplMatch) return tmplMatch[1];
-  return src;
-}
-
-function writeArticleContent(articlesDir, slug, newContent) {
-  const filePath = path.join(articlesDir, `${slug}.js`);
-  if (!fs.existsSync(filePath)) return false;
-
-  let src = fs.readFileSync(filePath, 'utf-8');
-  const tmplMatch = src.match(/`([\s\S]*?)`/);
-  if (tmplMatch) {
-    src = src.replace(tmplMatch[0], '`' + newContent + '`');
-    fs.writeFileSync(filePath, src, 'utf-8');
-    return true;
-  }
-  return false;
 }
 
 /* ── Link analysis ──────────────────────────────────────────────────── */
 function getExistingInternalLinks(html) {
-  const linkRegex = /href=["']\/guides\/([^"']+)["']/g;
+  // Capture the final slug segment for both /guides/{slug} and
+  // /guides/{category}/{slug} so de-duplication works regardless of format.
+  const linkRegex = /href=["']\/guides\/(?:[^"'/]+\/)?([^"'/]+)["']/g;
   const links = new Set();
   let m;
   while ((m = linkRegex.exec(html)) !== null) {
@@ -187,7 +168,7 @@ function injectLinks(content, opportunities) {
 
       if (regex.test(modified) && !modified.match(new RegExp(`<a[^>]*>[^<]*${word}[^<]*<\\/a>`, 'i'))) {
         modified = modified.replace(regex, (_, before, match, after) => {
-          return `${before}<a href="/guides/${target.slug}">${match}</a>${after}`;
+          return `${before}<a href="/guides/${target.category}/${target.slug}">${match}</a>${after}`;
         });
         linked = true;
         injected++;
@@ -199,7 +180,7 @@ function injectLinks(content, opportunities) {
     if (!linked) {
       const lastP = modified.lastIndexOf('</p>');
       if (lastP > -1) {
-        const link = ` Read our <a href="/guides/${target.slug}">${target.title}</a> guide for more.`;
+        const link = ` Read our <a href="/guides/${target.category}/${target.slug}">${target.title}</a> guide for more.`;
         modified = modified.slice(0, lastP) + link + modified.slice(lastP);
         injected++;
       }
@@ -244,9 +225,10 @@ export async function run() {
   log.info('Internal Linker starting');
 
   const paths = getRepoPaths();
-  const articles = parseArticlesIndex(paths.articlesIndex);
+  let src = fs.readFileSync(paths.articlesIndex, 'utf-8');
+  const articles = parseArticles(src);
 
-  if (!articles.length) {
+  if (!articles || !articles.length) {
     log.warn('No articles found in articles.js');
     return;
   }
@@ -254,49 +236,72 @@ export async function run() {
   log.info(`Analysing ${articles.length} articles for internal linking opportunities`);
 
   const results = [];
-  const changedFiles = [];
+  let skippedUnlocatable = 0;
 
   for (const article of articles) {
-    const content = readArticleContent(paths.articlesDir, article.slug);
-    if (!content || content.length < MIN_CONTENT_LENGTH) continue;
+    const content = article.content;
+    if (typeof content !== 'string' || content.length < MIN_CONTENT_LENGTH) continue;
 
     const existingLinks = getExistingInternalLinks(content);
     const opportunities = findLinkOpportunities(article, content, articles);
-
     if (!opportunities.length) continue;
 
     const { content: linked, injected } = injectLinks(content, opportunities);
+    if (injected <= 0 || linked === content) continue;
 
-    if (injected > 0) {
-      const written = writeArticleContent(paths.articlesDir, article.slug, linked);
-      if (written) {
-        const filePath = path.join('articles', `${article.slug}.js`);
-        changedFiles.push(filePath);
-        results.push({
-          slug: article.slug,
-          title: article.title,
-          existingLinks: existingLinks.size,
-          injected,
-        });
-        log.info(`Injected ${injected} links into ${article.slug} (had ${existingLinks.size} existing)`);
-      }
+    // Replace this article's content in-place using its canonical JSON form.
+    // If the serialised value isn't uniquely locatable (escaping mismatch or
+    // duplicate content), skip it rather than risk corrupting articles.js.
+    const oldSerialized = JSON.stringify(content);
+    const newSerialized = JSON.stringify(linked);
+    const occurrences = src.split(oldSerialized).length - 1;
+    if (occurrences !== 1) {
+      skippedUnlocatable++;
+      log.warn(`Skipped ${article.slug}: content not uniquely locatable in articles.js (${occurrences} matches)`);
+      continue;
     }
+    src = src.split(oldSerialized).join(newSerialized);
+    results.push({
+      slug: article.slug,
+      title: article.title,
+      existingLinks: existingLinks.size,
+      injected,
+    });
+    log.info(`Injected ${injected} links into ${article.slug} (had ${existingLinks.size} existing)`);
   }
 
-  if (!changedFiles.length) {
-    log.info('No linking opportunities found');
+  if (!results.length) {
+    log.info('No linking opportunities applied');
     return;
   }
+
+  // Validate the modified source still parses to the same article count
+  // before writing anything to disk.
+  const verify = parseArticles(src);
+  if (!verify || verify.length !== articles.length) {
+    log.error('Post-edit validation failed — articles.js would be invalid; aborting without writing');
+    return;
+  }
+
+  const totalInjected = results.reduce((s, r) => s + r.injected, 0);
+
+  if (DRY_RUN) {
+    log.info(`[DRY RUN] Would update ${results.length} articles with ${totalInjected} links ` +
+      `(skipped ${skippedUnlocatable} unlocatable). Not writing or committing.`);
+    return;
+  }
+
+  fs.writeFileSync(paths.articlesIndex, src, 'utf-8');
+  const changedFiles = ['articles.js'];
 
   // Commit and push
   const sha = gitCommitAndPush(
     paths.root,
     changedFiles,
-    `seo: add internal links to ${changedFiles.length} article(s)`,
+    `seo: add internal links to ${results.length} article(s)`,
   );
 
   // Slack report
-  const totalInjected = results.reduce((s, r) => s + r.injected, 0);
   const blocks = [
     slackHeader('🔗 Internal Linker — VisorUp'),
     slackSection(

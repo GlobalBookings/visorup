@@ -212,7 +212,7 @@ Requirements:
 7. Include 3-4 internal links:
    - Routes: /routes/island-to-highlands, /routes/nc500-complete
    - Tools: /build-route, /plan-trip, /packing-checklist
-   - Guides: /guides/{relevant-slug}
+   - Guides: /guides/{category}/{slug} (guide links MUST include the category segment, e.g. /guides/routes/top-20-motorcycle-roads-uk)
 8. Include at least one blockquote with a strong opinion or key insight
 9. Make the intro compelling enough to share — hook the reader in the first 2 sentences
 10. End with a clear call-to-action

@@ -227,7 +227,7 @@ Requirements:
 7. Include 2-3 internal links:
    - Routes: /routes/island-to-highlands, /routes/nc500-complete
    - Tools: /build-route, /plan-trip, /packing-checklist
-   - Guides: /guides/{relevant-slug}
+   - Guides: /guides/{category}/{slug} (guide links MUST include the category segment, e.g. /guides/routes/top-20-motorcycle-roads-uk)
 8. Include one blockquote with a key takeaway
 9. End with a practical summary or action step
 10. Cover British weather, gear, and riding conditions where relevant

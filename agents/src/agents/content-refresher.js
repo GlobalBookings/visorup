@@ -247,7 +247,7 @@ Tasks:
 7. Add internal links where relevant:
    - Routes: /routes/island-to-highlands, /routes/nc500-complete
    - Tools: /build-route, /plan-trip, /packing-checklist
-   - Other guides: /guides/{slug}
+   - Other guides: /guides/{category}/{slug} (guide links MUST include the category segment, e.g. /guides/routes/top-20-motorcycle-roads-uk)
 8. Update the year to ${new Date().getFullYear()} where appropriate
 
 Return ONLY the refreshed HTML content. No wrapper, no explanation.`;
