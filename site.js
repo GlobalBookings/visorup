@@ -6348,6 +6348,7 @@ class VisorUpSite {
           '</article>' +
           '<aside class="article-sidebar">' +
             affiliates +
+            this._rideReadyCTA(a) +
             '<div class="article-tags"><h4>Tags</h4>' + tags + '</div>' +
           '</aside>' +
         '</div>' +
@@ -6365,6 +6366,56 @@ class VisorUpSite {
         '<h4>The VisorUp Team</h4>' +
         '<p>VisorUp is a UK motorcycle touring resource run by riders. Our team road-tests routes, gear and bikes across Britain, from the North Coast 500 to the South Downs, and cross-checks every guide against manufacturer specs, current UK regulations and real-world riding before we publish. We update our guides regularly to keep prices, standards and recommendations accurate.</p>' +
       '</div>' +
+    '</div>';
+  }
+
+  // Contextual monetisation: a "Ride prepared" box linking to the relevant
+  // partner hubs + buying guides for informational guides (which otherwise
+  // carry no affiliate CTAs). Reuses the affiliate-box styles so it looks native.
+  _rideReadyCTA(a) {
+    var cat = (a.category || '').toLowerCase();
+    if (cat === 'buying-guides' || cat === 'infographics') return '';
+    if (a.tags && a.tags.indexOf('infographic') >= 0) return '';
+    var HUBS = {
+      'breakdown-cover': ['fa-truck-pickup', 'Breakdown cover'],
+      'travel-insurance': ['fa-umbrella', 'Travel &amp; tour insurance'],
+      'tyres': ['fa-circle-notch', 'Tyres compared'],
+      'bike-security': ['fa-lock', 'Security &amp; trackers'],
+      'insurance': ['fa-shield-halved', 'Bike insurance'],
+    };
+    var hubByCat = {
+      routes: ['breakdown-cover', 'travel-insurance', 'tyres'],
+      scenic: ['breakdown-cover', 'travel-insurance', 'tyres'],
+      destinations: ['breakdown-cover', 'travel-insurance', 'bike-security'],
+      seasonal: ['breakdown-cover', 'tyres', 'insurance'],
+      planning: ['breakdown-cover', 'travel-insurance', 'bike-security'],
+      bikes: ['insurance', 'breakdown-cover', 'bike-security'],
+      gear: ['tyres', 'breakdown-cover', 'travel-insurance'],
+      maintenance: ['tyres', 'breakdown-cover', 'insurance'],
+    };
+    var bgByCat = {
+      routes: [['best-motorcycle-panniers-uk-2026', 'Best panniers &amp; luggage'], ['best-motorcycle-jackets-uk-2026', 'Best touring jackets']],
+      scenic: [['best-motorcycle-jackets-uk-2026', 'Best touring jackets'], ['best-motorcycle-tank-bags-uk', 'Best tank bags']],
+      destinations: [['best-motorcycle-panniers-uk-2026', 'Best panniers &amp; luggage'], ['best-motorcycle-jackets-uk-2026', 'Best touring jackets']],
+      seasonal: [['best-waterproof-motorcycle-gloves-uk', 'Best waterproof gloves'], ['best-motorcycle-jackets-uk-2026', 'Best all-weather jackets']],
+      planning: [['best-motorcycle-panniers-uk-2026', 'Best panniers &amp; luggage'], ['best-motorcycle-tank-bags-uk', 'Best tank bags']],
+      bikes: [['best-full-face-helmets-uk-2026', 'Best full-face helmets'], ['best-motorcycle-jackets-uk-2026', 'Best jackets']],
+      gear: [['best-motorcycle-boots-uk-2026', 'Best boots'], ['best-full-face-helmets-uk-2026', 'Best helmets']],
+      maintenance: [['best-motorcycle-tank-bags-uk', 'Best tank bags'], ['best-motorcycle-panniers-uk-2026', 'Best luggage']],
+    };
+    function row(href, icon, label, cta) {
+      return '<a href="' + href + '" class="article-affiliate">' +
+        '<span class="article-affiliate-name"><i class="fas ' + icon + '" style="margin-right:8px;color:var(--accent);"></i>' + label + '</span>' +
+        '<span class="article-affiliate-cta">' + cta + ' <i class="fas fa-chevron-right"></i></span>' +
+      '</a>';
+    }
+    var hubs = hubByCat[cat] || ['breakdown-cover', 'travel-insurance', 'tyres'];
+    var html = hubs.map(function(h) { var m = HUBS[h]; return row('/' + h, m[0], m[1], 'Compare'); }).join('');
+    html += (bgByCat[cat] || []).map(function(g) { return row('/guides/buying-guides/' + g[0], 'fa-star', g[1], 'Read'); }).join('');
+    return '<div class="article-affiliate-box article-ride-ready">' +
+      '<h4><i class="fas fa-shield-halved" style="color:var(--accent);margin-right:6px;"></i>Ride prepared</h4>' +
+      html +
+      '<p class="article-affiliate-disclosure">Some links go to VisorUp partners; we may earn a commission at no extra cost to you.</p>' +
     '</div>';
   }
 
