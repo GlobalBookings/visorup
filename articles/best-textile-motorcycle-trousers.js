@@ -1,0 +1,113 @@
+export const content = `<h2>Best Textile Motorcycle Trousers: A Rider's Guide for 2026</h2>
+
+<p>I've been through more pairs of textile motorcycle trousers than I care to admit. Some have leaked on the A82 up to Fort William, others have torn after a minor spill on a gravel car park in the Lake District, and a few have been so uncomfortable I've had to pull over every hour to adjust them. After years of touring across Britain in every weather condition imaginable, I've learned what separates proper touring trousers from expensive mistakes.</p>
+
+<p>Textile trousers are the backbone of any serious touring kit. Unlike leather, they give you weather protection, versatility, and comfort for those long days in the saddle. Whether you're planning the <a href="/routes/nc500-complete">NC500</a> or just commuting through Manchester rain, getting this choice right makes a massive difference to your riding experience.</p>
+
+<h2>Why Textile Over Leather for Touring</h2>
+
+<p>I'm not saying leather doesn't have its place, but for British touring, textile wins every time. I've ridden the <a href="/routes/island-to-highlands">Island to Highlands route</a> in both, and textile kept me comfortable while leather left me either soaked or sweating depending on the hour.</p>
+
+<p>Textile trousers offer waterproofing, breathability, and the ability to adapt to our ridiculous weather. You can leave Carlisle in sunshine, hit rain in the Borders, face wind on the coast, and still be comfortable. Modern textiles also pack serious abrasion resistance—CE-rated materials that'll give you proper protection if things go wrong.</p>
+
+<h3>What I Look for in Touring Trousers</h3>
+
+<p>After countless miles on British roads, here's what matters to me: proper waterproofing with a reliable membrane, not just a coating that'll wash out after six months. Ventilation that actually works when you're crawling through summer traffic on the M6. Armour that stays in place and covers what it needs to. Pockets that are accessible and don't empty themselves at motorway speeds. And fit—because if they're uncomfortable after an hour, they'll be unbearable after eight.</p>
+
+<h2>Key Features That Actually Matter</h2>
+
+<h3>Waterproof Membranes</h3>
+
+<p>I've tested trousers with Gore-Tex, Reissa, Humax, and various proprietary membranes across Scotland in February. Here's the truth: a good membrane works, a bad one fails spectacularly. Gore-Tex remains the gold standard, but it's expensive. Reissa and modern Humax are excellent alternatives that I've trusted in Welsh downpours without issue.</p>
+
+<p>The membrane needs to be permanent, not a removable liner that you'll inevitably forget to fit when the weather turns. Fixed membranes perform better and last longer. I learned this the hard way during an unexpected storm in the Cairngorms when I discovered my liner was hanging in my garage 300 miles away.</p>
+
+<h3>Ventilation Systems</h3>
+
+<p>British weather is schizophrenic. You need vents that open wide enough to actually cool you down. Thigh vents are essential—I won't buy trousers without them. Some manufacturers add calf vents too, which help but aren't critical. The vents need to be easy to operate while wearing gloves and actually sealed when closed. I've had cheap vents that leaked worse than having no waterproofing at all.</p>
+
+<h3>Armour and Protection</h3>
+
+<p>CE Level 2 knee armour is non-negotiable. Your knees hit first in most offs. Hip armour should also be Level 2 if possible. Check that the armour pockets hold the protectors in the right place—I've seen plenty of trousers where the knee armour migrates down to your shin after an hour of riding.</p>
+
+<p>Abrasion resistance matters too. Look for reinforced areas on the knees, seat, and hips. Cordura is good, but modern alternatives like SuperFabric and Armalith offer excellent protection. I've slid along the A9 in Armalith-reinforced trousers and they held up brilliantly.</p>
+
+<h2>Fit and Comfort for Long Distance</h2>
+
+<p>You're going to spend hours in these trousers. I've done 12-hour days crossing Scotland, and comfort becomes everything after the first few hours. The waist should sit comfortably without needing a tight belt. The knees should have articulation—pre-curved legs that match your riding position. This prevents bunching and pressure points.</p>
+
+<p>The crotch area needs extra material and gusseting. Trousers designed for walking don't work on a bike. Trust me, I've learned this through painful experience on the long straights of the A1.</p>
+
+<h3>Sizing Considerations</h3>
+
+<p>Textile trousers should fit over your regular clothes but not be baggy. I typically wear mine over jeans when touring. Make sure there's enough room for thermal layers underneath—you'll want them on Scottish mornings even in summer. The leg length needs to be right when you're in riding position, not standing up. Too short and they'll ride up, exposing your boots and letting water in.</p>
+
+<h2>What's New in 2026</h2>
+
+<p>The textile market has evolved significantly. We're seeing more trousers with integrated thermal liners that actually work, not just token gestures. Smart fabrics that adapt to temperature are becoming more common, though I'm still testing their long-term reliability.</p>
+
+<p>Sustainability is a bigger focus now. Several manufacturers are using recycled materials without compromising protection. I'm cautiously optimistic about these—my latest pair uses recycled Cordura and has performed well through a wet spring across Wales and the Brecon Beacons.</p>
+
+<p>Connectivity is creeping in too. Some trousers now have pockets designed for cable routing and battery packs for heated gear. If you ride year-round in Britain, this is worth considering. I've tested heated trousers on winter runs to the Scottish Highlands, and the difference is remarkable when temperatures drop below freezing.</p>
+
+<h2>My Recommendations for Different Riding Styles</h2>
+
+<h3>For Long-Distance Touring</h3>
+
+<p>You need maximum comfort and weather protection. Look for trousers with excellent breathability, multiple vents, and proper waterproofing. Pockets are essential—you'll want somewhere for your phone, wallet, and the random receipts you collect at every fuel stop. Suspenders or braces are worth having to take weight off your waist during long days.</p>
+
+<p>I've found three-season trousers with removable thermal liners work best for touring. They give you flexibility without needing multiple pairs. You can head out for the NC500 in May and adapt to whatever Scotland throws at you.</p>
+
+<h3>For Commuting and Daily Use</h3>
+
+<p>Convenience matters more here. Quick-release zips that let you get in and out fast are brilliant. Reflective detailing for visibility in urban traffic is essential—I've been commuting around British cities for years, and being seen is half the battle.</p>
+
+<p>You might want trousers that look less "motorcyclist" for when you arrive at work. Some modern textiles have a more casual appearance while still offering full protection. I've got a pair that looks decent enough for the office after I remove the armour.</p>
+
+<h3>For Adventure and Off-Road Touring</h3>
+
+<p>Durability trumps everything else. Reinforced seats and knees are critical. The trousers need to handle being dropped in mud, scraped against the bike, and worn while wrestling a loaded adventure bike out of a bog in the Scottish Highlands (yes, I've done this).</p>
+
+<p>Ventilation becomes even more important because adventure riding is physically demanding. Look for trousers with large mesh panels and multiple vents. Longer legs are useful too—they'll overlap your boots better and keep crud out.</p>
+
+<h2>Where I Buy My Gear</h2>
+
+<p>I've used <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> for years now. Their range is comprehensive, prices are competitive, and returns are straightforward when something doesn't fit right. For trousers, being able to easily return the wrong size is crucial—online sizing charts are never perfect.</p>
+
+<p>I also recommend trying trousers on in person when possible. Local motorcycle shops let you sit on a bike while wearing them, which reveals fit issues you'd never spot standing in front of a mirror.</p>
+
+<h2>Maintenance and Longevity</h2>
+
+<p>Good textile trousers are an investment, typically £200-400 for quality touring kit. Make them last by washing them properly. I use Nikwax Tech Wash—regular detergents damage waterproof membranes. Wash them when they're dirty, but not obsessively. Over-washing wears them out faster.</p>
+
+<p>Reproof them annually with a proper treatment like Nikwax TX.Direct. I do this before the riding season starts. It takes 30 minutes and keeps the waterproofing effective. Check the armour regularly—if it's compressed or cracked, replace it. Armour is cheap compared to hospital bills.</p>
+
+<p>Store them properly in the off-season if you're a fair-weather rider. Hang them up, don't fold them. Keep them somewhere dry and away from direct sunlight, which degrades the materials over time.</p>
+
+<h2>Common Mistakes to Avoid</h2>
+
+<p>Don't buy trousers based on price alone. I've wasted money on cheap trousers that leaked within months. It's better to save up for one proper pair than buy three budget options that don't work.</p>
+
+<p>Don't ignore the fit. Uncomfortable trousers will ruin your riding. I've cut tours short because of trousers that chafed or restricted movement. Take the time to get this right.</p>
+
+<p>Don't skip the armour. Some riders remove it for comfort, which is madness. Modern armour is thin and comfortable—if yours isn't, upgrade it rather than riding without protection.</p>
+
+<p>Don't forget about connectivity. If your trousers don't connect to your jacket, you'll get a gap that lets water and wind in. I use trousers with a 360-degree zip that connects to my jacket. It makes a huge difference in bad weather on exposed roads like the A9 through the Highlands.</p>
+
+<blockquote>
+<p>The right textile trousers aren't the ones that look best in the shop—they're the ones you forget you're wearing after eight hours on the road. Comfort, protection, and reliability matter more than brand names or fancy features you'll never use.</p>
+</blockquote>
+
+<h2>Planning Your Next Tour</h2>
+
+<p>Once you've sorted your trouser situation, you'll want to plan some rides to actually use them. I'd recommend checking out our <a href="/build-route">route builder tool</a> to plan your next adventure. It's brilliant for mapping out multi-day tours where weather conditions might change dramatically—exactly when good textile trousers prove their worth.</p>
+
+<h2>Final Thoughts and Action Steps</h2>
+
+<p>Choosing the right textile motorcycle trousers comes down to understanding how you ride and what you need. For British touring, prioritize waterproofing and breathability above everything else. Our weather demands it.</p>
+
+<p>Here's what I'd do if I were buying trousers today: First, decide your budget—aim for at least £250 for quality touring trousers. Second, list your must-have features based on your riding style. Third, read reviews from actual riders, not just marketing material. Fourth, order two or three pairs in different sizes to try at home. Fifth, wear them around the house for an hour to check comfort before committing.</p>
+
+<p>The best trousers are the ones that let you focus on the road, the scenery, and the ride itself—not on whether you're wet, cold, or uncomfortable. Get this choice right, and you'll wonder how you ever managed without them. Get it wrong, and every ride becomes a battle against the elements.</p>
+
+<p>Whatever you choose, get out there and ride. Britain has incredible roads waiting for you, and with the right gear, there's no reason to let weather hold you back. I'll see you out there.</p>`;
