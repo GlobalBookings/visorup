@@ -1,0 +1,139 @@
+export const content = `<h2>Finding Proper Biker-Friendly B&Bs Across Scotland</h2>
+
+<p>I've spent years touring Scotland on two wheels, and I can tell you that finding genuinely biker-friendly accommodation makes the difference between a brilliant trip and a soggy, frustrating mess. Scotland's got some of the best roads in the UK—I'm talking the <a href="/routes/nc500-complete">NC500</a>, the A82 along Loch Lomond, and countless single-track gems—but you need somewhere that actually understands what touring riders need.</p>
+
+<p>A proper biker-friendly B&B isn't just about having a room available. It's about secure bike parking, somewhere to dry your gear when the weather inevitably turns, and hosts who don't give you grief when you roll up in full textiles looking like you've ridden through a car wash. I've stayed in places that tick all these boxes and plenty that don't, so let me share what I've learned about the best spots across Scotland in 2026.</p>
+
+<h2>What Makes a B&B Actually Biker-Friendly?</h2>
+
+<p>Before I get into specific recommendations, let's talk about what you should actually be looking for. I've rocked up at places advertising as "biker-friendly" only to find they mean you can park on the street like everyone else. That's not good enough.</p>
+
+<p>Here's what I look for: secure, covered parking where your bike's protected from Scotland's famous horizontal rain. Somewhere to properly dry your gear—not just a radiator in your room, but a dedicated drying area. Early breakfast options because you want to be on the road catching that morning light through Glen Coe. Lockable storage for your luggage and valuables. And hosts who ride themselves or at least understand the needs of touring motorcyclists.</p>
+
+<p>The best places I've found also offer basic tools, tyre pressure gauges, and sometimes even emergency spares. When you're 200 miles from home and your chain needs adjusting, that Allen key set is worth its weight in gold.</p>
+
+<h2>The Scottish Highlands: Where the Real Riding Is</h2>
+
+<h3>Glenmoriston Arms Hotel, Invermoriston</h3>
+
+<p>I've stayed here three times, and it's become my go-to spot when I'm riding the western Highlands. It sits right on the A82, perfectly positioned between Fort William and Inverness, and the hosts genuinely get motorcyclists. They've got a locked courtyard round the back where your bike's completely secure, and a dedicated drying room that's saved my bacon more than once.</p>
+
+<p>The breakfast is properly substantial—you'll need it before tackling the A87 towards Skye or heading north on the A835. They do early starts without making you feel like you're causing hassle, and the rooms are spot-on for the price. I paid around £85 for a single in 2025, and I'd expect similar rates in 2026.</p>
+
+<p>What makes this place special is the location. You're minutes from some of the best riding roads in Scotland, including the route to <a href="/routes/island-to-highlands">Skye and the Highlands</a>. The staff know the roads intimately and will tell you which ones to hit and which to avoid if the weather's turned.</p>
+
+<h3>The Torridon Hotel, Wester Ross</h3>
+
+<p>This is premium accommodation, no doubt about it, but if you're treating yourself during a Highlands tour, the Torridon delivers. I stayed here after completing a particularly wet section of the NC500, and they treated my Triumph like it was a Bentley. Covered parking, heated drying room, and the kind of welcome that makes you forget you've been rained on for six hours straight.</p>
+
+<p>The riding around here is outstanding. The Bealach na Bà is minutes away—one of the most dramatic climbs in Britain—and the single-track coast road north is stunning. Expect to pay £150-200 for a room, but you're getting serious quality and a location that's hard to beat.</p>
+
+<h3>Smiddy House, Spean Bridge</h3>
+
+<p>This is a proper bikers' spot. The owner rides, the parking is secure, and they've got everything from chain lube to spare bungees if you need them. It's positioned perfectly for the Commando Memorial route and you're 15 minutes from Fort William, making it ideal for day trips into Glen Coe or up the Great Glen.</p>
+
+<p>I've ridden with blokes who swear by this place, and after staying there myself last summer, I understand why. It's not fancy—around £70 a night—but it's exactly what you need. The breakfast portions are massive, they'll do packed lunches, and they genuinely understand that sometimes you need to leave at 6am to catch the weather window.</p>
+
+<h2>The North Coast 500 Corridor</h2>
+
+<p>If you're tackling the NC500, you need to plan your accommodation carefully. Some sections are remote, and in peak season, finding a room can be tricky. I've learned to book ahead, especially for June through August.</p>
+
+<h3>The Captain's Galley B&B, Scrabster</h3>
+
+<p>This is my preferred base for exploring the north coast. It's right near Thurso, giving you easy access to the northern section of the NC500, and the owners are brilliant with bikers. Secure parking, excellent drying facilities, and they're happy to accept deliveries if you need to order parts or <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> to send gear up.</p>
+
+<p>The rooms are modern and comfortable—around £90 a night—and the breakfast is outstanding. More importantly, they understand that touring riders keep odd hours and need flexibility. I've rolled in at 9pm after an extended ride and they've sorted me out without any drama.</p>
+
+<h3>Mackays Hotel, Wick</h3>
+
+<p>A bit more corporate than a traditional B&B, but Mackays has cottoned on to the biker market and they do it well. Dedicated motorcycle parking area, good security, and they've partnered with a local bike shop for emergency repairs. I stayed here in 2024 when my Tiger developed an electrical fault, and they helped me sort it quickly.</p>
+
+<p>The location in Wick makes it perfect for the eastern section of the NC500. You're well-positioned for day rides south towards the Sutherland coast or north to John O'Groats. Rooms run about £100-120, and you get the reliability of a small hotel with the personal touch.</p>
+
+<blockquote>The difference between a good Scotland tour and a brilliant one often comes down to your accommodation. A warm, dry room with secure parking transforms how you experience those epic roads.</blockquote>
+
+<h2>The Islands: Skye and Beyond</h2>
+
+<h3>Sligachan Hotel, Isle of Skye</h3>
+
+<p>Every biker who rides to Skye ends up at Sligachan eventually. It's an institution, sitting beneath the Cuillins with some of the most dramatic scenery in Scotland on your doorstep. They've always been brilliant with motorcyclists, offering covered parking and understanding that we need different facilities than car tourists.</p>
+
+<p>The hotel itself is classic Highland style—around £110-130 for a room—and the Seumas' Bar downstairs is the perfect spot to swap stories with other riders. I've met people here who've given me tips on roads I'd never have found otherwise. The location is perfect for exploring Skye properly, whether you're heading to Neist Point or the Trotternish Ridge.</p>
+
+<h3>Kinloch Lodge, Sleat</h3>
+
+<p>Another premium option, but worth mentioning because they're genuinely welcoming to bikers despite being quite upmarket. I treated myself here after a long tour, and they looked after my bike as carefully as everything else. The food is exceptional—Michelin-standard—and if you've been camping for a week before this, it feels like absolute luxury.</p>
+
+<p>You're paying for quality here, with rooms starting around £200, but the location at the southern end of Skye is perfect for quieter roads away from the NC500 traffic that's increasingly clogging the main routes.</p>
+
+<h2>The Cairngorms and Central Highlands</h2>
+
+<h3>The Fife Arms, Braemar</h3>
+
+<p>Braemar sits at the heart of some cracking riding roads, and The Fife Arms has surprised me by how well they handle motorcyclists. It's a luxury hotel—around £180-250 a night—but they provide secure parking and treat bikes with respect. The A93 over the Cairnwell Pass is on your doorstep, one of the highest public roads in Britain and absolutely brilliant on a bike.</p>
+
+<p>I wouldn't suggest this as a budget option, but if you're combining serious riding with a special occasion, it's hard to beat. The staff are professional, the rooms are outstanding, and you're in prime position for exploring Aberdeenshire and the eastern Highlands.</p>
+
+<h3>Newtonmore Hostel and Bunkhouse</h3>
+
+<p>Sometimes you don't need luxury; you just need clean, dry accommodation that won't break the bank. This place delivers exactly that. It's proper budget—around £30-40 a night—but they've got secure bike parking, drying facilities, and a common room where you'll meet other riders.</p>
+
+<p>The location is brilliant for accessing the A9, the A86 along Loch Laggan, and you're close enough to Aviemore for supplies or emergency bike shops. I've stayed here between bigger tours, and it's exactly what you need when you're prioritising miles over luxury.</p>
+
+<h2>Practical Tips for Booking Biker-Friendly B&Bs</h2>
+
+<p>Always call ahead rather than just booking online. You want to confirm they've actually got secure parking and that they understand you're on a bike. I've had places tell me over the phone that their "secure parking" is actually street parking with a camera watching it. That's not the same thing.</p>
+
+<p>Ask about their drying facilities specifically. In Scotland, you're going to get wet. It might be glorious sunshine when you set off, but by the time you're coming down the A82 past Glencoe, you could be riding through a deluge. You need somewhere that can dry your gear properly overnight, not just a radiator that leaves everything damp.</p>
+
+<p>Check their breakfast times. Some B&Bs are rigid about serving breakfast between 8-9am, which is useless if you want to catch the morning light or get ahead of traffic. The best biker-friendly places will do early breakfast or at least provide something you can grab if you're leaving before they officially serve.</p>
+
+<p>Look for places that offer luggage storage. If you're doing a multi-day tour and coming back to the same base, you don't want to haul all your gear every day. Being able to leave your main luggage and just ride with a day pack makes a huge difference.</p>
+
+<h2>Scotland Weather Considerations</h2>
+
+<p>I've ridden Scotland in every month, and I can tell you that weather-appropriate accommodation is crucial. Even in summer, temperatures can drop dramatically, especially in the Highlands. Your B&B needs proper heating—sounds obvious, but I've stayed in places where the heating doesn't go on until October regardless of actual temperature.</p>
+
+<p>In spring and autumn, you're dealing with unpredictable conditions. I've had snow in May and sunshine in November. Your accommodation needs to cope with whatever you're wearing. Good B&Bs will have covered areas where you can sort your gear without standing in the rain, and they'll understand if you need to reorganise your packing in the morning.</p>
+
+<p>Before heading out, make sure you've got your waterproofs sorted. Use our <a href="/packing-checklist">packing checklist</a> to ensure you've not forgotten crucial gear, because Scotland will test everything you've brought. The right accommodation makes dealing with challenging weather so much easier.</p>
+
+<h2>Planning Your Route Around Accommodation</h2>
+
+<p>When I'm planning a Scottish tour, I work backwards from accommodation. I identify the must-ride roads—maybe sections of the NC500, the A82, or some of the lesser-known gems—then I find the best biker-friendly accommodation in those areas. You can use our <a href="/build-route">route builder tool</a> to map this out properly.</p>
+
+<p>Scotland's got some long stretches of spectacular riding where accommodation is sparse. The west coast between Ullapool and Durness, for example, has limited options. You need to plan these sections carefully, especially in peak season. I've learned to book the remote sections first, then fill in the easier-to-find accommodation around them.</p>
+
+<p>Consider the distances between stops. After a full day riding in Scottish weather, you don't want another two hours in the saddle to reach your B&B. I aim for bases that give me access to 150-200 miles of quality riding without having to cover huge distances just to get there and back.</p>
+
+<h2>What to Expect to Pay in 2026</h2>
+
+<p>Budget B&Bs and bunkhouses: £30-60 per night. These are basic but functional, usually with shared facilities but decent bike parking.</p>
+
+<p>Mid-range B&Bs: £70-110 per night. This is the sweet spot for most touring riders—comfortable rooms, good facilities, proper breakfasts, and genuinely biker-friendly amenities.</p>
+
+<p>Premium options: £120-250+ per night. These are treating-yourself places with exceptional facilities, often in stunning locations, with all the extras you could want.</p>
+
+<p>Prices tend to spike in July and August when the NC500 is busiest. If you can ride Scotland in May, June, or September, you'll often find better rates and less crowded roads. I actually prefer September—the weather's often still good, the midges are dying off, and the roads are quieter.</p>
+
+<h2>Making the Most of Your Stay</h2>
+
+<p>The best B&B hosts are treasure troves of local knowledge. They'll tell you which roads are freshly resurfaced, which ones have deteriorated, where the speed cameras are, and which cafes actually understand bikers. Don't just grab your keys and disappear—have a conversation. I've found some of my favourite Scottish roads because a B&B owner suggested them.</p>
+
+<p>Many places will do packed lunches if you ask. When you're heading into remote areas like Wester Ross or the far north, having a decent lunch packed saves you relying on finding somewhere open. Scottish food stops can be few and far between, especially outside tourist season.</p>
+
+<p>If you're planning multiple nights in one location, ask about rates. Many places will negotiate a bit on the per-night cost if you're staying three or more nights. It's worth asking, especially outside peak season.</p>
+
+<h2>Book Ahead and Confirm</h2>
+
+<p>Scotland's popularity with bikers has increased massively, especially since the NC500 became famous. The days of just rolling up and finding somewhere are largely gone, at least in peak season. I book my accommodation at least two months ahead for summer trips, and I always confirm a week before I travel.</p>
+
+<p>Things change—B&Bs close, owners retire, properties get sold. That place you loved three years ago might not even exist anymore. A quick confirmation call ensures you're not left scrambling for accommodation when you arrive exhausted after eight hours in the saddle.</p>
+
+<p>Get cancellation policies in writing. Scottish weather can be unpredictable enough that you might need to adjust plans. Understanding what you can and can't cancel makes the whole trip less stressful.</p>
+
+<h2>Your Next Steps</h2>
+
+<p>Right then, here's what I'd do: pick your route first using the suggestions in our <a href="/guides/routes/top-20-motorcycle-roads-uk">top UK roads guide</a>, then identify two or three bases that give you access to the riding you want. Call them directly, confirm they're genuinely biker-friendly, and book your dates. Sort your gear list, make sure your bike's properly serviced, and get ready for some of the best riding you'll do anywhere in Britain.</p>
+
+<p>Scotland rewards preparation. The riding is absolutely world-class, but the weather and remote locations mean you need to plan properly. Get your accommodation sorted with genuinely biker-friendly places, and you'll have the foundation for a brilliant tour. I'll see you on the road—probably in a layby somewhere on the A87, grinning despite the rain.</p>`;
