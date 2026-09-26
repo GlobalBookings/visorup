@@ -1,0 +1,130 @@
+export const content = `<h2>Lake District Motorcycle Routes: Where England Gets Properly Brilliant</h2>
+
+<p>I'll cut straight to it—the Lake District is some of the finest riding you'll find in England. I've been touring these roads for years, and in 2026, they're still as rewarding as ever. Whether you're dodging tourist coaches on the A591 or carving through the Kirkstone Pass, this place delivers the kind of riding that reminds you why you swing a leg over your bike in the first place.</p>
+
+<p>The Lakes sit in Cumbria's northwest corner, roughly 100 miles from Manchester and about 300 from London. It's proper mountain terrain—England's highest peaks, deepest lakes, and some genuinely challenging roads that'll test your throttle control and line choice. I've ridden here in blazing sunshine and biblical rain, sometimes on the same day, and it's always worth the trip.</p>
+
+<h2>Why the Lake District Works for Motorcycle Touring</h2>
+
+<p>The riding here is concentrated. You can smash out three or four brilliant passes in a morning, stop for lunch overlooking Windermere, then tackle another two before tea. The roads are varied too—smooth sweepers along Ullswater, tight hairpins over Hardknott, and technical climbs that demand respect.</p>
+
+<p>What sets the Lakes apart from Scotland's bigger landscapes is accessibility. You're never far from fuel, food, or shelter, which matters when the weather turns. I've used this as a testing ground before tackling longer tours like the <a href="/routes/nc500-complete">NC500</a>, because if you can handle Lake District conditions, you can handle most of what Britain throws at you.</p>
+
+<h2>The Essential Lake District Routes</h2>
+
+<h3>Kirkstone Pass (A592)</h3>
+
+<p>This is my go-to introduction route for riders new to the Lakes. Running between Windermere and Ullswater, the A592 climbs to 1,489 feet at Kirkstone Pass Inn—England's third-highest pub, which is handy for a brew and a recalibration of your suspension settings.</p>
+
+<p>The southern approach from Windermere is the gentler option, with wide sweepers that let you build rhythm. Coming down the northern side toward Patterdale is where it gets interesting—steeper gradients, tighter bends, and stone walls that appear closer than your mirrors suggest. I always take this descent in second or third gear, engine braking doing most of the work.</p>
+
+<p>Watch for sheep. They're everywhere, and they have zero road sense. I've had more near-misses with Herdwicks than I care to admit. Early morning or late afternoon reduces both livestock and tourist traffic significantly.</p>
+
+<h3>Hardknott and Wrynose Passes</h3>
+
+<p>Right, let's talk about Hardknott. This is the route that separates touring riders from Sunday pootlers. With gradients hitting 30% and hairpins that reverse 180 degrees in about two bike lengths, it's technical, demanding, and absolutely brilliant.</p>
+
+<p>I approach from the west, starting at Eskdale and climbing Hardknott first. The road surface has improved over the years—the council resurfaced sections in 2024—but it's still narrow, with exposure that'll make your pillion nervous. First gear in places, clutch control essential, and don't be embarrassed to take it slow. I've seen sports bikes and full touring rigs both struggle here.</p>
+
+<p>The descent into Little Langdale, then the climb over Wrynose Pass, continues the challenge. Together, these two passes make about 20 miles of riding that'll live in your memory. Pack light if you're on a heavy tourer—the bike needs to be manageable at walking pace.</p>
+
+<blockquote>The Lake District teaches you throttle control, line choice, and humility, often in the same corner. Master these passes and you'll ride everything else in England with confidence.</blockquote>
+
+<h3>Ullswater Loop</h3>
+
+<p>For a more relaxed but equally scenic option, the loop around Ullswater delivers. Start at Pooley Bridge, take the A592 south along the eastern shore, then return via the A5091 and A66. It's about 30 miles of rolling, flowing roads with constant lake views.</p>
+
+<p>The eastern shore road is narrower and twistier, hugging the waterline. I've photographed my bike at Aira Force car park more times than I'll admit—it's that picturesque. The return leg opens up with faster sections where you can actually use fourth and fifth gear.</p>
+
+<p>This route works brilliantly as an evening ride when the light goes golden and the day trippers have cleared off. Summer evenings in 2026 have been spectacular, with long daylight hours into September.</p>
+
+<h3>The Honister and Newlands Valley Circuit</h3>
+
+<p>Starting from Keswick, head south on the B5289 through Borrowdale. This is one of my favourite Lake District roads—tree-lined, smooth tarmac, flowing bends that reward a good rhythm. The road climbs to Honister Pass, passing the slate mine that's been working since the 17th century.</p>
+
+<p>At 1,167 feet, Honister isn't the highest, but the approach from Borrowdale is properly scenic. Drop down into Buttermere, circle the lake on narrow lanes, then return via Newlands Valley. The whole loop is about 35 miles and showcases what the Lakes do best—variety in a compact area.</p>
+
+<p>Newlands Valley is quieter, almost hidden, with single-track sections that require concentration. Pass-places mean you'll meet oncoming traffic nose-to-nose, so keep speeds sensible and be ready to reverse if needed.</p>
+
+<h2>Practical Considerations for Lake District Riding</h2>
+
+<h3>Weather and Conditions</h3>
+
+<p>I've ridden the Lakes in every month, and the weather is properly variable. April through September offers the best odds of dry roads, but I've been rained on in July and enjoyed clear skies in February. The mountains create their own weather systems—it can be dry in Windermere and hammering down over Hardknott simultaneously.</p>
+
+<p>Pack waterproofs, always. I keep a packable rain jacket from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> in my tank bag year-round because Lake District rain arrives fast and heavy. Mist and low cloud are common on higher passes, reducing visibility to metres in extreme cases.</p>
+
+<p>Road surfaces drain reasonably well, but standing water collects in dips. Sheep leave a greasy residue that becomes slippery when wet—treat white markings and the centre of lanes with caution after rain. I run touring tyres with good wet-weather grip and haven't had issues, but don't expect sports tyres to perform miracles on damp tarmac.</p>
+
+<h3>Best Times to Ride</h3>
+
+<p>Weekday mornings from May to September are ideal. Roads are quieter, local traffic is predictable, and you'll have car parks to yourself. Weekends bring coaches, campervans, and Audi drivers who think they're at Goodwood. I avoid Bank Holidays entirely unless I'm riding at dawn.</p>
+
+<p>October into November can be magic—autumn colours, clear air, and minimal traffic. You'll need heated grips and maybe additional layers, but the riding is superb. Winter is possible but challenging; higher passes can be icy or closed altogether. Check <a href="/plan-trip">our trip planning tool</a> for current road conditions before heading out.</p>
+
+<h3>Fuel and Facilities</h3>
+
+<p>Fuel stations are concentrated in towns—Keswick, Windermere, Ambleside, Penrith. Once you're in the valleys, you're riding through villages with maybe a post office and a pub. I fill up before heading into the hills and carry a litre reserve bottle on longer days.</p>
+
+<p>Mobile signal is patchy. Don't rely on phone navigation in valleys—download offline maps or use a dedicated GPS. I've been caught out more than once trying to load Google Maps halfway up Wrynose.</p>
+
+<h2>Where to Base Yourself</h2>
+
+<p>Keswick works brilliantly as a central hub. It's got accommodation ranging from biker-friendly B&Bs to hotels, multiple fuel stations, and direct access to northern and western passes. Parking is reasonable, and the town has proper bike shops if you need supplies.</p>
+
+<p>Ambleside sits more centrally for southern routes, giving quick access to Kirkstone and Wrynose. Windermere is bigger and busier but well-connected. For a quieter option, Pooley Bridge or Patterdale put you near Ullswater with fewer crowds.</p>
+
+<p>I've stayed in all of these and rate Keswick highest for overall convenience. The YHA does motorcycle-friendly hostels if you're budget-touring, and there's a Travelodge if you just need a clean bed and breakfast.</p>
+
+<h2>Connecting Routes and Extended Tours</h2>
+
+<p>The Lakes work brilliantly as part of a longer northern England tour. From Keswick, you're 90 miles from the Scottish borders—I've combined Lake District passes with a run up to Kielder Forest and into the Borders on multi-day trips.</p>
+
+<p>Heading west, the Cumbrian coast offers completely different riding—fast A-roads along the Irish Sea with views across to the Isle of Man. East takes you into the Yorkshire Dales, which deserves its own article but pairs perfectly with the Lakes for a week-long tour.</p>
+
+<p>If you're planning something bigger, consider using the Lakes as preparation. It's what I did before my <a href="/routes/island-to-highlands">Island to Highlands</a> route—building skills on Hardknott made Scottish single-tracks feel manageable.</p>
+
+<h2>Gear and Bike Recommendations</h2>
+
+<p>I've ridden the Lakes on everything from a 125cc learner bike to a full touring rig. Honestly, anything works if you're comfortable with it. Smaller bikes make the tight passes easier—less weight to muscle through hairpins, better fuel economy, and easier parking.</p>
+
+<p>Bigger tourers handle the A-roads brilliantly but require more effort on Hardknott and similar technical sections. I've found adventure bikes to be the sweet spot—upright position for visibility, enough power for overtaking coaches, and manageable weight for tight manoeuvring.</p>
+
+<p>Panniers beat top boxes here. The narrow roads and stone walls mean width matters more than height. Keep weight low and central. Use our <a href="/packing-checklist">packing checklist</a> to avoid bringing stuff you won't need—every kilo counts on 30% gradients.</p>
+
+<h3>Essential Kit</h3>
+
+<ul>
+<li>Waterproof jacket and trousers that actually seal—check zips and velcro before you leave</li>
+<li>Heated grips or winter gloves for anything before June or after September</li>
+<li>Pinlock visor insert—misting is constant in Lake District conditions</li>
+<li>Tank bag or tail pack for layers, water, and snacks</li>
+<li>Tyre pressure gauge—check pressures when cold, adjust for load and conditions</li>
+<li>Basic tools and a puncture kit—mobile breakdown cover has limited reach in valleys</li>
+</ul>
+
+<h2>Safety and Riding Standards</h2>
+
+<p>The Lakes see serious accidents every year, usually involving riders who misjudge corners or encounter unexpected hazards. Stone walls are unforgiving—there's no run-off, no armco, just solid Lakeland slate. I ride every corner assuming there's a sheep, a walker, or a stopped car around it.</p>
+
+<p>Overtaking coaches and campervans is tempting but risky. Sightlines are short, and oncoming traffic appears fast. I wait for proper straights with clear visibility—they're rare but worth the patience. Getting stuck behind a coach for ten minutes is frustrating but infinitely better than a head-on.</p>
+
+<p>Single-track sections require courtesy and common sense. Pull in at passing places, acknowledge other road users, and don't assume you have priority. Walkers, cyclists, and horse riders all use these roads legally and deserve respect.</p>
+
+<h2>Making the Most of Your Lake District Tour</h2>
+
+<p>The riding here rewards planning but also spontaneity. I always have a rough route mapped but leave room to explore side roads that look interesting. Some of my best memories are from unmarked lanes that don't feature in guidebooks.</p>
+
+<p>Stop frequently. The views are spectacular, and trying to ride straight through misses the point. I aim for three or four photo stops per day, plus a proper lunch break. The best cafés are in villages, not tourist hotspots—ask locals where they eat.</p>
+
+<p>Consider timing your visit around local events, but be aware they bring traffic. The Keswick Mountain Festival in May is brilliant but busy. Autumn sees fewer events and better riding conditions overall.</p>
+
+<h2>Your Lake District Action Plan</h2>
+
+<p>If you've never ridden the Lakes, start with Kirkstone Pass and the Ullswater loop. Build confidence, get a feel for the roads, then tackle Hardknott when you're ready. Use Keswick as your base for two or three nights, ride early mornings, and pack for all weather conditions.</p>
+
+<p>Check your bike beforehand—brakes, tyres, chain tension, and fluid levels all matter more on demanding roads. Use <a href="/build-route">our route builder</a> to plan your days, but stay flexible enough to adapt when weather or conditions change.</p>
+
+<p>Most importantly, ride your own ride. Don't let faster traffic pressure you into uncomfortable speeds, and don't be embarrassed to take breaks or turn back if conditions deteriorate. The Lakes will still be here next time, and it's better to return than to push beyond your limits.</p>
+
+<p>See you out there. And if you spot a scruffy adventure bike pulled over at Kirkstone Inn, that's probably me sorting my waterproofs again.</p>`;
