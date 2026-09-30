@@ -1,0 +1,129 @@
+export const content = `<h2>Why Middleweight Adventure Bikes Are the Sweet Spot for UK Touring</h2>
+
+<p>I've spent the better part of a decade riding everything from 125cc trail bikes to full-bore adventure tourers across Britain, and I keep coming back to middleweights. Not because they're trendy or because manufacturers have flooded the market with them—though they have—but because for the kind of riding we actually do in the UK, they're bloody perfect.</p>
+
+<p>When I say middleweights, I'm talking about adventure bikes in the 600-900cc range. Think Yamaha Ténéré 700, Aprilia Tuareg 660, Honda Transalp, KTM 890 Adventure, Triumph Tiger 900—bikes that sit between the entry-level models and the proper heavyweight tourers. I've ridden most of them on everything from soggy B-roads in Wales to gravel tracks in the Highlands, and they've changed how I think about touring.</p>
+
+<h2>What Makes a Middleweight Adventure Bike Different</h2>
+
+<p>The distinction isn't just about engine capacity. It's about balance. A middleweight adventure bike typically weighs between 190-220kg fully fuelled, produces around 70-95bhp, and sits at a seat height that doesn't require a stepladder. More importantly, they handle like proper motorcycles rather than tractors.</p>
+
+<p>I took a Ténéré 700 up to the <a href="/routes/nc500-complete">NC500</a> last summer, and the difference from my previous runs on bigger bikes was night and day. On the single-track roads with passing places, I wasn't wrestling with weight. When I hit the gravel car parks at viewpoints, I didn't need a ground crew. And when the inevitable Scottish rain turned tarmac into a skating rink, I had the agility to deal with it.</p>
+
+<h3>Weight Where It Matters</h3>
+
+<p>Here's what nobody tells you: it's not the published kerb weight that matters—it's how that weight feels when you're manoeuvring in a pub car park after three hours in the saddle. I've dropped a fully-loaded 1250 GS in a campsite in the Lake District. It took two of us and a Welsh farmer to get it upright. That doesn't happen on a middleweight.</p>
+
+<p>The lower weight also means you can actually use the suspension travel without feeling like you're piloting a boat. On the B4391 through the Elan Valley—one of my favourite testing grounds—a middleweight lets you carry speed through the swooping curves without the constant corrections you need on a heavier bike.</p>
+
+<h2>Real-World Performance on British Roads</h2>
+
+<p>Let's talk about what these bikes actually do on the roads we ride. I'm not interested in what they're like crossing the Sahara or tackling the Darien Gap. I want to know how they perform on the A470 in the rain, on the gravel tracks around Glen Etive, and on those awful, patched-up roads in the Fens.</p>
+
+<h3>Motorway Capability</h3>
+
+<p>Can a middleweight handle motorways? Absolutely. I've done London to Inverness on a Tiger 900 Sport, and while it's not quite the armchair experience of a big tourer, it's more than adequate. At 70mph they're sitting around 5,000rpm, well within their comfort zone. The biggest difference is wind protection, which varies massively between models.</p>
+
+<p>The Transalp and Tuareg have proper wind protection. The Ténéré 700, brilliant as it is, will buffet you around like a crisp packet in a hurricane. I've learned to pack earplugs for anything over 100 miles on that bike.</p>
+
+<h3>B-Road Brilliance</h3>
+
+<p>This is where middleweights absolutely shine. The A832 around Loch Maree, the Snake Pass, the Cat and Fiddle—these roads were made for bikes like this. You've got enough power to make overtakes clean and safe, but you're not constantly managing explosive acceleration. The chassis are typically sport-touring focused, which means they're sharp enough to enjoy the twisties but stable enough that you're not exhausted after an hour.</p>
+
+<p>I rode the KTM 890 Adventure R through the <a href="/routes/island-to-highlands">Isle of Skye to the Highlands</a> route, and it was revelatory. The combination of light weight, proper suspension, and just-enough power meant I could focus on the scenery and the road surface rather than wrestling with the bike.</p>
+
+<h3>Off-Road Confidence</h3>
+
+<p>Here's where things get interesting. Most of us aren't riding motocross, but we do encounter gravel car parks, muddy lanes, forest tracks, and the occasional "is this still a road?" moment in the Highlands. A middleweight won't make you Graham Jarvis, but it will give you the confidence to explore.</p>
+
+<p>I've taken various middleweights up the gravel tracks in Galloway Forest Park, and the experience varies wildly. The Ténéré 700 and 890 Adventure R feel like proper dirt bikes that happen to be good on road. The Tiger 900 and Transalp are more road-focused but still competent. The Tuareg sits somewhere in the middle—sharp on tarmac, surprisingly capable on gravel.</p>
+
+<blockquote>The real advantage of a middleweight adventure bike in the UK isn't off-road prowess or motorway speed—it's the confidence to take the interesting route, whatever surface it's on, without constantly worrying about the bike.</blockquote>
+
+<h2>Fuel Economy and Range</h2>
+
+<p>This matters more than you think. Most middleweights return between 50-60mpg in real-world touring conditions, which is 10-15mpg better than the big bikes. With tank sizes typically around 18-21 litres, you're looking at 200-250 mile range. That's enough to get from Edinburgh to Ullapool, or Land's End to Manchester, without the fuel light haunting you.</p>
+
+<p>I've learned to trust this range. On the NC500, I've pushed a Tiger 900 to reserve between Durness and Ullapool—about 65 miles of glorious emptiness—and still had enough in the tank to reach the next pump. Try that on a thirsty litre bike and you'll be walking.</p>
+
+<h2>Practical Touring Considerations</h2>
+
+<h3>Luggage and Load Capacity</h3>
+
+<p>Most middleweights have payload capacities around 200-220kg, which is you, a pillion, gear, and luggage. That's tight if you're two-up touring, but perfect for solo adventures. I typically tour with soft luggage—a set of panniers and a tail bag from <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> does everything I need for a week away.</p>
+
+<p>The advantage of the lighter bike is that you're not constantly managing suspension sag. Load up a GS Adventure and you'll need to adjust preload, possibly rebound damping. Load up a Ténéré 700 and it just... handles it.</p>
+
+<h3>Seat Comfort</h3>
+
+<p>This is wildly variable. The Tiger 900's seat is genuinely comfortable for 300-mile days. The KTM seats are notoriously firm—I fitted an aftermarket seat on the 890 after one particularly bruising run to Wales. The Ténéré 700 is okay for about 150 miles before your backside starts complaining. Budget for a seat upgrade or a good gel pad if you're planning serious mileage.</p>
+
+<h3>Pillion Accommodation</h3>
+
+<p>Let's be honest: these aren't brilliant pillion bikes. They'll do it, but the seats are small, the grab handles are often afterthoughts, and the suspension can feel overwhelmed. I've carried a pillion on a Transalp from Devon to the Cotswolds, and while it worked, neither of us was especially comfortable. If you regularly tour two-up, seriously consider whether a middleweight is right for you.</p>
+
+<h2>Weather Performance</h2>
+
+<p>British weather is the real test. I've ridden middleweights through horizontal Scottish rain, surprise snow in May on the Cairngorms, and baking heat in the rare English summer. The lighter weight is a genuine advantage when the weather turns.</p>
+
+<h3>Rain and Wind</h3>
+
+<p>In heavy rain, a lighter bike is easier to control when the road surface turns greasy. I've hit standing water on the A66 in a downpour on both a 1250 GS and a Tuareg 660, and the lighter bike was far less nerve-wracking. You're not fighting the weight when aquaplaning starts.</p>
+
+<p>Wind is the bigger challenge. Crosswinds on exposed sections—the Rannoch Moor, the Cumbrian coast, anywhere in Lincolnshire—will push you around more on a middleweight. The trade-off is that corrections are easier because you're not wrestling so much mass.</p>
+
+<h3>Cold Weather Riding</h3>
+
+<p>Most modern middleweights have decent wind protection and enough fairing to keep the worst off you. Hand guards are essential—most bikes come with them, but if yours doesn't, fit them before your first winter ride. I've done January tours through Scotland on a Tiger 900, and with proper gear and heated grips, it's perfectly manageable.</p>
+
+<h2>The Middleweight Options for 2026</h2>
+
+<p>The market has exploded in the last few years. Here's what I've actually spent time on and can speak to from experience:</p>
+
+<h3>Yamaha Ténéré 700</h3>
+
+<p>This is the bike that started the middleweight adventure revolution in the UK. It's simple, reliable, surprisingly capable off-road, and feels bulletproof. The parallel twin makes great sounds and decent power. Wind protection is poor, the seat is average, and there's no fancy electronics. But it's honest, capable, and fun. I'd trust one for any UK tour.</p>
+
+<h3>KTM 890 Adventure and 890 Adventure R</h3>
+
+<p>The 890 is the most technologically advanced of the lot, with proper electronics, cornering ABS, and a genuinely excellent chassis. The R version is more off-road focused with longer suspension and spoked wheels. On British roads, it's hard to beat—sharp handling, punchy motor, good range. The seat needs addressing, and KTM's reliability record is... variable. But when it works, it's brilliant.</p>
+
+<h3>Triumph Tiger 900</h3>
+
+<p>Available in various flavours from road-focused GT to off-road Rally versions. The triple motor is smooth and characterful, the build quality is excellent, and it feels properly premium. It's the most refined middleweight I've ridden, which is either a good thing or makes it a bit sterile, depending on your perspective. For long UK tours on mixed surfaces, the Rally variant is hard to fault.</p>
+
+<h3>Aprilia Tuareg 660</h3>
+
+<p>The newest contender and possibly the best all-rounder. The parallel twin is punchy, the electronics are comprehensive, and the chassis is sharp without being intimidating. It's also gorgeous, which matters more than it should. I've used one for six months of touring, and it's impressed me everywhere except fuel consumption, which is notably higher than claimed.</p>
+
+<h3>Honda Transalp</h3>
+
+<p>Honda's return to middleweights is typically Honda: refined, reliable, sensible. It's not the most exciting bike here, but it's competent at everything. The wind protection is excellent, the parallel twin is smooth if uninspiring, and you know it'll start every time. If you want minimal drama and maximum reliability, this is it.</p>
+
+<h2>What About Cost?</h2>
+
+<p>New, you're looking at £8,500-£11,500 depending on model and spec. That's significantly less than heavyweight adventure bikes, which start around £12,000 and quickly push past £15,000 with options. Used prices are strong because demand is high—expect to pay £6,000-£9,000 for a good 2-3 year old example.</p>
+
+<p>Running costs are lower too. Insurance is cheaper, tyres last longer because you're not hauling around extra weight, and fuel costs are noticeably lower. Over a year of touring, that adds up to hundreds of pounds difference.</p>
+
+<h2>Making the Choice</h2>
+
+<p>Here's how I'd approach it if I were buying today. First, be honest about what you actually do. If 90% of your riding is on tarmac with occasional gravel car parks, you don't need the most off-road focused bike. A Transalp or Tiger 900 GT will serve you better than a heavily off-road spec machine.</p>
+
+<p>If you genuinely want to explore green lanes and forest tracks, the Ténéré 700 or 890 Adventure R make sense. They sacrifice some on-road refinement for off-road capability, but they're still more than good enough for serious road touring.</p>
+
+<p>Consider your typical trip length too. For weekend blasts and week-long tours, any of these bikes are perfect. For months on the road, you might want the extra comfort and capacity of a heavyweight. Use our <a href="/plan-trip">trip planning tool</a> to map out your typical tours and see what kind of distances and conditions you're actually covering.</p>
+
+<h3>Test Ride Reality</h3>
+
+<p>Don't trust a 20-minute dealer test ride. I've found bikes that felt perfect in the showroom utterly exhausting after 200 miles. Beg, borrow, or hire bikes for proper rides before committing. A full day on the bike will tell you more than any review or specification sheet.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>Middleweight adventure bikes have fundamentally changed UK touring for me. They've opened up routes I wouldn't have considered on bigger bikes—narrow lanes in Devon, gravel tracks in Wales, technical Scottish single-track roads. They've made touring less physically demanding without sacrificing capability.</p>
+
+<p>Are they perfect? No. You'll give up some comfort, some presence, some prestige. But you'll gain agility, confidence, and the ability to take the road less travelled without a moment's hesitation. For the kind of touring most of us actually do in Britain, that's a trade worth making.</p>
+
+<p>My practical advice: if you're planning your first adventure bike purchase or considering downsizing from a heavyweight, spend some time with a middleweight. Take one to Scotland. Ride it in the rain. Load it up with luggage and see how it feels. Use our <a href="/packing-checklist">packing checklist</a> to work out what you actually need for a tour, load the bike properly, and give it a proper test over a few hundred miles.</p>
+
+<p>I'll bet you'll discover what I did: for British roads in British weather, with British fuel prices and British traffic, a middleweight adventure bike is often not just good enough—it's better.</p>`;
