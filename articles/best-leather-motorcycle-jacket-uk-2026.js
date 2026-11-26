@@ -1,0 +1,169 @@
+export const content = `<h2>Finding the Best Leather Motorcycle Jacket for UK Touring</h2>
+
+<p>I've been touring Britain on two wheels for years now, and if there's one piece of kit I've learned not to compromise on, it's my leather jacket. I've ridden the <a href="/routes/nc500-complete">NC500</a> in October rain, commuted through London winters, and sweated through summer runs down to Cornwall. Through all of it, the right leather jacket has made the difference between comfort and misery.</p>
+
+<p>Let me share what I've learned about choosing a leather motorcycle jacket that'll actually serve you well on British roads, not just look good in a showroom.</p>
+
+<h2>Why Leather Still Matters in 2026</h2>
+
+<p>Yeah, textile jackets have come a long way. I own a couple myself. But leather remains the gold standard for abrasion resistance, and when you're carving through the Cairngorms or filtering through Manchester traffic, that protection matters. Modern leather jackets in 2026 aren't the stiff, uncomfortable things your dad wore either. We've got stretch panels, clever ventilation, and armour that actually works.</p>
+
+<p>I still remember coming off on the A537 Cat and Fiddle a few years back. Nothing dramatic, just a low-side on cold autumn tarmac. My leather jacket had road rash, but my skin didn't. That jacket paid for itself in one slide.</p>
+
+<h3>What Makes a Leather Jacket Great for British Touring</h3>
+
+<p>British weather is properly schizophrenic. I've started rides in Cumbria under blue skies and ended up drenched in Kendal an hour later. Your leather jacket needs to handle this. Here's what I look for:</p>
+
+<ul>
+<li><strong>Cowhide thickness:</strong> 1.2-1.4mm minimum. Any thinner and you're sacrificing protection for fashion</li>
+<li><strong>CE-rated armour:</strong> Shoulders, elbows, and a back protector. Level 2 if you can get it</li>
+<li><strong>Thermal liner:</strong> Removable is essential. You'll want it on the <a href="/routes/island-to-highlands">Isle of Skye run</a> in May, but you'll curse it in July</li>
+<li><strong>Waterproof membrane:</strong> Or at least room for a separate waterproof layer underneath</li>
+<li><strong>Ventilation:</strong> Chest and back vents make a massive difference on those rare hot days</li>
+<li><strong>Quality zips:</strong> YKK are worth seeking out. Cheap zips fail when it's hammering down on the A9</li>
+</ul>
+
+<h2>Types of Leather Motorcycle Jackets</h2>
+
+<h3>Sports Leather Jackets</h3>
+
+<p>These are what most people picture when they think motorcycle leather. I've owned a few over the years, and they're brilliant if you're doing spirited rides or track days. The aggressive cut, pre-curved arms, and race-spec armour make them ideal for performance riding.</p>
+
+<p>The downside? They're uncomfortable off the bike. Try walking around Keswick on a coffee stop hunched forward like you're still gripping the bars. Not ideal for touring unless you're doing serious miles on fast A-roads and motorways.</p>
+
+<p>Best for: Sportsbike riders, fast road work, occasional track days</p>
+
+<h3>Cruiser Style Leather Jackets</h3>
+
+<p>Straight cut, often with more style details like quilted panels or external pockets. I'll be honest, most traditional cruiser jackets prioritise looks over protection. If you're buying one in 2026, make absolutely certain it has proper CE armour and decent thickness leather.</p>
+
+<p>That said, the upright riding position fits perfectly with touring bikes and nakeds. I wore a modern cruiser-style jacket across Wales last summer and it was spot on for comfort during long days in the saddle.</p>
+
+<p>Best for: Cruisers, naked bikes, riders who want classic style with modern protection</p>
+
+<h3>Adventure Touring Leather Jackets</h3>
+
+<p>This is where the market's really evolved. Modern adventure leather jackets give you the protection of hide with touring-focused features. We're talking multiple pockets, longer cuts that work with your body position, and designs that layer well.</p>
+
+<p>I've been running an adventure leather jacket for the past two seasons and it's become my go-to for serious touring. The cut works whether I'm stood up on the pegs on a green lane or settled in for a three-hour motorway slog to Scotland.</p>
+
+<p>Best for: Adventure bikes, serious touring, all-day comfort</p>
+
+<h2>Key Features to Actually Look For</h2>
+
+<h3>The Leather Quality Question</h3>
+
+<p>Not all cowhide is created equal. I've seen cheap jackets that feel like cardboard and expensive ones that move like a second skin. Here's what matters:</p>
+
+<p><strong>Top grain leather</strong> is what you want. It's the outer layer of the hide, strongest and most durable. Full-grain is even better if your budget stretches. Avoid "genuine leather" labels – that's marketing speak for lower-quality splits.</p>
+
+<p>When you're in the shop (or reading descriptions on <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a>), check the thickness. Hold it up to light if you can. Quality leather has a consistent thickness throughout, no thin patches.</p>
+
+<h3>Armour That Actually Protects</h3>
+
+<p>CE Level 2 armour is standard in 2026, and thank god for that. The difference between Level 1 and Level 2 in a proper impact is significant. I always check that there's:</p>
+
+<ul>
+<li>Shoulder armour that sits in the right place (try the riding position in the shop)</li>
+<li>Elbow armour that doesn't slip when you bend your arms</li>
+<li>A proper back protector, not just a foam pad</li>
+<li>Chest armour if you're doing serious miles (optional but worth considering)</li>
+</ul>
+
+<p>The armour should be removable for washing, but it shouldn't move around while you're riding. I've had jackets where the shoulder armour migrated down my arm after an hour. Useless.</p>
+
+<h3>Fit Is Everything</h3>
+
+<p>I cannot stress this enough: a leather jacket must fit properly off the shelf. Unlike textile, leather doesn't have much give or adjustability. It'll mould to your body over time, but if it's wrong in the shop, it'll stay wrong.</p>
+
+<p>When trying a jacket, wear your usual base layers and sit on a bike if possible. Reach forward to the bars. Can you move comfortably? Are the armour pieces still in position? Is the collar comfortable when you turn your head to check your blind spot?</p>
+
+<p>The sleeves should be long enough that they don't ride up when you reach forward, leaving a gap between glove and jacket. I learned this the hard way on a freezing January ride up the M6 – that gap becomes a wind tunnel.</p>
+
+<blockquote>A leather jacket should feel slightly snug when new – it'll relax and mould to your body after a few hundred miles. If it feels roomy in the shop, it'll be too loose after breaking in.</blockquote>
+
+<h2>Weatherproofing Your Leather Investment</h2>
+
+<p>Leather and British weather have a complicated relationship. Modern leather jackets often come with a waterproof membrane, but let me tell you from experience: they're water-resistant at best. In a proper Lake District downpour, you will get wet eventually.</p>
+
+<p>I treat all my leather jackets with a quality waterproofing product every few months. Nikwax does a good leather conditioner that adds some water resistance without ruining the leather's ability to breathe. Apply it, let it dry properly, and you'll add serious water resistance.</p>
+
+<p>For multi-day tours, I always pack a lightweight oversuit. When the heavens open on the A82 along Loch Lomond, you'll be grateful for that extra layer. Your leather jacket stays dry underneath, and you can strip the oversuit off when the sun comes back out.</p>
+
+<h2>Breaking In Your Leather Jacket</h2>
+
+<p>New leather is stiff. That's normal. I've bought jackets that felt like wearing a suit of armour for the first few rides. The key is patience and regular wear.</p>
+
+<p>Start with shorter rides around town. The jacket will start to soften and conform to your body. Treat it with leather conditioner after the first few wears – this speeds up the breaking-in process and keeps the leather supple.</p>
+
+<p>Some riders swear by wearing their jacket around the house. I've done this, usually while getting strange looks from my partner, but it genuinely helps. The more you move in it, the faster it adapts to your body shape.</p>
+
+<p>After about 500 miles, a good leather jacket should feel completely different. All those stiff spots will have relaxed, and it'll feel like it was made for you.</p>
+
+<h2>Maintenance and Long-Term Care</h2>
+
+<p>Leather jackets are an investment. I've got one that's eight years old and still going strong because I look after it properly. Here's my maintenance routine:</p>
+
+<ul>
+<li><strong>Clean regularly:</strong> Wipe down with a damp cloth after rides, especially after rain. Road salt in winter is leather's enemy</li>
+<li><strong>Condition every 2-3 months:</strong> Keeps the leather supple and extends its life significantly</li>
+<li><strong>Hang properly:</strong> Use a proper hanger, not a hook. Store somewhere dry and away from direct heat</li>
+<li><strong>Check armour regularly:</strong> CE certification has a lifespan. Replace armour every 3-5 years even if it looks fine</li>
+<li><strong>Repair quickly:</strong> Small tears or loose stitching should be fixed immediately by a leather specialist</li>
+</ul>
+
+<p>I learned the hard way about storage. Left a jacket in my garage one damp winter and it developed mildew. Took ages to sort out and the leather never quite recovered. Keep your jacket in the house, not the garage or shed.</p>
+
+<h2>Budget Considerations for 2026</h2>
+
+<p>Quality leather jackets aren't cheap, but they last. I'd rather spend £400-600 on a jacket that'll serve me for a decade than £150 on something that'll fall apart in two years. The economics make sense when you factor in replacement costs.</p>
+
+<p>That said, there are ways to get quality leather without breaking the bank:</p>
+
+<p><strong>End of season sales:</strong> September and March are prime times for discounts. Last year's model is often 30-40% off and functionally identical to the new version.</p>
+
+<p><strong>Ex-demo or returns:</strong> Places like <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> often have ex-display stock at reduced prices. Check carefully for damage, but these can be brilliant value.</p>
+
+<p>Avoid the absolute bottom of the market. Those £100 leather jackets you see online are usually thin, poorly armoured, and won't protect you properly. If budget's tight, consider a good textile jacket instead – you'll get better protection for less money than from cheap leather.</p>
+
+<h2>Top Picks for British Touring in 2026</h2>
+
+<p>I'm not going to recommend specific models because they change every year, but I can tell you which brands consistently deliver quality:</p>
+
+<p><strong>Alpinestars</strong> make brilliant sports and sport-touring leather. Their fit is spot on for European body shapes, and the build quality is superb. I've toured extensively in their gear.</p>
+
+<p><strong>RST</strong> offer excellent value. British brand, they understand our weather, and their jackets punch well above their price point. Good armour, solid leather, sensible features.</p>
+
+<p><strong>Dainese</strong> if you want Italian style with top-tier protection. More expensive, but the fit and finish are exceptional. Their touring range works brilliantly for all-day comfort.</p>
+
+<p><strong>Rev'It</strong> are my go-to for adventure touring leather. Dutch brand, they nail the balance between protection, comfort, and practical features. Not the cheapest, but worth every penny.</p>
+
+<h2>Layering Systems for Year-Round Riding</h2>
+
+<p>A leather jacket is just one part of your protection system. For British touring, you need to think in layers. I run:</p>
+
+<p><strong>Base layer:</strong> Merino wool in winter, technical synthetics in summer. This regulates temperature and wicks moisture away from your skin.</p>
+
+<p><strong>Mid layer:</strong> Fleece or down gilet when it's cold. The beauty of a removable liner in your leather jacket is that you can adjust your insulation precisely.</p>
+
+<p><strong>Outer layer:</strong> The leather jacket itself, plus an oversuit for rain.</p>
+
+<p>This system has kept me comfortable from Scottish winters to summer rides through the Brecon Beacons. You can fine-tune your temperature by adding or removing layers, which matters when you're doing 300+ mile days.</p>
+
+<p>Use our <a href="/packing-checklist">packing checklist</a> tool to plan your layering system before long tours – it's saved me from forgetting crucial items more than once.</p>
+
+<h2>Making the Final Decision</h2>
+
+<p>After all that, here's my practical advice: go to a shop and try on multiple jackets. Online shopping is convenient, but leather jackets need to be felt and worn. The difference between brands' cuts is significant, and what fits your mate perfectly might be terrible for your body shape.</p>
+
+<p>Take your time. Wear the jacket around the shop for 10-15 minutes. Sit on bikes if they'll let you. Move through your riding positions. Feel where the armour sits. Check if the collar rubs your neck.</p>
+
+<p>When you find the right jacket, you'll know. It'll feel secure but not restrictive, protective but not uncomfortable. That's the one to buy, even if it means stretching your budget a bit.</p>
+
+<p>Your leather jacket is your riding companion for years to come. It'll see you through countless miles of British roads, protect you if things go wrong, and become more comfortable with every ride. Choose wisely, look after it properly, and it'll look after you.</p>
+
+<h2>Get Out and Ride</h2>
+
+<p>Once you've sorted your leather jacket, the best thing you can do is use it. Plan a proper tour using our <a href="/build-route">route builder</a>, pick a weekend with decent weather, and get some miles in. That's how you'll really learn what works for you and how your jacket performs.</p>
+
+<p>The roads are waiting. Whether it's a blast through the Yorkshire Dales or a week-long Scottish adventure, the right leather jacket makes every mile better. Stay safe out there.</p>`;
