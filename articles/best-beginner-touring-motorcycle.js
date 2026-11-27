@@ -1,0 +1,167 @@
+export const content = `<h2>Finding Your Perfect First Touring Motorcycle: A Practical Guide for 2026</h2>
+
+<p>I'll be straight with you – choosing your first touring bike can feel overwhelming. I see new riders at every services on the A66 or stopped at Loch Lomond asking themselves if they've picked the right machine. After years of helping mates into touring and covering thousands of miles across Britain, I've learned what actually matters when you're starting out.</p>
+
+<p>The good news? You don't need a £15,000 adventure bike to explore Britain properly. Some of my best tours have been on middleweight machines that cost less than half that. What you need is a bike that fits you, won't intimidate you, and can handle everything from the M6 in the rain to single-track roads in the Highlands.</p>
+
+<h2>What Makes a Good Beginner Touring Bike?</h2>
+
+<p>Before I dive into specific models, let's talk about what actually matters when you're covering distance on British roads. I've ridden enough duds to know the difference between marketing hype and practical touring capability.</p>
+
+<h3>Manageable Weight and Seat Height</h3>
+
+<p>Here's something nobody tells you in the showroom: a bike that feels fine on the test ride becomes a different beast when it's loaded with luggage after eight hours in the saddle. I've watched too many new tourers drop fully-loaded bikes in car parks or struggle to manoeuvre at petrol stations.</p>
+
+<p>Look for something under 230kg wet, with a seat height you can flat-foot or at least get a solid ball-of-foot down on both sides. When you're tired on the A9 after a long day, being able to confidently stop and put your feet down matters more than any spec sheet will tell you.</p>
+
+<h3>Comfortable Riding Position</h3>
+
+<p>British touring means hours in the saddle, often in weather that makes you question your life choices. I've done the NC500 on sports bikes and adventure bikes, and the difference in how you feel at the end of the day is massive.</p>
+
+<p>You want an upright or slightly forward-leaning position, not the aggressive crouch of a sports bike or the standing-desk feel of a tall adventure bike. Your wrists shouldn't ache after an hour, and you should be able to look at the scenery without neck strain.</p>
+
+<h3>Weather Protection</h3>
+
+<p>Let's be honest about British weather – you're going to get wet. But a decent screen and some basic weather protection can be the difference between an uncomfortable hour and a miserable day. I've ridden through Scottish rainstorms on naked bikes and bikes with proper fairings, and I know which one I'd choose for a week-long tour.</p>
+
+<h3>Luggage Options</h3>
+
+<p>This is non-negotiable for touring. You need to carry waterproofs, tools, spare layers, and all your overnight kit. Some bikes make this easy with factory luggage options or abundant mounting points. Others require expensive custom solutions.</p>
+
+<p>Check whether panniers and top boxes are available before you buy. Trust me – bungee cords and a rucksack are fine for a day ride to the Peaks, but they're absolutely miserable for a week touring Scotland.</p>
+
+<h2>The Best Beginner Touring Motorcycles for 2026</h2>
+
+<p>Right, let's get specific. These are bikes I've either ridden extensively or watched new tourers successfully use across Britain. I'm focusing on machines you can actually find and afford, not aspirational bikes you'll see in magazines.</p>
+
+<h3>Kawasaki Versys 650</h3>
+
+<p>I keep recommending this bike because it just works. The Versys 650 has been around forever, which means there's a massive used market and every mechanic in Britain knows how to service it. The parallel-twin engine is bulletproof, economical (I regularly see 55-60mpg), and has enough torque for overtaking on A-roads without being intimidating.</p>
+
+<p>The riding position is spot-on for all-day comfort, the screen keeps the worst weather off you, and factory panniers are readily available. I've taken one through the Yorkshire Dales in January and up to the Highlands in summer – it handles both brilliantly. The seat height is manageable for most riders, and at around 210kg it's light enough to manhandle when you need to.</p>
+
+<p>New ones hover around £8,000, but you can find good used examples from £4,000. For gear and accessories, check <a href="https://www.sportsbikeshop.co.uk/#/28914,3714,0" target="_blank" rel="noopener sponsored">SportsBikeShop</a> for luggage options and protection.</p>
+
+<h3>Honda NC750X</h3>
+
+<p>This is the sensible choice, and I mean that as a compliment. The NC750X won't set your heart racing, but it'll get you everywhere you want to go without drama. The engine is derived from Honda's car division – it's smooth, economical (I've achieved 70mpg on gentle touring), and utterly reliable.</p>
+
+<p>The genius bit is the storage where the fuel tank usually lives. It'll swallow a full-face helmet or a day's shopping, which is incredibly practical for touring. The DCT automatic option is controversial among purists, but I've met new tourers who swear by it, especially in heavy traffic or challenging conditions.</p>
+
+<p>Weight is around 220kg, seat height is reasonable, and the upright position makes covering distance comfortable. It's not exciting, but excitement isn't what you want when you're crossing Rannoch Moor in the rain.</p>
+
+<h3>Suzuki V-Strom 650</h3>
+
+<p>The V-Strom has been the default recommendation for beginner touring for years, and for good reason. It's tough, comfortable, and has that brilliant Suzuki V-twin character that makes distance riding engaging without being tiring.</p>
+
+<p>I've followed V-Stroms across Britain and watched them handle everything from motorway miles to muddy festival car parks. The latest versions have good electronics, decent weather protection, and that signature 'beak' that every adventure bike seems to need these days.</p>
+
+<p>At around 215kg with an accessible seat height, it's manageable for most riders. The aftermarket support is massive – you can find luggage, screens, and accessories for every possible use case. Used examples start around £3,500 for older models, with newer ones around £7,500.</p>
+
+<h3>Yamaha Tracer 7</h3>
+
+<p>If you want something with a bit more sporting character, the Tracer 7 (formerly the Tracer 700) is brilliant. It uses the excellent CP2 parallel-twin from the MT-07, which gives you punchy, engaging performance without being overwhelming.</p>
+
+<p>I've ridden this along the North Coast 500 and through the Welsh mountains, and it's genuinely fun while still being comfortable for distance. The screen could be better (a common Yamaha criticism), but that's easily fixed with aftermarket options. It's lighter than most adventure bikes at around 205kg, which makes it nimble on twisty B-roads.</p>
+
+<p>The downside is luggage – you'll need to invest in a proper system, as factory options are limited. But if you're the kind of rider who wants to enjoy <a href="/routes/nc500-complete">the NC500</a> rather than just complete it, this is worth considering.</p>
+
+<h3>BMW G 310 GS</h3>
+
+<p>Controversial choice perhaps, but hear me out. If you're a smaller rider or genuinely new to motorcycling, the baby GS is worth considering. At 169kg and with a low seat height, it's the most manageable bike on this list.</p>
+
+<p>Yes, the single-cylinder engine is buzzy on motorways. Yes, it's underpowered compared to bigger bikes. But for exploring British B-roads and building confidence, it's brilliant. I've watched new riders tackle challenging routes in Scotland on these bikes and have an absolute blast.</p>
+
+<p>The BMW badge means parts aren't cheap, and reliability on early models was patchy. But if you're genuinely nervous about starting touring on a heavier bike, it's a sensible stepping stone. Used ones are around £3,000-£4,000.</p>
+
+<h2>What About Used vs New?</h2>
+
+<p>Look, I love a new bike as much as anyone. That smell, those unscratched plastics, the full warranty. But for your first touring bike? I'd seriously consider used.</p>
+
+<p>You're going to drop it. Not definitely, but probably. Maybe in a car park, maybe on a muddy layby in Wales, maybe when the side stand sinks into hot tarmac at a services. When that happens, you'll be much less gutted if it's a £4,000 bike than a £10,000 one.</p>
+
+<p>Plus, used bikes often come with luggage and accessories already fitted, saving you hundreds or thousands in add-ons. I've picked up bikes with factory panniers, heated grips, and upgraded screens for less than a dealer would charge for the luggage alone.</p>
+
+<p>The key is buying smart. Check service history, look for signs of drops or crashes, and if you're not mechanically confident, pay a mechanic to inspect it. A hundred quid for a pre-purchase inspection can save you thousands in hidden problems.</p>
+
+<h2>Essential Touring Gear for Beginners</h2>
+
+<p>The bike is only half the equation. I've seen riders on perfect touring bikes have miserable trips because their gear let them down.</p>
+
+<h3>Luggage You Can Trust</h3>
+
+<p>Invest in proper waterproof luggage from the start. Soft panniers or a tail bag from companies like Kriega or Ortlieb will cost a few hundred quid but will last years. I'm still using soft panniers I bought in 2019, and they've been through everything British weather can throw at them.</p>
+
+<p>Hard luggage looks professional and locks, which is nice for security. But it's expensive and less forgiving when (not if) you drop the bike. For your first touring bike, I'd go soft and waterproof.</p>
+
+<h3>All-Weather Riding Gear</h3>
+
+<p>British touring demands layering. You'll start a morning in Scotland needing heated grips and three layers, then by afternoon you're sweating in the Borders sunshine. I use a good textile jacket with a removable thermal liner and waterproof membrane, plus decent waterproof trousers that pack small.</p>
+
+<p>Don't cheap out on gloves or boots. Cold, wet hands and feet will ruin a tour faster than anything else. I've cut days short because my fingers went numb, and I've learned that lesson enough times now.</p>
+
+<h3>Navigation and Communication</h3>
+
+<p>Your phone in a waterproof mount works fine, but I'd recommend a dedicated motorcycle GPS or at least using our <a href="/build-route">route building tool</a> to plan properly. Phone batteries die, signal disappears in the Highlands, and you don't want to be stopped on a verge in the rain trying to work out where you went wrong.</p>
+
+<blockquote>The best beginner touring bike isn't the one with the most features or the lowest price – it's the one that fits you properly, doesn't intimidate you, and makes you want to ride it every weekend.</blockquote>
+
+<h2>Breaking In Your New Touring Bike</h2>
+
+<p>Don't book a week-long Highland tour the day after you pick up your first touring bike. I know the temptation – I've done it myself – but it's a recipe for discovering every incompatibility between you and the bike when you're 300 miles from home.</p>
+
+<p>Start with day rides. Take it up to the Peaks or the Brecon Beacons for a day, see how it feels after six hours in the saddle. Load it up with luggage and ride to a local beauty spot – you'll quickly learn what works and what doesn't.</p>
+
+<p>Then try an overnighter. Somewhere like the Lake District or the Yorkshire Dales, close enough that you can bail if things go wrong. This is when you'll discover your seat needs a gel pad, or your screen needs an extender, or your panniers rub against your leg.</p>
+
+<p>Only after a few shakedown runs should you tackle something like <a href="/routes/island-to-highlands">a multi-day island and highlands route</a>. By then, you'll know your bike, you'll have sorted any niggles, and you'll actually enjoy the experience instead of fighting the machine.</p>
+
+<h2>Common Beginner Mistakes to Avoid</h2>
+
+<p>I've made most of these myself, so learn from my expensive lessons.</p>
+
+<h3>Buying Too Much Bike</h3>
+
+<p>That 1250GS looks amazing, and I'm sure you could handle it. But at 250kg fully loaded, with an intimidating seat height and a price tag that makes insurance companies salivate, it's probably not the smart first choice. Start smaller, build confidence, upgrade later.</p>
+
+<h3>Skimping on Luggage</h3>
+
+<p>Cheap luggage falls apart, leaks, or shifts around dangerously. I've seen straps fail on motorways and bags disintegrate in rain. Buy decent luggage once rather than cheap luggage three times.</p>
+
+<h3>Ignoring Ergonomics</h3>
+
+<p>If the bike doesn't fit you in the showroom, it won't magically fit after 200 miles. I'm six foot one, and I've tried to make short bikes work – it's miserable. If you're five foot six, don't convince yourself you'll adapt to that tall adventure bike. Physics doesn't care about your determination.</p>
+
+<h3>Planning Ambitious First Tours</h3>
+
+<p>The North Coast 500 looks incredible in photos, and it is. But it's also 500+ miles of sometimes challenging roads, variable weather, and remote locations. For your first tour, pick something closer, shorter, and easier to escape from if needed. Build up to the epic routes – they'll still be there next year.</p>
+
+<h2>Maintenance Considerations for Touring Bikes</h2>
+
+<p>Touring puts more demands on a bike than commuting or weekend blasts. You're covering bigger distances, often fully loaded, in all weather conditions. This means maintenance matters more.</p>
+
+<p>Choose a bike with a good dealer network or strong independent specialist support. Breaking down in Ullapool on a Friday evening is bad enough without discovering the nearest dealer is 150 miles away and doesn't open until Tuesday.</p>
+
+<p>Learn basic maintenance yourself – chain adjustment, oil checks, tyre pressure. I'm not suggesting you need to do valve clearances in a Travelodge car park, but you should be able to handle the basics. Use our <a href="/packing-checklist">packing checklist</a> to remember essential tools.</p>
+
+<p>Service intervals matter too. Some bikes need attention every 6,000 miles, others every 12,000. When you're touring regularly, those differences add up in cost and inconvenience.</p>
+
+<h2>Making Your Decision</h2>
+
+<p>Right, you've read all this, you've probably watched 47 YouTube reviews, and you're still not sure. Here's my final advice: go sit on bikes. Proper dealers will let you test ride. Some manufacturers do demo days where you can try multiple bikes.</p>
+
+<p>The bike that works for me might not work for you. I'm tall and comfortable with weight; you might be shorter and prefer something lighter. I prioritise long-distance comfort; you might want something more playful on twisty roads.</p>
+
+<p>What matters is finding a bike that makes you want to ride. Because the best touring bike is the one you'll actually use. I've seen riders on 125s have better tours than riders on expensive adventure bikes, simply because they were comfortable and confident on their machine.</p>
+
+<p>When you find that bike – the one where you sit on it and think "yeah, I could ride this to Scotland" – that's your bike. Trust your gut, do the practical checks, and then get out there and ride.</p>
+
+<h2>Your Next Steps</h2>
+
+<p>Once you've chosen your bike, the real fun begins. Start planning your first proper tour. Keep it manageable – a weekend in Wales, a few days in the Lakes, maybe a circuit of the Scottish Borders. Use our tools to plan routes that match your confidence level, and don't be afraid to build in rest days or flexible sections.</p>
+
+<p>Join local groups or forums where you can ride with more experienced tourers. I've learned more from following skilled riders through challenging conditions than from any amount of reading or watching videos. And don't be precious about asking for advice – every experienced tourer remembers being where you are now.</p>
+
+<p>Most importantly, actually go. Don't spend another year researching and planning and waiting for perfect conditions. Britain is beautiful in all weathers, and you'll never regret the tours you take. You'll only regret the ones you postpone.</p>
+
+<p>Your first touring bike is the start of something brilliant. Choose wisely, gear up properly, and get out there. The roads are waiting, and they're better than any website or showroom can describe. I'll see you out there.</p>`;
